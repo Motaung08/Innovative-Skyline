@@ -23,9 +23,10 @@
 dist: trusty
 language: java
 jdk:
-  - openjdk8
-  -openjdk11
-  script: ./mvn -f home/travis/build/Motaung08/Innovative-Skyline
+  - oraclejdk8
+  #-openjdk11
+install: true
+  script: ./mvnw clean install
 cache:
   directories:
   - $HOME/.m2
