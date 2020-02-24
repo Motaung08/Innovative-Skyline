@@ -24,10 +24,13 @@ dist: trusty
 language: java
 jdk:
   - oraclejdk8
-env:
-  - NODE_VERSION="0.12"
-before_install:
-  -  wget https://raw.githubusercontent.com/creationix/nvm/v0.31.0/nvm.sh -O ~/.nvm/nvm.sh
-  - source ~/.nvm/nvm.sh
-  - nvm install 5 # for Node v5
-  - node --version
+# env:
+#   - NODE_VERSION="0.12"
+# before_install:
+#   -  wget https://raw.githubusercontent.com/creationix/nvm/v0.31.0/nvm.sh -O ~/.nvm/nvm.sh
+#   - source ~/.nvm/nvm.sh
+#   - nvm install 5 # for Node v5
+#   - node --version
+node_js: "0.10"
+install: "npm install"
+script: "npm test"
