@@ -1,11 +1,11 @@
-# language: java
-# jdk: oraclejdk8
-# install: true
-# script: ./mvnw clean install
-# cache:
-#   directories:
-#   - $HOME/.m2
 language: java
-sudo: false
-script: mvn clean verify
+jdk: oraclejdk8
+install: true
+script: ./mvnw clean install
+cache:
+  directories:
+  - $HOME/.m2
+# language: java
+# sudo: false
+# script: mvn clean verify
 
