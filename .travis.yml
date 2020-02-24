@@ -1,10 +1,21 @@
+# language: java
+# jdk: oraclejdk8
+# install: true
+# script: ./mvnw clean install
+# cache:
+#   directories:
+#   - $HOME/.m2
+# jdk:
+#   - oraclejdk8
 language: java
-jdk: oraclejdk8
-install: true
-script: ./mvnw clean install
+sudo: false
+branches:
+  only:
+  - develop
+  - /^release\/v.*$/
+  - /^hotfix\/v.*$/
 cache:
   directories:
-  - $HOME/.m2
+    - $HOME/.m2
 jdk:
-  - oraclejdk8
-
+- oraclejdk8
