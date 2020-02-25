@@ -1,4 +1,5 @@
 language: java
 jdk:
-  -circlejdk8
+  - openjdk8
+
 script: ./mvnw clean install
