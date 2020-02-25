@@ -3,7 +3,7 @@ jdk:
   - openjdk8
 
 install: true
-script: ./mvnw clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script:  ./mvnw verify javadoc:jar@attach-javadocs -B -V
 
 # jobs:
 #   include:
