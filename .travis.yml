@@ -5,10 +5,10 @@ jdk:
 install: true
 script: ./mvnw clean install
 
-jobs:
-  include:
-    - stage: Test
-      script: ./mvnw clean test
+# jobs:
+#   include:
+#     - stage: Test
+#       script: ./mvnw clean test
       
 cache:
   directories:
