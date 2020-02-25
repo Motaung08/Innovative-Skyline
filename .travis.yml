@@ -3,7 +3,7 @@ jdk:
   - openjdk8
 
 install: true
-script: ./mvnw clean install
+script: ./mvnw clean install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 # jobs:
 #   include:
