@@ -14,7 +14,15 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_26" />
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/postgrad_tracker/lib/main.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1094" />
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="PATH_TO_GIT" value="C:\Program Files\Git\cmd\git.exe" />
@@ -48,6 +56,17 @@
             <path>
               <item name="Innovative-Skyline" type="b2602c69:ProjectViewProjectNode" />
               <item name="Innovative-Skyline" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Innovative-Skyline" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Innovative-Skyline" type="462c0819:PsiDirectoryNode" />
+              <item name="postgrad_tracker" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Innovative-Skyline" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Innovative-Skyline" type="462c0819:PsiDirectoryNode" />
+              <item name="postgrad_tracker" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -158,6 +177,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.32995737" />
@@ -188,5 +208,10 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/postgrad_progress_tracker/lib/main.dart" />
+    <entry file="file://$PROJECT_DIR$/postgrad_tracker/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1094" />
+      </provider>
+    </entry>
   </component>
 </project>
