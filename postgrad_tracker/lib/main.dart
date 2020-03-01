@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:coveralls/coveralls.dart';
 import 'Login.dart';
 void main() => runApp(MyApp());
 
