@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Home.dart';
 import 'package:postgrad_tracker/StudentSuperVisorRegister.dart';
 import 'StudentRegister.dart';
 
@@ -57,7 +58,12 @@ class _LoginPageState extends State<LoginPage> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        },
         child: Text("Login",
             textAlign: TextAlign.center,
             style: style.copyWith(
@@ -197,3 +203,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
