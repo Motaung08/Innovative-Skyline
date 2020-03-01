@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:coveralls/coveralls.dart';
+import 'package:firebase/firebase.dart';
 import 'Login.dart';
-void main() => runApp(MyApp());
+void main() {
+  initializeApp(
+      apiKey: "YourApiKey",
+      authDomain: "YourAuthDomain",
+      databaseURL: "YourDatabaseUrl",
+      projectId: "YourProjectId",
+      storageBucket: "YourStorageBucket");
+    runApp(MyApp());
+}
+//void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
