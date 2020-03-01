@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/SupervisorRegister.dart';
-import 'Register.dart';
+import 'StudentRegister.dart';
 
 class StudentSupChoicePage extends StatefulWidget {
   StudentSupChoicePage({Key key, this.title}) : super(key: key);
@@ -103,54 +103,66 @@ class _StudentSupChoicePageState extends State<StudentSupChoicePage> {
       );
     }
 
+    const Alignment topLeft = Alignment(-1.0, -1.0);
+
+
+
     return Scaffold(
+
       body: Center(
-        child: Container(
-          color: Colors.white,
+        child: Row(
+          children: <Widget>[
 
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.all(36.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              //mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
 
-                SizedBox(
-                  height: 65.0,
-                  width: 500.0,
-                  child: supervisorButon
-                ),
+            Container(
+              color: Colors.white,
 
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
-                ),
-                SizedBox(
-                  height: 45.0,
-                  width: 500.0,
-                  child: _divider()
-                ),
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  //mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    //BackButton(),
+                    SizedBox(
+                        height: 65.0,
+                        width: 500.0,
+                        child: supervisorButon
+                    ),
 
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
-                ),
-                SizedBox(
-                  height: 65.0,
-                  width: 500.0,
-                  child: studentButon,
-                ),
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
+                    SizedBox(
+                      height: 15.0,
+                      width: 50.0,
+                    ),
+                    SizedBox(
+                        height: 45.0,
+                        width: 500.0,
+                        child: _divider()
+                    ),
 
+                    SizedBox(
+                      height: 15.0,
+                      width: 50.0,
+                    ),
+                    SizedBox(
+                      height: 65.0,
+                      width: 500.0,
+                      child: studentButon,
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                      width: 50.0,
+
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
+          ],
+        )
+
       ),
     );
   }

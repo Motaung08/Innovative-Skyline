@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Login.dart';
 
 class SupervisorRegisterPage extends StatefulWidget {
   SupervisorRegisterPage({Key key, this.title}) : super(key: key);
@@ -107,6 +108,59 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
+
+    final loginButon = Material(
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(30.0),
+      color: Color(0xff009999),
+      child: MaterialButton(
+        minWidth: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()),
+          );
+        },
+        child: Text("Login",
+            textAlign: TextAlign.center,
+            style: style.copyWith(
+                color: Colors.white, fontWeight: FontWeight.bold)),
+      ),
+    );
+
+    Widget _divider() {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          children: <Widget>[
+            SizedBox(
+              width: 20,
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Divider(
+                  thickness: 1,
+                ),
+              ),
+            ),
+            Text('or'),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Divider(
+                  thickness: 1,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+          ],
+        ),
+      );
+    }
 
     return Scaffold(
       body: Center(
@@ -215,6 +269,20 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: 65.0, width: 550.0, child: registerButon),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 65.0, width: 550.0, child: _divider()),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 65.0, width: 550.0, child: loginButon),
                   ],
                 )
               ],

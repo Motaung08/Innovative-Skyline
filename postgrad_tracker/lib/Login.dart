@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/StudentSuperVisorRegister.dart';
-import 'Register.dart';
+import 'StudentRegister.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
