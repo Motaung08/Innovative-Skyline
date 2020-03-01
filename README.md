@@ -2,7 +2,7 @@
 Tracking postgraduates students progress
 
 
-Java based.
+Flutter-Dart based.
 
 [![Coverage Status](https://coveralls.io/repos/github/Motaung08/Innovative-Skyline/badge.svg?branch=master)](https://coveralls.io/github/Motaung08/Innovative-Skyline?branch=master)
 
