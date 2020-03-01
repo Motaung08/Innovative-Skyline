@@ -1,11 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:postgrad_tracker/StudentSuperVisorRegister.dart';
+import 'package:postgrad_tracker/SupervisorRegister.dart';
 import 'Register.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key key, this.title}) : super(key: key);
+class StudentSupChoicePage extends StatefulWidget {
+  StudentSupChoicePage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -19,53 +19,18 @@ class LoginPage extends StatefulWidget {
   final String title;
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _StudentSupChoicePageState createState() => _StudentSupChoicePageState();
 }
 
 
-class _LoginPageState extends State<LoginPage> {
+class _StudentSupChoicePageState extends State<StudentSupChoicePage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
   @override
   Widget build(BuildContext context) {
 
-    final emailField = TextField(
-      obscureText: false,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
 
-          hintText: "Email",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
-
-    final passwordField = TextField(
-      obscureText: true,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Password",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-    final loginButon = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff009999),
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {},
-        child: Text("Login",
-            textAlign: TextAlign.center,
-            style: style.copyWith(
-                color: Colors.white, fontWeight: FontWeight.bold)),
-      ),
-    );
-
-    final RegisterButon = Material(
+    final supervisorButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
@@ -75,10 +40,30 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
+            MaterialPageRoute(builder: (context) => SupervisorRegisterPage()),
           );
         },
-        child: Text("Register",
+        child: Text("Supervisor",
+            textAlign: TextAlign.center,
+            style: style.copyWith(
+                color: Colors.white, fontWeight: FontWeight.bold)),
+      ),
+    );
+
+    final studentButon = Material(
+      elevation: 5.0,
+      borderRadius: BorderRadius.circular(30.0),
+      color: Color(0xff009999),
+      child: MaterialButton(
+        minWidth: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => StudentRegisterPage()),
+          );
+        },
+        child: Text("Student",
             textAlign: TextAlign.center,
             style: style.copyWith(
                 color: Colors.white, fontWeight: FontWeight.bold)),
@@ -133,36 +118,9 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
 
                 SizedBox(
-                  height: 155.0,
-                  child: Image.asset(
-                    "assets/logo.png",
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
-                ),
-                SizedBox(
-                  height: 45.0,
-                  width: 500.0,
-                  child: emailField),
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
-                ),
-                SizedBox(height: 45.0,
-                    width: 500.0,
-                child:passwordField),
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
-                ),
-
-                SizedBox(
                   height: 65.0,
                   width: 500.0,
-                  child: loginButon
+                  child: supervisorButon
                 ),
 
                 SizedBox(
@@ -182,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 65.0,
                   width: 500.0,
-                  child: RegisterButon,
+                  child: studentButon,
                 ),
                 SizedBox(
                   height: 15.0,
