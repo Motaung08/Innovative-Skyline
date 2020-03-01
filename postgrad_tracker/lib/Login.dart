@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Home.dart';
 import 'package:postgrad_tracker/StudentSuperVisorRegister.dart';
 import 'StudentRegister.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -30,9 +31,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
 
-    final emailField = TextField(
+    final emailField = new TextFormField(
       obscureText: false,
       style: style,
+//      validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+//      onSaved: (value) => _email = value.trim(),
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
 

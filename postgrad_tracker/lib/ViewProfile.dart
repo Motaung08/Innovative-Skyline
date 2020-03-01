@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase/firebase.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -40,7 +42,13 @@ class _ViewProfilePageState extends State<ViewProfilePage> {
       child: Column(
 
           children: <Widget>[
-
+//                StreamBuilder(
+//                  stream: Firestore.instance.collection('Student').snapshots(),
+//                  builder: (context, snapshot){
+//                    if (!snapshot.hasData) return const Text('Loading...');
+//                    return Text("Name"+snapshot.data.documents[index]);
+//                  },
+//                ),
                 Text("Profile:  \n",
                     //textAlign: TextAlign.center,
                     style: style.copyWith(
