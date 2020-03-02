@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Home.dart';
 import 'package:postgrad_tracker/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/auth.dart';
 
@@ -29,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
 
     final emailField = new TextFormField(
       obscureText: false,
+      validator: (val) => val.isEmpty ? 'Username cannot be blank.' : null,
       onChanged: (val){
         setState(() => email = val);
       },
@@ -44,8 +46,9 @@ class _LoginPageState extends State<LoginPage> {
     );
 
 
-    final passwordField = TextField(
+    final passwordField = TextFormField(
       obscureText: true,
+      validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
       onChanged: (val){
         setState(() => password = val);
       },
@@ -67,10 +70,18 @@ class _LoginPageState extends State<LoginPage> {
           if (_formKey.currentState.validate()) {
             dynamic result = await _auth.signInWithEmailAndPassword(
                 email, password);
+
             if (result == null) {
               setState(() {
                 error = 'Could not sign in with those credentials';
-              });
+
+              });//setState
+            }//if
+            else{
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
             }
           }
         },
@@ -146,6 +157,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Padding(
             padding: const EdgeInsets.all(36.0),
             child: Form(
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -210,6 +222,11 @@ class _LoginPageState extends State<LoginPage> {
                     width: 50.0,
 
                 ),
+                  //SizedBox(height: 12.0),
+                  Text(
+                    error,
+                    style: TextStyle(color: Colors.red, fontSize: 14.0),
+                  ),
               ],
             ),
           ),

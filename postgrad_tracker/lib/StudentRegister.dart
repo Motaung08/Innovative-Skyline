@@ -172,7 +172,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
             dynamic result = await _auth.registerWithEmailAndPassword(email, password);
             if(result == null) {
               setState(() {
-                error = 'Please supply a valid email';
+                error = 'The server could not accept your credentials, you may have an invalid email.';
               });
             }
           }
