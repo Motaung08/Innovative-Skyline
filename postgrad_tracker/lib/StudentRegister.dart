@@ -26,59 +26,59 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
   //text field state
   String email='';
   String password='';
-//  String ConfirmPass='';
-//  String firstName='';
-//  String lastName='';
-//  String StudentNo='';
-//  String Degree='';
-//  String DateReg='';
+  String ConfirmPass='';
+  String firstName='';
+  String lastName='';
+  String StudentNo='';
+  String Degree='';
+  String DateReg='';
 
   @override
   Widget build(BuildContext context) {
 
-//    final studentNumberField = TextFormField(
-//      obscureText: false,
-//      validator: (val) => val.isEmpty ? 'Enter a Student Number' : null,
-//      onChanged: (val){
-//        setState(() => StudentNo = val);
-//      },
-//      style: style,
-//      decoration: InputDecoration(
-//          //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//
-//          hintText: "Student Number",
-//          border:
-//              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-//    );
-//
-//    final studentFirstNameField = TextFormField(
-//      obscureText: false,
-//      validator: (val) => val.isEmpty ? 'Enter a first name' : null,
-//      onChanged: (val){
-//        setState(() => firstName = val);
-//      },
-//      style: style,
-//      decoration: InputDecoration(
-//          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//
-//          hintText: "First Name",
-//          border:
-//              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-//    );
-//
-//    final studentLastNameField = TextFormField(
-//      obscureText: false,
-//      validator: (val) => val.isEmpty ? 'Enter a last name' : null,
-//      onChanged: (val){
-//        setState(() => lastName = val);
-//      },
-//      style: style,
-//      decoration: InputDecoration(
-//          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//          hintText: "Last Name",
-//          border:
-//              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-//    );
+    final studentNumberField = TextFormField(
+      obscureText: false,
+      validator: (val) => val.isEmpty ? 'Enter a Student Number' : null,
+      onChanged: (val){
+        setState(() => StudentNo = val);
+      },
+      style: style,
+      decoration: InputDecoration(
+          //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+          hintText: "Student Number",
+          border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+    );
+
+    final studentFirstNameField = TextFormField(
+      obscureText: false,
+      validator: (val) => val.isEmpty ? 'Enter a first name' : null,
+      onChanged: (val){
+        setState(() => firstName = val);
+      },
+      style: style,
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+          hintText: "First Name",
+          border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+    );
+
+    final studentLastNameField = TextFormField(
+      obscureText: false,
+      validator: (val) => val.isEmpty ? 'Enter a last name' : null,
+      onChanged: (val){
+        setState(() => lastName = val);
+      },
+      style: style,
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Last Name",
+          border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+    );
 
     final studentEmailField = TextFormField(
       obscureText: false,
@@ -94,44 +94,44 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
-//    final studentDegreeField = TextFormField(
-//      obscureText: false,
-//      validator: (val) => val.isEmpty ? 'Enter a Degree' : null,
-//      onChanged: (val){
-//        setState(() => Degree = val);
-//      },
-//      style: style,
-//      decoration: InputDecoration(
-//          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//          hintText: "Degree",
-//          border:
-//              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-//    );
+    final studentDegreeField = TextFormField(
+      obscureText: false,
+      validator: (val) => val.isEmpty ? 'Enter a Degree' : null,
+      onChanged: (val){
+        setState(() => Degree = val);
+      },
+      style: style,
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Degree",
+          border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+    );
 
-//    final studentdegreeTypeField = TextFormField(
-//      obscureText: false,
-//      style: style,
-//      decoration: InputDecoration(
-//          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//
-//          hintText: "Degree Type",
-//          border:
-//          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-//    );
+    final studentdegreeTypeField = TextFormField(
+      obscureText: false,
+      style: style,
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
 
-//    final studentDateRegisteredField = TextFormField(
-//      obscureText: false,
-//      validator: (val) => val.isEmpty ? 'Enter Date Registered' : null,
-//      onChanged: (val){
-//        setState(() => DateReg = val);
-//      },
-//      style: style,
-//      decoration: InputDecoration(
-//          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//          hintText: "Date Registered",
-//          border:
-//              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-//    );
+          hintText: "Degree Type",
+          border:
+          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+    );
+
+    final studentDateRegisteredField = TextFormField(
+      obscureText: false,
+      validator: (val) => val.isEmpty ? 'Enter Date Registered' : null,
+      onChanged: (val){
+        setState(() => DateReg = val);
+      },
+      style: style,
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Date Registered",
+          border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+    );
 
     final passwordField = TextFormField(
       obscureText: true,
@@ -146,20 +146,20 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-//    final confirmPasswordField = TextFormField(
-//      //validator: (val) => val.toString()==password ? 'Passwords do not match.' : null,
-//      obscureText: true,
-//      onChanged: (val){
-//        setState(() => ConfirmPass = val);
-//
-//      },
-//      style: style,
-//      decoration: InputDecoration(
-//          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//          hintText: "Confirm Password",
-//          border:
-//              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-//    );
+    final confirmPasswordField = TextFormField(
+      //validator: (val) => val.toString()==password ? 'Passwords do not match.' : null,
+      obscureText: true,
+      onChanged: (val){
+        setState(() => ConfirmPass = val);
+
+      },
+      style: style,
+      decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+          hintText: "Confirm Password",
+          border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+    );
     final registerButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -225,11 +225,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          //widget.toggleView();
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => LoginPage()),
-          );
+          widget.toggleView();
         },
         child: Text("Login",
             textAlign: TextAlign.center,
@@ -273,18 +269,18 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                           height: 15.0,
                           width: 50.0,
                         ),
-//                        SizedBox(
-//                            height: 45.0,
-//                            width: 250.0,
-//                            child: studentFirstNameField),
-//                        SizedBox(
-//                          height: 15.0,
-//                          width: 50.0,
-//                        ),
-//                        SizedBox(
-//                            height: 45.0,
-//                            width: 250.0,
-//                            child: studentLastNameField),
+                        SizedBox(
+                            height: 45.0,
+                            width: 250.0,
+                            child: studentFirstNameField),
+                        SizedBox(
+                          height: 15.0,
+                          width: 50.0,
+                        ),
+                        SizedBox(
+                            height: 45.0,
+                            width: 250.0,
+                            child: studentLastNameField),
                         SizedBox(
                           height: 15.0,
                           width: 50.0,
@@ -295,48 +291,48 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                           height: 15.0,
                           width: 50.0,
                         ),
-//                        SizedBox(
-//                            height: 45.0,
-//                            width: 250.0,
-//                            child: studentDegreeField),
-//                      ]),
-//                      Column(children: <Widget>[
-//                        SizedBox(
-//                          height: 15.0,
-//                          width: 50.0,
-//                        ),
-//                      ]),
-//                      Column(children: <Widget>[
-//                        SizedBox(
-//                          height: 15.0,
-//                          width: 50.0,
-//                        ),
-//                        SizedBox(
-//                            height: 45.0,
-//                            width: 250.0,
-//                            child: studentDateRegisteredField),
-//                        SizedBox(
-//                          height: 15.0,
-//                          width: 50.0,
-//                        ),
-//                        SizedBox(
-//                            height: 45.0,
-//                            width: 250.0,
-//                            child: studentNumberField),
-//                        SizedBox(
-//                          height: 15.0,
-//                          width: 50.0,
-//                        ),
+                        SizedBox(
+                            height: 45.0,
+                            width: 250.0,
+                            child: studentDegreeField),
+                      ]),
+                      Column(children: <Widget>[
+                        SizedBox(
+                          height: 15.0,
+                          width: 50.0,
+                        ),
+                      ]),
+                      Column(children: <Widget>[
+                        SizedBox(
+                          height: 15.0,
+                          width: 50.0,
+                        ),
+                        SizedBox(
+                            height: 45.0,
+                            width: 250.0,
+                            child: studentDateRegisteredField),
+                        SizedBox(
+                          height: 15.0,
+                          width: 50.0,
+                        ),
+                        SizedBox(
+                            height: 45.0,
+                            width: 250.0,
+                            child: studentNumberField),
+                        SizedBox(
+                          height: 15.0,
+                          width: 50.0,
+                        ),
                         SizedBox(
                             height: 45.0, width: 250.0, child: passwordField),
                         SizedBox(
                           height: 15.0,
                           width: 50.0,
                         ),
-//                        SizedBox(
-//                            height: 45.0,
-//                            width: 250.0,
-//                            child: confirmPasswordField),
+                        SizedBox(
+                            height: 45.0,
+                            width: 250.0,
+                            child: confirmPasswordField),
                       ]),
                     ],
                   ),
