@@ -10,8 +10,8 @@ version: 1.0.0+1
 environment:
     sdk: ">=2.0.0-dev.68.0 <3.0.0"
 dependencies:
-
-#  cloud_firestore:
+  firebase_auth: ^0.14.0+5
+  cloud_firestore:
 
   firebase: ^5.0.0
   coveralls:

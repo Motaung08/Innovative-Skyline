@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Home.dart';
 import 'package:postgrad_tracker/StudentSuperVisorRegister.dart';
+import 'package:postgrad_tracker/auth.dart';
 import 'StudentRegister.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -27,6 +28,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
