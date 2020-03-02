@@ -1,26 +1,14 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:postgrad_tracker/Home.dart';
 import 'package:postgrad_tracker/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/auth.dart';
-import 'StudentRegister.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key, this.title}) : super(key: key);
+  //LoginPage({Key key, this.title}) : super(key: key);
+//  final String title;
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+  final Function toggleView;
+  LoginPage({ this.toggleView });
+  final AuthService _auth = AuthService();
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -29,12 +17,16 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   final AuthService _auth = AuthService();
-
+  String email='';
+  String password='';
   @override
   Widget build(BuildContext context) {
 
     final emailField = new TextFormField(
       obscureText: false,
+      onChanged: (val){
+        setState(() => email = val);
+      },
       style: style,
 //      validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
 //      onSaved: (value) => _email = value.trim(),
@@ -49,6 +41,9 @@ class _LoginPageState extends State<LoginPage> {
 
     final passwordField = TextField(
       obscureText: true,
+      onChanged: (val){
+        setState(() => password = val);
+      },
       style: style,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -63,12 +58,11 @@ class _LoginPageState extends State<LoginPage> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
-        },
+          onPressed: () async {
+            print(email);
+            print(password);
+          },
+
         child: Text("Login",
             textAlign: TextAlign.center,
             style: style.copyWith(
@@ -84,6 +78,8 @@ class _LoginPageState extends State<LoginPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
+
+          //widget.toggleView();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
@@ -137,71 +133,74 @@ class _LoginPageState extends State<LoginPage> {
           width: MediaQuery.of(context).size.width,
           child: Padding(
             padding: const EdgeInsets.all(36.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              //mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
+            child: Form(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                //mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
 
-                SizedBox(
-                  height: 155.0,
-                  child: Image.asset(
-                    "assets/logo.png",
-                    fit: BoxFit.contain,
+                  SizedBox(
+                    height: 155.0,
+                    child: Image.asset(
+                      "assets/logo.png",
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
-                ),
-                SizedBox(
-                  height: 45.0,
-                  width: 500.0,
-                  child: emailField),
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
-                ),
-                SizedBox(height: 45.0,
+
+                  SizedBox(
+                    height: 15.0,
+                    width: 50.0,
+                    ),
+                    SizedBox(
+                      height: 45.0,
+                      width: 500.0,
+                      child: emailField),
+                    SizedBox(
+                      height: 15.0,
+                      width: 50.0,
+                    ),
+                    SizedBox(height: 45.0,
+                        width: 500.0,
+                    child:passwordField),
+                    SizedBox(
+                      height: 15.0,
+                      width: 50.0,
+                    ),
+
+                  SizedBox(
+                    height: 65.0,
                     width: 500.0,
-                child:passwordField),
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
-                ),
+                    child: loginButon
+                  ),
 
-                SizedBox(
-                  height: 65.0,
-                  width: 500.0,
-                  child: loginButon
-                ),
+                  SizedBox(
+                    height: 15.0,
+                    width: 50.0,
+                  ),
+                  SizedBox(
+                    height: 45.0,
+                    width: 500.0,
+                    child: _divider()
+                  ),
 
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
-                ),
-                SizedBox(
-                  height: 45.0,
-                  width: 500.0,
-                  child: _divider()
-                ),
-
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
-                ),
-                SizedBox(
-                  height: 65.0,
-                  width: 500.0,
-                  child: RegisterButon,
-                ),
-                SizedBox(
-                  height: 15.0,
-                  width: 50.0,
+                  SizedBox(
+                    height: 15.0,
+                    width: 50.0,
+                  ),
+                  SizedBox(
+                    height: 65.0,
+                    width: 500.0,
+                    child: RegisterButon,
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                    width: 50.0,
 
                 ),
               ],
             ),
+          ),
           ),
         ),
       ),

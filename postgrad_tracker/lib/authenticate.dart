@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Login.dart';
+import 'package:postgrad_tracker/StudentRegister.dart';
+import 'package:postgrad_tracker/StudentSuperVisorRegister.dart';
 
 class Authenticate extends StatefulWidget {
   @override
@@ -6,10 +9,19 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
+
+  bool showSignIn = true;
+  void toggleView(){
+    //print(showSignIn.toString());
+    setState(() => showSignIn = !showSignIn);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("authenticate"),
-    );
+    if (showSignIn) {
+      return LoginPage(toggleView:  toggleView);
+    } else {
+      return StudentRegisterPage(toggleView:  toggleView);
+    }
   }
 }

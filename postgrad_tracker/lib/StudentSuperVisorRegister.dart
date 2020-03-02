@@ -1,8 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/SupervisorRegister.dart';
 import 'StudentRegister.dart';
+
 
 class StudentSupChoicePage extends StatefulWidget {
   StudentSupChoicePage({Key key, this.title}) : super(key: key);
@@ -17,7 +17,8 @@ class StudentSupChoicePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
-
+//  final Function toggleView;
+//  StudentRegisterPage({this.toggleView});
   @override
   _StudentSupChoicePageState createState() => _StudentSupChoicePageState();
 }
@@ -58,6 +59,7 @@ class _StudentSupChoicePageState extends State<StudentSupChoicePage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
+
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => StudentRegisterPage()),
