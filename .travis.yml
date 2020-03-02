@@ -5,9 +5,8 @@ jdk:
   - openjdk8
   - openjdk11
 
-install:
-  -coveralls
-  -codecov
+# install:
+
 # script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 #         mvn test -B
 
