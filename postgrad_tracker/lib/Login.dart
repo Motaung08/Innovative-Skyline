@@ -17,8 +17,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  String error = '';
+
+  //text field state
   String email='';
   String password='';
+
   @override
   Widget build(BuildContext context) {
 
@@ -58,10 +63,17 @@ class _LoginPageState extends State<LoginPage> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed: () async {
-            print(email);
-            print(password);
-          },
+        onPressed: () async {
+          if (_formKey.currentState.validate()) {
+            dynamic result = await _auth.signInWithEmailAndPassword(
+                email, password);
+            if (result == null) {
+              setState(() {
+                error = 'Could not sign in with those credentials';
+              });
+            }
+          }
+        },
 
         child: Text("Login",
             textAlign: TextAlign.center,
@@ -79,11 +91,11 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
 
-          //widget.toggleView();
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
-          );
+          widget.toggleView();
+//          Navigator.push(
+//            context,
+//            MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
+//          );
         },
         child: Text("Register",
             textAlign: TextAlign.center,
