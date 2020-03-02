@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/auth.dart';
+import 'StudentSuperVisorRegister.dart';
 
 class LoginPage extends StatefulWidget {
   //LoginPage({Key key, this.title}) : super(key: key);
@@ -92,10 +93,10 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () {
 
           widget.toggleView();
-//          Navigator.push(
-//            context,
-//            MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
-//          );
+          Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
+          );
         },
         child: Text("Register",
             textAlign: TextAlign.center,
