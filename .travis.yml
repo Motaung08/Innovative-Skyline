@@ -6,8 +6,8 @@ jdk:
   - openjdk11
 
 install:
-  -pip install coveralls
-  -pip install codecov
+  -coveralls
+  -codecov
 # script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 #         mvn test -B
 
