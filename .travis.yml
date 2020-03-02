@@ -5,14 +5,14 @@ jdk:
   - openjdk8
   - openjdk11
 
-# install: true
+ install: true
 # script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 #         mvn test -B
 
-# jobs:
-#   include:
-#     - stage: Test
-#       script: ./mvnw clean test
+jobs:
+  include:
+    - stage: Test
+      script: ./mvnw clean test
       
 # cache:
 #   directories:
@@ -20,8 +20,7 @@ jdk:
 script:
   - npm run coveralls
   
-after success:
-  - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
+
   
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -30,5 +29,6 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-
+after success:
+  - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
   
