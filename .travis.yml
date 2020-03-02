@@ -25,5 +25,5 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
  after success:
-  -coveralls
+  -dart_coveralls calc [--output, --package-root] test.dart
   
