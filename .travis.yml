@@ -12,7 +12,7 @@ jdk:
 jobs:
   include:
     - stage: Test
-      script: ./mvnw clean test
+#       script: ./mvnw clean test
       
 # cache:
 #   directories:
