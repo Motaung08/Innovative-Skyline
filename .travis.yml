@@ -5,18 +5,30 @@ jdk:
   - openjdk8
   - openjdk11
 
-# install: true
+# install:
+
 # script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 #         mvn test -B
 
-jobs:
-  include:
-    - stage: Test
-#       script: ./mvnw clean test
+# jobs:
+#   include:
+#     - stage: Test
+# #       script: ./mvnw clean test
       
 # cache:
 #   directories:
 #     - $HOME/ .m2
+
+
+deploy:
+  -
+    on:
+      branch: release
+    provider: bintray
+    skip_cleanup: true
+    file: target/bin/bintray.json
+    user: nfrankel
+    key: $BINTRAY_API_KEY
   
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -26,6 +38,16 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 after success:
-#   - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
-    -coveralls
+# #   - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
+#     -coveralls
+      - bash <(curl -s https://codecov.io/bash)
+
+# language: dart
+# dart:
+#   - stable
+# script:
+#   - pub get --packages-dir
+#   - pub run test
+#   - pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
+  
   
