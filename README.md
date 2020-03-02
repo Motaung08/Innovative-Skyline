@@ -4,7 +4,9 @@ Tracking postgraduates students progress
 
 Flutter-Dart based.
 
-b5f731d9-76bb-401b-b835-a3c91189ef3f
+
+
+[![codecov](https://codecov.io/gh/Motaung08/Innovative-Skyline/branch/master/graph/badge.svg)](https://codecov.io/gh/Motaung08/Innovative-Skyline)
 
 [![Build Status](https://travis-ci.com/Motaung08/Innovative-Skyline.svg?branch=master)](https://travis-ci.com/Motaung08/Innovative-Skyline)
 
