@@ -25,5 +25,5 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
  after success:
-  -dart_coveralls calc [--output, --package-root] test.dart
+  - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
   
