@@ -68,23 +68,39 @@ class _LoginPageState extends State<LoginPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
-          if (_formKey.currentState.validate()) {
-            dynamic result = await _auth.signInWithEmailAndPassword(
-                email, password);
 
-            if (result == null) {
-              setState(() {
-                error = 'Could not sign in with those credentials';
+          ///////////////////////////////////////////
+          //Bypass the login - go straight to home page.
 
-              });//setState
-            }//if
-            else{
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HomePage()),
-              );
-            }
-          }
+           Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+
+          ///////////////////////////////////////////
+
+          //-------------------------------
+          //Showcase login functionalitym
+//          if (_formKey.currentState.validate()) {
+//            dynamic result = await _auth.signInWithEmailAndPassword(
+//                email, password);
+//
+//            if (result == null) {
+//              setState(() {
+//                error = 'Could not sign in with those credentials';
+//
+//              });//setState
+//            }//if
+//            else{
+//              Navigator.push(
+//                context,
+//                MaterialPageRoute(builder: (context) => HomePage()),
+//              );
+//            }
+//          }
+
+          //-------------------------------------
+
         },
 
         child: Text("Login",
@@ -103,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
 
-          widget.toggleView();
+         // widget.toggleView();
           Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => StudentSupChoicePage()),

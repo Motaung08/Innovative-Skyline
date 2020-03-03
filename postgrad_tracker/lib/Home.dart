@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Login.dart';
 import 'package:postgrad_tracker/ViewProfile.dart';
 import 'auth.dart';
 
@@ -38,10 +39,15 @@ class HomePage extends StatelessWidget {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {
+
+
+        onPressed: () async{
+          await _auth.signOut();
+
+
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => ViewProfilePage()),
+            MaterialPageRoute(builder: (context) => LoginPage()),
           );
         },
         child: Text("Sign out",
