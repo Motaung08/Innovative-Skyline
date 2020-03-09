@@ -1,5 +1,6 @@
 # Innovative-Skyline
-Tracking postgraduates students progress
+Tracking postgraduates students progress.
+
 Problem statement: Wits post-grad students are allocated supervisors to help them during their projects. A supervisor can be allocated multiple students and they find it hard to keep track of each student’s progress, meetings, task and deadlines.
 
 Solution: A proposed solution is a post-grad tracker website which is a collaboration tool that organizes projects into boards. In one glance, a supervisor can tell what’s being worked on, whose working on what, and the progress of each task in a project. This is achieved by linking student and supervisors to each project.
