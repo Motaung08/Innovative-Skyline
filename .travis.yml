@@ -7,9 +7,16 @@ jdk:
 
 install:
 
+before_script:
+  - git clone https://github.com/flutter/flutter.git -b beta
+  - ./flutter/bin/flutter doctor
+
 script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 #         mvn test -B
-
+   - ./flutter/bin/flutter test
+#   - pub get --packages-dir
+#   - pub run test
+#   - pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
 jobs:
   include:
     - stage: Test
