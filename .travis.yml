@@ -46,9 +46,9 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.pub-cache
 after success:
-    codecov:
-      token:
-        -c1e9acbc-56ea-47c3-ba87-c4a92ca5167c
+#     codecov:
+#       token:
+#         -c1e9acbc-56ea-47c3-ba87-c4a92ca5167c
         - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
 #     -coveralls
         - bash <(curl -s https://codecov.io/bash)
