@@ -1,20 +1,20 @@
-dist: xenial
+# dist: xenial
 
-language: java
-jdk:
-  - openjdk8
-  - openjdk11
+# language: java
+# jdk:
+#   - openjdk8
+#   - openjdk11
 
-install:
-  -sudo install curl
+# install:
+#   -sudo install curl
 
-before_script:
-  - git clone https://github.com/flutter/flutter.git -b beta
-  - ./flutter/bin/flutter doctor
+# before_script:
+#   - git clone https://github.com/flutter/flutter.git -b beta
+#   - ./flutter/bin/flutter doctor
 
-script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-#         mvn test -B
-   - ./flutter/bin/flutter test
+# script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+# #         mvn test -B
+#    - ./flutter/bin/flutter test
 #   - pub get --packages-dir
 #   - pub run test
 # #   - pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
@@ -30,39 +30,39 @@ script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 #     - $HOME/ .m2
 
 
-deploy:
-  -
-    on:
-      branch: release
-    provider: bintray
-    skip_cleanup: true
-    file: target/bin/bintray.json
-    user: nfrankel
-    key: $BINTRAY_API_KEY
+# deploy:
+#   -
+#     on:
+#       branch: release
+#     provider: bintray
+#     skip_cleanup: true
+#     file: target/bin/bintray.json
+#     user: nfrankel
+#     key: $BINTRAY_API_KEY
   
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.pub-cache
-after success:
-#     codecov:
-#       token:
-# #         -c1e9acbc-56ea-47c3-ba87-c4a92ca5167c
-#         - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
-#     -coveralls
-        - bash <(curl -s https://codecov.io/bash)
+# before_cache:
+#   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+#   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+# cache:
+#   directories:
+#     - $HOME/.gradle/caches/
+#     - $HOME/.gradle/wrapper/
+#     - $HOME/.pub-cache
+# after success:
+# #     codecov:
+# #       token:
+# # #         -c1e9acbc-56ea-47c3-ba87-c4a92ca5167c
+# #         - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
+# #     -coveralls
+#         - bash <(curl -s https://codecov.io/bash)
   
 
-# language: dart
-# dart:
-#   - stable
-# script:
-#   - pub get --packages-dir
-#   - pub run test
-#   - pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
+language: dart
+dart:
+  - stable
+script:
+  - pub get --packages-dir
+  - pub run test
+  - pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
   
   
