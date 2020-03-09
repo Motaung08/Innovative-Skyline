@@ -5,19 +5,19 @@ jdk:
   - openjdk8
   - openjdk11
 
-# install:
+install:
 
-# script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 #         mvn test -B
 
-# jobs:
-#   include:
-#     - stage: Test
-# #       script: ./mvnw clean test
+jobs:
+  include:
+    - stage: Test
+      script: ./mvnw clean test
       
-# cache:
-#   directories:
-#     - $HOME/ .m2
+cache:
+  directories:
+    - $HOME/ .m2
 
 
 deploy:
@@ -38,7 +38,7 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 after success:
-# #   - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
+  - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
 #     -coveralls
       - bash <(curl -s https://codecov.io/bash)
 
