@@ -16,15 +16,15 @@ script: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
    - ./flutter/bin/flutter test
 #   - pub get --packages-dir
 #   - pub run test
-#   - pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
-jobs:
-  include:
-    - stage: Test
-      script: ./mvnw clean test
+# #   - pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
+# jobs:
+#   include:
+#     - stage: Test
+#       script: ./mvnw clean test
       
-cache:
-  directories:
-    - $HOME/ .m2
+# cache:
+#   directories:
+#     - $HOME/ .m2
 
 
 deploy:
@@ -48,8 +48,8 @@ cache:
 after success:
 #     codecov:
 #       token:
-#         -c1e9acbc-56ea-47c3-ba87-c4a92ca5167c
-        - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
+# #         -c1e9acbc-56ea-47c3-ba87-c4a92ca5167c
+#         - mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
 #     -coveralls
         - bash <(curl -s https://codecov.io/bash)
   
