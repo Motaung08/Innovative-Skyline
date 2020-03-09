@@ -35,4 +35,3 @@ samples, guidance on mobile development, and a full API reference.
 
 [![Build Status](https://travis-ci.com/Motaung08/Innovative-Skyline.svg?branch=master)](https://travis-ci.com/Motaung08/Innovative-Skyline)
 
-[![Coverage Status](https://coveralls.io/repos/github/Motaung08/Innovative-Skyline/badge.svg)](https://coveralls.io/github/Motaung08/Innovative-Skyline)
