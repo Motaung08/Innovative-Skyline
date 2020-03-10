@@ -5,8 +5,10 @@ dart:
 jdk:
   - openjdk8
   
-install:
-  -sudo install curl
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y install libxml2-dev
+
   
 before_script:
   - git clone https://github.com/flutter/flutter.git -b beta
