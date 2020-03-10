@@ -61,8 +61,8 @@ language: dart
 dart:
   - stable
 script:
-  - pub get --packages-dir
+  #- pub get --packages-dir
   - flutter run test test/counter_test.dart
-  - pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
+  #- pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
   
   
