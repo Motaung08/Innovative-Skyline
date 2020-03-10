@@ -67,3 +67,6 @@ dart:
  jdk:
   - openjdk8
   
+ install:
+  -sudo install curl
+  
