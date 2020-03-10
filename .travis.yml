@@ -1,4 +1,4 @@
-language: generic
+language: dart
 env:
   global:
     - FLUTTER_CHANNEL=stable
@@ -21,7 +21,7 @@ env:
   include:
 
     - stage: Static analysis, formatting, and unit tests
-      language: generic
+      language: dart
       dist: bionic
       os: linux
       env: All unit and widget tests
@@ -34,6 +34,7 @@ env:
         - export PATH=$PWD/flutter/bin:$PWD/flutter/bin/cache/dart-sdk/bin:$PATH
         - flutter doctor -v
         - pub global activate coverage
+        
       script: ./scripts/runTests.sh
       after_success: bash <(curl -s https://codecov.io/bash) -f lcov.info
       cache:
@@ -173,7 +174,7 @@ env:
 #        # boot simulator
 #        - xcrun simctl boot $udid
 #        - xcrun simctl list
-        - xcrun simctl create "iPhone X" com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-13-3 | xargs xcrun simctl boot
+       # - xcrun simctl create "iPhone X" com.apple.CoreSimulator.SimDeviceType.iPhone-X com.apple.CoreSimulator.SimRuntime.iOS-13-3 | xargs xcrun simctl boot
         # skip homebrew update
         - export HOMEBREW_NO_AUTO_UPDATE=1
         #        - brew update
