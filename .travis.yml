@@ -62,7 +62,7 @@ dart:
   - stable
 script:
   #- pub get --packages-dir
-  - flutter run test
+  - flutter test
   #- pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
   
   
