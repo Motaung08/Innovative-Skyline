@@ -64,5 +64,6 @@ dart:
 #   - pub get --packages-dir
 #   - flutter test
 #   - pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
-  
+ jdk:
+  - openjdk8
   
