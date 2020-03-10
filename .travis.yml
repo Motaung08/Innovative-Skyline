@@ -12,6 +12,6 @@ before_install:
   
 before_script:
 #   - git clone https://github.com/Motaung08/Innovative-Skyline -b beta
-  - ./flutter/bin/flutter doctor
+  - flutter doctor -v
   
   
