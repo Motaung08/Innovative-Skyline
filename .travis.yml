@@ -16,3 +16,36 @@ env:
     - FLUTTER_HOME=${HOME}/flutter
     - PATH=${HOME}/.pub-cache/bin:${PATH}
     - PATH=${FLUTTER_HOME}/bin:${FLUTTER_HOME}/bin/cache/dart-sdk/bin:${PATH}
+    
+ jobs:
+  include:
+
+    - stage: Static analysis, formatting, and unit tests
+      language: generic
+      dist: bionic
+      os: linux
+      env: All unit and widget tests
+      before_script:
+        - sudo apt-get install -y --no-install-recommends lib32stdc++6 libstdc++6 > /dev/null
+
+        # install pre-compiled flutter
+        - wget --quiet --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/${FLUTTER_CHANNEL}/linux/flutter_linux_v${FLUTTER_VERSION}.tar.xz && tar xf flutter.tar.xz > /dev/null && rm flutter.tar.xz
+        - export PATH="$PATH":"$HOME/.pub-cache/bin"
+        - export PATH=$PWD/flutter/bin:$PWD/flutter/bin/cache/dart-sdk/bin:$PATH
+        - flutter doctor -v
+        - pub global activate coverage
+      script: ./scripts/runTests.sh
+      after_success: bash <(curl -s https://codecov.io/bash) -f lcov.info
+      cache:
+        directories:
+          - $HOME/.pub-cache
+
+    - &integration-test
+      stage: Testing
+      dist: bionic
+      language: generic
+      os: linux
+      env: bloc_flutter_android
+      # Run integration tests on android
+      before_install: &before_install_linux
+        - java -version
