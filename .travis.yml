@@ -10,8 +10,4 @@ before_install:
   - sudo apt-get -y install libxml2-dev
 
   
-before_script:
-#   - git clone https://github.com/Motaung08/Innovative-Skyline -b beta
-  - flutter doctor -v
-  
   
