@@ -1,4 +1,3 @@
-  CODECOV_TOKEN="c1e9acbc-56ea-47c3-ba87-c4a92ca5167c"
 codecov:
   require_ci_to_pass: yes
 
