@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Login.dart';
 import 'package:postgrad_tracker/auth.dart';
 import 'package:postgrad_tracker/wrapper.dart';
 import 'package:provider/provider.dart';
@@ -12,14 +13,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
-        value: AuthService().user,
+        //value: AuthService().user,
         child: MaterialApp(
           title: 'Postgraduate Tracker',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
           //home: LoginPage(),
-          home: Wrapper(),
+          home: LoginPage(),
         )
     );
   }

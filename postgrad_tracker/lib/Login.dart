@@ -3,13 +3,15 @@ import 'package:postgrad_tracker/Home.dart';
 import 'package:postgrad_tracker/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/auth.dart';
 import 'StudentSuperVisorRegister.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class LoginPage extends StatefulWidget {
-  //LoginPage({Key key, this.title}) : super(key: key);
-//  final String title;
+  LoginPage({Key key, this.title}) : super(key: key);
+  final String title;
 
-  final Function toggleView;
-  LoginPage({ this.toggleView });
+//  final Function toggleView;
+//  LoginPage({ this.toggleView });
   final AuthService _auth = AuthService();
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -17,6 +19,20 @@ class LoginPage extends StatefulWidget {
 
 
 class _LoginPageState extends State<LoginPage> {
+
+  Future<String> getData() async{
+    http.Response response = await http.get(
+        Uri.encodeFull("https://innovativeskyline.000webhostapp.com/get.php"),
+      headers: {
+          //May be required depending on API
+//          "key" : ""
+        "Accept" : "application/json"
+      }
+
+    );
+    print(response.body);
+  }
+
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
@@ -25,11 +41,20 @@ class _LoginPageState extends State<LoginPage> {
   //text field state
   String email='';
   String password='';
+  final _emailController =  TextEditingController();
+  final _passwordController =  TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    getData();
+
+
+
+
+
 
     final emailField = new TextFormField(
+      controller: _emailController,
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Username cannot be blank.' : null,
       onChanged: (val){
@@ -48,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
     final passwordField = TextFormField(
+      controller: _passwordController,
       obscureText: true,
       validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
       onChanged: (val){
@@ -60,6 +86,9 @@ class _LoginPageState extends State<LoginPage> {
           border:
           OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
+
+
+
     final loginButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -68,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
-
+          _performLogin();
           ///////////////////////////////////////////
           //Bypass the login - go straight to home page.
 
@@ -109,6 +138,16 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
+
+    @override
+    void dispose() {
+      // Clean up the controller when the widget is disposed.
+      _emailController.dispose();
+      _passwordController.dispose();
+      super.dispose();
+    }
+
+
 
     final RegisterButon = Material(
       elevation: 5.0,
@@ -166,91 +205,74 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     return Scaffold(
+
       body: Center(
-        child: Container(
-          color: Colors.white,
 
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.all(36.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                //mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
+          child: Container(
+            color: Colors.white,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
 
-                  SizedBox(
-                    height: 155.0,
-                    child: Image.asset(
-                      "assets/logo.png",
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+            child: Padding(
 
-                  SizedBox(
-                    height: 15.0,
-                    width: 50.0,
-                    ),
-                    SizedBox(
-                      height: 45.0,
-                      width: 500.0,
-                      child: emailField),
-                    SizedBox(
-                      height: 15.0,
-                      width: 50.0,
-                    ),
-                    SizedBox(height: 45.0,
-                        width: 500.0,
-                    child:passwordField),
-                    SizedBox(
-                      height: 15.0,
-                      width: 50.0,
-                    ),
+              padding: const EdgeInsets.all(36.0),
+              child: Form(
 
-                  SizedBox(
-                    height: 65.0,
-                    width: 500.0,
-                    child: loginButon
-                  ),
+                key: _formKey,
 
-                  SizedBox(
-                    height: 15.0,
-                    width: 50.0,
-                  ),
-                  SizedBox(
-                    height: 45.0,
-                    width: 500.0,
-                    child: _divider()
-                  ),
+                child: SingleChildScrollView(
 
-                  SizedBox(
-                    height: 15.0,
-                    width: 50.0,
-                  ),
-                  SizedBox(
-                    height: 65.0,
-                    width: 500.0,
-                    child: RegisterButon,
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                    width: 50.0,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
 
-                ),
-                  //SizedBox(height: 12.0),
-                  Text(
-                    error,
-                    style: TextStyle(color: Colors.red, fontSize: 14.0),
+                      Image.asset(
+                          "assets/logo.png",
+                          fit: BoxFit.contain,
+                        ),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      emailField,
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      passwordField,
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      loginButon,
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      _divider(),
+                      SizedBox (
+                        height: 15.0,
+                      ),
+                      RegisterButon,
+
+//                      Text(
+//                        error,
+//                        style: TextStyle(color: Colors.red, fontSize: 14.0),
+//                      ),
+
+                    ],
                   ),
-              ],
+              ),
             ),
           ),
-          ),
-        ),
+          )
+
       ),
     );
+  }
+  void _performLogin() {
+    String username = _emailController.text;
+    String password = _passwordController.text;
+
+    print('login attempt: $username with $password');
   }
 }
 

@@ -116,6 +116,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
+
     final confirmPasswordField = TextFormField(
       obscureText: true,
       style: style,
@@ -129,6 +130,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
+
     final registerButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -137,12 +139,12 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async{
-          if(_formKey.currentState.validate()){
-            dynamic result = await _auth.registerWithEmailAndPassword(email, password);
-            if (result == null){
-                setState(() => error = ' Error: Invalid fields');
-            }
-          }
+//          if(_formKey.currentState.validate()){
+//            dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+//            if (result == null){
+//                setState(() => error = ' Error: Invalid fields');
+//            }
+//          }
         },
         child: Text("Register",
             textAlign: TextAlign.center,
@@ -214,133 +216,101 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
             padding: const EdgeInsets.all(36.0),
             child: Form(
               key:_formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 155.0,
-                        child: Image.asset(
-                          "assets/logo.png",
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Column(children: <Widget>[
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0,
-                            width: 250.0,
-                            child: staffFirstNameField),
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0,
-                            width: 250.0,
-                            child: staffLastNameField),
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0, width: 250.0, child: staffEmailField),
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0,
-                            width: 250.0,
-                            child: staffOfficeField),
-                      ]),
-                      Column(children: <Widget>[
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                      ]),
-                      Column(children: <Widget>[
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0,
-                            width: 250.0,
-                            child: staffNumberField),
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Image.asset(
+                      "assets/logo.png",
+                      fit: BoxFit.contain,
+                    ),
 
-                        SizedBox(
-                            height: 45.0, width: 250.0, child: passwordField),
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0,
-                            width: 250.0,
-                            child: confirmPasswordField),
-                      ]),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: 65.0, width: 550.0, child: registerButon),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: 65.0, width: 550.0, child: _divider()),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: 65.0, width: 550.0, child: loginButon),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Column(children: <Widget>[
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          SizedBox(
+                              width: 150.0,
+                              child: staffFirstNameField),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          SizedBox(
+                              width: 150.0,
+                              child: staffLastNameField),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          SizedBox(
+                              width: 150.0,
+                              child: staffEmailField
+                          ),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          SizedBox(
+                              width: 150.0,
+                              child: staffOfficeField
+                          ),
+                        ]),
+                        Column(children: <Widget>[
+                          
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                        ]),
+                        Column(children: <Widget>[
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          SizedBox(
+                              width: 150.0,
+                              child: staffNumberField
+                          ),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          SizedBox(
+                              width: 150.0,
+                              child: passwordField
+                          ),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          SizedBox(
+                              width: 150.0,
+                              child: confirmPasswordField
+                          ),
 
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                        height:15
-                      ),
-                      Text(error,style: TextStyle(color: Colors.red, fontSize: 14),)
-                    ],
-                  )
-                ],
-              ),
+                        ]),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    registerButon,
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    _divider(),
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    loginButon,
+                    SizedBox(
+                      height: 15.0,
+                    ),
+                    Text(error,style: TextStyle(color: Colors.red, fontSize: 14),)
+
+
+                  ],
+                ),
+              )
             )
 
           ),

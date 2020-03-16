@@ -5,9 +5,9 @@ import 'auth.dart';
 
 
 class HomePage extends StatelessWidget {
-  //HomePage({Key key, this.title}) : super(key: key);
+  HomePage({Key key, this.title}) : super(key: key);
 
-  //final String title;
+  final String title;
   final AuthService _auth = AuthService();
   @override
 
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
 
 
         onPressed: () async{
-          await _auth.signOut();
+          //await _auth.signOut();
 
 
           Navigator.push(
@@ -98,7 +98,7 @@ class HomePage extends StatelessWidget {
         actions: <Widget>[
           FlatButton.icon(
             onPressed: () async{
-              await _auth.signOut();
+              //await _auth.signOut();
             },
             icon: Icon(Icons.person),
             label: Text("logout")
