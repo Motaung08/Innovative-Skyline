@@ -1,10 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:postgrad_tracker/Home.dart';
-import 'package:postgrad_tracker/StudentSuperVisorRegister.dart';
-import 'package:postgrad_tracker/auth.dart';
+import 'package:postgrad_tracker/main.dart';
 import 'StudentSuperVisorRegister.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -12,7 +12,7 @@ class LoginPage extends StatefulWidget {
 
 //  final Function toggleView;
 //  LoginPage({ this.toggleView });
-  final AuthService _auth = AuthService();
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -20,65 +20,64 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  Future<String> getData() async{
-    http.Response response = await http.get(
-        Uri.encodeFull("https://innovativeskyline.000webhostapp.com/get.php"),
-      headers: {
-          //May be required depending on API
-//          "key" : ""
-        "Accept" : "application/json"
-      }
+  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+  final _formKey = GlobalKey<FormState>();
+  String msg='';
+  //text field state
 
-    );
-    print(response.body);
+  TextEditingController _emailController =  new TextEditingController();
+  TextEditingController _passwordController =  new TextEditingController();
+  //
+
+  Future<List> _login() async{
+
+
+    final response = await http.post("https://innovativeskyline.000webhostapp.com/login.php",body: {
+      "Email": _emailController.text,
+      "Password": _passwordController.text
+    });
+    print('ugh x2');
+    var datauser= json.decode(response.body);
+    //print(datauser.length);
+    if(datauser.length==0){
+      setState(() {
+        msg="Incorrect email or password!";
+
+      });
+    }else{
+      setState(() {
+        Email=datauser[0]['Email'];
+        userType=int.parse(datauser[0]['UserType']);
+      });
+      Navigator.popAndPushNamed(context, '/Home');
+    }
+    //print(response.body);
+
+    return datauser;
+
   }
 
-  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-  final AuthService _auth = AuthService();
-  final _formKey = GlobalKey<FormState>();
-  String error = '';
-
-  //text field state
-  String email='';
-  String password='';
-  final _emailController =  TextEditingController();
-  final _passwordController =  TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    getData();
-
-
-
-
-
 
     final emailField = new TextFormField(
       controller: _emailController,
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Username cannot be blank.' : null,
-      onChanged: (val){
-        setState(() => email = val);
-      },
       style: style,
 //      validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
-//      onSaved: (value) => _email = value.trim(),
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-
           hintText: "Email",
           border:
           OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
-
     final passwordField = TextFormField(
       controller: _passwordController,
       obscureText: true,
       validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
-      onChanged: (val){
-        setState(() => password = val);
-      },
       style: style,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -86,8 +85,6 @@ class _LoginPageState extends State<LoginPage> {
           border:
           OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-
-
 
     final loginButon = Material(
       elevation: 5.0,
@@ -97,41 +94,8 @@ class _LoginPageState extends State<LoginPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
-          _performLogin();
-          ///////////////////////////////////////////
-          //Bypass the login - go straight to home page.
-
-           Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                    );
-
-          ///////////////////////////////////////////
-
-          //-------------------------------
-          //Showcase login functionalitym
-//          if (_formKey.currentState.validate()) {
-//            dynamic result = await _auth.signInWithEmailAndPassword(
-//                email, password);
-//
-//            if (result == null) {
-//              setState(() {
-//                error = 'Could not sign in with those credentials';
-//
-//              });//setState
-//            }//if
-//            else{
-//              Navigator.push(
-//                context,
-//                MaterialPageRoute(builder: (context) => HomePage()),
-//              );
-//            }
-//          }
-
-          //-------------------------------------
-
+          _login();
         },
-
         child: Text("Login",
             textAlign: TextAlign.center,
             style: style.copyWith(
@@ -147,8 +111,6 @@ class _LoginPageState extends State<LoginPage> {
       super.dispose();
     }
 
-
-
     final RegisterButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -157,8 +119,6 @@ class _LoginPageState extends State<LoginPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-
-         // widget.toggleView();
           Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
@@ -252,11 +212,13 @@ class _LoginPageState extends State<LoginPage> {
                         height: 15.0,
                       ),
                       RegisterButon,
-
-//                      Text(
-//                        error,
-//                        style: TextStyle(color: Colors.red, fontSize: 14.0),
-//                      ),
+                      SizedBox (
+                        height: 15.0,
+                      ),
+                      Text(
+                        msg,
+                        style: TextStyle(color: Colors.red, fontSize: 18.0),
+                      ),
 
                     ],
                   ),
@@ -268,11 +230,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  void _performLogin() {
-    String username = _emailController.text;
-    String password = _passwordController.text;
 
-    print('login attempt: $username with $password');
-  }
 }
 

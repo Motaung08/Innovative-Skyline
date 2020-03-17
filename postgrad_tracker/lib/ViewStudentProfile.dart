@@ -1,34 +1,62 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/main.dart';
+import 'package:http/http.dart' as http;
 
 
-class ViewProfilePage extends StatefulWidget {
-  ViewProfilePage({Key key, this.title}) : super(key: key);
+class ViewStudentProfilePage extends StatefulWidget {
+  final String email;
+  final int userType;
+  ViewStudentProfilePage({this.email,this.userType});
 
-  final String title;
+
+  //ViewProfilePage({Key key, this.title}) : super(key: key);
+
+  //final String title;
 
   @override
-  _ViewProfilePageState createState() => _ViewProfilePageState();
+  _ViewStudentProfilePageState createState() => _ViewStudentProfilePageState();
 }
-
-class _ViewProfilePageState extends State<ViewProfilePage> {
+String msg='';
+class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+
+  Future<List> _viewStudDetails() async{
+    print('let us deduce details...');
+    final response = await http.post("https://innovativeskyline.000webhostapp.com/viewStudentProfile.php",body: {
+      "Email": Email,
+    });
+
+    var datauser= json.decode(response.body);
+
+    if(datauser.length==0){
+      print("Nada");
+      setState(() {
+        msg=" Error :( ";
+      });
+    }else{
+      print("Assigning...");
+      setState(() {
+        FName=datauser[0]['Stud_FName'];
+        LName=datauser[0]['Std_LName'];
+        StudNo=datauser[0]['StudentNo'];
+        DegreeType=datauser[0]['DegreeID'];
+        //DateReg=datauser[0]['Stud_RegDate'];
+        //userType=int.parse(datauser[0]['UserType']);
+      });
+      //Navigator.popAndPushNamed(context, '/Home');
+    }
+    print(response.body);
+    return datauser;
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
-
-//    var user = firebase.auth().currentUser;
-//
-//    if (user != null) {
-//      user.providerData.forEach(function (profile) {
-//      console.log("Sign-in provider: " + profile.providerId);
-//      console.log("  Provider-specific UID: " + profile.uid);
-//      console.log("  Name: " + profile.displayName);
-//      console.log("  Email: " + profile.email);
-//      console.log("  Photo URL: " + profile.photoURL);
-//      });
-//    }
-
-    final Name="test";
+    _viewStudDetails();
+    final FullName= FName + " " + LName;
 
     final studentProfile = Container(
       //elevation: 5.0,
@@ -38,13 +66,6 @@ class _ViewProfilePageState extends State<ViewProfilePage> {
       child: Column(
 
           children: <Widget>[
-//                StreamBuilder(
-//                  stream: Firestore.instance.collection('Student').snapshots(),
-//                  builder: (context, snapshot){
-//                    if (!snapshot.hasData) return const Text('Loading...');
-//                    return Text("Name"+snapshot.data.documents[index]);
-//                  },
-//                ),
                 Text("Profile:  \n",
                     //textAlign: TextAlign.center,
                     style: style.copyWith(
@@ -53,31 +74,31 @@ class _ViewProfilePageState extends State<ViewProfilePage> {
 
 
               Text(
-                  "Name: "+Name+"\n",
+                  "Name: "+FullName+"\n",
                   //textAlign: TextAlign.center,
                   style: style.copyWith(
                       color: Color(0xff009999), fontWeight: FontWeight.bold, fontSize: 18)
               ),
               Text(
-                  "Student Number: "+"\n",
+                  "Student Number: "+StudNo+"\n",
                   //textAlign: TextAlign.start,
                   style: style.copyWith(
                       color: Color(0xff009999), fontWeight: FontWeight.bold, fontSize: 18)
               ),
         Text(
-                  "Email:"+"\n",
+                  "Email: "+Email+"\n",
                   textAlign: TextAlign.center,
                   style: style.copyWith(
                       color: Color(0xff009999), fontWeight: FontWeight.bold, fontSize: 18)
               ),
               Text(
-                  "Degree:"+"\n",
+                  "Degree: "+DegreeType+"\n",
                   textAlign: TextAlign.start,
                   style: style.copyWith(
                       color: Color(0xff009999), fontWeight: FontWeight.bold, fontSize: 18)
               ),
               Text(
-                  "Date Registered:"+"\n",
+                  "Date Registered: "+DateReg.toString()+"\n",
                   textAlign: TextAlign.start,
                   style: style.copyWith(
                       color: Color(0xff009999), fontWeight: FontWeight.bold, fontSize: 18)

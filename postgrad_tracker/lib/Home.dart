@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Login.dart';
-import 'package:postgrad_tracker/ViewProfile.dart';
-import 'auth.dart';
-
+import 'package:postgrad_tracker/ViewStudentProfile.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  //HomePage({Key key, this.title}) : super(key: key);
+  final String email;
+  final int userType;
+  HomePage({this.email, this.userType});
+  //final String title;
 
-  final String title;
-  final AuthService _auth = AuthService();
   @override
 
   Widget build(BuildContext context) {
+
+
     final ViewProfileButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -20,11 +22,13 @@ class HomePage extends StatelessWidget {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ViewProfilePage()),
-          );
-        },
+          if(userType==1 || userType==2){
+            Navigator.pushNamed(context, '/StudProfile');
+          } else if (userType==3){
+            Navigator.pushNamed(context, '/SupProfile');
+          }
+
+          },
         child: Text("View Profile",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -39,11 +43,7 @@ class HomePage extends StatelessWidget {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-
-
         onPressed: () async{
-          //await _auth.signOut();
-
 
           Navigator.push(
             context,
@@ -89,9 +89,9 @@ class HomePage extends StatelessWidget {
         ),
       );
     }
-
-    return Scaffold(
+    final stud_name='';return Scaffold(
       appBar: AppBar(
+          automaticallyImplyLeading: false,
         title: Text("Innovative Skyline"),
         backgroundColor: Color(0xff009999),
         //elevation: 0.0,
@@ -122,6 +122,7 @@ class HomePage extends StatelessWidget {
                   SizedBox(height: 65.0, width: 500.0, child: ViewProfileButon),
                   SizedBox(height: 15.0),
                   SizedBox(height: 65.0, width: 500.0, child: SignOutButon),
+
 
                 ],
               ),
