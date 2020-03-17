@@ -9,5 +9,18 @@ before_install:
   - sudo apt-get update
   - sudo apt-get -y install libxml2-dev
 
-  
-  
+
+
+ 
+script:
+  - pub get --packages-dir
+  - pub run test
+  - pub run dart_codecov_generator --report-on=bin/ --no-html --verbose test/env_test.dart
+  - export CODECOV_TOKEN="c1e9acbc-56ea-47c3-ba87-c4a92ca5167c"
+  - bash <(curl -s https://codecov.io/bash) 
+
+
+
+after_success:
+export CODECOV_TOKEN="c1e9acbc-56ea-47c3-ba87-c4a92ca5167c"
+bash <(curl -s https://codecov.io/bash)
