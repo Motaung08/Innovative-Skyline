@@ -37,18 +37,4 @@ samples, guidance on mobile development, and a full API reference.
 
 This is new
 
-
 [![codecov](https://codecov.io/gh/Motaung08/Innovative-Skyline/branch/master/graph/badge.svg)](https://codecov.io/gh/Motaung08/Innovative-Skyline)
-
-
-
-<a href="https://codecov.io/gh/Motaung08/Innovative-Skyline">
-  <img src="https://codecov.io/gh/Motaung08/Innovative-Skyline/branch/master/graph/badge.svg" />
-</a>
-
-
-
-.. image:: https://codecov.io/gh/Motaung08/Innovative-Skyline/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/Motaung08/Innovative-Skyline
-
-
