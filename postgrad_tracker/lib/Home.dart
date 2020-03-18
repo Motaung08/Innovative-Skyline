@@ -7,12 +7,41 @@ class HomePage extends StatelessWidget {
   final String email;
   final int userType;
   HomePage({this.email, this.userType});
-  //final String title;
+
+//  List<DynamicWidget> listDynamic = [];
+//  List<String> data = [];
+//
+//  Icon floatingIcon = new Icon(Icons.add);
+//
+//  addDynamic() {
+//    if (data.length != 0) {
+//      floatingIcon = new Icon(Icons.add);
+//
+//      data = [];
+//      listDynamic = [];
+//      print('if');
+//    }
+//    setState(() {});
+//    if (listDynamic.length >= 5) {
+//      return;
+//    }
+//    listDynamic.add(new DynamicWidget());
+//  }
+//
+//  submitData() {
+//    floatingIcon = new Icon(Icons.arrow_back);
+//    data = [];
+//    listDynamic.forEach((widget) => data.add(widget.controller.text));
+//    setState(() {});
+//    print(data.length);
+//  }
+
+
+
 
   @override
 
   Widget build(BuildContext context) {
-
 
     final ViewProfileButon = Material(
       elevation: 5.0,
@@ -22,11 +51,7 @@ class HomePage extends StatelessWidget {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          if(userType==1 || userType==2){
-            Navigator.pushNamed(context, '/StudProfile');
-          } else if (userType==3){
-            Navigator.pushNamed(context, '/SupProfile');
-          }
+
 
           },
         child: Text("View Profile",
@@ -36,26 +61,7 @@ class HomePage extends StatelessWidget {
       ),
     );
 
-    final SignOutButon = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff009999),
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () async{
 
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => LoginPage()),
-          );
-        },
-        child: Text("Sign out",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold)),
-      ),
-    );
 
     Widget _divider() {
       return Container(
@@ -89,22 +95,15 @@ class HomePage extends StatelessWidget {
         ),
       );
     }
-    final stud_name='';return Scaffold(
+
+
+    return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false,
+          //automaticallyImplyLeading: false,
         title: Text("Innovative Skyline"),
         backgroundColor: Color(0xff009999),
-        //elevation: 0.0,
-        actions: <Widget>[
-          FlatButton.icon(
-            onPressed: () async{
-              //await _auth.signOut();
-            },
-            icon: Icon(Icons.person),
-            label: Text("logout")
-          )
-        ],
       ),
+
       body: Center(
           child: Row(
         children: <Widget>[
@@ -116,13 +115,8 @@ class HomePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                //mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   //BackButton(),
-                  SizedBox(height: 65.0, width: 500.0, child: ViewProfileButon),
-                  SizedBox(height: 15.0),
-                  SizedBox(height: 65.0, width: 500.0, child: SignOutButon),
-
 
                 ],
               ),
@@ -130,6 +124,53 @@ class HomePage extends StatelessWidget {
           ),
         ],
       )),
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                child: Text('Menu',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0)),
+                decoration: BoxDecoration(
+                  color: Color(0xff009999),
+                ),
+              ),
+              ListTile(
+                title: Text(
+                    'View Profile',
+                    style: TextStyle(
+                        color: Color(0xff009999), fontWeight: FontWeight.bold)
+                ),
+                onTap: () {
+                  if(userType==1 || userType==2){
+                    Navigator.pushNamed(context, '/StudProfile');
+                  } else if (userType==3){
+                    Navigator.pushNamed(context, '/SupProfile');
+                  }else{
+                    print('User type not recognized');
+                    Navigator.pop(context);
+                  }
+
+                },
+              ),
+              ListTile(
+                title: Text(
+                    'Sign Out',
+                    style: TextStyle(
+                        color: Color(0xff009999), fontWeight: FontWeight.bold)
+                ),
+                onTap: () {
+                  Navigator.popAndPushNamed(context,'/');
+                },
+              ),
+            ],
+          ),
+        )
     );
   }
 }
