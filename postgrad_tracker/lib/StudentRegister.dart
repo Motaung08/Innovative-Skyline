@@ -37,6 +37,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
   Widget build(BuildContext context) {
 
     final studentNumberField = TextFormField(
+
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Enter a Student Number' : null,
       onChanged: (val){
@@ -168,14 +169,14 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
-          if(_formKey.currentState.validate()){
-            dynamic result = await _auth.registerWithEmailAndPassword(email, password);
-            if(result == null) {
-              setState(() {
-                error = 'The server could not accept your credentials, you may have an invalid email.';
-              });
-            }
-          }
+//          if(_formKey.currentState.validate()){
+//            dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+//            if(result == null) {
+//              setState(() {
+//                error = 'The server could not accept your credentials, you may have an invalid email.';
+//              });
+//            }
+//          }
         },
         child: Text("Register",
             textAlign: TextAlign.center,
@@ -246,142 +247,72 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
           child: Padding(
             padding: const EdgeInsets.all(36.0),
             child:Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Row(
+                child: SingleChildScrollView(
+                  key: _formKey,
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(
-                        height: 155.0,
-                        child: Image.asset(
-                          "assets/logo.png",
-                          fit: BoxFit.contain,
-                        ),
+                            Image.asset(
+                              "assets/logo.png",
+                              fit: BoxFit.contain,
+                            ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Column(children: <Widget>[
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width/2.8 ,
+                              child: studentFirstNameField
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width/2.8 ,
+                                child: studentLastNameField
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width/2.8 ,
+                                child: studentEmailField
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width/2.8 ,
+                                child: studentDegreeField
+                            ),
+
+                          ]),
+                          Column(children: <Widget>[
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                          ]),
+                          Column(children: <Widget>[
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width/2.8 ,
+                                child: studentDateRegisteredField
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width/2.8 ,
+                                child: studentNumberField
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width/2.8 ,
+                                child: passwordField
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width/2.8 ,
+                                child: confirmPasswordField
+                            ),
+
+                          ]),
+                        ],
                       ),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Column(children: <Widget>[
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0,
-                            width: 250.0,
-                            child: studentFirstNameField),
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0,
-                            width: 250.0,
-                            child: studentLastNameField),
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0, width: 250.0, child: studentEmailField),
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0,
-                            width: 250.0,
-                            child: studentDegreeField),
-                      ]),
-                      Column(children: <Widget>[
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                      ]),
-                      Column(children: <Widget>[
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0,
-                            width: 250.0,
-                            child: studentDateRegisteredField),
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0,
-                            width: 250.0,
-                            child: studentNumberField),
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0, width: 250.0, child: passwordField),
-                        SizedBox(
-                          height: 15.0,
-                          width: 50.0,
-                        ),
-                        SizedBox(
-                            height: 45.0,
-                            width: 250.0,
-                            child: confirmPasswordField),
-                      ]),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: 65.0, width: 550.0, child: registerButon),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: 65.0, width: 550.0, child: _divider()),
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(height: 65.0, width: 550.0, child: loginButon),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      SizedBox(
-                          height:15
-                      ),
-                      Text(error,style: TextStyle(color: Colors.red, fontSize: 14),)
+                      registerButon,
+                      _divider(),
+                      loginButon
                     ],
                   )
-                ],
-              ),
+                )
             )
-
           ),
         ),
       ),
