@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       "Email": _emailController.text,
       "Password": _passwordController.text
     });
-    print('ugh x2');
+   // print('ugh x2');
     var datauser= json.decode(response.body);
     //print(datauser.length);
     if(datauser.length==0){

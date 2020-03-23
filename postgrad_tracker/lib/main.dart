@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Board.dart';
 import 'package:postgrad_tracker/ViewSupProfile.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,7 @@ import 'Home.dart';
 import 'user.dart';
 import 'StudentRegister.dart';
 import 'SupervisorRegister.dart';
+import 'Board.dart';
 
 String Email='';
 int userType;
@@ -25,6 +27,9 @@ DateTime DateReg;
 String StaffNo='';
 String OfficePhone='';
 
+//Board
+String boardTitle='';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -38,14 +43,17 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           initialRoute: '/',
           routes: <String,WidgetBuilder>{
-            '/': (context) => new LoginPage(),
+           // '/': (context) => new LoginPage(),
+            '/Login': (context) => new LoginPage(),
             '/Home':(context)=>new HomePage(email: Email,userType: userType),
             '/StudProfile':(BuildContext context)=>new ViewStudentProfilePage(email: Email,userType: userType),
             '/SupProfile':(BuildContext context)=>new ViewSupProfilePage(email: Email,userType: userType),
             '/RegisterChoice':(context)=>new StudentSupChoicePage(),
             '/StudentRegister':(context)=>new StudentRegisterPage(),
             '/SupervisorRegister':(context)=>new SupervisorRegisterPage(),
+            '/Board':(context)=>new Board(title: boardTitle),
           },
+          home: HomePage(),
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
