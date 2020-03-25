@@ -29,13 +29,12 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+[![Build Status](https://travis-ci.com/Motaung08/Innovative-Skyline.svg?branch=master)](https://travis-ci.com/Motaung08/Innovative-Skyline)
 
 Show coverage...
 [![codecov](https://codecov.io/gh/Motaung08/Innovative-Skyline/branch/master/graph/badge.svg)](https://codecov.io/gh/Motaung08/Innovative-Skyline)
 
-<a href="https://codecov.io/gh/Motaung08/Innovative-Skyline">
-  <img src="https://codecov.io/gh/Motaung08/Innovative-Skyline/branch/master/graph/badge.svg" />
-</a>
+
 
 
 
