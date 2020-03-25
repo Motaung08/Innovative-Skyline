@@ -1,6 +1,5 @@
 # Innovative-Skyline
 Tracking postgraduates students progress.
-Testing....
 
 Problem statement: Wits post-grad students are allocated supervisors to help them during their projects. A supervisor can be allocated multiple students and they find it hard to keep track of each student’s progress, meetings, task and deadlines.
 
@@ -29,3 +28,14 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+Show coverage...
+[![codecov](https://codecov.io/gh/Motaung08/Innovative-Skyline/branch/master/graph/badge.svg)](https://codecov.io/gh/Motaung08/Innovative-Skyline)
+
+<a href="https://codecov.io/gh/Motaung08/Innovative-Skyline">
+  <img src="https://codecov.io/gh/Motaung08/Innovative-Skyline/branch/master/graph/badge.svg" />
+</a>
+
+
+
