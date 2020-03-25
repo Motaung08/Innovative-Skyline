@@ -32,13 +32,14 @@ class _LoginPageState extends State<LoginPage> {
   Future<List> _login() async{
 
 
-    final response = await http.post("https://innovativeskyline.000webhostapp.com/login.php",body: {
+    final response = await http.post("https://witsinnovativeskyline.000webhostapp.com/login.php",body: {
       "Email": _emailController.text,
       "Password": _passwordController.text
     });
    // print('ugh x2');
     var datauser= json.decode(response.body);
     //print(datauser.length);
+
     if(datauser.length==0){
       setState(() {
         msg="Incorrect email or password!";
@@ -47,11 +48,12 @@ class _LoginPageState extends State<LoginPage> {
     }else{
       setState(() {
         Email=datauser[0]['Email'];
-        userType=int.parse(datauser[0]['UserType']);
+        userType=int.parse(datauser[0]['UserTypeId']);
       });
       Navigator.popAndPushNamed(context, '/Home');
     }
     //print(response.body);
+    //print("*********************************************************************************");
 
     return datauser;
 

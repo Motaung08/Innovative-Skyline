@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
             '/SupervisorRegister':(context)=>new SupervisorRegisterPage(),
             '/Board':(context)=>new Board(title: boardTitle),
           },
-          home: HomePage(),
+          home: StudentRegisterPage(),
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
