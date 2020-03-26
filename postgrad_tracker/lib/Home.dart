@@ -159,9 +159,9 @@ class _MyHomePageState extends State<HomePage> {
                         color: Color(0xff009999), fontWeight: FontWeight.bold)
                 ),
                 onTap: () {
-                  if(userType==1 || userType==2){
+                  if(widget.userType==1 || widget.userType==2){
                     Navigator.popAndPushNamed(context, '/StudProfile');
-                  } else if (userType==3){
+                  } else if (widget.userType==3){
                     Navigator.popAndPushNamed(context, '/SupProfile');
                   }else{
                     print('User type not recognized');
