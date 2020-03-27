@@ -6,7 +6,7 @@ dart:
 
 dart_task:
   - test
-  - dartanalyzer: --fatal-infos --fatal-warnings .
+#   - dartanalyzer: --fatal-infos --fatal-warnings .
   - dartfmt
 
 matrix:
