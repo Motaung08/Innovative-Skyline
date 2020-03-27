@@ -12,8 +12,8 @@ dart_task:
 matrix:
   include:
   - dart: dev
-    script: ./tool/travis.sh
-    name: Collect and report coverage
+#     script: ./tool/travis.sh
+#     name: Collect and report coverage
 
 after_success:
   - gem install coveralls-lcov
