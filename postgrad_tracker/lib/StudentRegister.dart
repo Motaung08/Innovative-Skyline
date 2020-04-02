@@ -1,21 +1,24 @@
 import 'dart:convert';
-
+import 'RegisterUser.dart';
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Home.dart';
-import 'package:postgrad_tracker/auth.dart';
+
 import 'package:postgrad_tracker/main.dart';
 import 'Login.dart';
 import 'package:http/http.dart' as http;
+import 'RegisterUser.dart' as regUser;
 
 class StudentRegisterPage extends StatefulWidget {
 //  StudentRegisterPage({Key key, this.title}) : super(key: key);
 //  final String title;
-  final Function toggleView;
-  StudentRegisterPage({ this.toggleView });
 
+
+  final Function toggleView;
+
+  StudentRegisterPage({this.toggleView});
 
   //final Function toggleView;
- // StudentRegisterPage({this.toggleView});
+  // StudentRegisterPage({this.toggleView});
   @override
   _StudentRegisterPageState createState() => _StudentRegisterPageState();
 }
@@ -23,28 +26,31 @@ class StudentRegisterPage extends StatefulWidget {
 class _StudentRegisterPageState extends State<StudentRegisterPage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
-  final AuthService _auth = AuthService();
+
   final _formKey = GlobalKey<FormState>();
   String error = '';
 
-  bool SuccessUser=false;
-  bool SuccessStudent=false;
-  bool passwordMatch=false;
-
+  bool SuccessUser = false;
+  bool SuccessStudent = false;
+  bool passwordMatch = false;
 
   TextEditingController confirmPassCont = new TextEditingController();
   TextEditingController StudentTypeCont = new TextEditingController();
 
-
   //text field state
-  String email='';
-  String password='';
-  String ConfirmPass='';
-  String firstName='';
-  String lastName='';
-  String StudentNo='';
-  String Degree='';
-  String DateReg='';
+  String email = '';
+  String password = '';
+  // ignore: non_constant_identifier_names
+  String ConfirmPass = '';
+  String firstName = '';
+  String lastName = '';
+  // ignore: non_constant_identifier_names
+  String StudentNo = '';
+  // ignore: non_constant_identifier_names
+  String Degree = '';
+  String studentType='';
+  // ignore: non_constant_identifier_names
+  String DateReg = '';
 
   // Boolean variable for CircularProgressIndicator.
   bool visible = false;
@@ -60,24 +66,42 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
   final DegreeTypeController = TextEditingController();
   final RegistrationDateController = TextEditingController();
 
-  Future userRegistration() async{
-
+  Future studentRegistration() async {
+    SuccessStudent = false;
     // Showing CircularProgressIndicator.
     setState(() {
-      visible = true ;
+      visible = true;
     });
 
     // Getting value from Controller
-    //String name = nameController.text;
+
     String email = emailController.text;
     String password = passwordController.text;
-    String userType=userTypeController.text;
+    String userType = userTypeController.text;
+    String StudentNo = StudentNoController.text;
+    String Student_FName = Student_FNameController.text;
+    String Student_LName = Student_LNameController.text;
+    String DegreeType = DegreeTypeController.text;
+    String RegistrationDate = RegistrationDateController.text;
 
+    Register reg = new Register(email: email, password: password,userType: userType);
+    reg.userRegistration();
+    if (reg.SuccessUser==false){
+      print("NBNBNBNBN!!!!!!!!!!!!!!!!! SUCCESS?: "+reg.SuccessUser.toString());
+    }
     // SERVER API URL
-    var url = 'https://witsinnovativeskyline.000webhostapp.com/register_user.php';
+    var url =
+        'https://witsinnovativeskyline.000webhostapp.com/register_student.php';
 
     // Store all data with Param Name.
-    var data = {'email': email, 'password' : password, 'userType': userType};
+    var data = {
+      'email': email,
+      'StudentNo': StudentNo,
+      'Student_FName': Student_FName,
+      'Student_LName': Student_LName,
+      'DegreeType': DegreeType,
+      'RegistrationDate': RegistrationDate
+    };
 
     // Starting Web API Call.
     var response = await http.post(url, body: json.encode(data));
@@ -86,13 +110,12 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     var message = jsonDecode(response.body);
 
     // If Web call Success than Hide the CircularProgressIndicator.
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       setState(() {
         visible = false;
-        SuccessUser=true;
+        SuccessStudent = true;
       });
     }
-
 
     // Showing Alert Dialog with Response JSON Message.
     showDialog(
@@ -104,13 +127,11 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
             FlatButton(
               child: new Text("OK"),
               onPressed: () {
-                if (SuccessStudent && SuccessUser && passwordMatch){
+                //Navigator.of(context).pop();
+                print("SUCCESS USER!?: "+reg.SuccessUser.toString());
+                  if (SuccessStudent && reg.SuccessUser && passwordMatch) {
                   Navigator.pushNamed(context, '/Home');
-                }
-                else{
-                  print("Success Student " + SuccessStudent.toString());
-                  print("Success Student " + SuccessUser.toString());
-                  print("Success Student " + passwordMatch.toString());
+                } else {
                   Navigator.of(context).pop();
                 }
               },
@@ -119,80 +140,15 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         );
       },
     );
-
   }
-
-  Future studentRegistration() async{
-
-    // Showing CircularProgressIndicator.
-    setState(() {
-      visible = true ;
-    });
-
-    // Getting value from Controller
-
-    String email = emailController.text;
-
-    String StudentNo = StudentNoController.text;
-    String Student_FName = Student_FNameController.text;
-    String Student_LName = Student_LNameController.text;
-    String DegreeType = DegreeTypeController.text;
-    String RegistrationDate = RegistrationDateController.text;
-
-    // SERVER API URL
-    var url = 'https://witsinnovativeskyline.000webhostapp.com/register_student.php';
-
-    // Store all data with Param Name.
-    var data = {'email': email, 'StudentNo' : StudentNo,
-      'Student_FName': Student_FName, 'Student_LName': Student_LName,
-      'DegreeType': DegreeType, 'RegistrationDate': RegistrationDate};
-
-    // Starting Web API Call.
-    var response = await http.post(url, body: json.encode(data));
-
-    // Getting Server response into variable.
-    var message = jsonDecode(response.body);
-
-    // If Web call Success than Hide the CircularProgressIndicator.
-    if(response.statusCode == 200){
-      setState(() {
-        visible = false;
-        SuccessStudent=true;
-      });
-    }
-
-
-    // Showing Alert Dialog with Response JSON Message.
-//    showDialog(
-//      context: context,
-//      builder: (BuildContext context) {
-//        return AlertDialog(
-//          title: new Text(message),
-//          actions: <Widget>[
-//            FlatButton(
-//              child: new Text("OK"),
-//              onPressed: () {
-//                //Navigator.of(context).pop();
-//              },
-//            ),
-//          ],
-//        );
-//      },
-//    );
-
-  }
-
-
 
   @override
   Widget build(BuildContext context) {
-
-
     final studentNumberField = TextFormField(
       controller: StudentNoController,
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Enter a Student Number' : null,
-      onChanged: (val){
+      onChanged: (val) {
         setState(() => StudentNo = val);
       },
       style: style,
@@ -208,13 +164,12 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       controller: Student_FNameController,
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Enter a first name' : null,
-      onChanged: (val){
+      onChanged: (val) {
         setState(() => firstName = val);
       },
       style: style,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-
           hintText: "First Name",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
@@ -224,7 +179,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       controller: Student_LNameController,
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Enter a last name' : null,
-      onChanged: (val){
+      onChanged: (val) {
         setState(() => lastName = val);
       },
       style: style,
@@ -239,7 +194,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       controller: emailController,
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Enter an email' : null,
-      onChanged: (val){
+      onChanged: (val) {
         setState(() => email = val);
       },
       style: style,
@@ -254,7 +209,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       controller: DegreeTypeController,
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Enter a Degree' : null,
-      onChanged: (val){
+      onChanged: (val) {
         setState(() => Degree = val);
       },
       style: style,
@@ -267,20 +222,24 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 
     final studentTypeField = TextFormField(
       controller: userTypeController,
+      validator: (val) => val.isEmpty ? 'Enter Student Type' : null,
+      onChanged: (val) {
+        setState(() => studentType = val);
+      },
       obscureText: false,
       style: style,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Full/Part time",
           border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
     final studentDateRegisteredField = TextFormField(
       controller: RegistrationDateController,
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Enter Date Registered' : null,
-      onChanged: (val){
+      onChanged: (val) {
         setState(() => DateReg = val);
       },
       style: style,
@@ -294,8 +253,9 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     final passwordField = TextFormField(
       controller: passwordController,
       obscureText: true,
-      validator: (val) => val.length<6 ? 'Enter a password 6+ chars long' : null,
-      onChanged: (val){
+      validator: (val) =>
+          val.length < 6 ? 'Enter a password 6+ chars long' : null,
+      onChanged: (val) {
         setState(() => password = val);
       },
       style: style,
@@ -308,11 +268,20 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 
     final confirmPasswordField = TextFormField(
       controller: confirmPassCont,
-      //validator: (val) => val.toString()==password ? 'Passwords do not match.' : null,
-      obscureText: true,
-      onChanged: (val){
-        setState(() => ConfirmPass = val);
 
+      validator: (val) {
+
+        if (val.isEmpty) {
+          return 'Confirm password.';
+        }
+        if (val !=confirmPassCont.text){
+          return 'Passwords must match';
+        }
+        return null;
+      },
+      obscureText: true,
+      onChanged: (val) {
+        setState(() => ConfirmPass = val);
       },
       style: style,
       decoration: InputDecoration(
@@ -322,12 +291,14 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
-    checkPasswordMatch(){
-      if (passwordController.text==passwordController.text){
-        passwordMatch=true;
+
+    checkPasswordMatch() {
+      if (passwordController.text == confirmPassCont.text) {
+        passwordMatch = true;
       }
     }
 
+    //final RegisterUser
     final registerButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -336,10 +307,12 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
+          _formKey.currentState.validate();
+
+
+          regUser.Register().userRegistration();
           checkPasswordMatch();
           studentRegistration();
-          userRegistration();
-
 
         },
         child: Text("Register",
@@ -390,6 +363,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
+
           //widget.toggleView();
           Navigator.push(
             context,
@@ -409,89 +383,114 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
           color: Colors.white,
           width: MediaQuery.of(context).size.width,
           child: Padding(
-            padding: const EdgeInsets.all(36.0),
-            child:Form(
-                child: SingleChildScrollView(
+              padding: const EdgeInsets.all(36.0),
+              child: Form(
                   key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                            Image.asset(
-                              "assets/logo.png",
-                              fit: BoxFit.contain,
-                            ),
-                      Row(
+                  child: SingleChildScrollView(
+
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Column(children: <Widget>[
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width/2.8 ,
-                              child: studentFirstNameField
-                            ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width/2.8 ,
-                                child: studentLastNameField
-                            ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width/2.8 ,
-                                child: studentEmailField
-                            ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width/2.8 ,
-                                child: studentDegreeField
-                            ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width/2.8 ,
-                                child: studentTypeField
-                            ),
 
-                          ]),
-                          Column(children: <Widget>[
-                            SizedBox(
-                              width: 15.0,
-                            ),
-                          ]),
-                          Column(children: <Widget>[
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width/2.8 ,
-                                child: studentDateRegisteredField
-                            ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width/2.8 ,
-                                child: studentNumberField
-                            ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width/2.8 ,
-                                child: passwordField
-                            ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width/2.8 ,
-                                child: confirmPasswordField
-                            ),
+                          Image.asset(
+                            "assets/logo.png",
+                            fit: BoxFit.contain,
+                          ),
 
-                          ]),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Column(children: <Widget>[
+                                SizedBox(
+                                    width:
+                                    MediaQuery.of(context).size.width / 2.8,
+                                    child: studentFirstNameField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    width:
+                                    MediaQuery.of(context).size.width / 2.8,
+                                    child: studentLastNameField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    width:
+                                    MediaQuery.of(context).size.width / 2.8,
+                                    child: studentEmailField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    width:
+                                    MediaQuery.of(context).size.width / 2.8,
+                                    child: studentDegreeField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    width:
+                                    MediaQuery.of(context).size.width / 2.8,
+                                    child: studentTypeField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+
+                              ]),
+                              Column(children: <Widget>[
+                                SizedBox(
+                                  width: 15.0,
+                                ),
+                              ]),
+                              Column(children: <Widget>[
+                                SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.8,
+                                    child: studentDateRegisteredField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.8,
+                                    child: studentNumberField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.8,
+                                    child: passwordField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.8,
+                                    child: confirmPasswordField),
+                              ]),
+                            ],
+                          ),
+
+
+                          registerButon,
+                          Visibility(
+                              visible: visible,
+                              child: Container(
+                                  margin: EdgeInsets.only(bottom: 30),
+                                  child: CircularProgressIndicator())),
+                          _divider(),
+                          loginButon
                         ],
-                      ),
-                      registerButon,
-                      Visibility(
-                          visible: visible,
-                          child: Container(
-                              margin: EdgeInsets.only(bottom: 30),
-                              child: CircularProgressIndicator()
-                          )
-                      ),
-                      _divider(),
-                      loginButon
-                    ],
-                  )
-                )
-            )
-          ),
+                      )))),
         ),
       ),
     );
   }
 }
-

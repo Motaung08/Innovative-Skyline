@@ -5,7 +5,6 @@ import 'StudentSuperVisorRegister.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
   final String title;
@@ -17,38 +16,37 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-
 class _LoginPageState extends State<LoginPage> {
-
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   final _formKey = GlobalKey<FormState>();
-  String msg='';
+  String msg = '';
+
   //text field state
 
-  TextEditingController _emailController =  new TextEditingController();
-  TextEditingController _passwordController =  new TextEditingController();
+  TextEditingController _emailController = new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
+
   //
 
-  Future<List> _login() async{
-
-
-    final response = await http.post("https://witsinnovativeskyline.000webhostapp.com/login.php",body: {
-      "Email": _emailController.text,
-      "Password": _passwordController.text
-    });
-   // print('ugh x2');
-    var datauser= json.decode(response.body);
+  Future<List> _login() async {
+    final response = await http.post(
+        "https://witsinnovativeskyline.000webhostapp.com/login.php",
+        body: {
+          "Email": _emailController.text,
+          "Password": _passwordController.text
+        });
+    // print('ugh x2');
+    var datauser = json.decode(response.body);
     //print(datauser.length);
 
-    if(datauser.length==0){
+    if (datauser.length == 0) {
       setState(() {
-        msg="Incorrect email or password!";
-
+        msg = "Incorrect email or password!";
       });
-    }else{
+    } else {
       setState(() {
-        Email=datauser[0]['Email'];
-        userType=int.parse(datauser[0]['UserTypeId']);
+        Email = datauser[0]['Email'];
+        userType = int.parse(datauser[0]['UserTypeId']);
       });
       Navigator.popAndPushNamed(context, '/Home');
     }
@@ -56,36 +54,40 @@ class _LoginPageState extends State<LoginPage> {
     //print("*********************************************************************************");
 
     return datauser;
-
   }
-
 
   @override
   Widget build(BuildContext context) {
-
     final emailField = new TextFormField(
       controller: _emailController,
       obscureText: false,
-      validator: (val) => val.isEmpty ? 'Username cannot be blank.' : null,
+      //validator: (val) => val.isEmpty ? 'Username cannot be blank.' : null,
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Please enter an email address.';
+        }
+        return null;
+      },
       style: style,
 //      validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Email",
           border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
     final passwordField = TextFormField(
       controller: _passwordController,
       obscureText: true,
-      validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
+      validator: (val) =>
+          val.isEmpty ? 'Password cannot be empty.' : null,
       style: style,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Password",
           border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
     final loginButon = Material(
@@ -96,6 +98,7 @@ class _LoginPageState extends State<LoginPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
+          _formKey.currentState.validate();
           _login();
         },
         child: Text("Login",
@@ -122,8 +125,8 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
+            context,
+            MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
           );
         },
         child: Text("Register",
@@ -167,71 +170,62 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     return Scaffold(
-
       body: Center(
-
           child: Container(
-            color: Colors.white,
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-
-            child: Padding(
-
-              padding: const EdgeInsets.all(36.0),
-              child: Form(
-
-                key: _formKey,
-
-                child: SingleChildScrollView(
-
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-
-                      Image.asset(
-                          "assets/logo.png",
-                          fit: BoxFit.contain,
-                        ),
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      emailField,
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      passwordField,
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      loginButon,
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      _divider(),
-                      SizedBox (
-                        height: 15.0,
-                      ),
-                      RegisterButon,
-                      SizedBox (
-                        height: 15.0,
-                      ),
-                      Text(
-                        msg,
-                        style: TextStyle(color: Colors.red, fontSize: 18.0),
-                      ),
-
-                    ],
+        color: Colors.white,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Padding(
+          padding: const EdgeInsets.all(36.0),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Image.asset(
+                    "assets/logo.png",
+                    fit: BoxFit.contain,
                   ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  emailField,
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  passwordField,
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  loginButon,
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  _divider(),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  RegisterButon,
+                  SizedBox(
+                    height: 15.0,
+                  ),
+                  Text(
+                    msg,
+                    style: TextStyle(color: Colors.red, fontSize: 18.0),
+                  ),
+                ],
               ),
             ),
           ),
-          )
-
-      ),
+        ),
+      )),
     );
   }
-
 }
-

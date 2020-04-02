@@ -3,7 +3,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:postgrad_tracker/counter.dart';
 
-
 void main() {
   group('Counter', () {
     test('value should start at 0', () {

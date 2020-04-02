@@ -8,34 +8,36 @@ class HomePage extends StatefulWidget {
   final int userType;
 
   HomePage({this.email, this.userType});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<HomePage> {
-
   TextEditingController titleController = new TextEditingController();
 
-  Future<String> createAlertDialog(BuildContext context){
-    return showDialog(context: context, builder: (context){
-      return AlertDialog(
-        title: Text("Board title: "),
-        content: TextField(
-          controller: titleController,
-        ),
-        actions: <Widget>[
-          MaterialButton(
-            elevation: 5.0,
-            child: Text("Create Board"),
-            onPressed: (){
-              Navigator.of(context).pop(titleController.text.toString());
-              //addDynamic(titleController.text.toString());
-              //Navigator.of(context).pop();
-            },
-          )
-        ],
-      );
-    });
+  Future<String> createAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Board title: "),
+            content: TextField(
+              controller: titleController,
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                elevation: 5.0,
+                child: Text("Create Board"),
+                onPressed: () {
+                  Navigator.of(context).pop(titleController.text.toString());
+                  //addDynamic(titleController.text.toString());
+                  //Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
   }
 
   List<DynamicWidget> listDynamic = [];
@@ -43,12 +45,11 @@ class _MyHomePageState extends State<HomePage> {
 
   Icon floatingIcon = new Icon(Icons.add);
 
-
   addDynamic(String Title) {
 //  setState(() {
 //
 //  });
-  print("in addDynamic ... and we have $Title");
+    print("in addDynamic ... and we have $Title");
     listDynamic.add(new DynamicWidget(giventitle: Title));
     data.add("ello");
   }
@@ -61,12 +62,8 @@ class _MyHomePageState extends State<HomePage> {
     print(data.length);
   }
 
-
-
   @override
-
   Widget build(BuildContext context) {
-
     Widget result = new Flexible(
         flex: 1,
         child: new Card(
@@ -92,7 +89,6 @@ class _MyHomePageState extends State<HomePage> {
         ));
 
     Widget dynamicTextField = new Flexible(
-
       flex: 2,
 //child: Text("he"),
       child: new ListView.builder(
@@ -100,42 +96,44 @@ class _MyHomePageState extends State<HomePage> {
         itemBuilder: (_, index) => listDynamic[index],
       ),
     );
-    
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Innovative Skyline"),
-        backgroundColor: Color(0xff009999),
-      ),
-
-      body: new Container(
-        margin: new EdgeInsets.all(10.0),
-        child: new Column(
-          children: <Widget>[
-            
-            1 == 0 ? result : dynamicTextField,
-           // data.length == 0 ? submitButton : new Container(),
-            FlatButton(
-              onPressed: () {
-                //print("New board click");
-                createAlertDialog(context).then((onValue){
-                  addDynamic("$onValue");
-                  setState((){});
-                });
-              },
-              color: Colors.blue,
-              padding: EdgeInsets.all(30),
-              child: Row(
-                children: <Widget>[
-                  Icon(Icons.add),
-                  Text("  Create new board", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),)
-                ],
-              ),
-            ),
-          ],
+        appBar: AppBar(
+          title: Text("Innovative Skyline"),
+          backgroundColor: Color(0xff009999),
         ),
-      ),
-
+        body: new Container(
+          margin: new EdgeInsets.all(10.0),
+          child: new Column(
+            children: <Widget>[
+              1 == 0 ? result : dynamicTextField,
+              // data.length == 0 ? submitButton : new Container(),
+              FlatButton(
+                onPressed: () {
+                  //print("New board click");
+                  createAlertDialog(context).then((onValue) {
+                    addDynamic("$onValue");
+                    setState(() {});
+                  });
+                },
+                color: Colors.blue,
+                padding: EdgeInsets.all(30),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.add),
+                    Text(
+                      "  Create new board",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
         drawer: Drawer(
           // Add a ListView to the drawer. This ensures the user can scroll
           // through the options in the drawer if there isn't enough vertical
@@ -147,60 +145,56 @@ class _MyHomePageState extends State<HomePage> {
               DrawerHeader(
                 child: Text('Menu',
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0)),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0)),
                 decoration: BoxDecoration(
                   color: Color(0xff009999),
                 ),
               ),
               ListTile(
-                title: Text(
-                    'View Profile',
+                title: Text('View Profile',
                     style: TextStyle(
-                        color: Color(0xff009999), fontWeight: FontWeight.bold)
-                ),
+                        color: Color(0xff009999), fontWeight: FontWeight.bold)),
                 onTap: () {
-                  if(widget.userType==1 || widget.userType==2){
+                  if (widget.userType == 1 || widget.userType == 2) {
                     Navigator.popAndPushNamed(context, '/StudProfile');
-                  } else if (widget.userType==3){
+                  } else if (widget.userType == 3) {
                     Navigator.popAndPushNamed(context, '/SupProfile');
-                  }else{
+                  } else {
                     print('User type not recognized');
                     Navigator.pop(context);
                   }
-
                 },
               ),
               ListTile(
-                title: Text(
-                    'Sign Out',
+                title: Text('Sign Out',
                     style: TextStyle(
-                        color: Color(0xff009999), fontWeight: FontWeight.bold)
-                ),
+                        color: Color(0xff009999), fontWeight: FontWeight.bold)),
                 onTap: () {
-                  Navigator.popAndPushNamed(context,'/Login');
+                  Navigator.popAndPushNamed(context, '/Login');
                 },
               ),
             ],
           ),
-        )
-    );
+        ));
   }
 }
 
 // ignore: must_be_immutable
 class DynamicWidget extends StatelessWidget {
   String giventitle;
-  DynamicWidget({Key key, @required this.giventitle}) : super(key: key);
 
+  DynamicWidget({Key key, @required this.giventitle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: new EdgeInsets.all(8.0),
       child: new MaterialButton(
-          onPressed: (){
-            Navigator.pushNamed(context, '/Board');
-          },
+        onPressed: () {
+          Navigator.pushNamed(context, '/Board');
+        },
         color: Colors.blue,
         child: Text(giventitle),
       ),
