@@ -31,7 +31,7 @@ samples, guidance on mobile development, and a full API reference.
 
 [![Build Status](https://travis-ci.com/Motaung08/Innovative-Skyline.svg?branch=master)](https://travis-ci.com/Motaung08/Innovative-Skyline)
 
-[![codecov](https://codecov.io/gh/Motaung08/Innovative-Skyline/branch/master/graph/badge.svg)](https://codecov.io/gh/Motaung08/Innovative-Skyline)
+CODECOV AND BUILD FOR THIS PROJECT ARE DONE ON ANOTHER REPO WHICH IS https://github.com/Motaung08/postgrad-tracker
 
 
 
