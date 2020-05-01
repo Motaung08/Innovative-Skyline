@@ -84,7 +84,7 @@ class _MyHomePageState extends State<HomePage> {
     boards.clear();
     widget.listDynamic.clear();
     Navigator.popAndPushNamed(context, '/Login');
-    
+
     //NOTE!!! more will need to be done here.
   }
 
