@@ -1,29 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/tshepang/Documents/developments/Innovative-Skyline/postgrad_tracker/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "C:\\Users\\MSI\\Documents\\GitHub\\New folder\\Innovative-Skyline\\postgrad_tracker\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "/home/tshepang/.gradle/caches/transforms-2/files-2.1/ae13efc3dbae5c9ee58d4933337fcd21/coordinatorlayout-1.0.0/res/values/values.xml",
-                    "from": {
-                        "startLines": "2,102,3,13",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,5935,116,724",
-                        "endLines": "2,104,12,101",
-                        "endColumns": "60,12,24,24",
-                        "endOffsets": "111,6075,719,5930"
-                    },
-                    "to": {
-                        "startLines": "2,62,72,82",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,3836,4279,4887",
-                        "endLines": "2,64,81,170",
-                        "endColumns": "60,12,24,24",
-                        "endOffsets": "111,3976,4882,10093"
-                    }
-                },
-                {
-                    "source": "/home/tshepang/.gradle/caches/transforms-2/files-2.1/0a271e99b6771ad4a84318244d532fb7/core-1.0.0/res/values/values.xml",
+                    "source": "C:\\Users\\MSI\\.gradle\\caches\\transforms-2\\files-2.1\\0a271e99b6771ad4a84318244d532fb7\\core-1.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,171,172,176,177,178,6,13,56,88,125",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -42,14 +23,33 @@
                     }
                 },
                 {
-                    "source": "/home/tshepang/Documents/developments/Innovative-Skyline/postgrad_tracker/android/app/src/main/res/values/styles.xml",
+                    "source": "C:\\Users\\MSI\\.gradle\\caches\\transforms-2\\files-2.1\\ae13efc3dbae5c9ee58d4933337fcd21\\coordinatorlayout-1.0.0\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,102,3,13",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,5935,116,724",
+                        "endLines": "2,104,12,101",
+                        "endColumns": "60,12,24,24",
+                        "endOffsets": "111,6075,719,5930"
+                    },
+                    "to": {
+                        "startLines": "2,62,72,82",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,3836,4279,4887",
+                        "endLines": "2,64,81,170",
+                        "endColumns": "60,12,24,24",
+                        "endOffsets": "111,3976,4882,10093"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\MSI\\Documents\\GitHub\\New folder\\Innovative-Skyline\\postgrad_tracker\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
-                        "startOffsets": "134,777",
+                        "startOffsets": "137,791",
                         "endLines": "7,16",
                         "endColumns": "12,12",
-                        "endOffsets": "426,937"
+                        "endOffsets": "433,953"
                     },
                     "to": {
                         "startLines": "41,46",
