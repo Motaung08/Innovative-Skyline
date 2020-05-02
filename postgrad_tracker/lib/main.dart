@@ -30,6 +30,7 @@ User user=new User();
 Supervisor supervisor=new Supervisor();
 Student student=new Student();
 List<Project_Board> boards=List();
+Project_Board project_board=new Project_Board();
 
 
 StudentController studentController=new StudentController();
@@ -66,7 +67,7 @@ class MyApp extends StatelessWidget {
         '/StudentRegister': (context) => new StudentRegisterPage(),
         '/SupervisorRegister': (context) => new SupervisorRegisterPage(),
 
-        '/Board': (context) => new Board(title: boardTitle),
+        '/Board': (context) => new Board(proj_board: project_board),
       },
       home: LoginPage(),
       theme: ThemeData(

@@ -108,47 +108,78 @@ class Project_BoardController extends StatefulWidget {
 
   }
 
-//  Future createBoard(String title) async{
+  Future createBoard(String title) async{
+    bool created = false;
+
+
+      print('----------------------------- in createBoard method in Project_BoardController class -----------------------------');
+
+    if(user.userTypeID==1){
+      supervisor.staffNo="";
+    }
+    else{
+      student.studentNo="";
+    }
+
+      // SERVER API URL
+      var url =
+          'https://witsinnovativeskyline.000webhostapp.com/createBoard.php';
+
+      // Store all data with Param Name.
+      var data = {
+        'Project_Title': project_board.Project_Title,
+        'StudentNo' : student.studentNo,
+        'StaffNo' : supervisor.staffNo,
+        'userType' : user.userTypeID.toString()
+      };
+
+      // Starting Web API Call.
+      var response = await http.post(url, body: json.encode(data));
+
+      // Getting Server response into variable.
+      var message = jsonDecode(response.body);
+
+      print(message);
+
+
+
+  }
+
+//  Future CreateAssociation() async{
 //    bool created = false;
 //
-//    if(user.userTypeID==1){ // if the user is a student
-//      print('----------------------------- in createBoard method in Project_BoardController class -----------------------------');
-//      // SERVER API URL
-//      var url =
-//          'https://witsinnovativeskyline.000webhostapp.com/createBoardStudent.php';
 //
-//      // Store all data with Param Name.
-//      var data = {
-//        'Project_Title': title,
-//        'StudentNo' : student.studentNo,
-//      };
+//    print('----------------------------- in create association method in Project_BoardController class -----------------------------');
 //
-//      // Starting Web API Call.
-//      var response = await http.post(url, body: json.encode(data));
-//      print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
-//      // Getting Server response into variable.
-//      var message = jsonDecode(response.body);
-//
-//      print(message);
+//    if(user.userTypeID==1){
+//      supervisor.staffNo="";
 //    }
-////    else{ // if the user is a supervisor
-////      var data = {
-////        'Project_Title': title,
-////        'StaffNo' : supervisor.staffNo,
-////      };
-////
-////      // Starting Web API Call.
-////      var response = await http.post(url, body: json.encode(data));
-////
-////      // Getting Server response into variable.
-////      var message = jsonDecode(response.body);
-////      print(message);
-////    }
+//    else{
+//      student.studentNo="";
+//    }
 //
-////    for(int i=0;i<boards.length;i++){
-////      HomePage homePage=new HomePage();
-////      homePage.listDynamic.add(new DynamicWidget(giventitle: boards[i].Project_Title));
-////    }
+//    // SERVER API URL
+//    var url =
+//        'https://witsinnovativeskyline.000webhostapp.com/createAssoc.php';
+//
+//    print('vvvvvvvvvvvvvvvvvvv  student.studentNo '+ student.studentNo);
+//    print('vvvvvvvvvvvvvvvvvvv  supervisor.staffNo '+ supervisor.staffNo);
+//    print('vvvvvvvvvvvvvvvvvvv  user.userTypeID '+ user.userTypeID.toString());
+//    // Store all data with Param Name.
+//    var data = {
+//      'StudentNo' : student.studentNo,
+//      'StaffNo' : supervisor.staffNo,
+//      'userType' : user.userTypeID
+//    };
+//
+//    // Starting Web API Call.
+//    var response = await http.post(url, body: json.encode(data));
+//    print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+//    // Getting Server response into variable.
+//    var message = jsonDecode(response.body);
+//
+//    print(message);
+//
 //  }
 
 

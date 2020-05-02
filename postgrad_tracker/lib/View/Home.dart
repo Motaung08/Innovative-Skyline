@@ -41,7 +41,6 @@ class _MyHomePageState extends State<HomePage> {
             content: TextField(
               controller: titleController,
 
-
             ),
             actions: <Widget>[
               MaterialButton(
@@ -49,17 +48,8 @@ class _MyHomePageState extends State<HomePage> {
                 child: Text("Create Board"),
                 onPressed: () {
 
-                  //Board board = new Board();
-                  //print('Title: '+ board.title);
-
-                 // project_boardController.createBoard(titleController.text);
-
-                  //board.createBoard();
-
                   Navigator.of(context).pop(titleController.text.toString());
 
-                  //addDynamic(titleController.text.toString());
-                  //Navigator.of(context).pop();
                 },
               )
             ],
@@ -74,13 +64,6 @@ class _MyHomePageState extends State<HomePage> {
 
   }
 
-//  submitData() {
-//    floatingIcon = new Icon(Icons.arrow_back);
-//    data = [];
-//    listDynamic.forEach((widget) => data.add("ello"));
-//    //setState(() {});
-//    print(data.length);
-//  }
 
   signout(){
     boards.clear();
@@ -94,35 +77,6 @@ class _MyHomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
-//    setState(() {
-//
-//    });
-    print('=============== I am refreshed! ========================');
-   // initialize();
-    Widget result = new Flexible(
-        flex: 1,
-        child: new Card(
-          child: ListView.builder(
-            itemCount: widget.listDynamic.length,
-            itemBuilder: (_, index) {
-              return new Padding(
-                padding: new EdgeInsets.all(10.0),
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-//                    new Container(
-//                      margin: new EdgeInsets.only(left: 10.0),
-//                      child: new Text("${index + 1} : ${data[index]}"),
-//                      //child: new DynamicWidget(giventitle: "test rabbits"),
-//                    ),
-                    new Divider()
-                  ],
-                ),
-              );
-            },
-          ),
-        ));
 
     Widget dynamicTextField = new Flexible(
       flex: 2,
@@ -150,22 +104,16 @@ class _MyHomePageState extends State<HomePage> {
                 onPressed: () {
 
                   createAlertDialog(context).then((onValue){
-                    Project_Board created=new Project_Board();
-                    created.Project_Title='$onValue';
-                    addDynamic(created);
+                    //Project_Board created=new Project_Board();
+                    //created.Project_Title
+                    project_board.Project_Title='$onValue';
+                    project_boardController.createBoard('$onValue');
+                    addDynamic(project_board);
                     setState(() {
 
                     });
                   });
 
-                  //print("New board click");
-//                  createAlertDialog(context).then((onValue) {
-//                    if("$onValue"!='null'){
-//                      addDynamic("$onValue");
-//                      setState(() {});
-//                    }
-//
-//                  });
                 },
                 color: Colors.blue,
                 padding: EdgeInsets.all(30),
@@ -248,6 +196,7 @@ class DynamicWidget extends StatelessWidget {
       margin: new EdgeInsets.all(8.0),
       child: new MaterialButton(
         onPressed: () {
+          project_board=aboard;
           Navigator.pushNamed(context, '/Board');
         },
         color: Colors.blue,
