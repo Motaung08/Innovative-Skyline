@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:postgrad_tracker/Controller/UserController.dart';
+
+import 'package:postgrad_tracker/Model/PostGradType.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/Login.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
+import 'package:postgrad_tracker/Model/PostGradType.dart' show Degree;
 
 
 class StudentRegisterPage extends StatefulWidget {
@@ -14,8 +16,100 @@ class StudentRegisterPage extends StatefulWidget {
   _StudentRegisterPageState createState() => _StudentRegisterPageState();
 }
 
+class Degreetype {
+  int id;
+  String name;
+
+  Degreetype(this.id, this.name);
+
+  static List<Degreetype> getDegree() {
+    return <Degreetype>[
+      Degreetype(1, 'Honors'),
+      Degreetype(2, 'Masters by disceration'),
+      Degreetype(3, 'Masters by course work'), //Must change thid part to extract data from the server
+      Degreetype(4, 'PHD'),
+    ];
+  }
+}
+
+class Studenttype {
+  //Change to get from DB!
+  int id;
+  String name;
+
+  Studenttype(this.id, this.name);
+
+  static List<Studenttype> getStudType() {
+    return <Studenttype>[
+      Studenttype(1, 'Full-Time'),
+      Studenttype(2, 'Part-Time'),
+
+    ];
+  }
+}
+
+
 class _StudentRegisterPageState extends State<StudentRegisterPage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+
+  List<Degreetype> _degree = Degreetype.getDegree();
+  List<DropdownMenuItem<Degreetype>> _dropdownMenuItems;
+  Degreetype _selectedDegree;
+
+  List<Studenttype> _studenttype = Studenttype.getStudType();
+  List<DropdownMenuItem<Studenttype>> _dropdownStudTypeMenuItems;
+  Studenttype _selectedStudType;
+
+
+  @override
+  void initState() {
+    _dropdownMenuItems = buildDropdownMenuItems(_degree);
+    _selectedDegree = _dropdownMenuItems[0].value;
+    _dropdownStudTypeMenuItems = buildDropdownStudentTypeMenuItems(_studenttype);
+    _selectedStudType = _dropdownStudTypeMenuItems[0].value;
+    super.initState();
+  }
+
+  List<DropdownMenuItem<Degreetype>> buildDropdownMenuItems(List companies) {
+    List<DropdownMenuItem<Degreetype>> items = List();
+    for (Degreetype degree in companies) {
+      items.add(
+        DropdownMenuItem(
+          value: degree,
+          child: Text(degree.name, style: TextStyle(color: Colors.grey,fontFamily: 'Montserrat', fontSize: 20.0),),
+
+        ),
+      );
+    }
+    return items;
+  }
+
+  onChangeDropdownItem(Degreetype selectedDegree) {
+    setState(() {
+      _selectedDegree = selectedDegree;
+    });
+  }
+
+
+  List<DropdownMenuItem<Studenttype>> buildDropdownStudentTypeMenuItems(List types) {
+    List<DropdownMenuItem<Studenttype>> items = List();
+    for (Studenttype type in types) {
+      items.add(
+        DropdownMenuItem(
+          value: type,
+          child: Text(type.name, style: TextStyle(color: Colors.grey,fontFamily: 'Montserrat', fontSize: 20.0),overflow: TextOverflow.ellipsis,),
+
+        ),
+      );
+    }
+    return items;
+  }
+
+  onChangeStudTypeDropdownItem(Studenttype selectedType) {
+    setState(() {
+      _selectedStudType = selectedType;
+    });
+  }
 
 
   final _formKey = GlobalKey<FormState>();
@@ -77,10 +171,13 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     studentA.studentNo = StudentNoController.text;
     studentA.fName = Student_FNameController.text;
     studentA.lName = Student_LNameController.text;
-    studentA.degreeID = int.parse(DegreeTypeController.text);
+    //studentA.degreeID = int.parse(DegreeTypeController.text);
+    print('SELECTED DEGREE:     ------      '+_selectedDegree.id.toString());
+    studentA.degreeID=_selectedDegree.id;
     studentA.registrationDate = DateTime.parse(RegistrationDateController.text);
-    studentA.studentTypeID=int.parse(studentTypeController.text);
+    //studentA.studentTypeID=int.parse(studentTypeController.text);
     userA.userTypeID=1;
+    studentA.studentTypeID=_selectedStudType.id;
 
     var message = await studentController.studentRegistration(studentA, userA);
     print('...............Student registration:      '+message+'      ...............');
@@ -120,6 +217,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+
     final studentNumberField = TextFormField(
       controller: StudentNoController,
       obscureText: false,
@@ -179,6 +277,75 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
           hintText: "Email",
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+    );
+
+    final dropdownDegree =     new Container(
+      padding: EdgeInsets.symmetric(horizontal: 20) ,
+      decoration: ShapeDecoration(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(width: 1.0, style: BorderStyle.solid, color: Colors.grey),
+          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+        ),
+      ),
+
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+
+          children: <Widget>[
+
+            DropdownButton(
+              value: _selectedDegree,
+              items: _dropdownMenuItems,
+              onChanged: onChangeDropdownItem,
+              isExpanded: true,
+
+              //style: style,
+
+
+              //style: style,
+            ),
+
+            //Text('Selected: ${_selectedDegree.DegreeType}'),
+          ],
+        ),
+      ),
+    );
+
+    final dropdownStudType = new Container(
+      padding: EdgeInsets.symmetric(horizontal: 20) ,
+      decoration: ShapeDecoration(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(width: 1.0, style: BorderStyle.solid, color: Colors.grey),
+          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+        ),
+      ),
+
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+
+          children: <Widget>[
+
+            DropdownButton(
+              value: _selectedStudType,
+              items: _dropdownStudTypeMenuItems,
+              onChanged: onChangeStudTypeDropdownItem,
+              isExpanded: true,
+
+
+              //style: style,
+
+
+              //style: style,
+            ),
+
+            //Text('Selected: ${_selectedDegree.DegreeType}'),
+          ],
+        ),
+      ),
     );
 
     final studentDegreeField = TextFormField(
@@ -267,12 +434,6 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
-
-    checkPasswordMatch() {
-      if (passwordController.text == confirmPassCont.text) {
-        passwordMatch = true;
-      }
-    }
 
     //final RegisterUser
     final registerButon = Material(
@@ -401,16 +562,16 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                                   height: 15.0,
                                 ),
                                 SizedBox(
-                                    width:
+                                   width:
                                     MediaQuery.of(context).size.width / 2.8,
-                                    child: studentDegreeField),
+                                    child: dropdownDegree),
                                 SizedBox(
                                   height: 15.0,
                                 ),
                                 SizedBox(
                                     width:
                                     MediaQuery.of(context).size.width / 2.8,
-                                    child: studentTypeField),
+                                    child: dropdownStudType),
                                 SizedBox(
                                   height: 15.0,
                                 ),
@@ -453,6 +614,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 
 
                           registerButon,
+
                           Visibility(
                               visible: visible,
                               child: Container(
@@ -467,3 +629,4 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     );
   }
 }
+

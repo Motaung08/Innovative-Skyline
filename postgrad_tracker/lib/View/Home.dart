@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/User.dart';
+import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/main.dart';
 
 
@@ -11,7 +13,7 @@ class HomePage extends StatefulWidget {
   initializeDisplay(){
     print('Initializing board display! ##################');
     for(int i=0;i<boards.length;i++){
-      listDynamic.add(new DynamicWidget(giventitle: boards[i].Project_Title));
+      listDynamic.add(new DynamicWidget(aboard: boards[i]));
     }
 
   }
@@ -67,8 +69,8 @@ class _MyHomePageState extends State<HomePage> {
 
   Icon floatingIcon = new Icon(Icons.add);
 
-  addDynamic(String Title) {
-    widget.listDynamic.add(new DynamicWidget(giventitle: Title));
+  addDynamic(Project_Board givenBoard) {
+    widget.listDynamic.add(new DynamicWidget(aboard: givenBoard));
 
   }
 
@@ -148,7 +150,9 @@ class _MyHomePageState extends State<HomePage> {
                 onPressed: () {
 
                   createAlertDialog(context).then((onValue){
-                    addDynamic('testt');
+                    Project_Board created=new Project_Board();
+                    created.Project_Title='$onValue';
+                    addDynamic(created);
                     setState(() {
 
                     });
@@ -204,7 +208,7 @@ class _MyHomePageState extends State<HomePage> {
                     style: TextStyle(
                         color: Color(0xff009999), fontWeight: FontWeight.bold)),
                 onTap: () {
-
+                  print(user.userTypeID );
                   if (user.userTypeID == 1) {
                     Navigator.popAndPushNamed(context, '/StudProfile');
                   } else if (user.userTypeID == 2) {
@@ -233,9 +237,10 @@ class _MyHomePageState extends State<HomePage> {
 
 
 class DynamicWidget extends StatelessWidget {
-  String giventitle='';
+  //String giventitle='';
+  Project_Board aboard;
 
-  DynamicWidget({Key key, @required this.giventitle}) : super(key: key);
+  DynamicWidget({Key key, @required this.aboard}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -246,7 +251,7 @@ class DynamicWidget extends StatelessWidget {
           Navigator.pushNamed(context, '/Board');
         },
         color: Colors.blue,
-        child: Text(giventitle),
+        child: Text(aboard.Project_Title),
       ),
     );
   }

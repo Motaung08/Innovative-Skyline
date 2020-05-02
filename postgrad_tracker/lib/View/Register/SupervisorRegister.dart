@@ -16,6 +16,8 @@ class SupervisorRegisterPage extends StatefulWidget {
   _SupervisorRegisterPageState createState() => _SupervisorRegisterPageState();
 }
 
+
+
 class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   final _formKey = GlobalKey<FormState>();

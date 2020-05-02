@@ -25,6 +25,9 @@ class UserController extends StatefulWidget {
     // If Web call Success than Hide the CircularProgressIndicator.
     if (response.statusCode == 200) {
       user.register=true;
+      user.email=userA.email;
+      user.password=userA.password;
+      user.userTypeID=userA.userTypeID;
     }
     //return SuccessUser;
   }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Controller/DegreeController.dart';
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
 import 'package:postgrad_tracker/Controller/UserController.dart';
+import 'package:postgrad_tracker/Dropdowntest.dart';
+import 'package:postgrad_tracker/Model/PostGradType.dart';
 import 'package:postgrad_tracker/View/Register/StudentRegister.dart';
 import 'package:postgrad_tracker/View/Register/SupervisorRegister.dart';
-import 'package:postgrad_tracker/View/board/Board.dart';
+import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/StudentController.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
@@ -28,9 +31,11 @@ Supervisor supervisor=new Supervisor();
 Student student=new Student();
 List<Project_Board> boards=List();
 
+
 StudentController studentController=new StudentController();
 SupervisorController supervisorController=new SupervisorController();
 UserController userController=new UserController();
+DegreeController degreeController=new DegreeController();
 Project_BoardController project_boardController=new Project_BoardController();
 
 //ProjectBoardView
