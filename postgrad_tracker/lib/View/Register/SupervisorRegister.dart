@@ -100,6 +100,22 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
     );
   }
 
+  bool _isHidden=true;
+
+  void toggleVisibility(){
+    setState(() {
+      _isHidden=!_isHidden;
+    });
+  }
+
+  bool _isHiddenConf=true;
+
+  void toggleVisibilityConf(){
+    setState(() {
+      _isHiddenConf=!_isHiddenConf;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -181,9 +197,10 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
       onChanged: (val) {
         setState(() => userA.password = val);
       },
-      obscureText: true,
+      obscureText: _isHidden,
       style: style,
       decoration: InputDecoration(
+          suffixIcon: IconButton(icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibility),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Password",
           border:
@@ -192,7 +209,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
 
     final confirmPasswordField = TextFormField(
       controller: confirmPassController,
-      obscureText: true,
+      obscureText: _isHiddenConf,
       style: style,
       validator: (val) {
 
@@ -206,6 +223,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
       },
 
       decoration: InputDecoration(
+          suffixIcon: IconButton(icon: _isHiddenConf ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibilityConf),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Confirm Password",
           border:

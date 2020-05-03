@@ -215,6 +215,22 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     );
   }
 
+  bool _isHidden=true;
+
+  void toggleVisibility(){
+    setState(() {
+      _isHidden=!_isHidden;
+    });
+  }
+
+  bool _isHiddenConf=true;
+
+  void toggleVisibilityConf(){
+    setState(() {
+      _isHiddenConf=!_isHiddenConf;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -395,7 +411,8 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 
     final passwordField = TextFormField(
       controller: passwordController,
-      obscureText: true,
+      obscureText: _isHidden,
+
       validator: (val) =>
           val.length < 6 ? 'Enter a password 6+ chars long' : null,
       onChanged: (val) {
@@ -403,6 +420,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       },
       style: style,
       decoration: InputDecoration(
+        suffixIcon: IconButton(icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibility),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Password",
           border:
@@ -422,12 +440,13 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         }
         return null;
       },
-      obscureText: true,
+      obscureText: _isHiddenConf,
       onChanged: (val) {
         setState(() => ConfirmPass = val);
       },
       style: style,
       decoration: InputDecoration(
+          suffixIcon: IconButton(icon: _isHiddenConf ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibilityConf),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Confirm Password",
           border:
