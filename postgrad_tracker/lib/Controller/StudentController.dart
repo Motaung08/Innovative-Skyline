@@ -50,48 +50,55 @@ class StudentController extends StatefulWidget {
   Future<String> studentRegistration(Student studentA, User userA) async {
     student.register=false;
     bool success=false;
-    await userController.userRegistration(userA);
+    String userSuccess="";
+    String registrationSuccess="";
+    userSuccess= await userController.userRegistration(userA);
+    if (userSuccess=="Email Already Exist, Please Try Again With New Email Address..!"){
+      registrationSuccess=userSuccess;
+    }else{
+      // SERVER API URL
+      var url =
+          'https://witsinnovativeskyline.000webhostapp.com/register_student.php';
 
-    // SERVER API URL
-    var url =
-        'https://witsinnovativeskyline.000webhostapp.com/register_student.php';
+      // Store all data with Param Name.
+      var data = {
+        'email': studentA.email,
+        'StudentNo': studentA.studentNo,
+        'Student_FName': studentA.fName,
+        'Student_LName': studentA.lName,
+        'DegreeType': studentA.degreeID.toString(),
+        'RegistrationDate': (studentA.registrationDate).toString(),
+        'StudentTypeID':studentA.studentTypeID.toString()
+      };
 
-    // Store all data with Param Name.
-    var data = {
-      'email': studentA.email,
-      'StudentNo': studentA.studentNo,
-      'Student_FName': studentA.fName,
-      'Student_LName': studentA.lName,
-      'DegreeType': studentA.degreeID.toString(),
-      'RegistrationDate': (studentA.registrationDate).toString(),
-      'StudentTypeID':studentA.studentTypeID.toString()
-    };
+      // Starting Web API Call.
+      var response = await http.post(url, body: json.encode(data));
 
-    // Starting Web API Call.
-    var response = await http.post(url, body: json.encode(data));
-
-    // Getting Server response into variable.
-    var message = jsonDecode(response.body);
+      // Getting Server response into variable.
+      var message = jsonDecode(response.body);
 
 
-    // If Web call Success than Hide the CircularProgressIndicator.
-    if (response.statusCode == 200) {
-      success = true;
-      student.fName=studentA.fName;
-      student.lName=studentA.lName;
-      student.email=studentA.email;
-      student.studentTypeID=studentA.studentTypeID;
-      student.studentNo=studentA.studentNo;
-      student.registrationDate=studentA.registrationDate;
-      student.degreeID=studentA.degreeID;
+      // If Web call Success than Hide the CircularProgressIndicator.
+      if (response.statusCode == 200) {
+        success = true;
+        student.fName=studentA.fName;
+        student.lName=studentA.lName;
+        student.email=studentA.email;
+        student.studentTypeID=studentA.studentTypeID;
+        student.studentNo=studentA.studentNo;
+        student.registrationDate=studentA.registrationDate;
+        student.degreeID=studentA.degreeID;
 
+      }
+
+
+      if (user.register==true && success==true){
+        student.register=true;
+        registrationSuccess="";
+      }
     }
 
-
-    if (user.register==true && success==true){
-      student.register=true;
-    }
-    return message;
+    return registrationSuccess;
 
   }
 

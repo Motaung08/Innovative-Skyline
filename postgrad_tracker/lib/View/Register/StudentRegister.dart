@@ -179,7 +179,15 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     userA.userTypeID=1;
     studentA.studentTypeID=_selectedStudType.id;
 
-    var message = await studentController.studentRegistration(studentA, userA);
+    var registered = await studentController.studentRegistration(studentA, userA);
+    String message="";
+    //Empty string indicates no errors -> success
+    if (registered==""){
+      message="Successfuly registered.";
+    }
+    else{
+      message=registered;
+    }
     print('...............Student registration:      '+message+'      ...............');
 
 
@@ -204,6 +212,9 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                   Navigator.pushNamed(context, '/Home');
                 }
                 else{
+                  setState(() {
+                    visible=false;
+                  });
                   Navigator.of(context).pop();
                 }
 

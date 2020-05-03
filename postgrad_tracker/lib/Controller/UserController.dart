@@ -6,7 +6,7 @@ import 'package:postgrad_tracker/main.dart';
 
 class UserController extends StatefulWidget {
 
-  Future userRegistration(User userA) async {
+  Future<String> userRegistration(User userA) async {
     user.register = false;
 
     // SERVER API URL
@@ -29,7 +29,7 @@ class UserController extends StatefulWidget {
       user.password=userA.password;
       user.userTypeID=userA.userTypeID;
     }
-    //return SuccessUser;
+    return message;
   }
 
   Future<String> login(String email, String Password) async {
