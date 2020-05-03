@@ -22,10 +22,17 @@ class LoginPageState extends State<LoginPage> {
 
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
+  bool _isHidden=true;
 
+  void toggleVisibility(){
+    setState(() {
+      _isHidden=!_isHidden;
+    });
+  }
   //
 
   Future<List> _login() async {
+
 
     final response = await http.post(
         "https://witsinnovativeskyline.000webhostapp.com/login.php",
@@ -113,15 +120,21 @@ class LoginPageState extends State<LoginPage> {
 
     final passwordField = TextFormField(
       controller: _passwordController,
-      obscureText: true,
+
+      obscureText: _isHidden,
       validator: (val) =>
           val.isEmpty ? 'Password cannot be empty.' : null,
       style: style,
       decoration: InputDecoration(
+          fillColor: Colors.white,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Password",
+
           border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0),) ,
+      suffixIcon: IconButton(icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility) , onPressed: toggleVisibility, focusColor: Color(0xff009999),)
+      ),
+
     );
 
 
