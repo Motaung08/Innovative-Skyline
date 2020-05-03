@@ -38,32 +38,40 @@ class SupervisorController extends StatefulWidget {
 
   Future<String> registration(Supervisor supervisorA, User userA) async {
     supervisor.register = false;
-    userController.userRegistration(userA);
-
-    // SERVER API URL
-    var url =
-        'https://witsinnovativeskyline.000webhostapp.com/Register_Supervisor.php';
-
-    // Store all data with Param Name.
-    var data = {
-      'email': supervisorA.email,
-      'StaffNo': supervisorA.staffNo,
-      'Sup_FName': supervisorA.fName,
-      'Sup_LName': supervisorA.lName,
-      'Supervisor_OfficePhone': supervisorA.office,
-    };
-
-    // Starting Web API Call.
-    var response = await http.post(url, body: json.encode(data));
-
-    // Getting Server response into variable.
-    var message = jsonDecode(response.body);
-
-    // If Web call Success than Hide the CircularProgressIndicator.
-    if (response.statusCode == 200) {
-      supervisor.register = true;
+    String userRegistrationMessage="";
+    String RegistrationSuccess="";
+    userRegistrationMessage=await userController.userRegistration(userA);
+    if (userRegistrationMessage=="Email Already Exists, Please Try Again With New Email Address..!"){
+      RegistrationSuccess=userRegistrationMessage;
     }
-    return message;
+    else{
+      // SERVER API URL
+      var url =
+          'https://witsinnovativeskyline.000webhostapp.com/Register_Supervisor.php';
+
+      // Store all data with Param Name.
+      var data = {
+        'email': supervisorA.email,
+        'StaffNo': supervisorA.staffNo,
+        'Sup_FName': supervisorA.fName,
+        'Sup_LName': supervisorA.lName,
+        'Supervisor_OfficePhone': supervisorA.office,
+      };
+
+      // Starting Web API Call.
+      var response = await http.post(url, body: json.encode(data));
+
+      // Getting Server response into variable.
+      var message = jsonDecode(response.body);
+
+      // If Web call Success than Hide the CircularProgressIndicator.
+      if (response.statusCode == 200) {
+        supervisor.register = true;
+        RegistrationSuccess="Supervisor successfully registered!";
+      }
+    }
+
+    return RegistrationSuccess;
   }
 
   @override

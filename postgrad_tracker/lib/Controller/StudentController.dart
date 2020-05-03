@@ -53,7 +53,7 @@ class StudentController extends StatefulWidget {
     String userSuccess="";
     String registrationSuccess="";
     userSuccess= await userController.userRegistration(userA);
-    if (userSuccess=="Email Already Exist, Please Try Again With New Email Address..!"){
+    if (userSuccess=="Email Already Exists, Please Try Again With New Email Address..!"){
       registrationSuccess=userSuccess;
     }else{
       // SERVER API URL

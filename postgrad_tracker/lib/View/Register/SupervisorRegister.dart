@@ -62,7 +62,10 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
     userA.password = passwordController.text;
     userA.userTypeID=2;
 
-    var message = await supervisorController.registration(supervisorA, userA);
+    var registered = await supervisorController.registration(supervisorA, userA);
+
+
+
 
     if (supervisor.register==true){
       setState(() {
@@ -80,7 +83,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text(message),
+          title: new Text(registered),
           actions: <Widget>[
             FlatButton(
               child: new Text("OK"),
@@ -90,6 +93,9 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
                 if (supervisor.register && user.register) {
                   Navigator.pushNamed(context, '/Home');
                 } else {
+                  setState(() {
+                    visible=false;
+                  });
                   Navigator.of(context).pop();
                 }
               },
