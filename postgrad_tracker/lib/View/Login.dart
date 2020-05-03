@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/View/Register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/main.dart';
@@ -30,75 +31,37 @@ class LoginPageState extends State<LoginPage> {
     });
   }
   //
-
-  Future<List> _login() async {
-
-
-    final response = await http.post(
-        "https://witsinnovativeskyline.000webhostapp.com/login.php",
-        body: {
-          "Email": _emailController.text,
-          "Password": _passwordController.text
-        });
-
-    var datauser = json.decode(response.body);
-
-    print(datauser);
-
-    if (datauser.length == 0) {
+  Future _tryLogin() async{
+    msg= await userController.login(_emailController.text, _passwordController.text);
+    if(msg==""){
       setState(() {
-        msg = "Incorrect email or password!";
-        print(msg);
-      });
-    } else {
-      //print('Setting......................');
-      setState(() {
-       user.email = datauser[0]['Email'];
-       user.userTypeID = int.parse(datauser[0]['UserTypeId']);
 
       });
-
-      if (user.userTypeID==1){
-
-        await studentController.GetStudDetails();
-
-        await project_boardController.ReadBoards();
-        setState(() {
-
-        });
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (BuildContext context) => homePage),
-
-        );
-
-      }
-      else{
-        await supervisorController.GetSupDetails();
-
-        await project_boardController.ReadBoards();
-
-        setState(() {
-
-        });
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (BuildContext context) => homePage),
-
-        );
-
-      }
-      //Navigator.popAndPushNamed(context, '/Home');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (BuildContext context) => homePage),
+      );
     }
 
-    return datauser;
   }
 
 
   @override
   Widget build(BuildContext context) {
+
+    final forgotPassButton = new Container(
+      alignment: Alignment.bottomLeft,
+      child:
+        FlatButton(
+
+          onPressed: (){
+            Navigator.pushNamed(context, '/ResetPassword');
+          },
+          textColor: Color(0xff009999),
+          child: Text('Forgot Password?'),
+        ),
+
+    );
 
 
     final emailField = new TextFormField(
@@ -147,15 +110,10 @@ class LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
           _formKey.currentState.validate();
-          await _login();
+          await _tryLogin();
           setState(() {
 
           });
-//          Navigator.push(
-//            context,
-//            MaterialPageRoute(builder: (BuildContext context) => homePage),
-//
-//          );
 
         },
         child: Text("Login",
@@ -260,9 +218,10 @@ class LoginPageState extends State<LoginPage> {
                     height: 15.0,
                   ),
                   passwordField,
-                  SizedBox(
-                    height: 15.0,
-                  ),
+                  forgotPassButton,
+//                  SizedBox(
+//                    height: 15.0,
+//                  ),
                   loginButon,
                   SizedBox(
                     height: 15.0,

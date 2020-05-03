@@ -11,6 +11,7 @@ import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
+import 'package:postgrad_tracker/View/resetpassword.dart';
 import 'View/Login.dart';
 import 'View/Register/StudentSuperVisorRegister.dart';
 import 'View/profile/student/ViewStudentProfile.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
         '/SupervisorRegister': (context) => new SupervisorRegisterPage(),
 
         '/Board': (context) => new Board(proj_board: project_board),
+        '/ResetPassword': (context) => new ResetPasswordView(),
       },
       home: LoginPage(),
       theme: ThemeData(

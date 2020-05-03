@@ -52,7 +52,6 @@ class StudentController extends StatefulWidget {
     bool success=false;
     await userController.userRegistration(userA);
 
-
     // SERVER API URL
     var url =
         'https://witsinnovativeskyline.000webhostapp.com/register_student.php';

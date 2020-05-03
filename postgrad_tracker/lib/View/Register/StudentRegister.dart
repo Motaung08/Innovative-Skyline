@@ -435,7 +435,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         if (val.isEmpty) {
           return 'Confirm password.';
         }
-        if (val !=confirmPassCont.text){
+        if (val !=passwordController.text){
           return 'Passwords must match';
         }
         return null;
@@ -463,7 +463,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
-          _formKey.currentState.validate();
+
           //regUser.Register().userRegistration();
           //checkPasswordMatch();
           studentRegistration();
