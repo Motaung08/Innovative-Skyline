@@ -51,13 +51,6 @@ class StudentController extends StatefulWidget {
     student.register=false;
     bool success=false;
     await userController.userRegistration(userA);
-//    print('++++++++++++++++++++++++++++++++++++++++ email  '+   studentA.email   );
-//    print('++++++++++++++++++++++++++++++++++++++++ StudentNo  '+   studentA.studentNo        );
-//    print('++++++++++++++++++++++++++++++++++++++++ Student_FName  '+   studentA.fName        );
-//    print('++++++++++++++++++++++++++++++++++++++++ Student_LName  '+   studentA.lName        );
-//    print('++++++++++++++++++++++++++++++++++++++++ DegreeType  '+   studentA.degreeID.toString()        );
-//    print('++++++++++++++++++++++++++++++++++++++++ RegistrationDate  '+   (studentA.registrationDate).toString()        );
-//    print('++++++++++++++++++++++++++++++++++++++++ StudentTypeID  '+   studentA.studentTypeID.toString()        );
 
 
     // SERVER API URL

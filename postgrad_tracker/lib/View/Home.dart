@@ -156,10 +156,12 @@ class _MyHomePageState extends State<HomePage> {
                     style: TextStyle(
                         color: Color(0xff009999), fontWeight: FontWeight.bold)),
                 onTap: () {
-                  print(user.userTypeID );
+                  print("USER SUPERVISOR: "+user.userTypeID.toString() );
                   if (user.userTypeID == 1) {
                     Navigator.popAndPushNamed(context, '/StudProfile');
                   } else if (user.userTypeID == 2) {
+                    supervisorController.GetSupDetails();
+                    print('Navigate to View Supervisor Profile: '+supervisor.staffNo);
                     Navigator.popAndPushNamed(context, '/SupProfile');
                   } else {
                     print('User type not recognized');

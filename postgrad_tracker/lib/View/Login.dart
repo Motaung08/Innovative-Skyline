@@ -54,14 +54,11 @@ class LoginPageState extends State<LoginPage> {
       if (user.userTypeID==1){
 
         await studentController.GetStudDetails();
-        print('hhheeerrree');
 
         await project_boardController.ReadBoards();
-
         setState(() {
 
         });
-                //print('student -----------'+ student.studentNo);
 
         Navigator.push(
           context,
@@ -71,7 +68,20 @@ class LoginPageState extends State<LoginPage> {
 
       }
       else{
-        //readSupervisor();
+        await supervisorController.GetSupDetails();
+
+        await project_boardController.ReadBoards();
+
+        setState(() {
+
+        });
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => homePage),
+
+        );
+
       }
       //Navigator.popAndPushNamed(context, '/Home');
     }

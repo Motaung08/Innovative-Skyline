@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:postgrad_tracker/Controller/DegreeController.dart';
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
 import 'package:postgrad_tracker/Controller/UserController.dart';
-import 'package:postgrad_tracker/Dropdowntest.dart';
-import 'package:postgrad_tracker/Model/PostGradType.dart';
 import 'package:postgrad_tracker/View/Register/StudentRegister.dart';
 import 'package:postgrad_tracker/View/Register/SupervisorRegister.dart';
 import 'package:postgrad_tracker/View/Board.dart';
@@ -14,8 +11,6 @@ import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
-import 'package:provider/provider.dart';
-
 import 'View/Login.dart';
 import 'View/Register/StudentSuperVisorRegister.dart';
 import 'View/profile/student/ViewStudentProfile.dart';
@@ -36,7 +31,7 @@ Project_Board project_board=new Project_Board();
 StudentController studentController=new StudentController();
 SupervisorController supervisorController=new SupervisorController();
 UserController userController=new UserController();
-DegreeController degreeController=new DegreeController();
+
 Project_BoardController project_boardController=new Project_BoardController();
 
 //ProjectBoardView
@@ -61,8 +56,7 @@ class MyApp extends StatelessWidget {
         '/StudProfile': (BuildContext context) =>
 //        new ViewStudentProfilePage(user: user,),
         new ViewStudentProfilePage(),
-        '/SupProfile': (BuildContext context) =>
-        new ViewSupProfilePage(user: user,),
+        '/SupProfile': (BuildContext context) => new ViewSupProfilePage(),
         '/RegisterChoice': (context) => new StudentSupChoicePage(),
         '/StudentRegister': (context) => new StudentRegisterPage(),
         '/SupervisorRegister': (context) => new SupervisorRegisterPage(),

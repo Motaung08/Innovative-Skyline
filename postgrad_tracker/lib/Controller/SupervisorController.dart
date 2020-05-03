@@ -8,6 +8,34 @@ import 'package:postgrad_tracker/main.dart';
 
 class SupervisorController extends StatefulWidget {
 
+  Future<List> GetSupDetails() async {
+    var msg="";
+    final response = await http.post(
+        "https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php",
+        body: {
+          "Email": user.email,
+        });
+
+    var datauser = json.decode(response.body);
+
+    if (datauser.length == 0) {
+      print("Nada");
+      msg = " Error :( ";
+    } else {
+
+      supervisor.staffNo = datauser[0]['StaffNo'];
+      supervisor.fName = datauser[0]['Supervisor_Firstname'];
+      supervisor.lName = datauser[0]['Supervisor_Lastname'];
+      supervisor.email=user.email;
+      supervisor.office=datauser[0]['Supervisor_OfficePhone'];
+      print("Assigning...");
+      print(datauser);
+    }
+
+
+    return datauser;
+  }
+
   Future<String> registration(Supervisor supervisorA, User userA) async {
     supervisor.register = false;
     userController.userRegistration(userA);
