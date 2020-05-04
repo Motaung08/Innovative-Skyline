@@ -1,0 +1,128 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="innovativeskyline.postgrad_tracker"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="28" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <!-- <activity -->
+15    <!-- android:name="com.yalantis.ucrop.UCropActivity" -->
+16    <!-- android:screenOrientation="portrait" -->
+17    <!-- android:theme="@style/Theme.AppCompact.Light.NoActionBar"/> -->
+18
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/debug/AndroidManifest.xml:11:5-66
+19-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/debug/AndroidManifest.xml:11:22-64
+20    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+20-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-80
+20-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:7:22-77
+21    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+21-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-81
+21-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:8:22-78
+22    <!--
+23 io.flutter.app.FlutterApplication is an android.app.Application that
+24         calls FlutterMain.startInitialization(this); in its onCreate method.
+25         In most cases you can leave this as-is, but you if you want to provide
+26         additional functionality it is fine to subclass or reimplement
+27         FlutterApplication and put your custom class here.
+28    -->
+29    <application
+29-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:8:5-46:19
+30        android:name="io.flutter.app.FlutterApplication"
+30-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:9:9-57
+31        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+31-->[androidx.core:core:1.0.0] /home/tshepang/.gradle/caches/transforms-2/files-2.1/0a271e99b6771ad4a84318244d532fb7/core-1.0.0/AndroidManifest.xml:22:18-86
+32        android:debuggable="true"
+33        android:icon="@mipmap/ic_launcher"
+33-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:11:9-43
+34        android:label="postgrad_tracker" >
+34-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:10:9-41
+35        <activity
+35-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:12:9-40:20
+36            android:name="innovativeskyline.postgrad_tracker.MainActivity"
+36-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:13:13-41
+37            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+37-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:16:13-163
+38            android:hardwareAccelerated="true"
+38-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:17:13-47
+39            android:launchMode="singleTop"
+39-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:14:13-43
+40            android:theme="@style/LaunchTheme"
+40-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:15:13-47
+41            android:windowSoftInputMode="adjustResize" >
+41-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:18:13-55
+42
+43            <!--
+44                 Specifies an Android theme to apply to this Activity as soon as
+45                 the Android process has started. This theme is visible to the user
+46                 while the Flutter UI initializes. After that, this theme continues
+47                 to determine the Window background behind the Flutter UI.
+48            -->
+49            <meta-data
+49-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:23:13-26:17
+50                android:name="io.flutter.embedding.android.NormalTheme"
+50-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:24:15-70
+51                android:resource="@style/NormalTheme" />
+51-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:25:15-52
+52            <!--
+53                 Displays an Android View that continues showing the launch screen
+54                 Drawable until Flutter paints its first frame, then this splash
+55                 screen fades out. A splash screen is useful to avoid any visual
+56                 gap between the end of Android's launch screen and the painting of
+57                 Flutter's first frame.
+58            -->
+59            <meta-data
+59-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:32:13-35:17
+60                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+60-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:33:15-79
+61                android:resource="@drawable/launch_background" />
+61-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:34:15-61
+62
+63            <intent-filter>
+63-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:36:13-39:29
+64                <action android:name="android.intent.action.MAIN" />
+64-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:37:17-68
+64-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:37:25-66
+65
+66                <category android:name="android.intent.category.LAUNCHER" />
+66-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:38:17-76
+66-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:38:27-74
+67            </intent-filter>
+68        </activity>
+69        <!--
+70             Don't delete the meta-data below.
+71             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+72        -->
+73        <meta-data
+73-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:43:9-45:33
+74            android:name="flutterEmbedding"
+74-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:44:13-44
+75            android:value="2" />
+75-->/home/tshepang/Documents/developments/postgrad-tracker/android/app/src/main/AndroidManifest.xml:45:13-30
+76
+77        <provider
+77-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:11:9-19:20
+78            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+78-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:12:13-82
+79            android:authorities="innovativeskyline.postgrad_tracker.flutter.image_provider"
+79-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:13:13-74
+80            android:exported="false"
+80-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:14:13-37
+81            android:grantUriPermissions="true" >
+81-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:15:13-47
+82            <meta-data
+82-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:16:13-18:75
+83                android:name="android.support.FILE_PROVIDER_PATHS"
+83-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:17:17-67
+84                android:resource="@xml/flutter_image_picker_file_paths" />
+84-->[:image_picker] /home/tshepang/Documents/developments/postgrad-tracker/build/image_picker/intermediates/library_manifest/debug/AndroidManifest.xml:18:17-72
+85        </provider>
+86    </application>
+87
+88</manifest>

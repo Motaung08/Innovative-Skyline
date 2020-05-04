@@ -1,4 +1,0 @@
-#Mon May 04 03:42:53 SAST 2020
-base.0=/home/tshepang/Documents/developments/postgrad-tracker/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
