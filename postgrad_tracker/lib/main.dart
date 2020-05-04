@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
 import 'package:postgrad_tracker/Controller/UserController.dart';
-import 'package:postgrad_tracker/View/Register/StudentRegister.dart';
-import 'package:postgrad_tracker/View/Register/SupervisorRegister.dart';
-import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/StudentController.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
+import 'package:postgrad_tracker/View/Login.dart';
 import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
 import 'package:postgrad_tracker/View/resetpassword.dart';
-import 'View/Login.dart';
-import 'View/Register/StudentSuperVisorRegister.dart';
-import 'View/profile/student/ViewStudentProfile.dart';
+import 'View/Board.dart';
 import 'View/Home.dart';
+import 'View/profile/student/ViewStudentProfile.dart';
+import 'View/register/StudentRegister.dart';
+import 'View/register/StudentSuperVisorRegister.dart';
+import 'View/register/SupervisorRegister.dart';
 
 
 
@@ -26,6 +26,7 @@ User user=new User();
 Supervisor supervisor=new Supervisor();
 Student student=new Student();
 List<Project_Board> boards=List();
+// ignore: non_constant_identifier_names
 Project_Board project_board=new Project_Board();
 
 
@@ -33,6 +34,7 @@ StudentController studentController=new StudentController();
 SupervisorController supervisorController=new SupervisorController();
 UserController userController=new UserController();
 
+// ignore: non_constant_identifier_names
 Project_BoardController project_boardController=new Project_BoardController();
 
 //ProjectBoardView

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class User extends StatefulWidget {
   int userID;
   String email;
@@ -12,7 +13,7 @@ class User extends StatefulWidget {
 
 
 
- // User(this.userID, this._email, this.password, this.userTypeID);
+  // User(this.userID, this._email, this.password, this.userTypeID);
 
   _UserState createState() => _UserState();
 }
@@ -23,4 +24,3 @@ class _UserState extends State<User> {
     return Container();
   }
 }
-

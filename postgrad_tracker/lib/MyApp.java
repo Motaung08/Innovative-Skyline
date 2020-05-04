@@ -19,48 +19,48 @@ import 'SupervisorRegister.dart';
 import 'Board.dart';
 
 //Board
-String boardTitle = '';
-User user=new User();
-Supervisor supervisor=new Supervisor();
-Student student=new Student();
-List<Project_Board> boards=List();
+        String boardTitle = '';
+        User user=new User();
+        Supervisor supervisor=new Supervisor();
+        Student student=new Student();
+        List<Project_Board> boards=List();
 
-StudentController studentController=new StudentController();
-Project_BoardController project_boardController=new Project_BoardController();
+        StudentController studentController=new StudentController();
+        Project_BoardController project_boardController=new Project_BoardController();
 
 //ProjectBoardView
-HomePage homePage=new HomePage();
+        HomePage homePage=new HomePage();
 
 
-void main() => runApp(MyApp());
+        void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-          title: 'Postgraduate Tracker',
-          debugShowCheckedModeBanner: false,
-          initialRoute: '/',
-          routes: <String, WidgetBuilder>{
-             //'/': (context) => new LoginPage(),
-            '/Login': (context) => new LoginPage(),
-            '/Home': (context) => new HomePage(),
-            //'/Home': (context) => new HomePage(email: student.email, userType: user.userTypeID),
-            '/StudProfile': (BuildContext context) =>
-                new ViewStudentProfilePage(user: user,),
-            '/SupProfile': (BuildContext context) =>
-                new ViewSupProfilePage(user: user,),
-            '/RegisterChoice': (context) => new StudentSupChoicePage(),
-            '/StudentRegister': (context) => new StudentRegisterPage(),
-            '/SupervisorRegister': (context) => new SupervisorRegisterPage(),
+    // This widget is the root of your application.
+    @override
+    Widget build(BuildContext context) {
+        return MaterialApp(
+                title: 'Postgraduate Tracker',
+                debugShowCheckedModeBanner: false,
+                initialRoute: '/',
+                routes: <String, WidgetBuilder>{
+                //'/': (context) => new LoginPage(),
+                '/Login': (context) => new LoginPage(),
+                '/Home': (context) => new HomePage(),
+                //'/Home': (context) => new HomePage(email: student.email, userType: user.userTypeID),
+                '/StudProfile': (BuildContext context) =>
+        new ViewStudentProfilePage(user: user,),
+        '/SupProfile': (BuildContext context) =>
+        new ViewSupProfilePage(user: user,),
+        '/RegisterChoice': (context) => new StudentSupChoicePage(),
+                '/StudentRegister': (context) => new StudentRegisterPage(),
+                '/SupervisorRegister': (context) => new SupervisorRegisterPage(),
 
-            '/Board': (context) => new Board(title: boardTitle),
+                '/Board': (context) => new Board(title: boardTitle),
       },
-            home: LoginPage(),
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
+        home: LoginPage(),
+                theme: ThemeData(
+                primarySwatch: Colors.blue,
       ),
     );
-  }
+    }
 }

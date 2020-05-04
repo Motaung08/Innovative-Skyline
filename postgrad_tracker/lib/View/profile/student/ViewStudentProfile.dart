@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/main.dart';
-import 'package:http/http.dart' as http;
 
 class ViewStudentProfilePage extends StatefulWidget {
 //  final User user;
@@ -65,26 +61,26 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18))
-    ]));
+        ]));
 
     return Scaffold(
       body: Center(
           child: Row(
-        children: <Widget>[
-            Container(
-              color: Colors.white,
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.all(36.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[SizedBox(child: studentProfile)],
+            children: <Widget>[
+              Container(
+                color: Colors.white,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(36.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[SizedBox(child: studentProfile)],
+                  ),
                 ),
               ),
-            ),
-        ],
-      )),
+            ],
+          )),
     );
   }
 }

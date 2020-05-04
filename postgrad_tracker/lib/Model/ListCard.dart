@@ -17,4 +17,3 @@ class _ListCardState extends State<ListCard> {
     return Container();
   }
 }
-

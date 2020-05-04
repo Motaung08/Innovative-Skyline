@@ -7,9 +7,11 @@ import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/main.dart';
 
+// ignore: must_be_immutable
 class StudentController extends StatefulWidget {
 
   String msg = '';
+  // ignore: non_constant_identifier_names
   Future<List> GetStudDetails() async {
     //print('let us deduce details...'+user.email);
 

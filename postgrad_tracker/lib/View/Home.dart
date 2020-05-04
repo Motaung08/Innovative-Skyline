@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
-import 'package:postgrad_tracker/Model/User.dart';
-import 'package:postgrad_tracker/View/Board.dart';
+//import 'package:postgrad_tracker/Model/User.dart';
+//import 'package:postgrad_tracker/View/board/Board.dart';
 import 'package:postgrad_tracker/main.dart';
 
 
 class HomePage extends StatefulWidget {
 
- final  List<DynamicWidget> listDynamic = [];
+  final  List<DynamicWidget> listDynamic = [];
 
   initializeDisplay(){
     print('Initializing board display! ##################');
@@ -186,6 +186,7 @@ class _MyHomePageState extends State<HomePage> {
 }
 
 
+// ignore: must_be_immutable
 class DynamicWidget extends StatelessWidget {
   //String giventitle='';
   Project_Board aboard;
@@ -207,5 +208,3 @@ class DynamicWidget extends StatelessWidget {
     );
   }
 }
-
-
