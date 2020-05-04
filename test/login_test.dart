@@ -49,6 +49,7 @@ import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/View/Login.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
+import 'package:postgrad_tracker/View/register/SupervisorRegister.dart';
 
 
 class Post {
@@ -116,6 +117,16 @@ main(){
     testWidgets('All input feild and button widgets should be on screen', (
         WidgetTester tester) async {
       await tester.pumpWidget(makeWidgetTestable(StudentSupChoicePage()));
+    });
+
+//    testWidgets('All input feild and button widgets should be on screen', (
+//        WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(StudentRegisterPage()));
+//    });
+
+    testWidgets('All input feild and button widgets should be on screen', (
+        WidgetTester tester) async {
+      await tester.pumpWidget(makeWidgetTestable(SupervisorRegisterPage()));
     });
 
 

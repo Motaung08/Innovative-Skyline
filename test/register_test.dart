@@ -7,7 +7,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/View/Login.dart';
-import 'package:postgrad_tracker/View/register/StudentRegister.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/View/register/SupervisorRegister.dart';
 
@@ -19,8 +18,7 @@ class Post {
   Post.fromJson(this.data);
 }
 
-//class MockClient extends Mock implements http.Client {}
-
+class MockClient extends Mock implements http.Client {}
 
 Future<Post> fetchPost(http.Client client) async {
   final response =
@@ -78,12 +76,12 @@ main() {
       await tester.pumpWidget(makeWidgetTestable(LoginPage()));
 
     });
-
 //    testWidgets('All input feild and button widgets should be on screen', (
 //        WidgetTester tester) async {
 //      await tester.pumpWidget(makeWidgetTestable(StudentRegisterPage()));
 //
 //    });
+
 
     testWidgets('All input feild and button widgets should be on screen', (
         WidgetTester tester) async {
