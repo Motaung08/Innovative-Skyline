@@ -47,7 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.All input feild and button widgets should be on screen">
+  <component name="RunManager" selected="Flutter Test.All input feild and button widgets should be on screen (1)">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -96,6 +96,11 @@
       <option name="filePath" value="$PROJECT_DIR$/postgrad_progress_tracker/lib/main.dart" />
       <method v="2" />
     </configuration>
+    <configuration name="All input feild and button widgets should be on screen (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="All input feild and button widgets should be on screen" />
+      <option name="testFile" value="$PROJECT_DIR$/test/StudReg_test.dart" />
+      <method v="2" />
+    </configuration>
     <configuration name="All input feild and button widgets should be on screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="All input feild and button widgets should be on screen" />
       <option name="testFile" value="$PROJECT_DIR$/test/SupVisorReg_test.dart" />
@@ -114,9 +119,11 @@
       <item itemvalue="Dart Command Line App.main" />
       <item itemvalue="Flutter.Unnamed" />
       <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
+      <item itemvalue="Flutter Test.All input feild and button widgets should be on screen (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.All input feild and button widgets should be on screen (1)" />
         <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
       </list>
     </recent_temporary>

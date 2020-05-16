@@ -1,6 +1,6 @@
 os:
     - linux
-    - windows
+#    - windows
 # The Ubuntu Trusty release on Travis is known to
 # have oraclejdk8 available. For some reason, we couldn't
 # get this to work with other distributions/releases.
