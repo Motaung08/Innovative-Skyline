@@ -31,7 +31,7 @@
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Softwares/flutter/bin/cache/flutter_web_sdk" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -47,7 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Dart Command Line App.main.dart">
+  <component name="RunManager" selected="Flutter Test.All input feild and button widgets should be on screen">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -84,9 +84,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" nameIsGenerated="true">
+    <configuration name="main" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
-      <option name="workingDirectory" value="$PROJECT_DIR$/postgrad_progress_tracker" />
+      <option name="workingDirectory" value="$PROJECT_DIR$/../../Softwares/flutter/bin/cache/flutter_web_sdk" />
       <method v="2" />
     </configuration>
     <configuration name="Unnamed" type="FlutterRunConfigurationType" factoryName="Flutter" nameIsGenerated="true">
@@ -94,6 +94,11 @@
     </configuration>
     <configuration default="true" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/postgrad_progress_tracker/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="All input feild and button widgets should be on screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="All input feild and button widgets should be on screen" />
+      <option name="testFile" value="$PROJECT_DIR$/test/SupVisorReg_test.dart" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="TestNG">
@@ -106,9 +111,15 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Dart Command Line App.main.dart" />
+      <item itemvalue="Dart Command Line App.main" />
       <item itemvalue="Flutter.Unnamed" />
+      <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />

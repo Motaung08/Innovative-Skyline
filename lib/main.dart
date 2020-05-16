@@ -22,7 +22,6 @@ import 'View/Login.dart';
 import 'View/register/StudentSuperVisorRegister.dart';
 import 'View/profile/student/ViewStudentProfile.dart';
 import 'View/Home.dart';
-import 'View/register/StudentSuperVisorRegister.dart';
 
 
 
