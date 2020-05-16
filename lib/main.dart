@@ -34,6 +34,7 @@ Student student=new Student();
 List<Project_Board> boards=List();
 List<DegreeType> degrees=List();
 List<StudentType> studentTypes=List();
+// ignore: non_constant_identifier_names
 Project_Board project_board=new Project_Board();
 
 
