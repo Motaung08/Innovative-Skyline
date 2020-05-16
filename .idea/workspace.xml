@@ -47,7 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.All input feild and button widgets should be on screen (1)">
+  <component name="RunManager" selected="Flutter Test.User">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -106,6 +106,16 @@
       <option name="testFile" value="$PROJECT_DIR$/test/SupVisorReg_test.dart" />
       <method v="2" />
     </configuration>
+    <configuration name="All pages should be accessed!!!" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="All pages should be accessed!!!" />
+      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="User" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="User" />
+      <option name="testFile" value="$PROJECT_DIR$/test/user_test.dart" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -120,9 +130,13 @@
       <item itemvalue="Flutter.Unnamed" />
       <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
       <item itemvalue="Flutter Test.All input feild and button widgets should be on screen (1)" />
+      <item itemvalue="Flutter Test.All pages should be accessed!!!" />
+      <item itemvalue="Flutter Test.User" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.User" />
+        <item itemvalue="Flutter Test.All pages should be accessed!!!" />
         <item itemvalue="Flutter Test.All input feild and button widgets should be on screen (1)" />
         <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
       </list>
@@ -159,5 +173,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="SHOW_DIRTY_RECURSIVELY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/test/main_test.dart</url>
+          <line>16</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
