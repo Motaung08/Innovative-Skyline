@@ -54,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.Future.value() returns the value">
+  <component name="RunManager" selected="Dart Command Line App.main">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -108,9 +108,9 @@
       <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="All pages should be accessed!!!" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All pages should be accessed!!!" />
-      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
+    <configuration name="Future.value() returns the value (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Future.value() returns the value" />
+      <option name="testFile" value="$PROJECT_DIR$/test/login_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="Future.value() returns the value" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -118,9 +118,9 @@
       <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Server connection" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+    <configuration name="Server connection (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Server connection" />
-      <option name="testFile" value="$PROJECT_DIR$/test/UserController_test.dart" />
+      <option name="testFile" value="$PROJECT_DIR$/test/login_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="Testing Board" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -140,19 +140,19 @@
     <list>
       <item itemvalue="Dart Command Line App.main" />
       <item itemvalue="Flutter.Unnamed" />
-      <item itemvalue="Flutter Test.Server connection" />
       <item itemvalue="Flutter Test.All main tests" />
-      <item itemvalue="Flutter Test.All pages should be accessed!!!" />
       <item itemvalue="Flutter Test.Testing Board" />
       <item itemvalue="Flutter Test.Future.value() returns the value" />
+      <item itemvalue="Flutter Test.Server connection (1)" />
+      <item itemvalue="Flutter Test.Future.value() returns the value (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.Future.value() returns the value (1)" />
+        <item itemvalue="Flutter Test.Server connection (1)" />
         <item itemvalue="Flutter Test.Future.value() returns the value" />
         <item itemvalue="Flutter Test.Testing Board" />
         <item itemvalue="Flutter Test.All main tests" />
-        <item itemvalue="Flutter Test.All pages should be accessed!!!" />
-        <item itemvalue="Flutter Test.Server connection" />
       </list>
     </recent_temporary>
   </component>

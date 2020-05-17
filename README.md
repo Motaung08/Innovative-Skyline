@@ -21,4 +21,19 @@ samples, guidance on mobile development, and a full API reference.
 
 [![codecov](https://codecov.io/gh/Motaung08/postgrad-tracker/branch/master/graph/badge.svg)](https://codecov.io/gh/Motaung08/postgrad-tracker)
 
+[The webapp should be able to perform:
+
+    Login functionality
+    A supervisor should be able to add a project and then invite a student and other supervisors (s) to join the project.
+    For each project, the supervisor should be able to add multiple boards and tasks. The tasks will have a status that shows progress.
+    A schedule reminder for proposals due, task deadlines, and meetings for both students and supervisors.
+    Allow the sharing of resources among students and supervisors.
+
+The benefits of the proposed system will be:
+
+    Minimize confusion around project assignments with simple tools to organize tasks and track progress.
+    The use of the website will save time while promoting the organization and safe access to data.
+    The ability for students and supervisors to access every aspect of a project’s development with just a few clicks.
+
+
 
