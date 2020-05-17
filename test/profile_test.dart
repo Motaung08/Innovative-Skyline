@@ -20,12 +20,12 @@ void main(){
   {
     final User user = new User();
 
-    testWidgets('Find the studentProfile', (WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(ViewStudentProfilePage()));
-
-      final studentProfile =find.byKey(Key('StudentProfile'));
-      expect(studentProfile, findsOneWidget);
-    });
+//    testWidgets('Find the studentProfile', (WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(ViewStudentProfilePage()));
+//
+//      final studentProfile =find.byKey(Key('StudentProfile'));
+//      expect(studentProfile, findsOneWidget);
+//    });
 
     test("getter and setter methods", () {
       student.fName = "Tshepang";
