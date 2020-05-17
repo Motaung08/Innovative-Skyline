@@ -10,29 +10,29 @@ void main(){
   Board proj_board= new Board();
 
   group('Board tags', () {
-    test('all fields should be null', (){
-      expect(item.ProjectID, null);
-      expect(item.Project_Title, null);
-      expect(item.Project_Description, null);
-      expect(item.Project_StartDate, null);
-      expect(item.Project_EndDate, null);
-      expect(proj_board.key, null);
-    });
-
-    test('ProjectID should be assigned a value', () {
-      item.ProjectID= 1;
-      expect(item.ProjectID, 1);
-    });
-
-    test('ProjectTitle', (){
-      item.Project_Title= "Software Design";
-      expect(item.Project_Title,"Software Design");
-    });
-
-    test('Project Description', () {
-      item.Project_Description = "Build Application";
-      expect(item.Project_Description, "Build Application");
-    });
+//    test('all fields should be null', (){
+//      expect(item.ProjectID, null);
+//      expect(item.Project_Title, null);
+//      expect(item.Project_Description, null);
+//      expect(item.Project_StartDate, null);
+//      expect(item.Project_EndDate, null);
+//      expect(proj_board.key, null);
+//    });
+//
+//    test('ProjectID should be assigned a value', () {
+//      item.ProjectID= 1;
+//      expect(item.ProjectID, 1);
+//    });
+//
+//    test('ProjectTitle', (){
+//      item.Project_Title= "Software Design";
+//      expect(item.Project_Title,"Software Design");
+//    });
+//
+//    test('Project Description', () {
+//      item.Project_Description = "Build Application";
+//      expect(item.Project_Description, "Build Application");
+//    });
 
 //     test('Project Start Date', () {
 //       item.Project_StartDate= "02-02-2007" as DateTime;
