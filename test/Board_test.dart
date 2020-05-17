@@ -10,9 +10,9 @@ void main(){
   });
 
   
-    testWidgets('Testing Board', (WidgetTester tester) async{
-      await tester.pumpWidget(ListCard());
-    });
-    
+//    testWidgets('Testing Board', (WidgetTester tester) async{
+//      await tester.pumpWidget(ListCard());
+//    });
+//
     
 }

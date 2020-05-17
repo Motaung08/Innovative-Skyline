@@ -54,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.All input feild and button widgets should be on screen">
+  <component name="RunManager" selected="Flutter Test.Find the studentProfile">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -113,13 +113,13 @@
       <option name="testFile" value="$PROJECT_DIR$/test/UserController_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Future.value() returns the value (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Future.value() returns the value" />
-      <option name="testFile" value="$PROJECT_DIR$/test/login_test.dart" />
+    <configuration name="Find the studentProfile" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Find the studentProfile" />
+      <option name="testFile" value="$PROJECT_DIR$/test/profile_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Server connection (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Server connection" />
+    <configuration name="Future.value() returns the value (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Future.value() returns the value" />
       <option name="testFile" value="$PROJECT_DIR$/test/login_test.dart" />
       <method v="2" />
     </configuration>
@@ -141,18 +141,18 @@
       <item itemvalue="Dart Command Line App.main" />
       <item itemvalue="Flutter.Unnamed" />
       <item itemvalue="Flutter Test.Testing Board" />
-      <item itemvalue="Flutter Test.Server connection (1)" />
       <item itemvalue="Flutter Test.Future.value() returns the value (1)" />
       <item itemvalue="Flutter Test.All Models should be accessed" />
       <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
+      <item itemvalue="Flutter Test.Find the studentProfile" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.Find the studentProfile" />
         <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
         <item itemvalue="Flutter Test.All Models should be accessed" />
         <item itemvalue="Flutter Test.Testing Board" />
         <item itemvalue="Flutter Test.Future.value() returns the value (1)" />
-        <item itemvalue="Flutter Test.Server connection (1)" />
       </list>
     </recent_temporary>
   </component>
