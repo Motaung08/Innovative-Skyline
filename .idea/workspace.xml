@@ -39,7 +39,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Softwares/flutter/bin/cache/flutter_web_sdk" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunDashboard">
@@ -54,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.Server connection">
+  <component name="RunManager" selected="Flutter Test.Future.value() returns the value">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -103,19 +103,19 @@
       <option name="filePath" value="$PROJECT_DIR$/postgrad_progress_tracker/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Board tags" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Board tags" />
+    <configuration name="All main tests" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="All main tests" />
+      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="All pages should be accessed!!!" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="All pages should be accessed!!!" />
+      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Future.value() returns the value" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Future.value() returns the value" />
       <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Error" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Error" />
-      <option name="testFile" value="$PROJECT_DIR$/test/UserController_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Future" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Future" />
-      <option name="testFile" value="$PROJECT_DIR$/test/UserController_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="Server connection" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -123,9 +123,9 @@
       <option name="testFile" value="$PROJECT_DIR$/test/UserController_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="button widgets should be on screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="button widgets should be on screen" />
-      <option name="testFile" value="$PROJECT_DIR$/test/StudentRegister_test.dart" />
+    <configuration name="Testing Board" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Testing Board" />
+      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="TestNG">
@@ -140,19 +140,19 @@
     <list>
       <item itemvalue="Dart Command Line App.main" />
       <item itemvalue="Flutter.Unnamed" />
-      <item itemvalue="Flutter Test.Board tags" />
-      <item itemvalue="Flutter Test.button widgets should be on screen" />
-      <item itemvalue="Flutter Test.Future" />
-      <item itemvalue="Flutter Test.Error" />
       <item itemvalue="Flutter Test.Server connection" />
+      <item itemvalue="Flutter Test.All main tests" />
+      <item itemvalue="Flutter Test.All pages should be accessed!!!" />
+      <item itemvalue="Flutter Test.Testing Board" />
+      <item itemvalue="Flutter Test.Future.value() returns the value" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.Future.value() returns the value" />
+        <item itemvalue="Flutter Test.Testing Board" />
+        <item itemvalue="Flutter Test.All main tests" />
+        <item itemvalue="Flutter Test.All pages should be accessed!!!" />
         <item itemvalue="Flutter Test.Server connection" />
-        <item itemvalue="Flutter Test.Error" />
-        <item itemvalue="Flutter Test.Future" />
-        <item itemvalue="Flutter Test.button widgets should be on screen" />
-        <item itemvalue="Flutter Test.Board tags" />
       </list>
     </recent_temporary>
   </component>
@@ -193,18 +193,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/test/main_test.dart</url>
-          <line>16</line>
+          <line>19</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/test/Board_test.dart</url>
-          <line>21</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/test/UserController_test.dart</url>
+          <line>66</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/test/UserController_test.dart</url>
-          <line>72</line>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/test/Board_test.dart</url>
+          <line>6</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

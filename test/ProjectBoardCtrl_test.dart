@@ -1,11 +1,9 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
-import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/main.dart';
 
 import 'Models_test.dart';

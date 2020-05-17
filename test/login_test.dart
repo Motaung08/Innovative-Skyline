@@ -40,7 +40,7 @@
 //}
 //
 import 'dart:convert';
-
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -105,6 +105,11 @@ main(){
           .thenAnswer((_) async => http.Response('Not Found', 404));
 
       expect(fetchPost(client), throwsException);
+    });
+
+    test('Future.value() returns the value', () async {
+      var value = await Future.value(10);
+      expect(value, equals(10));
     });
 
 
