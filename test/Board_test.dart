@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/View/Board.dart';
@@ -33,20 +34,17 @@ void main(){
       expect(item.Project_Description, "Build Application");
     });
 
-//     test('Project Start Date', () {
-//       item.Project_StartDate= "02-02-2007" as DateTime;
-//       expect(item.Project_StartDate, "02-02-2007");
-//     });
-
-//     test('Project End Date', () {
-//       item.Project_EndDate = "30-11-2007" as DateTime;
-//       expect(item.Project_EndDate, "30-11-2007");
-//     });
 
     test('Project Board', (){
+      // ignore: unnecessary_statements
       proj_board.key;
     });
+
+    test('Must Pass', (){
+      proj_board.proj_board;
+    });
   });
+
 }
 
 

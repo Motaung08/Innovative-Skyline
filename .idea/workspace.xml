@@ -13,6 +13,13 @@
     <option name="delegatedBuild" value="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_27" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="PATH_TO_GIT" value="C:\Program Files\Git\cmd\git.exe" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -47,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.entering text on input fields">
+  <component name="RunManager" selected="Flutter Test.Std Details">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -96,28 +103,28 @@
       <option name="filePath" value="$PROJECT_DIR$/postgrad_progress_tracker/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="All input feild and button widgets should be on screen (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All input feild and button widgets should be on screen" />
-      <option name="testFile" value="$PROJECT_DIR$/test/StudReg_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="All pages should be accessed!!!" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All pages should be accessed!!!" />
-      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="User" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="User" />
-      <option name="testFile" value="$PROJECT_DIR$/test/user_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="entering text on input fields" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="entering text on input fields" />
+    <configuration name="Board tags" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Board tags" />
       <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="finds the widget" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="finds the widget" />
+    <configuration name="Project Board" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Project Board" />
+      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ProjectID should be assigned a value" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="ProjectID should be assigned a value" />
+      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Std Details" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Std Details" />
+      <option name="testFile" value="$PROJECT_DIR$/test/StudentProfile_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="all fields should be null" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="all fields should be null" />
       <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
       <method v="2" />
     </configuration>
@@ -133,19 +140,19 @@
     <list>
       <item itemvalue="Dart Command Line App.main" />
       <item itemvalue="Flutter.Unnamed" />
-      <item itemvalue="Flutter Test.All input feild and button widgets should be on screen (1)" />
-      <item itemvalue="Flutter Test.All pages should be accessed!!!" />
-      <item itemvalue="Flutter Test.User" />
-      <item itemvalue="Flutter Test.finds the widget" />
-      <item itemvalue="Flutter Test.entering text on input fields" />
+      <item itemvalue="Flutter Test.Board tags" />
+      <item itemvalue="Flutter Test.ProjectID should be assigned a value" />
+      <item itemvalue="Flutter Test.all fields should be null" />
+      <item itemvalue="Flutter Test.Project Board" />
+      <item itemvalue="Flutter Test.Std Details" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter Test.entering text on input fields" />
-        <item itemvalue="Flutter Test.finds the widget" />
-        <item itemvalue="Flutter Test.User" />
-        <item itemvalue="Flutter Test.All pages should be accessed!!!" />
-        <item itemvalue="Flutter Test.All input feild and button widgets should be on screen (1)" />
+        <item itemvalue="Flutter Test.Std Details" />
+        <item itemvalue="Flutter Test.ProjectID should be assigned a value" />
+        <item itemvalue="Flutter Test.Project Board" />
+        <item itemvalue="Flutter Test.all fields should be null" />
+        <item itemvalue="Flutter Test.Board tags" />
       </list>
     </recent_temporary>
   </component>
@@ -188,6 +195,11 @@
           <url>file://$PROJECT_DIR$/test/main_test.dart</url>
           <line>16</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/test/Board_test.dart</url>
+          <line>20</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
