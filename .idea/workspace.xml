@@ -54,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Dart Command Line App.main">
+  <component name="RunManager" selected="Flutter Test.All input feild and button widgets should be on screen">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -103,19 +103,19 @@
       <option name="filePath" value="$PROJECT_DIR$/postgrad_progress_tracker/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="All main tests" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All main tests" />
-      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
+    <configuration name="All Models should be accessed" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="All Models should be accessed" />
+      <option name="testFile" value="$PROJECT_DIR$/test/Models_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="All input feild and button widgets should be on screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="All input feild and button widgets should be on screen" />
+      <option name="testFile" value="$PROJECT_DIR$/test/UserController_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="Future.value() returns the value (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Future.value() returns the value" />
       <option name="testFile" value="$PROJECT_DIR$/test/login_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Future.value() returns the value" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Future.value() returns the value" />
-      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="Server connection (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -140,19 +140,19 @@
     <list>
       <item itemvalue="Dart Command Line App.main" />
       <item itemvalue="Flutter.Unnamed" />
-      <item itemvalue="Flutter Test.All main tests" />
       <item itemvalue="Flutter Test.Testing Board" />
-      <item itemvalue="Flutter Test.Future.value() returns the value" />
       <item itemvalue="Flutter Test.Server connection (1)" />
       <item itemvalue="Flutter Test.Future.value() returns the value (1)" />
+      <item itemvalue="Flutter Test.All Models should be accessed" />
+      <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
+        <item itemvalue="Flutter Test.All Models should be accessed" />
+        <item itemvalue="Flutter Test.Testing Board" />
         <item itemvalue="Flutter Test.Future.value() returns the value (1)" />
         <item itemvalue="Flutter Test.Server connection (1)" />
-        <item itemvalue="Flutter Test.Future.value() returns the value" />
-        <item itemvalue="Flutter Test.Testing Board" />
-        <item itemvalue="Flutter Test.All main tests" />
       </list>
     </recent_temporary>
   </component>
@@ -203,7 +203,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/test/Board_test.dart</url>
-          <line>6</line>
+          <line>5</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

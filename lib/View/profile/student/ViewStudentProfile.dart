@@ -81,7 +81,7 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
-    ]));
+    ]),key: Key('StudentProfile'),);
 
     return Scaffold(
       body: Center(
