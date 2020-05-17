@@ -44,6 +44,7 @@ UserController userController=new UserController();
 DegreeController degreeController=new DegreeController();
 StudentTypeController studentTypeController=new StudentTypeController();
 
+// ignore: non_constant_identifier_names
 Project_BoardController project_boardController=new Project_BoardController();
 
 //ProjectBoardView

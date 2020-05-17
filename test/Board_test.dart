@@ -1,46 +1,52 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:postgrad_tracker/Model/Project_Board.dart';
+import 'package:postgrad_tracker/View/Board.dart';
 
 
-class MyWidget extends StatelessWidget {
-  final String title;
-  final String message;
+void main(){
 
-  const MyWidget({
-    Key key,
-    @required this.title,
-    @required this.message,
-  }) : super(key: key);
+  Project_Board item = new Project_Board();
+  Board proj_board= new Board();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: Center(
-          child: Text(message),
-        ),
-      ),
-    );
-  }
-}
-void main() {
-  testWidgets('MyWidget has a title and message', (WidgetTester tester) async {
-    // Create the widget by telling the tester to build it.
-    await tester.pumpWidget(MyWidget(title: 'Project_Board', message: 'proj_board'));
+  group('Board tags', () {
+    test('all fields should be null', (){
+      expect(item.ProjectID, null);
+      expect(item.Project_Title, null);
+      expect(item.Project_Description, null);
+      expect(item.Project_StartDate, null);
+      expect(item.Project_EndDate, null);
+      expect(proj_board.key, null);
+    });
 
-    // Create the Finders.
-    final titleFinder = find.text('Project_Board');
-    final messageFinder = find.text('proj_board');
+    test('ProjectID should be assigned a value', () {
+      item.ProjectID= 1;
+      expect(item.ProjectID, 1);
+    });
 
-    // Use the `findsOneWidget` matcher provided by flutter_test to
-    // verify that the Text widgets appear exactly once in the widget tree.
-    expect(titleFinder, findsOneWidget);
-    expect(messageFinder, findsOneWidget);
+    test('ProjectTitle', (){
+      item.Project_Title= "Software Design";
+      expect(item.Project_Title,"Software Design");
+    });
 
+    test('Project Description', () {
+      item.Project_Description = "Build Application";
+      expect(item.Project_Description, "Build Application");
+    });
+
+    test('Project Start Date', () {
+      item.Project_StartDate= "02-02-2007" as DateTime;
+      expect(item.Project_StartDate, "02-02-2007");
+    });
+
+    test('Project End Date', () {
+      item.Project_EndDate = "30-11-2007" as DateTime;
+      expect(item.Project_EndDate, "30-11-2007");
+    });
+
+    test('Project Board', (){
+      proj_board.key;
+    });
   });
 }
+
+

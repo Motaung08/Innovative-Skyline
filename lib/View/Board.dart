@@ -22,6 +22,7 @@ class _BoardState extends State<Board> {
     return Scaffold(
       appBar: AppBar(
         title: Text(project_board.Project_Title),
+        key: Key("ProjectTlt-Input"),
         backgroundColor: Color(0xff009999),
       ),
     );
