@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Controller/DegreeController.dart';
+import 'package:postgrad_tracker/Controller/ListController.dart';
 import 'package:postgrad_tracker/Controller/StudentTypeController.dart';
 
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
+import 'package:postgrad_tracker/Controller/TaskController.dart';
 import 'package:postgrad_tracker/Controller/UserController.dart';
 import 'package:postgrad_tracker/Model/DegreeType.dart';
+import 'package:postgrad_tracker/Model/ListCard.dart';
 import 'package:postgrad_tracker/Model/StudentType.dart';
+import 'package:postgrad_tracker/Model/Task.dart';
 
 import 'package:postgrad_tracker/View/register/StudentRegister.dart';
 import 'package:postgrad_tracker/View/register/SupervisorRegister.dart';
@@ -31,11 +35,15 @@ User user=new User();
 
 Supervisor supervisor=new Supervisor();
 Student student=new Student();
-List<Project_Board> boards=List();
+
+
+
 List<DegreeType> degrees=List();
 List<StudentType> studentTypes=List();
+
 // ignore: non_constant_identifier_names
 Project_Board project_board=new Project_Board();
+ListCard listCard=new ListCard();
 
 
 StudentController studentController=new StudentController();
@@ -46,9 +54,12 @@ StudentTypeController studentTypeController=new StudentTypeController();
 
 // ignore: non_constant_identifier_names
 Project_BoardController project_boardController=new Project_BoardController();
+ListController listController=new ListController();
+TaskController taskController=new TaskController();
 
 //ProjectBoardView
 HomePage homePage=new HomePage();
+//Board boardPage=new Board();
 
 
 void main() => runApp(MyApp());

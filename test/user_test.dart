@@ -19,8 +19,8 @@ void main(){
       user.email="tshepangmotaung97@gmail.com";
       expect(user.email, "tshepangmotaung97@gmail.com");
 
-      user.studenNo="1431795";
-      expect(user.studenNo, "1431795");
+      user.studenNo='1431795';
+      expect(user.studenNo, '1431795');
 
       
 

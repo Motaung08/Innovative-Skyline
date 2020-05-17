@@ -17,6 +17,7 @@ class StudentController extends StatefulWidget {
 //    print('let us deduce details...'+user.email);
 
     final response = await http.post(
+       // "http://146.141.21.17/viewStudentProfile.php",
         "https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php",
         body: {
           "Email": user.email,
@@ -42,7 +43,9 @@ class StudentController extends StatefulWidget {
       //print('currently ... date: '+ student.registrationDate.toString());
       student.email=user.email;
       student.studentTypeID=int.parse(datauser[0]['StudentTypeID']);
-
+      //print("UserTypeID: "+user.userTypeID.toString()+" ,Student Number: "+student.studentNo);
+      user.boards.clear();
+      user.boards=await project_boardController.ReadBoards(user.userTypeID,student.studentNo);
     }
     //print(response.body);
 
@@ -75,6 +78,7 @@ class StudentController extends StatefulWidget {
     }else{
       // SERVER API URL
       var url =
+//          'http://146.141.21.17/register_student.php';
           'https://witsinnovativeskyline.000webhostapp.com/register_student.php';
 
       // Store all data with Param Name.

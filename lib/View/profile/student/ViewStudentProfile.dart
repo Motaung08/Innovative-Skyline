@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:intl/intl.dart';
 
+import '../../../user.dart';
+
 
 class ViewStudentProfilePage extends StatefulWidget {
 //  final User user;
@@ -10,7 +12,7 @@ class ViewStudentProfilePage extends StatefulWidget {
   @override
   _ViewStudentProfilePageState createState() => _ViewStudentProfilePageState();
 }
-
+final User user = new User();
 String msg = '';
 
 class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {

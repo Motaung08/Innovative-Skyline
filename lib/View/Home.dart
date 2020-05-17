@@ -9,6 +9,7 @@ import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
+import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/main.dart';
 
 
@@ -18,8 +19,8 @@ class HomePage extends StatefulWidget {
 
   initializeDisplay(){
     print('Initializing board display! ##################');
-    for(int i=0;i<boards.length;i++){
-      listDynamic.add(new DynamicWidget(aboard: boards[i]));
+    for(int i=0;i<user.boards.length;i++){
+      listDynamic.add(new DynamicWidget(aboard: user.boards[i]));
     }
 
   }
@@ -64,6 +65,8 @@ class _MyHomePageState extends State<HomePage> {
         });
   }
 
+
+
   Icon floatingIcon = new Icon(Icons.add);
 
   addDynamic(Project_Board givenBoard) {
@@ -73,7 +76,7 @@ class _MyHomePageState extends State<HomePage> {
 
 
   signout(){
-    boards.clear();
+
     degrees.clear();
     studentTypes.clear();
     widget.listDynamic.clear();
@@ -167,7 +170,7 @@ class _MyHomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              boards.isEmpty? noBoardsView : dynamicTextField,
+              user.boards.isEmpty? noBoardsView : dynamicTextField,
               plusButton,
             ]
           ),
@@ -235,6 +238,10 @@ class DynamicWidget extends StatelessWidget {
 
   DynamicWidget({Key key, @required this.aboard}) : super(key: key);
 
+  popLists() async{
+    aboard.boardLists=await listController.ReadLists(aboard.ProjectID);
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -246,9 +253,15 @@ class DynamicWidget extends StatelessWidget {
         color: Colors.blueGrey
         //Color(0xff009999)
          ,
-        onPressed: () {
+        onPressed: () async {
           project_board=aboard;
-          Navigator.pushNamed(context, '/Board');
+          await popLists();
+          Board boardPage=new Board();
+          await boardPage.populateListDisplay(aboard.ProjectID);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => boardPage),
+          );
         },
         child: Text(aboard.Project_Title, style: style,),
       ),

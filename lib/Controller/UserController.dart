@@ -12,6 +12,7 @@ class UserController extends StatefulWidget {
 
     // SERVER API URL
     var url =
+        //'http://146.141.21.17/register_user.php';
         'https://witsinnovativeskyline.000webhostapp.com/register_user.php';
 
     // Store all data with Param Name.
@@ -33,15 +34,18 @@ class UserController extends StatefulWidget {
     return message;
   }
 
-  Future<String> login(String email, String Password) async {
-    String msg="";
+  Future<bool> login(String email, String Password) async {
+
+    bool proceed=false;
 
     final response = await http.post(
+        //"http://146.141.21.17/login.php",
         "https://witsinnovativeskyline.000webhostapp.com/login.php",
         body: {
           'Email': email,
           'Password': Password
         });
+    //print('******************************************** Clicked');
 
     var datauser = json.decode(response.body);
 
@@ -49,7 +53,8 @@ class UserController extends StatefulWidget {
 
     if (datauser.length == 0) {
 
-        msg = "Incorrect email or password!";
+      proceed=false;
+        String msg = "Incorrect email or password!";
         print(msg);
 
     } else {
@@ -58,11 +63,11 @@ class UserController extends StatefulWidget {
         user.email = datauser[0]['Email'];
         user.userTypeID = int.parse(datauser[0]['UserTypeId']);
 
+
       if (user.userTypeID==1){
 
         await studentController.GetStudDetails();
 
-        await project_boardController.ReadBoards();
 
 
         await studentTypeController.getTypes();
@@ -73,13 +78,12 @@ class UserController extends StatefulWidget {
       else{
         await supervisorController.GetSupDetails();
 
-        await project_boardController.ReadBoards();
-
       }
+      proceed=true;
       //Navigator.popAndPushNamed(context, '/Home');
     }
 
-    return msg;
+    return proceed;
   }
 
   String ResetString="";
@@ -94,6 +98,7 @@ class UserController extends StatefulWidget {
     /*The script below should take in the email and check if there exists a user
     * associated with the given email address. */
     final response = await http.post(
+        //"http://146.141.21.17/ResetPassword.php",
         "https://witsinnovativeskyline.000webhostapp.com/ResetPassword.php",
         body: json.encode(data) );
 

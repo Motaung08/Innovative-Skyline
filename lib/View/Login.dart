@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'dart:async';
@@ -30,17 +31,7 @@ class LoginPageState extends State<LoginPage> {
   //
   Future _tryLogin() async{
 
-    msg= await userController.login(_emailController.text, _passwordController.text);
 
-    if(msg==""){
-      setState(() {
-
-      });
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (BuildContext context) => homePage),
-      );
-    }
 
   }
 
@@ -109,13 +100,34 @@ class LoginPageState extends State<LoginPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
+          bool proceed=false;
           if(_formKey.currentState.validate()){
-            await _tryLogin();
+
+            user.boards.clear();
+            proceed= await userController.login(_emailController.text, _passwordController.text);
+
+            if(proceed==true){
+              setState(() {
+
+              });
+              homePage=new HomePage();
+
+              homePage.initializeDisplay();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (BuildContext context) => homePage),
+              );
+            }
+            else{
+              print('Login Denied!');
+            }
+
             setState(() {
 
             });
           }
         },
+        key: Key('LoginInput'),
         child: Text("Login",
             textAlign: TextAlign.center,
             style: style.copyWith(
@@ -147,6 +159,7 @@ class LoginPageState extends State<LoginPage> {
             MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
           );
         },
+        key: Key('RegisterBttnInput'),
         child: Text("Register",
             textAlign: TextAlign.center,
             style: style.copyWith(

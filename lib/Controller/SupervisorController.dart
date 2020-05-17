@@ -8,9 +8,11 @@ import 'package:postgrad_tracker/main.dart';
 
 class SupervisorController extends StatefulWidget {
 
+  // ignore: non_constant_identifier_names
   Future<List> GetSupDetails() async {
     var msg="";
     final response = await http.post(
+       // "http://146.141.21.17/viewSupProfile.php",
         "https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php",
         body: {
           "Email": user.email,
@@ -28,6 +30,7 @@ class SupervisorController extends StatefulWidget {
       supervisor.lName = datauser[0]['Supervisor_Lastname'];
       supervisor.email=user.email;
       supervisor.office=datauser[0]['Supervisor_OfficePhone'];
+      user.boards=await project_boardController.ReadBoards(user.userTypeID,supervisor.staffNo);
       print("Assigning...");
       print(datauser);
     }
@@ -48,6 +51,7 @@ class SupervisorController extends StatefulWidget {
     else{
       // SERVER API URL
       var url =
+          //'http://146.141.21.17/Register_Supervisor.php';
           'https://witsinnovativeskyline.000webhostapp.com/Register_Supervisor.php';
 
       // Store all data with Param Name.
