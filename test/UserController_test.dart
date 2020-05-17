@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Controller/UserController.dart';
+import 'package:postgrad_tracker/main.dart';
 
 import 'Module_test.dart';
+import 'ProjectBoardCtrl_test.dart';
 
 class Post {
   dynamic data;
@@ -64,6 +67,16 @@ void main() {
         WidgetTester tester) async {
       await tester.pumpWidget(makeWidgetTestable(UserController()));
 
+    });
+
+    test('Future', (){
+      Post.fromJson(degreeController);
+
+    });
+
+    test('Error', (){
+          ('Failed to load post');
+      //Future.error(throwsException);
     });
 
   });

@@ -54,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.find widget using key">
+  <component name="RunManager" selected="Flutter Test.button widgets should be on screen">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -108,14 +108,14 @@
       <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Must Pass" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Must Pass" />
-      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
-      <method v="2" />
-    </configuration>
     <configuration name="all fields should be null" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="all fields should be null" />
       <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="button widgets should be on screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="button widgets should be on screen" />
+      <option name="testFile" value="$PROJECT_DIR$/test/StudentRegister_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="find widget using key" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -140,19 +140,19 @@
     <list>
       <item itemvalue="Dart Command Line App.main" />
       <item itemvalue="Flutter.Unnamed" />
-      <item itemvalue="Flutter Test.Must Pass" />
       <item itemvalue="Flutter Test.finds a Text widget" />
       <item itemvalue="Flutter Test.find widget using key" />
       <item itemvalue="Flutter Test.all fields should be null" />
       <item itemvalue="Flutter Test.Board tags" />
+      <item itemvalue="Flutter Test.button widgets should be on screen" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter Test.find widget using key" />
+        <item itemvalue="Flutter Test.button widgets should be on screen" />
         <item itemvalue="Flutter Test.Board tags" />
+        <item itemvalue="Flutter Test.find widget using key" />
         <item itemvalue="Flutter Test.all fields should be null" />
         <item itemvalue="Flutter Test.finds a Text widget" />
-        <item itemvalue="Flutter Test.Must Pass" />
       </list>
     </recent_temporary>
   </component>
