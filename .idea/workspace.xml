@@ -54,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.Must Pass">
+  <component name="RunManager" selected="Flutter Test.find widget using key">
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -108,16 +108,6 @@
       <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Project Board" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Project Board" />
-      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ProjectID should be assigned a value" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="ProjectID should be assigned a value" />
-      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
-      <method v="2" />
-    </configuration>
     <configuration name="Std Details" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Std Details" />
       <option name="testFile" value="$PROJECT_DIR$/test/StudentProfile_test.dart" />
@@ -126,6 +116,16 @@
     <configuration name="all pass" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="all pass" />
       <option name="testFile" value="$PROJECT_DIR$/test/StudentProfile_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="find widget using key" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="find widget using key" />
+      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="finds a Text widget" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="finds a Text widget" />
+      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
       <method v="2" />
     </configuration>
     <configuration default="true" type="TestNG">
@@ -140,19 +140,19 @@
     <list>
       <item itemvalue="Dart Command Line App.main" />
       <item itemvalue="Flutter.Unnamed" />
-      <item itemvalue="Flutter Test.ProjectID should be assigned a value" />
-      <item itemvalue="Flutter Test.Project Board" />
       <item itemvalue="Flutter Test.Std Details" />
       <item itemvalue="Flutter Test.Must Pass" />
       <item itemvalue="Flutter Test.all pass" />
+      <item itemvalue="Flutter Test.finds a Text widget" />
+      <item itemvalue="Flutter Test.find widget using key" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.find widget using key" />
+        <item itemvalue="Flutter Test.finds a Text widget" />
         <item itemvalue="Flutter Test.Must Pass" />
         <item itemvalue="Flutter Test.all pass" />
         <item itemvalue="Flutter Test.Std Details" />
-        <item itemvalue="Flutter Test.ProjectID should be assigned a value" />
-        <item itemvalue="Flutter Test.Project Board" />
       </list>
     </recent_temporary>
   </component>
@@ -198,7 +198,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/test/Board_test.dart</url>
-          <line>20</line>
+          <line>21</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
