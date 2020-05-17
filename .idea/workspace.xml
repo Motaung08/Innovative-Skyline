@@ -103,19 +103,19 @@
       <option name="filePath" value="$PROJECT_DIR$/postgrad_progress_tracker/lib/main.dart" />
       <method v="2" />
     </configuration>
+    <configuration name="Board tags" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Board tags" />
+      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
+      <method v="2" />
+    </configuration>
     <configuration name="Must Pass" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Must Pass" />
       <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Std Details" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Std Details" />
-      <option name="testFile" value="$PROJECT_DIR$/test/StudentProfile_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="all pass" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="all pass" />
-      <option name="testFile" value="$PROJECT_DIR$/test/StudentProfile_test.dart" />
+    <configuration name="all fields should be null" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="all fields should be null" />
+      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="find widget using key" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -140,19 +140,19 @@
     <list>
       <item itemvalue="Dart Command Line App.main" />
       <item itemvalue="Flutter.Unnamed" />
-      <item itemvalue="Flutter Test.Std Details" />
       <item itemvalue="Flutter Test.Must Pass" />
-      <item itemvalue="Flutter Test.all pass" />
       <item itemvalue="Flutter Test.finds a Text widget" />
       <item itemvalue="Flutter Test.find widget using key" />
+      <item itemvalue="Flutter Test.all fields should be null" />
+      <item itemvalue="Flutter Test.Board tags" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Flutter Test.find widget using key" />
+        <item itemvalue="Flutter Test.Board tags" />
+        <item itemvalue="Flutter Test.all fields should be null" />
         <item itemvalue="Flutter Test.finds a Text widget" />
         <item itemvalue="Flutter Test.Must Pass" />
-        <item itemvalue="Flutter Test.all pass" />
-        <item itemvalue="Flutter Test.Std Details" />
       </list>
     </recent_temporary>
   </component>

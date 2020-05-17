@@ -64,7 +64,7 @@ void main(){
     testWidgets('find widget using key', (WidgetTester tester) async {
       final testKey = Key('project_board.Project_Title');
 
-      await tester.pumpWidget(MaterialApp(key: testKey,home: Container()));
+      await tester.pumpWidget(Container(key: testKey));
 
       expect(find.byKey(testKey), findsOneWidget);
     });
