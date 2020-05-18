@@ -2,6 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:postgrad_tracker/Model/ListCard.dart';
 import 'dart:async';
 
+import 'package:postgrad_tracker/View/Board.dart';
+import 'package:postgrad_tracker/main.dart';
+
 
 void main(){
   test('Future.value() returns the value', () async {
@@ -10,9 +13,15 @@ void main(){
   });
 
   
-//    testWidgets('Testing Board', (WidgetTester tester) async{
-//      await tester.pumpWidget(ListCard());
-//    });
-//
+    testWidgets('Testing Board', (WidgetTester tester) async{
+      await tester.pumpWidget(MyApp());
+
+      var button = find.text('Add Task');
+      expect(button, findsOneWidget);
+      await tester.tap(button);
+      await tester.pump();
+//      expect(find.byKey(K), matcher)
+    });
+
     
 }
