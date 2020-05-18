@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:postgrad_tracker/Model/DegreeType.dart';
 
 import 'package:postgrad_tracker/Model/Student.dart';
@@ -7,6 +9,7 @@ import 'package:postgrad_tracker/Model/StudentType.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/Login.dart';
 import 'package:postgrad_tracker/main.dart';
+
 
 import '../../main.dart';
 
@@ -48,6 +51,29 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     });
 
   }
+
+   DateTime _date = new DateTime.now();
+   final format = DateFormat("yyyy-MM-dd");
+   String dateinput="Select date ...";
+   TextStyle datestyle=TextStyle(color: Colors.black.withOpacity(0.65),fontFamily: 'Montserrat');
+
+   Future<Null> selectDate(BuildContext context) async {
+     final DateTime picked = await showDatePicker(
+         context: context,
+         initialDate: _date,
+         firstDate: new DateTime(2000),
+         lastDate: new DateTime(2030)
+     );
+
+     if(picked != null && picked != _date){
+       print('Date Selected: ${_date.toString()}');
+       setState(() {
+         _date = picked;
+       });
+     }
+     datestyle=TextStyle(color: Colors.black,fontFamily: 'Montserrat');
+     dateinput=DateFormat('yyyy-MM-dd').format(_date);
+   }
 
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
@@ -435,8 +461,63 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
+    RegistrationDateController.text=_date.toString();
+
+//    final DateSelection = new TextFormField(
+//      decoration: InputDecoration(
+//        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+//        icon: const Icon(Icons.calendar_today),
+//        hintText: 'Enter your registration date',
+//        labelText: 'Registration Date',
+//        //border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+//      ),
+//      keyboardType: TextInputType.datetime,
+//    );
+
+    final DateSelection = new    Stack(
+      children: <Widget>[
+        Container(
+          width: double.infinity,
+          height: 60,
+          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+          //padding: EdgeInsets.only(bottom: 10),
+          decoration: BoxDecoration(
+            border: Border.all(
+                color: Colors.grey, width: 1),
+            borderRadius: BorderRadius.circular(32),
+            shape: BoxShape.rectangle,
+          ),
+          child: Row(
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.calendar_today, color: Color(0xff009999),),
+                onPressed: (){
+                  selectDate(context);
+                  },
+                tooltip: "Select registration date",
+              ),
+              Text(dateinput,style: datestyle,),
+            ],
+          ),
+        ),
+        Positioned(
+            left: 10,
+            top: 12,
+            child: Container(
+              padding: EdgeInsets.only(bottom: 10, left: 3, right: 0),
+              margin: EdgeInsets.only(left: 10),
+              color: Colors.white,
+              child: Text(
+                'Date Registered: ',
+                style: TextStyle(color: Colors.black.withOpacity(.65)),
+              ),
+            )),
+      ],
+    );
+
     final studentDateRegisteredField = TextFormField(
       controller: RegistrationDateController,
+      enabled: false,
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Enter Date Registered' : null,
       onChanged: (val) {
@@ -601,6 +682,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Column(children: <Widget>[
+
                                 SizedBox(
                                     width:
                                     MediaQuery.of(context).size.width / 2.8,
@@ -649,7 +731,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                                 SizedBox(
                                     width:
                                         MediaQuery.of(context).size.width / 2.8,
-                                    child: studentDateRegisteredField),
+                                    child: DateSelection),
                                 SizedBox(
                                   height: 15.0,
                                 ),
@@ -692,4 +774,6 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     );
   }
 }
+
+
 

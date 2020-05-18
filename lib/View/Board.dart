@@ -3,25 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:postgrad_tracker/Model/ListCard.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
+import 'package:postgrad_tracker/Model/Task.dart';
 import 'package:postgrad_tracker/main.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-// ignore: must_be_immutable
 class Board extends StatefulWidget {
   //final String title;
   // ignore: non_constant_identifier_names
   final Project_Board proj_board;
   List<DynamicWidget> listDynamic = [];
   final items = List();
-  // ignore: non_constant_identifier_names
   Board({Key key, this.proj_board}) : super(key: key);
 
   // ignore: non_constant_identifier_names
   List<StaggeredTile> stiles =new List<StaggeredTile>();
 
 
-  // ignore: non_constant_identifier_names
   Future populateListDisplay(int ProjectID) async {
     //lists = [];
     int boardIndex;
@@ -45,7 +43,13 @@ class Board extends StatefulWidget {
               StaggeredTile.count(2, user.boards[boardIndex].boardLists[i].listTasks.length+2));
         }
         //print("STILES"+stiles.length.toString());
+
+
+
+
+
     }
+
 
   }
 
@@ -123,7 +127,6 @@ class _BoardState extends State<Board> {
       ),
     );
 
-    // ignore: non_constant_identifier_names
     final ListCardItem = new Container(
       //width: MediaQuery.of(context).size.width/2,
       decoration: BoxDecoration(
@@ -256,7 +259,6 @@ class _BoardState extends State<Board> {
   }
 }
 
-// ignore: must_be_immutable
 class DynamicWidget extends StatelessWidget {
   TextStyle style = TextStyle(
       fontFamily: 'Montserrat', fontSize: 20.0, color: (Colors.white));

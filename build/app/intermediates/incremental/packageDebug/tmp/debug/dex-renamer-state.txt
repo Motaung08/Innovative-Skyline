@@ -1,4 +1,4 @@
-#Mon May 18 00:33:19 SAST 2020
-base.0=/home/tshepang/Documents/developments/Innovative-Skyline/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+#Mon May 18 10:20:29 CAT 2020
+base.0=C\:\\Users\\MSI\\Documents\\GitHub\\SD\\Innovative-Skyline\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
