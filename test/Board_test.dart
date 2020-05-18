@@ -13,14 +13,11 @@ void main(){
   });
 
   
-    testWidgets('Testing Board', (WidgetTester tester) async{
-      await tester.pumpWidget(Board());
+    test('Testing Board', () async{
 
       var button = find.text('Add Task');
       expect(button, findsOneWidget);
-      await tester.tap(button);
-      await tester.pump();
-//
+
     });
 
     
