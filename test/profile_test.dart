@@ -21,7 +21,7 @@ void main(){
     final User user = new User();
 
     testWidgets('Find the studentProfile', (WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(ViewStudentProfilePage()));
+      await tester.pumpWidget(makeWidgetTestable(MyApp()));
 //
 //      final studentProfile =find.byKey(Key('StudentProfile'));
 //      expect(studentProfile, findsOneWidget);
