@@ -61,7 +61,7 @@ class ListController extends StatefulWidget {
 
   }
 
-  Future createList(String title) async{
+  Future createList(ListCard newList) async{
     bool created = false;
 
 
@@ -69,11 +69,11 @@ class ListController extends StatefulWidget {
       var url =
 //          'http://146.141.21.17/createBoard.php';
           'https://witsinnovativeskyline.000webhostapp.com/createList.php';
-      print('================= '+title);
+      //print('================= '+title);
       // Store all data with Param Name.
       var data = {
-        'ProjectID': project_board.ProjectID.toString(),
-        'List_Title': title,
+        'ProjectID': newList.ProjectID.toString(),
+        'List_Title': newList.List_Title,
       };
 
       // Starting Web API Call.

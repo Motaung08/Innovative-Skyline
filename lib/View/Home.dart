@@ -65,8 +65,6 @@ class _MyHomePageState extends State<HomePage> {
         });
   }
 
-
-
   Icon floatingIcon = new Icon(Icons.add);
 
   addDynamic(Project_Board givenBoard) {
@@ -84,11 +82,11 @@ class _MyHomePageState extends State<HomePage> {
     User user=new User();
     supervisor=new Supervisor();
     student=new Student();
-    project_board=new Project_Board();
+    //project_board=new Project_Board();
     studentController=new StudentController();
     supervisorController=new SupervisorController();
     userController=new UserController();
-    project_boardController=new Project_BoardController();
+    //project_boardController=new Project_BoardController();
     Navigator.popAndPushNamed(context, '/Login');
 
 //ProjectBoardView
@@ -115,8 +113,10 @@ class _MyHomePageState extends State<HomePage> {
         onPressed: () {
           createAlertDialog(context).then((onValue){
             if (boardTitle!=""){
+              Project_Board project_board=new Project_Board();
+              Project_BoardController project_boardController=new Project_BoardController();
               project_board.Project_Title=boardTitle;
-              project_boardController.createBoard(boardTitle);
+              project_boardController.createBoard(project_board);
               addDynamic(project_board);
               boardTitle="";
               setState(() {
@@ -254,10 +254,11 @@ class DynamicWidget extends StatelessWidget {
         //Color(0xff009999)
          ,
         onPressed: () async {
-          project_board=aboard;
           await popLists();
-          Board boardPage=new Board();
+          Board boardPage=new Board(proj_board: aboard,);
+
           await boardPage.populateListDisplay(aboard.ProjectID);
+
           Navigator.push(
             context,
             MaterialPageRoute(builder: (BuildContext context) => boardPage),

@@ -67,7 +67,7 @@ class Project_BoardController extends StatefulWidget {
     return boards;
   }
 
-  Future createBoard(String title) async{
+  Future createBoard(Project_Board newBoard) async{
     bool created = false;
 
     if(user.userTypeID==1){
@@ -84,7 +84,7 @@ class Project_BoardController extends StatefulWidget {
 
       // Store all data with Param Name.
       var data = {
-        'Project_Title': project_board.Project_Title,
+        'Project_Title': newBoard.Project_Title,
         'StudentNo' : student.studentNo,
         'StaffNo' : supervisor.staffNo,
         'userType' : user.userTypeID.toString()
@@ -102,7 +102,7 @@ class Project_BoardController extends StatefulWidget {
 
   }
 
-  Future updateBoard() async{
+  Future updateBoard(Project_Board boardToUpdate) async{
     var url =
 
         'https://witsinnovativeskyline.000webhostapp.com/updateBoard.php';
@@ -110,8 +110,8 @@ class Project_BoardController extends StatefulWidget {
 
     // Store all data with Param Name.
     var data = {
-      'BoardID': project_board.ProjectID,
-      'Title' : project_board.Project_Title,
+      'BoardID': boardToUpdate.ProjectID,
+      'Title' : boardToUpdate.Project_Title,
     };
 
     // Starting Web API Call.
