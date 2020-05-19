@@ -240,21 +240,6 @@ class _BoardState extends State<Board> {
           staggeredTiles: widget.stiles,
         ),
       ),
-      /*
-          GridView.builder(
-          itemCount: testList.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: (orientation == Orientation.portrait) ? 2 : 3),
-          itemBuilder: (BuildContext context, int index) {
-            return new Card(
-              child: new GridTile(
-                child: testList[index], //just for testing, will fill with image later
-              ),
-            );
-          },
-
-        ),
-           */
     );
   }
 }
@@ -305,7 +290,45 @@ class DynamicWidget extends StatelessWidget {
           )),
     );
 
-    return new Container(
+    final TaskContainer= new Expanded(
+      flex: 2,
+      child:ListView.builder
+        (
+          itemCount: aList.listTasks.length,
+          itemBuilder: (BuildContext ctxt, int index) {
+            return new Container(
+              decoration: BoxDecoration(
+                color: Color(0xff009999),
+                //border: Border.all(color: Colors.white, width: 8),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              margin: EdgeInsets.all(3),
+              child: ListTile(
+                title: Text(aList.listTasks[index].Task_Title),
+                trailing: IconButton(icon: Icon(Icons.more_vert),onPressed: (){},),
+              ),
+            );
+          }
+      )
+        /*
+         ListView(
+        scrollDirection: Axis.vertical,
+        children: <Widget>[
+          RaisedButton(
+            onPressed: null,
+            child: Text("Facebook"),
+          ),
+          Padding(padding: EdgeInsets.all(5.00)),
+          RaisedButton(
+            onPressed: null,
+            child: Text("Google"),
+          ),
+        ],
+      ),
+         */
+    );
+
+    final BoardItem = Container(
       width: MediaQuery.of(context).size.width / 2,
       margin: new EdgeInsets.all(10.0),
       decoration: BoxDecoration(
@@ -339,16 +362,17 @@ class DynamicWidget extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 40,
-              child: ListView.builder(itemBuilder:
-                  (_,index)=>Text('Item $index'),
-              ),
+            TaskContainer,
 
-            ),
+
+
             addTaskButon,
 
           ]),
     );
+
+
+
+    return BoardItem;
   }
 }
