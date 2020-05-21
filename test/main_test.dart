@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:postgrad_tracker/Controller/ListController.dart';
+import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/View/resetpassword.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/View/register/SupervisorRegister.dart';
@@ -40,6 +42,23 @@ void main(){
     testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
       await tester.pumpWidget(makeWidgetTestable(ResetPasswordView()));
     });
+
+    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+      await tester.pumpWidget(makeWidgetTestable(ListController()));
+    });
+
+    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+      await tester.pumpWidget(makeWidgetTestable(StudentSupChoicePage()));
+    });
+
+    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+      await tester.pumpWidget(makeWidgetTestable(SupervisorRegisterPage()));
+    });
+
+    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+      await tester.pumpWidget(makeWidgetTestable(HomePage()));
+    });
+
 
 //    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
 //      await tester.pumpWidget(makeWidgetTestable(StudentRegisterPage()));

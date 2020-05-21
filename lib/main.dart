@@ -9,7 +9,6 @@ import 'package:postgrad_tracker/Controller/UserController.dart';
 import 'package:postgrad_tracker/Model/DegreeType.dart';
 import 'package:postgrad_tracker/Model/ListCard.dart';
 import 'package:postgrad_tracker/Model/StudentType.dart';
-
 import 'package:postgrad_tracker/View/register/StudentRegister.dart';
 import 'package:postgrad_tracker/View/register/SupervisorRegister.dart';
 import 'package:postgrad_tracker/View/Board.dart';
