@@ -44,14 +44,14 @@ void main(){
     testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
       await tester.pumpWidget(makeWidgetTestable(StudentSupChoicePage()));
     });
-
-    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(SupervisorRegisterPage()));
-    });
-
-    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(HomePage()));
-    });
+//
+//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(SupervisorRegisterPage()));
+//    });
+//
+//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(HomePage()));
+//    });
 
   });
 
