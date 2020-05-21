@@ -53,6 +53,8 @@ TaskController taskController=new TaskController();
 
 //ProjectBoardView
 HomePage homePage=new HomePage();
+Board boardPage=new Board();
+
 
 String personNo="";
 
@@ -79,7 +81,7 @@ class MyApp extends StatelessWidget {
         '/StudentRegister': (context) => new StudentRegisterPage(),
         '/SupervisorRegister': (context) => new SupervisorRegisterPage(),
 
-        '/Board': (context) => new Board(),
+        '/Board': (context) =>  boardPage,
         '/ResetPassword': (context) => new ResetPasswordView(),
 
 

@@ -45,9 +45,11 @@ class ListController extends StatefulWidget {
             ListCard listReceived = new ListCard();
             listReceived.ListID = int.parse(Response[i]['ListID']);
             listReceived.List_Title = Response[i]['List_Title'];
+            listReceived.ProjectID= int.parse(Response[i]['ProjectID']);
             listReceived.listTasks=await taskController.ReadTasks(listReceived.ListID);
 
             lists.add(listReceived);
+            //user.boards[listReceived.ProjectID].boardLists[listReceived.ListID].listTasks=await taskController.ReadTasks(listReceived.ListID);
             //print("Added: "+listReceived.List_Title);
           }
 

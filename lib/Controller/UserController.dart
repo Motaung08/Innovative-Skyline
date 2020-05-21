@@ -68,8 +68,6 @@ class UserController extends StatefulWidget {
 
         await studentController.GetStudDetails();
 
-
-
         await studentTypeController.getTypes();
 
         await degreeController.getDegrees();

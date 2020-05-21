@@ -47,6 +47,7 @@ class Project_BoardController extends StatefulWidget {
           print(msg);
         }
         else {
+          user.boards.clear();
           for (int i = 0; i < Response.length; i++) {
 
             Project_Board boardReceived = new Project_Board();
@@ -59,6 +60,8 @@ class Project_BoardController extends StatefulWidget {
             //boardReceived.boardLists=await listController.ReadLists(boardReceived.ProjectID);
 
             boards.add(boardReceived);
+            //user.boards.add(boardReceived);
+            //user.boards[i].boardLists=await listController.ReadLists(boardReceived.ProjectID);
           }
 
 
@@ -97,6 +100,30 @@ class Project_BoardController extends StatefulWidget {
       var message = jsonDecode(response.body);
 
       print(message);
+
+
+
+  }
+
+  Future deleteBoard(int ProjectID) async{
+
+    // SERVER API URL
+    var url =
+//          'http://146.141.21.17/createBoard.php';
+        'https://witsinnovativeskyline.000webhostapp.com/deleteBoard.php';
+
+    // Store all data with Param Name.
+    var data = {
+      'ProjectID': ProjectID.toString(),
+    };
+
+    // Starting Web API Call.
+    var response = await http.post(url, body: json.encode(data));
+    print(response.body.toString());
+    // Getting Server response into variable.
+    var message = jsonDecode(response.body);
+
+    print(message);
 
 
 
