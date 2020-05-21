@@ -11,18 +11,21 @@ import 'package:postgrad_tracker/main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 
+// ignore: must_be_immutable
 class Board extends StatefulWidget {
   //final String title;
   // ignore: non_constant_identifier_names
   final Project_Board proj_board;
   List<DynamicList> listDynamic = [];
   final items = List();
+  // ignore: non_constant_identifier_names
   Board({Key key, this.proj_board}) : super(key: key);
 
   // ignore: non_constant_identifier_names
   List<StaggeredTile> stiles =new List<StaggeredTile>();
 
 
+  // ignore: non_constant_identifier_names
   Future populateListDisplay(int ProjectID) async {
     //lists = [];
     int boardIndex;
@@ -67,6 +70,7 @@ class _BoardState extends State<Board> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController listTitle = new TextEditingController();
   final items = List();
+  // ignore: non_constant_identifier_names
   Project_BoardController project_boardController=new Project_BoardController();
 
   Future<String> editBoardAlertDialog(BuildContext context) {
@@ -272,6 +276,7 @@ class _BoardState extends State<Board> {
   }
 }
 
+// ignore: must_be_immutable
 class DynamicList extends StatefulWidget {
   ListCard aList;
 
