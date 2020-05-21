@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'package:postgrad_tracker/Model/ListCard.dart';
+import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
 
 // ignore: camel_case_types
 class ListController extends StatefulWidget {
 
-  // ignore: non_constant_identifier_names, missing_return
+  // ignore: non_constant_identifier_names
   Future<List> ReadLists(int ProjectID) async{
     List<ListCard> lists=List();
       bool created = false;
@@ -59,7 +61,7 @@ class ListController extends StatefulWidget {
 
   }
 
-  Future createList(String title) async{
+  Future createList(ListCard newList) async{
     bool created = false;
 
 
@@ -67,11 +69,11 @@ class ListController extends StatefulWidget {
       var url =
 //          'http://146.141.21.17/createBoard.php';
           'https://witsinnovativeskyline.000webhostapp.com/createList.php';
-      print('================= '+title);
+      //print('================= '+title);
       // Store all data with Param Name.
       var data = {
-        'ProjectID': project_board.ProjectID.toString(),
-        'List_Title': title,
+        'ProjectID': newList.ProjectID.toString(),
+        'List_Title': newList.List_Title,
       };
 
       // Starting Web API Call.

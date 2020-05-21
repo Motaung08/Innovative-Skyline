@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:http/http.dart' as http;
@@ -26,10 +27,12 @@ class SupervisorController extends StatefulWidget {
     } else {
 
       supervisor.staffNo = datauser[0]['StaffNo'];
+      personNo=supervisor.staffNo;
       supervisor.fName = datauser[0]['Supervisor_Firstname'];
       supervisor.lName = datauser[0]['Supervisor_Lastname'];
       supervisor.email=user.email;
       supervisor.office=datauser[0]['Supervisor_OfficePhone'];
+      Project_BoardController project_boardController=new Project_BoardController();
       user.boards=await project_boardController.ReadBoards(user.userTypeID,supervisor.staffNo);
       print("Assigning...");
       print(datauser);

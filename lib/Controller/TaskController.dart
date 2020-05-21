@@ -67,7 +67,7 @@ class TaskController extends StatefulWidget {
 
   Future createTask(Task aTask) async{
     bool created = false;
-
+      print("CREATING TASK...");
 
       // SERVER API URL
       var url =
@@ -76,19 +76,19 @@ class TaskController extends StatefulWidget {
       //print('================= '+title);
       // Store all data with Param Name.
       var data = {
-        'TaskID': aTask.TaskID,
+        //'TaskID': aTask.TaskID.toString(),
         'Task_Title': aTask.Task_Title,
-        'ListID':aTask.ListID,
+        'ListID':aTask.ListID.toString(),
         'Task_AddedBy':aTask.Task_AddedBy,
-        'Task_DateAdded':aTask.Task_DateAdded,
-        'Task_DateAdded':aTask.Task_Description,
-        'Task_Due':aTask.Task_Due,
-        'Task_StatusID':aTask.Task_StatusID,
+        'Task_DateAdded':aTask.Task_DateAdded.toString(),
+        'Task_Description':aTask.Task_Description,
+        'Task_Due':aTask.Task_Due.toString(),
+        'Task_StatusID':aTask.Task_StatusID.toString(),
       };
 
       // Starting Web API Call.
       var response = await http.post(url, body: json.encode(data));
-
+      print(response.body);
       // Getting Server response into variable.
       var message = jsonDecode(response.body);
 

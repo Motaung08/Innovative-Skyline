@@ -18,12 +18,13 @@ Widget makeWidgetTestable(Widget widget){
 void main(){
   group('User',()
   {
+    final User user = new User();
 
-    testWidgets('Find widget', (WidgetTester tester) async {
-      await tester.pumpWidget(ViewStudentProfilePage());
-
-      expect(find.byType(Container),findsOneWidget);
-
+    testWidgets('Find the studentProfile', (WidgetTester tester) async {
+      await tester.pumpWidget(makeWidgetTestable(MyApp()));
+//
+//      final studentProfile =find.byKey(Key('StudentProfile'));
+//      expect(studentProfile, findsOneWidget);
     });
 
     test("getter and setter methods", () {

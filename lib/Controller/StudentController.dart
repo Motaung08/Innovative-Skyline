@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/User.dart';
@@ -37,6 +38,7 @@ class StudentController extends StatefulWidget {
       student.fName = datauser[0]['Student_FirstName'];
       student.lName = datauser[0]['Student_LastName'];
       student.studentNo = datauser[0]['StudentNo'];
+      personNo=student.studentNo;
       print('currently ... student no: '+ student.studentNo);
       student.degreeID = int.parse(datauser[0]['Degree_ID']);
       student.registrationDate=DateTime.parse(datauser[0]['Student_RegistrationDate']);
@@ -45,6 +47,7 @@ class StudentController extends StatefulWidget {
       student.studentTypeID=int.parse(datauser[0]['StudentTypeID']);
       //print("UserTypeID: "+user.userTypeID.toString()+" ,Student Number: "+student.studentNo);
       user.boards.clear();
+      Project_BoardController project_boardController=new Project_BoardController();
       user.boards=await project_boardController.ReadBoards(user.userTypeID,student.studentNo);
     }
     //print(response.body);
