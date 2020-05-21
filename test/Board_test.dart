@@ -33,6 +33,7 @@ void main(){
       expect(testBoard.Project_Description, null);
       expect(testBoard.Project_StartDate, null);
       expect(testBoard.Project_EndDate, null);
+      expect(testBoard.key, null);
 
     });
 
@@ -43,6 +44,10 @@ void main(){
       testBoard.Project_Description='Software development';
 //      testBoard.Project_StartDate=02052020 as DateTime;
 //      testBoard.Project_EndDate = '30112020';
+      // ignore: unnecessary_statements
+      testBoard.key;
+
+      expect(testBoard.key, null);
 
       expect(user.studentNo, '1431795');
       expect(testBoard.Project_Title, 'SD_Project');
