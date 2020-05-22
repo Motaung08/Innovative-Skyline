@@ -3,11 +3,29 @@ import 'package:postgrad_tracker/main.dart';
 import 'package:intl/intl.dart';
 
 import '../../../user.dart';
+class String_Validator {
 
+}
 
 class ViewStudentProfilePage extends StatefulWidget {
 //  final User user;
-//
+  static String validate(String a){
+    if(a==null){
+      return 'null';
+    }
+    else {
+      return a;
+    }
+  }
+  static DateTime validateDate(DateTime a){
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+    if(a ==null){
+      return dateFormat.parse('0000-00-00');
+    }
+    else{
+      return a;
+    }
+  }
 //  const ViewStudentProfilePage({Key key, this.user}) : super(key: key);
   @override
   _ViewStudentProfilePageState createState() => _ViewStudentProfilePageState();
@@ -22,9 +40,10 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
 
 
 
+
   @override
   Widget build(BuildContext context) {
-    studentController.GetStudDetails();
+  //  studentController.GetStudDetails();
 
     setState(() {
 
@@ -39,19 +58,19 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 24)),
-          Text("Name: " + student.fName+ " " +student.lName + "\n",
+          Text("Name: " + ViewStudentProfilePage.validate(student.fName)+ " " +ViewStudentProfilePage.validate(student.lName) + "\n",
               //textAlign: TextAlign.center,
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
-          Text("Student Number: " + student.studentNo + "\n",
+          Text("Student Number: " + ViewStudentProfilePage.validate(student.studentNo) + "\n",
               //textAlign: TextAlign.start,
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
-          Text("Email: " + student.email + "\n",
+          Text("Email: " + ViewStudentProfilePage.validate(student.email) + "\n",
               textAlign: TextAlign.center,
               style: style.copyWith(
                   color: Color(0xff009999),
@@ -59,22 +78,21 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
                   fontSize: 18)),
           Text("Degree: " +
 
-              studentController.DetermineDegreeType()
+              ViewStudentProfilePage.validate(student.degreeId)
               + "\n",
               textAlign: TextAlign.start,
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
-          Text("Date Registered: " + dateFormat.format(student.registrationDate) + "\n",
+          Text("Date Registered: " + dateFormat.format(ViewStudentProfilePage.validateDate(student.registrationDate)) + "\n",
               textAlign: TextAlign.start,
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
           Text("Student Type: " +
-
-              studentController.DetermineStudentType()
+              ViewStudentProfilePage.validate(student.studentType)
               + "\n",
               textAlign: TextAlign.start,
               style: style.copyWith(
