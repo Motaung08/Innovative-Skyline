@@ -7,6 +7,8 @@ class Student extends StatefulWidget {
   String studentNo;
   String fName;
   String lName;
+  String degreeId;
+  String studentType;
   int degreeID;
   DateTime registrationDate;
   int studentTypeID;
