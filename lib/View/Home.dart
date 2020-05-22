@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/StudentController.dart';
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
@@ -38,21 +39,42 @@ class HomePage extends StatefulWidget {
 class _MyHomePageState extends State<HomePage> {
   TextEditingController titleController = new TextEditingController();
   String boardTitle = "";
-
+  final _formKey = GlobalKey<FormState>();
   //int userType=user.userTypeID;
   Future<String> createAlertDialog(BuildContext context) {
+
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Board title: "),
-            content: TextField(
-              controller: titleController,
+            title: Text("Create Board: "),
+            content: Form(
+              key: _formKey,
+
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    child: TextFormField(
+                      controller: titleController,
+                      decoration: InputDecoration(
+                        //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                          hintText: "* Board Title",
+                          border:
+                          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+                    ),
+                  ),
+
+
+
+                ],
+              ),
             ),
             actions: <Widget>[
               MaterialButton(
                 elevation: 5.0,
-                child: Text("Create Board"),
+                child: Text("Create"),
                 onPressed: () {
                   boardTitle = titleController.text;
                   //Navigator.of(context).pop(titleController.text.toString());
@@ -93,12 +115,18 @@ class _MyHomePageState extends State<HomePage> {
       fontFamily: 'Montserrat', fontSize: 20.0, color: (Colors.white));
   @override
   Widget build(BuildContext context) {
-    Widget dynamicTextField = new Flexible(
-      flex: 2,
-      child: new ListView.builder(
+
+    Widget dynamicTextField = new Container(
+      margin: new EdgeInsets.all(10.0),
+      //height: MediaQuery.of(context).size.height,
+      child: ListView.builder(
         itemCount: listDynamic.length,
         itemBuilder: (_, index) => listDynamic[index],
       ),
+//      new Flexible(
+//        flex: 2,
+//        child: new
+//      ),
     );
 
     final plusButton = new Container(
@@ -133,21 +161,38 @@ class _MyHomePageState extends State<HomePage> {
 
     final arrowImage = Image.asset("assets/downarrow.png");
 
-    final noBoardsView = new Column(
-      children: <Widget>[
-        Container(
-          width: MediaQuery.of(context).size.width / 1.1,
-          child: Text(
-            "Click the + button below to create a board.",
-            style: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.blueGrey),
+    final noBoardsView = new Container(
+      width: MediaQuery.of(context).size.width,
+      //height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        //mainAxisSize: MainAxisSize.max,
+
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width / 1.1,
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              "Click the + button below to create a board.",
+              style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueGrey),
+            ),
           ),
-        ),
-        arrowImage,
-      ],
+          Container(
+            margin: EdgeInsets.only(left: 100, top: 10),
+            alignment: Alignment.bottomLeft,
+            child: arrowImage,
+          )
+          ,
+        ],
+      ),
     );
 
     return Scaffold(
@@ -159,14 +204,7 @@ class _MyHomePageState extends State<HomePage> {
       body: new Container(
         margin: new EdgeInsets.all(10.0),
 //         // height: MediaQuery.of(context).size.height,
-        child: new Column(
-//
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              user.boards==null ? noBoardsView : dynamicTextField,
-
-            ]),
+        child: user.boards.length>0 ? dynamicTextField : noBoardsView,
       ),
       floatingActionButton: plusButton,
       drawer: Drawer(
@@ -243,58 +281,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
   @override
   Widget build(BuildContext context) {
     //widget.popLists();
-    final buttonview = Container(
-        margin: new EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-            color: Colors.blueGrey,
-            borderRadius: BorderRadius.circular(20)
 
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                new MaterialButton(
-                  //elevation: 5.0,
-                  //borderRadius: BorderRadius.circular(30.0),
-                  //color: Colors.blueGrey,
-                  //Color(0xff009999)
-
-                  onPressed: () async {
-                    await widget.popLists();
-                    Board boardPage = new Board(
-                      proj_board: widget.aboard,
-                    );
-
-                    await boardPage.populateListDisplay(widget.aboard.ProjectID);
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => boardPage),
-                    );
-                  },
-                  child: Text(
-                    widget.aboard.Project_Title,
-                    style: widget.style,
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(Icons.delete),
-                )
-              ],
-            )
-
-
-          ],
-        ));
     Project_BoardController project_boardController=new Project_BoardController();
     final listReturn = new Container(
       margin: EdgeInsets.all(8),
@@ -318,15 +305,8 @@ class _DynamicWidgetState extends State<DynamicWidget> {
               }
             }
             await project_boardController.deleteBoard(widget.aboard.ProjectID);
-            //await project_boardController.ReadBoards(user.userTypeID, personNo);
-            //homePage=new HomePage();
 
-            //
-//            Navigator.push(
-//              context,
-//              MaterialPageRoute(builder: (BuildContext context) => homePage),
-//            );
-            print("BOARD INDEX: "+boardIndex.toString());
+
             listDynamic.removeAt(boardIndex);
             user.boards.removeAt(boardIndex);
             homePage.initializeDisplay();
@@ -361,114 +341,3 @@ class _DynamicWidgetState extends State<DynamicWidget> {
     return listReturn;
   }
 }
-
-
-//// ignore: must_be_immutable
-//class DynamicWidget extends StatelessWidget {
-//  TextStyle style = TextStyle(
-//      fontFamily: 'Montserrat', fontSize: 20.0, color: (Colors.white));
-//  //String giventitle='';
-//  Project_Board aboard;
-//
-//  DynamicWidget({Key key, @required this.aboard}) : super(key: key);
-//
-//  popLists() async {
-//    aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
-//  }
-//
-//  @override
-//  Widget build(BuildContext context) {
-//
-//    final buttonview = Container(
-//        margin: new EdgeInsets.all(8.0),
-//        decoration: BoxDecoration(
-//            color: Colors.blueGrey,
-//            borderRadius: BorderRadius.circular(20)
-//
-//        ),
-//        child: Row(
-//          mainAxisSize: MainAxisSize.max,
-//          children: <Widget>[
-//            Column(
-//              mainAxisAlignment: MainAxisAlignment.start,
-//              children: <Widget>[
-//                new MaterialButton(
-//                  //elevation: 5.0,
-//                  //borderRadius: BorderRadius.circular(30.0),
-//                  //color: Colors.blueGrey,
-//                  //Color(0xff009999)
-//
-//                  onPressed: () async {
-//                    await popLists();
-//                    Board boardPage = new Board(
-//                      proj_board: aboard,
-//                    );
-//
-//                    await boardPage.populateListDisplay(aboard.ProjectID);
-//
-//                    Navigator.push(
-//                      context,
-//                      MaterialPageRoute(
-//                          builder: (BuildContext context) => boardPage),
-//                    );
-//                  },
-//                  child: Text(
-//                    aboard.Project_Title,
-//                    style: style,
-//                  ),
-//                ),
-//              ],
-//            ),
-//            Column(
-//              mainAxisAlignment: MainAxisAlignment.end,
-//              children: <Widget>[
-//                IconButton(
-//                  icon: Icon(Icons.delete),
-//                )
-//              ],
-//            )
-//
-//
-//          ],
-//        ));
-//Project_BoardController project_boardController=new Project_BoardController();
-//    final listReturn = new Container(
-//      margin: EdgeInsets.all(8),
-//      padding: EdgeInsets.all(8),
-//      decoration: BoxDecoration(
-//        color: Colors.blueGrey,
-//        borderRadius: BorderRadius.circular(20)
-//      ),
-//      child: ListTile(
-//        title: Text(
-//          aboard.Project_Title,
-//          style: style,
-//        ),
-//        trailing: IconButton(
-//          icon: Icon(Icons.delete,color: Colors.black,),
-//          onPressed: (){
-//            project_boardController.deleteBoard(aboard.ProjectID);
-//
-//          },
-//        ),
-//        onTap: () async {
-//          await popLists();
-//          Board boardPage = new Board(
-//            proj_board: aboard,
-//          );
-//
-//          await boardPage.populateListDisplay(aboard.ProjectID);
-//
-//          Navigator.push(
-//            context,
-//            MaterialPageRoute(
-//                builder: (BuildContext context) => boardPage),
-//          );
-//        },
-//      ),
-//
-//    );
-//
-//    return listReturn;
-//  }
-//}

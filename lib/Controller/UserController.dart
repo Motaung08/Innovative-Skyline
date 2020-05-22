@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/main.dart';
-//import 'package:password_hash/password_hash.dart';
+import 'package:password_hash/password_hash.dart';
 
 // ignore: must_be_immutable
 class UserController extends StatefulWidget {
@@ -39,9 +39,7 @@ class UserController extends StatefulWidget {
 
     bool proceed=false;
 
-//    var generator = new PBKDF2();
-//    var salt = Salt.generateAsBase64String();
-//    var hash = generator.generateKey(Password, salt, 1000, 32);
+print("EMAIL: "+email+", Password: "+Password);
 
     final response = await http.post(
         //"http://146.141.21.17/login.php",
