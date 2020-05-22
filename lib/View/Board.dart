@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:postgrad_tracker/Controller/ListController.dart';
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/TaskController.dart';
 import 'package:postgrad_tracker/Model/ListCard.dart';
@@ -46,15 +49,19 @@ class Board extends StatefulWidget {
     int listIndex;
     int testVal;
     void getIndexes(){
+
       for(int i=0;i<user.boards.length;i++){
         if(user.boards[i].ProjectID==ProjectID){
           boardIndex=i;
           BoardIdentificationIndex=i;
-          for (int j=0;j<user.boards[i].boardLists.length;j++){
-            if(user.boards[i].boardLists[j]==testVal){
-              testVal=j;
+          if(user.boards[i].boardLists!=null){
+            for (int j=0;j<user.boards[i].boardLists.length;j++){
+              if(user.boards[i].boardLists[j]==testVal){
+                testVal=j;
+              }
             }
           }
+
         }
       }
     }
@@ -65,6 +72,7 @@ class Board extends StatefulWidget {
     if(user.boards[boardIndex].boardLists!=null){
       print('Initializing list display! ##################');
       stiles.clear();
+      listDynamic.clear();
       for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
         // ListCard lsc=new ListCard();
         //lsc.List_Title="lsc test";
@@ -100,6 +108,7 @@ class _BoardState extends State<Board> {
   final items = List();
   // ignore: non_constant_identifier_names
   Project_BoardController project_boardController=new Project_BoardController();
+  String newListTitle="";
 
   Future<String> editBoardAlertDialog(BuildContext context) {
     TextEditingController titleController = new TextEditingController();
@@ -134,8 +143,105 @@ class _BoardState extends State<Board> {
         });
   }
 
+  Future<String> createAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("List title: "),
+            content: Form(
+              key:_formKey,
+              child: TextFormField(
+                controller: listTitle,
+                validator: (val) => val.isEmpty ? 'Enter a List Title' : null,
+                onChanged: (val) {
+                  setState(() => newListTitle = val);
+                },
+              ),
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                elevation: 5.0,
+                child: Text("Create List"),
+                onPressed: () {
+                  listTitle.text="";
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    final plusButton = new Container(
+      alignment: Alignment.bottomRight,
+      margin: EdgeInsets.all(1),
+      child: MaterialButton(
+        onPressed: () {
+          createAlertDialog(context).then((onValue) {
+            if (newListTitle != "") {
+              if(_formKey.currentState.validate()){
+                ListCard newList = new ListCard();
+                newList.List_Title=listTitle.text;
+                newList.ProjectID=widget.proj_board.ProjectID;
+                listController.createList(newList);
+                //widget.populateListDisplay(widget.proj_board.ProjectID);
+                listDynamic.add(new DynamicList(aList: newList));
+                setState(() {});
+              }
+            }
+          });
+        },
+        color:
+        //Colors.blueGrey
+        Color(0xff009999),
+        textColor: Colors.white,
+        child: Icon(
+          Icons.add,
+          size: 40,
+        ),
+        padding: EdgeInsets.all(16),
+        shape: CircleBorder(),
+      ),
+    );
+
+    final arrowImage = Image.asset("assets/downarrow.png");
+
+    final noBoardsView = new Container(
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width / 1.1,
+            alignment: Alignment.center,
+            child: Text(
+              "Click the + button below to create a list.",
+              style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueGrey),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 100, top: 10),
+            alignment: Alignment.bottomLeft,
+            child: arrowImage,
+          )
+          ,
+        ],
+      ),
+    );
 
     final orientation = MediaQuery.of(context).orientation;
     //listTitle.text="Enter list title ...";
@@ -173,28 +279,28 @@ class _BoardState extends State<Board> {
       ),
     );
 
-//    final ListCardItem = new Container(
-//      //width: MediaQuery.of(context).size.width/2,
-//      decoration: BoxDecoration(
-//        color: Colors.white,
-//        border: Border.all(color: Colors.white, width: 8),
-//        borderRadius: BorderRadius.circular(12),
-//      ),
-//      child: Form(
-//        key: _formKey,
-//        child: Column(children: <Widget>[
-//          TextFormField(
-//            controller: listTitle,
-//            decoration: InputDecoration(
-//                fillColor: Colors.white, hintText: "Enter list title..."),
-//          ),
-//          SizedBox(
-//            height: 20,
-//          ),
-//          addListButton,
-//        ]),
-//      ),
-//    );
+    final ListCardItem = new Container(
+      //width: MediaQuery.of(context).size.width/2,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.white, width: 8),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Form(
+        key: _formKey,
+        child: Column(children: <Widget>[
+          TextFormField(
+            controller: listTitle,
+            decoration: InputDecoration(
+                fillColor: Colors.white, hintText: "Enter list title..."),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          addListButton,
+        ]),
+      ),
+    );
 //    items.add(ListCardItem);
 
     final addListCard = GridTile(
@@ -272,8 +378,8 @@ class _BoardState extends State<Board> {
 
       }
 
-      testList.add(addListCard);
-      stiles.add(StaggeredTile.count(2, 2));
+      //testList.add(addListCard);
+      //stiles.add(StaggeredTile.count(2, 2));
       print("testList: "+testList.length.toString());
       print(" stiles: "+stiles.length.toString());
 
@@ -284,6 +390,24 @@ class _BoardState extends State<Board> {
 
     pop();
     print("STILES: "+stiles.length.toString());
+
+    final staggered =Container(
+        margin: new EdgeInsets.all(10.0),
+       // child:  SizedBox(
+          //height: 505,
+          child: SingleChildScrollView(
+            child: StaggeredGridView.count(
+              primary: false,
+              crossAxisCount: 4,
+              shrinkWrap: true,
+              mainAxisSpacing: 4.0,
+              crossAxisSpacing: 4.0,
+              children: testList,
+              staggeredTiles: stiles,
+            ),
+          ),
+        //)
+    );
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -304,22 +428,23 @@ class _BoardState extends State<Board> {
         backgroundColor: Color(0xff009999),
       ),
       backgroundColor: Colors.grey,
-      body: Container(
-          margin: new EdgeInsets.all(10.0),
-          child:  SingleChildScrollView(
-            child: StaggeredGridView.count(
-              primary: false,
-              crossAxisCount: 4,
-              shrinkWrap: true,
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
-              children: testList,
-              staggeredTiles: stiles,
-            ),
-          )
-      ),
+      body: user.boards[BoardIdentificationIndex].boardLists!=null ? staggered : noBoardsView,
+        floatingActionButton: plusButton,
+      //bottomSheet: plusButton,
     );
   }
+}
+
+class Constants{
+  static const String Edit = 'Edit';
+  static const String Delete = 'Delete';
+  //static const String SignOut = 'Sign out';
+
+  static const List<String> choices = <String>[
+    Edit,
+    Delete,
+    //SignOut
+  ];
 }
 
 // ignore: must_be_immutable
@@ -421,7 +546,13 @@ class _DynamicListState extends State<DynamicList> {
     }
 
 
-
+    void choiceAction(String choice){
+      if(choice == Constants.Edit){
+        print('Edit');
+      }else if(choice == Constants.Delete){
+        print('Delete');
+      }
+    }
 
 
     Future<String> createTaskAlertDialog(BuildContext context)  {
@@ -680,12 +811,24 @@ class _DynamicListState extends State<DynamicList> {
                   ),
                   child: ListTile(
                     title: Text(widget.aList.listTasks[index].Task_Title),
-                    trailing: IconButton(
-                      icon: Icon(Icons.more_vert),
-                      onPressed: () {
-
+                    trailing:
+                    PopupMenuButton<String>(
+                      onSelected: choiceAction,
+                      itemBuilder: (BuildContext context){
+                        return Constants.choices.map((String choice){
+                          return PopupMenuItem<String>(
+                            value: choice,
+                            child: Text(choice),
+                          );
+                        }).toList();
                       },
-                    ),
+                    )
+//                    IconButton(
+//                      icon: Icon(Icons.more_vert),
+//                      onPressed: () {
+//
+//                      },
+//                    ),
                   ),
                 ),
               ),
