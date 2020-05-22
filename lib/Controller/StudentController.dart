@@ -45,6 +45,8 @@ class StudentController extends StatefulWidget {
       //print('currently ... date: '+ student.registrationDate.toString());
       student.email=user.email;
       student.studentTypeID=int.parse(datauser[0]['StudentTypeID']);
+      student.studentType = studentTypes[student.studentTypeID-1].Student_Type;
+      student.degreeId=degrees[student.degreeID-1].Degree_Type;
       //print("UserTypeID: "+user.userTypeID.toString()+" ,Student Number: "+student.studentNo);
       user.boards.clear();
       Project_BoardController project_boardController=new Project_BoardController();
@@ -56,17 +58,6 @@ class StudentController extends StatefulWidget {
   }
 
   // ignore: non_constant_identifier_names
-  String DetermineStudentType() {
-    String type=studentTypes[student.studentTypeID-1].Student_Type;
-    return type;
-
-  }
-
-  // ignore: non_constant_identifier_names
-  String DetermineDegreeType(){
-    String type=degrees[student.degreeID-1].Degree_Type;
-    return type;
-  }
 
 
 
