@@ -10,11 +10,10 @@ import 'package:postgrad_tracker/main.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-<<<<<<< HEAD
+
 List<StaggeredTile> stiles =new List<StaggeredTile>();
 List<DynamicList> listDynamic = [];
 int BoardIdentificationIndex;
-=======
 
 // ignore: must_be_immutable
 >>>>>>> 66e232c3fa6d5eccb27b9ad6a5ea42de4719037c
@@ -30,11 +29,11 @@ class Board extends StatefulWidget {
   // ignore: non_constant_identifier_names
 
 
-<<<<<<< HEAD
+
  TaskController taskController=new TaskController();
-=======
+
   // ignore: non_constant_identifier_names
->>>>>>> 66e232c3fa6d5eccb27b9ad6a5ea42de4719037c
+
   Future populateListDisplay(int ProjectID) async {
     //lists = [];
     int boardIndex;
