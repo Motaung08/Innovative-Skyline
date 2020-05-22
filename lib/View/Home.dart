@@ -38,11 +38,13 @@ class HomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<HomePage> {
   TextEditingController titleController = new TextEditingController();
+  TextEditingController descriptionController = new TextEditingController();
   String boardTitle = "";
   final _formKey = GlobalKey<FormState>();
   //int userType=user.userTypeID;
   Future<String> createAlertDialog(BuildContext context) {
-
+    titleController.text="";
+    descriptionController.text="";
     return showDialog(
         context: context,
         builder: (context) {
@@ -51,25 +53,39 @@ class _MyHomePageState extends State<HomePage> {
             content: Form(
               key: _formKey,
 
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: TextFormField(
-                      controller: titleController,
-                      decoration: InputDecoration(
-                        //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          hintText: "* Board Title",
-                          border:
-                          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: TextFormField(
+                        controller: titleController,
+                        decoration: InputDecoration(
+                          //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            hintText: "* Board Title",
+                            border:
+                            OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+                      ),
                     ),
-                  ),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      child: TextFormField(
+                        controller: descriptionController,
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                          //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                            hintText: "Description",
+                            border:
+                            OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+                      ),
+                    ),
 
 
 
-                ],
-              ),
+                  ],
+                ),
+              )
             ),
             actions: <Widget>[
               MaterialButton(

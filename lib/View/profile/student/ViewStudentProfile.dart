@@ -78,7 +78,7 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
                   fontSize: 18)),
           Text("Degree: " +
 
-              ViewStudentProfilePage.validate(student.degreeID.toString())
+              ViewStudentProfilePage.validate(degrees[student.degreeID].Degree_Type)
               + "\n",
               textAlign: TextAlign.start,
               style: style.copyWith(
@@ -92,7 +92,7 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
           Text("Student Type: " +
-              ViewStudentProfilePage.validate(student.studentTypeID.toString())
+              ViewStudentProfilePage.validate(studentTypes[student.studentTypeID].Student_Type)
               + "\n",
               textAlign: TextAlign.start,
               style: style.copyWith(
