@@ -5,7 +5,14 @@ import 'package:postgrad_tracker/main.dart';
 
 class ViewSupProfilePage extends StatefulWidget {
 //final User user;
-
+  static String validate(String a){
+    if(a==null){
+      return 'null';
+    }
+    else {
+      return a;
+    }
+  }
   //const ViewSupProfilePage({Key key, this.user}) : super(key: key);
   @override
   _ViewSupProfilePageState createState() => _ViewSupProfilePageState();
@@ -15,11 +22,18 @@ String msg = '';
 
 class _ViewSupProfilePageState extends State<ViewSupProfilePage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-
+  String validate(String a) {
+    if (a == null) {
+      return 'null';
+    }
+    else {
+      return a;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    supervisorController.GetSupDetails();
+   // supervisorController.GetSupDetails();
     setState(() {
 
     });
@@ -33,25 +47,25 @@ class _ViewSupProfilePageState extends State<ViewSupProfilePage> {
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 24)),
-          Text("Name: " + supervisor.fName+" "+supervisor.lName + "\n",
+          Text("Name: " + ViewSupProfilePage.validate(supervisor.fName)+" "+ViewSupProfilePage.validate(supervisor.lName) + "\n",
               //textAlign: TextAlign.center,
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
-          Text("Staff Number: " + supervisor.staffNo + "\n",
+          Text("Staff Number: " + ViewSupProfilePage.validate(supervisor.staffNo) + "\n",
               //textAlign: TextAlign.start,
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
-          Text("Email: " + supervisor.email + "\n",
+          Text("Email: " + ViewSupProfilePage.validate(supervisor.email) + "\n",
               textAlign: TextAlign.center,
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
-          Text("Office Phone: " + supervisor.office + "\n",
+          Text("Office Phone: " + ViewSupProfilePage.validate(supervisor.office) + "\n",
               textAlign: TextAlign.start,
               style: style.copyWith(
                   color: Color(0xff009999),
