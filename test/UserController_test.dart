@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Controller/UserController.dart';
+import 'package:postgrad_tracker/View/profile/student/ViewStudentProfile.dart';
+import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
 
 import 'Models_test.dart';
 
@@ -63,6 +65,16 @@ void main() {
     testWidgets('All input feild and button widgets should be on screen', (
         WidgetTester tester) async {
       await tester.pumpWidget(makeWidgetTestable(UserController()));
+
+    });
+    testWidgets('All input feildee and button widgets should be on screen', (
+        WidgetTester tester) async {
+      await tester.pumpWidget(makeWidgetTestable(ViewStudentProfilePage()));
+
+    });
+    testWidgets('All input feildeeee and button widgets should be on screen', (
+        WidgetTester tester) async {
+      await tester.pumpWidget(makeWidgetTestable(ViewSupProfilePage()));
 
     });
 
