@@ -63,12 +63,17 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
+<<<<<<< HEAD
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Softwares/flutter/bin/cache/flutter_web_sdk" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+=======
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../MergeFix/Innovative-Skyline" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
+>>>>>>> 5d89e5744729d0072e2e91437fbfc20bdd4ad056
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -76,7 +81,35 @@
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline" />
     </key>
   </component>
+<<<<<<< HEAD
+  <component name="RunManager" selected="Flutter Test.All pages should be accessed!!! (1)">
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+=======
   <component name="RunManager" selected="Flutter.main.dart">
+>>>>>>> 5d89e5744729d0072e2e91437fbfc20bdd4ad056
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -101,6 +134,11 @@
       <option name="filePath" value="$PROJECT_DIR$/postgrad_progress_tracker/lib/main.dart" />
       <method v="2" />
     </configuration>
+<<<<<<< HEAD
+    <configuration name="All pages should be accessed!!! (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="All pages should be accessed!!!" />
+      <option name="testFile" value="$PROJECT_DIR$/test/Home_test.dart" />
+=======
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
@@ -113,16 +151,17 @@
     <configuration name="All input feild and button widgets should be on screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="All input feild and button widgets should be on screen" />
       <option name="testFile" value="$PROJECT_DIR$/test/UserController_test.dart" />
+>>>>>>> 5d89e5744729d0072e2e91437fbfc20bdd4ad056
       <method v="2" />
     </configuration>
-    <configuration name="Find the studentProfile" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Find the studentProfile" />
-      <option name="testFile" value="$PROJECT_DIR$/test/profile_test.dart" />
+    <configuration name="All pages should be accessed!!!" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="All pages should be accessed!!!" />
+      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Future.value() returns the value (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Future.value() returns the value" />
-      <option name="testFile" value="$PROJECT_DIR$/test/login_test.dart" />
+    <configuration name="Test DegreeType" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Test DegreeType" />
+      <option name="testFile" value="$PROJECT_DIR$/test/Models_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="Testing Board" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -130,12 +169,19 @@
       <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
       <method v="2" />
     </configuration>
+<<<<<<< HEAD
+    <configuration name="find widget by key" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="find widget by key" />
+      <option name="testFile" value="$PROJECT_DIR$/test/Home_test.dart" />
+      <method v="2" />
+=======
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+>>>>>>> 5d89e5744729d0072e2e91437fbfc20bdd4ad056
     </configuration>
     <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
@@ -159,19 +205,27 @@
       <item itemvalue="Dart Command Line App.main" />
       <item itemvalue="Flutter.main.dart" />
       <item itemvalue="Flutter.Unnamed" />
+<<<<<<< HEAD
+      <item itemvalue="Flutter Test.Testing Board" />
+      <item itemvalue="Flutter Test.Test DegreeType" />
+      <item itemvalue="Flutter Test.All pages should be accessed!!!" />
+      <item itemvalue="Flutter Test.All pages should be accessed!!! (1)" />
+      <item itemvalue="Flutter Test.find widget by key" />
+=======
       <item itemvalue="Flutter Test.All Models should be accessed" />
       <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
       <item itemvalue="Flutter Test.Find the studentProfile" />
       <item itemvalue="Flutter Test.Future.value() returns the value (1)" />
       <item itemvalue="Flutter Test.Testing Board" />
+>>>>>>> 5d89e5744729d0072e2e91437fbfc20bdd4ad056
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.All pages should be accessed!!! (1)" />
+        <item itemvalue="Flutter Test.find widget by key" />
+        <item itemvalue="Flutter Test.All pages should be accessed!!!" />
+        <item itemvalue="Flutter Test.Test DegreeType" />
         <item itemvalue="Flutter Test.Testing Board" />
-        <item itemvalue="Flutter Test.Find the studentProfile" />
-        <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
-        <item itemvalue="Flutter Test.All Models should be accessed" />
-        <item itemvalue="Flutter Test.Future.value() returns the value (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -282,18 +336,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/test/main_test.dart</url>
-          <line>19</line>
+          <line>21</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/test/UserController_test.dart</url>
           <line>66</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/test/Board_test.dart</url>
-          <line>8</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
