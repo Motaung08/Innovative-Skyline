@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:intl/intl.dart';
 
@@ -17,6 +18,7 @@ class ViewStudentProfilePage extends StatefulWidget {
       return a;
     }
   }
+
   static DateTime validateDate(DateTime a){
     DateFormat dateFormat = DateFormat("yyyy-MM-dd");
     if(a ==null){
@@ -37,13 +39,16 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   DateFormat dateFormat = DateFormat("yyyy-MM-dd");
   String typeName="";
-
-
-
+  int degreeid =student.degreeID;
+ int DegreeID(){
+   if(degreeid!=null){
+     return degreeid;
+   }
+ }
 
   @override
   Widget build(BuildContext context) {
-  //  studentController.GetStudDetails();
+    //  studentController.GetStudDetails();
 
     setState(() {
 
@@ -78,7 +83,7 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
                   fontSize: 18)),
           Text("Degree: " +
 
-              ViewStudentProfilePage.validate(degrees[student.degreeID].Degree_Type)
+              ViewStudentProfilePage.validate(student.degreeId)
               + "\n",
               textAlign: TextAlign.start,
               style: style.copyWith(
@@ -92,33 +97,33 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
           Text("Student Type: " +
-              ViewStudentProfilePage.validate(studentTypes[student.studentTypeID].Student_Type)
+              ViewStudentProfilePage.validate(student.studentType)
               + "\n",
               textAlign: TextAlign.start,
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
-    ]));
+        ]));
 
     return Scaffold(
       body: Center(
           child: Row(
-        children: <Widget>[
-            Container(
-              color: Colors.white,
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.all(36.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[SizedBox(child: studentProfile)],
+            children: <Widget>[
+              Container(
+                color: Colors.white,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(36.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[SizedBox(child: studentProfile)],
+                  ),
                 ),
               ),
-            ),
-        ],
-      )),
+            ],
+          )),
     );
   }
 }
