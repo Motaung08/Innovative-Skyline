@@ -55,7 +55,7 @@ class Project_BoardController extends StatefulWidget {
             boardReceived.ProjectID = int.parse(Response[i]['ProjectID']);
             boardReceived.Project_Title = Response[i]['Project_Title'];
             boardReceived.Project_Description = Response[i]['Project_Description'];
-            print("START DATE: "+Response[i]['Project_StartDate'].toString());
+            //print("START DATE: "+Response[i]['Project_StartDate'].toString());
             if(Response[i]['Project_StartDate']!=null){
               boardReceived.Project_StartDate=DateTime.parse(Response[i]['Project_StartDate']);
             }
