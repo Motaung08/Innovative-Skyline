@@ -110,8 +110,9 @@ class _BoardState extends State<Board> {
   String endDateinput = "Select date ...";
   TextStyle datestyle = TextStyle(
       color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
-  bool ChangedStart=false;
-  bool ChangedEnd=false;
+  bool ChangedStart = false;
+  bool ChangedEnd = false;
+  bool ChangedBoardValue;
   Future<Null> selectStartDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
@@ -122,7 +123,7 @@ class _BoardState extends State<Board> {
     if (picked != null && picked != DateTime.now()) {
       setState(() {
         _startDate = picked;
-        ChangedStart=true;
+        ChangedStart = true;
       });
     }
     datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
@@ -139,7 +140,7 @@ class _BoardState extends State<Board> {
     if (picked != null && picked != DateTime.now()) {
       setState(() {
         _endDate = picked;
-        ChangedEnd=true;
+        ChangedEnd = true;
       });
     }
     datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
@@ -157,17 +158,17 @@ class _BoardState extends State<Board> {
   Future<String> editBoardAlertDialog(BuildContext context) {
     TextEditingController titleController = new TextEditingController();
     descriptionController.text = widget.proj_board.Project_Description;
-    if(widget.proj_board.Project_StartDate!=null){
-      startDateinput = DateFormat('yyyy-MM-dd').format(widget.proj_board.Project_StartDate);
+    if (widget.proj_board.Project_StartDate != null) {
+      startDateinput =
+          DateFormat('yyyy-MM-dd').format(widget.proj_board.Project_StartDate);
+    } else {
+      startDateinput = "Select date ...";
     }
-    else{
-      startDateinput="Select date ...";
-    }
-    if(widget.proj_board.Project_EndDate!=null){
-      endDateinput = DateFormat('yyyy-MM-dd').format(widget.proj_board.Project_EndDate);
-    }
-    else{
-      endDateinput="Select date ...";
+    if (widget.proj_board.Project_EndDate != null) {
+      endDateinput =
+          DateFormat('yyyy-MM-dd').format(widget.proj_board.Project_EndDate);
+    } else {
+      endDateinput = "Select date ...";
     }
     titleController.text = widget.proj_board.Project_Title;
     String title = "";
@@ -187,10 +188,9 @@ class _BoardState extends State<Board> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Container(
-                          alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.only(left: 20),
-                          child: Text("Board Title:")
-                        ),
+                            alignment: Alignment.centerLeft,
+                            margin: EdgeInsets.only(left: 20),
+                            child: Text("Board Title:")),
                         Container(
                           margin: EdgeInsets.all(10),
                           child: TextFormField(
@@ -201,15 +201,16 @@ class _BoardState extends State<Board> {
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(32.0))),
                             onChanged: (val) {
-                              setState(() => widget.proj_board.Project_Title = val);
+                              ChangedBoardValue=true;
+                              setState(
+                                  () => widget.proj_board.Project_Title = val);
                             },
                           ),
                         ),
                         Container(
                             alignment: Alignment.centerLeft,
                             margin: EdgeInsets.only(left: 20),
-                            child: Text("Description:")
-                        ),
+                            child: Text("Description:")),
                         Container(
                           margin: EdgeInsets.all(10),
                           child: TextFormField(
@@ -221,11 +222,12 @@ class _BoardState extends State<Board> {
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(32.0))),
                             onChanged: (val) {
-                              setState(() => widget.proj_board.Project_Description = val);
+                              ChangedBoardValue=true;
+                              setState(() =>
+                                  widget.proj_board.Project_Description = val);
                             },
                           ),
                         ),
-
                         Stack(
                           children: <Widget>[
                             Container(
@@ -341,24 +343,68 @@ class _BoardState extends State<Board> {
                     ),
                   )),
               actions: <Widget>[
-                MaterialButton(
-                  elevation: 5.0,
-                  child: Text("Ok"),
-                  onPressed: () {
-                    boardTitle = titleController.text;
-                    print(widget.proj_board.Project_Description);
-                    if(_EditformKey.currentState.validate()){
-                      if(ChangedStart==true){
-                        widget.proj_board.Project_StartDate=_startDate;
-                      }
-                      if(ChangedEnd==true){
-                        widget.proj_board.Project_EndDate=_endDate;
-                      }
-                      project_boardController.updateBoard(widget.proj_board);
-                    }
-                    Navigator.of(context).pop();
-                  },
-                )
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                          alignment: Alignment.bottomLeft,
+                          //color: Colors.green,
+                          width: MediaQuery.of(context).size.width/1.75,
+                          child: MaterialButton(
+                            elevation: 5.0,
+                            child: Text("DELETE",style: TextStyle(color: Colors.red),),
+                            onPressed: () async {
+                              int boardIndex;
+                              for (int j=0;j<user.boards.length;j++){
+                                if(user.boards[j].ProjectID==widget.proj_board.ProjectID){
+                                  boardIndex=j;
+                                }
+                              }
+                              await project_boardController.deleteBoard(widget.proj_board.ProjectID);
+
+
+                              listDynamic.removeAt(boardIndex);
+                              user.boards.removeAt(boardIndex);
+                              homePage.initializeDisplay();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (BuildContext context) => homePage),
+                              );
+                              setState(() {
+
+                              });
+                            },
+                          )),
+                      Container(
+                          alignment: Alignment.bottomRight,
+                          //color: Colors.green,
+                          child: MaterialButton(
+                            elevation: 5.0,
+                            child: Text("Ok"),
+                            onPressed: () {
+                              boardTitle = titleController.text;
+                              //print(widget.proj_board.Project_Description);
+                              if (_EditformKey.currentState.validate()) {
+                                if (ChangedStart == true) {
+                                  widget.proj_board.Project_StartDate =
+                                      _startDate;
+                                }
+                                if (ChangedEnd == true) {
+                                  widget.proj_board.Project_EndDate =
+                                      _endDate;
+                                }
+                                if(ChangedBoardValue==true||ChangedStart==true||ChangedEnd==true){
+                                  project_boardController
+                                      .updateBoard(widget.proj_board);
+                                }
+
+                              }
+                              Navigator.of(context).pop();
+                            },
+                          )),
+
+                    ],
+                ),
               ],
             );
           });
@@ -631,7 +677,6 @@ class _BoardState extends State<Board> {
                 icon: Icon(Icons.edit),
                 onPressed: () {
                   editBoardAlertDialog(context);
-
                 },
               ),
             ),
