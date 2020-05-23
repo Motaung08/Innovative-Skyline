@@ -4,10 +4,8 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:postgrad_tracker/Controller/ListController.dart';
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/TaskController.dart';
-import 'package:postgrad_tracker/Controller/TaskStatusController.dart';
 import 'package:postgrad_tracker/Model/ListCard.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Task.dart';
@@ -18,12 +16,11 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 List<StaggeredTile> stiles = new List<StaggeredTile>();
 List<DynamicList> listDynamic = [];
+// ignore: non_constant_identifier_names
 int BoardIdentificationIndex;
 
-// ignore: must_be_immutable
 
 // ignore: must_be_immutable
-
 class Board extends StatefulWidget {
   //final String title;
   // ignore: non_constant_identifier_names
@@ -38,26 +35,15 @@ class Board extends StatefulWidget {
   TaskController taskController = new TaskController();
 
   // ignore: non_constant_identifier_names
-
-  // ignore: non_constant_identifier_names
-
   Future populateListDisplay(int ProjectID) async {
     //lists = [];
     int boardIndex;
-    int listIndex;
-    int testVal;
+   // int testVal;
     void getIndexes() {
       for (int i = 0; i < user.boards.length; i++) {
         if (user.boards[i].ProjectID == ProjectID) {
           boardIndex = i;
           BoardIdentificationIndex = i;
-          if (user.boards[i].boardLists != null) {
-            for (int j = 0; j < user.boards[i].boardLists.length; j++) {
-              if (user.boards[i].boardLists[j] == testVal) {
-                testVal = j;
-              }
-            }
-          }
         }
       }
     }
@@ -102,7 +88,7 @@ class _BoardState extends State<Board> {
   TextEditingController titleController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
   String boardTitle = "";
-  final _EditformKey = GlobalKey<FormState>();
+  final _editFormKey = GlobalKey<FormState>();
   //int userType=user.userTypeID;
 
   DateTime _startDate = new DateTime.now();
@@ -112,8 +98,11 @@ class _BoardState extends State<Board> {
   String endDateinput = "Select date ...";
   TextStyle datestyle = TextStyle(
       color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
+  // ignore: non_constant_identifier_names
   bool ChangedStart = false;
+  // ignore: non_constant_identifier_names
   bool ChangedEnd = false;
+  // ignore: non_constant_identifier_names
   bool ChangedBoardValue;
   Future<Null> selectStartDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -173,9 +162,7 @@ class _BoardState extends State<Board> {
       endDateinput = "Select date ...";
     }
     titleController.text = widget.proj_board.Project_Title;
-    String title = "";
     if (widget.proj_board.Project_Title != null) {
-      title = widget.proj_board.Project_Title;
     }
     return showDialog(
         context: context,
@@ -184,7 +171,7 @@ class _BoardState extends State<Board> {
             return AlertDialog(
               title: Text(widget.proj_board.Project_Title),
               content: Form(
-                  key: _EditformKey,
+                  key: _editFormKey,
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -389,7 +376,7 @@ class _BoardState extends State<Board> {
                           onPressed: () {
                             boardTitle = titleController.text;
                             //print(widget.proj_board.Project_Description);
-                            if (_EditformKey.currentState.validate()) {
+                            if (_editFormKey.currentState.validate()) {
                               if (ChangedStart == true) {
                                 widget.proj_board.Project_StartDate =
                                     _startDate;
@@ -416,6 +403,7 @@ class _BoardState extends State<Board> {
   }
 
   Future<String> createAlertDialog(BuildContext context) {
+    listTitle.text="";
     return showDialog(
         context: context,
         builder: (context) {
@@ -425,19 +413,39 @@ class _BoardState extends State<Board> {
               key: _formKey,
               child: TextFormField(
                 controller: listTitle,
-                validator: (val) => val.isEmpty ? 'Enter a List Title' : null,
-                onChanged: (val) {
-                  setState(() => newListTitle = val);
-                },
+                validator: (val) => val.isEmpty ? 'Enter a List Title' :  null,
               ),
             ),
             actions: <Widget>[
               MaterialButton(
                 elevation: 5.0,
                 child: Text("Create List"),
-                onPressed: () {
-                  listTitle.text = "";
-                  Navigator.of(context).pop();
+                onPressed: () async {
+                  //listTitle.text = "";
+                  if (_formKey.currentState.validate()) {
+                    ListCard newList = new ListCard();
+                    newList.List_Title = listTitle.text;
+                    newList.ProjectID = widget.proj_board.ProjectID;
+                    await listController.createList(newList);
+                    //await listController.ReadLists(widget.proj_board.ProjectID);
+                    //widget.populateListDisplay(widget.proj_board.ProjectID);
+                    int boardIndex;
+                    for (int i = 0; i < user.boards.length; i++) {
+                      if (user.boards[i].ProjectID == widget.proj_board.ProjectID) {
+                        boardIndex = i;
+                        BoardIdentificationIndex = i;
+                      }
+                    }
+                    user.boards[boardIndex].boardLists.add(newList);
+                    //listDynamic.add(new DynamicList(aList: newList));
+
+                    setState(() {
+
+                    });
+                    Navigator.pop(context);
+                  }
+
+
                 },
               )
             ],
@@ -447,23 +455,47 @@ class _BoardState extends State<Board> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> testList = List<Widget>();
+
+    void pop() {
+      testList.clear();
+      stiles.clear();
+      int boardIndex;
+
+      for (int i = 0; i < user.boards.length; i++) {
+        if (user.boards[i].ProjectID == widget.proj_board.ProjectID) {
+          boardIndex = i;
+          BoardIdentificationIndex = i;
+        }
+      }
+
+      if (user.boards[boardIndex].boardLists != null) {
+        print('Initializing list display! ##################');
+        stiles.clear();
+        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+          testList.add(listDynamic[i]);
+          stiles.add(StaggeredTile.count(
+              2, user.boards[0].boardLists[i].listTasks.length + 1.5));
+        }
+        //print("STILES"+stiles.length.toString());
+
+      }
+
+      //testList.add(addListCard);
+      //stiles.add(StaggeredTile.count(2, 2));
+      print("testList: " + testList.length.toString());
+      print(" stiles: " + stiles.length.toString());
+    }
+
     final plusButton = new Container(
       alignment: Alignment.bottomRight,
       margin: EdgeInsets.all(1),
       child: MaterialButton(
-        onPressed: () {
-          createAlertDialog(context).then((onValue) {
-            if (newListTitle != "") {
-              if (_formKey.currentState.validate()) {
-                ListCard newList = new ListCard();
-                newList.List_Title = listTitle.text;
-                newList.ProjectID = widget.proj_board.ProjectID;
-                listController.createList(newList);
-                //widget.populateListDisplay(widget.proj_board.ProjectID);
-                listDynamic.add(new DynamicList(aList: newList));
-                setState(() {});
-              }
-            }
+        onPressed: () async {
+          await createAlertDialog(context);
+          await boardPage.populateListDisplay(widget.proj_board.ProjectID);
+          setState(() {
+
           });
         },
         color:
@@ -512,143 +544,7 @@ class _BoardState extends State<Board> {
       ),
     );
 
-    final orientation = MediaQuery.of(context).orientation;
-    //listTitle.text="Enter list title ...";
 
-    final addListButton = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff009999),
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () async {
-          //if (_formKey.currentState.validate()) {
-          if (_formKey.currentState.validate()) {
-            ListCard newList = new ListCard();
-            newList.List_Title = listTitle.text;
-            newList.ProjectID = widget.proj_board.ProjectID;
-            listController.createList(newList);
-            //widget.populateListDisplay(widget.proj_board.ProjectID);
-            listDynamic.add(new DynamicList(aList: newList));
-            setState(() {});
-          }
-        },
-        key: Key('ListInput'),
-        child: Text("Add list",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 14.0,
-                color: Colors.white,
-                fontWeight: FontWeight.bold)),
-      ),
-    );
-
-    final ListCardItem = new Container(
-      //width: MediaQuery.of(context).size.width/2,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.white, width: 8),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Form(
-        key: _formKey,
-        child: Column(children: <Widget>[
-          TextFormField(
-            controller: listTitle,
-            decoration: InputDecoration(
-                fillColor: Colors.white, hintText: "Enter list title..."),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          addListButton,
-        ]),
-      ),
-    );
-//    items.add(ListCardItem);
-
-    final addListCard = GridTile(
-      child: Container(
-        margin: new EdgeInsets.all(5.0),
-        padding: EdgeInsets.all(7),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.white, width: 1),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Form(
-                key: _formKey,
-                child: TextFormField(
-                  controller: listTitle,
-                  // textDirection: TextDirection.ltr,
-//                  onChanged: (val) {
-//                    setState(() => listTitle.text = val);
-//                  },
-                  validator: (val) => val.isEmpty ? 'Enter list title.' : null,
-                  decoration: InputDecoration(
-                      fillColor: Colors.white, hintText: "Enter list title..."),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              addListButton,
-            ]),
-      ),
-    );
-
-    Widget dynamicLists = new Flexible(
-      flex: 2,
-      child: new GridView.builder(
-        itemCount: items.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: (orientation == Orientation.portrait) ? 2 : 3),
-        //itemBuilder: (_, index) => widget.listDynamic[index],
-        itemBuilder: (BuildContext context, int index) {
-          return new Card(
-            child: new GridTile(child: items[index]),
-          );
-        },
-      ),
-    );
-
-    List<Widget> testList = List<Widget>();
-
-    void pop() {
-      testList.clear();
-      stiles.clear();
-      int boardIndex;
-
-      for (int i = 0; i < user.boards.length; i++) {
-        if (user.boards[i].ProjectID == widget.proj_board.ProjectID) {
-          boardIndex = i;
-          BoardIdentificationIndex = i;
-        }
-      }
-
-      if (user.boards[boardIndex].boardLists != null) {
-        print('Initializing list display! ##################');
-        stiles.clear();
-        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-          testList.add(listDynamic[i]);
-          stiles.add(StaggeredTile.count(
-              2, user.boards[0].boardLists[i].listTasks.length + 1.5));
-        }
-        //print("STILES"+stiles.length.toString());
-
-      }
-
-      //testList.add(addListCard);
-      //stiles.add(StaggeredTile.count(2, 2));
-      print("testList: " + testList.length.toString());
-      print(" stiles: " + stiles.length.toString());
-    }
 
     pop();
     print("STILES: " + stiles.length.toString());
@@ -753,25 +649,11 @@ class DynamicList extends StatefulWidget {
   @override
   _DynamicListState createState() => _DynamicListState();
 }
-/*
-  class DynamicList extends StatefulWidget {
-  @override
-  _DynamicListState createState() => _DynamicListState();
-}
-class _DynamicListState extends State<DynamicList> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-   */
 
 class _DynamicListState extends State<DynamicList> {
   TextStyle style = TextStyle(
       fontFamily: 'Montserrat', fontSize: 20.0, color: (Colors.white));
 
-  final _formKey = GlobalKey<FormState>();
-  List<TaskStatus> _taskStatus = taskStatuses;
   List<DropdownMenuItem<TaskStatus>> _dropdownTaskStatusMenuItems;
   TaskStatus _selectedTaskStatus;
 
@@ -814,7 +696,6 @@ class _DynamicListState extends State<DynamicList> {
   Widget build(BuildContext context) {
     // ignore: missing_return
     int getBoardIndex(int boardID) {
-      int boardIndex;
       //print("BOARD ID: "+boardID.toString());
       //print("getting board index ... ugh");
       for (int i = 0; i < user.boards.length; i++) {
@@ -822,7 +703,6 @@ class _DynamicListState extends State<DynamicList> {
         //print("Board ID: "+user.boards[i].ProjectID.toString()+" our ID: "+boardID.toString() );
 
         if (user.boards[i].ProjectID == boardID) {
-          boardIndex = i;
           //print("BOARD INDEX: "+i.toString());
           return i;
         }
@@ -831,9 +711,6 @@ class _DynamicListState extends State<DynamicList> {
 
     // ignore: missing_return
     int getListIndex(int listID) {
-      //print('get list index ...');
-      int listIndex;
-      int boardIndex;
       for (int j = 0;
           j <
               user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists
@@ -842,25 +719,22 @@ class _DynamicListState extends State<DynamicList> {
         if (user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[j]
                 .ListID ==
             listID) {
-          listIndex = j;
-          //print("LIST INDEX: "+j.toString());
           return j;
         }
       }
     }
 
+    // ignore: missing_return
     int getTaskStatusIndex(int statusID) {
-      int statusIndex;
       for (int j = 0; j < taskStatuses.length; j++) {
         if (taskStatuses[j].TaskStatusID == statusID) {
-          statusIndex = j;
           return j;
         }
       }
     }
 
+    // ignore: missing_return, non_constant_identifier_names
     int getTaskIndex(int TaskID) {
-      int statusIndex;
       for (int j = 0;
           j <
               user
@@ -875,27 +749,21 @@ class _DynamicListState extends State<DynamicList> {
                 .listTasks[j]
                 .TaskID ==
             TaskID) {
-          statusIndex = j;
           return j;
         }
       }
     }
 
-    void choiceAction(String choice) {
-      if (choice == Constants.Edit) {
-        print('Edit');
-      } else if (choice == Constants.Delete) {
-        print('Delete');
-      }
-    }
 
-    final _EditformKey = GlobalKey<FormState>();
+
+    // ignore: non_constant_identifier_names
+    final EditorKey = GlobalKey<FormState>();
+    final titleEditorKey = GlobalKey<FormState>();
 
     DateTime _dueDate = new DateTime.now();
     bool dueChanged = false;
-    final format = DateFormat("yyyy-MM-dd");
-    String dueDateinput = "Select date ...";
-    TextStyle datestyle = TextStyle(
+    String dueDateInput = "Select date ...";
+    TextStyle dateStyle = TextStyle(
         color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
 
     Future<Null> selectDueDate(BuildContext context) async {
@@ -911,24 +779,54 @@ class _DynamicListState extends State<DynamicList> {
           dueChanged = true;
         });
       }
-      datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+      dateStyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
 
-      dueDateinput = DateFormat('yyyy-MM-dd').format(_dueDate);
-      //print(dueDateinput);
+      dueDateInput = DateFormat('yyyy-MM-dd').format(_dueDate);
+
     }
 
-
-
     int _selectedTaskID;
+    // ignore: non_constant_identifier_names
     bool ChangedTask = false;
+
+//    final addListButton = Material(
+//      elevation: 5.0,
+//      borderRadius: BorderRadius.circular(30.0),
+//      color: Color(0xff009999),
+//      child: MaterialButton(
+//        minWidth: MediaQuery.of(context).size.width,
+//        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+//        onPressed: () async {
+//          //if (_formKey.currentState.validate()) {
+//          if(_formKey.currentState.validate()){
+//            ListCard newList = new ListCard();
+//            newList.List_Title=listTitle.text;
+//            newList.ProjectID=widget.proj_board.ProjectID;
+//            listController.createList(newList);
+//            //widget.populateListDisplay(widget.proj_board.ProjectID);
+//            listDynamic.add(new DynamicList(aList: newList));
+//            setState(() {});
+//          }
+//
+//
+//
+//        },
+//        key: Key('ListInput'),
+//        child: Text("Add list",
+//            textAlign: TextAlign.center,
+//            style: TextStyle(
+//                fontFamily: 'Montserrat',
+//                fontSize: 14.0,
+//                color: Colors.white,
+//                fontWeight: FontWeight.bold)),
+//      ),
+//    );
+
     Future<String> createTaskAlertDialog(BuildContext context, bool create) {
       ChangedTask = false;
       TextEditingController titleController = new TextEditingController();
       TextEditingController descriptionController = new TextEditingController();
 
-      //THIS MUST CHANGE TO DATETIME PICKER!
-      TextEditingController dueController = new TextEditingController();
-      TextEditingController statusController = new TextEditingController();
 
       TaskController taskController = new TaskController();
       Task newTask = new Task();
@@ -948,14 +846,14 @@ class _DynamicListState extends State<DynamicList> {
         if (newTask.Task_Due != null) {
 
           _dueDate = newTask.Task_Due;
-          dueDateinput = DateFormat("yyyy-MM-dd").format(_dueDate);
+          dueDateInput = DateFormat("yyyy-MM-dd").format(_dueDate);
         }
       } else {
         titleController.text = "";
         descriptionController.text = "";
         _selectedTaskStatus = taskStatuses[0];
         _dueDate = DateTime.now();
-        dueDateinput = "Select date ...";
+        dueDateInput = "Select date ...";
       }
 
       return showDialog(
@@ -973,7 +871,7 @@ class _DynamicListState extends State<DynamicList> {
                           .Task_Title),
                   content: Container(
                     child: Form(
-                      key: _EditformKey,
+                      key: EditorKey,
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -1104,16 +1002,15 @@ class _DynamicListState extends State<DynamicList> {
                                             //tooltip: "Select start date",
                                           ),
                                           Text(
-                                            dueDateinput,
-                                            style: datestyle,
+                                            dueDateInput,
+                                            style: dateStyle,
                                           ),
                                         ],
                                       ),
                                       onPressed: () async {
                                         await selectDueDate(context);
-                                        //startDateinput=_startDate.toString();
                                         setState(() {
-                                          dueDateinput =
+                                          dueDateInput =
                                               DateFormat('yyyy-MM-dd')
                                                   .format(_dueDate);
                                           ChangedTask = true;
@@ -1148,7 +1045,7 @@ class _DynamicListState extends State<DynamicList> {
                             elevation: 5.0,
                             child: Text("Create"),
                             onPressed: () async {
-                              if(_EditformKey.currentState.validate()){
+                              if(EditorKey.currentState.validate()){
                                 newTask.Task_Title = titleController.text;
                                 newTask.Task_Description =
                                     descriptionController.text;
@@ -1201,17 +1098,22 @@ class _DynamicListState extends State<DynamicList> {
                                       style: TextStyle(color: Colors.red),
                                     ),
                                     onPressed: () async {
-                                      print("DELETE TASK");
-                                      //await taskController.deleteTask(_selectedTaskID);
+                                      print("DELETE TASK: "+_selectedTaskID.toString());
+                                      int send=_selectedTaskID;
+                                      await taskController.deleteTask(send);
+                                      widget.aList.listTasks.removeWhere((element) => element.TaskID==_selectedTaskID);
 
                                       //listDynamic.removeAt(boardIndex);
                                       //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.removeWhere((element) => element.TaskID==_selectedTaskID);
 //                                homePage.initializeDisplay();
-//                                Navigator.push(
-//                                  context,
-//                                  MaterialPageRoute(builder: (BuildContext context) => homePage),
-//                                );
+                                      boardPage.populateListDisplay(widget.aList.ProjectID);
+                                      Navigator.popAndPushNamed(context, '/Board');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (BuildContext context) => boardPage),
+                                );
                                       setState(() {});
+                                      Navigator.of(context).pop();
                                     },
                                   )),
                               Container(
@@ -1223,7 +1125,7 @@ class _DynamicListState extends State<DynamicList> {
                                     onPressed: () {
                                       //boardTitle = titleController.text;
                                       //print(widget.aboard.Project_Description);
-                                      if (_EditformKey.currentState
+                                      if (EditorKey.currentState
                                           .validate()) {
                                         if (dueChanged == true) {
                                           newTask.Task_Due = _dueDate;
@@ -1239,7 +1141,7 @@ class _DynamicListState extends State<DynamicList> {
                                       descriptionController.text = "";
                                       _selectedTaskStatus = taskStatuses[0];
                                       _dueDate = DateTime.now();
-                                      dueDateinput = "Select date ...";
+                                      dueDateInput = "Select date ...";
                                       Navigator.of(context).pop();
                                     },
                                   )),
@@ -1248,6 +1150,94 @@ class _DynamicListState extends State<DynamicList> {
                   ],
                 );
               },
+            );
+          });
+    }
+
+    Future<String> editListAlertDialog(BuildContext context) {
+      TextEditingController titleController = new TextEditingController();
+      titleController.text = widget.aList.List_Title;
+      String title = "";
+      if (widget.aList.List_Title != null) {
+        title = widget.aList.List_Title;
+      }
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Edit title: "),
+              content: Form(
+                key: titleEditorKey,
+                child: TextFormField(
+                  controller: titleController,
+                  validator: (val) => val.isEmpty ? 'Enter a Title' : null,
+                  onChanged: (val) {
+                    setState(() => widget.aList.List_Title = val);
+                  },
+                  style: style.copyWith(color: Colors.black),
+                  decoration: InputDecoration(
+                    //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+                    //hintText: "Student Number",
+                      border:
+                      OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))
+                  ),
+                ),
+              ),
+              actions: <Widget>[
+                MaterialButton(
+                  elevation: 5.0,
+                  child: Text("Save"),
+                  onPressed: () {
+                    if(titleEditorKey.currentState.validate()){
+                      widget.aList.List_Title = titleController.text;
+                      listController.updateList(widget.aList);
+                      //Navigator.of(context).pop(titleController.text.toString());
+                      Navigator.of(context).pop();
+                    }
+                  },
+                )
+              ],
+            );
+          });
+    }
+
+    Future<String> confirmDeleteAlertDialog(BuildContext context) {
+
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("CONFIRM DELETE ",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
+              content: Text("Are you sure you want to delete this list?",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),),
+              actions: <Widget>[
+
+                MaterialButton(
+                  elevation: 5.0,
+                  child: Text("Yes",style: TextStyle(color: Colors.red),),
+                  onPressed: () async{
+                    print("LIST: "+widget.aList.ListID.toString());
+                    await listController.deleteList(widget.aList.ListID);
+
+                    listDynamic.removeWhere((element) => element.aList.ListID==widget.aList.ListID);
+                    user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists.removeWhere((element) => element.ListID==widget.aList.ListID);
+                    await boardPage.populateListDisplay(widget.aList.ProjectID);
+                    //Navigator.popAndPushNamed(context, '/Board');
+
+                    setState(() {
+
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
+                MaterialButton(
+                  elevation: 5.0,
+                  child: Text("No"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
             );
           });
     }
@@ -1298,11 +1288,13 @@ class _DynamicListState extends State<DynamicList> {
           )),
     );
 
+    // ignore: non_constant_identifier_names
     final TaskContainer = new Expanded(
         flex: 1,
         child: ListView.builder(
           itemCount: widget.aList.listTasks.length,
-          itemBuilder: (BuildContext ctxt, int index) {
+          // ignore: non_constant_identifier_names
+          itemBuilder: (BuildContext Context, int index) {
             return new Container(
               margin: EdgeInsets.all(4),
               height: 80,
@@ -1367,6 +1359,41 @@ class _DynamicListState extends State<DynamicList> {
           shrinkWrap: true,
         ));
 
+    Widget titleView =Container(
+      width: MediaQuery.of(context).size.width / 4,
+      child: Text(widget.aList.List_Title,
+          style: TextStyle(
+              fontFamily: 'Montserrat',
+              fontSize: 14.0,
+              color: Colors.black,
+              fontWeight: FontWeight.bold)
+      ),
+    );
+
+    TextEditingController listTitleController = new TextEditingController();
+
+
+    Future choiceAction(String choice) async {
+      if (choice == Constants.Edit) {
+        editListAlertDialog(context);
+        setState(() {
+
+        });
+
+
+      } else if (choice == Constants.Delete) {
+        //confirmDeleteAlertDialog(context);
+        await confirmDeleteAlertDialog(context);
+        //await boardPage.populateListDisplay(widget.aList.ProjectID);
+        setState(() {
+
+        });
+        Navigator.popAndPushNamed(context, '/Board');
+
+      }
+    }
+
+    // ignore: non_constant_identifier_names
     final BoardItem = Container(
       width: MediaQuery.of(context).size.width / 2,
       margin: new EdgeInsets.all(6.0),
@@ -1384,21 +1411,18 @@ class _DynamicListState extends State<DynamicList> {
 
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  width: MediaQuery.of(context).size.width / 4,
-                  child: Text(widget.aList.List_Title,
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 14.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold)),
-                ),
-                IconButton(
-                  icon: Icon(Icons.more_vert),
-                  onPressed: () {
-                    //createAlertDialog(context);
-                  },
-                ),
+                titleView,
+                PopupMenuButton<String>(
+                        onSelected: choiceAction,
+                        itemBuilder: (BuildContext context) {
+                          return Constants.choices.map((String choice) {
+                            return PopupMenuItem<String>(
+                              value: choice,
+                              child: choice!="Delete"?Text(choice):Text(choice,style: TextStyle(color: Colors.red),),
+                            );
+                          }).toList();
+                        },
+                      ),
               ],
             ),
             TaskContainer,

@@ -72,6 +72,14 @@ class TaskController extends StatefulWidget {
   Future createTask(Task aTask) async{
     bool created = false;
       print("CREATING TASK...");
+    String dateAdded;
+    String dateDue;
+    if(aTask.Task_DateAdded!=null){
+      dateAdded=DateFormat("yyyy-MM-dd").format(aTask.Task_DateAdded);
+    }
+    if(aTask.Task_Due!=null){
+      dateDue=DateFormat("yyyy-MM-dd").format(aTask.Task_Due);
+    }
 
       // SERVER API URL
       var url =
@@ -84,9 +92,9 @@ class TaskController extends StatefulWidget {
         'Task_Title': aTask.Task_Title,
         'ListID':aTask.ListID.toString(),
         'Task_AddedBy':aTask.Task_AddedBy,
-        'Task_DateAdded':aTask.Task_DateAdded.toString(),
+        'Task_DateAdded':dateAdded,
         'Task_Description':aTask.Task_Description,
-        'Task_Due':aTask.Task_Due.toString(),
+        'Task_Due':dateDue,
         'Task_StatusID':aTask.Task_StatusID.toString(),
       };
 
@@ -149,6 +157,7 @@ $DueDate = $obj['Task_Date_Due'];
   }
 
   Future deleteTask(int TaskID) async{
+    print("yowhoo: "+TaskID.toString());
 
     // SERVER API URL
     var url =
@@ -160,7 +169,7 @@ $DueDate = $obj['Task_Date_Due'];
     };
 
     // Starting Web API Call.
-    var response = await http.post(url, body: data);
+    var response = await http.post(url, body: jsonEncode(data));
 
     // Getting Server response into variable.
     // ignore: non_constant_identifier_names
