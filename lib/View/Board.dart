@@ -201,7 +201,7 @@ class _BoardState extends State<Board> {
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(32.0))),
                             onChanged: (val) {
-                              ChangedBoardValue=true;
+                              ChangedBoardValue = true;
                               setState(
                                   () => widget.proj_board.Project_Title = val);
                             },
@@ -222,7 +222,7 @@ class _BoardState extends State<Board> {
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(32.0))),
                             onChanged: (val) {
-                              ChangedBoardValue=true;
+                              ChangedBoardValue = true;
                               setState(() =>
                                   widget.proj_board.Project_Description = val);
                             },
@@ -343,67 +343,69 @@ class _BoardState extends State<Board> {
                     ),
                   )),
               actions: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                          alignment: Alignment.bottomLeft,
-                          //color: Colors.green,
-                          width: MediaQuery.of(context).size.width/1.75,
-                          child: MaterialButton(
-                            elevation: 5.0,
-                            child: Text("DELETE",style: TextStyle(color: Colors.red),),
-                            onPressed: () async {
-                              int boardIndex;
-                              for (int j=0;j<user.boards.length;j++){
-                                if(user.boards[j].ProjectID==widget.proj_board.ProjectID){
-                                  boardIndex=j;
-                                }
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        alignment: Alignment.bottomLeft,
+                        //color: Colors.green,
+                        width: MediaQuery.of(context).size.width / 1.75,
+                        child: MaterialButton(
+                          elevation: 5.0,
+                          child: Text(
+                            "DELETE",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                          onPressed: () async {
+                            int boardIndex;
+                            for (int j = 0; j < user.boards.length; j++) {
+                              if (user.boards[j].ProjectID ==
+                                  widget.proj_board.ProjectID) {
+                                boardIndex = j;
                               }
-                              await project_boardController.deleteBoard(widget.proj_board.ProjectID);
+                            }
+                            await project_boardController
+                                .deleteBoard(widget.proj_board.ProjectID);
 
-
-                              listDynamic.removeAt(boardIndex);
-                              user.boards.removeAt(boardIndex);
-                              homePage.initializeDisplay();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (BuildContext context) => homePage),
-                              );
-                              setState(() {
-
-                              });
-                            },
-                          )),
-                      Container(
-                          alignment: Alignment.bottomRight,
-                          //color: Colors.green,
-                          child: MaterialButton(
-                            elevation: 5.0,
-                            child: Text("Ok"),
-                            onPressed: () {
-                              boardTitle = titleController.text;
-                              //print(widget.proj_board.Project_Description);
-                              if (_EditformKey.currentState.validate()) {
-                                if (ChangedStart == true) {
-                                  widget.proj_board.Project_StartDate =
-                                      _startDate;
-                                }
-                                if (ChangedEnd == true) {
-                                  widget.proj_board.Project_EndDate =
-                                      _endDate;
-                                }
-                                if(ChangedBoardValue==true||ChangedStart==true||ChangedEnd==true){
-                                  project_boardController
-                                      .updateBoard(widget.proj_board);
-                                }
-
+                            listDynamic.removeAt(boardIndex);
+                            user.boards.removeAt(boardIndex);
+                            homePage.initializeDisplay();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => homePage),
+                            );
+                            setState(() {});
+                          },
+                        )),
+                    Container(
+                        alignment: Alignment.bottomRight,
+                        //color: Colors.green,
+                        child: MaterialButton(
+                          elevation: 5.0,
+                          child: Text("Ok"),
+                          onPressed: () {
+                            boardTitle = titleController.text;
+                            //print(widget.proj_board.Project_Description);
+                            if (_EditformKey.currentState.validate()) {
+                              if (ChangedStart == true) {
+                                widget.proj_board.Project_StartDate =
+                                    _startDate;
                               }
-                              Navigator.of(context).pop();
-                            },
-                          )),
-
-                    ],
+                              if (ChangedEnd == true) {
+                                widget.proj_board.Project_EndDate = _endDate;
+                              }
+                              if (ChangedBoardValue == true ||
+                                  ChangedStart == true ||
+                                  ChangedEnd == true) {
+                                project_boardController
+                                    .updateBoard(widget.proj_board);
+                              }
+                            }
+                            Navigator.of(context).pop();
+                          },
+                        )),
+                  ],
                 ),
               ],
             );
@@ -810,6 +812,38 @@ class _DynamicListState extends State<DynamicList> {
       }
     }
 
+    final _EditformKey = GlobalKey<FormState>();
+    //int userType=user.userTypeID;
+
+    DateTime _dueDate = new DateTime.now();
+    bool dueChanged=false;
+    final format = DateFormat("yyyy-MM-dd");
+    String dueDateinput = "Select date ...";
+    TextStyle datestyle = TextStyle(
+        color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
+
+    Future<Null> selectDueDate(BuildContext context) async {
+
+      final DateTime picked = await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: new DateTime(2000),
+          lastDate: new DateTime(2030));
+
+      if (picked != null ) {
+
+        setState(() {
+          _dueDate = picked;
+          dueChanged = true;
+        });
+      }
+      datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+
+        dueDateinput = DateFormat('yyyy-MM-dd').format(_dueDate);
+        //print(dueDateinput);
+
+    }
+
     Future<String> createTaskAlertDialog(BuildContext context) {
       TextEditingController titleController = new TextEditingController();
       TextEditingController descriptionController = new TextEditingController();
@@ -824,146 +858,192 @@ class _DynamicListState extends State<DynamicList> {
       return showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
-              title: Text("New Task: "),
-              content: Container(
-                child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        //Title
-                        TextFormField(
-                          controller: titleController,
-                          style: style.copyWith(color: Colors.black),
-                          obscureText: false,
-                          validator: (val) =>
+            return StatefulBuilder(
+              builder: (context,setState){
+                return AlertDialog(
+                  title: Text("New Task: "),
+                  content: Container(
+                    child: Form(
+                      key: _formKey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            //Title
+                            TextFormField(
+                              controller: titleController,
+                              style: style.copyWith(color: Colors.black),
+                              obscureText: false,
+                              validator: (val) =>
                               val.isEmpty ? 'Enter Task Title' : null,
-                          onChanged: (val) {
-                            newTask.Task_Title = val;
-                          },
-                          decoration: InputDecoration(
-                              contentPadding:
+                              onChanged: (val) {
+                                newTask.Task_Title = val;
+                              },
+                              decoration: InputDecoration(
+                                  contentPadding:
                                   EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                              hintText: "* Title",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(32.0))),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                                  hintText: "* Title",
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(32.0))),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
 
-                        //Description
-                        TextFormField(
-                          controller: descriptionController,
-                          style: style.copyWith(color: Colors.black),
-                          maxLines: 5,
-                          obscureText: false,
-                          //validator: (val) => val.isEmpty ? 'Enter Task Title' : null,
-                          onChanged: (val) {
-                            newTask.Task_Description = val;
-                          },
-                          decoration: InputDecoration(
-                              contentPadding:
+                            //Description
+                            TextFormField(
+                              controller: descriptionController,
+                              style: style.copyWith(color: Colors.black),
+                              maxLines: 5,
+                              obscureText: false,
+                              //validator: (val) => val.isEmpty ? 'Enter Task Title' : null,
+                              onChanged: (val) {
+                                newTask.Task_Description = val;
+                              },
+                              decoration: InputDecoration(
+                                  contentPadding:
                                   EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                              hintText: "Description",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(32.0))),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                                  hintText: "Description",
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(32.0))),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
 
-                        //Status
-                        TextFormField(
-                          controller: statusController,
-                          style: style.copyWith(color: Colors.black),
-                          //maxLines: 5,
-                          obscureText: false,
-                          //validator: (val) => val.isEmpty ? 'Enter Task Title' : null,
-                          onChanged: (val) {
-                            newTask.Task_StatusID = int.parse(val);
-                          },
-                          decoration: InputDecoration(
-                              contentPadding:
+                            //Status
+                            TextFormField(
+                              controller: statusController,
+                              style: style.copyWith(color: Colors.black),
+                              //maxLines: 5,
+                              obscureText: false,
+                              //validator: (val) => val.isEmpty ? 'Enter Task Title' : null,
+                              onChanged: (val) {
+                                newTask.Task_StatusID = int.parse(val);
+                              },
+                              decoration: InputDecoration(
+                                  contentPadding:
                                   EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                              hintText: "Status",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(32.0))),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                                  hintText: "Status",
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(32.0))),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
 
-                        //Due
-                        TextFormField(
-                          controller: dueController,
-                          style: style.copyWith(color: Colors.black),
-                          //maxLines: 5,
-                          obscureText: false,
-                          //validator: (val) => val.isEmpty ? 'Enter Task Title' : null,
-                          onChanged: (val) {
-                            newTask.Task_Due = DateTime.parse(val);
-                          },
-                          decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                              hintText: "Date Due",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(32.0))),
+                            //Due
+                            Stack(
+                              children: <Widget>[
+                                Container(
+                                    width: double.infinity,
+                                    height: 60,
+                                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                    //padding: EdgeInsets.only(bottom: 10),
+                                    decoration: BoxDecoration(
+                                      border:
+                                      Border.all(color: Colors.grey, width: 1),
+                                      borderRadius: BorderRadius.circular(32),
+                                      shape: BoxShape.rectangle,
+                                    ),
+                                    child: MaterialButton(
+                                      child: Row(
+                                        children: <Widget>[
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.calendar_today,
+                                              color: Color(0xff009999),
+                                            ),
+                                            onPressed: () {},
+                                            //tooltip: "Select start date",
+                                          ),
+                                          Text(
+                                            dueDateinput,
+                                            style: datestyle,
+                                          ),
+                                        ],
+                                      ),
+                                      onPressed: () async {
+
+                                        await selectDueDate(context);
+
+                                        //startDateinput=_startDate.toString();
+                                        setState(() {
+                                          dueDateinput = DateFormat('yyyy-MM-dd').format(_dueDate);
+                                        });
+                                      },
+
+                                    )
+                                ),
+                                Positioned(
+                                    left: 10,
+                                    top: 12,
+                                    child: Container(
+                                      padding: EdgeInsets.only(
+                                          bottom: 10, left: 3, right: 0),
+                                      margin: EdgeInsets.only(left: 10),
+                                      color: Colors.white,
+                                      child: Text(
+                                        'Due Date:',
+                                        style: TextStyle(
+                                            color: Colors.black.withOpacity(.65)),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ),
-              actions: <Widget>[
-                MaterialButton(
-                  elevation: 5.0,
-                  child: Text("Create"),
-                  onPressed: () async {
-                    newTask.Task_Title = titleController.text;
-                    newTask.Task_Description = descriptionController.text;
-                    newTask.ListID = widget.aList.ListID;
-                    newTask.Task_AddedBy = personNo;
+                  actions: <Widget>[
+                    MaterialButton(
+                      elevation: 5.0,
+                      child: Text("Create"),
+                      onPressed: () async {
+                        newTask.Task_Title = titleController.text;
+                        newTask.Task_Description = descriptionController.text;
+                        newTask.ListID = widget.aList.ListID;
+                        newTask.Task_AddedBy = personNo;
 
-                    //NB COME BACK AND CHANGE THIS!
-                    newTask.Task_StatusID = 1;
+                        //NB COME BACK AND CHANGE THIS!
+                        newTask.Task_StatusID = 1;
 
-                    newTask.Task_DateAdded = DateTime.now();
+                        newTask.Task_DateAdded = DateTime.now();
 
-                    //NB COME BACK AND CHANGE!
-                    //newTask.Task_Due=DateTime.parse(dueController.text);
-                    newTask.Task_Due = DateTime.parse("2020-02-02");
-                    print("BEFORE: " +
-                        user
-                            .boards[BoardIdentificationIndex]
-                            .boardLists[getListIndex(widget.aList.ListID)]
-                            .listTasks
-                            .length
-                            .toString());
-                    await taskController.createTask(newTask);
-                    //widget.aList.listTasks.add(newTask);
-                    user.boards[getBoardIndex(widget.aList.ProjectID)]
-                        .boardLists[getListIndex(widget.aList.ListID)].listTasks
-                        .add(newTask);
-                    stiles[getListIndex(widget.aList.ListID)] =
+                        //NB COME BACK AND CHANGE!
+                        //newTask.Task_Due=DateTime.parse(dueController.text);
+                        newTask.Task_Due = DateTime.parse("2020-02-02");
+                        print("BEFORE: " +
+                            user
+                                .boards[BoardIdentificationIndex]
+                                .boardLists[getListIndex(widget.aList.ListID)]
+                                .listTasks
+                                .length
+                                .toString());
+                        await taskController.createTask(newTask);
+                        //widget.aList.listTasks.add(newTask);
+                        user.boards[getBoardIndex(widget.aList.ProjectID)]
+                            .boardLists[getListIndex(widget.aList.ListID)].listTasks
+                            .add(newTask);
+                        stiles[getListIndex(widget.aList.ListID)] =
                         new StaggeredTile.count(
                             2,
                             stiles[getListIndex(widget.aList.ListID)]
-                                    .mainAxisCellCount +
+                                .mainAxisCellCount +
                                 1.5);
-                    //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
+                        //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
 
 //                    setState(() {
 //
 //                    });
 
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                );
+              },
             );
           });
     }
