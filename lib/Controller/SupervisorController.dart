@@ -42,6 +42,32 @@ class SupervisorController extends StatefulWidget {
     return datauser;
   }
 
+  Future<Supervisor> fetchSup(String email) async {
+    Supervisor fetchedSup=new Supervisor();
+    final response = await http.post(
+      // "http://146.141.21.17/viewSupProfile.php",
+        "https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php",
+        body: {
+          "Email": email,
+        });
+
+    var datauser = json.decode(response.body);
+
+    if (datauser.length == 0) {
+      print("No supervisor");
+    } else {
+
+      fetchedSup.staffNo = datauser[0]['StaffNo'];
+      fetchedSup.fName = datauser[0]['Supervisor_Firstname'];
+      fetchedSup.lName = datauser[0]['Supervisor_Lastname'];
+      fetchedSup.email=datauser[0]['Supervisor_Email'];
+      fetchedSup.office=datauser[0]['Supervisor_OfficePhone'];
+    }
+
+
+    return fetchedSup;
+  }
+
   Future<String> registration(Supervisor supervisorA, User userA) async {
     supervisor.register = false;
     String userRegistrationMessage="";

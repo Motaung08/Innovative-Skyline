@@ -72,7 +72,7 @@ print("EMAIL: "+email+", Password: "+Password);
         await taskStatusController.getStatuses();
       if (user.userTypeID==1){
 
-        await studentController.GetStudDetails();
+        await studentController.GetStudDetails(user.email);
 
         await studentTypeController.getTypes();
 
@@ -88,6 +88,73 @@ print("EMAIL: "+email+", Password: "+Password);
     }
 
     return proceed;
+  }
+
+  Future<List<User>> ReadUsers() async {
+    List<User> registered=[];
+    // SERVER API URL
+    var url =
+    //'http://146.141.21.17/ReadBoards.php';
+        'https://witsinnovativeskyline.000webhostapp.com/readUsers.php';
+
+//    var data={
+//      'UserTypeID' : user.userTypeID.toString(),
+//      'StudentNo' : student.studentNo,
+//      'StaffNo' : supervisor.staffNo
+//    };
+
+    // Starting Web API Call.
+    var response = await http.post(url);
+
+    // Getting Server response into variable.
+    // ignore: non_constant_identifier_names
+    var Response = jsonDecode(response.body);
+    print(Response);
+
+
+    if (Response.length == 0) {
+
+      print("No registered users.");
+    }
+    else {
+      registered=[];
+      for (int i = 0; i < Response.length; i++) {
+
+        User userReceived = new User();
+        userReceived.userID = int.parse(Response[i]['UserID']);
+        userReceived.email = Response[i]['Email'];
+        userReceived.userTypeID=int.parse(Response[i]['UserTypeId']);
+        registered.add(userReceived);
+      }
+
+
+
+    }
+    return registered;
+  }
+
+  Future<bool> userExists(String Email) async{
+    print("Looking for: "+Email);
+    List<User> registeredUsers=await ReadUsers();
+    bool exists=false;
+    for (int i=0;i<registeredUsers.length;i++){
+      if(registeredUsers[i].email==Email){
+        print("FOUND USER");
+        exists=true;
+      }
+    }
+    return exists;
+  }
+
+  Future<User> getUser(String Email) async{
+    List<User> registeredUsers=await ReadUsers();
+    User giveUser=new User();
+    for (int i=0;i<registeredUsers.length;i++){
+      if(registeredUsers[i].email==Email){
+        giveUser=registeredUsers[i];
+      }
+    }
+    return giveUser;
   }
 
   String ResetString="";

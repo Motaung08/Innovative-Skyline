@@ -7,6 +7,7 @@ INJECTED from C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\android\app\sr
 MERGED from C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\android\app\src\main\AndroidManifest.xml:1:1-47:12
 MERGED from [:image_cropper] C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\build\image_cropper\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:image_picker] C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-22:12
+MERGED from [:share] C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\MSI\.gradle\caches\transforms-2\files-2.1\09be4c98f955b63e9a8cadeb6d33d870\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.github.yalantis:ucrop:2.2.3] C:\Users\MSI\.gradle\caches\transforms-2\files-2.1\d5e6a4e91d051b5b3108515958716512\jetified-ucrop-2.2.3\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.material:material:1.0.0] C:\Users\MSI\.gradle\caches\transforms-2\files-2.1\db2388f0fe5e05a7a168e5a9c11e912f\material-1.0.0\AndroidManifest.xml:17:1-24:12
@@ -128,6 +129,8 @@ MERGED from [:image_cropper] C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline
 MERGED from [:image_cropper] C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\build\image_cropper\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:image_picker] C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:image_picker] C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:share] C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:share] C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\build\share\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\MSI\.gradle\caches\transforms-2\files-2.1\09be4c98f955b63e9a8cadeb6d33d870\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\MSI\.gradle\caches\transforms-2\files-2.1\09be4c98f955b63e9a8cadeb6d33d870\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.github.yalantis:ucrop:2.2.3] C:\Users\MSI\.gradle\caches\transforms-2\files-2.1\d5e6a4e91d051b5b3108515958716512\jetified-ucrop-2.2.3\AndroidManifest.xml:7:5-9:41

@@ -10,6 +10,7 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.1.0 <3.0.0"
 dependencies:
+
   http:
   flutter:
     sdk: flutter
@@ -17,6 +18,7 @@ dependencies:
   flutter_staggered_grid_view: "0.3.0"
   crypto: ^2.1.4
   password_hash: ^2.0.0
+  share: ^0.6.4+3
 
   image_cropper: 1.0.2
   image_picker: 0.6.0+17

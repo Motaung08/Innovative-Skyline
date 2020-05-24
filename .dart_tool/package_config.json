@@ -272,6 +272,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "share",
+      "rootUri": "file:///C:/Users/MSI/flutter_windows_v1.12.13+hotfix.8-stable/flutter/.pub-cache/hosted/pub.dartlang.org/share-0.6.4+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "shelf",
       "rootUri": "file:///C:/Users/MSI/flutter_windows_v1.12.13+hotfix.8-stable/flutter/.pub-cache/hosted/pub.dartlang.org/shelf-0.7.5",
       "packageUri": "lib/",
@@ -416,7 +422,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2020-05-22T11:02:29.156114Z",
+  "generated": "2020-05-24T14:41:29.888435Z",
   "generator": "pub",
   "generatorVersion": "2.8.2"
 }

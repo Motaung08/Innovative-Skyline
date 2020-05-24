@@ -13,15 +13,15 @@ class StudentController extends StatefulWidget {
 
   String msg = '';
   // ignore: non_constant_identifier_names
-  Future<List> GetStudDetails() async {
+  Future<List> GetStudDetails(String email) async {
     print('hhhhhhhhhhhhhhhhhhhhhhhhhhhh     ');
 //    print('let us deduce details...'+user.email);
-
+    Student aStudent=new Student();
     final response = await http.post(
        // "http://146.141.21.17/viewStudentProfile.php",
         "https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php",
         body: {
-          "Email": user.email,
+          "Email": email,
         });
 
     var datauser = json.decode(response.body);
@@ -55,6 +55,42 @@ class StudentController extends StatefulWidget {
     //print(response.body);
 
     return datauser;
+  }
+
+  Future<Student> fetchStudent(String email) async {
+    print('hhhhhhhhhhhhhhhhhhhhhhhhhhhh     ');
+//    print('let us deduce details...'+user.email);
+    Student aStudent=new Student();
+    final response = await http.post(
+      // "http://146.141.21.17/viewStudentProfile.php",
+        "https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php",
+        body: {
+          "Email": email,
+        });
+
+    var datauser = json.decode(response.body);
+
+    if (datauser.length == 0) {
+      print("Nada");
+      //setState(() {
+      msg = " Error :( ";
+      // });
+    } else {
+      print("Assigning...");
+      print(datauser);
+
+      aStudent.fName = datauser[0]['Student_FirstName'];
+      aStudent.lName = datauser[0]['Student_LastName'];
+      aStudent.studentNo = datauser[0]['StudentNo'];
+      aStudent.degreeID = int.parse(datauser[0]['Degree_ID']);
+      aStudent.registrationDate=DateTime.parse(datauser[0]['Student_RegistrationDate']);
+      //print('currently ... date: '+ student.registrationDate.toString());
+      aStudent.email=datauser[0]['Student_Email'];
+      aStudent.studentTypeID=int.parse(datauser[0]['StudentTypeID']);
+    }
+    //print(response.body);
+
+    return aStudent;
   }
 
   // ignore: non_constant_identifier_names
