@@ -670,7 +670,7 @@ class _BoardState extends State<Board> {
               color: Colors.black,
             ),
             onPressed: () {
-              print("SHARE");
+              //print("SHARE");
               shareAlertDialog(context);
               //Share.share(widget.proj_board.Project_Title);
             },
@@ -681,8 +681,10 @@ class _BoardState extends State<Board> {
       ),
       backgroundColor: Colors.grey,
       body:
-          user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists !=
-                  null
+      ((user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists !=
+                  null)
+          //|| user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists.length!=0
+      )
               ? staggered
               : noBoardsView,
       floatingActionButton: plusButton,

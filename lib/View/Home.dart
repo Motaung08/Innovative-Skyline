@@ -716,11 +716,16 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                 }
                               }
                               await project_boardController.deleteBoard(widget.aboard.ProjectID);
-
+                              user.boards=await project_boardController.ReadBoards(user.userTypeID, personNo);
+//                              for(int i=0;i<user.boards.length;i++){
+//                                user.boards[i].boardLists= await listController.ReadLists(user.boards[i].ProjectID);
+//                              }
 
                               listDynamic.removeAt(boardIndex);
-                              user.boards.removeAt(boardIndex);
+                              //user.boards.removeAt(boardIndex);
+                              //homePage=new HomePage();
                               homePage.initializeDisplay();
+                              Navigator.pop(context);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (BuildContext context) => homePage),
@@ -789,7 +794,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
         onTap: () async {
           print("BOARD: "+widget.aboard.ProjectID.toString());
           await widget.popLists();
-
+          print("LISTS IS NULL: "+(widget.aboard.boardLists==null).toString());
           //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
           Board boardPage = new Board(
             proj_board: widget.aboard,
