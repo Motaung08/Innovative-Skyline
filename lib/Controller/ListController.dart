@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 class ListController extends StatefulWidget {
 
   // ignore: non_constant_identifier_names
-  Future<List> ReadLists(int ProjectID) async{
+  Future<List<ListCard>> ReadLists(int ProjectID) async{
     List<ListCard> lists=List();
       bool created = false;
       String msg = '';

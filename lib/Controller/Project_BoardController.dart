@@ -104,8 +104,6 @@ class Project_BoardController extends StatefulWidget {
 
       // Starting Web API Call.
       var response = await http.post(url, body: json.encode(data));
-      //print("HH "+response.body);
-      // Getting Server response into variable.
       var message = jsonDecode(response.body);
 
       print(message);

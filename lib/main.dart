@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         //'/': (context) => new LoginPage(),
         '/Login': (context) => new LoginPage(),
-        '/Home': (context) => new HomePage(),
+        '/Home': (context) => homePage,
         //'/Home': (context) => new HomePage(email: student.email, userType: user.userTypeID),
         '/StudProfile': (BuildContext context) => new ViewStudentProfilePage(),
 //        new ViewStudentProfilePage(user: user,),

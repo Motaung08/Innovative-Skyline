@@ -112,7 +112,7 @@ class LoginPageState extends State<LoginPage> {
               });
               homePage=new HomePage();
 
-              homePage.initializeDisplay();
+              await homePage.initializeDisplay();
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (BuildContext context) => homePage),

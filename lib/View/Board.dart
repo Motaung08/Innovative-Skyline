@@ -11,80 +11,108 @@ import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Task.dart';
 import 'package:postgrad_tracker/Model/TaskStatus.dart';
 import 'package:postgrad_tracker/main.dart';
-
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 List<StaggeredTile> stiles = new List<StaggeredTile>();
 List<DynamicList> listDynamic = [];
 // ignore: non_constant_identifier_names
-int BoardIdentificationIndex;
 
 
 // ignore: must_be_immutable
 class Board extends StatefulWidget {
-  //final String title;
+
   // ignore: non_constant_identifier_names
   final Project_Board proj_board;
-
-  final items = List();
   // ignore: non_constant_identifier_names
   Board({Key key, this.proj_board}) : super(key: key);
 
-  // ignore: non_constant_identifier_names
-
-  TaskController taskController = new TaskController();
 
   // ignore: non_constant_identifier_names
-  Future populateListDisplay(int ProjectID) async {
-    //lists = [];
-    int boardIndex;
-   // int testVal;
-    void getIndexes() {
-      for (int i = 0; i < user.boards.length; i++) {
-        if (user.boards[i].ProjectID == ProjectID) {
-          boardIndex = i;
-          BoardIdentificationIndex = i;
-        }
-      }
-    }
+//  Future populateListDisplay(int ProjectID) async {
+//    //lists = [];
+//    int boardIndex;
+//   // int testVal;
+//    void getIndexes() {
+//      for (int i = 0; i < user.boards.length; i++) {
+//        if (user.boards[i].ProjectID == ProjectID) {
+//          boardIndex = i;
+//          BoardIdentificationIndex = i;
+//        }
+//      }
+//    }
+//
+//    getIndexes();
+//    items.clear();
+//    user.boards[boardIndex].boardLists=await listController.ReadLists(ProjectID);
+//
+//    if (user.boards[boardIndex].boardLists != null) {
+//      print('Initializing board\'s list display! ##################');
+//      stiles.clear();
+//      listDynamic.clear();
+//      for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+//        DynamicList dynamicCreatedList = new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
+//
+//        listDynamic.add(dynamicCreatedList);
+//
+//        stiles.add(StaggeredTile.count(
+//            2, user.boards[boardIndex].boardLists[i].listTasks.length));
+//      }
+//
+//    }
+//  }
 
-    getIndexes();
-    items.clear();
 
-    if (user.boards[boardIndex].boardLists != null) {
-      print('Initializing list display! ##################');
-      stiles.clear();
-      listDynamic.clear();
-      for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-        // ListCard lsc=new ListCard();
-        //lsc.List_Title="lsc test";
-        DynamicList dynamicCreatedList =
-            new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
-        //await dynamicCreatedList.initializeTaskDisplay();
-        listDynamic.add(dynamicCreatedList);
-        // user.boards[boardIndex].boardLists[i].listTasks.clear();
-        //await taskController.ReadTasks(testVal);
-        //items.add(listDynamic[i]);
-        print(i);
-        print('adding stiles for: StaggeredTile.count(' +
-            (2).toString() +
-            "," +
-            (user.boards[boardIndex].boardLists[i].listTasks.length + 2)
-                .toString() +
-            ")");
-        stiles.add(StaggeredTile.count(
-            2, user.boards[boardIndex].boardLists[i].listTasks.length + 1.5));
-      }
-      //print("STILES"+stiles.length.toString());
-
-    }
-  }
 
   @override
   _BoardState createState() => _BoardState();
+
+
 }
 
 class _BoardState extends State<Board> {
+
+  int getBoardIndex(int BoardID){
+    for (int i = 0; i < user.boards.length; i++) {
+      if (user.boards[i].ProjectID == BoardID) {
+        return i;
+      }
+    }
+  }
+
+  void pop() {
+    print("**POP**");
+    stiles.clear();
+    int boardIndex = getBoardIndex(widget.proj_board.ProjectID);
+
+    listDynamic.clear();
+    if(user.boards[boardIndex].boardLists!=null){
+      for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+        DynamicList dynamicCreatedList = new DynamicList(
+            aList: user.boards[boardIndex].boardLists[i]);
+
+        listDynamic.add(dynamicCreatedList);
+        //print("List: "+user.boards[boardIndex].boardLists[i].List_Title+" has "+user.boards[boardIndex].boardLists[i].listTasks.length.toString()+" tasks");
+        if(user.boards[boardIndex].boardLists[i].listTasks.length==0){
+          stiles.add(StaggeredTile.count(2, 1.5));
+        }
+        else{
+          stiles.add(StaggeredTile.count(
+              2, user.boards[boardIndex].boardLists[i].listTasks.length+1));
+        }
+
+
+      }
+    }
+
+  }
+
+  @override
+  void initState() {
+    super.initState();
+   //widget.populateListDisplay(widget.proj_board.ProjectID);
+    pop();
+  }
+
   TextEditingController titleController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
   String boardTitle = "";
@@ -142,10 +170,9 @@ class _BoardState extends State<Board> {
   TextEditingController listTitle = new TextEditingController();
   final items = List();
   // ignore: non_constant_identifier_names
-  Project_BoardController project_boardController =
-      new Project_BoardController();
-  String newListTitle = "";
 
+  Project_BoardController project_boardController = new Project_BoardController();
+  //Edit Board Popup
   Future<String> editBoardAlertDialog(BuildContext context) {
     TextEditingController titleController = new TextEditingController();
     descriptionController.text = widget.proj_board.Project_Description;
@@ -402,6 +429,8 @@ class _BoardState extends State<Board> {
         });
   }
 
+  String newListTitle = "";
+  //Create List Popup
   Future<String> createAlertDialog(BuildContext context) {
     listTitle.text="";
     return showDialog(
@@ -427,25 +456,9 @@ class _BoardState extends State<Board> {
                     newList.List_Title = listTitle.text;
                     newList.ProjectID = widget.proj_board.ProjectID;
                     await listController.createList(newList);
-                    //await listController.ReadLists(widget.proj_board.ProjectID);
-                    //widget.populateListDisplay(widget.proj_board.ProjectID);
-                    int boardIndex;
-                    for (int i = 0; i < user.boards.length; i++) {
-                      if (user.boards[i].ProjectID == widget.proj_board.ProjectID) {
-                        boardIndex = i;
-                        BoardIdentificationIndex = i;
-                      }
-                    }
-                    user.boards[boardIndex].boardLists.add(newList);
-                    //listDynamic.add(new DynamicList(aList: newList));
-
-                    setState(() {
-
-                    });
+                    user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists=await listController.ReadLists(widget.proj_board.ProjectID);
                     Navigator.pop(context);
                   }
-
-
                 },
               )
             ],
@@ -453,49 +466,20 @@ class _BoardState extends State<Board> {
         });
   }
 
+
   @override
   Widget build(BuildContext context) {
-    List<Widget> testList = List<Widget>();
 
-    void pop() {
-      testList.clear();
-      stiles.clear();
-      int boardIndex;
-
-      for (int i = 0; i < user.boards.length; i++) {
-        if (user.boards[i].ProjectID == widget.proj_board.ProjectID) {
-          boardIndex = i;
-          BoardIdentificationIndex = i;
-        }
-      }
-
-      if (user.boards[boardIndex].boardLists != null) {
-        print('Initializing list display! ##################');
-        stiles.clear();
-        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-          testList.add(listDynamic[i]);
-          stiles.add(StaggeredTile.count(
-              2, user.boards[0].boardLists[i].listTasks.length + 1.5));
-        }
-        //print("STILES"+stiles.length.toString());
-
-      }
-
-      //testList.add(addListCard);
-      //stiles.add(StaggeredTile.count(2, 2));
-      print("testList: " + testList.length.toString());
-      print(" stiles: " + stiles.length.toString());
-    }
-
+    //plus list
     final plusButton = new Container(
       alignment: Alignment.bottomRight,
       margin: EdgeInsets.all(1),
       child: MaterialButton(
         onPressed: () async {
           await createAlertDialog(context);
-          await boardPage.populateListDisplay(widget.proj_board.ProjectID);
+          pop();
           setState(() {
-
+            
           });
         },
         color:
@@ -513,6 +497,8 @@ class _BoardState extends State<Board> {
 
     final arrowImage = Image.asset("assets/downarrow.png");
 
+    //This view should be displayed when it is determined that
+    //The selected board has no lists to display.
     final noBoardsView = new Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -544,11 +530,7 @@ class _BoardState extends State<Board> {
       ),
     );
 
-
-
-    pop();
-    print("STILES: " + stiles.length.toString());
-
+    //Staggered lists view which we see for individual boards.
     final staggered = Container(
       margin: new EdgeInsets.all(10.0),
       // child:  SizedBox(
@@ -560,12 +542,14 @@ class _BoardState extends State<Board> {
           shrinkWrap: true,
           mainAxisSpacing: 4.0,
           crossAxisSpacing: 4.0,
-          children: testList,
+          children: listDynamic,
           staggeredTiles: stiles,
         ),
       ),
       //)
     );
+
+
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -586,7 +570,7 @@ class _BoardState extends State<Board> {
         backgroundColor: Color(0xff009999),
       ),
       backgroundColor: Colors.grey,
-      body: user.boards[BoardIdentificationIndex].boardLists != null
+      body: user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists != null
           ? staggered
           : noBoardsView,
       floatingActionButton: plusButton,
@@ -628,22 +612,12 @@ class DynamicList extends StatefulWidget {
     }
   }
 
-  List<Task> thisListTasks = [];
+  //List<Task> thisListTasks = [];
 
   Future initializeTaskDisplay() async {
     getIndex();
-
-    if (user.boards[boardIndex].boardLists[listIndex].listTasks != null) {
-      print('Initializing task display! ##################');
-      thisListTasks = [];
-
-      for (int i = 0;
-          i < user.boards[boardIndex].boardLists[listIndex].listTasks.length;
-          i++) {
-        thisListTasks
-            .add(user.boards[boardIndex].boardLists[listIndex].listTasks[i]);
-      }
-    }
+    user.boards[boardIndex].boardLists[listIndex].listTasks=await taskController.ReadTasks(aList.ListID);
+    print("TASKS: "+user.boards[boardIndex].boardLists[listIndex].listTasks.length.toString());
   }
 
   @override
@@ -884,8 +858,16 @@ class _DynamicListState extends State<DynamicList> {
                               validator: (val) =>
                                   val.isEmpty ? 'Enter Task Title' : null,
                               onChanged: (val) {
-                                newTask.Task_Title = val;
-                                ChangedTask = true;
+
+                                //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks[getListIndex(widget.aList.ListID)].Task_Title = val;
+
+
+                                setState(() {
+                                  newTask.Task_Title = val;
+                                  ChangedTask = true;
+                                });
+
+
                               },
                               decoration: InputDecoration(
                                   contentPadding: EdgeInsets.fromLTRB(
@@ -1067,11 +1049,12 @@ class _DynamicListState extends State<DynamicList> {
 
                                 await taskController.createTask(newTask);
                                 //widget.aList.listTasks.add(newTask);
-                                user
-                                    .boards[getBoardIndex(widget.aList.ProjectID)]
-                                    .boardLists[getListIndex(widget.aList.ListID)]
-                                    .listTasks
-                                    .add(newTask);
+//                                user
+//                                    .boards[getBoardIndex(widget.aList.ProjectID)]
+//                                    .boardLists[getListIndex(widget.aList.ListID)]
+//                                    .listTasks
+//                                    .add(newTask);
+                                widget.initializeTaskDisplay();
                                 stiles[getListIndex(widget.aList.ListID)] =
                                 new StaggeredTile.count(
                                     2,
@@ -1101,17 +1084,14 @@ class _DynamicListState extends State<DynamicList> {
                                       print("DELETE TASK: "+_selectedTaskID.toString());
                                       int send=_selectedTaskID;
                                       await taskController.deleteTask(send);
-                                      widget.aList.listTasks.removeWhere((element) => element.TaskID==_selectedTaskID);
-
+                                      //widget.aList.listTasks.removeWhere((element) => element.TaskID==_selectedTaskID);
+                                      //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks=await taskController.ReadTasks(widget.aList.ListID);
                                       //listDynamic.removeAt(boardIndex);
                                       //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.removeWhere((element) => element.TaskID==_selectedTaskID);
 //                                homePage.initializeDisplay();
-                                      boardPage.populateListDisplay(widget.aList.ProjectID);
-                                      Navigator.popAndPushNamed(context, '/Board');
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (BuildContext context) => boardPage),
-                                );
+                                      //boardPage.populateListDisplay(widget.aList.ProjectID);
+                                      //Navigator.popAndPushNamed(context, '/Board');
+
                                       setState(() {});
                                       Navigator.of(context).pop();
                                     },
@@ -1127,13 +1107,17 @@ class _DynamicListState extends State<DynamicList> {
                                       //print(widget.aboard.Project_Description);
                                       if (EditorKey.currentState
                                           .validate()) {
+
                                         if (dueChanged == true) {
                                           newTask.Task_Due = _dueDate;
                                         }
                                         newTask.Task_StatusID=_selectedTaskStatus.TaskStatusID;
+                                        //newTask.Task_Title=titleController.text;
+                                        //taskController.updateTask(newTask);
                                         if (ChangedTask == true) {
-                                          taskController.updateTask(newTask);
                                           print("Update task");
+                                          taskController.updateTask(newTask);
+
                                         }
                                       }
                                       newTask=new Task();
@@ -1218,15 +1202,7 @@ class _DynamicListState extends State<DynamicList> {
                   onPressed: () async{
                     print("LIST: "+widget.aList.ListID.toString());
                     await listController.deleteList(widget.aList.ListID);
-
-                    listDynamic.removeWhere((element) => element.aList.ListID==widget.aList.ListID);
-                    user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists.removeWhere((element) => element.ListID==widget.aList.ListID);
-                    await boardPage.populateListDisplay(widget.aList.ProjectID);
-                    //Navigator.popAndPushNamed(context, '/Board');
-
-                    setState(() {
-
-                    });
+                    //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists=await listController.ReadLists(widget.aList.ProjectID);
                     Navigator.pop(context);
                   },
                 ),
@@ -1256,19 +1232,17 @@ class _DynamicListState extends State<DynamicList> {
 
             await createTaskAlertDialog(context, true);
             //print("PROJECT ID?!?!?: "+widget.aList.ProjectID.toString());
-            boardPage = new Board(
-              proj_board: user.boards[getBoardIndex(widget.aList.ProjectID)],
-            );
-
-            await boardPage.populateListDisplay(widget.aList.ProjectID);
-
-            Navigator.popAndPushNamed(context, '/Board');
-//            Navigator.push(
-//              context,
-//              MaterialPageRoute(
-//                  builder: (BuildContext context) => boardPage),
+//            boardPage = new Board(
+//              proj_board: user.boards[getBoardIndex(widget.aList.ProjectID)],
 //            );
-            setState(() {});
+
+           // await boardPage.populateListDisplay(widget.aList.ProjectID);
+            await widget.initializeTaskDisplay();
+            setState(() {
+
+            });
+            //Navigator.popAndPushNamed(context, '/Board');
+
           },
           key: Key('ListInput'),
           child: Row(
@@ -1292,7 +1266,7 @@ class _DynamicListState extends State<DynamicList> {
     final TaskContainer = new Expanded(
         flex: 1,
         child: ListView.builder(
-          itemCount: widget.aList.listTasks.length,
+          itemCount: user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.length,
           // ignore: non_constant_identifier_names
           itemBuilder: (BuildContext Context, int index) {
             return new Container(
@@ -1324,36 +1298,26 @@ class _DynamicListState extends State<DynamicList> {
                           left: BorderSide(
                               color: Color(0xff009999), width: 5.0))),
                   child: ListTile(
-                    title: Text(widget.aList.listTasks[index].Task_Title),
-//                      trailing: PopupMenuButton<String>(
-//                        onSelected: choiceAction,
-//                        itemBuilder: (BuildContext context) {
-//                          return Constants.choices.map((String choice) {
-//                            return PopupMenuItem<String>(
-//                              value: choice,
-//                              child: Text(choice),
-//                            );
-//                          }).toList();
-//                        },
-//                      ),
-                    onTap: () {
-                      //print("Task press :)");
-                      // print(widget.aList.listTasks[index].Task_Title);
-                      _selectedTaskID = widget.aList.listTasks[index].TaskID;
+                    title: Text(user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks[index].Task_Title),
+                    onTap: () async {
+                      _selectedTaskID = user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks[index].TaskID;
                       initializeTaskStatus();
-                      createTaskAlertDialog(context, false);
+                      //print("Current tasks: "+user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.length.toString());
+                      await createTaskAlertDialog(context, false);
+                      await widget.initializeTaskDisplay();
+                      Board boardPage = new Board(
+                        proj_board: user.boards[getBoardIndex(widget.aList.ProjectID)],
+                      );
+                      Navigator.pop(context);
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (BuildContext context) => boardPage),
+                      );
                     },
-//                    IconButton(
-//                      icon: Icon(Icons.more_vert),
-//                      onPressed: () {
-//
-//                      },
-//                    ),
                   ),
                 ),
               ),
-              //margin: EdgeInsets.all(3),
-//              child:
             );
           },
           shrinkWrap: true,
@@ -1372,23 +1336,48 @@ class _DynamicListState extends State<DynamicList> {
 
     TextEditingController listTitleController = new TextEditingController();
 
+    void delpop(){
+      stiles.clear();
+      int boardIndex = getBoardIndex(widget.aList.ProjectID);
+
+      listDynamic.clear();
+      for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+        DynamicList dynamicCreatedList = new DynamicList(
+            aList: user.boards[boardIndex].boardLists[i]);
+
+        listDynamic.add(dynamicCreatedList);
+
+        //print("List: "+user.boards[boardIndex].boardLists[i].List_Title+" has "+user.boards[boardIndex].boardLists[i].listTasks.length.toString()+" tasks");
+        stiles.add(StaggeredTile.count(
+            2, user.boards[boardIndex].boardLists[i].listTasks.length + 1.5));
+
+      }
+    }
+
 
     Future choiceAction(String choice) async {
       if (choice == Constants.Edit) {
-        editListAlertDialog(context);
+        //print(widget.aList.ListID);
+        await editListAlertDialog(context);
         setState(() {
 
         });
 
 
       } else if (choice == Constants.Delete) {
-        //confirmDeleteAlertDialog(context);
         await confirmDeleteAlertDialog(context);
-        //await boardPage.populateListDisplay(widget.aList.ProjectID);
-        setState(() {
+        user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists=await listController.ReadLists(widget.aList.ProjectID);
 
-        });
-        Navigator.popAndPushNamed(context, '/Board');
+        //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
+        Board boardPage = new Board(
+          proj_board: user.boards[getBoardIndex(widget.aList.ProjectID)],
+        );
+        Navigator.pop(context);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => boardPage),
+        );
 
       }
     }

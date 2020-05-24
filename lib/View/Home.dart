@@ -16,19 +16,14 @@ import 'package:postgrad_tracker/main.dart';
 
 final List<DynamicWidget> listDynamic = [];
 
-initializeDisplay() {
-  listDynamic.clear();
-  print('Initializing board display! ##################');
-  for (int i = 0; i < user.boards.length; i++) {
-    listDynamic.add(new DynamicWidget(aboard: user.boards[i]));
-  }
-}
-
 class HomePage extends StatefulWidget {
-  initializeDisplay() {
+  initializeDisplay() async {
+    Project_BoardController projectBoardController=new Project_BoardController();
+    user.boards= await projectBoardController.ReadBoards(user.userTypeID,personNo);
     listDynamic.clear();
     print('Initializing board display! ##################');
     for (int i = 0; i < user.boards.length; i++) {
+      print("Board ID: "+user.boards[i].ProjectID.toString()+", Title: "+user.boards[i].Project_Title);
       listDynamic.add(new DynamicWidget(aboard: user.boards[i]));
     }
   }
@@ -245,6 +240,7 @@ class _MyHomePageState extends State<HomePage> {
                   onPressed: () {
                     boardTitle = titleController.text;
                     //Navigator.of(context).pop(titleController.text.toString());
+                   // user.boards=await
                     Navigator.of(context).pop();
                   },
                 )
@@ -253,8 +249,6 @@ class _MyHomePageState extends State<HomePage> {
           });
         });
   }
-
-
 
   Icon floatingIcon = new Icon(Icons.add);
 
@@ -291,37 +285,36 @@ class _MyHomePageState extends State<HomePage> {
       child: ListView.builder(
         itemCount: listDynamic.length,
         itemBuilder: (_, index) => listDynamic[index],
-//        itemBuilder: (BuildContext ctxt, int index) {
-//          return new ListTile(
-//            title: listDynamic[index].,
-//          );
-//        },
       ),
-//      new Flexible(
-//        flex: 2,
-//        child: new
-//      ),
     );
+
+    Project_BoardController project_boardController=new Project_BoardController();
 
     final plusButton = new Container(
       alignment: Alignment.bottomRight,
       child: MaterialButton(
-        onPressed: () {
-          createAlertDialog(context).then((onValue) {
-            if (boardTitle != "") {
-              Project_Board project_board = new Project_Board();
-              Project_BoardController project_boardController =
-                  new Project_BoardController();
-              project_board.Project_Title = boardTitle;
-              project_board.Project_Description = descriptionController.text;
-              project_board.Project_StartDate = _startDate;
-              project_board.Project_EndDate = _endDate;
-              project_boardController.createBoard(project_board);
-              addDynamic(project_board);
-              boardTitle = "";
-              setState(() {});
-            }
-          });
+        onPressed: () async{
+          await createAlertDialog(context);
+          if (boardTitle != "") {
+            Project_Board project_board = new Project_Board();
+            Project_BoardController project_boardController =
+            new Project_BoardController();
+            project_board.Project_Title = boardTitle;
+            project_board.Project_Description = descriptionController.text;
+            project_board.Project_StartDate = _startDate;
+            project_board.Project_EndDate = _endDate;
+            await project_boardController.createBoard(project_board);
+            user.boards=await project_boardController.ReadBoards(user.userTypeID, personNo);
+            project_board=user.boards.last;
+            addDynamic(project_board);
+            boardTitle = "";
+            await homePage.initializeDisplay();
+            Navigator.popAndPushNamed(context, '/Home');
+            setState(() {
+
+            });
+          }
+
         },
         color:
             //Colors.blueGrey
@@ -508,7 +501,9 @@ class _DynamicWidgetState extends State<DynamicWidget> {
       datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
       endDateinput = DateFormat('yyyy-MM-dd').format(_endDate);
     }
+
     bool ChangedBoardValue=false;
+
     Future<String> editBoardAlertDialog(BuildContext context) {
       TextEditingController titleController = new TextEditingController();
       descriptionController.text = widget.aboard.Project_Description;
@@ -556,9 +551,14 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                       borderRadius: BorderRadius.circular(32.0))),
                               onChanged: (val) {
                                 ChangedBoardValue=true;
-                                setState(
-                                        () => widget.aboard.Project_Title = val,
-                                );
+                                setState(() {
+
+                                  widget.aboard.Project_Title = val;
+                                  print('changing: '+widget.aboard.Project_Title);
+                                });
+//                                setState(
+//                                        () => widget.aboard.Project_Title = val,
+//                                );
                               },
                             ),
                           ),
@@ -751,6 +751,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                 if(ChangedBoardValue==true||ChangedStart==true||ChangedEnd==true){
                                   project_boardController
                                       .updateBoard(widget.aboard);
+                                  print(widget.aboard.Project_Title);
                                 }
                               }
                               Navigator.of(context).pop();
@@ -779,50 +780,21 @@ class _DynamicWidgetState extends State<DynamicWidget> {
         trailing: IconButton(
           icon: Icon(Icons.edit,color: Colors.black,),
           onPressed: ()async {
-//            int boardIndex;
-//            for (int j=0;j<user.boards.length;j++){
-//              if(user.boards[j].ProjectID==widget.aboard.ProjectID){
-//                boardIndex=j;
-//              }
-//            }
-//            await project_boardController.deleteBoard(widget.aboard.ProjectID);
-//
-//
-//            listDynamic.removeAt(boardIndex);
-//            user.boards.removeAt(boardIndex);
-//            homePage.initializeDisplay();
-//            Navigator.push(
-//              context,
-//              MaterialPageRoute(builder: (BuildContext context) => homePage),
-//            );
-//            setState(() {
-//
-//            });
-          editBoardAlertDialog(context);
-          setState(() {
+            await editBoardAlertDialog(context);
+            setState(() {
 
-          });
+            });
           },
         ),
-//        trailing: PopupMenuButton<String>(
-//          onSelected: choiceAction,
-//          itemBuilder: (BuildContext context) {
-//            return Constants.choices.map((String choice) {
-//              return PopupMenuItem<String>(
-//                value: choice,
-//                child: choice!="Delete"?Text(choice):Text(choice,style: TextStyle(color: Colors.red),),
-//              );
-//            }).toList();
-//          },
-//        ),
         onTap: () async {
+          print("BOARD: "+widget.aboard.ProjectID.toString());
           await widget.popLists();
+
           //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
           Board boardPage = new Board(
             proj_board: widget.aboard,
           );
 
-          await boardPage.populateListDisplay(widget.aboard.ProjectID);
 
           Navigator.push(
             context,
