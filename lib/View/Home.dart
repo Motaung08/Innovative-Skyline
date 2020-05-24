@@ -716,7 +716,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                 }
                               }
                               await project_boardController.deleteBoard(widget.aboard.ProjectID);
-                              user.boards=await project_boardController.ReadBoards(user.userTypeID, personNo);
+                              //user.boards=await project_boardController.ReadBoards(user.userTypeID, personNo);
 //                              for(int i=0;i<user.boards.length;i++){
 //                                user.boards[i].boardLists= await listController.ReadLists(user.boards[i].ProjectID);
 //                              }
@@ -799,6 +799,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
           Board boardPage = new Board(
             proj_board: widget.aboard,
           );
+          await boardPage.populateListDisplay(widget.aboard.ProjectID);
 
 
           Navigator.push(

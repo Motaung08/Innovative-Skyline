@@ -33,38 +33,37 @@ class Board extends StatefulWidget {
   Board({Key key, this.proj_board}) : super(key: key);
 
   // ignore: non_constant_identifier_names
-//  Future populateListDisplay(int ProjectID) async {
-//    //lists = [];
-//    int boardIndex;
-//   // int testVal;
-//    void getIndexes() {
-//      for (int i = 0; i < user.boards.length; i++) {
-//        if (user.boards[i].ProjectID == ProjectID) {
-//          boardIndex = i;
-//          BoardIdentificationIndex = i;
-//        }
-//      }
-//    }
-//
-//    getIndexes();
-//    items.clear();
-//    user.boards[boardIndex].boardLists=await listController.ReadLists(ProjectID);
-//
-//    if (user.boards[boardIndex].boardLists != null) {
-//      print('Initializing board\'s list display! ##################');
-//      stiles.clear();
-//      listDynamic.clear();
-//      for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-//        DynamicList dynamicCreatedList = new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
-//
-//        listDynamic.add(dynamicCreatedList);
-//
-//        stiles.add(StaggeredTile.count(
-//            2, user.boards[boardIndex].boardLists[i].listTasks.length));
-//      }
-//
-//    }
-//  }
+  Future populateListDisplay(int ProjectID) async {
+    //lists = [];
+    int boardIndex;
+   // int testVal;
+    void getIndexes() {
+      for (int i = 0; i < user.boards.length; i++) {
+        if (user.boards[i].ProjectID == ProjectID) {
+          boardIndex = i;
+        }
+      }
+    }
+
+    getIndexes();
+   // items.clear();
+    user.boards[boardIndex].boardLists=await listController.ReadLists(ProjectID);
+
+    if (user.boards[boardIndex].boardLists != null) {
+      print('Initializing board\'s list display! ##################');
+      stiles.clear();
+      listDynamic.clear();
+      for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+        DynamicList dynamicCreatedList = new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
+
+        listDynamic.add(dynamicCreatedList);
+
+        stiles.add(StaggeredTile.count(
+            2, user.boards[boardIndex].boardLists[i].listTasks.length+1.3));
+      }
+
+    }
+  }
 
   @override
   _BoardState createState() => _BoardState();
@@ -379,15 +378,32 @@ class _BoardState extends State<Board> {
                             await project_boardController
                                 .deleteBoard(widget.proj_board.ProjectID);
 
-                            listDynamic.removeAt(boardIndex);
-                            user.boards.removeAt(boardIndex);
-                            homePage.initializeDisplay();
+                            //
+
+                            await project_boardController.deleteBoard(widget.proj_board.ProjectID);
+
+                            //listDynamic.removeAt(boardIndex);
+                            await homePage.initializeDisplay();
+                            Navigator.pop(context);
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) => homePage),
+                              MaterialPageRoute(builder: (BuildContext context) => homePage),
                             );
-                            setState(() {});
+                            setState(() {
+
+                            });
+
+                            //
+
+//                            listDynamic.removeAt(boardIndex);
+//                            user.boards.removeAt(boardIndex);
+//                            homePage.initializeDisplay();
+//                            Navigator.push(
+//                              context,
+//                              MaterialPageRoute(
+//                                  builder: (BuildContext context) => homePage),
+//                            );
+//                            setState(() {});
                           },
                         )),
                     Container(
