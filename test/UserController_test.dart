@@ -67,16 +67,7 @@ void main() {
       await tester.pumpWidget(makeWidgetTestable(UserController()));
 
     });
-    testWidgets('All input feildee and button widgets should be on screen', (
-        WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(ViewStudentProfilePage()));
 
-    });
-    testWidgets('All input feildeeee and button widgets should be on screen', (
-        WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(ViewSupProfilePage()));
-
-    });
 
   });
 

@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 class AssignmentController extends StatefulWidget {
 
+  // ignore: non_constant_identifier_names
   Future createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID) async{
     var url =
         'https://witsinnovativeskyline.000webhostapp.com/createAssignment.php';
