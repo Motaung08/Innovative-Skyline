@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 class ListController extends StatefulWidget {
 
   // ignore: non_constant_identifier_names
-  Future<List> ReadLists(int ProjectID) async{
+  Future<List<ListCard>> ReadLists(int ProjectID) async{
     List<ListCard> lists=List();
       bool created = false;
       String msg = '';
@@ -90,7 +90,7 @@ class ListController extends StatefulWidget {
 
   }
 
-  Future updateList() async{
+  Future updateList(ListCard aList) async{
     var url =
 
         'https://witsinnovativeskyline.000webhostapp.com/updateList.php';
@@ -98,8 +98,8 @@ class ListController extends StatefulWidget {
 
     // Store all data with Param Name.
     var data = {
-      'ListID': listCard.ListID,
-      'Title' : listCard.List_Title,
+      'ListID': aList.ListID.toString(),
+      'Title' : aList.List_Title,
     };
 
     // Starting Web API Call.
@@ -109,6 +109,27 @@ class ListController extends StatefulWidget {
     var message = jsonDecode(response.body);
 
     print(message);
+  }
+
+  Future deleteList(int ListID) async{
+    //print('We want to delete list '+ListID.toString());
+    // SERVER API URL
+    var url =
+    //'http://146.141.21.17/ReadBoards.php';
+        'https://witsinnovativeskyline.000webhostapp.com/deleteList.php';
+
+    var data={
+      'ListID' : ListID.toString(),
+    };
+
+    // Starting Web API Call.
+    var response = await http.post(url, body: jsonEncode(data));
+
+    // Getting Server response into variable.
+    // ignore: non_constant_identifier_names
+    var Response = jsonDecode(response.body);
+    print(Response);
+
   }
 
 

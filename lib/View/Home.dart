@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:intl/intl.dart';
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/StudentController.dart';
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
@@ -15,23 +16,18 @@ import 'package:postgrad_tracker/main.dart';
 
 final List<DynamicWidget> listDynamic = [];
 
-initializeDisplay() {
-  listDynamic.clear();
-  print('Initializing board display! ##################');
-  for (int i = 0; i < user.boards.length; i++) {
-    listDynamic.add(new DynamicWidget(aboard: user.boards[i]));
-  }
-}
-
 class HomePage extends StatefulWidget {
-
-  initializeDisplay() {
+  initializeDisplay() async {
+    Project_BoardController projectBoardController=new Project_BoardController();
+    user.boards= await projectBoardController.ReadBoards(user.userTypeID,personNo);
     listDynamic.clear();
     print('Initializing board display! ##################');
     for (int i = 0; i < user.boards.length; i++) {
+      print("Board ID: "+user.boards[i].ProjectID.toString()+", Title: "+user.boards[i].Project_Title);
       listDynamic.add(new DynamicWidget(aboard: user.boards[i]));
     }
   }
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -42,63 +38,215 @@ class _MyHomePageState extends State<HomePage> {
   String boardTitle = "";
   final _formKey = GlobalKey<FormState>();
   //int userType=user.userTypeID;
+
+  DateTime _startDate = new DateTime.now();
+  DateTime _endDate = new DateTime.now();
+  final format = DateFormat("yyyy-MM-dd");
+  String startDateinput = "Select date ...";
+  String endDateinput = "Select date ...";
+  TextStyle datestyle = TextStyle(
+      color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
+
+  Future<Null> selectStartDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: new DateTime(2000),
+        lastDate: new DateTime(2030));
+
+    if (picked != null && picked != DateTime.now()) {
+      setState(() {
+        _startDate = picked;
+      });
+    }
+    datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+    startDateinput = DateFormat('yyyy-MM-dd').format(_startDate);
+  }
+
+  Future<Null> selectEndDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: new DateTime(2000),
+        lastDate: new DateTime(2030));
+
+    if (picked != null && picked != DateTime.now()) {
+      setState(() {
+        _endDate = picked;
+      });
+    }
+    datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+    endDateinput = DateFormat('yyyy-MM-dd').format(_endDate);
+  }
+
   Future<String> createAlertDialog(BuildContext context) {
-    titleController.text="";
-    descriptionController.text="";
+    titleController.text = "";
+    descriptionController.text = "";
+    startDateinput = "Select date ...";
+    endDateinput = "Select date ...";
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text("Create Board: "),
-            content: Form(
-              key: _formKey,
-
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: TextFormField(
-                        controller: titleController,
-                        decoration: InputDecoration(
-                          //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            hintText: "* Board Title",
-                            border:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-                      ),
+          return StatefulBuilder(builder: (context, setState) {
+            return AlertDialog(
+              title: Text("Create Board: "),
+              content: Form(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          child: TextFormField(
+                            controller: titleController,
+                            decoration: InputDecoration(
+                                //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                hintText: "* Board Title",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(32.0))),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          child: TextFormField(
+                            controller: descriptionController,
+                            maxLines: 5,
+                            decoration: InputDecoration(
+                                //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                hintText: "Description",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(32.0))),
+                          ),
+                        ),
+                        Stack(
+                          children: <Widget>[
+                            Container(
+                              width: double.infinity,
+                              height: 60,
+                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              //padding: EdgeInsets.only(bottom: 10),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.grey, width: 1),
+                                borderRadius: BorderRadius.circular(32),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: MaterialButton(
+                                child: Row(
+                                  children: <Widget>[
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.calendar_today,
+                                        color: Color(0xff009999),
+                                      ),
+                                      onPressed: () {},
+                                      tooltip: "Select start date",
+                                    ),
+                                    Text(
+                                      startDateinput,
+                                      style: datestyle,
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  selectStartDate(context);
+                                  startDateinput = DateFormat('yyyy-MM-dd')
+                                      .format(_startDate);
+                                  //startDateinput=_startDate.toString();
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                            Positioned(
+                                left: 10,
+                                top: 12,
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: 10, left: 3, right: 0),
+                                  margin: EdgeInsets.only(left: 10),
+                                  color: Colors.white,
+                                  child: Text(
+                                    'Start Date:',
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(.65)),
+                                  ),
+                                )),
+                          ],
+                        ),
+                        Stack(
+                          children: <Widget>[
+                            Container(
+                              width: double.infinity,
+                              height: 60,
+                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              //padding: EdgeInsets.only(bottom: 10),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.grey, width: 1),
+                                borderRadius: BorderRadius.circular(32),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: MaterialButton(
+                                child: Row(
+                                  children: <Widget>[
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.calendar_today,
+                                        color: Color(0xff009999),
+                                      ),
+                                      onPressed: () {
+                                        setState(() {});
+                                      },
+                                      tooltip: "Select end date",
+                                    ),
+                                    Text(
+                                      endDateinput,
+                                      style: datestyle,
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  selectEndDate(context);
+                                  endDateinput =
+                                      DateFormat('yyyy-MM-dd').format(_endDate);
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                            Positioned(
+                                left: 10,
+                                top: 12,
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: 10, left: 3, right: 0),
+                                  margin: EdgeInsets.only(left: 10),
+                                  color: Colors.white,
+                                  child: Text(
+                                    'End Date: ',
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(.65)),
+                                  ),
+                                )),
+                          ],
+                        )
+                      ],
                     ),
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: TextFormField(
-                        controller: descriptionController,
-                        maxLines: 5,
-                        decoration: InputDecoration(
-                          //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            hintText: "Description",
-                            border:
-                            OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-                      ),
-                    ),
-
-
-
-                  ],
-                ),
-              )
-            ),
-            actions: <Widget>[
-              MaterialButton(
-                elevation: 5.0,
-                child: Text("Create"),
-                onPressed: () {
-                  boardTitle = titleController.text;
-                  //Navigator.of(context).pop(titleController.text.toString());
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
+                  )),
+              actions: <Widget>[
+                MaterialButton(
+                  elevation: 5.0,
+                  child: Text("Create"),
+                  onPressed: () {
+                    boardTitle = titleController.text;
+                    //Navigator.of(context).pop(titleController.text.toString());
+                   // user.boards=await
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
         });
   }
 
@@ -131,7 +279,6 @@ class _MyHomePageState extends State<HomePage> {
       fontFamily: 'Montserrat', fontSize: 20.0, color: (Colors.white));
   @override
   Widget build(BuildContext context) {
-
     Widget dynamicTextField = new Container(
       margin: new EdgeInsets.all(10.0),
       //height: MediaQuery.of(context).size.height,
@@ -139,28 +286,35 @@ class _MyHomePageState extends State<HomePage> {
         itemCount: listDynamic.length,
         itemBuilder: (_, index) => listDynamic[index],
       ),
-//      new Flexible(
-//        flex: 2,
-//        child: new
-//      ),
     );
+
+    Project_BoardController project_boardController=new Project_BoardController();
 
     final plusButton = new Container(
       alignment: Alignment.bottomRight,
       child: MaterialButton(
-        onPressed: () {
-          createAlertDialog(context).then((onValue) {
-            if (boardTitle != "") {
-              Project_Board project_board = new Project_Board();
-              Project_BoardController project_boardController =
-                  new Project_BoardController();
-              project_board.Project_Title = boardTitle;
-              project_boardController.createBoard(project_board);
-              addDynamic(project_board);
-              boardTitle = "";
-              setState(() {});
-            }
-          });
+        onPressed: () async{
+          await createAlertDialog(context);
+          if (boardTitle != "") {
+            Project_Board project_board = new Project_Board();
+            Project_BoardController project_boardController =
+            new Project_BoardController();
+            project_board.Project_Title = boardTitle;
+            project_board.Project_Description = descriptionController.text;
+            project_board.Project_StartDate = _startDate;
+            project_board.Project_EndDate = _endDate;
+            await project_boardController.createBoard(project_board);
+            user.boards=await project_boardController.ReadBoards(user.userTypeID, personNo);
+            project_board=user.boards.last;
+            addDynamic(project_board);
+            boardTitle = "";
+            await homePage.initializeDisplay();
+            Navigator.popAndPushNamed(context, '/Home');
+            setState(() {
+
+            });
+          }
+
         },
         color:
             //Colors.blueGrey
@@ -205,8 +359,7 @@ class _MyHomePageState extends State<HomePage> {
             margin: EdgeInsets.only(left: 100, top: 10),
             alignment: Alignment.bottomLeft,
             child: arrowImage,
-          )
-          ,
+          ),
         ],
       ),
     );
@@ -220,7 +373,7 @@ class _MyHomePageState extends State<HomePage> {
       body: new Container(
         margin: new EdgeInsets.all(10.0),
 //         // height: MediaQuery.of(context).size.height,
-        child: user.boards.length>0 ? dynamicTextField : noBoardsView,
+        child: user.boards.length > 0 ? dynamicTextField : noBoardsView,
       ),
       floatingActionButton: plusButton,
       drawer: Drawer(
@@ -293,65 +446,362 @@ class DynamicWidget extends StatefulWidget {
   _DynamicWidgetState createState() => _DynamicWidgetState();
 }
 
+
+
 class _DynamicWidgetState extends State<DynamicWidget> {
   @override
   Widget build(BuildContext context) {
     //widget.popLists();
+    Project_BoardController project_boardController = new Project_BoardController();
+    TextEditingController titleController = new TextEditingController();
+    TextEditingController descriptionController = new TextEditingController();
+    String boardTitle = "";
+    final _EditformKey = GlobalKey<FormState>();
+    //int userType=user.userTypeID;
 
-    Project_BoardController project_boardController=new Project_BoardController();
+    DateTime _startDate = new DateTime.now();
+    DateTime _endDate = new DateTime.now();
+    final format = DateFormat("yyyy-MM-dd");
+    String startDateinput = "Select date ...";
+    String endDateinput = "Select date ...";
+    TextStyle datestyle = TextStyle(
+        color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
+    bool ChangedStart = false;
+    bool ChangedEnd = false;
+    Future<Null> selectStartDate(BuildContext context) async {
+      final DateTime picked = await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: new DateTime(2000),
+          lastDate: new DateTime(2030));
+
+      if (picked != null && picked != DateTime.now()) {
+        setState(() {
+          _startDate = picked;
+          ChangedStart = true;
+        });
+      }
+      datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+      startDateinput = DateFormat('yyyy-MM-dd').format(_startDate);
+    }
+
+    Future<Null> selectEndDate(BuildContext context) async {
+      final DateTime picked = await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: new DateTime(2000),
+          lastDate: new DateTime(2030));
+
+      if (picked != null && picked != DateTime.now()) {
+        setState(() {
+          _endDate = picked;
+          ChangedEnd = true;
+        });
+      }
+      datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+      endDateinput = DateFormat('yyyy-MM-dd').format(_endDate);
+    }
+
+    bool ChangedBoardValue=false;
+
+    Future<String> editBoardAlertDialog(BuildContext context) {
+      TextEditingController titleController = new TextEditingController();
+      descriptionController.text = widget.aboard.Project_Description;
+      if (widget.aboard.Project_StartDate != null) {
+        startDateinput =
+            DateFormat('yyyy-MM-dd').format(widget.aboard.Project_StartDate);
+      } else {
+        startDateinput = "Select date ...";
+      }
+      if (widget.aboard.Project_EndDate != null) {
+        endDateinput =
+            DateFormat('yyyy-MM-dd').format(widget.aboard.Project_EndDate);
+      } else {
+        endDateinput = "Select date ...";
+      }
+      titleController.text = widget.aboard.Project_Title;
+      String title = "";
+      if (widget.aboard.Project_Title != null) {
+        title = widget.aboard.Project_Title;
+      }
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return StatefulBuilder(builder: (context, setState) {
+              return AlertDialog(
+                title: Text(widget.aboard.Project_Title),
+                content: Form(
+                    key: _EditformKey,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Container(
+                              alignment: Alignment.centerLeft,
+                              margin: EdgeInsets.only(left: 20),
+                              child: Text("Board Title:")),
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            child: TextFormField(
+                              controller: titleController,
+                              decoration: InputDecoration(
+                                //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                //hintText: "* Board Title",
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(32.0))),
+                              onChanged: (val) {
+                                ChangedBoardValue=true;
+                                setState(() {
+
+                                  widget.aboard.Project_Title = val;
+                                  print('changing: '+widget.aboard.Project_Title);
+                                });
+//                                setState(
+//                                        () => widget.aboard.Project_Title = val,
+//                                );
+                              },
+                            ),
+                          ),
+                          Container(
+                              alignment: Alignment.centerLeft,
+                              margin: EdgeInsets.only(left: 20),
+                              child: Text("Description:")),
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            child: TextFormField(
+                              controller: descriptionController,
+                              maxLines: 5,
+                              decoration: InputDecoration(
+                                //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                //hintText: "Description",
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(32.0))),
+                              onChanged: (val) {
+                                ChangedBoardValue=true;
+                                setState(() =>
+                                widget.aboard.Project_Description = val);
+                              },
+                            ),
+                          ),
+                          Stack(
+                            children: <Widget>[
+                              Container(
+                                width: double.infinity,
+                                height: 60,
+                                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                //padding: EdgeInsets.only(bottom: 10),
+                                decoration: BoxDecoration(
+                                  border:
+                                  Border.all(color: Colors.grey, width: 1),
+                                  borderRadius: BorderRadius.circular(32),
+                                  shape: BoxShape.rectangle,
+                                ),
+                                child: MaterialButton(
+                                  child: Row(
+                                    children: <Widget>[
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.calendar_today,
+                                          color: Color(0xff009999),
+                                        ),
+                                        onPressed: () {},
+                                        tooltip: "Select start date",
+                                      ),
+                                      Text(
+                                        startDateinput,
+                                        style: datestyle,
+                                      ),
+                                    ],
+                                  ),
+                                  onPressed: () {
+                                    selectStartDate(context);
+                                    startDateinput = DateFormat('yyyy-MM-dd')
+                                        .format(_startDate);
+                                    //startDateinput=_startDate.toString();
+                                    setState(() {});
+                                  },
+                                ),
+                              ),
+                              Positioned(
+                                  left: 10,
+                                  top: 12,
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                        bottom: 10, left: 3, right: 0),
+                                    margin: EdgeInsets.only(left: 10),
+                                    color: Colors.white,
+                                    child: Text(
+                                      'Start Date:',
+                                      style: TextStyle(
+                                          color: Colors.black.withOpacity(.65)),
+                                    ),
+                                  )),
+                            ],
+                          ),
+                          Stack(
+                            children: <Widget>[
+                              Container(
+                                width: double.infinity,
+                                height: 60,
+                                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                //padding: EdgeInsets.only(bottom: 10),
+                                decoration: BoxDecoration(
+                                  border:
+                                  Border.all(color: Colors.grey, width: 1),
+                                  borderRadius: BorderRadius.circular(32),
+                                  shape: BoxShape.rectangle,
+                                ),
+                                child: MaterialButton(
+                                  child: Row(
+                                    children: <Widget>[
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.calendar_today,
+                                          color: Color(0xff009999),
+                                        ),
+                                        onPressed: () {
+                                          setState(() {});
+                                        },
+                                        tooltip: "Select end date",
+                                      ),
+                                      Text(
+                                        endDateinput,
+                                        style: datestyle,
+                                      ),
+                                    ],
+                                  ),
+                                  onPressed: () {
+                                    selectEndDate(context);
+                                    endDateinput =
+                                        DateFormat('yyyy-MM-dd').format(_endDate);
+                                    setState(() {});
+                                  },
+                                ),
+                              ),
+                              Positioned(
+                                  left: 10,
+                                  top: 12,
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                        bottom: 10, left: 3, right: 0),
+                                    margin: EdgeInsets.only(left: 10),
+                                    color: Colors.white,
+                                    child: Text(
+                                      'End Date: ',
+                                      style: TextStyle(
+                                          color: Colors.black.withOpacity(.65)),
+                                    ),
+                                  )),
+                            ],
+                          )
+                        ],
+                      ),
+                    )),
+                actions: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                          alignment: Alignment.bottomLeft,
+                          //color: Colors.green,
+                          width: MediaQuery.of(context).size.width/1.75,
+                          child: MaterialButton(
+                            elevation: 5.0,
+                            child: Text("DELETE",style: TextStyle(color: Colors.red),),
+                            onPressed: () async {
+                              int boardIndex;
+                              for (int j=0;j<user.boards.length;j++){
+                                if(user.boards[j].ProjectID==widget.aboard.ProjectID){
+                                  boardIndex=j;
+                                }
+                              }
+                              await project_boardController.deleteBoard(widget.aboard.ProjectID);
+
+
+                              listDynamic.removeAt(boardIndex);
+                              user.boards.removeAt(boardIndex);
+                              homePage.initializeDisplay();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (BuildContext context) => homePage),
+                              );
+                              setState(() {
+
+                              });
+                            },
+                          )),
+                      Container(
+                          alignment: Alignment.bottomRight,
+                          //color: Colors.green,
+                          child: MaterialButton(
+                            elevation: 5.0,
+                            child: Text("Ok"),
+                            onPressed: () {
+                              //boardTitle = titleController.text;
+                              //print(widget.aboard.Project_Description);
+                              if (_EditformKey.currentState.validate()) {
+                                if (ChangedStart == true) {
+                                  widget.aboard.Project_StartDate =
+                                      _startDate;
+                                }
+                                if (ChangedEnd == true) {
+                                  widget.aboard.Project_EndDate =
+                                      _endDate;
+                                }
+                                if(ChangedBoardValue==true||ChangedStart==true||ChangedEnd==true){
+                                  project_boardController
+                                      .updateBoard(widget.aboard);
+                                  print(widget.aboard.Project_Title);
+                                }
+                              }
+                              Navigator.of(context).pop();
+                            },
+                          )),
+
+                    ],
+                  ),
+                ],
+              );
+            });
+          });
+    }
+
+
     final listReturn = new Container(
       margin: EdgeInsets.all(8),
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
-          color: Colors.blueGrey,
-          borderRadius: BorderRadius.circular(20)
-      ),
+          color: Colors.blueGrey, borderRadius: BorderRadius.circular(20)),
       child: ListTile(
         title: Text(
           widget.aboard.Project_Title,
           style: widget.style,
         ),
         trailing: IconButton(
-          icon: Icon(Icons.delete,color: Colors.black,),
+          icon: Icon(Icons.edit,color: Colors.black,),
           onPressed: ()async {
-            int boardIndex;
-            for (int j=0;j<user.boards.length;j++){
-              if(user.boards[j].ProjectID==widget.aboard.ProjectID){
-                boardIndex=j;
-              }
-            }
-            await project_boardController.deleteBoard(widget.aboard.ProjectID);
-
-
-            listDynamic.removeAt(boardIndex);
-            user.boards.removeAt(boardIndex);
-            homePage.initializeDisplay();
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (BuildContext context) => homePage),
-            );
+            await editBoardAlertDialog(context);
             setState(() {
 
             });
           },
         ),
         onTap: () async {
+          print("BOARD: "+widget.aboard.ProjectID.toString());
           await widget.popLists();
+
           //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
           Board boardPage = new Board(
             proj_board: widget.aboard,
           );
 
-          await boardPage.populateListDisplay(widget.aboard.ProjectID);
 
           Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => boardPage),
+            MaterialPageRoute(builder: (BuildContext context) => boardPage),
           );
         },
       ),
-
     );
 
     return listReturn;

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:intl/intl.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/main.dart';
@@ -54,8 +55,13 @@ class Project_BoardController extends StatefulWidget {
             boardReceived.ProjectID = int.parse(Response[i]['ProjectID']);
             boardReceived.Project_Title = Response[i]['Project_Title'];
             boardReceived.Project_Description = Response[i]['Project_Description'];
-            //boardReceived.Project_StartDate=DateTime.parse(Response[i]['Project_StartDate']);
-            //boardReceived.Project_EndDate=DateTime.parse(Response[i]['Project_EndDate']);
+            //print("START DATE: "+Response[i]['Project_StartDate'].toString());
+            if(Response[i]['Project_StartDate']!=null){
+              boardReceived.Project_StartDate=DateTime.parse(Response[i]['Project_StartDate']);
+            }
+            if(Response[i]['Project_EndDate']!=null){
+              boardReceived.Project_EndDate=DateTime.parse(Response[i]['Project_EndDate']);
+            }
 
             //boardReceived.boardLists=await listController.ReadLists(boardReceived.ProjectID);
 
@@ -88,6 +94,9 @@ class Project_BoardController extends StatefulWidget {
       // Store all data with Param Name.
       var data = {
         'Project_Title': newBoard.Project_Title,
+        'Project_Description' : newBoard.Project_Description,
+        'Project_StartDate' : DateFormat('yyyy-MM-dd').format((newBoard.Project_StartDate)),
+        'Project_EndDate' : DateFormat('yyyy-MM-dd').format((newBoard.Project_EndDate)),
         'StudentNo' : student.studentNo,
         'StaffNo' : supervisor.staffNo,
         'userType' : user.userTypeID.toString()
@@ -95,8 +104,6 @@ class Project_BoardController extends StatefulWidget {
 
       // Starting Web API Call.
       var response = await http.post(url, body: json.encode(data));
-
-      // Getting Server response into variable.
       var message = jsonDecode(response.body);
 
       print(message);
@@ -119,7 +126,7 @@ class Project_BoardController extends StatefulWidget {
 
     // Starting Web API Call.
     var response = await http.post(url, body: json.encode(data));
-    print(response.body.toString());
+    //print(response.body.toString());
     // Getting Server response into variable.
     var message = jsonDecode(response.body);
 
@@ -134,11 +141,31 @@ class Project_BoardController extends StatefulWidget {
 
         'https://witsinnovativeskyline.000webhostapp.com/updateBoard.php';
 
+    String startDate;
+    if(boardToUpdate.Project_StartDate!=null){
+      startDate=DateFormat('yyyy-MM-dd').format(boardToUpdate.Project_StartDate);
+    }
+    else{
+     startDate=null;
+    }
+
+    String endDate;
+    if(boardToUpdate.Project_EndDate!=null){
+      endDate=DateFormat('yyyy-MM-dd').format(boardToUpdate.Project_EndDate);
+    }
+    else{
+      endDate=null;
+    }
+
+
 
     // Store all data with Param Name.
     var data = {
       'BoardID': boardToUpdate.ProjectID,
       'Title' : boardToUpdate.Project_Title,
+      'Description' : boardToUpdate.Project_Description,
+      'Start' : startDate,
+      'End' : endDate,
     };
 
     // Starting Web API Call.

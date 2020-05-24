@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Controller/TaskStatusController.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/main.dart';
@@ -67,6 +68,8 @@ print("EMAIL: "+email+", Password: "+Password);
         user.userTypeID = int.parse(datauser[0]['UserTypeId']);
 
 
+        TaskStatusController taskStatusController=new TaskStatusController();
+        await taskStatusController.getStatuses();
       if (user.userTypeID==1){
 
         await studentController.GetStudDetails();

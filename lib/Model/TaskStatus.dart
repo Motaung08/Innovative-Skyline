@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class TaskStatus extends StatefulWidget {
-  final TaskStatusID;
-  final Status;
+  int TaskStatusID;
+  String Status;
 
-  const TaskStatus({Key key, this.TaskStatusID, this.Status}) : super(key: key);
+   TaskStatus({Key key, this.TaskStatusID, this.Status}) : super(key: key);
 
   _TaskStatusState createState() => _TaskStatusState();
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:intl/intl.dart';
 import 'package:postgrad_tracker/Model/ListCard.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,10 @@ class TaskController extends StatefulWidget {
             taskReceived.Task_Title = Response[i]['Task_Title'];
 
             taskReceived.Task_StatusID = int.parse(Response[i]['Task_StatusID']);
-            //taskReceived.Task_Due = DateTime.parse(Response[i]['Task_Date_Due']);
+            if(Response[i]['Task_Date_Due']!=null){
+              taskReceived.Task_Due = DateTime.parse(Response[i]['Task_Date_Due']);
+            }
+
             taskReceived.Task_Description = Response[i]['Task_Description'];
             //taskReceived.Task_DateAdded = DateTime.parse(Response[i]['Task_Date_added']);
             taskReceived.Task_AddedBy = Response[i]['Task_AddedBy'];
@@ -68,6 +72,14 @@ class TaskController extends StatefulWidget {
   Future createTask(Task aTask) async{
     bool created = false;
       print("CREATING TASK...");
+    String dateAdded;
+    String dateDue;
+    if(aTask.Task_DateAdded!=null){
+      dateAdded=DateFormat("yyyy-MM-dd").format(aTask.Task_DateAdded);
+    }
+    if(aTask.Task_Due!=null){
+      dateDue=DateFormat("yyyy-MM-dd").format(aTask.Task_Due);
+    }
 
       // SERVER API URL
       var url =
@@ -80,9 +92,9 @@ class TaskController extends StatefulWidget {
         'Task_Title': aTask.Task_Title,
         'ListID':aTask.ListID.toString(),
         'Task_AddedBy':aTask.Task_AddedBy,
-        'Task_DateAdded':aTask.Task_DateAdded.toString(),
+        'Task_DateAdded':dateAdded,
         'Task_Description':aTask.Task_Description,
-        'Task_Due':aTask.Task_Due.toString(),
+        'Task_Due':dateDue,
         'Task_StatusID':aTask.Task_StatusID.toString(),
       };
 
@@ -103,18 +115,37 @@ class TaskController extends StatefulWidget {
 
         'https://witsinnovativeskyline.000webhostapp.com/updateTask.php';
 
-
+    /*
+    $TaskID = $obj['TaskID'];
+$ListID = $obj['ListID'];
+$Task_Title = $obj['Task_Title'];
+$Task_Description = $obj['Task_Description'];
+//$AddedBy = $obj['Task_AddedBy'];
+$StatusID = $obj['Task_StatusID'];
+$DateAdded = $obj['Task_Date_added'];
+$DueDate = $obj['Task_Date_Due'];
+     */
+    String dateAdded;
+    String dateDue;
+    if(aTask.Task_DateAdded!=null){
+      dateAdded=DateFormat("yyyy-MM-dd").format(aTask.Task_DateAdded);
+    }
+    if(aTask.Task_Due!=null){
+      dateDue=DateFormat("yyyy-MM-dd").format(aTask.Task_Due);
+    }
     // Store all data with Param Name.
     var data = {
-      'TaskID': aTask.TaskID,
+      'TaskID': aTask.TaskID.toString(),
       'Task_Title': aTask.Task_Title,
-      'ListID':aTask.ListID,
+      'ListID':aTask.ListID.toString(),
       'Task_AddedBy':aTask.Task_AddedBy,
-      'Task_DateAdded':aTask.Task_DateAdded,
-      'Task_DateAdded':aTask.Task_Description,
-      'Task_Due':aTask.Task_Due,
-      'Task_StatusID':aTask.Task_StatusID,
+      'Task_Date_added':dateAdded,
+      'Task_Description':aTask.Task_Description,
+      'Task_Date_Due':dateDue,
+      'Task_StatusID':aTask.Task_StatusID.toString(),
     };
+
+    print("UPDATE!");
 
     // Starting Web API Call.
     var response = await http.post(url, body: json.encode(data));
@@ -123,6 +154,27 @@ class TaskController extends StatefulWidget {
     var message = jsonDecode(response.body);
 
     print(message);
+  }
+
+  Future deleteTask(int TaskID) async{
+    print("yowhoo: "+TaskID.toString());
+
+    // SERVER API URL
+    var url =
+    //'http://146.141.21.17/ReadBoards.php';
+        'https://witsinnovativeskyline.000webhostapp.com/deleteTask.php';
+
+    var data={
+      'TaskID' : TaskID.toString(),
+    };
+
+    // Starting Web API Call.
+    var response = await http.post(url, body: jsonEncode(data));
+
+    // Getting Server response into variable.
+    // ignore: non_constant_identifier_names
+    var Response = jsonDecode(response.body);
+    print(Response);
   }
 
 

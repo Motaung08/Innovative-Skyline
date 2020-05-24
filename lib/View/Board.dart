@@ -3,169 +3,462 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:postgrad_tracker/Controller/ListController.dart';
+import 'package:intl/intl.dart';
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/TaskController.dart';
 import 'package:postgrad_tracker/Model/ListCard.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Task.dart';
+import 'package:postgrad_tracker/Model/TaskStatus.dart';
 import 'package:postgrad_tracker/main.dart';
-
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-
-
-List<StaggeredTile> stiles =new List<StaggeredTile>();
+List<StaggeredTile> stiles = new List<StaggeredTile>();
 List<DynamicList> listDynamic = [];
-int BoardIdentificationIndex;
+// ignore: non_constant_identifier_names
+
 
 // ignore: must_be_immutable
-
-// ignore: must_be_immutable
-
 class Board extends StatefulWidget {
-  //final String title;
+
   // ignore: non_constant_identifier_names
   final Project_Board proj_board;
-
-  final items = List();
   // ignore: non_constant_identifier_names
   Board({Key key, this.proj_board}) : super(key: key);
 
-  // ignore: non_constant_identifier_names
-
-
-
- TaskController taskController=new TaskController();
 
   // ignore: non_constant_identifier_names
+//  Future populateListDisplay(int ProjectID) async {
+//    //lists = [];
+//    int boardIndex;
+//   // int testVal;
+//    void getIndexes() {
+//      for (int i = 0; i < user.boards.length; i++) {
+//        if (user.boards[i].ProjectID == ProjectID) {
+//          boardIndex = i;
+//          BoardIdentificationIndex = i;
+//        }
+//      }
+//    }
+//
+//    getIndexes();
+//    items.clear();
+//    user.boards[boardIndex].boardLists=await listController.ReadLists(ProjectID);
+//
+//    if (user.boards[boardIndex].boardLists != null) {
+//      print('Initializing board\'s list display! ##################');
+//      stiles.clear();
+//      listDynamic.clear();
+//      for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+//        DynamicList dynamicCreatedList = new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
+//
+//        listDynamic.add(dynamicCreatedList);
+//
+//        stiles.add(StaggeredTile.count(
+//            2, user.boards[boardIndex].boardLists[i].listTasks.length));
+//      }
+//
+//    }
+//  }
 
 
-  // ignore: non_constant_identifier_names
 
-  Future populateListDisplay(int ProjectID) async {
-    //lists = [];
-    int boardIndex;
-    int listIndex;
-    int testVal;
-    void getIndexes(){
+  @override
+  _BoardState createState() => _BoardState();
 
-      for(int i=0;i<user.boards.length;i++){
-        if(user.boards[i].ProjectID==ProjectID){
-          boardIndex=i;
-          BoardIdentificationIndex=i;
-          if(user.boards[i].boardLists!=null){
-            for (int j=0;j<user.boards[i].boardLists.length;j++){
-              if(user.boards[i].boardLists[j]==testVal){
-                testVal=j;
-              }
-            }
-          }
 
-        }
+}
+
+class _BoardState extends State<Board> {
+
+  int getBoardIndex(int BoardID){
+    for (int i = 0; i < user.boards.length; i++) {
+      if (user.boards[i].ProjectID == BoardID) {
+        return i;
       }
     }
-    getIndexes();
-    items.clear();
+  }
 
+  void pop() {
+    print("**POP**");
+    stiles.clear();
+    int boardIndex = getBoardIndex(widget.proj_board.ProjectID);
 
+    listDynamic.clear();
     if(user.boards[boardIndex].boardLists!=null){
-      print('Initializing list display! ##################');
-      stiles.clear();
-      listDynamic.clear();
       for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-        // ListCard lsc=new ListCard();
-        //lsc.List_Title="lsc test";
-        DynamicList dynamicCreatedList=new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
-        //await dynamicCreatedList.initializeTaskDisplay();
+        DynamicList dynamicCreatedList = new DynamicList(
+            aList: user.boards[boardIndex].boardLists[i]);
+
         listDynamic.add(dynamicCreatedList);
-       // user.boards[boardIndex].boardLists[i].listTasks.clear();
-        //await taskController.ReadTasks(testVal);
-        //items.add(listDynamic[i]);
-        print(i);
-        print('adding stiles for: StaggeredTile.count('+(2).toString()+","+(user.boards[boardIndex].boardLists[i].listTasks.length+2).toString()+")");
-        stiles.add(
-            StaggeredTile.count(2, user.boards[boardIndex].boardLists[i].listTasks.length+1.5));
+        //print("List: "+user.boards[boardIndex].boardLists[i].List_Title+" has "+user.boards[boardIndex].boardLists[i].listTasks.length.toString()+" tasks");
+        if(user.boards[boardIndex].boardLists[i].listTasks.length==0){
+          stiles.add(StaggeredTile.count(2, 1.5));
+        }
+        else{
+          stiles.add(StaggeredTile.count(
+              2, user.boards[boardIndex].boardLists[i].listTasks.length+1));
+        }
+
+
       }
-      //print("STILES"+stiles.length.toString());
-
     }
-
 
   }
 
   @override
-  _BoardState createState() => _BoardState();
-}
+  void initState() {
+    super.initState();
+   //widget.populateListDisplay(widget.proj_board.ProjectID);
+    pop();
+  }
 
+  TextEditingController titleController = new TextEditingController();
+  TextEditingController descriptionController = new TextEditingController();
+  String boardTitle = "";
+  final _editFormKey = GlobalKey<FormState>();
+  //int userType=user.userTypeID;
 
+  DateTime _startDate = new DateTime.now();
+  DateTime _endDate = new DateTime.now();
+  final format = DateFormat("yyyy-MM-dd");
+  String startDateinput = "Select date ...";
+  String endDateinput = "Select date ...";
+  TextStyle datestyle = TextStyle(
+      color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
+  // ignore: non_constant_identifier_names
+  bool ChangedStart = false;
+  // ignore: non_constant_identifier_names
+  bool ChangedEnd = false;
+  // ignore: non_constant_identifier_names
+  bool ChangedBoardValue;
+  Future<Null> selectStartDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: new DateTime(2000),
+        lastDate: new DateTime(2030));
 
+    if (picked != null && picked != DateTime.now()) {
+      setState(() {
+        _startDate = picked;
+        ChangedStart = true;
+      });
+    }
+    datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+    startDateinput = DateFormat('yyyy-MM-dd').format(_startDate);
+  }
 
+  Future<Null> selectEndDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: new DateTime(2000),
+        lastDate: new DateTime(2030));
 
-class _BoardState extends State<Board> {
+    if (picked != null && picked != DateTime.now()) {
+      setState(() {
+        _endDate = picked;
+        ChangedEnd = true;
+      });
+    }
+    datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+    endDateinput = DateFormat('yyyy-MM-dd').format(_endDate);
+  }
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController listTitle = new TextEditingController();
   final items = List();
   // ignore: non_constant_identifier_names
-  Project_BoardController project_boardController=new Project_BoardController();
-  String newListTitle="";
 
+  Project_BoardController project_boardController = new Project_BoardController();
+  //Edit Board Popup
   Future<String> editBoardAlertDialog(BuildContext context) {
     TextEditingController titleController = new TextEditingController();
+    descriptionController.text = widget.proj_board.Project_Description;
+    if (widget.proj_board.Project_StartDate != null) {
+      startDateinput =
+          DateFormat('yyyy-MM-dd').format(widget.proj_board.Project_StartDate);
+    } else {
+      startDateinput = "Select date ...";
+    }
+    if (widget.proj_board.Project_EndDate != null) {
+      endDateinput =
+          DateFormat('yyyy-MM-dd').format(widget.proj_board.Project_EndDate);
+    } else {
+      endDateinput = "Select date ...";
+    }
     titleController.text = widget.proj_board.Project_Title;
-    String title = "";
     if (widget.proj_board.Project_Title != null) {
-      title = widget.proj_board.Project_Title;
     }
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text("Edit title: "),
-            content: TextFormField(
-              controller: titleController,
-            ),
-            actions: <Widget>[
-              MaterialButton(
-                elevation: 5.0,
-                child: Text("Save"),
-                onPressed: () {
-                  widget.proj_board.Project_Title = titleController.text;
-                  project_boardController.updateBoard(widget.proj_board);
+          return StatefulBuilder(builder: (context, setState) {
+            return AlertDialog(
+              title: Text(widget.proj_board.Project_Title),
+              content: Form(
+                  key: _editFormKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Container(
+                            alignment: Alignment.centerLeft,
+                            margin: EdgeInsets.only(left: 20),
+                            child: Text("Board Title:")),
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          child: TextFormField(
+                            controller: titleController,
+                            decoration: InputDecoration(
+                                //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                //hintText: "* Board Title",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(32.0))),
+                            onChanged: (val) {
+                              ChangedBoardValue = true;
+                              setState(
+                                  () => widget.proj_board.Project_Title = val);
+                            },
+                          ),
+                        ),
+                        Container(
+                            alignment: Alignment.centerLeft,
+                            margin: EdgeInsets.only(left: 20),
+                            child: Text("Description:")),
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          child: TextFormField(
+                            controller: descriptionController,
+                            maxLines: 5,
+                            decoration: InputDecoration(
+                                //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                //hintText: "Description",
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(32.0))),
+                            onChanged: (val) {
+                              ChangedBoardValue = true;
+                              setState(() =>
+                                  widget.proj_board.Project_Description = val);
+                            },
+                          ),
+                        ),
+                        Stack(
+                          children: <Widget>[
+                            Container(
+                              width: double.infinity,
+                              height: 60,
+                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              //padding: EdgeInsets.only(bottom: 10),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.grey, width: 1),
+                                borderRadius: BorderRadius.circular(32),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: MaterialButton(
+                                child: Row(
+                                  children: <Widget>[
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.calendar_today,
+                                        color: Color(0xff009999),
+                                      ),
+                                      onPressed: () {},
+                                      tooltip: "Select start date",
+                                    ),
+                                    Text(
+                                      startDateinput,
+                                      style: datestyle,
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  selectStartDate(context);
+                                  startDateinput = DateFormat('yyyy-MM-dd')
+                                      .format(_startDate);
+                                  //startDateinput=_startDate.toString();
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                            Positioned(
+                                left: 10,
+                                top: 12,
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: 10, left: 3, right: 0),
+                                  margin: EdgeInsets.only(left: 10),
+                                  color: Colors.white,
+                                  child: Text(
+                                    'Start Date:',
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(.65)),
+                                  ),
+                                )),
+                          ],
+                        ),
+                        Stack(
+                          children: <Widget>[
+                            Container(
+                              width: double.infinity,
+                              height: 60,
+                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                              //padding: EdgeInsets.only(bottom: 10),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.grey, width: 1),
+                                borderRadius: BorderRadius.circular(32),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: MaterialButton(
+                                child: Row(
+                                  children: <Widget>[
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.calendar_today,
+                                        color: Color(0xff009999),
+                                      ),
+                                      onPressed: () {
+                                        setState(() {});
+                                      },
+                                      tooltip: "Select end date",
+                                    ),
+                                    Text(
+                                      endDateinput,
+                                      style: datestyle,
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  selectEndDate(context);
+                                  endDateinput =
+                                      DateFormat('yyyy-MM-dd').format(_endDate);
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                            Positioned(
+                                left: 10,
+                                top: 12,
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: 10, left: 3, right: 0),
+                                  margin: EdgeInsets.only(left: 10),
+                                  color: Colors.white,
+                                  child: Text(
+                                    'End Date: ',
+                                    style: TextStyle(
+                                        color: Colors.black.withOpacity(.65)),
+                                  ),
+                                )),
+                          ],
+                        )
+                      ],
+                    ),
+                  )),
+              actions: <Widget>[
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                        alignment: Alignment.bottomLeft,
+                        //color: Colors.green,
+                        width: MediaQuery.of(context).size.width / 1.75,
+                        child: MaterialButton(
+                          elevation: 5.0,
+                          child: Text(
+                            "DELETE",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                          onPressed: () async {
+                            int boardIndex;
+                            for (int j = 0; j < user.boards.length; j++) {
+                              if (user.boards[j].ProjectID ==
+                                  widget.proj_board.ProjectID) {
+                                boardIndex = j;
+                              }
+                            }
+                            await project_boardController
+                                .deleteBoard(widget.proj_board.ProjectID);
 
-
-                  //Navigator.of(context).pop(titleController.text.toString());
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          );
+                            listDynamic.removeAt(boardIndex);
+                            user.boards.removeAt(boardIndex);
+                            homePage.initializeDisplay();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => homePage),
+                            );
+                            setState(() {});
+                          },
+                        )),
+                    Container(
+                        alignment: Alignment.bottomRight,
+                        //color: Colors.green,
+                        child: MaterialButton(
+                          elevation: 5.0,
+                          child: Text("Ok"),
+                          onPressed: () {
+                            boardTitle = titleController.text;
+                            //print(widget.proj_board.Project_Description);
+                            if (_editFormKey.currentState.validate()) {
+                              if (ChangedStart == true) {
+                                widget.proj_board.Project_StartDate =
+                                    _startDate;
+                              }
+                              if (ChangedEnd == true) {
+                                widget.proj_board.Project_EndDate = _endDate;
+                              }
+                              if (ChangedBoardValue == true ||
+                                  ChangedStart == true ||
+                                  ChangedEnd == true) {
+                                project_boardController
+                                    .updateBoard(widget.proj_board);
+                              }
+                            }
+                            Navigator.of(context).pop();
+                          },
+                        )),
+                  ],
+                ),
+              ],
+            );
+          });
         });
   }
 
+  String newListTitle = "";
+  //Create List Popup
   Future<String> createAlertDialog(BuildContext context) {
+    listTitle.text="";
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: Text("List title: "),
             content: Form(
-              key:_formKey,
+              key: _formKey,
               child: TextFormField(
                 controller: listTitle,
-                validator: (val) => val.isEmpty ? 'Enter a List Title' : null,
-                onChanged: (val) {
-                  setState(() => newListTitle = val);
-                },
+                validator: (val) => val.isEmpty ? 'Enter a List Title' :  null,
               ),
             ),
             actions: <Widget>[
               MaterialButton(
                 elevation: 5.0,
                 child: Text("Create List"),
-                onPressed: () {
-                  listTitle.text="";
-                  Navigator.of(context).pop();
+                onPressed: () async {
+                  //listTitle.text = "";
+                  if (_formKey.currentState.validate()) {
+                    ListCard newList = new ListCard();
+                    newList.List_Title = listTitle.text;
+                    newList.ProjectID = widget.proj_board.ProjectID;
+                    await listController.createList(newList);
+                    user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists=await listController.ReadLists(widget.proj_board.ProjectID);
+                    Navigator.pop(context);
+                  }
                 },
               )
             ],
@@ -173,31 +466,25 @@ class _BoardState extends State<Board> {
         });
   }
 
+
   @override
   Widget build(BuildContext context) {
 
+    //plus list
     final plusButton = new Container(
       alignment: Alignment.bottomRight,
       margin: EdgeInsets.all(1),
       child: MaterialButton(
-        onPressed: () {
-          createAlertDialog(context).then((onValue) {
-            if (newListTitle != "") {
-              if(_formKey.currentState.validate()){
-                ListCard newList = new ListCard();
-                newList.List_Title=listTitle.text;
-                newList.ProjectID=widget.proj_board.ProjectID;
-                listController.createList(newList);
-                //widget.populateListDisplay(widget.proj_board.ProjectID);
-                listDynamic.add(new DynamicList(aList: newList));
-                setState(() {});
-              }
-            }
+        onPressed: () async {
+          await createAlertDialog(context);
+          pop();
+          setState(() {
+            
           });
         },
         color:
-        //Colors.blueGrey
-        Color(0xff009999),
+            //Colors.blueGrey
+            Color(0xff009999),
         textColor: Colors.white,
         child: Icon(
           Icons.add,
@@ -210,6 +497,8 @@ class _BoardState extends State<Board> {
 
     final arrowImage = Image.asset("assets/downarrow.png");
 
+    //This view should be displayed when it is determined that
+    //The selected board has no lists to display.
     final noBoardsView = new Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -219,7 +508,6 @@ class _BoardState extends State<Board> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
-
         children: <Widget>[
           Container(
             width: MediaQuery.of(context).size.width / 1.1,
@@ -237,177 +525,31 @@ class _BoardState extends State<Board> {
             margin: EdgeInsets.only(left: 100, top: 10),
             alignment: Alignment.bottomLeft,
             child: arrowImage,
-          )
-          ,
+          ),
         ],
       ),
     );
 
-    final orientation = MediaQuery.of(context).orientation;
-    //listTitle.text="Enter list title ...";
-
-    final addListButton = Material(
-      elevation: 5.0,
-      borderRadius: BorderRadius.circular(30.0),
-      color: Color(0xff009999),
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () async {
-          //if (_formKey.currentState.validate()) {
-          if(_formKey.currentState.validate()){
-            ListCard newList = new ListCard();
-            newList.List_Title=listTitle.text;
-            newList.ProjectID=widget.proj_board.ProjectID;
-            listController.createList(newList);
-            //widget.populateListDisplay(widget.proj_board.ProjectID);
-            listDynamic.add(new DynamicList(aList: newList));
-            setState(() {});
-          }
-
-
-
-        },
-        key: Key('ListInput'),
-        child: Text("Add list",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 14.0,
-                color: Colors.white,
-                fontWeight: FontWeight.bold)),
-      ),
-    );
-
-    final ListCardItem = new Container(
-      //width: MediaQuery.of(context).size.width/2,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.white, width: 8),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Form(
-        key: _formKey,
-        child: Column(children: <Widget>[
-          TextFormField(
-            controller: listTitle,
-            decoration: InputDecoration(
-                fillColor: Colors.white, hintText: "Enter list title..."),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          addListButton,
-        ]),
-      ),
-    );
-//    items.add(ListCardItem);
-
-    final addListCard = GridTile(
-      child: Container(
-        margin: new EdgeInsets.all(5.0),
-        padding: EdgeInsets.all(7),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.white, width: 1),
-          borderRadius: BorderRadius.circular(12),
+    //Staggered lists view which we see for individual boards.
+    final staggered = Container(
+      margin: new EdgeInsets.all(10.0),
+      // child:  SizedBox(
+      //height: 505,
+      child: SingleChildScrollView(
+        child: StaggeredGridView.count(
+          primary: false,
+          crossAxisCount: 4,
+          shrinkWrap: true,
+          mainAxisSpacing: 4.0,
+          crossAxisSpacing: 4.0,
+          children: listDynamic,
+          staggeredTiles: stiles,
         ),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Form(
-                key: _formKey,
-                child: TextFormField(
-                  controller: listTitle,
-                  textDirection: TextDirection.ltr,
-//                  onChanged: (val) {
-//                    setState(() => listTitle.text = val);
-//                  },
-                  validator: (val) => val.isEmpty ? 'Enter list title.' : null,
-                  decoration: InputDecoration(
-                      fillColor: Colors.white, hintText: "Enter list title..."),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              addListButton,
-            ]),
       ),
+      //)
     );
 
-    Widget dynamicLists = new Flexible(
-      flex: 2,
-      child: new GridView.builder(
-        itemCount: items.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: (orientation == Orientation.portrait) ? 2 : 3),
-        //itemBuilder: (_, index) => widget.listDynamic[index],
-        itemBuilder: (BuildContext context, int index) {
-          return new Card(
-            child: new GridTile(child: items[index]),
-          );
-        },
-      ),
-    );
 
-    List<Widget> testList = List<Widget>();
-
-    void pop() {
-      testList.clear();
-      stiles.clear();
-      int boardIndex;
-
-      for(int i=0;i<user.boards.length;i++){
-        if(user.boards[i].ProjectID==widget.proj_board.ProjectID){
-          boardIndex=i;
-          BoardIdentificationIndex=i;
-        }
-      }
-
-
-      if(user.boards[boardIndex].boardLists!=null){
-        print('Initializing list display! ##################');
-        stiles.clear();
-        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-          testList.add(listDynamic[i]);
-          stiles.add(StaggeredTile.count(2, user.boards[0].boardLists[i].listTasks.length+1.5));
-        }
-        //print("STILES"+stiles.length.toString());
-
-      }
-
-      //testList.add(addListCard);
-      //stiles.add(StaggeredTile.count(2, 2));
-      print("testList: "+testList.length.toString());
-      print(" stiles: "+stiles.length.toString());
-
-
-    }
-
-
-
-    pop();
-    print("STILES: "+stiles.length.toString());
-
-    final staggered =Container(
-        margin: new EdgeInsets.all(10.0),
-       // child:  SizedBox(
-          //height: 505,
-          child: SingleChildScrollView(
-            child: StaggeredGridView.count(
-              primary: false,
-              crossAxisCount: 4,
-              shrinkWrap: true,
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
-              children: testList,
-              staggeredTiles: stiles,
-            ),
-          ),
-        //)
-    );
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -428,14 +570,16 @@ class _BoardState extends State<Board> {
         backgroundColor: Color(0xff009999),
       ),
       backgroundColor: Colors.grey,
-      body: user.boards[BoardIdentificationIndex].boardLists!=null ? staggered : noBoardsView,
-        floatingActionButton: plusButton,
+      body: user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists != null
+          ? staggered
+          : noBoardsView,
+      floatingActionButton: plusButton,
       //bottomSheet: plusButton,
     );
   }
 }
 
-class Constants{
+class Constants {
   static const String Edit = 'Edit';
   static const String Delete = 'Delete';
   //static const String SignOut = 'Sign out';
@@ -468,55 +612,64 @@ class DynamicList extends StatefulWidget {
     }
   }
 
-  List<Task> thisListTasks = [];
+  //List<Task> thisListTasks = [];
 
-  Future initializeTaskDisplay() async{
+  Future initializeTaskDisplay() async {
     getIndex();
-
-    if(user.boards[boardIndex].boardLists[listIndex].listTasks!=null){
-      print('Initializing task display! ##################');
-      thisListTasks=[];
-
-      for(int i=0;i<user.boards[boardIndex].boardLists[listIndex].listTasks.length;i++){
-        thisListTasks.add(user.boards[boardIndex].boardLists[listIndex].listTasks[i]);
-      }
-
-
-    }
-
-
+    user.boards[boardIndex].boardLists[listIndex].listTasks=await taskController.ReadTasks(aList.ListID);
+    print("TASKS: "+user.boards[boardIndex].boardLists[listIndex].listTasks.length.toString());
   }
 
   @override
   _DynamicListState createState() => _DynamicListState();
 }
-/*
-  class DynamicList extends StatefulWidget {
-  @override
-  _DynamicListState createState() => _DynamicListState();
-}
-class _DynamicListState extends State<DynamicList> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-   */
 
 class _DynamicListState extends State<DynamicList> {
-
   TextStyle style = TextStyle(
       fontFamily: 'Montserrat', fontSize: 20.0, color: (Colors.white));
 
-  final _formKey = GlobalKey<FormState>();
+  List<DropdownMenuItem<TaskStatus>> _dropdownTaskStatusMenuItems;
+  TaskStatus _selectedTaskStatus;
 
+  List<DropdownMenuItem<TaskStatus>> buildDropdownTaskStatusMenuItems(
+      List types) {
+    List<DropdownMenuItem<TaskStatus>> items = List();
+    for (TaskStatus type in types) {
+      items.add(
+        DropdownMenuItem(
+          value: type,
+          child: Text(
+            type.Status,
+            style: TextStyle(
+                color: Colors.grey, fontFamily: 'Montserrat', fontSize: 20.0),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      );
+    }
+
+    return items;
+  }
+
+  onChangeTaskStatusDropdownItem(TaskStatus selectedStatus) {
+    setState(() {
+      _selectedTaskStatus = selectedStatus;
+    });
+  }
+
+  initializeTaskStatus() {
+    _dropdownTaskStatusMenuItems =
+        buildDropdownTaskStatusMenuItems(taskStatuses);
+
+    _selectedTaskStatus = taskStatuses[0];
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    //widget.initializeTaskDisplay();
-
-    int getBoardIndex(int boardID)  {
-      int boardIndex;
+    // ignore: missing_return
+    int getBoardIndex(int boardID) {
       //print("BOARD ID: "+boardID.toString());
       //print("getting board index ... ugh");
       for (int i = 0; i < user.boards.length; i++) {
@@ -524,195 +677,542 @@ class _DynamicListState extends State<DynamicList> {
         //print("Board ID: "+user.boards[i].ProjectID.toString()+" our ID: "+boardID.toString() );
 
         if (user.boards[i].ProjectID == boardID) {
-
-          boardIndex = i;
-          print("UGH NOW? "+i.toString());
+          //print("BOARD INDEX: "+i.toString());
           return i;
-
         }
       }
     }
 
+    // ignore: missing_return
+    int getListIndex(int listID) {
+      for (int j = 0;
+          j <
+              user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists
+                  .length;
+          j++) {
+        if (user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[j]
+                .ListID ==
+            listID) {
+          return j;
+        }
+      }
+    }
 
-    int getListIndex(int listID)  {
-      int listIndex;
-      int boardIndex;
-      for (int j = 0; j < user.boards[BoardIdentificationIndex].boardLists.length; j++) {
-        if (user.boards[BoardIdentificationIndex].boardLists[j].ListID == listID) {
-          listIndex = j;
+    // ignore: missing_return
+    int getTaskStatusIndex(int statusID) {
+      for (int j = 0; j < taskStatuses.length; j++) {
+        if (taskStatuses[j].TaskStatusID == statusID) {
+          return j;
+        }
+      }
+    }
+
+    // ignore: missing_return, non_constant_identifier_names
+    int getTaskIndex(int TaskID) {
+      for (int j = 0;
+          j <
+              user
+                  .boards[getBoardIndex(widget.aList.ProjectID)]
+                  .boardLists[getListIndex(widget.aList.ListID)]
+                  .listTasks
+                  .length;
+          j++) {
+        if (user
+                .boards[getBoardIndex(widget.aList.ProjectID)]
+                .boardLists[getListIndex(widget.aList.ListID)]
+                .listTasks[j]
+                .TaskID ==
+            TaskID) {
           return j;
         }
       }
     }
 
 
-    void choiceAction(String choice){
-      if(choice == Constants.Edit){
-        print('Edit');
-      }else if(choice == Constants.Delete){
-        print('Delete');
+
+    // ignore: non_constant_identifier_names
+    final EditorKey = GlobalKey<FormState>();
+    final titleEditorKey = GlobalKey<FormState>();
+
+    DateTime _dueDate = new DateTime.now();
+    bool dueChanged = false;
+    String dueDateInput = "Select date ...";
+    TextStyle dateStyle = TextStyle(
+        color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
+
+    Future<Null> selectDueDate(BuildContext context) async {
+      final DateTime picked = await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: new DateTime(2000),
+          lastDate: new DateTime(2030));
+
+      if (picked != null) {
+        setState(() {
+          _dueDate = picked;
+          dueChanged = true;
+        });
       }
+      dateStyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+
+      dueDateInput = DateFormat('yyyy-MM-dd').format(_dueDate);
+
     }
 
+    int _selectedTaskID;
+    // ignore: non_constant_identifier_names
+    bool ChangedTask = false;
 
-    Future<String> createTaskAlertDialog(BuildContext context)  {
+//    final addListButton = Material(
+//      elevation: 5.0,
+//      borderRadius: BorderRadius.circular(30.0),
+//      color: Color(0xff009999),
+//      child: MaterialButton(
+//        minWidth: MediaQuery.of(context).size.width,
+//        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+//        onPressed: () async {
+//          //if (_formKey.currentState.validate()) {
+//          if(_formKey.currentState.validate()){
+//            ListCard newList = new ListCard();
+//            newList.List_Title=listTitle.text;
+//            newList.ProjectID=widget.proj_board.ProjectID;
+//            listController.createList(newList);
+//            //widget.populateListDisplay(widget.proj_board.ProjectID);
+//            listDynamic.add(new DynamicList(aList: newList));
+//            setState(() {});
+//          }
+//
+//
+//
+//        },
+//        key: Key('ListInput'),
+//        child: Text("Add list",
+//            textAlign: TextAlign.center,
+//            style: TextStyle(
+//                fontFamily: 'Montserrat',
+//                fontSize: 14.0,
+//                color: Colors.white,
+//                fontWeight: FontWeight.bold)),
+//      ),
+//    );
+
+    Future<String> createTaskAlertDialog(BuildContext context, bool create) {
+      ChangedTask = false;
       TextEditingController titleController = new TextEditingController();
       TextEditingController descriptionController = new TextEditingController();
-
-      //THIS MUST CHANGE TO DATETIME PICKER!
-      TextEditingController dueController = new TextEditingController();
-      TextEditingController statusController = new TextEditingController();
 
 
       TaskController taskController = new TaskController();
       Task newTask = new Task();
 
+      if (create == false) {
+        //i.e. to View/Edit the Task
 
+        newTask = user
+            .boards[getBoardIndex(widget.aList.ProjectID)]
+            .boardLists[getListIndex(widget.aList.ListID)]
+            .listTasks[getTaskIndex(_selectedTaskID)];
 
+        titleController.text = newTask.Task_Title;
+        descriptionController.text = newTask.Task_Description;
+        _selectedTaskStatus = taskStatuses[getTaskStatusIndex(newTask.Task_StatusID)];
+
+        if (newTask.Task_Due != null) {
+
+          _dueDate = newTask.Task_Due;
+          dueDateInput = DateFormat("yyyy-MM-dd").format(_dueDate);
+        }
+      } else {
+        titleController.text = "";
+        descriptionController.text = "";
+        _selectedTaskStatus = taskStatuses[0];
+        _dueDate = DateTime.now();
+        dueDateInput = "Select date ...";
+      }
 
       return showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog (
-              title: Text("New Task: "),
-              content: Container(
+            return StatefulBuilder(
+              builder: (context, setState) {
+                return AlertDialog(
+                  title: create == true
+                      ? Text("New Task: ")
+                      : Text(user
+                          .boards[getBoardIndex(widget.aList.ProjectID)]
+                          .boardLists[getListIndex(widget.aList.ListID)]
+                          .listTasks[getTaskIndex(_selectedTaskID)]
+                          .Task_Title),
+                  content: Container(
+                    child: Form(
+                      key: EditorKey,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            //Title
+                            TextFormField(
+                              controller: titleController,
+                              style: style.copyWith(color: Colors.black),
+                              obscureText: false,
+                              validator: (val) =>
+                                  val.isEmpty ? 'Enter Task Title' : null,
+                              onChanged: (val) {
 
-                child: Form(
-                  key: _formKey,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-
-                        //Title
-                        TextFormField(
-                          controller: titleController,
-                          style: style.copyWith(color: Colors.black),
-                          obscureText: false,
-                          validator: (val) =>
-                          val.isEmpty
-                              ? 'Enter Task Title'
-                              : null,
-                          onChanged: (val) {
-                            newTask.Task_Title = val;
-                          },
-                          decoration: InputDecoration(
-                              contentPadding: EdgeInsets.fromLTRB(
-                                  20.0, 15.0, 20.0, 15.0),
-                              hintText: "* Title",
-                              border:
-                              OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(32.0))
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-
-                        //Description
-                        TextFormField(
-                          controller: descriptionController,
-                          style: style.copyWith(color: Colors.black),
-                          maxLines: 5,
-                          obscureText: false,
-                          //validator: (val) => val.isEmpty ? 'Enter Task Title' : null,
-                          onChanged: (val) {
-                            newTask.Task_Description = val;
-                          },
-                          decoration: InputDecoration(
-                              contentPadding: EdgeInsets.fromLTRB(
-                                  20.0, 15.0, 20.0, 15.0),
-                              hintText: "Description",
-                              border:
-                              OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(32.0))
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-
-                        //Status
-                        TextFormField(
-                          controller: statusController,
-                          style: style.copyWith(color: Colors.black),
-                          //maxLines: 5,
-                          obscureText: false,
-                          //validator: (val) => val.isEmpty ? 'Enter Task Title' : null,
-                          onChanged: (val) {
-                            newTask.Task_StatusID = int.parse(val);
-                          },
-                          decoration: InputDecoration(
-                              contentPadding: EdgeInsets.fromLTRB(
-                                  20.0, 15.0, 20.0, 15.0),
-                              hintText: "Status",
-                              border:
-                              OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(32.0))
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-
-                        //Due
-                        TextFormField(
-                          controller: dueController,
-                          style: style.copyWith(color: Colors.black),
-                          //maxLines: 5,
-                          obscureText: false,
-                          //validator: (val) => val.isEmpty ? 'Enter Task Title' : null,
-                          onChanged: (val) {
-                            newTask.Task_Due = DateTime.parse(val);
-                          },
-                          decoration: InputDecoration(
-                              contentPadding: EdgeInsets.fromLTRB(
-                                  20.0, 15.0, 20.0, 15.0),
-                              hintText: "Date Due",
-                              border:
-                              OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(32.0))
-                          ),
-                        ),
+                                //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks[getListIndex(widget.aList.ListID)].Task_Title = val;
 
 
-                      ],
+                                setState(() {
+                                  newTask.Task_Title = val;
+                                  ChangedTask = true;
+                                });
+
+
+                              },
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.fromLTRB(
+                                      20.0, 15.0, 20.0, 15.0),
+                                  hintText: "* Title",
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(32.0))),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+
+                            //Description
+                            TextFormField(
+                              controller: descriptionController,
+                              style: style.copyWith(color: Colors.black),
+                              maxLines: 5,
+                              obscureText: false,
+                              //validator: (val) => val.isEmpty ? 'Enter Task Title' : null,
+                              onChanged: (val) {
+                                newTask.Task_Description = val;
+                                ChangedTask = true;
+                              },
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.fromLTRB(
+                                      20.0, 15.0, 20.0, 15.0),
+                                  hintText: "Description",
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(32.0))),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+
+                            //Status
+
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              decoration: ShapeDecoration(
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                      width: 1.0,
+                                      style: BorderStyle.solid,
+                                      color: Colors.grey),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(32.0)),
+                                ),
+                              ),
+                              child: Center(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    DropdownButton(
+                                      value: _selectedTaskStatus,
+                                      items: _dropdownTaskStatusMenuItems,
+                                      onChanged: (value) {
+                                        ChangedTask = true;
+                                        setState(() {
+                                          _selectedTaskStatus = value;
+                                        });
+                                      },
+                                      isExpanded: true,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+//                            TextFormField(
+//                              controller: statusController,
+//                              style: style.copyWith(color: Colors.black),
+//                              //maxLines: 5,
+//                              obscureText: false,
+//                              //validator: (val) => val.isEmpty ? 'Enter Task Title' : null,
+//                              onChanged: (val) {
+//                                newTask.Task_StatusID = int.parse(val);
+//                              },
+//                              decoration: InputDecoration(
+//                                  contentPadding:
+//                                  EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+//                                  hintText: "Status",
+//                                  border: OutlineInputBorder(
+//                                      borderRadius: BorderRadius.circular(32.0))),
+//                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+
+                            //Due
+                            Stack(
+                              children: <Widget>[
+                                Container(
+                                    width: double.infinity,
+                                    height: 60,
+                                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                    //padding: EdgeInsets.only(bottom: 10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey, width: 1),
+                                      borderRadius: BorderRadius.circular(32),
+                                      shape: BoxShape.rectangle,
+                                    ),
+                                    child: MaterialButton(
+                                      child: Row(
+                                        children: <Widget>[
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.calendar_today,
+                                              color: Color(0xff009999),
+                                            ),
+                                            onPressed: () {},
+                                            //tooltip: "Select start date",
+                                          ),
+                                          Text(
+                                            dueDateInput,
+                                            style: dateStyle,
+                                          ),
+                                        ],
+                                      ),
+                                      onPressed: () async {
+                                        await selectDueDate(context);
+                                        setState(() {
+                                          dueDateInput =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(_dueDate);
+                                          ChangedTask = true;
+                                        });
+                                      },
+                                    )),
+                                Positioned(
+                                    left: 10,
+                                    top: 12,
+                                    child: Container(
+                                      padding: EdgeInsets.only(
+                                          bottom: 10, left: 3, right: 0),
+                                      margin: EdgeInsets.only(left: 10),
+                                      color: Colors.white,
+                                      child: Text(
+                                        'Due Date:',
+                                        style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(.65)),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
+                  ),
+                  actions: <Widget>[
+                    create == true
+                        ? MaterialButton(
+                            elevation: 5.0,
+                            child: Text("Create"),
+                            onPressed: () async {
+                              if(EditorKey.currentState.validate()){
+                                newTask.Task_Title = titleController.text;
+                                newTask.Task_Description =
+                                    descriptionController.text;
+                                newTask.ListID = widget.aList.ListID;
+                                newTask.Task_AddedBy = personNo;
+
+                                //NB COME BACK AND CHANGE THIS!
+                                newTask.Task_StatusID = _selectedTaskStatus.TaskStatusID;
+
+                                newTask.Task_DateAdded = DateTime.now();
+
+                                //NB COME BACK AND CHANGE!
+                                //newTask.Task_Due=DateTime.parse(dueController.text);
+                                //newTask.Task_Due = DateTime.parse("2020-02-02");
+                                if(dueChanged==true){
+                                  newTask.Task_Due=_dueDate;
+                                }
+
+
+                                await taskController.createTask(newTask);
+                                //widget.aList.listTasks.add(newTask);
+//                                user
+//                                    .boards[getBoardIndex(widget.aList.ProjectID)]
+//                                    .boardLists[getListIndex(widget.aList.ListID)]
+//                                    .listTasks
+//                                    .add(newTask);
+                                widget.initializeTaskDisplay();
+                                stiles[getListIndex(widget.aList.ListID)] =
+                                new StaggeredTile.count(
+                                    2,
+                                    stiles[getListIndex(widget.aList.ListID)]
+                                        .mainAxisCellCount +
+                                        1.5);
+                              }
+
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        : Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                  alignment: Alignment.bottomLeft,
+                                  //color: Colors.green,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.75,
+                                  child: MaterialButton(
+                                    elevation: 5.0,
+                                    child: Text(
+                                      "DELETE",
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                    onPressed: () async {
+                                      print("DELETE TASK: "+_selectedTaskID.toString());
+                                      int send=_selectedTaskID;
+                                      await taskController.deleteTask(send);
+                                      //widget.aList.listTasks.removeWhere((element) => element.TaskID==_selectedTaskID);
+                                      //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks=await taskController.ReadTasks(widget.aList.ListID);
+                                      //listDynamic.removeAt(boardIndex);
+                                      //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.removeWhere((element) => element.TaskID==_selectedTaskID);
+//                                homePage.initializeDisplay();
+                                      //boardPage.populateListDisplay(widget.aList.ProjectID);
+                                      //Navigator.popAndPushNamed(context, '/Board');
+
+                                      setState(() {});
+                                      Navigator.of(context).pop();
+                                    },
+                                  )),
+                              Container(
+                                  alignment: Alignment.bottomRight,
+                                  //color: Colors.green,
+                                  child: MaterialButton(
+                                    elevation: 5.0,
+                                    child: Text("Ok"),
+                                    onPressed: () {
+                                      //boardTitle = titleController.text;
+                                      //print(widget.aboard.Project_Description);
+                                      if (EditorKey.currentState
+                                          .validate()) {
+
+                                        if (dueChanged == true) {
+                                          newTask.Task_Due = _dueDate;
+                                        }
+                                        newTask.Task_StatusID=_selectedTaskStatus.TaskStatusID;
+                                        //newTask.Task_Title=titleController.text;
+                                        //taskController.updateTask(newTask);
+                                        if (ChangedTask == true) {
+                                          print("Update task");
+                                          taskController.updateTask(newTask);
+
+                                        }
+                                      }
+                                      newTask=new Task();
+                                      titleController.text = "";
+                                      descriptionController.text = "";
+                                      _selectedTaskStatus = taskStatuses[0];
+                                      _dueDate = DateTime.now();
+                                      dueDateInput = "Select date ...";
+                                      Navigator.of(context).pop();
+                                    },
+                                  )),
+                            ],
+                          ),
+                  ],
+                );
+              },
+            );
+          });
+    }
+
+    Future<String> editListAlertDialog(BuildContext context) {
+      TextEditingController titleController = new TextEditingController();
+      titleController.text = widget.aList.List_Title;
+      String title = "";
+      if (widget.aList.List_Title != null) {
+        title = widget.aList.List_Title;
+      }
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Edit title: "),
+              content: Form(
+                key: titleEditorKey,
+                child: TextFormField(
+                  controller: titleController,
+                  validator: (val) => val.isEmpty ? 'Enter a Title' : null,
+                  onChanged: (val) {
+                    setState(() => widget.aList.List_Title = val);
+                  },
+                  style: style.copyWith(color: Colors.black),
+                  decoration: InputDecoration(
+                    //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+
+                    //hintText: "Student Number",
+                      border:
+                      OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))
                   ),
                 ),
               ),
               actions: <Widget>[
                 MaterialButton(
                   elevation: 5.0,
-                  child: Text("Create"),
-                  onPressed: () async{
-                    newTask.Task_Title = titleController.text;
-                    newTask.Task_Description = descriptionController.text;
-                    newTask.ListID = widget.aList.ListID;
-                    newTask.Task_AddedBy = personNo;
-
-                    //NB COME BACK AND CHANGE THIS!
-                    newTask.Task_StatusID = 1;
-
-                    newTask.Task_DateAdded = DateTime.now();
-
-                    //NB COME BACK AND CHANGE!
-                    //newTask.Task_Due=DateTime.parse(dueController.text);
-                    newTask.Task_Due = DateTime.parse("2020-02-02");
-                    print("BEFORE: "+user.boards[BoardIdentificationIndex].boardLists[getListIndex(widget.aList.ListID)].listTasks.length.toString());
-                    await taskController.createTask(newTask);
-                    //widget.aList.listTasks.add(newTask);
-                    user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.add(newTask);
-                    stiles[getListIndex(widget.aList.ListID)]=new StaggeredTile.count(2,stiles[getListIndex(widget.aList.ListID)].mainAxisCellCount+1.5);
-                    //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
-
-//                    setState(() {
-//
-//                    });
-
-                    Navigator.of(context).pop();
+                  child: Text("Save"),
+                  onPressed: () {
+                    if(titleEditorKey.currentState.validate()){
+                      widget.aList.List_Title = titleController.text;
+                      listController.updateList(widget.aList);
+                      //Navigator.of(context).pop(titleController.text.toString());
+                      Navigator.of(context).pop();
+                    }
                   },
                 )
+              ],
+            );
+          });
+    }
+
+    Future<String> confirmDeleteAlertDialog(BuildContext context) {
+
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("CONFIRM DELETE ",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
+              content: Text("Are you sure you want to delete this list?",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),),
+              actions: <Widget>[
+
+                MaterialButton(
+                  elevation: 5.0,
+                  child: Text("Yes",style: TextStyle(color: Colors.red),),
+                  onPressed: () async{
+                    print("LIST: "+widget.aList.ListID.toString());
+                    await listController.deleteList(widget.aList.ListID);
+                    //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists=await listController.ReadLists(widget.aList.ProjectID);
+                    Navigator.pop(context);
+                  },
+                ),
+                MaterialButton(
+                  elevation: 5.0,
+                  child: Text("No"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
               ],
             );
           });
@@ -725,29 +1225,24 @@ class _DynamicListState extends State<DynamicList> {
 
       //Color(0xff009999),
       child: MaterialButton(
-          minWidth: MediaQuery
-              .of(context)
-              .size
-              .width,
+          minWidth: MediaQuery.of(context).size.width,
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          onPressed: ()  async{
-            await createTaskAlertDialog(context);
+          onPressed: () async {
+            initializeTaskStatus();
+
+            await createTaskAlertDialog(context, true);
             //print("PROJECT ID?!?!?: "+widget.aList.ProjectID.toString());
-            boardPage = new Board(
-              proj_board: user.boards[getBoardIndex(widget.aList.ProjectID)],
-            );
-
-            await boardPage.populateListDisplay(widget.aList.ProjectID);
-
-            Navigator.popAndPushNamed(context, '/Board');
-//            Navigator.push(
-//              context,
-//              MaterialPageRoute(
-//                  builder: (BuildContext context) => boardPage),
+//            boardPage = new Board(
+//              proj_board: user.boards[getBoardIndex(widget.aList.ProjectID)],
 //            );
+
+           // await boardPage.populateListDisplay(widget.aList.ProjectID);
+            await widget.initializeTaskDisplay();
             setState(() {
 
             });
+            //Navigator.popAndPushNamed(context, '/Board');
+
           },
           key: Key('ListInput'),
           child: Row(
@@ -767,14 +1262,13 @@ class _DynamicListState extends State<DynamicList> {
           )),
     );
 
+    // ignore: non_constant_identifier_names
     final TaskContainer = new Expanded(
         flex: 1,
-        child: ListView.builder
-          (
-
-          itemCount: widget.aList.listTasks.length,
-
-          itemBuilder: (BuildContext ctxt, int index) {
+        child: ListView.builder(
+          itemCount: user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.length,
+          // ignore: non_constant_identifier_names
+          itemBuilder: (BuildContext Context, int index) {
             return new Container(
               margin: EdgeInsets.all(4),
               height: 80,
@@ -795,57 +1289,102 @@ class _DynamicListState extends State<DynamicList> {
               child: ClipPath(
                 clipper: ShapeBorderClipper(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))
-                    )
-                ),
+                        borderRadius: BorderRadius.all(Radius.circular(10)))),
                 child: Container(
                   height: 200.0,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       border: Border(
                           left: BorderSide(
-                              color: Color(0xff009999),
-                              width: 5.0
-                          )
-                      )
-                  ),
+                              color: Color(0xff009999), width: 5.0))),
                   child: ListTile(
-                    title: Text(widget.aList.listTasks[index].Task_Title),
-                    trailing:
-                    PopupMenuButton<String>(
-                      onSelected: choiceAction,
-                      itemBuilder: (BuildContext context){
-                        return Constants.choices.map((String choice){
-                          return PopupMenuItem<String>(
-                            value: choice,
-                            child: Text(choice),
-                          );
-                        }).toList();
-                      },
-                    )
-//                    IconButton(
-//                      icon: Icon(Icons.more_vert),
-//                      onPressed: () {
-//
-//                      },
-//                    ),
+                    title: Text(user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks[index].Task_Title),
+                    onTap: () async {
+                      _selectedTaskID = user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks[index].TaskID;
+                      initializeTaskStatus();
+                      //print("Current tasks: "+user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.length.toString());
+                      await createTaskAlertDialog(context, false);
+                      await widget.initializeTaskDisplay();
+                      Board boardPage = new Board(
+                        proj_board: user.boards[getBoardIndex(widget.aList.ProjectID)],
+                      );
+                      Navigator.pop(context);
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (BuildContext context) => boardPage),
+                      );
+                    },
                   ),
                 ),
               ),
-              //margin: EdgeInsets.all(3),
-//              child:
             );
           },
           shrinkWrap: true,
+        ));
 
-        )
+    Widget titleView =Container(
+      width: MediaQuery.of(context).size.width / 4,
+      child: Text(widget.aList.List_Title,
+          style: TextStyle(
+              fontFamily: 'Montserrat',
+              fontSize: 14.0,
+              color: Colors.black,
+              fontWeight: FontWeight.bold)
+      ),
     );
 
+    TextEditingController listTitleController = new TextEditingController();
+
+    void delpop(){
+      stiles.clear();
+      int boardIndex = getBoardIndex(widget.aList.ProjectID);
+
+      listDynamic.clear();
+      for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+        DynamicList dynamicCreatedList = new DynamicList(
+            aList: user.boards[boardIndex].boardLists[i]);
+
+        listDynamic.add(dynamicCreatedList);
+
+        //print("List: "+user.boards[boardIndex].boardLists[i].List_Title+" has "+user.boards[boardIndex].boardLists[i].listTasks.length.toString()+" tasks");
+        stiles.add(StaggeredTile.count(
+            2, user.boards[boardIndex].boardLists[i].listTasks.length + 1.5));
+
+      }
+    }
+
+
+    Future choiceAction(String choice) async {
+      if (choice == Constants.Edit) {
+        //print(widget.aList.ListID);
+        await editListAlertDialog(context);
+        setState(() {
+
+        });
+
+
+      } else if (choice == Constants.Delete) {
+        await confirmDeleteAlertDialog(context);
+        user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists=await listController.ReadLists(widget.aList.ProjectID);
+
+        //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
+        Board boardPage = new Board(
+          proj_board: user.boards[getBoardIndex(widget.aList.ProjectID)],
+        );
+        Navigator.pop(context);
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => boardPage),
+        );
+
+      }
+    }
+
+    // ignore: non_constant_identifier_names
     final BoardItem = Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width / 2,
+      width: MediaQuery.of(context).size.width / 2,
       margin: new EdgeInsets.all(6.0),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -861,36 +1400,25 @@ class _DynamicListState extends State<DynamicList> {
 
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width / 4,
-                  child: Text(widget.aList.List_Title,
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 14.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold)),
-                ),
-                IconButton(
-                  icon: Icon(Icons.more_vert),
-                  onPressed: () {
-                    //createAlertDialog(context);
-                  },
-                ),
+                titleView,
+                PopupMenuButton<String>(
+                        onSelected: choiceAction,
+                        itemBuilder: (BuildContext context) {
+                          return Constants.choices.map((String choice) {
+                            return PopupMenuItem<String>(
+                              value: choice,
+                              child: choice!="Delete"?Text(choice):Text(choice,style: TextStyle(color: Colors.red),),
+                            );
+                          }).toList();
+                        },
+                      ),
               ],
             ),
             TaskContainer,
-
-
             addTaskButton,
-
           ]),
     );
-
 
     return BoardItem;
   }
 }
-
