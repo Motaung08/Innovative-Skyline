@@ -87,6 +87,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
           actions: <Widget>[
             FlatButton(
               child: new Text("OK"),
+              key: Key("FlatButton"),
               onPressed: () {
                 //Navigator.of(context).pop();
 

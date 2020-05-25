@@ -1,40 +1,79 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 import 'package:postgrad_tracker/View/profile/student/ViewStudentProfile.dart';
 import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
 
+import 'Models_test.dart';
+
+
 void main(){
-  test('validation failed', (){
-    final results = ViewStudentProfilePage.validate(null);
-    expect(results, 'null');
+  group('All pages should be accessed', ()
+  {
+    test('validation failed', () {
+      final results = ViewStudentProfilePage.validate(null);
+      expect(results, 'null');
+    });
+    test('validation passed', () {
+      final results = ViewStudentProfilePage.validate('nully');
+      expect(results, 'nully');
+    });
+    test('validation date failed', () {
+      DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+      final results = ViewStudentProfilePage.validateDate(null);
+      expect(results, dateFormat.parse('0000-00-00'));
+    });
+    test('validation date passed', () {
+      DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+      final DateTime dateTime = DateTime(2000);
+      final results = ViewStudentProfilePage.validateDate(dateTime);
+      expect(results, dateTime);
+    });
+    test('validation1 failed', () {
+      final results = ViewSupProfilePage.validate(null);
+      expect(results, 'null');
+    });
+    test('validation1 passed', () {
+      final results = ViewSupProfilePage.validate('nully');
+      expect(results, 'nully');
+    });
+
+//    testWidgets('All input feild and button widgets should be on screen', (
+//        WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(ViewStudentProfilePage()));
+
+      // ignore: non_constant_identifier_names
+//      final ProfileField = find.byKey(Key('ProfileText'));
+//      expect(ProfileField, findsOneWidget);
+
+      // ignore: non_constant_identifier_names
+//      final NameField = find.byKey(Key('NameText'));
+//      expect(NameField, findsOneWidget);
+//
+//      // ignore: non_constant_identifier_names
+//      final StudentNoField = find.byKey(Key('StudentNoText'));
+//      expect(StudentNoField, findsOneWidget);
+//
+//      // ignore: non_constant_identifier_names
+//      final EmailField = find.byKey(Key('EmailText'));
+//      expect(EmailField, findsOneWidget);
+//
+//      // ignore: non_constant_identifier_names
+//      final DegreeField = find.byKey(Key('DegreeText'));
+//      expect(DegreeField, findsOneWidget);
+//
+//      // ignore: non_constant_identifier_names
+//      final DORField = find.byKey(Key('DORText'));
+//      expect(DORField, findsOneWidget);
+//
+//      // ignore: non_constant_identifier_names
+//      final StudentField = find.byKey(Key('StudentText'));
+//      expect(StudentField, findsOneWidget);
+
+//    });
+
+
 
   });
-  test('validation passed', (){
-    final results = ViewStudentProfilePage.validate('nully');
-    expect(results, 'nully');
 
-  });
-  test('validation date failed', (){
-    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
-    final results = ViewStudentProfilePage.validateDate(null);
-    expect(results, dateFormat.parse('0000-00-00'));
-
-  });
-  test('validation date passed', (){
-    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
-    final DateTime dateTime =DateTime(2000);
-    final results = ViewStudentProfilePage.validateDate(dateTime);
-    expect(results, dateTime);
-
-  });
-  test('validation1 failed', (){
-    final results = ViewSupProfilePage.validate(null);
-    expect(results, 'null');
-
-  });
-  test('validation1 passed', (){
-    final results = ViewSupProfilePage.validate('nully');
-    expect(results, 'nully');
-
-  });
 }

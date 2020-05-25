@@ -3,15 +3,14 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
+import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/View/Login.dart';
-import 'package:postgrad_tracker/View/register/StudentRegister.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
-import 'package:postgrad_tracker/View/register/SupervisorRegister.dart';
 
-import 'fetchPost.dart';
 
 
 class Post {
@@ -42,6 +41,7 @@ Widget makeWidgetTestable(Widget widget){
 
 main() {
   group('Server connection', () {
+
     test(
         'returns a Post if the Login http call completes successfully', () async {
       final client = MockClient();
@@ -90,12 +90,11 @@ main() {
 
     });
 
-    testWidgets('All input feild and button widgets should be on screen', (
-        WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(SupervisorRegisterPage()));
+    testWidgets('find by tap', (WidgetTester tester) async {
+
+
 
     });
-    
 
 
 
