@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
+import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/profile/student/ViewStudentProfile.dart';
 import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
+import 'package:postgrad_tracker/main.dart';
 
 import 'Models_test.dart';
 
@@ -36,6 +38,35 @@ void main(){
     test('validation1 passed', () {
       final results = ViewSupProfilePage.validate('nully');
       expect(results, 'nully');
+    });
+
+    test("getter and setter methods", ()
+    {
+      student.fName = "Tshepang";
+      expect(student.fName, "Tshepang");
+
+      student.lName = "Motaung";
+      expect(student.lName, "Motaung");
+
+      student.studentNo = "1431795";
+      expect(student.studentNo, "1431795");
+
+      student.email = "1431795@students.wits.ac.za";
+      expect(student.email, "1431795@students.wits.ac.za");
+
+      student.studentType = "Full-Year";
+      expect(student.studentType, "Full-Year");
+
+      student.degreeID = 1;
+      expect(student.degreeID, 1);
+
+//      student.registrationDate = "20-02-2009" as DateTime;
+//      expect(student.registrationDate,"20-02-2009" as DateTime);
+
+      // ignore: unnecessary_statements
+      student.key;
+
+
     });
 
 //    testWidgets('All input feild and button widgets should be on screen', (

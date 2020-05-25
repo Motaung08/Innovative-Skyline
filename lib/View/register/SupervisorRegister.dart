@@ -1,8 +1,5 @@
-import 'dart:convert';
 import 'dart:ui';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:postgrad_tracker/Controller/SupervisorController.dart';
 
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
