@@ -42,6 +42,7 @@ class _ViewSupProfilePageState extends State<ViewSupProfilePage> {
     final supervisorProfile = Container(
         child: Column(children: <Widget>[
           Text("Profile:  \n",
+              key: Key('ProfileText'),
               //textAlign: TextAlign.center,
               style: style.copyWith(
                   color: Color(0xff009999),
@@ -49,24 +50,28 @@ class _ViewSupProfilePageState extends State<ViewSupProfilePage> {
                   fontSize: 24)),
           Text("Name: " + ViewSupProfilePage.validate(supervisor.fName)+" "+ViewSupProfilePage.validate(supervisor.lName) + "\n",
               //textAlign: TextAlign.center,
+              key: Key('NameText'),
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
           Text("Staff Number: " + ViewSupProfilePage.validate(supervisor.staffNo) + "\n",
               //textAlign: TextAlign.start,
+              key: Key('StaffNumberText'),
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
           Text("Email: " + ViewSupProfilePage.validate(supervisor.email) + "\n",
               textAlign: TextAlign.center,
+              key: Key('EmailText'),
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
           Text("Office Phone: " + ViewSupProfilePage.validate(supervisor.office) + "\n",
               textAlign: TextAlign.start,
+              key: Key('OfficePhoneText'),
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
