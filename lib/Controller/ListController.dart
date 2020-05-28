@@ -19,7 +19,7 @@ class ListController extends StatefulWidget {
   // ignore: non_constant_identifier_names, missing_return
   Future<List<ListCard>> ReadLists(int ProjectID) async{
     List<ListCard> lists=List();
-      bool created = false;
+
       String msg = '';
 
         // SERVER API URL
@@ -56,19 +56,26 @@ class ListController extends StatefulWidget {
             listReceived.listTasks=await taskController.ReadTasks(listReceived.ListID);
 
             lists.add(listReceived);
+
             //user.boards[listReceived.ProjectID].boardLists[listReceived.ListID].listTasks=await taskController.ReadTasks(listReceived.ListID);
             //print("Added: "+listReceived.List_Title);
+
           }
 
 
           /*At this point all the previously created lists have been read in from
           the model and so the UI should then be populated.
           */
+
           return lists;
           //boardPage.populateListDisplay();
         }
 
   }
+
+
+
+
 
   /*
   The following method takes in a listCard - which is populated with values

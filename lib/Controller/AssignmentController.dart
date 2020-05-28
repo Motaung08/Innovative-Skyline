@@ -3,8 +3,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:postgrad_tracker/Model/Assignment.dart';
 
 class AssignmentController extends StatefulWidget {
+  Assignment assignment;
+
   /*
   The purpose of this method is to share a board. This is done by taking in the
   appropriate arguments to write to the Assignment table in the database -

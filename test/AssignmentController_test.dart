@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart';
 import 'package:http/testing.dart';
 import 'package:test/test.dart';
 import 'package:postgrad_tracker/Controller/AssignmentController.dart';
@@ -19,17 +20,14 @@ class MockAssignmentController extends Mock implements AssignmentController{
   }
 }
 
+
+
 void main() {
 
   group("Create assignment", (){
     test('Assignment created for valid supervisor', () async {
-      AssignmentController assignmentController=new MockAssignmentController();
-      //when(assignmentController.createAssignment(2, '0930', 55, 1)).thenAnswer((_) => Future.value(true));
 
 
-      var a = await assignmentController.createAssignment(2, 'A00', 55, 1).toString();
-
-      print(a);
 
 
     });
