@@ -7,6 +7,15 @@ import 'package:http/http.dart' as http;
 // ignore: camel_case_types
 class ListController extends StatefulWidget {
 
+  /*
+  The purpose of this method is to read in all instances in the List Table in
+  the database which as associated with the given ProjectID. Each of these
+  lists are then read in as a ListCard object(model) and are then stored in
+  a list so that when this method is called, a list containing all the ListCards
+  associated with the project is returned. These listCards can then be
+  individually accessed and their attributes called upon, such as showing each
+  of the list titles of a board when a user navigates to said board page.
+   */
   // ignore: non_constant_identifier_names, missing_return
   Future<List<ListCard>> ReadLists(int ProjectID) async{
     List<ListCard> lists=List();
@@ -61,6 +70,11 @@ class ListController extends StatefulWidget {
 
   }
 
+  /*
+  The following method takes in a listCard - which is populated with values
+  from the UI before this method is called - and then uses it's attribute values
+  to create a new instance within the List table of the database.
+   */
   Future createList(ListCard newList) async{
     bool created = false;
 
@@ -88,6 +102,12 @@ class ListController extends StatefulWidget {
 
   }
 
+  /*
+  The following method takes in a listCard - which is populated with values
+  previously stored as well as updates from the UI before this method is called
+  - and then uses it's attribute values to update the list instance associated
+   with the ListID (of the passed in list) in the List table of the database.
+   */
   Future updateList(ListCard aList) async{
     var url =
 
@@ -109,6 +129,12 @@ class ListController extends StatefulWidget {
     print(message);
   }
 
+  /*
+  The following method takes in a listCard - which is populated with values
+  previously stored as well as updates from the UI before this method is called
+  - and then uses it's attribute values to delete the list instance associated
+   with the ListID (of the passed in list) in the List table of the database.
+   */
   // ignore: non_constant_identifier_names
   Future deleteList(int ListID) async{
     //print('We want to delete list '+ListID.toString());

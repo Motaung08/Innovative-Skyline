@@ -9,6 +9,11 @@ import 'package:password_hash/password_hash.dart';
 // ignore: must_be_immutable
 class UserController extends StatefulWidget {
 
+  /*
+  The purpose of the following method is to take in a User object and use the
+  User values to create an instance in the User table in the database. This
+  method also ensures no duplicate email is used.
+   */
   Future<String> userRegistration(User userA) async {
     user.register = false;
 
@@ -36,11 +41,16 @@ class UserController extends StatefulWidget {
     return message;
   }
 
+  /*
+  The following  method is used to determine whether a user may proceed to the
+  home screen and if they may, then the home screen should be populated
+  accordingly.
+   */
   Future<bool> login(String email, String Password) async {
 
     bool proceed=false;
 
-print("EMAIL: "+email+", Password: "+Password);
+  print("EMAIL: "+email+", Password: "+Password);
 
     final response = await http.post(
         //"http://146.141.21.17/login.php",
@@ -72,7 +82,7 @@ print("EMAIL: "+email+", Password: "+Password);
         await taskStatusController.getStatuses();
       if (user.userTypeID==1){
 
-        await studentController.GetStudDetails(user.email);
+        await studentController.setStudentUser(user.email);
 
         await studentTypeController.getTypes();
 
@@ -80,7 +90,7 @@ print("EMAIL: "+email+", Password: "+Password);
 
       }
       else{
-        await supervisorController.GetSupDetails();
+        await supervisorController.setUserSup(email);
 
       }
       proceed=true;
@@ -90,6 +100,10 @@ print("EMAIL: "+email+", Password: "+Password);
     return proceed;
   }
 
+  /*
+  The following method is used to return all instances in the User table in the
+  database as a list of User objects.
+   */
   Future<List<User>> ReadUsers() async {
     List<User> registered=[];
     // SERVER API URL
@@ -97,11 +111,6 @@ print("EMAIL: "+email+", Password: "+Password);
     //'http://146.141.21.17/ReadBoards.php';
         'https://witsinnovativeskyline.000webhostapp.com/readUsers.php';
 
-//    var data={
-//      'UserTypeID' : user.userTypeID.toString(),
-//      'StudentNo' : student.studentNo,
-//      'StaffNo' : supervisor.staffNo
-//    };
 
     // Starting Web API Call.
     var response = await http.post(url);
@@ -133,6 +142,11 @@ print("EMAIL: "+email+", Password: "+Password);
     return registered;
   }
 
+  /*
+  This method exists for the main reason that when a user would like to share a
+  board, we have a means of checking that the board is being shared with a valid
+  user.
+   */
   Future<bool> userExists(String Email) async{
     print("Looking for: "+Email);
     List<User> registeredUsers=await ReadUsers();
@@ -146,6 +160,10 @@ print("EMAIL: "+email+", Password: "+Password);
     return exists;
   }
 
+  /*
+  This method is used to retrieve the user details/attributes based on the given
+  email address.
+   */
   Future<User> getUser(String Email) async{
     List<User> registeredUsers=await ReadUsers();
     User giveUser=new User();
@@ -157,6 +175,12 @@ print("EMAIL: "+email+", Password: "+Password);
     return giveUser;
   }
 
+  /*
+  This method serves the purpose of resetting a users password. This is done by
+  passing in an email address and password so that the instance associated with
+  the user/email may be retrieved and subsequently updated with the given
+  password(hashing is done within the PHP script).
+   */
   String ResetString="";
   Future<String> ResetPassword(String email, String password) async{
     

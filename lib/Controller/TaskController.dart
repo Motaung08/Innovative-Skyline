@@ -7,8 +7,13 @@ import 'package:http/http.dart' as http;
 // ignore: camel_case_types
 class TaskController extends StatefulWidget {
 
+  /*
+  The purpose of this method is to read in all the instances in the Task table
+  with the ListID of that which is passed in. These instances are returned in
+  the form of a list of Task objects.
+   */
   // ignore: non_constant_identifier_names
-  Future<List> ReadTasks(int ListID) async{
+  Future<List<Task>> ReadTasks(int ListID) async{
     List<Task> tasks=new List();
       bool created = false;
       String msg = '';
@@ -65,6 +70,11 @@ class TaskController extends StatefulWidget {
     return tasks;
   }
 
+  /*
+  The purpose of this method is to take in a Task (for it's associated values)
+  and create an instance in the Task table in the database with the values
+  of the passed in task.
+   */
   Future createTask(Task aTask) async{
     bool created = false;
       print("CREATING TASK...");
@@ -106,6 +116,13 @@ class TaskController extends StatefulWidget {
 
   }
 
+  /*
+  The purpose of this method is to take in a Task (for it's associated values)
+  and update the instance in the Task table (the instance with the
+  corresponding TaskID to that which was passed in) with the values
+  of the passed in task (said values may have been updated by the user via the
+  UI).
+   */
   Future updateTask(Task aTask) async{
     var url =
 
@@ -152,6 +169,11 @@ $DueDate = $obj['Task_Date_Due'];
     print(message);
   }
 
+  /*
+  The purpose of this method is to take in a Task (for it's associated values)
+  and remove the instance in the Task table (the instance with the
+  corresponding TaskID to that which was passed in).
+   */
   Future deleteTask(int TaskID) async{
     print("yowhoo: "+TaskID.toString());
 

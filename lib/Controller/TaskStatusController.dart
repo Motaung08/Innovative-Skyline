@@ -6,6 +6,11 @@ import 'package:postgrad_tracker/Model/TaskStatus.dart';
 import 'package:postgrad_tracker/main.dart';
 
 class TaskStatusController extends StatefulWidget {
+  /*
+  The purpose of this method is to read in all instances in the TaskStatus table
+  in the database so that when creating or updating a task, a pre-populated list
+  of task statuses may be shown to be chosen from.
+   */
   Future getStatuses() async{
     //print('I am called');
 //    final response = await http.post("http://146.141.21.17/getStudentTypes.php");

@@ -34,6 +34,7 @@ void main() {
         'returns a Post if the Board http call completes successfully', () async {
       final client = MockClient();
 
+
       when(client.get(
           'https://witsinnovativeskyline.000webhostapp.com/getDegreeTypes.php'))
           .thenAnswer((_) async => http.Response('{"title": "Test"}', 200));
@@ -52,6 +53,8 @@ void main() {
     test(
         'returns a Post if the DegreeController http call completes successfully', () async {
       final client = MockClient();
+      final degree=DegreeController();
+
 
       when(client.get(
           'https://witsinnovativeskyline.000webhostapp.com/getDegreeTypes.php'))

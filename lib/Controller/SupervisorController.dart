@@ -9,39 +9,11 @@ import 'package:postgrad_tracker/main.dart';
 
 class SupervisorController extends StatefulWidget {
 
-  // ignore: non_constant_identifier_names
-  Future<List> GetSupDetails() async {
-    var msg="";
-    final response = await http.post(
-       // "http://146.141.21.17/viewSupProfile.php",
-        "https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php",
-        body: {
-          "Email": user.email,
-        });
-
-    var datauser = json.decode(response.body);
-
-    if (datauser.length == 0) {
-      print("Nada");
-      msg = " Error :( ";
-    } else {
-
-      supervisor.staffNo = datauser[0]['StaffNo'];
-      personNo=supervisor.staffNo;
-      supervisor.fName = datauser[0]['Supervisor_Firstname'];
-      supervisor.lName = datauser[0]['Supervisor_Lastname'];
-      supervisor.email=user.email;
-      supervisor.office=datauser[0]['Supervisor_OfficePhone'];
-      Project_BoardController project_boardController=new Project_BoardController();
-      user.boards=await project_boardController.ReadBoards(user.userTypeID,supervisor.staffNo);
-      print("Assigning...");
-      print(datauser);
-    }
-
-
-    return datauser;
-  }
-
+  /*
+  The purpose of this method is to retrieve the Supervisor instance associated
+  with the given email address and assign the instance attributes to a new
+  Supervisor object which is subsequently returned.
+   */
   Future<Supervisor> fetchSup(String email) async {
     Supervisor fetchedSup=new Supervisor();
     final response = await http.post(
@@ -68,6 +40,33 @@ class SupervisorController extends StatefulWidget {
     return fetchedSup;
   }
 
+  /*
+  The purpose of this method is to set the user as a supervisor and load their
+  supervisor attributes as well as loading the boards which are associated with
+  said user/supervisor.
+   */
+  Future setUserSup(String email)async{
+    supervisor=await fetchSup(email);
+    Project_BoardController project_boardController=new Project_BoardController();
+    user.boards=await project_boardController.ReadBoards(user.userTypeID,supervisor.staffNo);
+  }
+
+  /*
+    The purpose of this method is to take in a supervisor object and a user
+    object (created when the user selects register under the supervisor
+    registration page) and subsequently creates instances in the Supervisor
+    Table and User Table respectively. This method ensures that a duplicate
+    email address is not used.
+
+    This registration method is different to that in StudentController
+    as different data is required to be passed in.
+
+     NOTE: Should add a check that the staff number is also unique
+     as the database requires a unique staff number!
+
+     NOTE: Should subsequently log the new user in if the registration is
+     successful.
+   */
   Future<String> registration(Supervisor supervisorA, User userA) async {
     supervisor.register = false;
     String userRegistrationMessage="";

@@ -8,6 +8,13 @@ import 'package:postgrad_tracker/main.dart';
 
 class StudentTypeController extends StatefulWidget {
 
+  /*
+  This method should retrieve the different types of possible students so that
+  upon registration, a student may select from a pre-populated list, which type
+  of student they are. This is a type of future-proofing for when there may be
+  more types of students such as full-time foreign students, part-time foreign
+  students, disability students, etc, which may need to behave differently.
+   */
   Future getTypes() async{
     //print('I am called');
 //    final response = await http.post("http://146.141.21.17/getStudentTypes.php");

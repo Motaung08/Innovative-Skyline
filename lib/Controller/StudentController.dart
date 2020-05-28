@@ -11,58 +11,13 @@ import 'package:postgrad_tracker/main.dart';
 // ignore: must_be_immutable
 class StudentController extends StatefulWidget {
 
-  String msg = '';
-  // ignore: non_constant_identifier_names
-  Future<List> GetStudDetails(String email) async {
-    print('hhhhhhhhhhhhhhhhhhhhhhhhhhhh     ');
-//    print('let us deduce details...'+user.email);
-    Student aStudent=new Student();
-    final response = await http.post(
-       // "http://146.141.21.17/viewStudentProfile.php",
-        "https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php",
-        body: {
-          "Email": email,
-        });
-
-    var datauser = json.decode(response.body);
-
-    if (datauser.length == 0) {
-      print("Nada");
-      //setState(() {
-      msg = " Error :( ";
-      // });
-    } else {
-      print("Assigning...");
-      print(datauser);
-
-      student.fName = datauser[0]['Student_FirstName'];
-      student.lName = datauser[0]['Student_LastName'];
-      student.studentNo = datauser[0]['StudentNo'];
-      personNo=student.studentNo;
-      print('currently ... student no: '+ student.studentNo);
-      student.degreeID = int.parse(datauser[0]['Degree_ID']);
-      student.registrationDate=DateTime.parse(datauser[0]['Student_RegistrationDate']);
-      //print('currently ... date: '+ student.registrationDate.toString());
-      student.email=user.email;
-      student.studentTypeID=int.parse(datauser[0]['StudentTypeID']);
-      //student.studentType = studentTypes[student.studentTypeID-1].Student_Type;
-      //student.degreeId=degrees[student.degreeID-1].Degree_Type;
-      //print("UserTypeID: "+user.userTypeID.toString()+" ,Student Number: "+student.studentNo);
-      user.boards.clear();
-      Project_BoardController project_boardController=new Project_BoardController();
-      user.boards=await project_boardController.ReadBoards(user.userTypeID,student.studentNo);
-    }
-    //print(response.body);
-
-    return datauser;
-  }
-
+  /*
+  The purpose of this method is to retrieve the attributes of a specified
+  Student instance in the database based on a passed in email address.
+   */
   Future<Student> fetchStudent(String email) async {
-    print('hhhhhhhhhhhhhhhhhhhhhhhhhhhh     ');
-//    print('let us deduce details...'+user.email);
     Student aStudent=new Student();
     final response = await http.post(
-      // "http://146.141.21.17/viewStudentProfile.php",
         "https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php",
         body: {
           "Email": email,
@@ -73,7 +28,7 @@ class StudentController extends StatefulWidget {
     if (datauser.length == 0) {
       print("Nada");
       //setState(() {
-      msg = " Error :( ";
+      //msg = " Error :( ";
       // });
     } else {
       print("Assigning...");
@@ -84,19 +39,41 @@ class StudentController extends StatefulWidget {
       aStudent.studentNo = datauser[0]['StudentNo'];
       aStudent.degreeID = int.parse(datauser[0]['Degree_ID']);
       aStudent.registrationDate=DateTime.parse(datauser[0]['Student_RegistrationDate']);
-      //print('currently ... date: '+ student.registrationDate.toString());
       aStudent.email=datauser[0]['Student_Email'];
       aStudent.studentTypeID=int.parse(datauser[0]['StudentTypeID']);
     }
-    //print(response.body);
 
     return aStudent;
   }
 
-  // ignore: non_constant_identifier_names
+
+  /*
+  The purpose of this method is to assign the student attributes of a user
+  and subsequently load the project boards which are associated.
+   */
+  Future setStudentUser(String email) async {
+    student= await fetchStudent(email);
+    user.boards.clear();
+    Project_BoardController project_boardController=new Project_BoardController();
+    user.boards=await project_boardController.ReadBoards(user.userTypeID,student.studentNo);
+  }
 
 
 
+
+  /*
+    The purpose of this method is to take in a student object and a user object
+     (created when the user selects register under the student registration
+     page) and subsequently creates instances in the Student Table and User
+     Table respectively. This method ensures that a duplicate email address is
+     not used.
+
+     NOTE: Should add a check that the student number is also unique
+     as the database requires a unique student number!
+
+     NOTE: Should subsequently log the new user in if the registration is
+     successful.
+   */
   Future<String> studentRegistration(Student studentA, User userA) async {
     student.register=false;
     bool success=false;

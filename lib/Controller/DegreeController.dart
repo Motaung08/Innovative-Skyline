@@ -1,12 +1,18 @@
 import 'dart:convert';
+import 'package:mockito/mockito.dart';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Model/DegreeType.dart';
 import 'package:postgrad_tracker/main.dart';
 
 class DegreeController extends StatefulWidget {
 
+/*
+The purpose of this method is to fetch the different types of degrees stored.
+This is so that upon student app registration, the student may select from a
+pre-populated list of degree types such as Honours, masters by coursework, etc.
+ */
   Future getDegrees() async{
 
     //final response = await http.post("http://146.141.21.17/getDegreeTypes.php");
@@ -30,6 +36,8 @@ class DegreeController extends StatefulWidget {
   @override
   _DegreeControllerState createState() => _DegreeControllerState();
 }
+
+
 
 class _DegreeControllerState extends State<DegreeController> {
   @override

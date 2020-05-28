@@ -8,6 +8,14 @@ import 'package:http/http.dart' as http;
 // ignore: camel_case_types
 class Project_BoardController extends StatefulWidget {
 
+  /*
+  The purpose of this method is to read in all boards associated with the user
+  who is currently signed in. The UserTypeID is passed in so that the correct
+  SQL statement may be executed (to check the student or supervisor column in
+  the Assignment table depending on if the UserTypeID indicates student or
+  supervisor). This method should return a list of Project_Board instances
+  associated with the specified user.
+   */
   // ignore: non_constant_identifier_names
   Future<List> ReadBoards(int UserTypeID, String personNo) async{
     List<Project_Board> boards=List();
@@ -76,6 +84,11 @@ class Project_BoardController extends StatefulWidget {
     return boards;
   }
 
+  /*
+  The purpose of this method is to create a Project_Board instance in the
+  database based on the attribute values stored in the newBoard which is
+  passed in.
+   */
   Future createBoard(Project_Board newBoard) async{
     bool created = false;
 
@@ -112,6 +125,10 @@ class Project_BoardController extends StatefulWidget {
 
   }
 
+  /*
+  The purpose of this method is to delete a Project_Board instance in the
+  database based on the ProjectID of the newBoard which is passed in.
+   */
   Future deleteBoard(int ProjectID) async{
 
     // SERVER API URL
@@ -136,6 +153,11 @@ class Project_BoardController extends StatefulWidget {
 
   }
 
+  /*
+  The purpose of this method is to update a Project_Board instance in the
+  database based on the attribute values stored in the newBoard which is
+  passed in.
+   */
   Future updateBoard(Project_Board boardToUpdate) async{
     var url =
 
