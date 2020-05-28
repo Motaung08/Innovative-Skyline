@@ -27,9 +27,6 @@ class StudentRegisterPage extends StatefulWidget {
 }
 
 
-
-
-
 class _StudentRegisterPageState extends State<StudentRegisterPage> {
    Future initializeRegister () async {
     await widget.initialize();

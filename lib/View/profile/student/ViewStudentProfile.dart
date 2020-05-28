@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:intl/intl.dart';
 
 import '../../../user.dart';
+// ignore: camel_case_types
 class String_Validator {
 
 }
@@ -58,6 +58,7 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
 
         child: Column(children: <Widget>[
           Text("Profile:  \n",
+              key: Key('ProfileText'),
               //textAlign: TextAlign.center,
               style: style.copyWith(
                   color: Color(0xff009999),
@@ -65,18 +66,21 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
                   fontSize: 24)),
           Text("Name: " + ViewStudentProfilePage.validate(student.fName)+ " " +ViewStudentProfilePage.validate(student.lName) + "\n",
               //textAlign: TextAlign.center,
+              key: Key('Name'),
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
           Text("Student Number: " + ViewStudentProfilePage.validate(student.studentNo) + "\n",
               //textAlign: TextAlign.start,
+              key: Key('StudentNoText'),
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
                   fontSize: 18)),
           Text("Email: " + ViewStudentProfilePage.validate(student.email) + "\n",
               textAlign: TextAlign.center,
+              key: Key('EmailText'),
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
@@ -85,6 +89,7 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
 
               ViewStudentProfilePage.validate(degrees[student.degreeID-1].Degree_Type)
               + "\n",
+              key: Key('DegreeText'),
               textAlign: TextAlign.start,
               style: style.copyWith(
                   color: Color(0xff009999),
@@ -92,6 +97,7 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
                   fontSize: 18)),
           Text("Date Registered: " + dateFormat.format(ViewStudentProfilePage.validateDate(student.registrationDate)) + "\n",
               textAlign: TextAlign.start,
+              key: Key('DORText'),
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
@@ -100,6 +106,7 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
               ViewStudentProfilePage.validate(studentTypes[(student.studentTypeID-1)].Student_Type)
               + "\n",
               textAlign: TextAlign.start,
+              key: Key('StudentText'),
               style: style.copyWith(
                   color: Color(0xff009999),
                   fontWeight: FontWeight.bold,
