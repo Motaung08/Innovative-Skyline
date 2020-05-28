@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -10,10 +11,8 @@ class AssignmentController extends StatefulWidget {
   with special mention of who the board is being shared with as this will be
   used to load the board upon their logging in.
    */
-  String createAssignmentResponse="";
-  Future<String> createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID) async{
-    bool created=false;
-    createAssignmentResponse="";
+
+  Future createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID) async{
     var url =
         'https://witsinnovativeskyline.000webhostapp.com/createAssignment.php';
 
@@ -31,13 +30,8 @@ class AssignmentController extends StatefulWidget {
     // ignore: non_constant_identifier_names
     var Response = jsonDecode(response.body);
     print(Response);
-    createAssignmentResponse=Response;
 
-    if(Response=="Association created!"){
-      created=true;
-    }
     return Response;
-    //return created;
 
 
   }

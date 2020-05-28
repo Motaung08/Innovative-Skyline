@@ -25,14 +25,11 @@ void main() {
     test('Assignment created for valid supervisor', () async {
       AssignmentController assignmentController=new MockAssignmentController();
       //when(assignmentController.createAssignment(2, '0930', 55, 1)).thenAnswer((_) => Future.value(true));
-      String AssoTrue="Association created!";
-      String AssoFalse="NO association created!";
-      bool act=false;
 
-      //PostExpectation<Future<String>> ans = when(assignmentController.createAssignment(2, '0930', 55, 1));
-      String actual=await assignmentController.createAssignment(2, '0930', 55, 1);
-      when(assignmentController.createAssignment(2, '0930', 55, 1)).thenAnswer((_) => Future.value(AssoTrue));
 
+      var a = await assignmentController.createAssignment(2, 'A00', 55, 1).toString();
+
+      print(a);
 
 
     });
