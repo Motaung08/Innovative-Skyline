@@ -47,10 +47,4 @@ class _DegreeControllerState extends State<DegreeController> {
   }
 }
 
-class Degree extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 

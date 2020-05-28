@@ -1,19 +1,22 @@
+// Create a MockClient using the Mock class provided by the Mockito package.
+// Create new instances of this class in each test.
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
+
+class MockClient extends Mock implements http.Client {}
 
 class Post {
   dynamic data;
   Post.fromJson(this.data);
 }
 
-class MockClient extends Mock implements http.Client {}
-
 Future<Post> fetchPost(http.Client client) async {
   final response =
-  await client.get('https://witsinnovativeskyline.000webhostapp.com/login.php');
+  await client.get('https://jsonplaceholder.typicode.com/posts/1');
 
   if (response.statusCode == 200) {
     // If the call to the server was successful, parse the JSON.
@@ -25,48 +28,28 @@ Future<Post> fetchPost(http.Client client) async {
 }
 
 
-main(){
-  group('Server connection', () {
-        test('returns a Post if the Login http call completes successfully', () async {
-          final client = MockClient();
+main() {
+  group('fetchPost', () {
+    test('returns a Post if the http call completes successfully', () async {
+      final client = MockClient();
 
-          // Use Mockito to return a successful response when it calls the
-          // provided http.Client.
-          when(client.get('https://witsinnovativeskyline.000webhostapp.com/login.php'))
-              .thenAnswer((_) async => http.Response('{"title": "Test"}', 200));
+      // Use Mockito to return a successful response when it calls the
+      // provided http.Client.
+      when(client.get('https://jsonplaceholder.typicode.com/posts/1'))
+          .thenAnswer((_) async => http.Response('{"title": "Test"}', 200));
 
-    //      expect(await fetchPost(client), const TypeMatcher<Post>());
-        });
 
-        test('throws an exception if the Login http call completes with an error', () {
-          final client = MockClient();
+    });
 
-          // Use Mockito to return an unsuccessful response when it calls the
-          // provided http.Client.
-          when(client.get('https://witsinnovativeskyline.000webhostapp.com/login.php'))
-              .thenAnswer((_) async => http.Response('Not Found', 404));
+    test('throws an exception if the http call completes with an error', () {
+      final client = MockClient();
 
-          expect(fetchPost(client), throwsException);
-        });
+      // Use Mockito to return an unsuccessful response when it calls the
+      // provided http.Client.
+      when(client.get('https://jsonplaceholder.typicode.com/posts/1'))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
 
-        test('returns a Post if the Register http call completes successfully', () async {
-          final client = MockClient();
-
-          when(client.get('https://witsinnovativeskyline.000webhostapp.com/register_user.php'))
-              .thenAnswer((_) async => http.Response('{"title: RegisterChoice"}', 200));
-        });
-
-//        test('returns a Post if the Register http call completes successfully', () async {
-//          final client = MockClient();
-//
-//          when(client.get(
-//              'https://witsinnovativeskyline.000webhostapp.com/register_user.php'))
-//              .thenAnswer((_) async => http.Response('Not Found', 404));
-//
-//          expect(fetchPost(client), throwsException);
-//
-//        });
-
+      expect(fetchPost(client), throwsException);
+    });
   });
-
 }
