@@ -33,32 +33,32 @@ void main() {
 
 
     });
-    test('Assignment created for valid student', () async {
-      AssignmentController assignmentController=new MockAssignmentController();
-      when(assignmentController.createAssignment(1, '1713445', 55, 1)).thenAnswer((_) => Future.value("Association created!"));
-
-    });
-    test('Assignment created for invalid super', () async {
-      AssignmentController assignmentController=new MockAssignmentController();
-      when(assignmentController.createAssignment(1, 'A', 55, 1)).thenAnswer((_) => Future.value("Connected but sql fail"));
-
-      //when(assignmentController.createAssignment(1, 'A', 55, 1)).thenAnswer((_) async => Future.value(false));
-
-    });
-    test('Assignment created for invalid user type', () async {
-      AssignmentController assignmentController=new MockAssignmentController();
-      when(assignmentController.createAssignment(3, 'A00', 55, 1)).thenAnswer((_) => Future.value("Connected but sql fail"));
-
-
-    });
-    test('Assignment created for invalid board', () async {
-      AssignmentController assignmentController=new MockAssignmentController();
-      when(assignmentController.createAssignment(1, 'A00', 0, 1)).thenAnswer((_) => Future.value("Connected but sql fail"));
-      //await assignmentController.createAssignment(2, 'A00', 55, 1);
-      //expect(await assignmentController.createAssignment(2, 'A00', 0, 1), "Connected but sql fail");
-
-
-    });
+//    test('Assignment created for valid student', () async {
+//      AssignmentController assignmentController=new MockAssignmentController();
+//      when(assignmentController.createAssignment(1, '1713445', 55, 1)).thenAnswer((_) => Future.value("Association created!"));
+//
+//    });
+//    test('Assignment created for invalid super', () async {
+//      AssignmentController assignmentController=new MockAssignmentController();
+//      when(assignmentController.createAssignment(1, 'A', 55, 1)).thenAnswer((_) => Future.value("Connected but sql fail"));
+//
+//      //when(assignmentController.createAssignment(1, 'A', 55, 1)).thenAnswer((_) async => Future.value(false));
+//
+//    });
+//    test('Assignment created for invalid user type', () async {
+//      AssignmentController assignmentController=new MockAssignmentController();
+//      when(assignmentController.createAssignment(3, 'A00', 55, 1)).thenAnswer((_) => Future.value("Connected but sql fail"));
+//
+//
+//    });
+//    test('Assignment created for invalid board', () async {
+//      AssignmentController assignmentController=new MockAssignmentController();
+//      when(assignmentController.createAssignment(1, 'A00', 0, 1)).thenAnswer((_) => Future.value("Connected but sql fail"));
+//      //await assignmentController.createAssignment(2, 'A00', 55, 1);
+//      //expect(await assignmentController.createAssignment(2, 'A00', 0, 1), "Connected but sql fail");
+//
+//
+//    });
   });
 
 
