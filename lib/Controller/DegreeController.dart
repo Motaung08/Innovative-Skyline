@@ -13,7 +13,7 @@ The purpose of this method is to fetch the different types of degrees stored.
 This is so that upon student app registration, the student may select from a
 pre-populated list of degree types such as Honours, masters by coursework, etc.
  */
-    Future<bool>getDegrees() async{
+    Future getDegrees() async{
      bool success=false;
 
     //final response = await http.post("http://146.141.21.17/getDegreeTypes.php");
@@ -31,11 +31,6 @@ pre-populated list of degree types such as Honours, masters by coursework, etc.
       //print(degree.Degree_Type);
     }
 
-    if(degrees!=null){
-      success=true;
-    }
-
-    return success;
 
   }
 
@@ -43,7 +38,7 @@ pre-populated list of degree types such as Honours, masters by coursework, etc.
   _DegreeControllerState createState() => _DegreeControllerState();
 }
 
-class MockDegreeController extends DegreeController implements Mock{}
+
 
 class _DegreeControllerState extends State<DegreeController> {
   @override
@@ -51,3 +46,11 @@ class _DegreeControllerState extends State<DegreeController> {
     return Container();
   }
 }
+
+class Degree extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
