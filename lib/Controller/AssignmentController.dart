@@ -15,7 +15,7 @@ class AssignmentController extends StatefulWidget {
   used to load the board upon their logging in.
    */
 
-  Future createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID) async{
+  Future<String> createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID) async{
     var url =
         'https://witsinnovativeskyline.000webhostapp.com/createAssignment.php';
 

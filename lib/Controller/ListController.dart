@@ -73,19 +73,12 @@ class ListController extends StatefulWidget {
 
   }
 
-
-
-
-
   /*
   The following method takes in a listCard - which is populated with values
   from the UI before this method is called - and then uses it's attribute values
   to create a new instance within the List table of the database.
    */
   Future createList(ListCard newList) async{
-    bool created = false;
-
-
       // SERVER API URL
       var url =
 //          'http://146.141.21.17/createBoard.php';
@@ -104,8 +97,6 @@ class ListController extends StatefulWidget {
       var message = jsonDecode(response.body);
 
       print(message);
-
-
 
   }
 

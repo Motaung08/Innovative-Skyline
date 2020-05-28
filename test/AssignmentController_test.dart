@@ -26,8 +26,8 @@ void main() {
 
   group("Create assignment", (){
     test('Assignment created for valid supervisor', () async {
-
-
+      AssignmentController assignmentController=new MockAssignmentController();
+    expect(when(await assignmentController.createAssignment(1, '1713445', 55, 1)),isInstanceOf<PostExpectation<String>>());
 
 
     });
