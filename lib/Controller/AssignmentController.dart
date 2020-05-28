@@ -4,8 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class AssignmentController extends StatefulWidget {
-
+  /*
+  The purpose of this method is to share a board. This is done by taking in the
+  appropriate arguments to write to the Assignment table in the database -
+  with special mention of who the board is being shared with as this will be
+  used to load the board upon their logging in.
+   */
+  String createAssignmentResponse="";
   Future createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID) async{
+    //createAssignmentResponse="";
     var url =
         'https://witsinnovativeskyline.000webhostapp.com/createAssignment.php';
 
@@ -23,6 +30,7 @@ class AssignmentController extends StatefulWidget {
     // ignore: non_constant_identifier_names
     var Response = jsonDecode(response.body);
     print(Response);
+    //createAssignmentResponse=Response;
 
 
 
