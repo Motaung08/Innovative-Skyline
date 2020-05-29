@@ -1,14 +1,9 @@
-import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Controller/StudentController.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/User.dart';
-import 'package:postgrad_tracker/View/register/StudentRegister.dart';
 import 'package:postgrad_tracker/main.dart';
 
-import 'Models_test.dart';
 
 
 
@@ -30,6 +25,8 @@ void main() {
     test(
         'studentRegistration', () async {
           User testUser=new User();
+          String userSuccess="";
+          String registrationSuccess="";
           testUser.email='testStudent@students.wits.ac.za';
           testUser.password="testPassword";
           testUser.userTypeID=1;
@@ -41,6 +38,13 @@ void main() {
           testStudent.lName="";
           testStudent.degreeID=1;
           testStudent.registrationDate=DateTime.now();
+
+          if (testUser.email == '' && testUser.password == ''){
+            print('Nada');
+          }
+          if (userSuccess == "Email Already Exists, Please Try Again With New Email Address..!"){
+            registrationSuccess=userSuccess;
+          }
           //testStudent.studentTypeID
       StudentController studentController=new StudentController();
       await studentController.setStudentUser('1713445@students.wits.ac.za');
