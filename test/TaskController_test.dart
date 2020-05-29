@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
@@ -30,7 +31,11 @@ Future<Post> fetchPost(http.Client client) async {
 
 
 void main() {
+
+  bool created=false;
+
   group('Server connection', () {
+
     test(
         'returns a Post if the TaskController http call completes successfully', () async {
       final client = MockClient();
@@ -62,14 +67,16 @@ void main() {
     });
 
     test('Creating a task', () async {
+
       TaskController taskController = new TaskController();
-      bool created = true;
+       created = true;
       var data;
       Task atask = new Task();
 
 
       await taskController.createTask(atask);
-      expect(Task!=null, true);
+//      created = true;
+      expect(Task!=null, created=true);
 
       atask.Task_Title ='';
       atask.TaskID = 1;
@@ -80,8 +87,49 @@ void main() {
       atask.Task_Due = DateTime(2020,10,30);
 
 
+    });
+
+    test('Updating Task', () async {
+      TaskController taskController = new TaskController();
+      Task atask = new Task();
+
+      await taskController.updateTask(atask);
+
+      expect(atask.Task_Title='Test1', 'Test1');
+      expect(atask.Task_Title='Code coverage', 'Code coverage');
+      expect(atask.Task_AddedBy='Tshepang', 'Tshepang');
+      expect(atask.Task_StatusID=1, 1);
+      expect(atask.TaskID=1, 1);
+      expect(atask.Task_DateAdded=DateTime(2020,02,19), DateTime(2020,02,19));
+      expect(atask.Task_Due=DateTime(2020,11,08), DateTime(2020,11,08));
+
+      if(atask.Task_Due != null){
+        expect(atask.Task_Due=DateTime(2020,11,08), DateTime(2020,11,08));
+      }
+
+      if(atask.Task_DateAdded != null){
+        expect(atask.Task_DateAdded=DateTime(2020,02,19), DateTime(2020,02,19));
+      }
+
+      expect(Task!=null, created=true);
+
+    });
+
+    test('updating task', () async {
+      final updateTask = MockClient();
+
+      when(updateTask.get(
+          'https://witsinnovativeskyline.000webhostapp.com/updateTask.php'))
+          .thenAnswer((_) async =>
+          http.Response('{"title": "Testing Update Task"}', 200));
+    });
 
 
+    test("Delete Task", () async {
+      TaskController deleteTask = new  TaskController();
+      Task delTask = new Task();
+
+      await deleteTask.deleteTask(delTask.TaskID=1);
     });
 
 
