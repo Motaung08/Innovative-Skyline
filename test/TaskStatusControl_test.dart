@@ -30,59 +30,24 @@ Future<Post> fetchPost(http.Client client) async {
 
 
 void main() {
-  bool created = false;
-
-  group('Server connection', () {
-    test(
-        'returns a Post if the TaskStatusController http call completes successfully', () async {
-      final client = MockClient();
-
-      when(client.get(
-          'ttps://witsinnovativeskyline.000webhostapp.com/getTaskStatuses.php'))
-          .thenAnswer((_) async => http.Response('{"title": "Test TaskStatusController"}', 200));
-    });
-
-    test(
-        'returns a Post if the TaskStatusController http call completes successfully', () async {
-      final client = MockClient();
-
-      when(client.get(
-          'ttps://witsinnovativeskyline.000webhostapp.com/getTaskStatuses.php'))
-          .thenAnswer((_) async =>
-          http.Response('{"title: TaskStatusController"}', 200));
-    });
-
 
     test("TaskStatusController Test", () async {
       TaskController testTask = new TaskController();
       TaskStatus taskStatus = new TaskStatus();
-      int n = 5;
-      // ignore: unnecessary_statements
 
-      taskStatus.TaskStatusID = 1;
-      expect(taskStatus.TaskStatusID, 1);
-      taskStatus.Status = 'Assigned';
+      await testTask.ReadTasks(taskStatus.TaskStatusID=1);
+
+      expect(taskStatus.Status='Assigned','Assigned');
 
       taskStatus.createState();
-      taskStatus.TaskStatusID =2;
-      expect(taskStatus.TaskStatusID, 2);
-      taskStatus.Status = 'Acknowledge';
-
-      taskStatus.createState();
-      taskStatus.TaskStatusID=3;
-      expect(taskStatus.TaskStatusID, 3);
-      taskStatus.Status = 'Pending';
-
-      taskStatus.createState();
-      taskStatus.TaskStatusID=4;
-      expect(taskStatus.TaskStatusID, 4);
-      taskStatus.Status = 'Complete';
-
+//      await testTask.ReadTasks(taskStatus.TaskStatusID=2);
+//
+//      expect(taskStatus.Status= 'Acknowledged', 'Acknowlegded');
 
     });
 
 
-  });
+
 
 
 }
