@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Controller/TaskController.dart';
+import 'package:postgrad_tracker/Model/Task.dart';
 
 import 'Models_test.dart';
 
@@ -60,10 +61,28 @@ void main() {
       expect(fetchPost(client), throwsException);
     });
 
-//    testWidgets('All input feild and button widgets should be on screen', (
-//        WidgetTester tester) async {
-//      await tester.pumpWidget(makeWidgetTestable(TaskController()));
-//    });
+    test('Creating a task', () async {
+      TaskController taskController = new TaskController();
+      bool created = true;
+      var data;
+      Task atask = new Task();
+
+
+      await taskController.createTask(atask);
+      expect(Task!=null, true);
+
+      atask.Task_Title ='';
+      atask.TaskID = 1;
+      atask.Task_Description = '';
+      atask.Task_AddedBy = '';
+      atask.Task_StatusID = 1;
+      atask.Task_DateAdded = DateTime(2020,02,02);
+      atask.Task_Due = DateTime(2020,10,30);
+
+
+
+
+    });
 
 
   });
