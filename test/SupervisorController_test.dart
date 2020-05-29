@@ -92,6 +92,26 @@ void main() {
       expect(supervisor!=null, true);
     });
 
+    test("test variable data", () async {
+      Supervisor supervisorA = new Supervisor();
+
+      supervisorA.email = 'email';
+      expect(supervisorA.email, 'email');
+
+      supervisorA.staffNo = 'StaffNo';
+      expect(supervisorA.staffNo, 'StaffNo');
+
+      supervisorA.fName = 'Sup_FName';
+      expect(supervisorA.fName, 'Sup_FName');
+
+      supervisorA.lName = 'Sup_LName';
+      expect(supervisorA.lName,'Sup_LName');
+
+      supervisorA.office = 'Supervisor_OfficePhone';
+      expect(supervisorA.office,'Supervisor_OfficePhone');
+
+
+    });
 
   });
 
