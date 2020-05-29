@@ -303,7 +303,7 @@ class _MyHomePageState extends State<HomePage> {
             project_board.Project_Description = descriptionController.text;
             project_board.Project_StartDate = _startDate;
             project_board.Project_EndDate = _endDate;
-            await project_boardController.createBoard(project_board);
+            await project_boardController.createBoard(project_board,user.userTypeID,personNo);
             user.boards=await project_boardController.ReadBoards(user.userTypeID, personNo);
             project_board=user.boards.last;
             addDynamic(project_board);

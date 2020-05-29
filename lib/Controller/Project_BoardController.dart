@@ -2,11 +2,59 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Model/Student.dart';
+import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
 
 // ignore: camel_case_types
 class Project_BoardController {
+
+  /*
+  The purpose of this method is to create a Project_Board instance in the
+  database based on the attribute values stored in the newBoard which is
+  passed in.
+   */
+  Future<String> createBoard(Project_Board newBoard,int userTypeID, String personNum) async{
+    bool created = false;
+
+    if(user.userTypeID==1){
+      supervisor.staffNo="";
+    }
+    else{
+      student.studentNo="";
+    }
+
+    // SERVER API URL
+    var url =
+//          'http://146.141.21.17/createBoard.php';
+        'https://witsinnovativeskyline.000webhostapp.com/createBoard.php';
+
+    String startDate;
+    String endDate;
+    if(newBoard.Project_StartDate!=null){
+      startDate= DateFormat('yyyy-MM-dd').format((newBoard.Project_StartDate));
+    }
+    if(newBoard.Project_EndDate!=null){
+      endDate= DateFormat('yyyy-MM-dd').format((newBoard.Project_EndDate));
+    }
+    // Store all data with Param Name.
+    var data = {
+      'Project_Title': newBoard.Project_Title,
+      'Project_Description' : newBoard.Project_Description,
+      'Project_StartDate' : startDate,
+      'Project_EndDate' : endDate,
+      'StudentNo' : personNum,
+      'StaffNo' : personNum,
+      'userType' : userTypeID.toString()
+    };
+
+    // Starting Web API Call.
+    var response = await http.post(url, body: json.encode(data));
+    var message = jsonDecode(response.body);
+    return message;
+
+  }
 
   /*
   The purpose of this method is to read in all boards associated with the user
@@ -17,7 +65,7 @@ class Project_BoardController {
   associated with the specified user.
    */
   // ignore: non_constant_identifier_names
-  Future<List> ReadBoards(int UserTypeID, String personNo) async{
+  Future<List<Project_Board>> ReadBoards(int UserTypeID, String personNo) async{
     List<Project_Board> boards=List();
       bool created = false;
       String msg = '';
@@ -36,9 +84,9 @@ class Project_BoardController {
             'https://witsinnovativeskyline.000webhostapp.com/ReadBoards.php';
 
         var data={
-          'UserTypeID' : user.userTypeID.toString(),
-          'StudentNo' : student.studentNo,
-          'StaffNo' : supervisor.staffNo
+          'UserTypeID' : UserTypeID.toString(),
+          'StudentNo' : personNo,
+          'StaffNo' : personNo
         };
 
         // Starting Web API Call.
@@ -85,80 +133,11 @@ class Project_BoardController {
   }
 
   /*
-  The purpose of this method is to create a Project_Board instance in the
-  database based on the attribute values stored in the newBoard which is
-  passed in.
-   */
-  Future createBoard(Project_Board newBoard) async{
-    bool created = false;
-
-    if(user.userTypeID==1){
-      supervisor.staffNo="";
-    }
-    else{
-      student.studentNo="";
-    }
-
-      // SERVER API URL
-      var url =
-//          'http://146.141.21.17/createBoard.php';
-          'https://witsinnovativeskyline.000webhostapp.com/createBoard.php';
-
-      // Store all data with Param Name.
-      var data = {
-        'Project_Title': newBoard.Project_Title,
-        'Project_Description' : newBoard.Project_Description,
-        'Project_StartDate' : DateFormat('yyyy-MM-dd').format((newBoard.Project_StartDate)),
-        'Project_EndDate' : DateFormat('yyyy-MM-dd').format((newBoard.Project_EndDate)),
-        'StudentNo' : student.studentNo,
-        'StaffNo' : supervisor.staffNo,
-        'userType' : user.userTypeID.toString()
-      };
-
-      // Starting Web API Call.
-      var response = await http.post(url, body: json.encode(data));
-      var message = jsonDecode(response.body);
-
-      print(message);
-
-
-
-  }
-
-  /*
-  The purpose of this method is to delete a Project_Board instance in the
-  database based on the ProjectID of the newBoard which is passed in.
-   */
-  Future deleteBoard(int ProjectID) async{
-
-    // SERVER API URL
-    var url =
-//          'http://146.141.21.17/createBoard.php';
-        'https://witsinnovativeskyline.000webhostapp.com/deleteBoard.php';
-
-    // Store all data with Param Name.
-    var data = {
-      'ProjectID': ProjectID.toString(),
-    };
-
-    // Starting Web API Call.
-    var response = await http.post(url, body: json.encode(data));
-    //print(response.body.toString());
-    // Getting Server response into variable.
-    var message = jsonDecode(response.body);
-
-    print(message);
-
-
-
-  }
-
-  /*
   The purpose of this method is to update a Project_Board instance in the
   database based on the attribute values stored in the newBoard which is
   passed in.
    */
-  Future updateBoard(Project_Board boardToUpdate) async{
+  Future<String> updateBoard(Project_Board boardToUpdate) async{
     var url =
 
         'https://witsinnovativeskyline.000webhostapp.com/updateBoard.php';
@@ -168,7 +147,7 @@ class Project_BoardController {
       startDate=DateFormat('yyyy-MM-dd').format(boardToUpdate.Project_StartDate);
     }
     else{
-     startDate=null;
+      startDate=null;
     }
 
     String endDate;
@@ -178,8 +157,6 @@ class Project_BoardController {
     else{
       endDate=null;
     }
-
-
 
     // Store all data with Param Name.
     var data = {
@@ -196,8 +173,34 @@ class Project_BoardController {
     // Getting Server response into variable.
     var message = jsonDecode(response.body);
 
-    print(message);
+    return message;
   }
+
+  /*
+  The purpose of this method is to delete a Project_Board instance in the
+  database based on the ProjectID of the newBoard which is passed in.
+   */
+  Future<String> deleteBoard(int ProjectID) async{
+
+    // SERVER API URL
+    var url =
+//          'http://146.141.21.17/createBoard.php';
+        'https://witsinnovativeskyline.000webhostapp.com/deleteBoard.php';
+
+    // Store all data with Param Name.
+    var data = {
+      'ProjectID': ProjectID.toString(),
+    };
+
+    // Starting Web API Call.
+    var response = await http.post(url, body: json.encode(data));
+    //print(response.body.toString());
+    // Getting Server response into variable.
+    var message = jsonDecode(response.body);
+    return message;
+  }
+
+
 
 
 }
