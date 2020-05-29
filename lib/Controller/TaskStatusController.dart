@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Model/TaskStatus.dart';
 import 'package:postgrad_tracker/main.dart';
 
-class TaskStatusController extends StatefulWidget {
+class TaskStatusController{
   /*
   The purpose of this method is to read in all instances in the TaskStatus table
   in the database so that when creating or updating a task, a pre-populated list
@@ -31,13 +31,4 @@ class TaskStatusController extends StatefulWidget {
 
   }
 
-  @override
-  _TaskStatusControllerState createState() => _TaskStatusControllerState();
-}
-
-class _TaskStatusControllerState extends State<TaskStatusController> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
 }

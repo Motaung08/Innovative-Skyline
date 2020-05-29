@@ -60,10 +60,10 @@ void main() {
       expect(fetchPost(client), throwsException);
     });
 
-    testWidgets('All input feild and button widgets should be on screen', (
-        WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(SupervisorController()));
-    });
+//    testWidgets('All input feild and button widgets should be on screen', (
+//        WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(SupervisorController()));
+//    });
 
 
   });

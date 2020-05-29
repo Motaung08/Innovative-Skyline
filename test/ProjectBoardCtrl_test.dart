@@ -65,11 +65,11 @@ void main() {
       expect(fetchPost(client), throwsException);
     });
 
-    testWidgets('All input feild and button widgets should be on screen', (
-        WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(Project_BoardController()));
-
-    });
+//    testWidgets('All input feild and button widgets should be on screen', (
+//        WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(Project_BoardController()));
+//
+//    });
 //    test('Must be assigned', (){
 //      expect(data.ProjectID, null);
 //      expect(data.Project_Title, null);

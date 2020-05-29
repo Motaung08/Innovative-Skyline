@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Model/DegreeType.dart';
 import 'package:postgrad_tracker/main.dart';
 
-class DegreeController extends StatefulWidget {
+class DegreeController {
 
 /*
 The purpose of this method is to fetch the different types of degrees stored.
@@ -28,23 +28,11 @@ pre-populated list of degree types such as Honours, masters by coursework, etc.
       degree.DegreeID=int.parse(result[i]['DegreeID']);
       degree.Degree_Type=result[i]['Degree_Type'];
       degrees.add(degree);
-      //print(degree.Degree_Type);
     }
 
-
   }
 
-  @override
-  _DegreeControllerState createState() => _DegreeControllerState();
 }
 
-
-
-class _DegreeControllerState extends State<DegreeController> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
 
 

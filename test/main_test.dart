@@ -38,13 +38,13 @@ void main(){
       await tester.pumpWidget(makeWidgetTestable(ResetPasswordView()));
     });
 
-    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(ListController()));
-    });
-
-    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(TaskController()));
-    });
+//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(ListController()));
+//    });
+//
+//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(TaskController()));
+//    });
 
     testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
       await tester.pumpWidget(makeWidgetTestable(HomePage()));

@@ -6,7 +6,7 @@ import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
 
 // ignore: camel_case_types
-class Project_BoardController extends StatefulWidget {
+class Project_BoardController {
 
   /*
   The purpose of this method is to read in all boards associated with the user
@@ -200,20 +200,4 @@ class Project_BoardController extends StatefulWidget {
   }
 
 
-  @override
-  _Project_BoardControllerState createState() => _Project_BoardControllerState();
-
-}
-
-// ignore: camel_case_types
-class _Project_BoardControllerState extends State<Project_BoardController> {
-
-
-  @override
-  Widget build(BuildContext context) {
-//setState(() {
-//
-//});
-    return Container();
-  }
 }

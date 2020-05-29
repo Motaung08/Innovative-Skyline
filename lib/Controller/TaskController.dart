@@ -5,7 +5,7 @@ import 'package:postgrad_tracker/Model/Task.dart';
 import 'package:http/http.dart' as http;
 
 // ignore: camel_case_types
-class TaskController extends StatefulWidget {
+class TaskController{
 
   /*
   The purpose of this method is to read in all the instances in the Task table
@@ -193,23 +193,5 @@ $DueDate = $obj['Task_Date_Due'];
     // ignore: non_constant_identifier_names
     var Response = jsonDecode(response.body);
     print(Response);
-  }
-
-
-  @override
-  _TaskControllerControllerState createState() => _TaskControllerControllerState();
-
-}
-
-// ignore: camel_case_types
-class _TaskControllerControllerState extends State<TaskController> {
-
-
-  @override
-  Widget build(BuildContext context) {
-//setState(() {
-//
-//});
-    return Container();
   }
 }

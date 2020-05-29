@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Model/StudentType.dart';
 import 'package:postgrad_tracker/main.dart';
 
-class StudentTypeController extends StatefulWidget {
+class StudentTypeController{
 
   /*
   This method should retrieve the different types of possible students so that
@@ -34,13 +34,4 @@ class StudentTypeController extends StatefulWidget {
 
   }
 
-  @override
-  _StudentTypeControllerState createState() => _StudentTypeControllerState();
-}
-
-class _StudentTypeControllerState extends State<StudentTypeController> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
 }

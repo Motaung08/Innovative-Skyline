@@ -9,7 +9,7 @@ import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/main.dart';
 
 // ignore: must_be_immutable
-class StudentController extends StatefulWidget {
+class StudentController{
 
   /*
   The purpose of this method is to retrieve the attributes of a specified
@@ -130,18 +130,4 @@ class StudentController extends StatefulWidget {
 
   }
 
-
-  @override
-  _StudentControllerState createState() => _StudentControllerState();
-}
-
-class _StudentControllerState extends State<StudentController> {
-
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Container();
-  }
 }

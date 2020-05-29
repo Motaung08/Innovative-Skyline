@@ -7,7 +7,7 @@ import 'package:postgrad_tracker/Model/User.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/main.dart';
 
-class SupervisorController extends StatefulWidget {
+class SupervisorController{
 
   /*
   The purpose of this method is to retrieve the Supervisor instance associated
@@ -107,14 +107,4 @@ class SupervisorController extends StatefulWidget {
     return RegistrationSuccess;
   }
 
-
-  @override
-  _SupervisorControllerState createState() => _SupervisorControllerState();
-}
-
-class _SupervisorControllerState extends State<SupervisorController> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
 }

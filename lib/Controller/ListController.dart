@@ -5,7 +5,7 @@ import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
 
 // ignore: camel_case_types
-class ListController extends StatefulWidget {
+class ListController{
 
   /*
   The purpose of this method is to read in all instances in the List Table in
@@ -155,21 +155,4 @@ class ListController extends StatefulWidget {
 
   }
 
-
-  @override
-  _ListControllerControllerState createState() => _ListControllerControllerState();
-
-}
-
-// ignore: camel_case_types
-class _ListControllerControllerState extends State<ListController> {
-
-
-  @override
-  Widget build(BuildContext context) {
-//setState(() {
-//
-//});
-    return Container();
-  }
 }

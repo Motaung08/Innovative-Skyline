@@ -75,15 +75,15 @@ import 'Models_test.dart';
 //
 //}
 class MockUserController extends Mock implements UserController{
-  @override
-  String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-    String fullString;
-    assert(() {
-      fullString = toDiagnosticsNode(style: DiagnosticsTreeStyle.singleLine).toString(minLevel: minLevel);
-      return true;
-    }());
-    return fullString ?? toStringShort();
-  }
+//  @override
+//  String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+//    String fullString;
+//    assert(() {
+//      fullString = toDiagnosticsNode(style: DiagnosticsTreeStyle.singleLine).toString(minLevel: minLevel);
+//      return true;
+//    }());
+//    return fullString ?? toStringShort();
+//  }
 }
 void main(){
   group('Test User', (){
@@ -92,10 +92,10 @@ void main(){
       expect(when(await mockUserController.getUser('1713445@students.wits.ac.za')),isInstanceOf<PostExpectation<User>>());
     });
 
-        testWidgets('All input feild and button widgets should be on screen', (
-        WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(UserController()));
-
-    });
+//        testWidgets('All input feild and button widgets should be on screen', (
+//        WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(UserController()));
+//
+//    });
   });
 }

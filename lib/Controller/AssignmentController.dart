@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Model/Assignment.dart';
 
-class AssignmentController extends StatefulWidget {
+class AssignmentController {
   Assignment assignment;
 
   /*
@@ -85,13 +85,7 @@ class AssignmentController extends StatefulWidget {
 
   }
 
-  @override
-  _AssignmentControllerState createState() => _AssignmentControllerState();
+
 }
 
-class _AssignmentControllerState extends State<AssignmentController> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+

@@ -7,7 +7,7 @@ import 'package:postgrad_tracker/main.dart';
 import 'package:password_hash/password_hash.dart';
 
 // ignore: must_be_immutable
-class UserController extends StatefulWidget {
+class UserController{
 
   /*
   The purpose of the following method is to take in a User object and use the
@@ -219,14 +219,4 @@ class UserController extends StatefulWidget {
 
   }
 
-
-  @override
-  _UserControllerState createState() => _UserControllerState();
-}
-
-class _UserControllerState extends State<UserController> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
 }
