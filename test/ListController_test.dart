@@ -39,55 +39,67 @@ Widget makeWidgetTestable(Widget widget){
 }
 
 
-
+class MockList extends Mock implements ListCard{
+  @override
+  String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+    String fullString;
+    assert(() {
+      fullString = toDiagnosticsNode(style: DiagnosticsTreeStyle.singleLine).toString(minLevel: minLevel);
+      return true;
+    }());
+    return fullString ?? toStringShort();
+  }  
+}
 
 void main() {
   group('Server connection', () {
 
     ListController lc=new ListController();
-    test('Reads lists',() async{final client=MockListController();
-   // expect(await lc.ReadLists(55), isInstanceOf<List<ListCard>>());
+    test('Create lists',() async{
+      ListController listController=new ListController();
+      ListCard mockList=MockList();
+      mockList.ProjectID=103;
+      mockList.List_Title="Test creation";
+      expect(await listController.createList(mockList), "List created!");
 
 
 
     });
 
-//    test('Assignment created for valid supervisor', () async {
-//      ListController mockListController=new MockListController();
-//
-//
-//      String expectedResponse = "Association created!";
-//      //when(mockAssignmentController.createAssignment(2, 'A00', 55, 1)).thenAnswer((_) async => expectedResponse);
-//      expect(await mockListController.createAssignment(2, 'A00', 103, 1), expectedResponse);
-//
-//
-//    });
-//    test('Assignment read for valid supervisor', () async {
-//      AssignmentController mockAssignmentController=new MockAssignmentController();
-//
-//
-//      String expectedResponse = "Association created!";
-//      //when(mockAssignmentController.createAssignment(2, 'A00', 55, 1)).thenAnswer((_) async => expectedResponse);
-//      expect(await mockAssignmentController.ReadAssignment(2, 'A00', 103), isInstanceOf<List>());
-//
-//
-//    });
-//    test('Assignment deleted for valid supervisor', () async {
-//      AssignmentController mockAssignmentController=new MockAssignmentController();
-//
-//
-//      String expectedResponse = "Association created!";
-//      //when(mockAssignmentController.createAssignment(2, 'A00', 55, 1)).thenAnswer((_) async => expectedResponse);
-//      expect(await mockAssignmentController.DeleteAssignment(2, 'A00', 103), "Association DELETED!");
-//
-//
-//    });
-//
-//    testWidgets('All input feild and button widgets should be on screen', (
-//        WidgetTester tester) async {
-//      await tester.pumpWidget(makeWidgetTestable(ListController()));
-//    });
+    test('Read lists',() async{
+      ListController listController=new ListController();
 
+      expect(await listController.ReadLists(103), isInstanceOf<List<ListCard>>());
+
+
+
+    });
+    test('Update lists',() async{
+      ListController listController=new ListController();
+      ListCard mockList=MockList();
+      List<ListCard> testlists=[];
+      testlists=await listController.ReadLists(103);
+      mockList.ProjectID=103;
+      mockList.List_Title="Test creation update";
+      mockList.ListID=testlists.last.ListID;
+
+      expect(await listController.updateList(mockList), "List updated successfully");
+
+
+
+    });
+    test('delete lists',() async{
+      ListController listController=new ListController();
+      ListCard mockList=MockList();
+      List<ListCard> testlists=[];
+      testlists=await listController.ReadLists(103);
+      int listID=testlists.last.ListID;
+
+      expect(await listController.deleteList(listID), "List DELETED!");
+
+
+
+    });
 
   });
 

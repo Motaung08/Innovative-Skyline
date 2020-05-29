@@ -46,7 +46,6 @@ class ListController{
           print(msg);
         }
         else {
-          print('mmmmmmmmmmmmmmmmmmmmmm lists!');
           lists=[];
           for (int i = 0; i < Response.length; i++) {
             ListCard listReceived = new ListCard();
@@ -78,7 +77,7 @@ class ListController{
   from the UI before this method is called - and then uses it's attribute values
   to create a new instance within the List table of the database.
    */
-  Future createList(ListCard newList) async{
+  Future<String> createList(ListCard newList) async{
       // SERVER API URL
       var url =
 //          'http://146.141.21.17/createBoard.php';
@@ -96,7 +95,7 @@ class ListController{
       // Getting Server response into variable.
       var message = jsonDecode(response.body);
 
-      print(message);
+      return message;
 
   }
 
@@ -106,7 +105,7 @@ class ListController{
   - and then uses it's attribute values to update the list instance associated
    with the ListID (of the passed in list) in the List table of the database.
    */
-  Future updateList(ListCard aList) async{
+  Future<String> updateList(ListCard aList) async{
     var url =
 
         'https://witsinnovativeskyline.000webhostapp.com/updateList.php';
@@ -124,7 +123,7 @@ class ListController{
     // Getting Server response into variable.
     var message = jsonDecode(response.body);
 
-    print(message);
+    return message;
   }
 
   /*
@@ -134,7 +133,7 @@ class ListController{
    with the ListID (of the passed in list) in the List table of the database.
    */
   // ignore: non_constant_identifier_names
-  Future deleteList(int ListID) async{
+  Future<String> deleteList(int ListID) async{
     //print('We want to delete list '+ListID.toString());
     // SERVER API URL
     var url =
@@ -151,7 +150,7 @@ class ListController{
     // Getting Server response into variable.
     // ignore: non_constant_identifier_names
     var Response = jsonDecode(response.body);
-    print(Response);
+    return Response;
 
   }
 
