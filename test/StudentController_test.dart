@@ -41,6 +41,7 @@ void main() {
 
       expect(await studentController.fetchStudent('1713445@students.wits.ac.za'), isInstanceOf<Student>());
     });
+
     test(
         'setStudentUser', () async {
       StudentController studentController=new StudentController();
@@ -58,6 +59,7 @@ void main() {
       if(userSuccess == "Email Already Exists, Please Try Again With New Email Address..!"){
         registrationSuccess.replaceAll(userSuccess.substring(0), userSuccess);
       }
+
       await aStudent.fetchStudent(email);
 
       User user =new User();

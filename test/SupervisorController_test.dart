@@ -3,9 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
+import 'package:postgrad_tracker/Model/Supervisor.dart';
+import 'package:postgrad_tracker/Model/User.dart';
+import 'package:postgrad_tracker/main.dart';
 
 
-import 'Models_test.dart';
 
 class Post {
   dynamic data;
@@ -31,39 +33,64 @@ Future<Post> fetchPost(http.Client client) async {
 void main() {
   group('Server connection', () {
     test(
-        'returns a Post if the SupervisorController http call completes successfully', () async {
-      final client = MockClient();
+        'fetchSupervisor', () async {
+      SupervisorController fetchedSup=new SupervisorController();
 
-      when(client.get(
-          'https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php'))
-          .thenAnswer((_) async => http.Response('{"title": "Test"}', 200));
+      expect(await fetchedSup.fetchSup('tsh@wits.ac.za'), isInstanceOf<Supervisor>());
     });
 
     test(
-        'returns a Post if the SupervisorController http call completes successfully', () async {
-      final client = MockClient();
+        'setSupervisorUser', () async {
+      SupervisorController fetchedSup=new SupervisorController();
 
-      when(client.get(
-          'https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php'))
-          .thenAnswer((_) async =>
-          http.Response('{"title: SupervisorController"}', 200));
+      await fetchedSup.setUserSup('tsh@wits.ac.za');
+      expect(supervisor!=null, true);
+    });
+
+    test('Invalid supUser details', () async {
+      SupervisorController fetchedSup = new SupervisorController();
+
+      String email ='';
+
+      //print("No supervisor")
+
+      await fetchedSup.fetchSup(email);
     });
 
     test(
-        'returns a Post if the SupervisorController http call completes successfully', () async {
-      final client = MockClient();
+        'Supervisor Registration', () async {
+      User testUser=new User();
+      String userSuccess="";
+      String registrationSuccess="";
 
-      when(client.get(
-          'https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php'))
-          .thenAnswer((_) async => http.Response('Not Found', 404));
 
-      expect(fetchPost(client), throwsException);
+      testUser.email='testSupvisor@wits.ac.za';
+      testUser.password="testSupPassword";
+      testUser.userTypeID=1;
+
+      Supervisor testSupervisor=new Supervisor();
+
+      testSupervisor.email=testUser.email;
+      expect(testSupervisor.email, testUser.email);
+
+      testSupervisor.staffNo="12345";
+      expect(testSupervisor.staffNo, '12345');
+
+      testSupervisor.fName="Tshepang";
+      expect(testSupervisor.fName, "Tshepang");
+
+      testSupervisor.lName="Motaung";
+      expect(testSupervisor.lName, "Motaung");
+
+      testSupervisor.office="1";
+      expect(testSupervisor.office, "1");
+
+
+      //testStudent.studentTypeID
+      SupervisorController supervisorController=new SupervisorController();
+      await supervisorController.setUserSup('tsh@wits.ac.za');
+      expect(supervisor!=null, true);
     });
-
-//    testWidgets('All input feild and button widgets should be on screen', (
-//        WidgetTester tester) async {
-//      await tester.pumpWidget(makeWidgetTestable(SupervisorController()));
-//    });
 
 
   });
