@@ -11,7 +11,7 @@ import 'package:postgrad_tracker/Controller/AssignmentController.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 
-class MockAssignmentController extends Mock implements AssignmentController{
+class MockAssignmentController extends AssignmentController implements Mock{
   @override
   String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
     String fullString;
@@ -27,25 +27,34 @@ class MockAssignmentController extends Mock implements AssignmentController{
 
 void main() {
 
-  group("Create assignment", (){
+  group("assignment", (){
     test('Assignment created for valid supervisor', () async {
       AssignmentController mockAssignmentController=new MockAssignmentController();
-//      var url =
-//          'https://witsinnovativeskyline.000webhostapp.com/createAssignment.php';
-//      var data={
-//        'UserTypeID' : 2.toString(),
-//        'AssignPerson' : 'A00',
-//        'ProjectID' : 55.toString(),
-//        'AccessLevelID' : 1.toString(),
-//      };
-//
-//      // Starting Web API Call.
-//      var response = await http.post(url,body: jsonEncode(data));
-//      var Response = jsonDecode(response.body);
+
 
         String expectedResponse = "Association created!";
-        when(mockAssignmentController.createAssignment(2, 'A00', 55, 1)).thenAnswer((_) async => expectedResponse);
-        expect(await mockAssignmentController.createAssignment(2, 'A00', 55, 1), expectedResponse);
+        //when(mockAssignmentController.createAssignment(2, 'A00', 55, 1)).thenAnswer((_) async => expectedResponse);
+        expect(await mockAssignmentController.createAssignment(2, 'A00', 103, 1), expectedResponse);
+
+
+    });
+    test('Assignment read for valid supervisor', () async {
+      AssignmentController mockAssignmentController=new MockAssignmentController();
+
+
+      String expectedResponse = "Association created!";
+      //when(mockAssignmentController.createAssignment(2, 'A00', 55, 1)).thenAnswer((_) async => expectedResponse);
+      expect(await mockAssignmentController.ReadAssignment(2, 'A00', 103), isInstanceOf<List>());
+
+
+    });
+    test('Assignment deleted for valid supervisor', () async {
+      AssignmentController mockAssignmentController=new MockAssignmentController();
+
+
+      String expectedResponse = "Association created!";
+      //when(mockAssignmentController.createAssignment(2, 'A00', 55, 1)).thenAnswer((_) async => expectedResponse);
+      expect(await mockAssignmentController.DeleteAssignment(2, 'A00', 103), "Association DELETED!");
 
 
     });

@@ -39,6 +39,52 @@ class AssignmentController extends StatefulWidget {
 
   }
 
+  Future<List> ReadAssignment(int UserType, String OtherPersonNo, int ProjectID) async{
+    var url =
+        'https://witsinnovativeskyline.000webhostapp.com/ReadAssignment.php';
+
+    var data={
+      'UserTypeID' : UserType.toString(),
+      'AssignPerson' : OtherPersonNo,
+      'ProjectID' : ProjectID.toString(),
+    };
+
+    // Starting Web API Call.
+    var response = await http.post(url,body: jsonEncode(data));
+
+    // Getting Server response into variable.
+    // ignore: non_constant_identifier_names
+    var Response = jsonDecode(response.body);
+    print(Response);
+
+    return Response;
+
+
+  }
+
+  Future<String> DeleteAssignment(int UserType, String OtherPersonNo, int ProjectID) async{
+    var url =
+        'https://witsinnovativeskyline.000webhostapp.com/DeleteAssignment.php';
+
+    var data={
+      'UserTypeID' : UserType.toString(),
+      'AssignPerson' : OtherPersonNo,
+      'ProjectID' : ProjectID.toString(),
+    };
+
+    // Starting Web API Call.
+    var response = await http.post(url,body: jsonEncode(data));
+
+    // Getting Server response into variable.
+    // ignore: non_constant_identifier_names
+    var Response = jsonDecode(response.body);
+    print(Response);
+
+    return Response;
+
+
+  }
+
   @override
   _AssignmentControllerState createState() => _AssignmentControllerState();
 }
