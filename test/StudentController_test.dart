@@ -48,30 +48,26 @@ void main() {
       expect(student!=null, true);
     });
 
-    test(
-        'returns a Post if the View Profile http call completes successfully', () async {
-      final client = MockClient();
+    test("Fetch Student", () async {
+      StudentController aStudent = new StudentController();
 
-      // Use Mockito to return a successful response when it calls the
-      // provided http.Client.
-      when(client.get('https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php'))
-          .thenAnswer((_) async => http.Response('{"title": "Test"}', 200));
-//            expect(await fetchPost(client), const TypeMatcher<Post>());
+      String email='';
+      String userSuccess='';
+      String registrationSuccess= "";
+
+      if(userSuccess == "Email Already Exists, Please Try Again With New Email Address..!"){
+        registrationSuccess.replaceAll(userSuccess.substring(0), userSuccess);
+      }
+      await aStudent.fetchStudent(email);
+
+      User user =new User();
+
+      if(user.register == true && userSuccess=='true'){
+        student.register = true;
+        registrationSuccess = '';
+      }
+
     });
-
-    test(
-        'throws an exception if the Login http call completes with an error', () {
-      final client = MockClient();
-
-      // Use Mockito to return an unsuccessful response when it calls the
-      // provided http.Client.
-      when(client.get(
-          'https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php'))
-          .thenAnswer((_) async => http.Response('Not Found', 404));
-      expect(fetchPost(client), throwsException);
-    });
-
-
     test(
         'studentRegistration', () async {
           User testUser=new User();
@@ -91,17 +87,13 @@ void main() {
           testStudent.degreeID=1;
           testStudent.registrationDate=DateTime.now();
 
-          if (testUser.email == '' && testUser.password == ''){
-            print('Nada');
-          }
-          if (userSuccess == "Email Already Exists, Please Try Again With New Email Address..!"){
-            registrationSuccess=userSuccess;
-          }
           //testStudent.studentTypeID
       StudentController studentController=new StudentController();
       await studentController.setStudentUser('1713445@students.wits.ac.za');
       expect(student!=null, true);
     });
+    
+    
 
   });
 
