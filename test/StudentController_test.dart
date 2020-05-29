@@ -1,10 +1,35 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:postgrad_tracker/Controller/StudentController.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/main.dart';
+import 'ListController_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:http/http.dart' as http;
+
+import 'Student_register_test.dart';
 
 
+class Post {
+  dynamic data;
+  Post.fromJson(this.data);
+}
+
+Future<Post> fetchPost(http.Client client) async {
+  final response =
+  await client.get('https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php');
+
+  if (response.statusCode == 200) {
+    // If the call to the server was successful, parse the JSON.
+    return Post.fromJson(json.decode(response.body));
+  } else {
+    // If that call was not successful, throw an error.
+    throw Exception('Failed to load post');
+  }
+}
 
 
 
@@ -22,11 +47,38 @@ void main() {
       await studentController.setStudentUser('1713445@students.wits.ac.za');
       expect(student!=null, true);
     });
+
+    test(
+        'returns a Post if the View Profile http call completes successfully', () async {
+      final client = MockClient();
+
+      // Use Mockito to return a successful response when it calls the
+      // provided http.Client.
+      when(client.get('https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php'))
+          .thenAnswer((_) async => http.Response('{"title": "Test"}', 200));
+//            expect(await fetchPost(client), const TypeMatcher<Post>());
+    });
+
+    test(
+        'throws an exception if the Login http call completes with an error', () {
+      final client = MockClient();
+
+      // Use Mockito to return an unsuccessful response when it calls the
+      // provided http.Client.
+      when(client.get(
+          'https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php'))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+      expect(fetchPost(client), throwsException);
+    });
+
+
     test(
         'studentRegistration', () async {
           User testUser=new User();
           String userSuccess="";
           String registrationSuccess="";
+
+
           testUser.email='testStudent@students.wits.ac.za';
           testUser.password="testPassword";
           testUser.userTypeID=1;
