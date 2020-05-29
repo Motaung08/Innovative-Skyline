@@ -52,6 +52,7 @@ class StudentController{
    */
   Future setStudentUser(String email) async {
     student= await fetchStudent(email);
+    personNo=student.studentNo;
     user.boards.clear();
     Project_BoardController project_boardController=new Project_BoardController();
     user.boards=await project_boardController.ReadBoards(user.userTypeID,student.studentNo);

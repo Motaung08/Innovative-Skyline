@@ -16,14 +16,6 @@ class Project_BoardController {
   passed in.
    */
   Future<String> createBoard(Project_Board newBoard,int userTypeID, String personNum) async{
-    bool created = false;
-
-    if(user.userTypeID==1){
-      supervisor.staffNo="";
-    }
-    else{
-      student.studentNo="";
-    }
 
     // SERVER API URL
     var url =
@@ -67,15 +59,6 @@ class Project_BoardController {
   // ignore: non_constant_identifier_names
   Future<List<Project_Board>> ReadBoards(int UserTypeID, String personNo) async{
     List<Project_Board> boards=List();
-      bool created = false;
-      String msg = '';
-
-      if (user.userTypeID==1){
-        supervisor.staffNo="";
-      }else{
-        student.studentNo="";
-      }
-
 
 
         // SERVER API URL
@@ -97,7 +80,7 @@ class Project_BoardController {
         var Response = jsonDecode(response.body);
         print(Response);
 
-
+        String msg='';
         if (Response.length == 0) {
 
           msg = "No boards created yet. Click the + button to create a board.";

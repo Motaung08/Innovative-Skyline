@@ -295,14 +295,15 @@ class _MyHomePageState extends State<HomePage> {
       child: MaterialButton(
         onPressed: () async{
           await createAlertDialog(context);
-          if (boardTitle != "") {
+          if (titleController.text != "") {
             Project_Board project_board = new Project_Board();
             Project_BoardController project_boardController =
             new Project_BoardController();
-            project_board.Project_Title = boardTitle;
+            project_board.Project_Title = titleController.text;
             project_board.Project_Description = descriptionController.text;
             project_board.Project_StartDate = _startDate;
             project_board.Project_EndDate = _endDate;
+            //print("Person: "+personNo);
             await project_boardController.createBoard(project_board,user.userTypeID,personNo);
             user.boards=await project_boardController.ReadBoards(user.userTypeID, personNo);
             project_board=user.boards.last;
