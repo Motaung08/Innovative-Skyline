@@ -27,7 +27,7 @@ void main(){
       expect(item.key, null);
       expect(item.proj_board, null);
       expect(user.userTypeID, null);
-      expect(user.studentNo, null);
+      //expect(user.studentNo, null);
       expect(testBoard.Project_Title, null);
       expect(testBoard.ProjectID, null);
       expect(testBoard.Project_Description, null);
@@ -38,7 +38,7 @@ void main(){
     });
 
     test('getter and setter functions', (){
-      user.studentNo= '1431795';
+     // user.studentNo= '1431795';
       testBoard.Project_Title = 'SD_Project';
       testBoard.ProjectID=1;
       testBoard.Project_Description='Software development';
@@ -49,7 +49,7 @@ void main(){
 
       expect(testBoard.key, null);
 
-      expect(user.studentNo, '1431795');
+      //expect(user.studentNo, '1431795');
       expect(testBoard.Project_Title, 'SD_Project');
       expect(testBoard.ProjectID, 1);
       expect(testBoard.Project_Description, 'Software development');

@@ -54,8 +54,8 @@ void main(){
       student.email = "1431795@students.wits.ac.za";
       expect(student.email, "1431795@students.wits.ac.za");
 
-      student.studentType = "Full-Year";
-      expect(student.studentType, "Full-Year");
+//      student.studentType = "Full-Year";
+//      expect(student.studentType, "Full-Year");
 
       student.degreeID = 1;
       expect(student.degreeID, 1);

@@ -47,6 +47,7 @@ class SupervisorController{
    */
   Future setUserSup(String email)async{
     supervisor=await fetchSup(email);
+    personNo=supervisor.staffNo;
     Project_BoardController project_boardController=new Project_BoardController();
     user.boards=await project_boardController.ReadBoards(user.userTypeID,supervisor.staffNo);
   }
