@@ -85,6 +85,8 @@ void main() {
       testSupervisor.office="1";
       expect(testSupervisor.office, "1");
 
+      var response = await http.post('https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php');
+      supervisor.register = true;
 
       //testStudent.studentTypeID
       SupervisorController supervisorController=new SupervisorController();
@@ -94,6 +96,27 @@ void main() {
 
     test("test variable data", () async {
       Supervisor supervisorA = new Supervisor();
+
+      var data = {
+
+        'email': supervisorA.email,
+
+        'StaffNo': supervisorA.staffNo,
+
+        'Sup_FName': supervisorA.fName,
+
+        'Sup_LName': supervisorA.lName,
+
+        'Supervisor_OfficePhone': supervisorA.office,
+
+      };
+
+      data.containsKey(supervisorA.email);
+      data.containsKey(supervisorA.lName);
+      data.containsKey(supervisorA.fName);
+      data.containsKey(supervisorA.staffNo);
+      data.containsKey(supervisorA.office);
+      data.containsKey(supervisorA.key);
 
       supervisorA.email = 'email';
       expect(supervisorA.email, 'email');
