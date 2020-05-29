@@ -1,5 +1,7 @@
 
 
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
@@ -7,7 +9,7 @@ import 'package:http/testing.dart';
 import 'package:test/test.dart';
 import 'package:postgrad_tracker/Controller/AssignmentController.dart';
 import 'package:mockito/mockito.dart';
-
+import 'package:http/http.dart' as http;
 
 class MockAssignmentController extends Mock implements AssignmentController{
   @override
@@ -27,9 +29,23 @@ void main() {
 
   group("Create assignment", (){
     test('Assignment created for valid supervisor', () async {
-      AssignmentController assignmentController=new MockAssignmentController();
+      AssignmentController mockAssignmentController=new MockAssignmentController();
+//      var url =
+//          'https://witsinnovativeskyline.000webhostapp.com/createAssignment.php';
+//      var data={
+//        'UserTypeID' : 2.toString(),
+//        'AssignPerson' : 'A00',
+//        'ProjectID' : 55.toString(),
+//        'AccessLevelID' : 1.toString(),
+//      };
+//
+//      // Starting Web API Call.
+//      var response = await http.post(url,body: jsonEncode(data));
+//      var Response = jsonDecode(response.body);
 
-    expect(when(await assignmentController.createAssignment(1, '1713445', 55, 1)),isInstanceOf<PostExpectation<String>>());
+        String expectedResponse = "Association created!";
+        when(mockAssignmentController.createAssignment(2, 'A00', 55, 1)).thenAnswer((_) async => expectedResponse);
+        expect(await mockAssignmentController.createAssignment(2, 'A00', 55, 1), expectedResponse);
 
 
     });
