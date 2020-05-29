@@ -46,7 +46,6 @@ class StudentController{
     return aStudent;
   }
 
-
   /*
   The purpose of this method is to assign the student attributes of a user
   and subsequently load the project boards which are associated.
@@ -56,10 +55,8 @@ class StudentController{
     user.boards.clear();
     Project_BoardController project_boardController=new Project_BoardController();
     user.boards=await project_boardController.ReadBoards(user.userTypeID,student.studentNo);
+
   }
-
-
-
 
   /*
     The purpose of this method is to take in a student object and a user object
