@@ -11,7 +11,7 @@ void main() {
 
   bool created=false;
 
-  group('Server connection', () {
+  group('Test Task CRUD', () {
 
 
     test('Creating a task', () async {
