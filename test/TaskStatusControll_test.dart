@@ -1,15 +1,25 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:postgrad_tracker/Model/TaskStatus.dart';
+import 'package:mockito/mockito.dart';
+import 'package:postgrad_tracker/Controller/TaskStatusController.dart';
+import 'package:postgrad_tracker/main.dart';
 
+class MockTaskStatusController extends TaskStatusController implements Mock{}
 
 void main(){
-  test('Test TaskStatusController', (){
-    TaskStatus testStatus = new TaskStatus();
+  test('Test TaskStatusController', () async {
 
-    testStatus.TaskStatusID = 1;
-    expect(testStatus.TaskStatusID, 1);
+    final client = MockTaskStatusController();
+    client.toString();
 
-    testStatus.Status = 'Assigned';
-    expect(testStatus.Status, 'Assigned');
+    expect(taskStatuses.length!=0, false);
+
+//
+//    TaskStatus testStatus = new TaskStatus();
+//
+//    testStatus.TaskStatusID = 1;
+//    expect(testStatus.TaskStatusID, 1);
+//
+//    testStatus.Status = 'Assigned';
+//    expect(testStatus.Status, 'Assigned');
   });
 }
