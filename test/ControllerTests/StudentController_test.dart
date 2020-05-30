@@ -1,39 +1,39 @@
-//import 'dart:convert';
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:postgrad_tracker/Controller/StudentController.dart';
+import 'package:postgrad_tracker/Model/Student.dart';
+import 'package:postgrad_tracker/Model/User.dart';
+import 'package:postgrad_tracker/main.dart';
+import 'ListController_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:http/http.dart' as http;
+
+import '../Student_register_test.dart';
+
 //
-//import 'package:flutter/cupertino.dart';
-//import 'package:flutter_test/flutter_test.dart';
-//import 'package:postgrad_tracker/Controller/StudentController.dart';
-//import 'package:postgrad_tracker/Model/Student.dart';
-//import 'package:postgrad_tracker/Model/User.dart';
-//import 'package:postgrad_tracker/main.dart';
-//import 'ListController_test.dart';
-//import 'package:mockito/mockito.dart';
-//import 'package:http/http.dart' as http;
+//class Post {
+//  dynamic data;
+//  Post.fromJson(this.data);
+//}
 //
-//import '../Student_register_test.dart';
+//Future<Post> fetchPost(http.Client client) async {
+//  final response =
+//  await client.get('https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php');
 //
-////
-////class Post {
-////  dynamic data;
-////  Post.fromJson(this.data);
-////}
-////
-////Future<Post> fetchPost(http.Client client) async {
-////  final response =
-////  await client.get('https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php');
-////
-////  if (response.statusCode == 200) {
-////    // If the call to the server was successful, parse the JSON.
-////    return Post.fromJson(json.decode(response.body));
-////  } else {
-////    // If that call was not successful, throw an error.
-////    throw Exception('Failed to load post');
-////  }
-////}
-//
-//
-//
-//void main() {
+//  if (response.statusCode == 200) {
+//    // If the call to the server was successful, parse the JSON.
+//    return Post.fromJson(json.decode(response.body));
+//  } else {
+//    // If that call was not successful, throw an error.
+//    throw Exception('Failed to load post');
+//  }
+//}
+
+
+
+void main() {
 //  group('Student tests', () {
 //    test(
 //        'fetchStudent', () async {
@@ -102,5 +102,5 @@
 //
 //
 //  });
-//
-//}
+
+}
