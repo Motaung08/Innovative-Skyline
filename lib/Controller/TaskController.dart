@@ -75,11 +75,12 @@ class TaskController{
   and create an instance in the Task table in the database with the values
   of the passed in task.
    */
-  Future createTask(Task aTask) async{
+  String dateAdded;
+  String dateDue;
+  Future<String> createTask(Task aTask) async{
     bool created = false;
       print("CREATING TASK...");
-    String dateAdded;
-    String dateDue;
+
     if(aTask.Task_DateAdded!=null){
       dateAdded=DateFormat("yyyy-MM-dd").format(aTask.Task_DateAdded);
     }
@@ -106,10 +107,10 @@ class TaskController{
 
       // Starting Web API Call.
       var response = await http.post(url, body: json.encode(data));
-      print(response.body);
+      //print(response.body);
       // Getting Server response into variable.
       var message = jsonDecode(response.body);
-      print(message);
+      return message;
 
 
 

@@ -464,6 +464,8 @@ class _BoardState extends State<Board> {
                 onPressed: () async {
                   //listTitle.text = "";
                   if (_formKey.currentState.validate()) {
+                    print('BEFORE LISTS: '+user.boards[getBoardIndex(widget.proj_board.ProjectID)]
+                        .boardLists.length.toString());
                     ListCard newList = new ListCard();
                     newList.List_Title = listTitle.text;
                     newList.ProjectID = widget.proj_board.ProjectID;
@@ -472,6 +474,8 @@ class _BoardState extends State<Board> {
                             .boardLists =
                         await listController.ReadLists(
                             widget.proj_board.ProjectID);
+                    print('AFTER LISTS: '+user.boards[getBoardIndex(widget.proj_board.ProjectID)]
+                        .boardLists.length.toString());
                     Navigator.pop(context);
                   }
                 },
@@ -1141,7 +1145,15 @@ class _DynamicListState extends State<DynamicList> {
                                 if (dueChanged == true) {
                                   newTask.Task_Due = _dueDate;
                                 }
-
+                                print(
+                                  "Title: "+newTask.Task_Title+"\n"+
+                                    "Description: "+newTask.Task_Description+"\n"+
+                                    "ListID: "+newTask.ListID.toString()+"\n"+
+                                    "Added by: "+newTask.Task_AddedBy+"\n"+
+                                    "Status ID: "+newTask.Task_StatusID.toString()+"\n"+
+                                    "Date added: "+newTask.Task_DateAdded.toString()+"\n"+
+                                    "Date Due: "+newTask.Task_Due.toString()
+                                );
                                 await taskController.createTask(newTask);
                                 //widget.aList.listTasks.add(newTask);
 //                                user

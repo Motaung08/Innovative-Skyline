@@ -90,7 +90,7 @@ class ListController{
 
       // Getting Server response into variable.
       var message = jsonDecode(response.body);
-
+      print(message);
       return message;
 
   }
