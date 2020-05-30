@@ -11,7 +11,7 @@ void main(){
     final client = MockTaskStatusController();
     client.toString();
 
-    expect(taskStatuses.length >0, isFalse);
+    expect(taskStatuses.length, lessThanOrEqualTo(0));
 
   });
 }
