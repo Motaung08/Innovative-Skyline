@@ -1,14 +1,10 @@
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:http/http.dart' as http;
+import 'package:postgrad_tracker/Controller/TaskStatusController.dart';
 import 'package:postgrad_tracker/Controller/UserController.dart';
 import 'package:postgrad_tracker/Model/User.dart';
-import 'package:postgrad_tracker/View/profile/student/ViewStudentProfile.dart';
-import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
+import 'package:postgrad_tracker/main.dart';
 
-import 'Models_test.dart';
 
 //class Post {
 //  dynamic data;
@@ -74,17 +70,7 @@ import 'Models_test.dart';
 //  });
 //
 //}
-class MockUserController extends Mock implements UserController{
-//  @override
-//  String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-//    String fullString;
-//    assert(() {
-//      fullString = toDiagnosticsNode(style: DiagnosticsTreeStyle.singleLine).toString(minLevel: minLevel);
-//      return true;
-//    }());
-//    return fullString ?? toStringShort();
-//  }
-}
+class MockUserController extends Mock implements UserController{}
 void main(){
   group('Test User', (){
     test('test fetch user', () async{
@@ -92,10 +78,41 @@ void main(){
       expect(when(await mockUserController.getUser('1713445@students.wits.ac.za')),isInstanceOf<PostExpectation<User>>());
     });
 
-//        testWidgets('All input feild and button widgets should be on screen', (
-//        WidgetTester tester) async {
-//      await tester.pumpWidget(makeWidgetTestable(UserController()));
-//
-//    });
+    test('Test UserRegistration', () async {
+      User testuser = new User();
+
+      UserController userController = new UserController();
+//      User mockList=MockUser();
+      await userController.ReadUsers();
+      List<List<User>> testlists=[];
+
+      testuser.email = 'tman@gmail.com';
+      expect(testuser.email, 'tman@gmail.com');
+
+      testuser.password = 'tman';
+      expect(testuser.password, 'tman');
+
+      testuser.userTypeID =1;
+      expect(testuser.userTypeID, 1);
+    });
+
+    test('test Status', () async {
+      TaskStatusController taskStatus = new TaskStatusController();
+
+      await taskStatus.getStatuses();
+
+    });
+
+    test('UserReceived', () async {
+      User userRec = new User();
+      UserController userController = new UserController();
+
+      userRec.email = '';
+      userRec.password = '';
+
+
+    });
+
+
   });
 }
