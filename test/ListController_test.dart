@@ -40,12 +40,14 @@ void main() {
   group('Server connection', () {
 
     ListController lc=new ListController();
+    String message ='';
     test('Create lists',() async{
+      message = "No Lists created yet";
       ListController listController=new ListController();
       ListCard mockList=MockList();
       mockList.ProjectID=103;
       mockList.List_Title="Test creation";
-      expect(await listController.createList(mockList), "List created!");
+      expect(await listController.createList(mockList), message="List created!");
 
     });
 
