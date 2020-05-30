@@ -1,6 +1,6 @@
-.packages
-.flutter-plugins-dependencies
-.flutter-plugins
+#.packages
+#.flutter-plugins-dependencies
+#.flutter-plugins
 #.pub/
 #build/
 #.dart_tool
