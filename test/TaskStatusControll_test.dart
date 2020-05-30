@@ -11,15 +11,7 @@ void main(){
     final client = MockTaskStatusController();
     client.toString();
 
-    expect(taskStatuses.length!=0, false);
+    expect(taskStatuses.length >0, isFalse);
 
-//
-//    TaskStatus testStatus = new TaskStatus();
-//
-//    testStatus.TaskStatusID = 1;
-//    expect(testStatus.TaskStatusID, 1);
-//
-//    testStatus.Status = 'Assigned';
-//    expect(testStatus.Status, 'Assigned');
   });
 }
