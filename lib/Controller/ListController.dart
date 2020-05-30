@@ -40,12 +40,8 @@ class ListController{
         print(Response);
 
 
-        if (Response.length == 0) {
+        if (Response.length != 0) {
 
-          msg = "No Lists created yet.";
-          print(msg);
-        }
-        else {
           lists=[];
           for (int i = 0; i < Response.length; i++) {
             ListCard listReceived = new ListCard();
@@ -66,9 +62,9 @@ class ListController{
           the model and so the UI should then be populated.
           */
 
-          return lists;
-          //boardPage.populateListDisplay();
+
         }
+    return lists;
 
   }
 

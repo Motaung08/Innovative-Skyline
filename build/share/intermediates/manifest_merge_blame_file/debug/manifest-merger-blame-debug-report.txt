@@ -3,6 +3,6 @@
 3    package="io.flutter.plugins.share" >
 4
 5    <uses-sdk android:minSdkVersion="16" />
-5-->/home/tshepang/.pub-cache/hosted/pub.dartlang.org/share-0.6.4+3/android/src/main/AndroidManifest.xml
+5-->C:\Users\MSI\flutter_windows_v1.12.13+hotfix.8-stable\flutter\.pub-cache\hosted\pub.dartlang.org\share-0.6.4+3\android\src\main\AndroidManifest.xml
 6
 7</manifest>

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/tshepang/Documents/developments/Innovative-Skyline/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-zh/values-zh.xml",
+            "outputFile": "C:\\Users\\MSI\\Documents\\GitHub\\SD\\Innovative-Skyline\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh\\values-zh.xml",
             "map": [
                 {
-                    "source": "/home/tshepang/.gradle/caches/transforms-2/files-2.1/b6c2402374faeb1994757dbf9eb8f154/jetified-ucrop-2.2.3/res/values-zh/values-zh.xml",
+                    "source": "C:\\Users\\MSI\\.gradle\\caches\\transforms-2\\files-2.1\\d5e6a4e91d051b5b3108515958716512\\jetified-ucrop-2.2.3\\res\\values-zh\\values-zh.xml",
                     "from": {
                         "startLines": "2,3,4",
                         "startColumns": "4,4,4",
