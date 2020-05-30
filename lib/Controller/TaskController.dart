@@ -8,6 +8,54 @@ import 'package:http/http.dart' as http;
 class TaskController{
 
   /*
+  The purpose of this method is to take in a Task (for it's associated values)
+  and create an instance in the Task table in the database with the values
+  of the passed in task.
+   */
+  String dateAdded;
+  String dateDue;
+  Future<String> createTask(Task aTask) async{
+    dateAdded=null;
+    dateDue=null;
+    print("CREATING TASK...");
+
+    if(aTask.Task_DateAdded!=null){
+      dateAdded=DateFormat("yyyy-MM-dd").format(aTask.Task_DateAdded);
+    }
+    if(aTask.Task_Due!=null){
+      dateDue=DateFormat("yyyy-MM-dd").format(aTask.Task_Due);
+    }
+
+    // SERVER API URL
+    var url =
+//          'http://146.141.21.17/createBoard.php';
+        'https://witsinnovativeskyline.000webhostapp.com/createTask.php';
+    //print('================= '+title);
+    // Store all data with Param Name.
+    var data = {
+      //'TaskID': aTask.TaskID.toString(),
+      'Task_Title': aTask.Task_Title,
+      'ListID':aTask.ListID.toString(),
+      'Task_AddedBy':aTask.Task_AddedBy,
+      'Task_DateAdded':dateAdded,
+      'Task_Description':aTask.Task_Description,
+      'Task_Due':dateDue,
+      'Task_StatusID':aTask.Task_StatusID.toString(),
+    };
+
+    // Starting Web API Call.
+    var response = await http.post(url, body: json.encode(data));
+    //print(response.body);
+    // Getting Server response into variable.
+    var message = jsonDecode(response.body);
+    return message;
+
+
+
+
+  }
+
+  /*
   The purpose of this method is to read in all the instances in the Task table
   with the ListID of that which is passed in. These instances are returned in
   the form of a list of Task objects.
@@ -70,52 +118,7 @@ class TaskController{
     return tasks;
   }
 
-  /*
-  The purpose of this method is to take in a Task (for it's associated values)
-  and create an instance in the Task table in the database with the values
-  of the passed in task.
-   */
-  String dateAdded;
-  String dateDue;
-  Future<String> createTask(Task aTask) async{
-    bool created = false;
-      print("CREATING TASK...");
 
-    if(aTask.Task_DateAdded!=null){
-      dateAdded=DateFormat("yyyy-MM-dd").format(aTask.Task_DateAdded);
-    }
-    if(aTask.Task_Due!=null){
-      dateDue=DateFormat("yyyy-MM-dd").format(aTask.Task_Due);
-    }
-
-      // SERVER API URL
-      var url =
-//          'http://146.141.21.17/createBoard.php';
-          'https://witsinnovativeskyline.000webhostapp.com/createTask.php';
-      //print('================= '+title);
-      // Store all data with Param Name.
-      var data = {
-        //'TaskID': aTask.TaskID.toString(),
-        'Task_Title': aTask.Task_Title,
-        'ListID':aTask.ListID.toString(),
-        'Task_AddedBy':aTask.Task_AddedBy,
-        'Task_DateAdded':dateAdded,
-        'Task_Description':aTask.Task_Description,
-        'Task_Due':dateDue,
-        'Task_StatusID':aTask.Task_StatusID.toString(),
-      };
-
-      // Starting Web API Call.
-      var response = await http.post(url, body: json.encode(data));
-      //print(response.body);
-      // Getting Server response into variable.
-      var message = jsonDecode(response.body);
-      return message;
-
-
-
-
-  }
 
   /*
   The purpose of this method is to take in a Task (for it's associated values)
@@ -124,23 +127,13 @@ class TaskController{
   of the passed in task (said values may have been updated by the user via the
   UI).
    */
-  Future updateTask(Task aTask) async{
+  Future<String> updateTask(Task aTask) async{
     var url =
 
         'https://witsinnovativeskyline.000webhostapp.com/updateTask.php';
 
-    /*
-    $TaskID = $obj['TaskID'];
-$ListID = $obj['ListID'];
-$Task_Title = $obj['Task_Title'];
-$Task_Description = $obj['Task_Description'];
-//$AddedBy = $obj['Task_AddedBy'];
-$StatusID = $obj['Task_StatusID'];
-$DateAdded = $obj['Task_Date_added'];
-$DueDate = $obj['Task_Date_Due'];
-     */
-    String dateAdded;
-    String dateDue;
+    dateAdded=null;
+    dateDue=null;
     if(aTask.Task_DateAdded!=null){
       dateAdded=DateFormat("yyyy-MM-dd").format(aTask.Task_DateAdded);
     }
@@ -159,7 +152,6 @@ $DueDate = $obj['Task_Date_Due'];
       'Task_StatusID':aTask.Task_StatusID.toString(),
     };
 
-    print("UPDATE!");
 
     // Starting Web API Call.
     var response = await http.post(url, body: json.encode(data));
@@ -167,7 +159,7 @@ $DueDate = $obj['Task_Date_Due'];
     // Getting Server response into variable.
     var message = jsonDecode(response.body);
 
-    print(message);
+    return message;
   }
 
   /*
@@ -175,8 +167,7 @@ $DueDate = $obj['Task_Date_Due'];
   and remove the instance in the Task table (the instance with the
   corresponding TaskID to that which was passed in).
    */
-  Future deleteTask(int TaskID) async{
-    print("yowhoo: "+TaskID.toString());
+  Future<String> deleteTask(int TaskID) async{
 
     // SERVER API URL
     var url =
@@ -193,6 +184,6 @@ $DueDate = $obj['Task_Date_Due'];
     // Getting Server response into variable.
     // ignore: non_constant_identifier_names
     var Response = jsonDecode(response.body);
-    print(Response);
+    return Response;
   }
 }

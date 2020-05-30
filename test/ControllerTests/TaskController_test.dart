@@ -17,7 +17,7 @@ void main() {
     test('Creating a task', () async {
 
       TaskController taskController = new TaskController();
-       created = true;
+      created = true;
       var data;
       Task atask = new Task();
 
@@ -29,52 +29,59 @@ void main() {
       atask.Task_DateAdded = DateTime.now();
       atask.Task_Due = DateTime.now();
       expect(await taskController.createTask(atask), "Task created!");
-      expect(taskController.dateAdded, DateFormat("yyyy-MM-dd").format(atask.Task_DateAdded));
-      expect(taskController.dateDue, DateFormat("yyyy-MM-dd").format(atask.Task_Due));
+      if(taskController.dateAdded!=null){
+        expect(taskController.dateAdded, DateFormat("yyyy-MM-dd").format(atask.Task_DateAdded));
+      }
+      if(taskController.dateDue!=null){
+        expect(taskController.dateDue, DateFormat("yyyy-MM-dd").format(atask.Task_Due));
+      }
+
+
+
+    });
+
+    test('Reading tasks for a valid list', () async {
+
+      TaskController taskController = new TaskController();
+      expect(await taskController.ReadTasks(196),isNotEmpty);
+
+    });
+
+    test('Reading tasks for an invalid list', () async {
+
+      TaskController taskController = new TaskController();
+      expect(await taskController.ReadTasks(0),isEmpty);
 
     });
 
     test('Updating Task', () async {
       TaskController taskController = new TaskController();
       Task atask = new Task();
-
+      List<Task> testTasks=[];
+      testTasks=await taskController.ReadTasks(196);
+      atask=testTasks.last;
       await taskController.updateTask(atask);
 
-      expect(atask.Task_Title='Test1', 'Test1');
-      expect(atask.Task_Title='Code coverage', 'Code coverage');
-      expect(atask.Task_AddedBy='Tshepang', 'Tshepang');
-      expect(atask.Task_StatusID=1, 1);
-      expect(atask.TaskID=1, 1);
-      expect(atask.Task_DateAdded=DateTime(2020,02,19), DateTime(2020,02,19));
-      expect(atask.Task_Due=DateTime(2020,11,08), DateTime(2020,11,08));
 
-      if(atask.Task_Due != null){
-        expect(atask.Task_Due=DateTime(2020,11,08), DateTime(2020,11,08));
+      expect(await taskController.updateTask(atask),"Task updated successfully");
+
+      if(taskController.dateAdded!=null){
+        expect(taskController.dateAdded, DateFormat("yyyy-MM-dd").format(atask.Task_DateAdded));
+      }
+      if(taskController.dateDue!=null){
+        expect(taskController.dateDue, DateFormat("yyyy-MM-dd").format(atask.Task_Due));
       }
 
-      if(atask.Task_DateAdded != null){
-        expect(atask.Task_DateAdded=DateTime(2020,02,19), DateTime(2020,02,19));
-      }
-
-      expect(Task!=null, created=true);
-
     });
-
-    test('updating task', () async {
-      final updateTask = MockClient();
-
-      when(updateTask.get(
-          'https://witsinnovativeskyline.000webhostapp.com/updateTask.php'))
-          .thenAnswer((_) async =>
-          http.Response('{"title": "Testing Update Task"}', 200));
-    });
-
 
     test("Delete Task", () async {
-      TaskController deleteTask = new  TaskController();
-      Task delTask = new Task();
+      TaskController taskController = new TaskController();
+      Task atask = new Task();
+      List<Task> testTasks=[];
+      testTasks=await taskController.ReadTasks(196);
+      atask=testTasks.last;
 
-      await deleteTask.deleteTask(delTask.TaskID=1);
+      expect(await taskController.deleteTask(atask.TaskID),"Task DELETED!");
     });
 
 
