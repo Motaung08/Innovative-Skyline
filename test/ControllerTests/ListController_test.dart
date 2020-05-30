@@ -26,7 +26,7 @@ class MockListController extends Mock implements ListController{}
 
 
 void main() {
-  group('Server connection', () {
+  group('Test CRUD List', () {
 
     ListController lc=new ListController();
     String message ='';
@@ -34,10 +34,10 @@ void main() {
       message = "No Lists created yet";
       //ListController mockListController=new MockListController();
       ListController listController=new ListController();
-      ListCard mockList=MockList();
-      mockList.ProjectID=103;
-      mockList.List_Title="Test creation";
-      expect(await listController.createList(mockList),"List created!");
+      ListCard egList=new ListCard();
+      egList.ProjectID=103;
+      egList.List_Title="Test creation";
+      expect(await listController.createList(egList),"List created!");
 
     });
 
