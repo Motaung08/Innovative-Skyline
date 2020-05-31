@@ -85,9 +85,7 @@ class TaskController{
 
 
         if (Response.length == 0) {
-
           msg = "No Tasks created yet.";
-          print(msg);
         }
         else {
          // print('mmmmmmmmmmmmmmmmmmmmmm lists!');
@@ -115,6 +113,7 @@ class TaskController{
           }
 
         }
+        print(msg);
     return tasks;
   }
 
