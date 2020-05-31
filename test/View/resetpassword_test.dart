@@ -47,6 +47,10 @@ void main() {
      expect(forgotPassButton, findsOneWidget);
    });
 
+   testWidgets('test visibility', (WidgetTester tester) async {
+     
+   });
+
  });
 
 }
