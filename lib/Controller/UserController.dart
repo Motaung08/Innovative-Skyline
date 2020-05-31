@@ -232,7 +232,6 @@ class UserController{
     if (result=="No user found.") {
 
         ResetString = "No user found :(";
-        print(ResetString);
 
     } else if (result=="Email Exists but password not reset.") {
 
@@ -242,7 +241,7 @@ class UserController{
     }else{
       ResetString="Successfully updated password!";
     }
-
+    print(ResetString);
     return ResetString;
 
   }
