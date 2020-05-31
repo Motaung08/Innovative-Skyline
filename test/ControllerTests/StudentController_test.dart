@@ -36,7 +36,7 @@ void main() {
 
           Student testStudent=new Student();
           testStudent.email=testUser.email;
-          testStudent.studentNo="";
+          testStudent.studentNo="UniqueStudNo123";
           testStudent.fName="";
           testStudent.lName="";
           testStudent.degreeID=1;

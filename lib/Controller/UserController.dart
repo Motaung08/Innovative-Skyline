@@ -89,15 +89,15 @@ class UserController{
     var datauser = json.decode(response.body);
 
     print(datauser);
-
-    if (datauser.length == 0) {
+    String msg="";
+    if (datauser== "No user found.") {
 
       proceed=false;
-        String msg = "Incorrect email or password!";
-        print(msg);
+        msg = "Incorrect email or password!";
+
 
     } else {
-      //print('Setting......................');
+        msg="Found user, assigning attributes ...";
 
         user.email = datauser[0]['Email'];
         user.userTypeID = int.parse(datauser[0]['UserTypeId']);
@@ -121,7 +121,7 @@ class UserController{
       proceed=true;
       //Navigator.popAndPushNamed(context, '/Home');
     }
-
+    print(msg);
     return proceed;
   }
 

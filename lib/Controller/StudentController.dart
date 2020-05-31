@@ -101,9 +101,9 @@ class StudentController{
       // Getting Server response into variable.
       var message = jsonDecode(response.body);
 
-
+      print("MESSAGE: "+message);
       // If Web call Success than Hide the CircularProgressIndicator.
-      if (response.statusCode == 200) {
+      if (message == "Student Registered Successfully") {
         success = true;
         student.fName=studentA.fName;
         student.lName=studentA.lName;
@@ -113,6 +113,10 @@ class StudentController{
         student.registrationDate=studentA.registrationDate;
         student.degreeID=studentA.degreeID;
 
+      }
+      else{
+        success=false;
+        print("STUDENT NOT REGISTERED");
       }
 
 

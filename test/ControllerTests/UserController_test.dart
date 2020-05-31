@@ -1,118 +1,159 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:postgrad_tracker/Controller/StudentController.dart';
+import 'package:postgrad_tracker/Controller/SupervisorController.dart';
 import 'package:postgrad_tracker/Controller/TaskStatusController.dart';
 import 'package:postgrad_tracker/Controller/UserController.dart';
+import 'package:postgrad_tracker/Model/Student.dart';
+import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/main.dart';
 
-
-//class Post {
-//  dynamic data;
-//  Post.fromJson(this.data);
-//}
-//
-//class MockClient extends Mock implements http.Client {}
-//
-//Future<Post> fetchPost(http.Client client) async {
-//  final response =
-//  await client.get('https://witsinnovativeskyline.000webhostapp.com/register_user.php');
-//
-//  if (response.statusCode == 200) {
-//    // If the call to the server was successful, parse the JSON.
-//    return Post.fromJson(json.decode(response.body));
-//  } else {
-//    // If that call was not successful, throw an error.
-//    throw Exception('Failed to load post');
-//  }
-//}
-//
-//
-//void main() {
-//  group('Server connection', () {
-//
-//    test(
-//        'returns a Post if the UserController http call completes successfully', () async {
-//      final client = MockClient();
-//
-//      when(client.get(
-//          'https://witsinnovativeskyline.000webhostapp.com/register_user.php'))
-//          .thenAnswer((_) async => http.Response('{"title": "Test"}', 200));
-//    });
-//
-//    test(
-//        'returns a Post if the UserController http call completes successfully', () async {
-//      final client = MockClient();
-//
-//      when(client.get(
-//          'https://witsinnovativeskyline.000webhostapp.com/register_user.php'))
-//          .thenAnswer((_) async =>
-//          http.Response('{"title: UserController"}', 200));
-//    });
-//
-//    test(
-//        'returns a Post if the UserController http call completes successfully', () async {
-//      final client = MockClient();
-//
-//      when(client.get(
-//          'https://witsinnovativeskyline.000webhostapp.com/register_user.php'))
-//          .thenAnswer((_) async => http.Response('Not Found', 404));
-//
-//      expect(fetchPost(client), throwsException);
-//    });
-//
-//    testWidgets('All input feild and button widgets should be on screen', (
-//        WidgetTester tester) async {
-//      await tester.pumpWidget(makeWidgetTestable(UserController()));
-//
-//    });
-//
-//
-//  });
-//
-//}
 class MockUserController extends Mock implements UserController{}
 void main(){
+
+  group('Test Student User',(){
+    /*
+    Functions to test:
+
+    -userRegistration
+    -userDeRegistration
+    -login
+    -ReadUsers
+    -userExists
+    -getUser
+    -ResetPassword
+     */
+
+    User testUser=new User();
+
+    testUser.email='testStudent@students.wits.ac.za';
+    testUser.password="testPassword";
+    testUser.userTypeID=1;
+
+    Student testStudent=new Student();
+    testStudent.email=testUser.email;
+    testStudent.studentNo="UniqueStudNo123";
+    testStudent.fName="Test";
+    testStudent.lName="Student";
+    testStudent.degreeID=1;
+    testStudent.registrationDate=DateTime.now();
+    testStudent.studentTypeID=1;
+
+
+    test('StudentLogin',() async{
+      UserController userController=new UserController();
+      StudentController studentController=new StudentController();
+      expect(await studentController.studentRegistration(testStudent,testUser), "Student Register Success");
+      expect(await userController.login(testUser.email, testUser.password),true);
+    });
+
+    test('User exists',() async{
+      UserController userController=new UserController();
+      expect(await userController.userExists(testUser.email), true);
+    });
+
+
+    test('Get User',() async{
+      UserController userController=new UserController();
+      expect(await userController.getUser(testUser.email), isNotNull);
+    });
+
+    test('Reset Password',() async{
+      UserController userController=new UserController();
+      expect(await userController.ResetPassword(testUser.email,"NewExamplePassword"), "Successfully updated password!");
+    });
+
+    test('Test student type user deregistration', () async{
+      UserController userController = new UserController();
+
+      expect(await userController.userDeRegistration(testUser), "Student removed successfully.");
+
+    });
+
+    test('StudentLogin for invalid email',() async{
+      UserController userController=new UserController();
+      expect(await userController.login(testUser.email, testUser.password),false);
+    });
+  });
   group('Test User', (){
-    test('test fetch user', () async{
-      UserController mockUserController=MockUserController();
-      expect(when(await mockUserController.getUser('1713445@students.wits.ac.za')),isInstanceOf<PostExpectation<User>>());
+
+
+
+    //---
+
+    User testSupUser = new User();
+    testSupUser.email = 'testSup@wits.ac.za';
+    testSupUser.password = 'supPass';
+    testSupUser.userTypeID =2;
+
+    Supervisor testSupervisor=new Supervisor();
+
+    testSupervisor.email=testSupUser.email;
+    testSupervisor.staffNo="UniqueStaffNo123456";
+    testSupervisor.fName="Tshepang";
+    testSupervisor.lName="Motaung";
+    testSupervisor.office="+134";
+
+    /*
+    Functions to test:
+
+    -userRegistration
+    -userDeRegistration
+    -login
+    -ReadUsers
+    -userExists
+    -getUser
+    -ResetPassword
+     */
+
+    User testUser=new User();
+
+    testUser.email='testSup@wits.ac.za';
+    testUser.password="testPassword";
+    testUser.userTypeID=2;
+
+
+    test('Supervisor Login',() async{
+      UserController userController=new UserController();
+      SupervisorController supervisorController=new SupervisorController();
+      expect(await supervisorController.registration(testSupervisor,testUser), "Supervisor successfully registered!");
+      expect(await userController.login(testUser.email, testUser.password),true);
     });
 
-    test('Test UserRegistration', () async {
-      User testuser = new User();
+    test('User exists',() async{
+      UserController userController=new UserController();
+      expect(await userController.userExists(testUser.email), true);
+    });
 
+
+    test('Get User',() async{
+      UserController userController=new UserController();
+      expect(await userController.getUser(testUser.email), isNotNull);
+    });
+
+    test('Reset Password',() async{
+      UserController userController=new UserController();
+      expect(await userController.ResetPassword(testUser.email,"NewExamplePassword"), "Successfully updated password!");
+    });
+
+    test('Test supervisor type user deregistration', () async{
       UserController userController = new UserController();
-//      User mockList=MockUser();
-      await userController.ReadUsers();
-      List<List<User>> testlists=[];
 
-      testuser.email = 'tman@gmail.com';
-      expect(testuser.email, 'tman@gmail.com');
-
-      testuser.password = 'tman';
-      expect(testuser.password, 'tman');
-
-      testuser.userTypeID =1;
-      expect(testuser.userTypeID, 1);
-    });
-
-    test('test Status', () async {
-      TaskStatusController taskStatus = new TaskStatusController();
-
-      await taskStatus.getStatuses();
+      expect(await userController.userDeRegistration(testUser), "Supervisor removed successfully.");
 
     });
 
-    test('UserReceived', () async {
-      User userRec = new User();
-      UserController userController = new UserController();
-
-      userRec.email = '';
-      userRec.password = '';
-
-
+    test('Supervisor Login for invalid email',() async{
+      UserController userController=new UserController();
+      expect(await userController.login(testUser.email, testUser.password),false);
     });
 
 
+
+  });
+  test('Read users', (){
+    UserController userController=new UserController();
+    expect(userController.ReadUsers(), isNotNull);
   });
 }
