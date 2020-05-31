@@ -28,7 +28,7 @@ void main() {
 
 
       if(atask.Task_Due!=null){
-        expect(taskController.dateDue, DateFormat("yyyy-MM-dd").format(atask.Task_Due));
+        expect(taskController.dateDue==DateFormat("yyyy-MM-dd").format(atask.Task_Due),true);
       }
       if(atask.Task_DateAdded!=null){
         expect(taskController.dateAdded==DateFormat("yyyy-MM-dd").format(atask.Task_DateAdded),true);
