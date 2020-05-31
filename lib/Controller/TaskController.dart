@@ -18,11 +18,12 @@ class TaskController{
     dateDue=null;
     print("CREATING TASK...");
 
-    if(aTask.Task_DateAdded!=null){
-      dateAdded=DateFormat("yyyy-MM-dd").format(aTask.Task_DateAdded);
-    }
+
     if(aTask.Task_Due!=null){
       dateDue=DateFormat("yyyy-MM-dd").format(aTask.Task_Due);
+    }
+    if(aTask.Task_DateAdded!=null){
+      dateAdded=DateFormat("yyyy-MM-dd").format(aTask.Task_DateAdded);
     }
 
     // SERVER API URL
