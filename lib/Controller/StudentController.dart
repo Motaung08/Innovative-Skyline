@@ -119,12 +119,13 @@ class StudentController{
 
       if (user.register==true && success==true){
         student.register=true;
-        registrationSuccess="";
+        registrationSuccess="Student Register Success";
       }
     }
 
     return registrationSuccess;
 
   }
+
 
 }

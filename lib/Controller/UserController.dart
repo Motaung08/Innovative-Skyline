@@ -42,6 +42,31 @@ class UserController{
   }
 
   /*
+  The purpose of the following method is to take in a User object and use the
+  User values to remove the corresponding an instance in the User table in the
+  database.
+   */
+  Future<String> userDeRegistration(User userA) async {
+    user.register = false;
+
+    // SERVER API URL
+    var url =
+    //'http://146.141.21.17/register_user.php';
+        'https://witsinnovativeskyline.000webhostapp.com/deregister_user.php';
+
+    // Store all data with Param Name.
+    var data = {'email': userA.email, 'userType': userA.userTypeID};
+
+    // Starting Web API Call.
+    var response = await http.post(url, body: json.encode(data));
+
+    // Getting Server response into variable.
+    var message = jsonDecode(response.body);
+
+    return message;
+  }
+
+  /*
   The following  method is used to determine whether a user may proceed to the
   home screen and if they may, then the home screen should be populated
   accordingly.
