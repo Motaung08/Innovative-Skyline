@@ -84,7 +84,7 @@ class Project_BoardController {
         if (Response.length == 0) {
 
           msg = "No boards created yet. Click the + button to create a board.";
-          print(msg);
+
         }
         else {
           user.boards.clear();
@@ -112,6 +112,7 @@ class Project_BoardController {
 
 
         }
+    print(msg);
     return boards;
   }
 
