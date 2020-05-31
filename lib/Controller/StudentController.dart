@@ -15,6 +15,7 @@ class StudentController{
   Student instance in the database based on a passed in email address.
    */
   Future<Student> fetchStudent(String email) async {
+    String msg='';
     Student aStudent=new Student();
     final response = await http.post(
         "https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php",
@@ -25,13 +26,11 @@ class StudentController{
     var datauser = json.decode(response.body);
 
     if (datauser.length == 0) {
-      print("Nada");
-      //setState(() {
-      //msg = " Error :( ";
-      // });
+
+      msg = " Error :( No such student found. ";
+
     } else {
-      print("Assigning...");
-      print(datauser);
+      msg="Found student, assigning attributes ...";
 
       aStudent.fName = datauser[0]['Student_FirstName'];
       aStudent.lName = datauser[0]['Student_LastName'];
@@ -41,7 +40,7 @@ class StudentController{
       aStudent.email=datauser[0]['Student_Email'];
       aStudent.studentTypeID=int.parse(datauser[0]['StudentTypeID']);
     }
-
+    print(msg);
     return aStudent;
   }
 
