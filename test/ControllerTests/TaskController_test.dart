@@ -17,8 +17,6 @@ void main() {
     test('Creating a task', () async {
 
       TaskController taskController = new TaskController();
-      created = true;
-      var data;
       Task atask = new Task();
 
       atask.Task_Title ='New task test';
