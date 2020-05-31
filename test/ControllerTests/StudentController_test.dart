@@ -30,17 +30,18 @@ void main() {
     test('studentRegistration', () async {
           User testUser=new User();
 
-          testUser.email='testStudent@students.wits.ac.za';
+          testUser.email='testStudentInReg@students.wits.ac.za';
           testUser.password="testPassword";
           testUser.userTypeID=1;
 
           Student testStudent=new Student();
           testStudent.email=testUser.email;
           testStudent.studentNo="UniqueStudNo123";
-          testStudent.fName="";
-          testStudent.lName="";
+          testStudent.fName="Test";
+          testStudent.lName="Student";
           testStudent.degreeID=1;
           testStudent.registrationDate=DateTime.now();
+          testStudent.studentTypeID=1;
 
           //testStudent.studentTypeID
       StudentController studentController=new StudentController();

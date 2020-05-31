@@ -77,7 +77,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
       style: style,
       key: Key('PasswordInput'),
       decoration: InputDecoration(
-          suffixIcon: IconButton(icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibility),
+          suffixIcon: IconButton(icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibility, key: Key("viewHidePassword"),),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "New Password",
           border:
