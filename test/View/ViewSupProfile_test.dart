@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
-import 'Models_test.dart';
+import '../Models_test.dart';
 
 
 
