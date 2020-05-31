@@ -27,7 +27,7 @@ void main() {
       expect(await taskController.createTask(atask), "Task created!");
 
       if(atask.Task_DateAdded!=null){
-        expect(taskController.dateAdded, DateFormat("yyyy-MM-dd").format(atask.Task_DateAdded));
+        expect(taskController.dateAdded==DateFormat("yyyy-MM-dd").format(atask.Task_DateAdded),true);
       }
 
       if(atask.Task_Due!=null){
