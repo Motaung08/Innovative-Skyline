@@ -16,6 +16,7 @@ class SupervisorController{
    */
   Future<Supervisor> fetchSup(String email) async {
     Supervisor fetchedSup=new Supervisor();
+    String msg='';
     final response = await http.post(
       // "http://146.141.21.17/viewSupProfile.php",
         "https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php",
@@ -26,16 +27,16 @@ class SupervisorController{
     var datauser = json.decode(response.body);
 
     if (datauser.length == 0) {
-      print("No supervisor");
+      msg='No supervisor';
     } else {
-
+      msg='Found supervisor.';
       fetchedSup.staffNo = datauser[0]['StaffNo'];
       fetchedSup.fName = datauser[0]['Supervisor_Firstname'];
       fetchedSup.lName = datauser[0]['Supervisor_Lastname'];
       fetchedSup.email=datauser[0]['Supervisor_Email'];
       fetchedSup.office=datauser[0]['Supervisor_OfficePhone'];
     }
-
+    print(msg);
 
     return fetchedSup;
   }
