@@ -47,9 +47,7 @@ void main() {
      expect(forgotPassButton, findsOneWidget);
    });
 
-   test('test visibility', (){
 
-   });
 
    testWidgets('test visibility', (WidgetTester tester) async {
      await tester.pumpWidget(makeWidgetTestable(ResetPasswordView()));

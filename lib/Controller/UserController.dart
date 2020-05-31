@@ -131,6 +131,7 @@ class UserController{
    */
   Future<List<User>> ReadUsers() async {
     List<User> registered=[];
+    String msg='';
     // SERVER API URL
     var url =
     //'http://146.141.21.17/ReadBoards.php';
@@ -148,9 +149,10 @@ class UserController{
 
     if (Response.length == 0) {
 
-      print("No registered users.");
+      msg="No registered users.";
     }
     else {
+      msg='Registered users found.';
       registered=[];
       for (int i = 0; i < Response.length; i++) {
 
@@ -164,6 +166,7 @@ class UserController{
 
 
     }
+    print(msg);
     return registered;
   }
 

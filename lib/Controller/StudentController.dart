@@ -116,7 +116,6 @@ class StudentController{
       }
       else{
         success=false;
-        print("STUDENT NOT REGISTERED");
       }
 
 
