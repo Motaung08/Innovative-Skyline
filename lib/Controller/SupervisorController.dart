@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
@@ -49,8 +47,8 @@ class SupervisorController{
   Future setUserSup(String email)async{
     supervisor=await fetchSup(email);
     personNo=supervisor.staffNo;
-    Project_BoardController project_boardController=new Project_BoardController();
-    user.boards=await project_boardController.ReadBoards(user.userTypeID,supervisor.staffNo);
+    Project_BoardController projectBoardController=new Project_BoardController();
+    user.boards=await projectBoardController.ReadBoards(user.userTypeID,supervisor.staffNo);
   }
 
   /*
@@ -97,7 +95,7 @@ class SupervisorController{
       var response = await http.post(url, body: json.encode(data));
 
       // Getting Server response into variable.
-      var message = jsonDecode(response.body);
+      //var message = jsonDecode(response.body);
 
       // If Web call Success than Hide the CircularProgressIndicator.
       if (response.statusCode == 200) {

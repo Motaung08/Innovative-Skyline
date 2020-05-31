@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:postgrad_tracker/Controller/ListController.dart';
-import 'package:postgrad_tracker/Controller/TaskController.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/View/resetpassword.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';

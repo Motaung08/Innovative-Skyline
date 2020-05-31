@@ -39,10 +39,11 @@ class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   DateFormat dateFormat = DateFormat("yyyy-MM-dd");
   String typeName="";
-  int degreeid =student.degreeID;
+  int degreeID =student.degreeID;
+ // ignore: non_constant_identifier_names, missing_return
  int DegreeID(){
-   if(degreeid!=null){
-     return degreeid;
+   if(degreeID!=null){
+     return degreeID;
    }
  }
 

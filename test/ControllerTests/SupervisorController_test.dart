@@ -1,7 +1,4 @@
-import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';

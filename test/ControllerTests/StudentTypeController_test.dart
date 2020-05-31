@@ -1,8 +1,5 @@
-import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:http/http.dart' as http;
-import 'package:postgrad_tracker/Controller/DegreeController.dart';
 import 'package:postgrad_tracker/Controller/StudentTypeController.dart';
 import 'package:postgrad_tracker/main.dart';
 

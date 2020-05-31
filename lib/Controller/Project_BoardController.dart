@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
-import 'package:flutter/material.dart';
-import 'package:postgrad_tracker/Model/Student.dart';
-import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
 
@@ -164,6 +161,7 @@ class Project_BoardController {
   The purpose of this method is to delete a Project_Board instance in the
   database based on the ProjectID of the newBoard which is passed in.
    */
+  // ignore: non_constant_identifier_names
   Future<String> deleteBoard(int ProjectID) async{
 
     // SERVER API URL

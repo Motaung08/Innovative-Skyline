@@ -2,12 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:postgrad_tracker/Controller/StudentController.dart';
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
-import 'package:postgrad_tracker/Controller/TaskStatusController.dart';
 import 'package:postgrad_tracker/Controller/UserController.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
-import 'package:postgrad_tracker/main.dart';
 
 class MockUserController extends Mock implements UserController{}
 void main(){
@@ -62,6 +60,10 @@ void main(){
     test('Reset Password',() async{
       UserController userController=new UserController();
       expect(await userController.ResetPassword(testUser.email,"NewExamplePassword"), "Successfully updated password!");
+    });
+    test('Reset Password invalid user',() async{
+      UserController userController=new UserController();
+      expect(await userController.ResetPassword("invalid","NewExamplePassword"), "No user found :(");
     });
 
     test('Test student type user deregistration', () async{

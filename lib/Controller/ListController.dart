@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:postgrad_tracker/Model/ListCard.dart';
-import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,8 +18,6 @@ class ListController{
   // ignore: non_constant_identifier_names, missing_return
   Future<List<ListCard>> ReadLists(int ProjectID) async{
     List<ListCard> lists=List();
-
-      String msg = '';
 
         // SERVER API URL
         var url =

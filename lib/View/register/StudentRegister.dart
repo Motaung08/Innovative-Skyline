@@ -74,7 +74,6 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
-  List<DegreeType> _degree = degrees;
   List<DropdownMenuItem<DegreeType>> _dropdownMenuItems;
   DegreeType _selectedDegree;
 
@@ -84,6 +83,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 
 
   @override
+  // ignore: must_call_super
   void initState() {
 //    //widget.initialize();
     initializeRegister();
@@ -428,35 +428,6 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       ),
     );
 
-    final studentDegreeField = TextFormField(
-      controller: DegreeTypeController,
-      obscureText: false,
-      validator: (val) => val.isEmpty ? 'Enter a Degree' : null,
-      onChanged: (val) {
-        setState(() => Degree = val);
-      },
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Degree",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
-    final studentTypeField = TextFormField(
-      controller: studentTypeTextController,
-      validator: (val) => val.isEmpty ? 'Enter Student Type' : null,
-      onChanged: (val) {
-        setState(() => studentType = val);
-      },
-      obscureText: false,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Full/Part time",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
 
     RegistrationDateController.text=_date.toString();
 
@@ -471,6 +442,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 //      keyboardType: TextInputType.datetime,
 //    );
 
+    // ignore: non_constant_identifier_names
     final DateSelection = new    Stack(
       children: <Widget>[
         Container(
@@ -512,21 +484,6 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       ],
     );
 
-    final studentDateRegisteredField = TextFormField(
-      controller: RegistrationDateController,
-      enabled: false,
-      obscureText: false,
-      validator: (val) => val.isEmpty ? 'Enter Date Registered' : null,
-      onChanged: (val) {
-        setState(() => DateReg = val);
-      },
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Date Registered",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
 
     final passwordField = TextFormField(
       controller: passwordController,

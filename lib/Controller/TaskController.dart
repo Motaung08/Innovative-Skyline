@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Model/Task.dart';
 import 'package:http/http.dart' as http;
 
@@ -63,7 +62,6 @@ class TaskController{
   // ignore: non_constant_identifier_names
   Future<List<Task>> ReadTasks(int ListID) async{
     List<Task> tasks=new List();
-      bool created = false;
       String msg = '';
 
         // SERVER API URL
@@ -166,6 +164,7 @@ class TaskController{
   and remove the instance in the Task table (the instance with the
   corresponding TaskID to that which was passed in).
    */
+  // ignore: non_constant_identifier_names
   Future<String> deleteTask(int TaskID) async{
 
     // SERVER API URL

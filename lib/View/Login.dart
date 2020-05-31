@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/main.dart';
-import 'dart:async';
 
 class LoginPage extends StatefulWidget {
 
@@ -27,12 +26,6 @@ class LoginPageState extends State<LoginPage> {
     setState(() {
       _isHidden=!_isHidden;
     });
-  }
-  //
-  Future _tryLogin() async{
-
-
-
   }
 
 
@@ -134,16 +127,6 @@ class LoginPageState extends State<LoginPage> {
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
-
-    @override
-    void dispose() {
-      // Clean up the controller when the widget is disposed.
-      _emailController.dispose();
-      _passwordController.dispose();
-      super.dispose();
-    }
-
-
 
     // ignore: non_constant_identifier_names
     final RegisterButon = Material(

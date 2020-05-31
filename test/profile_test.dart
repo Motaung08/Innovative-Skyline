@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:postgrad_tracker/Model/User.dart';
-import 'package:postgrad_tracker/View/profile/student/ViewStudentProfile.dart';
 import 'package:postgrad_tracker/main.dart';
 
 
@@ -18,7 +16,6 @@ Widget makeWidgetTestable(Widget widget){
 void main(){
   group('User',()
   {
-    final User user = new User();
 
     testWidgets('Find the studentProfile', (WidgetTester tester) async {
       await tester.pumpWidget(makeWidgetTestable(MyApp()));

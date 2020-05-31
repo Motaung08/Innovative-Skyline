@@ -52,8 +52,8 @@ class StudentController{
     student= await fetchStudent(email);
     personNo=student.studentNo;
     user.boards.clear();
-    Project_BoardController project_boardController=new Project_BoardController();
-    user.boards=await project_boardController.ReadBoards(user.userTypeID,student.studentNo);
+    Project_BoardController projectBoardController=new Project_BoardController();
+    user.boards=await projectBoardController.ReadBoards(user.userTypeID,student.studentNo);
 
   }
 

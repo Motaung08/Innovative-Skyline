@@ -2,10 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
-import 'package:postgrad_tracker/Controller/StudentController.dart';
-import 'package:postgrad_tracker/Controller/SupervisorController.dart';
-import 'package:postgrad_tracker/Controller/UserController.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
@@ -56,7 +52,7 @@ void main(){
 
     testWidgets('find widget by key', (WidgetTester tester) async {
       final key = Key('key');
-      Project_Board aboard = new Project_Board();
+
 
       // await tester.pumpWidget(DynamicWidget(key: key, aboard: aboard));
       await tester.pumpWidget(MaterialApp(key: key, home: Container()));

@@ -9,7 +9,6 @@ import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/StudentController.dart';
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
 import 'package:postgrad_tracker/Controller/TaskController.dart';
-import 'package:postgrad_tracker/Controller/UserController.dart';
 import 'package:postgrad_tracker/Model/ListCard.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
@@ -19,7 +18,6 @@ import 'package:postgrad_tracker/Model/TaskStatus.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:share/share.dart';
 
 List<StaggeredTile> stiles = new List<StaggeredTile>();
 List<DynamicList> listDynamic = [];
@@ -70,6 +68,7 @@ class Board extends StatefulWidget {
 }
 
 class _BoardState extends State<Board> {
+  // ignore: missing_return, non_constant_identifier_names
   int getBoardIndex(int BoardID) {
     for (int i = 0; i < user.boards.length; i++) {
       if (user.boards[i].ProjectID == BoardID) {
@@ -166,6 +165,7 @@ class _BoardState extends State<Board> {
   final items = List();
   // ignore: non_constant_identifier_names
 
+  // ignore: non_constant_identifier_names
   Project_BoardController project_boardController =
       new Project_BoardController();
   //Edit Board Popup
@@ -368,18 +368,6 @@ class _BoardState extends State<Board> {
                             style: TextStyle(color: Colors.red),
                           ),
                           onPressed: () async {
-                            int boardIndex;
-                            for (int j = 0; j < user.boards.length; j++) {
-                              if (user.boards[j].ProjectID ==
-                                  widget.proj_board.ProjectID) {
-                                boardIndex = j;
-                              }
-                            }
-                            await project_boardController
-                                .deleteBoard(widget.proj_board.ProjectID);
-
-                            //
-
                             await project_boardController.deleteBoard(widget.proj_board.ProjectID);
 
                             //listDynamic.removeAt(boardIndex);
@@ -555,6 +543,7 @@ class _BoardState extends State<Board> {
                           });
                           // Add assignment now that it is valid.
                           User assignUser=await userController.getUser(email);
+                          // ignore: non_constant_identifier_names
                           String OtherPersonNo;
 
                           if(assignUser.userTypeID==1){
@@ -1248,10 +1237,7 @@ class _DynamicListState extends State<DynamicList> {
     Future<String> editListAlertDialog(BuildContext context) {
       TextEditingController titleController = new TextEditingController();
       titleController.text = widget.aList.List_Title;
-      String title = "";
-      if (widget.aList.List_Title != null) {
-        title = widget.aList.List_Title;
-      }
+
       return showDialog(
           context: context,
           builder: (context) {
@@ -1456,7 +1442,6 @@ class _DynamicListState extends State<DynamicList> {
               fontWeight: FontWeight.bold)),
     );
 
-    TextEditingController listTitleController = new TextEditingController();
 
     Future choiceAction(String choice) async {
       if (choice == Constants.Edit) {

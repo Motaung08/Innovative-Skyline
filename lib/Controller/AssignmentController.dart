@@ -1,7 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Model/Assignment.dart';
 
@@ -15,6 +12,7 @@ class AssignmentController {
   used to load the board upon their logging in.
    */
 
+  // ignore: non_constant_identifier_names
   Future<String> createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID) async{
     var url =
         'https://witsinnovativeskyline.000webhostapp.com/createAssignment.php';
@@ -39,6 +37,7 @@ class AssignmentController {
 
   }
 
+  // ignore: non_constant_identifier_names
   Future<List> ReadAssignment(int UserType, String OtherPersonNo, int ProjectID) async{
     var url =
         'https://witsinnovativeskyline.000webhostapp.com/ReadAssignment.php';
@@ -62,6 +61,7 @@ class AssignmentController {
 
   }
 
+  // ignore: non_constant_identifier_names
   Future<String> DeleteAssignment(int UserType, String OtherPersonNo, int ProjectID) async{
     var url =
         'https://witsinnovativeskyline.000webhostapp.com/DeleteAssignment.php';

@@ -261,7 +261,7 @@ class _MyHomePageState extends State<HomePage> {
     studentTypes.clear();
     listDynamic.clear();
 
-    User user = new User();
+    user = new User();
     supervisor = new Supervisor();
     student = new Student();
     //project_board=new Project_Board();
@@ -272,7 +272,7 @@ class _MyHomePageState extends State<HomePage> {
     Navigator.popAndPushNamed(context, '/Login');
 
 //ProjectBoardView
-    HomePage homePage = new HomePage();
+    homePage = new HomePage();
   }
 
   TextStyle style = TextStyle(
@@ -288,26 +288,24 @@ class _MyHomePageState extends State<HomePage> {
       ),
     );
 
-    Project_BoardController project_boardController=new Project_BoardController();
-
     final plusButton = new Container(
       alignment: Alignment.bottomRight,
       child: MaterialButton(
         onPressed: () async{
           await createAlertDialog(context);
           if (titleController.text != "") {
-            Project_Board project_board = new Project_Board();
-            Project_BoardController project_boardController =
+            Project_Board projectBoard = new Project_Board();
+            Project_BoardController projectBoardController =
             new Project_BoardController();
-            project_board.Project_Title = titleController.text;
-            project_board.Project_Description = descriptionController.text;
-            project_board.Project_StartDate = _startDate;
-            project_board.Project_EndDate = _endDate;
+            projectBoard.Project_Title = titleController.text;
+            projectBoard.Project_Description = descriptionController.text;
+            projectBoard.Project_StartDate = _startDate;
+            projectBoard.Project_EndDate = _endDate;
             //print("Person: "+personNo);
-            await project_boardController.createBoard(project_board,user.userTypeID,personNo);
-            user.boards=await project_boardController.ReadBoards(user.userTypeID, personNo);
-            project_board=user.boards.last;
-            addDynamic(project_board);
+            await projectBoardController.createBoard(projectBoard,user.userTypeID,personNo);
+            user.boards=await projectBoardController.ReadBoards(user.userTypeID, personNo);
+            projectBoard=user.boards.last;
+            addDynamic(projectBoard);
             boardTitle = "";
             await homePage.initializeDisplay();
             Navigator.popAndPushNamed(context, '/Home');
@@ -431,6 +429,7 @@ class _MyHomePageState extends State<HomePage> {
   }
 }
 
+// ignore: must_be_immutable
 class DynamicWidget extends StatefulWidget {
   TextStyle style = TextStyle(
       fontFamily: 'Montserrat', fontSize: 20.0, color: (Colors.white));
@@ -453,21 +452,22 @@ class _DynamicWidgetState extends State<DynamicWidget> {
   @override
   Widget build(BuildContext context) {
     //widget.popLists();
-    Project_BoardController project_boardController = new Project_BoardController();
-    TextEditingController titleController = new TextEditingController();
+    Project_BoardController projectBoardController = new Project_BoardController();
     TextEditingController descriptionController = new TextEditingController();
-    String boardTitle = "";
-    final _EditformKey = GlobalKey<FormState>();
+    // ignore: non_constant_identifier_names
+    final Edit_formKey = GlobalKey<FormState>();
     //int userType=user.userTypeID;
 
     DateTime _startDate = new DateTime.now();
     DateTime _endDate = new DateTime.now();
-    final format = DateFormat("yyyy-MM-dd");
+
     String startDateinput = "Select date ...";
     String endDateinput = "Select date ...";
     TextStyle datestyle = TextStyle(
         color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
+    // ignore: non_constant_identifier_names
     bool ChangedStart = false;
+    // ignore: non_constant_identifier_names
     bool ChangedEnd = false;
     Future<Null> selectStartDate(BuildContext context) async {
       final DateTime picked = await showDatePicker(
@@ -503,6 +503,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
       endDateinput = DateFormat('yyyy-MM-dd').format(_endDate);
     }
 
+    // ignore: non_constant_identifier_names
     bool ChangedBoardValue=false;
 
     Future<String> editBoardAlertDialog(BuildContext context) {
@@ -521,10 +522,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
         endDateinput = "Select date ...";
       }
       titleController.text = widget.aboard.Project_Title;
-      String title = "";
-      if (widget.aboard.Project_Title != null) {
-        title = widget.aboard.Project_Title;
-      }
+
       return showDialog(
           context: context,
           builder: (context) {
@@ -532,7 +530,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
               return AlertDialog(
                 title: Text(widget.aboard.Project_Title),
                 content: Form(
-                    key: _EditformKey,
+                    key: Edit_formKey,
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -716,7 +714,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                   boardIndex=j;
                                 }
                               }
-                              await project_boardController.deleteBoard(widget.aboard.ProjectID);
+                              await projectBoardController.deleteBoard(widget.aboard.ProjectID);
                               //user.boards=await project_boardController.ReadBoards(user.userTypeID, personNo);
 //                              for(int i=0;i<user.boards.length;i++){
 //                                user.boards[i].boardLists= await listController.ReadLists(user.boards[i].ProjectID);
@@ -745,7 +743,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                             onPressed: () {
                               //boardTitle = titleController.text;
                               //print(widget.aboard.Project_Description);
-                              if (_EditformKey.currentState.validate()) {
+                              if (Edit_formKey.currentState.validate()) {
                                 if (ChangedStart == true) {
                                   widget.aboard.Project_StartDate =
                                       _startDate;
@@ -755,7 +753,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                       _endDate;
                                 }
                                 if(ChangedBoardValue==true||ChangedStart==true||ChangedEnd==true){
-                                  project_boardController
+                                  projectBoardController
                                       .updateBoard(widget.aboard);
                                   print(widget.aboard.Project_Title);
                                 }

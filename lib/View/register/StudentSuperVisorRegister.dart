@@ -1,9 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-
-import '../../main.dart';
-import '../../main.dart';
-import '../../main.dart';
 import 'StudentRegister.dart';
 
 class StudentSupChoicePage extends StatefulWidget {
@@ -101,8 +97,6 @@ class _StudentSupChoicePageState extends State<StudentSupChoicePage> {
         ),
       );
     }
-
-    const Alignment topLeft = Alignment(-1.0, -1.0);
 
     return Scaffold(
       body: Center(

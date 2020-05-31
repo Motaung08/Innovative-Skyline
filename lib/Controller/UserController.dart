@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Controller/TaskStatusController.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/main.dart';
-import 'package:password_hash/password_hash.dart';
 
 // ignore: must_be_immutable
 class UserController{
@@ -71,6 +69,7 @@ class UserController{
   home screen and if they may, then the home screen should be populated
   accordingly.
    */
+  // ignore: non_constant_identifier_names
   Future<bool> login(String email, String Password) async {
 
     bool proceed=false;
@@ -129,6 +128,7 @@ class UserController{
   The following method is used to return all instances in the User table in the
   database as a list of User objects.
    */
+  // ignore: non_constant_identifier_names
   Future<List<User>> ReadUsers() async {
     List<User> registered=[];
     String msg='';
@@ -175,6 +175,7 @@ class UserController{
   board, we have a means of checking that the board is being shared with a valid
   user.
    */
+  // ignore: non_constant_identifier_names
   Future<bool> userExists(String Email) async{
     print("Looking for: "+Email);
     List<User> registeredUsers=await ReadUsers();
@@ -192,6 +193,7 @@ class UserController{
   This method is used to retrieve the user details/attributes based on the given
   email address.
    */
+  // ignore: non_constant_identifier_names
   Future<User> getUser(String Email) async{
     List<User> registeredUsers=await ReadUsers();
     User giveUser=new User();
@@ -209,7 +211,9 @@ class UserController{
   the user/email may be retrieved and subsequently updated with the given
   password(hashing is done within the PHP script).
    */
+  // ignore: non_constant_identifier_names
   String ResetString="";
+  // ignore: non_constant_identifier_names
   Future<String> ResetPassword(String email, String password) async{
     
     var data =
@@ -233,13 +237,10 @@ class UserController{
 
         ResetString = "No user found :(";
 
-    } else if (result=="Email Exists but password not reset.") {
+    } else if (result=="Password updated successfully") {
 
-        ResetString =
-        "There was a problem updating the password, please try again.";
-
-    }else{
       ResetString="Successfully updated password!";
+
     }
     print(ResetString);
     return ResetString;
