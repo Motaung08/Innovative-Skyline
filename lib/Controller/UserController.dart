@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:postgrad_tracker/Controller/AssignmentTypeController.dart';
 import 'package:postgrad_tracker/Controller/TaskStatusController.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:http/http.dart' as http;
@@ -21,7 +22,10 @@ class UserController{
         'https://witsinnovativeskyline.000webhostapp.com/register_user.php';
 
     // Store all data with Param Name.
-    var data = {'email': userA.email, 'password': userA.password, 'userType': userA.userTypeID};
+    var data = {
+      'email': userA.email.toLowerCase(),
+      'password': userA.password,
+      'userType': userA.userTypeID};
 
     // Starting Web API Call.
     var response = await http.post(url, body: json.encode(data));
@@ -53,7 +57,10 @@ class UserController{
         'https://witsinnovativeskyline.000webhostapp.com/deregister_user.php';
 
     // Store all data with Param Name.
-    var data = {'email': userA.email, 'userType': userA.userTypeID};
+    var data = {
+      'email': userA.email.toLowerCase(),
+      'userType': userA.userTypeID
+    };
 
     // Starting Web API Call.
     var response = await http.post(url, body: json.encode(data));
@@ -80,7 +87,7 @@ class UserController{
         //"http://146.141.21.17/login.php",
         "https://witsinnovativeskyline.000webhostapp.com/login.php",
         body: {
-          'Email': email,
+          'Email': email.toLowerCase(),
           'Password': Password
         });
     //print('******************************************** Clicked');
@@ -103,7 +110,9 @@ class UserController{
 
 
         TaskStatusController taskStatusController=new TaskStatusController();
+        AssignmentTypeController assignmentTypeController=new AssignmentTypeController();
         await taskStatusController.getStatuses();
+        await assignmentTypeController.getTypes();
       if (user.userTypeID==1){
 
         await studentController.setStudentUser(user.email);
@@ -181,7 +190,7 @@ class UserController{
     List<User> registeredUsers=await ReadUsers();
     bool exists=false;
     for (int i=0;i<registeredUsers.length;i++){
-      if(registeredUsers[i].email==Email){
+      if(registeredUsers[i].email.toLowerCase()==Email.toLowerCase()){
         print("FOUND USER");
         exists=true;
       }
@@ -198,7 +207,7 @@ class UserController{
     List<User> registeredUsers=await ReadUsers();
     User giveUser=new User();
     for (int i=0;i<registeredUsers.length;i++){
-      if(registeredUsers[i].email==Email){
+      if(registeredUsers[i].email.toLowerCase()==Email.toLowerCase()){
         giveUser=registeredUsers[i];
       }
     }
@@ -218,7 +227,7 @@ class UserController{
     
     var data =
     {
-      'Email': email,
+      'Email': email.toLowerCase(),
       'Password': password
     };
 

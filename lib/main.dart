@@ -8,6 +8,7 @@ import 'package:postgrad_tracker/Controller/StudentTypeController.dart';
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
 import 'package:postgrad_tracker/Controller/TaskController.dart';
 import 'package:postgrad_tracker/Controller/UserController.dart';
+import 'package:postgrad_tracker/Model/AssignmentType.dart';
 import 'package:postgrad_tracker/Model/DegreeType.dart';
 import 'package:postgrad_tracker/Model/ListCard.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
@@ -34,6 +35,7 @@ Student student=new Student();
 List<DegreeType> degrees=List();
 List<StudentType> studentTypes=List();
 List<TaskStatus> taskStatuses=List();
+List<AssignmentType>assignmentTypes=List();
 
 // ignore: non_constant_identifier_names
 //Project_Board project_board=new Project_Board();

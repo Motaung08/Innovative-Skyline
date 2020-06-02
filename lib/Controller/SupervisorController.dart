@@ -20,7 +20,7 @@ class SupervisorController{
       // "http://146.141.21.17/viewSupProfile.php",
         "https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php",
         body: {
-          "Email": email,
+          "Email": email.toLowerCase(),
         });
 
     var datauser = json.decode(response.body);
@@ -62,9 +62,6 @@ class SupervisorController{
     This registration method is different to that in StudentController
     as different data is required to be passed in.
 
-     NOTE: Should add a check that the staff number is also unique
-     as the database requires a unique staff number!
-
      NOTE: Should subsequently log the new user in if the registration is
      successful.
    */
@@ -85,8 +82,8 @@ class SupervisorController{
 
       // Store all data with Param Name.
       var data = {
-        'email': supervisorA.email,
-        'StaffNo': supervisorA.staffNo,
+        'email': supervisorA.email.toLowerCase(),
+        'StaffNo': supervisorA.staffNo.toLowerCase(),
         'Sup_FName': supervisorA.fName,
         'Sup_LName': supervisorA.lName,
         'Supervisor_OfficePhone': supervisorA.office,

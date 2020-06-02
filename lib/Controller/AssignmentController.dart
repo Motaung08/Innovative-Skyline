@@ -19,7 +19,7 @@ class AssignmentController {
 
     var data={
       'UserTypeID' : OtherUserType.toString(),
-      'AssignPerson' : OtherPersonNo,
+      'AssignPerson' : OtherPersonNo.toLowerCase(),
       'ProjectID' : ProjectID.toString(),
       'AccessLevelID' : AccessID.toString(),
     };
@@ -44,7 +44,7 @@ class AssignmentController {
 
     var data={
       'UserTypeID' : UserType.toString(),
-      'AssignPerson' : OtherPersonNo,
+      'AssignPerson' : OtherPersonNo.toLowerCase(),
       'ProjectID' : ProjectID.toString(),
     };
 
@@ -68,7 +68,7 @@ class AssignmentController {
 
     var data={
       'UserTypeID' : UserType.toString(),
-      'AssignPerson' : OtherPersonNo,
+      'AssignPerson' : OtherPersonNo.toLowerCase(),
       'ProjectID' : ProjectID.toString(),
     };
 

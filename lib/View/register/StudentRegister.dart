@@ -9,6 +9,7 @@ import 'package:postgrad_tracker/Model/StudentType.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/Login.dart';
 import 'package:postgrad_tracker/main.dart';
+import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
 
 
 import '../../main.dart';
@@ -49,7 +50,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 
   }
 
-   DateTime _date = new DateTime.now();
+   DateTime _date;
    final format = DateFormat("yyyy-MM-dd");
    String dateinput="Select date ...";
    TextStyle datestyle=TextStyle(color: Colors.black.withOpacity(0.65),fontFamily: 'Montserrat');
@@ -57,16 +58,17 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
    Future<Null> selectDate(BuildContext context) async {
      final DateTime picked = await showDatePicker(
          context: context,
-         initialDate: _date,
+         initialDate: DateTime.now(),
          firstDate: new DateTime(2000),
          lastDate: new DateTime(2030)
      );
 
-     if(picked != null && picked != _date){
+     if(picked != null){
        print('Date Selected: ${_date.toString()}');
        setState(() {
          _date = picked;
        });
+
      }
      datestyle=TextStyle(color: Colors.black,fontFamily: 'Montserrat');
      dateinput=DateFormat('yyyy-MM-dd').format(_date);
@@ -85,15 +87,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
   @override
   // ignore: must_call_super
   void initState() {
-//    //widget.initialize();
     initializeRegister();
-//   // _dropdownMenuItems = buildDropdownMenuItems(degrees);
-//    //_selectedDegree = degrees[0];
-//    // print('Degrees size: '+degrees.length.toString());
-//
-//   // _dropdownStudTypeMenuItems = buildDropdownStudentTypeMenuItems(_studenttype);
-//    //_selectedStudType = _dropdownStudTypeMenuItems[0].value;
-//
 //    super.initState();
   }
 
@@ -284,7 +278,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     });
   }
 
-
+  DateTime _dateTime;
   @override
   Widget build(BuildContext context) {
     //widget.initialize();
@@ -429,8 +423,49 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       ),
     );
 
-
     RegistrationDateController.text=_date.toString();
+//    final dateform =  Stack(
+//      children: <Widget>[
+//        Container(
+//          width: double.infinity,
+//          height: 60,
+//          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+//          //padding: EdgeInsets.only(bottom: 10),
+//          decoration: BoxDecoration(
+//            border: Border.all(
+//                color: Colors.grey, width: 1),
+//            borderRadius: BorderRadius.circular(32),
+//            shape: BoxShape.rectangle,
+//          ),
+//          child:  Padding(
+//            padding: EdgeInsets.only(left: 20, right: 20,),
+//            child: DateTimeFormField(
+//              initialValue: null,
+//              label: "",
+//              validator: (DateTime dateTime) {
+//                if (dateTime == null) {
+//                  return "Date Time Required";
+//                }
+//                return null;
+//              },
+//              onSaved: (DateTime dateTime) => _dateTime = dateTime,
+//            ),
+//          )
+//        ),
+//        Positioned(
+//            left: 10,
+//            top: 12,
+//            child: Container(
+//              padding: EdgeInsets.only(bottom: 10, left: 3, right: 0),
+//              margin: EdgeInsets.only(left: 10),
+//              color: Colors.white,
+//              child: Text(
+//                'Date Registered: ',
+//                style: TextStyle(color: Colors.black.withOpacity(.65)),
+//              ),
+//            ))
+//      ],
+//    );
 
     // ignore: non_constant_identifier_names
     final DateSelection = new    Stack(
@@ -446,13 +481,14 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
             borderRadius: BorderRadius.circular(32),
             shape: BoxShape.rectangle,
           ),
-          child: Row(
+          child:  Row(
             children: <Widget>[
               IconButton(
                 icon: Icon(Icons.calendar_today, color: Color(0xff009999),),
                 onPressed: (){
                   selectDate(context);
-                  },
+
+                },
                 tooltip: "Select registration date",
               ),
               Text(dateinput,style: datestyle,),
@@ -531,7 +567,31 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         onPressed: () async {
 
           if (_formKey.currentState.validate()){
-            studentRegistration();
+            if(_date==null){
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: new Text("No registration date selected ..."),
+                    content: Text("Enter the registration date of your current postgraduate degree so that deadlines may be calculated."),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: new Text("OK"),
+                        onPressed: () {
+                          setState(() {
+                            visible=false;
+                          });
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            }else{
+              studentRegistration();
+            }
+
           }
 
         },
@@ -675,7 +735,10 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                                 SizedBox(
                                     width:
                                         MediaQuery.of(context).size.width / 2.8,
-                                    child: DateSelection),
+                                    child:
+                                    //dateform
+                                    DateSelection
+                                ),
                                 SizedBox(
                                   height: 15.0,
                                 ),
@@ -707,12 +770,13 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                           Visibility(
                               visible: visible,
                               child: Container(
-                                  margin: EdgeInsets.only(bottom: 30),
+                                  margin: EdgeInsets.only(bottom: 30, top: 30),
                                   child: CircularProgressIndicator()
                               )
                           ),
                           _divider(),
-                          loginButon
+                          loginButon,
+
                         ],
                       )))),
         ),

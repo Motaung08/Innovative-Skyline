@@ -21,7 +21,7 @@ class StudentController{
     final response = await http.post(
         "https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php",
         body: {
-          "Email": email,
+          "Email": email.toLowerCase(),
         });
 
     var datauser = json.decode(response.body);
@@ -65,9 +65,6 @@ class StudentController{
      Table respectively. This method ensures that a duplicate email address is
      not used.
 
-     NOTE: Should add a check that the student number is also unique
-     as the database requires a unique student number!
-
      NOTE: Should subsequently log the new user in if the registration is
      successful.
    */
@@ -87,8 +84,8 @@ class StudentController{
 
       // Store all data with Param Name.
       var data = {
-        'email': studentA.email,
-        'StudentNo': studentA.studentNo,
+        'email': studentA.email.toLowerCase(),
+        'StudentNo': studentA.studentNo.toLowerCase(),
         'Student_FName': studentA.fName,
         'Student_LName': studentA.lName,
         'DegreeType': studentA.degreeID.toString(),
@@ -118,7 +115,6 @@ class StudentController{
       else if(message=="An account has already been created for this student number."){
         UserController userController=new UserController();
         userController.userDeRegistration(userA);
-        print("DO SOMETHING ABOUT DUPLICATE STUDENT!");
         success=false;
         registrationSuccess="This student number already has an associated account.";
       }

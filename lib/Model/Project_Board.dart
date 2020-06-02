@@ -14,6 +14,9 @@ class Project_Board extends StatefulWidget {
   // ignore: non_constant_identifier_names
   DateTime Project_EndDate;
 
+  //Read in from the associations table to determine what should be disabled.
+  int AccessLevel;
+
   List<ListCard> boardLists=new List<ListCard>();
 
   _Project_BoardState createState() => _Project_BoardState();

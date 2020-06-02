@@ -9,6 +9,7 @@ import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/StudentController.dart';
 import 'package:postgrad_tracker/Controller/SupervisorController.dart';
 import 'package:postgrad_tracker/Controller/TaskController.dart';
+import 'package:postgrad_tracker/Model/AssignmentType.dart';
 import 'package:postgrad_tracker/Model/ListCard.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
@@ -78,6 +79,41 @@ class _BoardState extends State<Board> {
     }
   }
 
+  Future initializeAssignmentTypes () async {
+
+    _dropdownAssignmentTypeMenuItems = buildDropdownAssignmentTypeMenuItems(_assignmentType);
+    _selectedAssignmentType = _dropdownAssignmentTypeMenuItems[0].value;
+    setState(() {
+
+    });
+
+  }
+
+  List<AssignmentType> _assignmentType = assignmentTypes;
+  List<DropdownMenuItem<AssignmentType>> _dropdownAssignmentTypeMenuItems;
+  AssignmentType _selectedAssignmentType;
+
+  List<DropdownMenuItem<AssignmentType>> buildDropdownAssignmentTypeMenuItems(List types) {
+    List<DropdownMenuItem<AssignmentType>> items = List();
+    for (AssignmentType type in types) {
+      items.add(
+        DropdownMenuItem(
+          value: type,
+          child: Text(type.assignmentTypeText, style: TextStyle(color: Colors.grey,fontFamily: 'Montserrat', fontSize: 20.0),overflow: TextOverflow.ellipsis,),
+
+        ),
+      );
+    }
+    return items;
+  }
+
+  onChangeAssignmentTypeDropdownItem(AssignmentType selectedType) {
+    setState(() {
+      _selectedAssignmentType = selectedType;
+    });
+  }
+
+
   void pop() {
     print("**POP**");
     stiles.clear();
@@ -104,6 +140,7 @@ class _BoardState extends State<Board> {
   @override
   void initState() {
     super.initState();
+    initializeAssignmentTypes();
     //widget.populateListDisplay(widget.proj_board.ProjectID);
     pop();
   }
@@ -164,11 +201,59 @@ class _BoardState extends State<Board> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController listTitle = new TextEditingController();
   final items = List();
-  // ignore: non_constant_identifier_names
 
   // ignore: non_constant_identifier_names
   Project_BoardController project_boardController =
       new Project_BoardController();
+
+  Future<String> confirmBoardDeleteAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              "CONFIRM DELETE ",
+              style:
+              TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+            ),
+            content: Text(
+              "Are you sure you want to delete this board?",
+              style:
+              TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+            ),
+            actions: <Widget>[
+              MaterialButton(
+                elevation: 5.0,
+                child: Text(
+                  "Yes",
+                  style: TextStyle(color: Colors.red),
+                ),
+                onPressed: () async {
+                  await project_boardController.deleteBoard(widget.proj_board.ProjectID);
+
+                            //listDynamic.removeAt(boardIndex);
+                            await homePage.initializeDisplay();
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => homePage),
+                            );
+                            setState(() {});
+                },
+              ),
+              MaterialButton(
+                elevation: 5.0,
+                child: Text("No"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
   //Edit Board Popup
   Future<String> editBoardAlertDialog(BuildContext context) {
     TextEditingController titleController = new TextEditingController();
@@ -206,6 +291,7 @@ class _BoardState extends State<Board> {
                         Container(
                           margin: EdgeInsets.all(10),
                           child: TextFormField(
+
                             controller: titleController,
                             decoration: InputDecoration(
                                 //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -369,30 +455,9 @@ class _BoardState extends State<Board> {
                             style: TextStyle(color: Colors.red),
                           ),
                           onPressed: () async {
-                            await project_boardController
-                                .deleteBoard(widget.proj_board.ProjectID);
+                            await confirmBoardDeleteAlertDialog(context);
 
-                            //listDynamic.removeAt(boardIndex);
-                            await homePage.initializeDisplay();
-                            Navigator.pop(context);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) => homePage),
-                            );
-                            setState(() {});
 
-                            //
-
-//                            listDynamic.removeAt(boardIndex);
-//                            user.boards.removeAt(boardIndex);
-//                            homePage.initializeDisplay();
-//                            Navigator.push(
-//                              context,
-//                              MaterialPageRoute(
-//                                  builder: (BuildContext context) => homePage),
-//                            );
-//                            setState(() {});
                           },
                         )),
                     Container(
@@ -494,105 +559,186 @@ class _BoardState extends State<Board> {
   String email;
   TextEditingController emailController = new TextEditingController();
   GlobalKey<FormState> _key = new GlobalKey();
-  Future<String> shareAlertDialog(BuildContext context) {
-    String foundUser = "";
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return StatefulBuilder(
-            builder: (context, setState) {
-              return AlertDialog(
-                title: Text("Share with: "),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Form(
-                      key: _key,
-                      child: TextFormField(
-                        controller: emailController,
-                        decoration: const InputDecoration(labelText: 'Email'),
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) => validateEmail(value),
-                        maxLength: 32,
-                        onEditingComplete: () {
-                          //Check if email exists
 
-                          //if there is time make it possible to add multiple
-                          //recipients here.
-                        },
-                        onChanged: (String val) {
-                          email = val;
-                        },
-                      ),
-                    ),
-                    Text(
-                      foundUser,
-                      style: TextStyle(color: Colors.red),
-                    )
-                  ],
-                ),
-                actions: <Widget>[
-                  MaterialButton(
-                    elevation: 5.0,
-                    child: Text("Share"),
-                    onPressed: () async {
-                      print("share with " + email);
-                      if (_key.currentState.validate()) {
-                        // No any error in validation
-
-                        print("Email $email");
-
-                        //check for users
-                        bool exists = await userController.userExists(email);
-                        if (exists == true) {
-                          print('exists');
-                          foundUser = "";
-                          setState(() {});
-                          // Add assignment now that it is valid.
-                          User assignUser = await userController.getUser(email);
-                          // ignore: non_constant_identifier_names
-                          String OtherPersonNo;
-
-                          if (assignUser.userTypeID == 1) {
-                            StudentController studentController =
-                                new StudentController();
-                            Student assignStud =
-                                await studentController.fetchStudent(email);
-                            OtherPersonNo = assignStud.studentNo;
-                          } else {
-                            SupervisorController supervisorController =
-                                new SupervisorController();
-                            Supervisor assignSup =
-                                await supervisorController.fetchSup(email);
-                            OtherPersonNo = assignSup.staffNo;
-                          }
-
-                          AssignmentController assignmentController =
-                              new AssignmentController();
-
-                          //COME BACK AND CHANGE ACCESSID!
-                          await assignmentController.createAssignment(
-                              assignUser.userTypeID,
-                              OtherPersonNo,
-                              widget.proj_board.ProjectID,
-                              1);
-                          Navigator.pop(context);
-                        } else {
-                          foundUser = "No such user found.";
-                          setState(() {});
-                        }
-                      }
-                    },
-                  )
-                ],
-              );
-            },
-          );
-        });
+  bool _isShareDisabled=false;
+  bool _isEditDisabled=false;
+  determineAccess(){
+    if(widget.proj_board.AccessLevel==null || widget.proj_board.AccessLevel==1) {
+      //Full admin
+      _isShareDisabled = false;
+      _isEditDisabled = false;
+    }
+    else if(widget.proj_board.AccessLevel==2){
+      //Can edit but not share
+      _isShareDisabled = true;
+      _isEditDisabled = false;
+    }else if (widget.proj_board.AccessLevel==3){
+      //Can only view
+      _isShareDisabled = true;
+      _isEditDisabled = true;
+    }
   }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
+  determineAccess();
+    final dropdownAssignmentType = new SizedBox(
+
+      child:StatefulBuilder(
+        builder: (context,setState){
+          return  Container(
+            // padding: EdgeInsets.symmetric(horizontal: 20) ,
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(width: 1.0, style: BorderStyle.solid, color: Colors.grey),
+                borderRadius: BorderRadius.all(Radius.circular(32.0)),
+              ),
+            ),
+
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+
+                children: <Widget>[
+
+                  DropdownButton(
+                    value: _selectedAssignmentType,
+                    items: _dropdownAssignmentTypeMenuItems,
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedAssignmentType = value;
+                      });
+                    },
+                    isExpanded: true,
+                  ),
+
+                  //Text('Selected: ${_selectedDegree.DegreeType}'),
+                ],
+              ),
+            ),
+          );
+        },
+
+      ),
+
+    );
+
+    Future<String> shareAlertDialog(BuildContext context) async {
+      String foundUser = "";
+
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return StatefulBuilder(
+              builder: (context, setState) {
+                return AlertDialog(
+                  title: Text("Share"),
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Form(
+                        key: _key,
+                        child:Container(
+                          alignment: Alignment.bottomLeft,
+                          child:
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+
+                              TextFormField(
+                                controller: emailController,
+                                decoration: const InputDecoration(labelText: 'Email'),
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (value) => validateEmail(value),
+                                maxLength: 32,
+                                onEditingComplete: () {
+                                  //Check if email exists
+
+                                  //if there is time make it possible to add multiple
+                                  //recipients here.
+                                },
+                                onChanged: (String val) {
+                                  email = val;
+                                },
+                              ),
+                              dropdownAssignmentType
+                            ],
+                          ),
+                        ),
+                      ),
+                      Text(
+                        foundUser,
+                        style: TextStyle(color: Colors.red),
+                      )
+                    ],
+                  ),
+                  actions: <Widget>[
+                    MaterialButton(
+                      elevation: 5.0,
+                      child: Text("Share"),
+                      onPressed: () async {
+                        print("share with " + email);
+                        if (_key.currentState.validate()) {
+                          // No any error in validation
+
+                          print("Email $email");
+
+                          //check for users
+                          bool exists = await userController.userExists(email);
+                          if (exists == true) {
+                            print('exists');
+                            foundUser = "";
+                            setState(() {});
+                            // Add assignment now that it is valid.
+                            User assignUser = await userController.getUser(email);
+                            // ignore: non_constant_identifier_names
+                            String OtherPersonNo;
+
+                            if (assignUser.userTypeID == 1) {
+                              StudentController studentController =
+                              new StudentController();
+                              Student assignStud =
+                              await studentController.fetchStudent(email);
+                              OtherPersonNo = assignStud.studentNo;
+                            } else {
+                              SupervisorController supervisorController =
+                              new SupervisorController();
+                              Supervisor assignSup =
+                              await supervisorController.fetchSup(email);
+                              OtherPersonNo = assignSup.staffNo;
+                            }
+
+                            AssignmentController assignmentController =
+                            new AssignmentController();
+                            print("SELECTED: "+_selectedAssignmentType.assignmentTypeText+" "+_selectedAssignmentType.assignmentTypeID.toString());
+                            //COME BACK AND CHANGE ACCESSID!
+                            await assignmentController.createAssignment(
+                                assignUser.userTypeID,
+                                OtherPersonNo,
+                                widget.proj_board.ProjectID,
+                                _selectedAssignmentType.assignmentTypeID);
+                            Navigator.pop(context);
+                          } else {
+                            foundUser = "No such user found.";
+                            setState(() {});
+                          }
+                        }
+                      },
+                    )
+                  ],
+                );
+              },
+            );
+          });
+    }
+
     //plus list
     final plusButton = new Container(
       alignment: Alignment.bottomRight,
@@ -651,6 +797,32 @@ class _BoardState extends State<Board> {
       ),
     );
 
+  final noBoardsNoEditView = new Container(
+    width: MediaQuery.of(context).size.width,
+    decoration: BoxDecoration(
+      color: Colors.white,
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width / 1.1,
+          alignment: Alignment.center,
+          child: Text(
+            "No lists created yet.",
+            style: TextStyle(
+                fontFamily: 'Montserrat',
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueGrey),
+          ),
+        ),
+      ],
+    ),
+  );
+
     //Staggered lists view which we see for individual boards.
     final staggered = Container(
       margin: new EdgeInsets.all(10.0),
@@ -670,27 +842,31 @@ class _BoardState extends State<Board> {
       //)
     );
 
+
+
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
           GestureDetector(
             onTap: () {},
             child: IconButton(
+              disabledColor: Colors.grey,
               icon: Icon(
                 Icons.edit,
-                color: Colors.black,
+                color: _isEditDisabled==true? Colors.grey : Colors.black,
               ),
-              onPressed: () {
+              onPressed:_isEditDisabled==true? null : () {
                 editBoardAlertDialog(context);
               },
             ),
           ),
           IconButton(
+            disabledColor: Colors.grey,
             icon: Icon(
               Icons.share,
-              color: Colors.black,
+              color: _isShareDisabled==true? Colors.grey : Colors.black,
             ),
-            onPressed: () {
+            onPressed: _isShareDisabled==true? null : () {
               //print("SHARE");
               shareAlertDialog(context);
               //Share.share(widget.proj_board.Project_Title);
@@ -701,14 +877,12 @@ class _BoardState extends State<Board> {
         backgroundColor: Color(0xff009999),
       ),
       backgroundColor: Colors.grey,
-      body: ((user.boards[getBoardIndex(widget.proj_board.ProjectID)]
-                  .boardLists !=
-              null)
-          //|| user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists.length!=0
+      body: (
+          user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists.length!=0
           )
           ? staggered
-          : noBoardsView,
-      floatingActionButton: plusButton,
+          : _isEditDisabled==true? noBoardsNoEditView : noBoardsView,
+      floatingActionButton: _isEditDisabled==true? null : plusButton,
       //bottomSheet: plusButton,
     );
   }
@@ -799,67 +973,90 @@ class _DynamicListState extends State<DynamicList> {
     setState(() {});
   }
 
+  int getBoardIndex(int boardID) {
+    //print("BOARD ID: "+boardID.toString());
+    //print("getting board index ... ugh");
+    for (int i = 0; i < user.boards.length; i++) {
+      //print("looking...............");
+      //print("Board ID: "+user.boards[i].ProjectID.toString()+" our ID: "+boardID.toString() );
+
+      if (user.boards[i].ProjectID == boardID) {
+        //print("BOARD INDEX: "+i.toString());
+        return i;
+      }
+    }
+  }
+
+  // ignore: missing_return
+  int getListIndex(int listID) {
+    for (int j = 0;
+    j <
+        user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists
+            .length;
+    j++) {
+      if (user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[j]
+          .ListID ==
+          listID) {
+        return j;
+      }
+    }
+  }
+
+  // ignore: missing_return
+  int getTaskStatusIndex(int statusID) {
+    for (int j = 0; j < taskStatuses.length; j++) {
+      if (taskStatuses[j].TaskStatusID == statusID) {
+        return j;
+      }
+    }
+  }
+
+  // ignore: missing_return, non_constant_identifier_names
+  int getTaskIndex(int TaskID) {
+    for (int j = 0;
+    j <
+        user
+            .boards[getBoardIndex(widget.aList.ProjectID)]
+            .boardLists[getListIndex(widget.aList.ListID)]
+            .listTasks
+            .length;
+    j++) {
+      if (user
+          .boards[getBoardIndex(widget.aList.ProjectID)]
+          .boardLists[getListIndex(widget.aList.ListID)]
+          .listTasks[j]
+          .TaskID ==
+          TaskID) {
+        return j;
+      }
+    }
+  }
+
+  bool _isShareDisabled=false;
+  bool _isEditDisabled=false;
+  determineAccess(){
+    Project_Board pb=user.boards[getBoardIndex(widget.aList.ProjectID)];
+    if(pb.AccessLevel==null || pb.AccessLevel==1) {
+      //Full admin
+      _isShareDisabled = false;
+      _isEditDisabled = false;
+    }
+    else if(pb.AccessLevel==2){
+      //Can edit but not share
+      _isShareDisabled = true;
+      _isEditDisabled = false;
+    }else if (pb.AccessLevel==3){
+      //Can only view
+      _isShareDisabled = true;
+      _isEditDisabled = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    determineAccess();
     // ignore: missing_return
-    int getBoardIndex(int boardID) {
-      //print("BOARD ID: "+boardID.toString());
-      //print("getting board index ... ugh");
-      for (int i = 0; i < user.boards.length; i++) {
-        //print("looking...............");
-        //print("Board ID: "+user.boards[i].ProjectID.toString()+" our ID: "+boardID.toString() );
 
-        if (user.boards[i].ProjectID == boardID) {
-          //print("BOARD INDEX: "+i.toString());
-          return i;
-        }
-      }
-    }
-
-    // ignore: missing_return
-    int getListIndex(int listID) {
-      for (int j = 0;
-          j <
-              user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists
-                  .length;
-          j++) {
-        if (user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[j]
-                .ListID ==
-            listID) {
-          return j;
-        }
-      }
-    }
-
-    // ignore: missing_return
-    int getTaskStatusIndex(int statusID) {
-      for (int j = 0; j < taskStatuses.length; j++) {
-        if (taskStatuses[j].TaskStatusID == statusID) {
-          return j;
-        }
-      }
-    }
-
-    // ignore: missing_return, non_constant_identifier_names
-    int getTaskIndex(int TaskID) {
-      for (int j = 0;
-          j <
-              user
-                  .boards[getBoardIndex(widget.aList.ProjectID)]
-                  .boardLists[getListIndex(widget.aList.ListID)]
-                  .listTasks
-                  .length;
-          j++) {
-        if (user
-                .boards[getBoardIndex(widget.aList.ProjectID)]
-                .boardLists[getListIndex(widget.aList.ListID)]
-                .listTasks[j]
-                .TaskID ==
-            TaskID) {
-          return j;
-        }
-      }
-    }
 
     // ignore: non_constant_identifier_names
     final EditorKey = GlobalKey<FormState>();
@@ -892,6 +1089,50 @@ class _DynamicListState extends State<DynamicList> {
     int _selectedTaskID;
     // ignore: non_constant_identifier_names
     bool ChangedTask = false;
+
+    Future<String> confirmTaskDeleteAlertDialog(BuildContext context) {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(
+                "CONFIRM DELETE ",
+                style:
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+              ),
+              content: Text(
+                "Are you sure you want to delete this task?",
+                style:
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              ),
+              actions: <Widget>[
+                MaterialButton(
+                  elevation: 5.0,
+                  child: Text(
+                    "Yes",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  onPressed: () async {
+                    print("DELETE TASK: " +
+                        _selectedTaskID.toString());
+                    int send = _selectedTaskID;
+                    await taskController.deleteTask(send);
+
+                    setState(() {});
+                    Navigator.of(context).pop();
+                  },
+                ),
+                MaterialButton(
+                  elevation: 5.0,
+                  child: Text("No"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          });
+    }
 
     /*
     The following is the popup for creation, update and deletion of a task.
@@ -930,7 +1171,7 @@ class _DynamicListState extends State<DynamicList> {
         titleController.text = "";
         descriptionController.text = "";
         _selectedTaskStatus = taskStatuses[0];
-        _dueDate = DateTime.now();
+        _dueDate = null;
         dueDateInput = "Select date ...";
       }
 
@@ -1038,22 +1279,6 @@ class _DynamicListState extends State<DynamicList> {
                                 ),
                               ),
                             ),
-//                            TextFormField(
-//                              controller: statusController,
-//                              style: style.copyWith(color: Colors.black),
-//                              //maxLines: 5,
-//                              obscureText: false,
-//                              //validator: (val) => val.isEmpty ? 'Enter Task Title' : null,
-//                              onChanged: (val) {
-//                                newTask.Task_StatusID = int.parse(val);
-//                              },
-//                              decoration: InputDecoration(
-//                                  contentPadding:
-//                                  EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//                                  hintText: "Status",
-//                                  border: OutlineInputBorder(
-//                                      borderRadius: BorderRadius.circular(32.0))),
-//                            ),
                             SizedBox(
                               height: 10,
                             ),
@@ -1146,33 +1371,27 @@ class _DynamicListState extends State<DynamicList> {
                                 if (dueChanged == true) {
                                   newTask.Task_Due = _dueDate;
                                 }
-                                print("Title: " +
-                                    newTask.Task_Title +
-                                    "\n" +
-                                    "Description: " +
-                                    newTask.Task_Description +
-                                    "\n" +
-                                    "ListID: " +
-                                    newTask.ListID.toString() +
-                                    "\n" +
-                                    "Added by: " +
-                                    newTask.Task_AddedBy +
-                                    "\n" +
-                                    "Status ID: " +
-                                    newTask.Task_StatusID.toString() +
-                                    "\n" +
-                                    "Date added: " +
-                                    newTask.Task_DateAdded.toString() +
-                                    "\n" +
-                                    "Date Due: " +
-                                    newTask.Task_Due.toString());
+//                                print("Title: " +
+//                                    newTask.Task_Title +
+//                                    "\n" +
+//                                    "Description: " +
+//                                    newTask.Task_Description +
+//                                    "\n" +
+//                                    "ListID: " +
+//                                    newTask.ListID.toString() +
+//                                    "\n" +
+//                                    "Added by: " +
+//                                    newTask.Task_AddedBy +
+//                                    "\n" +
+//                                    "Status ID: " +
+//                                    newTask.Task_StatusID.toString() +
+//                                    "\n" +
+//                                    "Date added: " +
+//                                    newTask.Task_DateAdded.toString() +
+//                                    "\n" +
+//                                    "Date Due: " +
+//                                    newTask.Task_Due.toString());
                                 await taskController.createTask(newTask);
-                                //widget.aList.listTasks.add(newTask);
-//                                user
-//                                    .boards[getBoardIndex(widget.aList.ProjectID)]
-//                                    .boardLists[getListIndex(widget.aList.ListID)]
-//                                    .listTasks
-//                                    .add(newTask);
                                 widget.initializeTaskDisplay();
                                 stiles[getListIndex(widget.aList.ListID)] =
                                     new StaggeredTile.count(
@@ -1181,9 +1400,10 @@ class _DynamicListState extends State<DynamicList> {
                                                     widget.aList.ListID)]
                                                 .mainAxisCellCount +
                                             1);
+                                Navigator.of(context).pop();
                               }
 
-                              Navigator.of(context).pop();
+
                             },
                           )
                         : Row(
@@ -1201,19 +1421,7 @@ class _DynamicListState extends State<DynamicList> {
                                       style: TextStyle(color: Colors.red),
                                     ),
                                     onPressed: () async {
-                                      print("DELETE TASK: " +
-                                          _selectedTaskID.toString());
-                                      int send = _selectedTaskID;
-                                      await taskController.deleteTask(send);
-                                      //widget.aList.listTasks.removeWhere((element) => element.TaskID==_selectedTaskID);
-                                      //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks=await taskController.ReadTasks(widget.aList.ListID);
-                                      //listDynamic.removeAt(boardIndex);
-                                      //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.removeWhere((element) => element.TaskID==_selectedTaskID);
-//                                homePage.initializeDisplay();
-                                      //boardPage.populateListDisplay(widget.aList.ProjectID);
-                                      //Navigator.popAndPushNamed(context, '/Board');
-
-                                      setState(() {});
+                                      await confirmTaskDeleteAlertDialog(context);
                                       Navigator.of(context).pop();
                                     },
                                   )),
@@ -1300,6 +1508,8 @@ class _DynamicListState extends State<DynamicList> {
             );
           });
     }
+
+
 
     Future<String> confirmDeleteAlertDialog(BuildContext context) {
       return showDialog(
@@ -1457,7 +1667,7 @@ class _DynamicListState extends State<DynamicList> {
                           : TextStyle(color: Colors.black)
                       ,
                     ),
-                    onTap: () async {
+                    onTap: _isEditDisabled==true?null : () async {
                       _selectedTaskID = user
                           .boards[getBoardIndex(widget.aList.ProjectID)]
                           .boardLists[getListIndex(widget.aList.ListID)]
@@ -1538,7 +1748,8 @@ class _DynamicListState extends State<DynamicList> {
               children: <Widget>[
                 titleView,
                 PopupMenuButton<String>(
-                  onSelected: choiceAction,
+                  enabled: _isEditDisabled==true?false:true,
+                  onSelected: _isEditDisabled==true? null : choiceAction,
                   itemBuilder: (BuildContext context) {
                     return Constants.choices.map((String choice) {
                       return PopupMenuItem<String>(
@@ -1556,7 +1767,7 @@ class _DynamicListState extends State<DynamicList> {
               ],
             ),
             TaskContainer,
-            addTaskButton,
+            _isEditDisabled==false? addTaskButton : SizedBox(height:1),
           ]),
     );
 

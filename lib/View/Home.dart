@@ -39,12 +39,12 @@ class _MyHomePageState extends State<HomePage> {
   final _formKey = GlobalKey<FormState>();
   //int userType=user.userTypeID;
 
-  DateTime _startDate = new DateTime.now();
-  DateTime _endDate = new DateTime.now();
+  DateTime _startDate;
+  DateTime _endDate;
   final format = DateFormat("yyyy-MM-dd");
-  String startDateinput = "Select date ...";
-  String endDateinput = "Select date ...";
-  TextStyle datestyle = TextStyle(
+  String startDateInput = "Select date ...";
+  String endDateInput = "Select date ...";
+  TextStyle dateStyle = TextStyle(
       color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
 
   Future<Null> selectStartDate(BuildContext context) async {
@@ -54,13 +54,13 @@ class _MyHomePageState extends State<HomePage> {
         firstDate: new DateTime(2000),
         lastDate: new DateTime(2030));
 
-    if (picked != null && picked != DateTime.now()) {
+    if (picked != null) {
       setState(() {
         _startDate = picked;
       });
     }
-    datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
-    startDateinput = DateFormat('yyyy-MM-dd').format(_startDate);
+    dateStyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+    startDateInput = DateFormat('yyyy-MM-dd').format(_startDate);
   }
 
   Future<Null> selectEndDate(BuildContext context) async {
@@ -70,20 +70,20 @@ class _MyHomePageState extends State<HomePage> {
         firstDate: new DateTime(2000),
         lastDate: new DateTime(2030));
 
-    if (picked != null && picked != DateTime.now()) {
+    if (picked != null) {
       setState(() {
         _endDate = picked;
       });
     }
-    datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
-    endDateinput = DateFormat('yyyy-MM-dd').format(_endDate);
+    dateStyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+    endDateInput = DateFormat('yyyy-MM-dd').format(_endDate);
   }
 
   Future<String> createAlertDialog(BuildContext context) {
     titleController.text = "";
     descriptionController.text = "";
-    startDateinput = "Select date ...";
-    endDateinput = "Select date ...";
+    startDateInput = "Select date ...";
+    endDateInput = "Select date ...";
     return showDialog(
         context: context,
         builder: (context) {
@@ -100,6 +100,8 @@ class _MyHomePageState extends State<HomePage> {
                           margin: EdgeInsets.all(10),
                           child: TextFormField(
                             controller: titleController,
+                            validator: (val) =>
+                            val.isEmpty ? 'Enter Board Title' : null,
                             decoration: InputDecoration(
                                 //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                 hintText: "* Board Title",
@@ -144,17 +146,19 @@ class _MyHomePageState extends State<HomePage> {
                                       tooltip: "Select start date",
                                     ),
                                     Text(
-                                      startDateinput,
-                                      style: datestyle,
+                                      startDateInput,
+                                      style: dateStyle,
                                     ),
                                   ],
                                 ),
-                                onPressed: () {
-                                  selectStartDate(context);
-                                  startDateinput = DateFormat('yyyy-MM-dd')
-                                      .format(_startDate);
-                                  //startDateinput=_startDate.toString();
-                                  setState(() {});
+                                onPressed: () async {
+                                  await selectStartDate(context);
+
+
+                                  setState(() {
+                                    startDateInput = DateFormat('yyyy-MM-dd')
+                                        .format(_startDate);
+                                  });
                                 },
                               ),
                             ),
@@ -201,16 +205,18 @@ class _MyHomePageState extends State<HomePage> {
                                       tooltip: "Select end date",
                                     ),
                                     Text(
-                                      endDateinput,
-                                      style: datestyle,
+                                      endDateInput,
+                                      style: dateStyle,
                                     ),
                                   ],
                                 ),
-                                onPressed: () {
-                                  selectEndDate(context);
-                                  endDateinput =
-                                      DateFormat('yyyy-MM-dd').format(_endDate);
-                                  setState(() {});
+                                onPressed: () async {
+                                  await selectEndDate(context);
+
+                                  setState(() {
+                                    endDateInput =
+                                        DateFormat('yyyy-MM-dd').format(_endDate);
+                                  });
                                 },
                               ),
                             ),
@@ -237,11 +243,28 @@ class _MyHomePageState extends State<HomePage> {
                 MaterialButton(
                   elevation: 5.0,
                   child: Text("Create"),
-                  onPressed: () {
+                  onPressed: () async {
                     boardTitle = titleController.text;
-                    //Navigator.of(context).pop(titleController.text.toString());
-                   // user.boards=await
-                    Navigator.of(context).pop();
+                    if (_formKey.currentState.validate()) {
+                      Project_Board projectBoard = new Project_Board();
+                      Project_BoardController projectBoardController =
+                      new Project_BoardController();
+                      projectBoard.Project_Title = titleController.text;
+                      projectBoard.Project_Description = descriptionController.text;
+                      projectBoard.Project_StartDate = _startDate;
+                      projectBoard.Project_EndDate = _endDate;
+                      //print("Person: "+personNo);
+                      await projectBoardController.createBoard(projectBoard,user.userTypeID,personNo);
+                      user.boards=await projectBoardController.ReadBoards(user.userTypeID, personNo);
+                      projectBoard=user.boards.last;
+                      addDynamic(projectBoard);
+                      boardTitle = "";
+                      await homePage.initializeDisplay();
+                      Navigator.popAndPushNamed(context, '/Home');
+                      setState(() {
+
+                      });
+                    }
                   },
                 )
               ],
@@ -279,6 +302,7 @@ class _MyHomePageState extends State<HomePage> {
       fontFamily: 'Montserrat', fontSize: 20.0, color: (Colors.white));
   @override
   Widget build(BuildContext context) {
+
     Widget dynamicTextField = new Container(
       margin: new EdgeInsets.all(10.0),
       //height: MediaQuery.of(context).size.height,
@@ -293,26 +317,7 @@ class _MyHomePageState extends State<HomePage> {
       child: MaterialButton(
         onPressed: () async{
           await createAlertDialog(context);
-          if (titleController.text != "") {
-            Project_Board projectBoard = new Project_Board();
-            Project_BoardController projectBoardController =
-            new Project_BoardController();
-            projectBoard.Project_Title = titleController.text;
-            projectBoard.Project_Description = descriptionController.text;
-            projectBoard.Project_StartDate = _startDate;
-            projectBoard.Project_EndDate = _endDate;
-            //print("Person: "+personNo);
-            await projectBoardController.createBoard(projectBoard,user.userTypeID,personNo);
-            user.boards=await projectBoardController.ReadBoards(user.userTypeID, personNo);
-            projectBoard=user.boards.last;
-            addDynamic(projectBoard);
-            boardTitle = "";
-            await homePage.initializeDisplay();
-            Navigator.popAndPushNamed(context, '/Home');
-            setState(() {
 
-            });
-          }
 
         },
         color:
@@ -371,7 +376,6 @@ class _MyHomePageState extends State<HomePage> {
       ),
       body: new Container(
         margin: new EdgeInsets.all(10.0),
-//         // height: MediaQuery.of(context).size.height,
         child: user.boards.length > 0 ? dynamicTextField : noBoardsView,
       ),
       floatingActionButton: plusButton,
@@ -423,8 +427,6 @@ class _MyHomePageState extends State<HomePage> {
           ],
         ),
       ),
-      //bottomNavigationBar: plusButton,
-      //bottomSheet: plusButton,
     );
   }
 }
@@ -449,8 +451,43 @@ class DynamicWidget extends StatefulWidget {
 
 
 class _DynamicWidgetState extends State<DynamicWidget> {
+
+  // ignore: missing_return
+  int getBoardIndex(int boardID) {
+    //print("BOARD ID: "+boardID.toString());
+    //print("getting board index ... ugh");
+    for (int i = 0; i < user.boards.length; i++) {
+      //print("looking...............");
+      //print("Board ID: "+user.boards[i].ProjectID.toString()+" our ID: "+boardID.toString() );
+
+      if (user.boards[i].ProjectID == boardID) {
+        //print("BOARD INDEX: "+i.toString());
+        return i;
+      }
+    }
+  }
+  bool _isShareDisabled=false;
+  bool _isEditDisabled=false;
+  determineAccess(){
+    Project_Board pb=user.boards[getBoardIndex(widget.aboard.ProjectID)];
+    if(pb.AccessLevel==null || pb.AccessLevel==1) {
+      //Full admin
+      _isShareDisabled = false;
+      _isEditDisabled = false;
+    }
+    else if(pb.AccessLevel==2){
+      //Can edit but not share
+      _isShareDisabled = true;
+      _isEditDisabled = false;
+    }else if (pb.AccessLevel==3){
+      //Can only view
+      _isShareDisabled = true;
+      _isEditDisabled = true;
+    }
+  }
   @override
   Widget build(BuildContext context) {
+    determineAccess();
     //widget.popLists();
     Project_BoardController projectBoardController = new Project_BoardController();
     TextEditingController descriptionController = new TextEditingController();
@@ -458,8 +495,8 @@ class _DynamicWidgetState extends State<DynamicWidget> {
     final Edit_formKey = GlobalKey<FormState>();
     //int userType=user.userTypeID;
 
-    DateTime _startDate = new DateTime.now();
-    DateTime _endDate = new DateTime.now();
+    DateTime _startDate;
+    DateTime _endDate;
 
     String startDateinput = "Select date ...";
     String endDateinput = "Select date ...";
@@ -505,6 +542,64 @@ class _DynamicWidgetState extends State<DynamicWidget> {
 
     // ignore: non_constant_identifier_names
     bool ChangedBoardValue=false;
+
+    Future<String> confirmDeleteAlertDialog(BuildContext context) {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(
+                "CONFIRM DELETE ",
+                style:
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+              ),
+              content: Text(
+                "Are you sure you want to delete this board?",
+                style:
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              ),
+              actions: <Widget>[
+                MaterialButton(
+                  elevation: 5.0,
+                  child: Text(
+                    "Yes",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  onPressed: () async {
+                    int boardIndex;
+                    for (int j=0;j<user.boards.length;j++){
+                      if(user.boards[j].ProjectID==widget.aboard.ProjectID){
+                        boardIndex=j;
+                      }
+                    }
+                    await projectBoardController.deleteBoard(widget.aboard.ProjectID);
+
+
+                    listDynamic.removeAt(boardIndex);
+                    //user.boards.removeAt(boardIndex);
+                    //homePage=new HomePage();
+                    homePage.initializeDisplay();
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (BuildContext context) => homePage),
+                    );
+                    setState(() {
+
+                    });
+                  },
+                ),
+                MaterialButton(
+                  elevation: 5.0,
+                  child: Text("No"),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            );
+          });
+    }
 
     Future<String> editBoardAlertDialog(BuildContext context) {
       TextEditingController titleController = new TextEditingController();
@@ -555,9 +650,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                   widget.aboard.Project_Title = val;
                                   print('changing: '+widget.aboard.Project_Title);
                                 });
-//                                setState(
-//                                        () => widget.aboard.Project_Title = val,
-//                                );
+
                               },
                             ),
                           ),
@@ -612,12 +705,12 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                       ),
                                     ],
                                   ),
-                                  onPressed: () {
-                                    selectStartDate(context);
-                                    startDateinput = DateFormat('yyyy-MM-dd')
-                                        .format(_startDate);
-                                    //startDateinput=_startDate.toString();
-                                    setState(() {});
+                                  onPressed: () async {
+                                    await selectStartDate(context);
+                                    setState(() {
+                                      startDateinput = DateFormat('yyyy-MM-dd')
+                                          .format(_startDate);
+                                    });
                                   },
                                 ),
                               ),
@@ -669,11 +762,12 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                       ),
                                     ],
                                   ),
-                                  onPressed: () {
-                                    selectEndDate(context);
-                                    endDateinput =
-                                        DateFormat('yyyy-MM-dd').format(_endDate);
-                                    setState(() {});
+                                  onPressed: () async {
+                                    await selectEndDate(context);
+                                    setState(() {
+                                      endDateinput =
+                                          DateFormat('yyyy-MM-dd').format(_endDate);
+                                    });
                                   },
                                 ),
                               ),
@@ -708,30 +802,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                             elevation: 5.0,
                             child: Text("DELETE",style: TextStyle(color: Colors.red),),
                             onPressed: () async {
-                              int boardIndex;
-                              for (int j=0;j<user.boards.length;j++){
-                                if(user.boards[j].ProjectID==widget.aboard.ProjectID){
-                                  boardIndex=j;
-                                }
-                              }
-                              await projectBoardController.deleteBoard(widget.aboard.ProjectID);
-                              //user.boards=await project_boardController.ReadBoards(user.userTypeID, personNo);
-//                              for(int i=0;i<user.boards.length;i++){
-//                                user.boards[i].boardLists= await listController.ReadLists(user.boards[i].ProjectID);
-//                              }
-
-                              listDynamic.removeAt(boardIndex);
-                              //user.boards.removeAt(boardIndex);
-                              //homePage=new HomePage();
-                              homePage.initializeDisplay();
-                              Navigator.pop(context);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (BuildContext context) => homePage),
-                              );
-                              setState(() {
-
-                              });
+                              await confirmDeleteAlertDialog(context);
                             },
                           )),
                       Container(
@@ -782,8 +853,10 @@ class _DynamicWidgetState extends State<DynamicWidget> {
           style: widget.style,
         ),
         trailing: IconButton(
-          icon: Icon(Icons.edit,color: Colors.black,),
-          onPressed: ()async {
+          icon: Icon(
+            Icons.edit,
+            color: _isEditDisabled==true? Colors.grey : Colors.black,),
+          onPressed: _isEditDisabled==true? null : ()async {
             await editBoardAlertDialog(context);
             setState(() {
 

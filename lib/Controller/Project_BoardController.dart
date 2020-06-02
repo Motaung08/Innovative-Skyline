@@ -33,8 +33,8 @@ class Project_BoardController {
       'Project_Description' : newBoard.Project_Description,
       'Project_StartDate' : startDate,
       'Project_EndDate' : endDate,
-      'StudentNo' : personNum,
-      'StaffNo' : personNum,
+      'StudentNo' : personNum.toLowerCase(),
+      'StaffNo' : personNum.toLowerCase(),
       'userType' : userTypeID.toString()
     };
 
@@ -65,8 +65,8 @@ class Project_BoardController {
 
         var data={
           'UserTypeID' : UserTypeID.toString(),
-          'StudentNo' : personNo,
-          'StaffNo' : personNo
+          'StudentNo' : personNo.toLowerCase(),
+          'StaffNo' : personNo.toLowerCase()
         };
 
         // Starting Web API Call.
@@ -91,6 +91,10 @@ class Project_BoardController {
             boardReceived.ProjectID = int.parse(Response[i]['ProjectID']);
             boardReceived.Project_Title = Response[i]['Project_Title'];
             boardReceived.Project_Description = Response[i]['Project_Description'];
+            if(Response[i]['AccessLevelID']!=null){
+              boardReceived.AccessLevel=int.parse(Response[i]['AccessLevelID']);
+            }
+
             //print("START DATE: "+Response[i]['Project_StartDate'].toString());
             if(Response[i]['Project_StartDate']!=null){
               boardReceived.Project_StartDate=DateTime.parse(Response[i]['Project_StartDate']);
