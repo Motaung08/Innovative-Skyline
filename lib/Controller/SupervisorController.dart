@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
+import 'package:postgrad_tracker/Controller/UserController.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:http/http.dart' as http;
@@ -95,10 +96,15 @@ class SupervisorController{
       var response = await http.post(url, body: json.encode(data));
 
       // Getting Server response into variable.
-      //var message = jsonDecode(response.body);
+      var message = jsonDecode(response.body);
+      if(message=="This staff number already has an associated account."){
+        RegistrationSuccess=message;
+        UserController userController=new UserController();
+        userController.userDeRegistration(userA);
+      }
 
       // If Web call Success than Hide the CircularProgressIndicator.
-      if (response.statusCode == 200) {
+      if (message=="Supervisor Registered Successfully") {
         supervisor.register = true;
         RegistrationSuccess="Supervisor successfully registered!";
       }

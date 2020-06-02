@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/main.dart';
+import 'dart:async';
 
 class LoginPage extends StatefulWidget {
 
@@ -28,7 +29,7 @@ class LoginPageState extends State<LoginPage> {
     });
   }
 
-
+  bool visible = false;
   @override
   Widget build(BuildContext context) {
 
@@ -93,6 +94,9 @@ class LoginPageState extends State<LoginPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
+          setState(() {
+            visible = true;
+          });
           bool proceed=false;
           if(_formKey.currentState.validate()){
 
@@ -101,7 +105,7 @@ class LoginPageState extends State<LoginPage> {
 
             if(proceed==true){
               setState(() {
-
+                visible=false;
               });
               homePage=new HomePage();
 
@@ -127,6 +131,8 @@ class LoginPageState extends State<LoginPage> {
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
+
+
 
     // ignore: non_constant_identifier_names
     final RegisterButon = Material(
@@ -219,6 +225,13 @@ class LoginPageState extends State<LoginPage> {
 //                  SizedBox(
 //                    height: 15.0,
 //                  ),
+                  Visibility(
+                      visible: visible,
+                      child: Container(
+                          margin: EdgeInsets.only(bottom: 30, top: 30),
+                          child: CircularProgressIndicator()
+                      )
+                  ),
                   loginButon,
                   SizedBox(
                     height: 15.0,

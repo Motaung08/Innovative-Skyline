@@ -34,7 +34,7 @@ class Board extends StatefulWidget {
   Future populateListDisplay(int ProjectID) async {
     //lists = [];
     int boardIndex;
-   // int testVal;
+    // int testVal;
     void getIndexes() {
       for (int i = 0; i < user.boards.length; i++) {
         if (user.boards[i].ProjectID == ProjectID) {
@@ -44,22 +44,23 @@ class Board extends StatefulWidget {
     }
 
     getIndexes();
-   // items.clear();
-    user.boards[boardIndex].boardLists=await listController.ReadLists(ProjectID);
+    // items.clear();
+    user.boards[boardIndex].boardLists =
+        await listController.ReadLists(ProjectID);
 
     if (user.boards[boardIndex].boardLists != null) {
       print('Initializing board\'s list display! ##################');
       stiles.clear();
       listDynamic.clear();
       for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-        DynamicList dynamicCreatedList = new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
+        DynamicList dynamicCreatedList =
+            new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
 
         listDynamic.add(dynamicCreatedList);
 
         stiles.add(StaggeredTile.count(
-            2, user.boards[boardIndex].boardLists[i].listTasks.length+1.3));
+            2, user.boards[boardIndex].boardLists[i].listTasks.length + 1.3));
       }
-
     }
   }
 
@@ -368,18 +369,18 @@ class _BoardState extends State<Board> {
                             style: TextStyle(color: Colors.red),
                           ),
                           onPressed: () async {
-                            await project_boardController.deleteBoard(widget.proj_board.ProjectID);
+                            await project_boardController
+                                .deleteBoard(widget.proj_board.ProjectID);
 
                             //listDynamic.removeAt(boardIndex);
                             await homePage.initializeDisplay();
                             Navigator.pop(context);
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (BuildContext context) => homePage),
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) => homePage),
                             );
-                            setState(() {
-
-                            });
+                            setState(() {});
 
                             //
 
@@ -452,8 +453,10 @@ class _BoardState extends State<Board> {
                 onPressed: () async {
                   //listTitle.text = "";
                   if (_formKey.currentState.validate()) {
-                    print('BEFORE LISTS: '+user.boards[getBoardIndex(widget.proj_board.ProjectID)]
-                        .boardLists.length.toString());
+                    print('BEFORE LISTS: ' +
+                        user.boards[getBoardIndex(widget.proj_board.ProjectID)]
+                            .boardLists.length
+                            .toString());
                     ListCard newList = new ListCard();
                     newList.List_Title = listTitle.text;
                     newList.ProjectID = widget.proj_board.ProjectID;
@@ -462,8 +465,10 @@ class _BoardState extends State<Board> {
                             .boardLists =
                         await listController.ReadLists(
                             widget.proj_board.ProjectID);
-                    print('AFTER LISTS: '+user.boards[getBoardIndex(widget.proj_board.ProjectID)]
-                        .boardLists.length.toString());
+                    print('AFTER LISTS: ' +
+                        user.boards[getBoardIndex(widget.proj_board.ProjectID)]
+                            .boardLists.length
+                            .toString());
                     Navigator.pop(context);
                   }
                 },
@@ -474,13 +479,14 @@ class _BoardState extends State<Board> {
   }
 
   String validateEmail(String value) {
-    String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regExp = new RegExp(pattern);
     if (value.length == 0) {
       return "Email is Required";
-    } else if(!regExp.hasMatch(value)){
+    } else if (!regExp.hasMatch(value)) {
       return "Invalid Email";
-    }else {
+    } else {
       return null;
     }
   }
@@ -489,12 +495,12 @@ class _BoardState extends State<Board> {
   TextEditingController emailController = new TextEditingController();
   GlobalKey<FormState> _key = new GlobalKey();
   Future<String> shareAlertDialog(BuildContext context) {
-    String foundUser="";
+    String foundUser = "";
     return showDialog(
         context: context,
         builder: (context) {
           return StatefulBuilder(
-            builder: (context,setState){
+            builder: (context, setState) {
               return AlertDialog(
                 title: Text("Share with: "),
                 content: Column(
@@ -519,7 +525,10 @@ class _BoardState extends State<Board> {
                         },
                       ),
                     ),
-                    Text(foundUser,style: TextStyle(color: Colors.red),)
+                    Text(
+                      foundUser,
+                      style: TextStyle(color: Colors.red),
+                    )
                   ],
                 ),
                 actions: <Widget>[
@@ -527,48 +536,51 @@ class _BoardState extends State<Board> {
                     elevation: 5.0,
                     child: Text("Share"),
                     onPressed: () async {
-                      print("share with "+email);
+                      print("share with " + email);
                       if (_key.currentState.validate()) {
                         // No any error in validation
 
                         print("Email $email");
 
                         //check for users
-                        bool exists=await userController.userExists(email);
-                        if(exists==true){
+                        bool exists = await userController.userExists(email);
+                        if (exists == true) {
                           print('exists');
-                          foundUser="";
-                          setState(() {
-
-                          });
+                          foundUser = "";
+                          setState(() {});
                           // Add assignment now that it is valid.
-                          User assignUser=await userController.getUser(email);
+                          User assignUser = await userController.getUser(email);
                           // ignore: non_constant_identifier_names
                           String OtherPersonNo;
 
-                          if(assignUser.userTypeID==1){
-                            StudentController studentController=new StudentController();
-                            Student assignStud= await studentController.fetchStudent(email);
-                            OtherPersonNo=assignStud.studentNo;
-                          }else{
-                            SupervisorController supervisorController=new SupervisorController();
-                            Supervisor assignSup=await supervisorController.fetchSup(email);
-                            OtherPersonNo=assignSup.staffNo;
+                          if (assignUser.userTypeID == 1) {
+                            StudentController studentController =
+                                new StudentController();
+                            Student assignStud =
+                                await studentController.fetchStudent(email);
+                            OtherPersonNo = assignStud.studentNo;
+                          } else {
+                            SupervisorController supervisorController =
+                                new SupervisorController();
+                            Supervisor assignSup =
+                                await supervisorController.fetchSup(email);
+                            OtherPersonNo = assignSup.staffNo;
                           }
 
-
-                          AssignmentController assignmentController = new AssignmentController();
+                          AssignmentController assignmentController =
+                              new AssignmentController();
 
                           //COME BACK AND CHANGE ACCESSID!
-                          await assignmentController.createAssignment(assignUser.userTypeID, OtherPersonNo, widget.proj_board.ProjectID, 1);
+                          await assignmentController.createAssignment(
+                              assignUser.userTypeID,
+                              OtherPersonNo,
+                              widget.proj_board.ProjectID,
+                              1);
                           Navigator.pop(context);
-                        }else{
-                          foundUser="No such user found.";
-                          setState(() {
-
-                          });
+                        } else {
+                          foundUser = "No such user found.";
+                          setState(() {});
                         }
-
                       }
                     },
                   )
@@ -689,13 +701,13 @@ class _BoardState extends State<Board> {
         backgroundColor: Color(0xff009999),
       ),
       backgroundColor: Colors.grey,
-      body:
-      ((user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists !=
-                  null)
+      body: ((user.boards[getBoardIndex(widget.proj_board.ProjectID)]
+                  .boardLists !=
+              null)
           //|| user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists.length!=0
-      )
-              ? staggered
-              : noBoardsView,
+          )
+          ? staggered
+          : noBoardsView,
       floatingActionButton: plusButton,
       //bottomSheet: plusButton,
     );
@@ -1134,15 +1146,26 @@ class _DynamicListState extends State<DynamicList> {
                                 if (dueChanged == true) {
                                   newTask.Task_Due = _dueDate;
                                 }
-                                print(
-                                  "Title: "+newTask.Task_Title+"\n"+
-                                    "Description: "+newTask.Task_Description+"\n"+
-                                    "ListID: "+newTask.ListID.toString()+"\n"+
-                                    "Added by: "+newTask.Task_AddedBy+"\n"+
-                                    "Status ID: "+newTask.Task_StatusID.toString()+"\n"+
-                                    "Date added: "+newTask.Task_DateAdded.toString()+"\n"+
-                                    "Date Due: "+newTask.Task_Due.toString()
-                                );
+                                print("Title: " +
+                                    newTask.Task_Title +
+                                    "\n" +
+                                    "Description: " +
+                                    newTask.Task_Description +
+                                    "\n" +
+                                    "ListID: " +
+                                    newTask.ListID.toString() +
+                                    "\n" +
+                                    "Added by: " +
+                                    newTask.Task_AddedBy +
+                                    "\n" +
+                                    "Status ID: " +
+                                    newTask.Task_StatusID.toString() +
+                                    "\n" +
+                                    "Date added: " +
+                                    newTask.Task_DateAdded.toString() +
+                                    "\n" +
+                                    "Date Due: " +
+                                    newTask.Task_Due.toString());
                                 await taskController.createTask(newTask);
                                 //widget.aList.listTasks.add(newTask);
 //                                user
@@ -1373,10 +1396,11 @@ class _DynamicListState extends State<DynamicList> {
               height: 80,
               decoration: BoxDecoration(
                 color: Color(0xff009999).withOpacity(0.1),
-
+                //color:Colors.green,
                 boxShadow: [
                   new BoxShadow(
                     color: Color(0xff009999),
+                    //color: Colors.red
                     //blurRadius: 10.0,
                     //offset: Offset(1.0,0.0)
                   ),
@@ -1395,13 +1419,44 @@ class _DynamicListState extends State<DynamicList> {
                       color: Colors.white,
                       border: Border(
                           left: BorderSide(
-                              color: Color(0xff009999), width: 5.0))),
+                              //color: Color(0xff009999),
+                              color: user
+                                          .boards[getBoardIndex(
+                                              widget.aList.ProjectID)]
+                                          .boardLists[
+                                              getListIndex(widget.aList.ListID)]
+                                          .listTasks[index]
+                                          .Task_StatusID ==
+                                      4
+                                  ? Colors.grey
+                                  : user
+                                              .boards[getBoardIndex(
+                                                  widget.aList.ProjectID)]
+                                              .boardLists[getListIndex(
+                                                  widget.aList.ListID)]
+                                              .listTasks[index]
+                                              .Task_StatusID ==
+                                          1
+                                      ? Color(0xff009999)
+                                      : Colors.green,
+                              width: 5.0))),
                   child: ListTile(
                     title: Text(user
                         .boards[getBoardIndex(widget.aList.ProjectID)]
                         .boardLists[getListIndex(widget.aList.ListID)]
                         .listTasks[index]
-                        .Task_Title),
+                        .Task_Title,
+                      style: user
+                          .boards[getBoardIndex(
+                          widget.aList.ProjectID)]
+                          .boardLists[
+                      getListIndex(widget.aList.ListID)]
+                          .listTasks[index]
+                          .Task_StatusID ==
+                          4? TextStyle(color: Colors.grey, decoration: TextDecoration.lineThrough)
+                          : TextStyle(color: Colors.black)
+                      ,
+                    ),
                     onTap: () async {
                       _selectedTaskID = user
                           .boards[getBoardIndex(widget.aList.ProjectID)]
@@ -1441,7 +1496,6 @@ class _DynamicListState extends State<DynamicList> {
               color: Colors.black,
               fontWeight: FontWeight.bold)),
     );
-
 
     Future choiceAction(String choice) async {
       if (choice == Constants.Edit) {

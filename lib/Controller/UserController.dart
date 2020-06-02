@@ -84,7 +84,7 @@ class UserController{
           'Password': Password
         });
     //print('******************************************** Clicked');
-
+    print(response.body);
     var datauser = json.decode(response.body);
 
     print(datauser);

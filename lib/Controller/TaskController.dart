@@ -18,10 +18,6 @@ class TaskController{
     dateDue=null;
     print("CREATING TASK...");
 
-
-
-
-
     if(aTask.Task_Due!=null){
       dateDue=DateFormat("yyyy-MM-dd").format(aTask.Task_Due);
     }

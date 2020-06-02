@@ -221,6 +221,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     studentA.studentTypeID=_selectedStudType.StudentTypeID;
 
     var registered = await studentController.studentRegistration(studentA, userA);
+    print("REGISTER OUTPUT: "+registered);
     String message="";
     //Empty string indicates no errors -> success
     if (registered==""){
@@ -430,17 +431,6 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 
 
     RegistrationDateController.text=_date.toString();
-
-//    final DateSelection = new TextFormField(
-//      decoration: InputDecoration(
-//        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//        icon: const Icon(Icons.calendar_today),
-//        hintText: 'Enter your registration date',
-//        labelText: 'Registration Date',
-//        //border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-//      ),
-//      keyboardType: TextInputType.datetime,
-//    );
 
     // ignore: non_constant_identifier_names
     final DateSelection = new    Stack(
@@ -718,7 +708,9 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                               visible: visible,
                               child: Container(
                                   margin: EdgeInsets.only(bottom: 30),
-                                  child: CircularProgressIndicator())),
+                                  child: CircularProgressIndicator()
+                              )
+                          ),
                           _divider(),
                           loginButon
                         ],

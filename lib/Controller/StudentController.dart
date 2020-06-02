@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
+import 'package:postgrad_tracker/Controller/UserController.dart';
 
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/User.dart';
@@ -113,6 +114,13 @@ class StudentController{
         student.registrationDate=studentA.registrationDate;
         student.degreeID=studentA.degreeID;
 
+      }
+      else if(message=="An account has already been created for this student number."){
+        UserController userController=new UserController();
+        userController.userDeRegistration(userA);
+        print("DO SOMETHING ABOUT DUPLICATE STUDENT!");
+        success=false;
+        registrationSuccess="This student number already has an associated account.";
       }
       else{
         success=false;
