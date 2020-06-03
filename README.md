@@ -22,7 +22,7 @@ samples, guidance on mobile development, and a full API reference.
 
 [![codecov](https://codecov.io/gh/Motaung08/Innovative-Skyline/branch/master/graph/badge.svg)](https://codecov.io/gh/Motaung08/Innovative-Skyline)
 
-[![Release]/github/v/release/:user/:Motaung08/Innovative-Skyline]
+/github/v/release/:user/:repo
 
 
 
