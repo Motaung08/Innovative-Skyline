@@ -1197,6 +1197,7 @@ class _DynamicListState extends State<DynamicList> {
                           children: <Widget>[
                             //Title
                             TextFormField(
+                              enabled: _isEditDisabled==true?false:true,
                               controller: titleController,
                               style: style.copyWith(color: Colors.black),
                               obscureText: false,
@@ -1224,6 +1225,9 @@ class _DynamicListState extends State<DynamicList> {
 
                             //Description
                             TextFormField(
+                              enabled:
+                              //_isEditDisabled==true?false:
+                              true,
                               controller: descriptionController,
                               style: style.copyWith(color: Colors.black),
                               maxLines: 5,
@@ -1265,7 +1269,7 @@ class _DynamicListState extends State<DynamicList> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     DropdownButton(
-                                      value: _selectedTaskStatus,
+                                      value:  _selectedTaskStatus,
                                       items: _dropdownTaskStatusMenuItems,
                                       onChanged: (value) {
                                         ChangedTask = true;
@@ -1314,7 +1318,9 @@ class _DynamicListState extends State<DynamicList> {
                                           ),
                                         ],
                                       ),
-                                      onPressed: () async {
+                                      onPressed:
+                                      //_isEditDisabled==true?null :
+                                       () async {
                                         await selectDueDate(context);
                                         setState(() {
                                           dueDateInput =
@@ -1667,7 +1673,7 @@ class _DynamicListState extends State<DynamicList> {
                           : TextStyle(color: Colors.black)
                       ,
                     ),
-                    onTap: _isEditDisabled==true?null : () async {
+                    onTap: () async {
                       _selectedTaskID = user
                           .boards[getBoardIndex(widget.aList.ProjectID)]
                           .boardLists[getListIndex(widget.aList.ListID)]
