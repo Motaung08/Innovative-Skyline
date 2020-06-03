@@ -78,11 +78,7 @@ void main(){
       expect(await userController.login(testUser.email, testUser.password),false);
     });
   });
-  group('Test User', (){
-
-
-
-    //---
+  group('Test Supervisor user', (){
 
     User testSupUser = new User();
     testSupUser.email = 'testSup@wits.ac.za';
@@ -92,7 +88,7 @@ void main(){
     Supervisor testSupervisor=new Supervisor();
 
     testSupervisor.email=testSupUser.email;
-    testSupervisor.staffNo="UniqueStaffNo123456";
+    testSupervisor.staffNo="UniqueStaffNo123456b";
     testSupervisor.fName="Tshepang";
     testSupervisor.lName="Motaung";
     testSupervisor.office="+134";
