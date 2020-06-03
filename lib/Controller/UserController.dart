@@ -18,8 +18,8 @@ class UserController{
 
     // SERVER API URL
     var url =
-        //'http://146.141.21.17/register_user.php';
-        'https://witsinnovativeskyline.000webhostapp.com/register_user.php';
+        'http://10.100.15.38/register_user.php';
+//        'https://witsinnovativeskyline.000webhostapp.com/register_user.php';
 
     // Store all data with Param Name.
     var data = {
@@ -53,8 +53,8 @@ class UserController{
 
     // SERVER API URL
     var url =
-    //'http://146.141.21.17/register_user.php';
-        'https://witsinnovativeskyline.000webhostapp.com/deregister_user.php';
+    'http://10.100.15.38/deregister_user.php';
+//        'https://witsinnovativeskyline.000webhostapp.com/deregister_user.php';
 
     // Store all data with Param Name.
     var data = {
@@ -84,8 +84,8 @@ class UserController{
   print("EMAIL: "+email+", Password: "+Password);
 
     final response = await http.post(
-        //"http://146.141.21.17/login.php",
-        "https://witsinnovativeskyline.000webhostapp.com/login.php",
+        "http://10.100.15.38/login.php",
+//        "https://witsinnovativeskyline.000webhostapp.com/login.php",
         body: {
           'Email': email.toLowerCase(),
           'Password': Password
@@ -143,8 +143,8 @@ class UserController{
     String msg='';
     // SERVER API URL
     var url =
-    //'http://146.141.21.17/ReadBoards.php';
-        'https://witsinnovativeskyline.000webhostapp.com/readUsers.php';
+    'http://10.100.15.38/readUsers.php';
+//        'https://witsinnovativeskyline.000webhostapp.com/readUsers.php';
 
 
     // Starting Web API Call.
@@ -234,8 +234,8 @@ class UserController{
     /*The script below should take in the email and check if there exists a user
     * associated with the given email address. */
     final response = await http.post(
-        //"http://146.141.21.17/ResetPassword.php",
-        "https://witsinnovativeskyline.000webhostapp.com/ResetPassword.php",
+        "http://10.100.15.38/ResetPassword.php",
+//        "https://witsinnovativeskyline.000webhostapp.com/ResetPassword.php",
         body: json.encode(data) );
 
     var result = json.decode(response.body);

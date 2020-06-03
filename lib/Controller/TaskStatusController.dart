@@ -11,8 +11,8 @@ class TaskStatusController{
    */
   Future getStatuses() async{
     //print('I am called');
-//    final response = await http.post("http://146.141.21.17/getStudentTypes.php");
-    final response = await http.post("https://witsinnovativeskyline.000webhostapp.com/getTaskStatuses.php");
+    final response = await http.post("http://10.100.15.38/getTaskStatuses.php");
+//    final response = await http.post("https://witsinnovativeskyline.000webhostapp.com/getTaskStatuses.php");
 
     //print('Assigning title for '+student.studentTypeID.toString());
 

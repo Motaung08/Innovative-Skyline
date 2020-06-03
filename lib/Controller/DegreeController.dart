@@ -12,7 +12,10 @@ pre-populated list of degree types such as Honours, masters by coursework, etc.
  */
     Future getDegrees() async{
     //final response = await http.post("http://146.141.21.17/getDegreeTypes.php");
-    final response = await http.post("https://witsinnovativeskyline.000webhostapp.com/getDegreeTypes.php");
+    final response = await http.post(
+        //"https://witsinnovativeskyline.000webhostapp.com/getDegreeTypes.php"
+      "http://10.100.15.38/getDegreeTypes.php"
+      );
 
     //print('Assigning title for '+student.studentTypeID.toString());
 

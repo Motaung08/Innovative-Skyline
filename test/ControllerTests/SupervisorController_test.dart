@@ -26,7 +26,7 @@ void main() {
         'Supervisor Registration', () async {
       User testUser=new User();
 
-      testUser.email='testSupvisor@wits.ac.za';
+      testUser.email='testSupvisorReg@wits.ac.za';
       testUser.password="testSupPassword";
       testUser.userTypeID=2;
 
@@ -35,8 +35,8 @@ void main() {
       testSupervisor.email=testUser.email;
       expect(testSupervisor.email, testUser.email);
 
-      testSupervisor.staffNo="UniqueStaffNo123456";
-      expect(testSupervisor.staffNo, 'UniqueStaffNo123456');
+      testSupervisor.staffNo="UniqueStaffNo123456a";
+      expect(testSupervisor.staffNo, 'UniqueStaffNo123456a');
 
       testSupervisor.fName="Tshepang";
       expect(testSupervisor.fName, "Tshepang");

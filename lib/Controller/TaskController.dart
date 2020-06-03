@@ -26,8 +26,8 @@ class TaskController{
     }
     // SERVER API URL
     var url =
-//          'http://146.141.21.17/createBoard.php';
-        'https://witsinnovativeskyline.000webhostapp.com/createTask.php';
+          'http://10.100.15.38/createTask.php';
+//        'https://witsinnovativeskyline.000webhostapp.com/createTask.php';
     //print('================= '+title);
     // Store all data with Param Name.
     var data = {
@@ -65,8 +65,8 @@ class TaskController{
 
         // SERVER API URL
         var url =
-            //'http://146.141.21.17/ReadBoards.php';
-            'https://witsinnovativeskyline.000webhostapp.com/ReadTasks.php';
+            'http://10.100.15.38/ReadTasks.php';
+//            'https://witsinnovativeskyline.000webhostapp.com/ReadTasks.php';
 
         var data={
           'ListID' : ListID.toString(),
@@ -125,8 +125,8 @@ class TaskController{
    */
   Future<String> updateTask(Task aTask) async{
     var url =
-
-        'https://witsinnovativeskyline.000webhostapp.com/updateTask.php';
+        'http://10.100.15.38/updateTask.php';
+//        'https://witsinnovativeskyline.000webhostapp.com/updateTask.php';
 
     dateAdded=null;
     dateDue=null;
@@ -168,8 +168,8 @@ class TaskController{
 
     // SERVER API URL
     var url =
-    //'http://146.141.21.17/ReadBoards.php';
-        'https://witsinnovativeskyline.000webhostapp.com/deleteTask.php';
+    'http://10.100.15.38/deleteTask.php';
+//        'https://witsinnovativeskyline.000webhostapp.com/deleteTask.php';
 
     var data={
       'TaskID' : TaskID.toString(),

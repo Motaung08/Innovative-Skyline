@@ -19,7 +19,8 @@ class StudentController{
     String msg='';
     Student aStudent=new Student();
     final response = await http.post(
-        "https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php",
+//        "https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php",
+    "http://10.100.15.38/viewStudentProfile.php",
         body: {
           "Email": email.toLowerCase(),
         });
@@ -50,10 +51,12 @@ class StudentController{
   and subsequently load the project boards which are associated.
    */
   Future setStudentUser(String email) async {
+
     student= await fetchStudent(email);
     personNo=student.studentNo;
     user.boards.clear();
     Project_BoardController projectBoardController=new Project_BoardController();
+
     user.boards=await projectBoardController.ReadBoards(user.userTypeID,student.studentNo);
 
   }
@@ -79,8 +82,8 @@ class StudentController{
     }else{
       // SERVER API URL
       var url =
-//          'http://146.141.21.17/register_student.php';
-          'https://witsinnovativeskyline.000webhostapp.com/register_student.php';
+          'http://10.100.15.38/register_student.php';
+//          'https://witsinnovativeskyline.000webhostapp.com/register_student.php';
 
       // Store all data with Param Name.
       var data = {

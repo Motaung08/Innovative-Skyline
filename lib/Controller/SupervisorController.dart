@@ -17,8 +17,8 @@ class SupervisorController{
     Supervisor fetchedSup=new Supervisor();
     String msg='';
     final response = await http.post(
-      // "http://146.141.21.17/viewSupProfile.php",
-        "https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php",
+       "http://10.100.15.38/viewSupProfile.php",
+//        "https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php",
         body: {
           "Email": email.toLowerCase(),
         });
@@ -77,8 +77,8 @@ class SupervisorController{
     else{
       // SERVER API URL
       var url =
-          //'http://146.141.21.17/Register_Supervisor.php';
-          'https://witsinnovativeskyline.000webhostapp.com/Register_Supervisor.php';
+          'http://10.100.15.38/Register_Supervisor.php';
+//          'https://witsinnovativeskyline.000webhostapp.com/Register_Supervisor.php';
 
       // Store all data with Param Name.
       var data = {

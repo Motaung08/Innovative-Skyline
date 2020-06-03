@@ -16,8 +16,8 @@ class Project_BoardController {
 
     // SERVER API URL
     var url =
-//          'http://146.141.21.17/createBoard.php';
-        'https://witsinnovativeskyline.000webhostapp.com/createBoard.php';
+          'http://10.100.15.38/createBoard.php';
+//        'https://witsinnovativeskyline.000webhostapp.com/createBoard.php';
 
     String startDate;
     String endDate;
@@ -60,8 +60,8 @@ class Project_BoardController {
 
         // SERVER API URL
         var url =
-            //'http://146.141.21.17/ReadBoards.php';
-            'https://witsinnovativeskyline.000webhostapp.com/ReadBoards.php';
+            'http://10.100.15.38/ReadBoards.php';
+            //'https://witsinnovativeskyline.000webhostapp.com/ReadBoards.php';
 
         var data={
           'UserTypeID' : UserTypeID.toString(),
@@ -71,7 +71,7 @@ class Project_BoardController {
 
         // Starting Web API Call.
         var response = await http.post(url, body: data);
-
+        print('User: '+UserTypeID.toString()+", Stud no: "+personNo.toLowerCase()+", StaffNo: "+personNo.toLowerCase()+" Yields: "+response.body);
         // Getting Server response into variable.
         // ignore: non_constant_identifier_names
         var Response = jsonDecode(response.body);
@@ -124,8 +124,8 @@ class Project_BoardController {
    */
   Future<String> updateBoard(Project_Board boardToUpdate) async{
     var url =
-
-        'https://witsinnovativeskyline.000webhostapp.com/updateBoard.php';
+        'http://10.100.15.38/updateBoard.php';
+//        'https://witsinnovativeskyline.000webhostapp.com/updateBoard.php';
 
     String startDate;
     if(boardToUpdate.Project_StartDate!=null){
@@ -170,8 +170,8 @@ class Project_BoardController {
 
     // SERVER API URL
     var url =
-//          'http://146.141.21.17/createBoard.php';
-        'https://witsinnovativeskyline.000webhostapp.com/deleteBoard.php';
+          'http://10.100.15.38/deleteBoard.php';
+//        'https://witsinnovativeskyline.000webhostapp.com/deleteBoard.php';
 
     // Store all data with Param Name.
     var data = {

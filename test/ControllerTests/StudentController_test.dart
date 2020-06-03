@@ -22,13 +22,13 @@ void main() {
     test('studentRegistration', () async {
           User testUser=new User();
 
-          testUser.email='testStudentInReg@students.wits.ac.za';
+          testUser.email='testStudentInRegistratin@students.wits.ac.za';
           testUser.password="testPassword";
           testUser.userTypeID=1;
 
           Student testStudent=new Student();
           testStudent.email=testUser.email;
-          testStudent.studentNo="UniqueStudNo123";
+          testStudent.studentNo="UniqueStudNo123456";
           testStudent.fName="Test";
           testStudent.lName="Student";
           testStudent.degreeID=1;

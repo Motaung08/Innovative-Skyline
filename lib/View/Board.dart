@@ -1226,7 +1226,7 @@ class _DynamicListState extends State<DynamicList> {
                             //Description
                             TextFormField(
                               enabled:
-                              //_isEditDisabled==true?false:
+                              _isEditDisabled==true?false:
                               true,
                               controller: descriptionController,
                               style: style.copyWith(color: Colors.black),
@@ -1251,35 +1251,38 @@ class _DynamicListState extends State<DynamicList> {
 
                             //Status
 
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
-                              decoration: ShapeDecoration(
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      width: 1.0,
-                                      style: BorderStyle.solid,
-                                      color: Colors.grey),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(32.0)),
+                            IgnorePointer(
+                              ignoring: _isEditDisabled==true?true:false,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                decoration: ShapeDecoration(
+                                  shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        width: 1.0,
+                                        style: BorderStyle.solid,
+                                        color: Colors.grey),
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(32.0)),
+                                  ),
                                 ),
-                              ),
-                              child: Center(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    DropdownButton(
-                                      value:  _selectedTaskStatus,
-                                      items: _dropdownTaskStatusMenuItems,
-                                      onChanged: (value) {
-                                        ChangedTask = true;
-                                        setState(() {
-                                          _selectedTaskStatus = value;
-                                        });
-                                      },
-                                      isExpanded: true,
-                                    ),
-                                  ],
+                                child: Center(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      DropdownButton(
+                                        value:  _selectedTaskStatus,
+                                        items:  _dropdownTaskStatusMenuItems,
+                                        onChanged:  (value) {
+                                          ChangedTask = true;
+                                          setState(() {
+                                            _selectedTaskStatus = value;
+                                          });
+                                        },
+                                        isExpanded: true,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -1288,64 +1291,68 @@ class _DynamicListState extends State<DynamicList> {
                             ),
 
                             //Due
-                            Stack(
-                              children: <Widget>[
-                                Container(
-                                    width: double.infinity,
-                                    height: 60,
-                                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                                    //padding: EdgeInsets.only(bottom: 10),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey, width: 1),
-                                      borderRadius: BorderRadius.circular(32),
-                                      shape: BoxShape.rectangle,
-                                    ),
-                                    child: MaterialButton(
-                                      child: Row(
-                                        children: <Widget>[
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.calendar_today,
-                                              color: Color(0xff009999),
+                            IgnorePointer(
+                              ignoring: _isEditDisabled==true?true:false,
+                              child: Stack(
+                                children: <Widget>[
+                                  Container(
+                                      width: double.infinity,
+                                      height: 60,
+                                      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                      //padding: EdgeInsets.only(bottom: 10),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey, width: 1),
+                                        borderRadius: BorderRadius.circular(32),
+                                        shape: BoxShape.rectangle,
+                                      ),
+                                      child: MaterialButton(
+                                        child: Row(
+                                          children: <Widget>[
+                                            IconButton(
+                                              icon: Icon(
+                                                Icons.calendar_today,
+                                                color: Color(0xff009999),
+                                              ),
+                                              onPressed: () {},
+                                              //tooltip: "Select start date",
                                             ),
-                                            onPressed: () {},
-                                            //tooltip: "Select start date",
-                                          ),
-                                          Text(
-                                            dueDateInput,
-                                            style: dateStyle,
-                                          ),
-                                        ],
-                                      ),
-                                      onPressed:
-                                      //_isEditDisabled==true?null :
-                                       () async {
-                                        await selectDueDate(context);
-                                        setState(() {
-                                          dueDateInput =
-                                              DateFormat('yyyy-MM-dd')
-                                                  .format(_dueDate);
-                                          ChangedTask = true;
-                                        });
-                                      },
-                                    )),
-                                Positioned(
-                                    left: 10,
-                                    top: 12,
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          bottom: 10, left: 3, right: 0),
-                                      margin: EdgeInsets.only(left: 10),
-                                      color: Colors.white,
-                                      child: Text(
-                                        'Due Date:',
-                                        style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(.65)),
-                                      ),
-                                    )),
-                              ],
+                                            Text(
+                                              dueDateInput,
+                                              style: dateStyle,
+                                            ),
+                                          ],
+                                        ),
+                                        onPressed:
+                                        _isEditDisabled==true?null :
+                                            () async {
+                                          await selectDueDate(context);
+                                          setState(() {
+                                            dueDateInput =
+                                                DateFormat('yyyy-MM-dd')
+                                                    .format(_dueDate);
+                                            ChangedTask = true;
+                                          });
+                                        },
+                                      )),
+                                  Positioned(
+                                      left: 10,
+                                      top: 12,
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                            bottom: 10, left: 3, right: 0),
+                                        margin: EdgeInsets.only(left: 10),
+                                        color: Colors.white,
+                                        child: Text(
+                                          'Due Date:',
+                                          style: TextStyle(
+                                              color:
+                                              Colors.black.withOpacity(.65)),
+                                        ),
+                                      )
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -1415,22 +1422,25 @@ class _DynamicListState extends State<DynamicList> {
                         : Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              Container(
-                                  alignment: Alignment.bottomLeft,
-                                  //color: Colors.green,
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.75,
-                                  child: MaterialButton(
-                                    elevation: 5.0,
-                                    child: Text(
-                                      "DELETE",
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                    onPressed: () async {
-                                      await confirmTaskDeleteAlertDialog(context);
-                                      Navigator.of(context).pop();
-                                    },
-                                  )),
+                              IgnorePointer(
+                                ignoring: _isEditDisabled==true?true:false,
+                                child: Container(
+                                    alignment: Alignment.bottomLeft,
+                                    //color: Colors.green,
+                                    width:
+                                    MediaQuery.of(context).size.width / 1.75,
+                                    child: MaterialButton(
+                                      elevation: 5.0,
+                                      child: Text(
+                                        "DELETE",
+                                        style: _isEditDisabled==true?TextStyle(color:Colors.grey):TextStyle(color: Colors.red),
+                                      ),
+                                      onPressed: _isEditDisabled==true? null : () async {
+                                        await confirmTaskDeleteAlertDialog(context);
+                                        Navigator.of(context).pop();
+                                      },
+                                    )),
+                              ),
                               Container(
                                   alignment: Alignment.bottomRight,
                                   //color: Colors.green,

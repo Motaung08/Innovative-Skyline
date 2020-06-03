@@ -21,8 +21,8 @@ class ListController{
 
         // SERVER API URL
         var url =
-            //'http://146.141.21.17/ReadBoards.php';
-            'https://witsinnovativeskyline.000webhostapp.com/ReadLists.php';
+            'http://10.100.15.38/ReadLists.php';
+            //'https://witsinnovativeskyline.000webhostapp.com/ReadLists.php';
 
         var data={
           'ProjectID' : ProjectID.toString(),
@@ -73,8 +73,8 @@ class ListController{
   Future<String> createList(ListCard newList) async{
       // SERVER API URL
       var url =
-//          'http://146.141.21.17/createBoard.php';
-          'https://witsinnovativeskyline.000webhostapp.com/createList.php';
+          'http://10.100.15.38/createList.php';
+//          'https://witsinnovativeskyline.000webhostapp.com/createList.php';
       //print('================= '+title);
       // Store all data with Param Name.
       var data = {
@@ -101,7 +101,8 @@ class ListController{
   Future<String> updateList(ListCard aList) async{
     var url =
 
-        'https://witsinnovativeskyline.000webhostapp.com/updateList.php';
+       // 'https://witsinnovativeskyline.000webhostapp.com/updateList.php';
+    'http://10.100.15.38/updateList.php';
 
 
     // Store all data with Param Name.
@@ -130,8 +131,8 @@ class ListController{
     //print('We want to delete list '+ListID.toString());
     // SERVER API URL
     var url =
-    //'http://146.141.21.17/ReadBoards.php';
-        'https://witsinnovativeskyline.000webhostapp.com/deleteList.php';
+    'http://10.100.15.38/deleteList.php';
+        //'https://witsinnovativeskyline.000webhostapp.com/deleteList.php';
 
     var data={
       'ListID' : ListID.toString(),
