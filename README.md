@@ -19,8 +19,6 @@ samples, guidance on mobile development, and a full API reference.
 
 [![codecov](https://codecov.io/gh/Motaung08/Innovative-Skyline/branch/master/graph/badge.svg)](https://codecov.io/gh/Motaung08/Innovative-Skyline)
 
-![GitHub release (latest by date)](https://github.com/Motaung08/Innovative-Skyline/releases)
-
 
 [The webapp should be able to perform:
 
