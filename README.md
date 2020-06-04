@@ -3,7 +3,7 @@
 A new Flutter application.
 
 ## Getting Started
-
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Motaung08/Innovative-Skyline)
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
