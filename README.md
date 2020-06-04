@@ -21,9 +21,6 @@ samples, guidance on mobile development, and a full API reference.
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Motaung08/Innovative-Skyline)
 
-/github/v/release/:user/:Motaung08/Innovative-Skyline
-
-
 
 [The webapp should be able to perform:
 
