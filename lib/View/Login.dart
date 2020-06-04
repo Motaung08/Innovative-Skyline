@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/main.dart';
-import 'dart:async';
 
 class LoginPage extends StatefulWidget {
 
@@ -109,7 +108,7 @@ class LoginPageState extends State<LoginPage> {
               });
               homePage=new HomePage();
 
-              await homePage.initializeDisplay();
+              //await homePage.initializeDisplay();
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (BuildContext context) => homePage),

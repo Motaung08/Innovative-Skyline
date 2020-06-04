@@ -13,7 +13,9 @@ class TaskController{
    */
   String dateAdded;
   String dateDue;
-  Future<String> createTask(Task aTask) async{
+
+  Future<String> createTask(Task aTask,{String url='http://10.100.15.38/createTask.php'}) async{
+    print(url);
     dateAdded=null;
     dateDue=null;
     print("CREATING TASK...");
@@ -25,8 +27,8 @@ class TaskController{
       dateAdded=DateFormat("yyyy-MM-dd").format(aTask.Task_DateAdded);
     }
     // SERVER API URL
-    var url =
-          'http://10.100.15.38/createTask.php';
+//    var url =
+//          'http://lamp.ms.wits.ac.za/~s1611821/createTask.php';
 //        'https://witsinnovativeskyline.000webhostapp.com/createTask.php';
     //print('================= '+title);
     // Store all data with Param Name.
@@ -46,6 +48,7 @@ class TaskController{
     //print(response.body);
     // Getting Server response into variable.
     var message = jsonDecode(response.body);
+    print(message);
     return message;
 
 
@@ -59,13 +62,11 @@ class TaskController{
   the form of a list of Task objects.
    */
   // ignore: non_constant_identifier_names
-  Future<List<Task>> ReadTasks(int ListID) async{
+  Future<List<Task>> ReadTasks(int ListID,{url='http://10.100.15.38/ReadTasks.php'}) async{
     List<Task> tasks=new List();
       String msg = '';
 
         // SERVER API URL
-        var url =
-            'http://10.100.15.38/ReadTasks.php';
 //            'https://witsinnovativeskyline.000webhostapp.com/ReadTasks.php';
 
         var data={
@@ -123,10 +124,12 @@ class TaskController{
   of the passed in task (said values may have been updated by the user via the
   UI).
    */
-  Future<String> updateTask(Task aTask) async{
-    var url =
-        'http://10.100.15.38/updateTask.php';
+  Future<String> updateTask(Task aTask, {url ='http://10.100.15.38/updateTask.php'}) async{
+   // var url =
+        //'http://10.100.15.38/updateTask.php';
 //        'https://witsinnovativeskyline.000webhostapp.com/updateTask.php';
+
+
 
     dateAdded=null;
     dateDue=null;
@@ -164,12 +167,12 @@ class TaskController{
   corresponding TaskID to that which was passed in).
    */
   // ignore: non_constant_identifier_names
-  Future<String> deleteTask(int TaskID) async{
+  Future<String> deleteTask(int TaskID, {url="http://10.100.15.38/deleteTask.php"}) async{
 
     // SERVER API URL
-    var url =
-    'http://10.100.15.38/deleteTask.php';
-//        'https://witsinnovativeskyline.000webhostapp.com/deleteTask.php';
+//    var url =
+//    'http://10.100.15.38/deleteTask.php';
+////        'https://witsinnovativeskyline.000webhostapp.com/deleteTask.php';
 
     var data={
       'TaskID' : TaskID.toString(),

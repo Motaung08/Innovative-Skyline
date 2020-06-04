@@ -13,13 +13,14 @@ class UserController{
   User values to create an instance in the User table in the database. This
   method also ensures no duplicate email is used.
    */
-  Future<String> userRegistration(User userA) async {
+  Future<String> userRegistration(User userA,{url='http://10.100.15.38/register_user.php'}) async {
     user.register = false;
 
     // SERVER API URL
-    var url =
-        'http://10.100.15.38/register_user.php';
-//        'https://witsinnovativeskyline.000webhostapp.com/register_user.php';
+//    var url =
+//        'http://10.100.15.38/register_user.php';
+////        'https://witsinnovativeskyline.000webhostapp.com/register_user.php';
+
 
     // Store all data with Param Name.
     var data = {
@@ -48,13 +49,13 @@ class UserController{
   User values to remove the corresponding an instance in the User table in the
   database.
    */
-  Future<String> userDeRegistration(User userA) async {
+  Future<String> userDeRegistration(User userA,{url='http://10.100.15.38/deregister_user.php'}) async {
     user.register = false;
 
     // SERVER API URL
-    var url =
-    'http://10.100.15.38/deregister_user.php';
-//        'https://witsinnovativeskyline.000webhostapp.com/deregister_user.php';
+//    var url =
+//    'http://10.100.15.38/deregister_user.php';
+////        'https://witsinnovativeskyline.000webhostapp.com/deregister_user.php';
 
     // Store all data with Param Name.
     var data = {
@@ -77,14 +78,14 @@ class UserController{
   accordingly.
    */
   // ignore: non_constant_identifier_names
-  Future<bool> login(String email, String Password) async {
+  Future<bool> login(String email, String Password,{url='http://10.100.15.38/login.php'}) async {
 
     bool proceed=false;
 
   print("EMAIL: "+email+", Password: "+Password);
 
     final response = await http.post(
-        "http://10.100.15.38/login.php",
+        url,
 //        "https://witsinnovativeskyline.000webhostapp.com/login.php",
         body: {
           'Email': email.toLowerCase(),
@@ -107,23 +108,24 @@ class UserController{
 
         user.email = datauser[0]['Email'];
         user.userTypeID = int.parse(datauser[0]['UserTypeId']);
+        return true;
 
 
         TaskStatusController taskStatusController=new TaskStatusController();
         AssignmentTypeController assignmentTypeController=new AssignmentTypeController();
-        await taskStatusController.getStatuses();
-        await assignmentTypeController.getTypes();
+//        await taskStatusController.getStatuses();
+//        await assignmentTypeController.getTypes();
       if (user.userTypeID==1){
 
-        await studentController.setStudentUser(user.email);
-
-        await studentTypeController.getTypes();
-
-        await degreeController.getDegrees();
+//        await studentController.setStudentUser(user.email);
+//
+//        await studentTypeController.getTypes();
+//
+//        await degreeController.getDegrees();
 
       }
       else{
-        await supervisorController.setUserSup(email);
+//        await supervisorController.setUserSup(email);
 
       }
       proceed=true;
@@ -138,13 +140,15 @@ class UserController{
   database as a list of User objects.
    */
   // ignore: non_constant_identifier_names
-  Future<List<User>> ReadUsers() async {
+  Future<List<User>> ReadUsers({url='http://10.100.15.38/readUsers.php'}) async {
     List<User> registered=[];
     String msg='';
-    // SERVER API URL
-    var url =
-    'http://10.100.15.38/readUsers.php';
-//        'https://witsinnovativeskyline.000webhostapp.com/readUsers.php';
+//    // SERVER API URL
+//    var url =
+//    'http://10.100.15.38/readUsers.php';
+////        'https://witsinnovativeskyline.000webhostapp.com/readUsers.php';
+
+
 
 
     // Starting Web API Call.
@@ -223,7 +227,7 @@ class UserController{
   // ignore: non_constant_identifier_names
   String ResetString="";
   // ignore: non_constant_identifier_names
-  Future<String> ResetPassword(String email, String password) async{
+  Future<String> ResetPassword(String email, String password,{url='http://10.100.15.38/ResetPassword.php'}) async{
     
     var data =
     {
@@ -234,7 +238,7 @@ class UserController{
     /*The script below should take in the email and check if there exists a user
     * associated with the given email address. */
     final response = await http.post(
-        "http://10.100.15.38/ResetPassword.php",
+        url,
 //        "https://witsinnovativeskyline.000webhostapp.com/ResetPassword.php",
         body: json.encode(data) );
 

@@ -13,10 +13,10 @@ class AssignmentController {
    */
 
   // ignore: non_constant_identifier_names
-  Future<String> createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID) async{
-    var url =
-//        'https://witsinnovativeskyline.000webhostapp.com/createAssignment.php';
-        'http://10.100.15.38/createAssignment.php';
+  Future<String> createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID,{url='http://10.100.15.38/createAssignment.php'}) async{
+//    var url =
+////        'https://witsinnovativeskyline.000webhostapp.com/createAssignment.php';
+//        'http://10.100.15.38/createAssignment.php';
 
     var data={
       'UserTypeID' : OtherUserType.toString(),
