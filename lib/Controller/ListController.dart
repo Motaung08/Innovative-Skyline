@@ -16,12 +16,12 @@ class ListController{
   of the list titles of a board when a user navigates to said board page.
    */
   // ignore: non_constant_identifier_names, missing_return
-  Future<List<ListCard>> ReadLists(int ProjectID) async{
+  Future<List<ListCard>> ReadLists(int ProjectID,{url='http://10.100.15.38/ReadLists.php'}) async{
     List<ListCard> lists=List();
 
         // SERVER API URL
-        var url =
-            'http://10.100.15.38/ReadLists.php';
+//        var url =
+//            'http://10.100.15.38/ReadLists.php';
             //'https://witsinnovativeskyline.000webhostapp.com/ReadLists.php';
 
         var data={
@@ -45,7 +45,7 @@ class ListController{
             listReceived.ListID = int.parse(Response[i]['ListID']);
             listReceived.List_Title = Response[i]['List_Title'];
             listReceived.ProjectID= int.parse(Response[i]['ProjectID']);
-            listReceived.listTasks=await taskController.ReadTasks(listReceived.ListID);
+            listReceived.listTasks=await taskController.ReadTasks(listReceived.ListID,url:'http://10.100.15.38/ReadTasks.php');
 
             lists.add(listReceived);
 
@@ -70,10 +70,10 @@ class ListController{
   from the UI before this method is called - and then uses it's attribute values
   to create a new instance within the List table of the database.
    */
-  Future<String> createList(ListCard newList) async{
+  Future<String> createList(ListCard newList,{url='http://10.100.15.38/createList.php'}) async{
       // SERVER API URL
-      var url =
-          'http://10.100.15.38/createList.php';
+//      var url =
+//          'http://10.100.15.38/createList.php';
 //          'https://witsinnovativeskyline.000webhostapp.com/createList.php';
       //print('================= '+title);
       // Store all data with Param Name.
@@ -98,11 +98,11 @@ class ListController{
   - and then uses it's attribute values to update the list instance associated
    with the ListID (of the passed in list) in the List table of the database.
    */
-  Future<String> updateList(ListCard aList) async{
-    var url =
-
-       // 'https://witsinnovativeskyline.000webhostapp.com/updateList.php';
-    'http://10.100.15.38/updateList.php';
+  Future<String> updateList(ListCard aList,{url='http://10.100.15.38/updateList.php'}) async{
+//    var url =
+//
+//       // 'https://witsinnovativeskyline.000webhostapp.com/updateList.php';
+//    'http://10.100.15.38/updateList.php';
 
 
     // Store all data with Param Name.
@@ -127,11 +127,11 @@ class ListController{
    with the ListID (of the passed in list) in the List table of the database.
    */
   // ignore: non_constant_identifier_names
-  Future<String> deleteList(int ListID) async{
+  Future<String> deleteList(int ListID,{url='http://10.100.15.38/deleteList.php'}) async{
     //print('We want to delete list '+ListID.toString());
     // SERVER API URL
-    var url =
-    'http://10.100.15.38/deleteList.php';
+//    var url =
+//    'http://10.100.15.38/deleteList.php';
         //'https://witsinnovativeskyline.000webhostapp.com/deleteList.php';
 
     var data={

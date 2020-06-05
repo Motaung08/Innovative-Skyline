@@ -42,7 +42,7 @@ if(isset($check)){
 	 $emailExist = 'Email Already Exists, Please Try Again With New Email Address..!';
 	 
 	 // Converting the message into JSON format.
-	$existEmailJSON = json_encode($emailExist);
+	$existEmailJSON = json_encode(strip_tags($emailExist));
 	 
 	// Echo the message on Screen.
 	 echo $existEmailJSON ; 

@@ -13,7 +13,7 @@ class UserController{
   User values to create an instance in the User table in the database. This
   method also ensures no duplicate email is used.
    */
-  Future<String> userRegistration(User userA,{url='http://10.100.15.38/register_user.php'}) async {
+  Future<String> userRegistration(User userA,{url='http://10.100.15.38/register_user.php',url2='http://10.100.15.38/register_student.php'}) async {
     user.register = false;
 
     // SERVER API URL
@@ -189,9 +189,9 @@ class UserController{
   user.
    */
   // ignore: non_constant_identifier_names
-  Future<bool> userExists(String Email) async{
+  Future<bool> userExists(String Email,{url1="http://10.100.15.38/readUsers.php"}) async{
     print("Looking for: "+Email);
-    List<User> registeredUsers=await ReadUsers();
+    List<User> registeredUsers=await ReadUsers(url:"http://10.100.15.38/readUsers.php");
     bool exists=false;
     for (int i=0;i<registeredUsers.length;i++){
       if(registeredUsers[i].email.toLowerCase()==Email.toLowerCase()){
@@ -207,8 +207,8 @@ class UserController{
   email address.
    */
   // ignore: non_constant_identifier_names
-  Future<User> getUser(String Email) async{
-    List<User> registeredUsers=await ReadUsers();
+  Future<User> getUser(String Email,{url="http://10.100.15.38/readUsers.php"}) async{
+    List<User> registeredUsers=await ReadUsers(url:"http://10.100.15.38/readUsers.php");
     User giveUser=new User();
     for (int i=0;i<registeredUsers.length;i++){
       if(registeredUsers[i].email.toLowerCase()==Email.toLowerCase()){
@@ -228,7 +228,7 @@ class UserController{
   String ResetString="";
   // ignore: non_constant_identifier_names
   Future<String> ResetPassword(String email, String password,{url='http://10.100.15.38/ResetPassword.php'}) async{
-    
+  print(email);
     var data =
     {
       'Email': email.toLowerCase(),
