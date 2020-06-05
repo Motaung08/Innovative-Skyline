@@ -12,11 +12,11 @@ class Project_BoardController {
   database based on the attribute values stored in the newBoard which is
   passed in.
    */
-  Future<String> createBoard(Project_Board newBoard,int userTypeID, String personNum) async{
+  Future<String> createBoard(Project_Board newBoard,int userTypeID, String personNum,{url= 'http://10.100.15.38/createBoard.php'}) async{
 
     // SERVER API URL
-    var url =
-          'http://10.100.15.38/createBoard.php';
+//    var url =
+//          'http://10.100.15.38/createBoard.php';
 //        'https://witsinnovativeskyline.000webhostapp.com/createBoard.php';
 
     String startDate;
@@ -54,13 +54,13 @@ class Project_BoardController {
   associated with the specified user.
    */
   // ignore: non_constant_identifier_names
-  Future<List<Project_Board>> ReadBoards(int UserTypeID, String personNo) async{
+  Future<List<Project_Board>> ReadBoards(int UserTypeID, String personNo,{url='http://10.100.15.38/ReadBoards.php'}) async{
     List<Project_Board> boards=List();
 
 
         // SERVER API URL
-        var url =
-            'http://10.100.15.38/ReadBoards.php';
+//        var url =
+//            'http://10.100.15.38/ReadBoards.php';
             //'https://witsinnovativeskyline.000webhostapp.com/ReadBoards.php';
 
         var data={
@@ -122,9 +122,9 @@ class Project_BoardController {
   database based on the attribute values stored in the newBoard which is
   passed in.
    */
-  Future<String> updateBoard(Project_Board boardToUpdate) async{
-    var url =
-        'http://10.100.15.38/updateBoard.php';
+  Future<String> updateBoard(Project_Board boardToUpdate,{url='http://10.100.15.38/updateBoard.php'}) async{
+//    var url =
+//        'http://10.100.15.38/updateBoard.php';
 //        'https://witsinnovativeskyline.000webhostapp.com/updateBoard.php';
 
     String startDate;
@@ -166,11 +166,11 @@ class Project_BoardController {
   database based on the ProjectID of the newBoard which is passed in.
    */
   // ignore: non_constant_identifier_names
-  Future<String> deleteBoard(int ProjectID) async{
+  Future<String> deleteBoard(int ProjectID,{url='http://10.100.15.38/deleteBoard.php'}) async{
 
     // SERVER API URL
-    var url =
-          'http://10.100.15.38/deleteBoard.php';
+//    var url =
+//          'http://10.100.15.38/deleteBoard.php';
 //        'https://witsinnovativeskyline.000webhostapp.com/deleteBoard.php';
 
     // Store all data with Param Name.
