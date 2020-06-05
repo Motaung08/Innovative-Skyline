@@ -10,9 +10,9 @@ class TaskStatusController{
   in the database so that when creating or updating a task, a pre-populated list
   of task statuses may be shown to be chosen from.
    */
-  Future getStatuses() async{
+  Future getStatuses({url="http://10.100.15.38/getTaskStatuses.php"}) async{
     //print('I am called');
-    final response = await http.post("http://10.100.15.38/getTaskStatuses.php");
+    final response = await http.post(url);
 //    final response = await http.post("https://witsinnovativeskyline.000webhostapp.com/getTaskStatuses.php");
 
     //print('Assigning title for '+student.studentTypeID.toString());
