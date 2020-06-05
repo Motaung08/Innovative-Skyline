@@ -36,39 +36,44 @@ void main() {
 
     });
 
-//    test('Read lists',() async{
-//      ListController listController=new ListController();
-//
-//      expect(await listController.ReadLists(103,url:'https://lamp.ms.wits.ac.za/~s1611821/ReadLists.php'), isInstanceOf<List<ListCard>>());
-//
-//    });
+    test('Read lists',() async{
+      ListController listController=new ListController();
+
+      expect(await listController.ReadLists(103,url:'https://lamp.ms.wits.ac.za/~s1611821/ReadLists.php',
+              url2:'https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php'), isInstanceOf<List<ListCard>>());
+
+    });
 
     //NOTE: Sometimes fails?
-//    test('Update lists',() async{
-//      ListController listController=new ListController();
-//      ListCard mockList=MockList();
-//      List<ListCard> testlists=[];
-//      testlists=await listController.ReadLists(103,url:"https://lamp.ms.wits.ac.za/~s1611821/ReadLists.php");
-//      mockList.ProjectID=103;
-//      mockList.List_Title="Test creation update";
-//      mockList.ListID=testlists.last.ListID;
-//
-//      expect(await listController.updateList(mockList,url:'https://lamp.ms.wits.ac.za/~s1611821/updateList.php'), "List updated successfully");
+    test('Update lists',() async{
+      ListController listController=new ListController();
+      ListCard mockList=MockList();
+      List<ListCard> testlists=[];
+      testlists=await listController.ReadLists(103,url:"https://lamp.ms.wits.ac.za/~s1611821/ReadLists.php",
+      url2:'https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php');
 
+      mockList.ProjectID=103;
+      mockList.List_Title="Test creation update";
+      mockList.ListID=testlists.last.ListID;
 
-//
-//    });
-//    test('delete lists',() async{
-//      ListController listController=new ListController();
-//      List<ListCard> testlists=[];
-//      testlists=await listController.ReadLists(103,url:"https://lamp.ms.wits.ac.za/~s1611821/ReadLists.php");
-//      int listID=testlists.last.ListID;
-//
-//      expect(await listController.deleteList(listID,url: 'https://lamp.ms.wits.ac.za/~s1611821/deleteList.php'), "List DELETED!");
+      expect(await listController.updateList(mockList,url:'https://lamp.ms.wits.ac.za/~s1611821/updateList.php'), "List updated successfully");
 
 
 
-//    });
+    });
+
+    test('delete lists',() async{
+      ListController listController=new ListController();
+      List<ListCard> testlists=[];
+      testlists=await listController.ReadLists(103,url:"https://lamp.ms.wits.ac.za/~s1611821/ReadLists.php",
+      url2:'https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php');
+      int listID=testlists.last.ListID;
+
+      expect(await listController.deleteList(listID,url: 'https://lamp.ms.wits.ac.za/~s1611821/deleteList.php'), "List DELETED!");
+
+
+
+    });
 
   });
 

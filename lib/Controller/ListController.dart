@@ -16,7 +16,7 @@ class ListController{
   of the list titles of a board when a user navigates to said board page.
    */
   // ignore: non_constant_identifier_names, missing_return
-  Future<List<ListCard>> ReadLists(int ProjectID,{url='http://10.100.15.38/ReadLists.php'}) async{
+  Future<List<ListCard>> ReadLists(int ProjectID,{url='http://10.100.15.38/ReadLists.php',url2:'http://10.100.15.38/ReadTasks.php'}) async{
     List<ListCard> lists=List();
 
         // SERVER API URL
@@ -45,7 +45,7 @@ class ListController{
             listReceived.ListID = int.parse(Response[i]['ListID']);
             listReceived.List_Title = Response[i]['List_Title'];
             listReceived.ProjectID= int.parse(Response[i]['ProjectID']);
-            listReceived.listTasks=await taskController.ReadTasks(listReceived.ListID,url:'http://10.100.15.38/ReadTasks.php');
+            listReceived.listTasks=await taskController.ReadTasks(listReceived.ListID,url:url2);
 
             lists.add(listReceived);
 
