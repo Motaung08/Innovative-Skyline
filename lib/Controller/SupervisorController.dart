@@ -13,11 +13,12 @@ class SupervisorController{
   with the given email address and assign the instance attributes to a new
   Supervisor object which is subsequently returned.
    */
-  Future<Supervisor> fetchSup(String email) async {
+  Future<Supervisor> fetchSup(String email, {url="http://10.100.15.38/viewSupProfile.php"}) async {
     Supervisor fetchedSup=new Supervisor();
     String msg='';
     final response = await http.post(
-       "http://10.100.15.38/viewSupProfile.php",
+      url,
+//       "http://10.100.15.38/viewSupProfile.php",
 //        "https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php",
         body: {
           "Email": email.toLowerCase(),
@@ -45,11 +46,11 @@ class SupervisorController{
   supervisor attributes as well as loading the boards which are associated with
   said user/supervisor.
    */
-  Future setUserSup(String email)async{
-    supervisor=await fetchSup(email);
+  Future setUserSup(String email,{url='http://10.100.15.38/viewSupProfile.php',url2='http://10.100.15.38/ReadBoards.php'})async{
+    supervisor=await fetchSup(email,url:url);
     personNo=supervisor.staffNo;
     Project_BoardController projectBoardController=new Project_BoardController();
-    user.boards=await projectBoardController.ReadBoards(user.userTypeID,supervisor.staffNo);
+    user.boards=await projectBoardController.ReadBoards(user.userTypeID,supervisor.staffNo,url:url2);
   }
 
   /*
@@ -65,19 +66,27 @@ class SupervisorController{
      NOTE: Should subsequently log the new user in if the registration is
      successful.
    */
-  Future<String> registration(Supervisor supervisorA, User userA) async {
-    supervisor.register = false;
-    String userRegistrationMessage="";
-    // ignore: non_constant_identifier_names
-    String RegistrationSuccess="";
-    userRegistrationMessage=await userController.userRegistration(userA);
-    if (userRegistrationMessage=="Email Already Exists, Please Try Again With New Email Address..!"){
-      RegistrationSuccess=userRegistrationMessage;
-    }
+  Future<String> registration(Supervisor supervisorA, User userA,{url='http://10.100.15.38/Register_Supervisor.php',
+    url2: 'http://10.100.15.38/register_user.php'}) async {
+
+          supervisor.register = false;
+          String userRegistrationMessage="";
+          // ignore: non_constant_identifier_names
+          String RegistrationSuccess="";
+
+          if(url == 'http://10.100.15.38/Register_Supervisor.php') {
+            userRegistrationMessage = await userController.userRegistration(
+                userA, url: url2);
+          }else{
+
+          }
+          if (userRegistrationMessage=="Email Already Exists, Please Try Again With New Email Address..!"){
+            RegistrationSuccess=userRegistrationMessage;
+          }
     else{
       // SERVER API URL
-      var url =
-          'http://10.100.15.38/Register_Supervisor.php';
+//      var url =
+//          'http://10.100.15.38/Register_Supervisor.php';
 //          'https://witsinnovativeskyline.000webhostapp.com/Register_Supervisor.php';
 
       // Store all data with Param Name.
@@ -94,6 +103,7 @@ class SupervisorController{
 
       // Getting Server response into variable.
       var message = jsonDecode(response.body);
+
       if(message=="This staff number already has an associated account."){
         RegistrationSuccess=message;
         UserController userController=new UserController();
