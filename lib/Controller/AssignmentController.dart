@@ -39,9 +39,9 @@ class AssignmentController {
   }
 
   // ignore: non_constant_identifier_names
-  Future<List> ReadAssignment(int UserType, String OtherPersonNo, int ProjectID) async{
-    var url =
-        'https://witsinnovativeskyline.000webhostapp.com/ReadAssignment.php';
+  Future<List> ReadAssignment(int UserType, String OtherPersonNo, int ProjectID,{url='http://10.100.15.38/ReadAssignment.php'}) async{
+//    var url =
+//        'https://witsinnovativeskyline.000webhostapp.com/ReadAssignment.php';
 
     var data={
       'UserTypeID' : UserType.toString(),
@@ -63,10 +63,10 @@ class AssignmentController {
   }
 
   // ignore: non_constant_identifier_names
-  Future<String> DeleteAssignment(int UserType, String OtherPersonNo, int ProjectID) async{
-    var url =
-        //'https://witsinnovativeskyline.000webhostapp.com/DeleteAssignment.php';
-    'http://10.100.15.38/DeleteAssignment.php';
+  Future<String> DeleteAssignment(int UserType, String OtherPersonNo, int ProjectID,{url='http://10.100.15.38/DeleteAssignment.php'}) async{
+//    var url =
+//        //'https://witsinnovativeskyline.000webhostapp.com/DeleteAssignment.php';
+//    'http://10.100.15.38/DeleteAssignment.php';
 
     var data={
       'UserTypeID' : UserType.toString(),
