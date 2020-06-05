@@ -15,12 +15,13 @@ class StudentController{
   The purpose of this method is to retrieve the attributes of a specified
   Student instance in the database based on a passed in email address.
    */
-  Future<Student> fetchStudent(String email) async {
+  Future<Student> fetchStudent(String email,{url="http://10.100.15.38/viewStudentProfile.php"}) async {
     String msg='';
     Student aStudent=new Student();
     final response = await http.post(
 //        "https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php",
-    "http://10.100.15.38/viewStudentProfile.php",
+//    "http://10.100.15.38/viewStudentProfile.php",
+    url,
         body: {
           "Email": email.toLowerCase(),
         });
@@ -50,14 +51,14 @@ class StudentController{
   The purpose of this method is to assign the student attributes of a user
   and subsequently load the project boards which are associated.
    */
-  Future setStudentUser(String email) async {
+  Future setStudentUser(String email, {url='http://10.100.15.38/viewStudentProfile.php',url2:'http://10.100.15.38/ReadBoards.php'}) async {
 
-    student= await fetchStudent(email);
+    student= await fetchStudent(email,url:url);
     personNo=student.studentNo;
     user.boards.clear();
     Project_BoardController projectBoardController=new Project_BoardController();
 
-    user.boards=await projectBoardController.ReadBoards(user.userTypeID,student.studentNo);
+    user.boards=await projectBoardController.ReadBoards(user.userTypeID,student.studentNo,url:url2);
 
   }
 
@@ -71,18 +72,18 @@ class StudentController{
      NOTE: Should subsequently log the new user in if the registration is
      successful.
    */
-  Future<String> studentRegistration(Student studentA, User userA) async {
+  Future<String> studentRegistration(Student studentA, User userA, {url1='http://10.100.15.38/register_student.php',url2='http://10.100.15.38/register_user.php'}) async {
     student.register=false;
     bool success=false;
     String userSuccess="";
     String registrationSuccess="";
-    userSuccess= await userController.userRegistration(userA);
+    userSuccess= await userController.userRegistration(userA,url:url2,url2: url1);
     if (userSuccess=="Email Already Exists, Please Try Again With New Email Address..!"){
       registrationSuccess=userSuccess;
     }else{
       // SERVER API URL
-      var url =
-          'http://10.100.15.38/register_student.php';
+//      var url =
+//          'http://10.100.15.38/register_student.php';
 //          'https://witsinnovativeskyline.000webhostapp.com/register_student.php';
 
       // Store all data with Param Name.
@@ -97,7 +98,7 @@ class StudentController{
       };
 
       // Starting Web API Call.
-      var response = await http.post(url, body: json.encode(data));
+      var response = await http.post(url1, body: json.encode(data));
 
       // Getting Server response into variable.
       var message = jsonDecode(response.body);
