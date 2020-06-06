@@ -24,39 +24,40 @@ void main() {
     });
 
 
-//    test(
-//        'Supervisor Registration', () async {
-//      User testUser=new User();
-//
-//      testUser.email='testSupvisorReg@wits.ac.za';
-//      testUser.password="testSupPassword";
-//      testUser.userTypeID=2;
-//
-//      Supervisor testSupervisor=new Supervisor();
-//
-//      testSupervisor.email=testUser.email;
-//      expect(testSupervisor.email, testUser.email);
-//
-//      testSupervisor.staffNo="UniqueStaffNo123456a";
-//      expect(testSupervisor.staffNo, 'UniqueStaffNo123456a');
-//
-//      testSupervisor.fName="Tshepang";
-//      expect(testSupervisor.fName, "Tshepang");
-//
-//      testSupervisor.lName="Motaung";
-//      expect(testSupervisor.lName, "Motaung");
-//
-//      testSupervisor.office="+134";
-//      expect(testSupervisor.office, "+134");
-//
-//
-//      SupervisorController supervisorController=new SupervisorController();
-//
-//      expect(await supervisorController.registration(testSupervisor, testUser,url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"
-//      ,url:"https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php"), "Supervisor successfully registered!");
-//
-//      await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
-//    });
+    test(
+        'Supervisor Registration', () async {
+      User testUser=new User();
+
+      testUser.email='testSupvisorReg@wits.ac.za';
+      testUser.password="testSupPassword";
+      testUser.userTypeID=2;
+
+      Supervisor testSupervisor=new Supervisor();
+
+      testSupervisor.email=testUser.email;
+      expect(testSupervisor.email, testUser.email);
+
+      testSupervisor.staffNo="UniqueStaffNo123456a";
+      expect(testSupervisor.staffNo, 'UniqueStaffNo123456a');
+
+      testSupervisor.fName="Tshepang";
+      expect(testSupervisor.fName, "Tshepang");
+
+      testSupervisor.lName="Motaung";
+      expect(testSupervisor.lName, "Motaung");
+
+      testSupervisor.office="+134";
+      expect(testSupervisor.office, "+134");
+
+
+      SupervisorController supervisorController=new SupervisorController();
+
+      expect(await supervisorController.registration(testSupervisor, testUser,
+          url:"https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php",
+          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"), "Supervisor successfully registered!");
+
+      await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
+    });
 
     test("test variable data", () async {
       Supervisor supervisorA = new Supervisor();
