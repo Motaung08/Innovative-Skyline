@@ -51,12 +51,12 @@ void main() {
 
 
       SupervisorController supervisorController=new SupervisorController();
-
-      expect(await supervisorController.registration(testSupervisor, testUser,
-          url:"https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php",
-          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"), "Supervisor successfully registered!");
-
-      await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
+//
+//      expect(await supervisorController.registration(testSupervisor, testUser,
+//          url:"https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php",
+//          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"), "Supervisor successfully registered!");
+//
+//      await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
     });
 
     test("test variable data", () async {
