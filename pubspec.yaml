@@ -20,6 +20,7 @@ dependencies:
   password_hash: ^2.0.0
   share: ^0.6.4+3
   flutter_datetime_formfield: ^0.1.2
+  responsive_framework: ^0.0.7
 
   image_cropper: 1.0.2
   image_picker: 0.6.0+17

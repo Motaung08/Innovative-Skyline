@@ -11,7 +11,6 @@ class AssignmentController {
   with special mention of who the board is being shared with as this will be
   used to load the board upon their logging in.
    */
-
   // ignore: non_constant_identifier_names
   Future<String> createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID,{url='http://10.100.15.38/createAssignment.php'}) async{
 //    var url =
@@ -32,10 +31,7 @@ class AssignmentController {
     // ignore: non_constant_identifier_names
     var Response = jsonDecode(response.body);
     print(Response);
-
     return Response;
-
-
   }
 
   // ignore: non_constant_identifier_names

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
@@ -33,6 +34,7 @@ class Board extends StatefulWidget {
 
   // ignore: non_constant_identifier_names
   Future populateListDisplay(int ProjectID) async {
+    print('populateListDisplay() called');
     //lists = [];
     int boardIndex;
     // int testVal;
@@ -53,14 +55,22 @@ class Board extends StatefulWidget {
       print('Initializing board\'s list display! ##################');
       stiles.clear();
       listDynamic.clear();
+      int crossCount=kIsWeb==true?1:2;
       for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+        double mainAxis=0.5;
+        for(int m=0;m<user.boards[boardIndex].boardLists[i].listTasks.length;m++){
+          double addNum= kIsWeb==true? .225 : .52;
+          mainAxis+=addNum;
+        }
         DynamicList dynamicCreatedList =
             new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
 
         listDynamic.add(dynamicCreatedList);
 
         stiles.add(StaggeredTile.count(
-            2, user.boards[boardIndex].boardLists[i].listTasks.length + 1.3));
+            1,kIsWeb==false?
+        user.boards[boardIndex].boardLists[i].listTasks.length+1.3 :
+        mainAxis));
       }
     }
   }
@@ -70,6 +80,10 @@ class Board extends StatefulWidget {
 }
 
 class _BoardState extends State<Board> {
+
+
+
+
   // ignore: missing_return, non_constant_identifier_names
   int getBoardIndex(int BoardID) {
     for (int i = 0; i < user.boards.length; i++) {
@@ -121,17 +135,31 @@ class _BoardState extends State<Board> {
 
     listDynamic.clear();
     if (user.boards[boardIndex].boardLists != null) {
+
       for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+        double mainAxis=0.5;
         DynamicList dynamicCreatedList =
             new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
 
         listDynamic.add(dynamicCreatedList);
-        //print("List: "+user.boards[boardIndex].boardLists[i].List_Title+" has "+user.boards[boardIndex].boardLists[i].listTasks.length.toString()+" tasks");
         if (user.boards[boardIndex].boardLists[i].listTasks.length == 0) {
-          stiles.add(StaggeredTile.count(2, 1.5));
+          stiles.add(StaggeredTile.count(1, kIsWeb==true? .8:1.5));
+          //stiles.add(StaggeredTile.count(1, .8));
         } else {
-          stiles.add(StaggeredTile.count(
-              2, user.boards[boardIndex].boardLists[i].listTasks.length + 1.3));
+          print("LENGTH: "+user.boards[boardIndex].boardLists[i].listTasks.length.toString());
+          for(int m=0;m<user.boards[boardIndex].boardLists[i].listTasks.length;m++){
+            double addNum= kIsWeb==true? .225 : .52;
+            mainAxis+=addNum;
+
+          }
+          //mainAxis+=user.boards[boardIndex].boardLists[i].listTasks.length;
+          stiles.add(
+              StaggeredTile.count(
+                  1
+              ,
+              mainAxis
+          )
+          );
         }
       }
     }
@@ -579,13 +607,9 @@ class _BoardState extends State<Board> {
     }
   }
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
+
   determineAccess();
     final dropdownAssignmentType = new SizedBox(
 
@@ -831,10 +855,11 @@ class _BoardState extends State<Board> {
       child: SingleChildScrollView(
         child: StaggeredGridView.count(
           primary: false,
-          crossAxisCount: 4,
+          addRepaintBoundaries: true,
+          crossAxisCount: kIsWeb==false?2:MediaQuery.of(context).size.width<1200?2:4,
           shrinkWrap: true,
-          mainAxisSpacing: 4.0,
-          crossAxisSpacing: 4.0,
+          mainAxisSpacing: 0.0,
+          crossAxisSpacing: 0.0,
           children: listDynamic,
           staggeredTiles: stiles,
         ),
@@ -1408,11 +1433,12 @@ class _DynamicListState extends State<DynamicList> {
                                 widget.initializeTaskDisplay();
                                 stiles[getListIndex(widget.aList.ListID)] =
                                     new StaggeredTile.count(
+                                        kIsWeb==true?1:
                                         2,
                                         stiles[getListIndex(
                                                     widget.aList.ListID)]
                                                 .mainAxisCellCount +
-                                            1);
+                                            .225);
                                 Navigator.of(context).pop();
                               }
 
@@ -1575,17 +1601,12 @@ class _DynamicListState extends State<DynamicList> {
 
       //Color(0xff009999),
       child: MaterialButton(
-          minWidth: MediaQuery.of(context).size.width,
+          //minWidth: MediaQuery.of(context).size.width,
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           onPressed: () async {
             initializeTaskStatus();
 
             await createTaskAlertDialog(context, true);
-            //print("PROJECT ID?!?!?: "+widget.aList.ProjectID.toString());
-//            boardPage = new Board(
-//              proj_board: user.boards[getBoardIndex(widget.aList.ProjectID)],
-//            );
-
             // await boardPage.populateListDisplay(widget.aList.ProjectID);
             await widget.initializeTaskDisplay();
             setState(() {});
@@ -1711,10 +1732,11 @@ class _DynamicListState extends State<DynamicList> {
             );
           },
           shrinkWrap: true,
-        ));
+        )
+    );
 
     Widget titleView = Container(
-      width: MediaQuery.of(context).size.width / 4,
+      //width: MediaQuery.of(context).size.width / 4,
       child: Text(widget.aList.List_Title,
           style: TextStyle(
               fontFamily: 'Montserrat',
@@ -1759,7 +1781,6 @@ class _DynamicListState extends State<DynamicList> {
           children: <Widget>[
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
-
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 titleView,

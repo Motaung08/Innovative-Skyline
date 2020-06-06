@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
@@ -304,6 +305,7 @@ class _MyHomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
 
     Widget dynamicTextField = new Container(
+      alignment: Alignment.center,
       margin: new EdgeInsets.all(10.0),
       //height: MediaQuery.of(context).size.height,
       child: ListView.builder(
@@ -375,6 +377,7 @@ class _MyHomePageState extends State<HomePage> {
         backgroundColor: Color(0xff009999),
       ),
       body: new Container(
+        alignment: Alignment.center,
         margin: new EdgeInsets.all(10.0),
         child: user.boards.length > 0 ? dynamicTextField : noBoardsView,
       ),
@@ -842,7 +845,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
     }
 
 
-    final listReturn = new Container(
+    final listReturn = kIsWeb==false? new Container(
       margin: EdgeInsets.all(8),
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -880,6 +883,60 @@ class _DynamicWidgetState extends State<DynamicWidget> {
           );
         },
       ),
+    ):
+    Row(
+      children: [
+        Expanded(
+          flex:1,
+          child:Text("")
+        ),
+        Expanded(
+          flex:5,
+            child:new Container(
+              margin: EdgeInsets.all(8),
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: Colors.blueGrey, borderRadius: BorderRadius.circular(20)),
+              child: ListTile(
+                title: Text(
+                  widget.aboard.Project_Title,
+                  style: widget.style,
+                ),
+                trailing: IconButton(
+                  icon: Icon(
+                    Icons.edit,
+                    color: _isEditDisabled==true? Colors.grey : Colors.black,),
+                  onPressed: _isEditDisabled==true? null : ()async {
+                    await editBoardAlertDialog(context);
+                    setState(() {
+
+                    });
+                  },
+                ),
+                onTap: () async {
+                  print("BOARD: "+widget.aboard.ProjectID.toString());
+                  await widget.popLists();
+                  print("LISTS IS NULL: "+(widget.aboard.boardLists==null).toString());
+                  //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
+                  Board boardPage = new Board(
+                    proj_board: widget.aboard,
+                  );
+                  await boardPage.populateListDisplay(widget.aboard.ProjectID);
+
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (BuildContext context) => boardPage),
+                  );
+                },
+              ),
+            )
+        ),
+        Expanded(
+            flex:1,
+            child:Text("")
+        )
+      ],
     );
 
     return listReturn;

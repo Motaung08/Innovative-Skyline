@@ -1,11 +1,17 @@
+
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/main.dart';
+import 'dart:io' show Platform;
+
+
 
 class LoginPage extends StatefulWidget {
-
 
   @override
   LoginPageState createState() => LoginPageState();
@@ -20,37 +26,111 @@ class LoginPageState extends State<LoginPage> {
 
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
-  bool _isHidden=true;
+  bool _isHidden = true;
 
-  void toggleVisibility(){
+  void toggleVisibility() {
     setState(() {
-      _isHidden=!_isHidden;
+      _isHidden = !_isHidden;
     });
   }
+
+
+
 
   bool visible = false;
   @override
   Widget build(BuildContext context) {
 
-    final forgotPassButton = new Container(
+
+
+    final forgotPassButton =kIsWeb==true? Row(
+      children: [
+        Expanded(
+          //flex:2,
+          child: SizedBox(
+            height: 15,
+          ),
+        ),
+        Expanded(
+          //flex:1,
+          child:   new Container(
+            alignment: Alignment.bottomLeft,
+            key: Key("ForgotPasswordInput"),
+            child: FlatButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/ResetPassword');
+              },
+              textColor: Color(0xff009999),
+              child: Text('Forgot Password?'),
+            ),
+          ),
+        ),
+        //emailField,
+        Expanded(
+          //flex:2,
+          child: SizedBox(
+            height: 15,
+          ),
+        ),
+      ],
+    )
+    :
+    new Container(
       alignment: Alignment.bottomLeft,
       key: Key("ForgotPasswordInput"),
-      child:
-        FlatButton(
-
-          onPressed: (){
-            Navigator.pushNamed(context, '/ResetPassword');
-          },
-          textColor: Color(0xff009999),
-          child: Text('Forgot Password?'),
-        ),
-
+      child: FlatButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/ResetPassword');
+        },
+        textColor: Color(0xff009999),
+        child: Text('Forgot Password?'),
+      ),
     );
 
 
-    final emailField = new TextFormField(
+
+
+    final emailField = kIsWeb==true? Row(
+      children: [
+        Expanded(
+          //flex:2,
+          child: SizedBox(
+            height: 15,
+          ),
+        ),
+        Expanded(
+          //flex:1,
+          child:  new TextFormField(
+            controller: _emailController,
+            obscureText: false,
+
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter an email address.';
+              }
+              return null;
+            },
+            style: style,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Email",
+                border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+          ),
+        ),
+        Expanded(
+          //flex:2,
+          child: SizedBox(
+            height: 15,
+          ),
+        ),
+      ],
+    )
+    :
+    TextFormField(
       controller: _emailController,
       obscureText: false,
+
       validator: (value) {
         if (value.isEmpty) {
           return 'Please enter an email address.';
@@ -62,30 +142,135 @@ class LoginPageState extends State<LoginPage> {
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Email",
           border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
-    final passwordField = TextFormField(
+    final passwordField = kIsWeb==true? Row(
+      children: [
+        Expanded(
+          //flex:2,
+          child: SizedBox(
+            height: 15,
+          ),
+        ),
+        Expanded(
+          //flex:1,
+          child:  new TextFormField(
+            controller: _passwordController,
+            obscureText: _isHidden,
+            validator: (val) => val.isEmpty ? 'Password cannot be empty.' : null,
+            style: style,
+            decoration: InputDecoration(
+                fillColor: Colors.white,
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Password",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(32.0),
+                ),
+                suffixIcon: IconButton(
+                  icon:
+                  _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+                  onPressed: toggleVisibility,
+                  focusColor: Color(0xff009999),
+                )),
+          ),
+        ),
+        Expanded(
+          //flex:2,
+          child: SizedBox(
+            height: 15,
+          ),
+        ),
+      ],
+    )
+    :
+    new TextFormField(
       controller: _passwordController,
-
       obscureText: _isHidden,
-      validator: (val) =>
-          val.isEmpty ? 'Password cannot be empty.' : null,
+      validator: (val) => val.isEmpty ? 'Password cannot be empty.' : null,
       style: style,
       decoration: InputDecoration(
           fillColor: Colors.white,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Password",
-
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0),) ,
-      suffixIcon: IconButton(icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility) , onPressed: toggleVisibility, focusColor: Color(0xff009999),)
-      ),
-
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(32.0),
+          ),
+          suffixIcon: IconButton(
+            icon:
+            _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+            onPressed: toggleVisibility,
+            focusColor: Color(0xff009999),
+          )),
     );
 
 
-    final loginButon = Material(
+
+
+    final loginButon = kIsWeb==true? Row(
+      children: [
+        Expanded(
+          //flex:2,
+          child: SizedBox(
+            height: 15,
+          ),
+        ),
+        Expanded(
+          //flex:1,
+          child:   Material(
+            elevation: 5.0,
+            borderRadius: BorderRadius.circular(30.0),
+            color: Color(0xff009999),
+            child: MaterialButton(
+              minWidth: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              onPressed: () async {
+                setState(() {
+                  visible = true;
+                });
+                bool proceed = false;
+                if (_formKey.currentState.validate()) {
+                  user.boards.clear();
+                  proceed = await userController.login(
+                      _emailController.text, _passwordController.text);
+
+                  if (proceed == true) {
+                    setState(() {
+                      visible = false;
+                    });
+                    homePage = new HomePage();
+
+                    await homePage.initializeDisplay();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (BuildContext context) => homePage),
+                    );
+                  } else {
+                    print('Login Denied!');
+                  }
+
+                  setState(() {});
+                }
+              },
+              key: Key('LoginInput'),
+              child: Text("Login",
+                  textAlign: TextAlign.center,
+                  style: style.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+            ),
+          ),
+        ),
+        //emailField,
+        Expanded(
+          //flex:2,
+          child: SizedBox(
+            height: 15,
+          ),
+        ),
+      ],
+    )
+    :
+    Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
@@ -93,34 +278,32 @@ class LoginPageState extends State<LoginPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
-          setState(() {
-            visible = true;
-          });
-          bool proceed=false;
-          if(_formKey.currentState.validate()){
-
+          bool proceed = false;
+          if (_formKey.currentState.validate()) {
+            setState(() {
+              visible = true;
+            });
             user.boards.clear();
-            proceed= await userController.login(_emailController.text, _passwordController.text);
+            proceed = await userController.login(
+                _emailController.text, _passwordController.text);
 
-            if(proceed==true){
+            if (proceed == true) {
               setState(() {
-                visible=false;
+                visible = false;
               });
-              homePage=new HomePage();
+              homePage = new HomePage();
 
-              //await homePage.initializeDisplay();
+              await homePage.initializeDisplay();
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (BuildContext context) => homePage),
               );
-            }
-            else{
+            } else {
               print('Login Denied!');
             }
+          }
+          else{
 
-            setState(() {
-
-            });
           }
         },
         key: Key('LoginInput'),
@@ -133,8 +316,49 @@ class LoginPageState extends State<LoginPage> {
 
 
 
+
     // ignore: non_constant_identifier_names
-    final RegisterButon = Material(
+    final RegisterButon = kIsWeb==true?  Row(
+      children: [
+        Expanded(
+          //flex:2,
+          child: SizedBox(
+            height: 15,
+          ),
+        ),
+        Expanded(
+          //flex:1,
+          child:  Material(
+            elevation: 5.0,
+            borderRadius: BorderRadius.circular(30.0),
+            color: Color(0xff009999),
+            child: MaterialButton(
+              minWidth: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
+                );
+              },
+              key: Key('RegisterBttnInput'),
+              child: Text("Register",
+                  textAlign: TextAlign.center,
+                  style: style.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+            ),
+          ),
+        ),
+        Expanded(
+          //flex:2,
+          child: SizedBox(
+            height: 15,
+          ),
+        ),
+      ],
+    )
+    :
+    Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
@@ -155,8 +379,59 @@ class LoginPageState extends State<LoginPage> {
       ),
     );
 
+
+
     Widget _divider() {
-      return Container(
+      return kIsWeb==true? Row(
+        children: [
+          Expanded(
+            //flex:2,
+            child: SizedBox(
+              height: 15,
+            ),
+          ),
+          Expanded(
+            //flex:1,
+            child:  Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                children: <Widget>[
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Divider(
+                        thickness: 1,
+                      ),
+                    ),
+                  ),
+                  Text('or'),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Divider(
+                        thickness: 1,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            //flex:2,
+            child: SizedBox(
+              height: 15,
+            ),
+          ),
+        ],
+      ):
+      Container(
         margin: EdgeInsets.symmetric(vertical: 10),
         child: Row(
           children: <Widget>[
@@ -191,68 +466,71 @@ class LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Center(
           child: Container(
-        color: Colors.white,
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Padding(
-          padding: const EdgeInsets.all(36.0),
-          child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Image.asset(
-                    "assets/logo.png",
-                    fit: BoxFit.contain,
-                  ),
-                  SizedBox(
-                    height: 15.0,
-                  ),
+            alignment: Alignment.center,
+            color: Colors.white,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.all(36.0),
+              child: Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/logo.png",
+                        fit: BoxFit.contain,
+                      ),
+                      SizedBox(
+                        height: 15.0,
+                      ),
 
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  emailField,
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  passwordField,
-                  forgotPassButton,
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      emailField,
+
+
+                      //emailField,
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      passwordField,
+                      forgotPassButton,
 //                  SizedBox(
 //                    height: 15.0,
 //                  ),
-                  Visibility(
-                      visible: visible,
-                      child: Container(
-                          margin: EdgeInsets.only(bottom: 30, top: 30),
-                          child: CircularProgressIndicator()
-                      )
+                      Visibility(
+                          visible: visible,
+                          child: Container(
+                              margin: EdgeInsets.only(bottom: 30, top: 30),
+                              child: CircularProgressIndicator())),
+                      loginButon,
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      _divider(),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      RegisterButon,
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      Text(
+                        msg,
+                        style: TextStyle(color: Colors.red, fontSize: 18.0),
+                      ),
+                    ],
                   ),
-                  loginButon,
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  _divider(),
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  RegisterButon,
-                  SizedBox(
-                    height: 15.0,
-                  ),
-                  Text(
-                    msg,
-                    style: TextStyle(color: Colors.red, fontSize: 18.0),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
         ),
-      )),
     );
   }
 }

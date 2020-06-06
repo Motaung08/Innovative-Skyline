@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/Controller/AssignmentTypeController.dart';
 import 'package:postgrad_tracker/Controller/TaskStatusController.dart';
 import 'package:postgrad_tracker/Model/User.dart';
@@ -108,27 +109,29 @@ class UserController{
 
         user.email = datauser[0]['Email'];
         user.userTypeID = int.parse(datauser[0]['UserTypeId']);
-        return true;
+       // return true;
 
 
         TaskStatusController taskStatusController=new TaskStatusController();
         AssignmentTypeController assignmentTypeController=new AssignmentTypeController();
-//        await taskStatusController.getStatuses();
-//        await assignmentTypeController.getTypes();
+        await taskStatusController.getStatuses();
+        await assignmentTypeController.getTypes();
+
       if (user.userTypeID==1){
 
-//        await studentController.setStudentUser(user.email);
-//
-//        await studentTypeController.getTypes();
-//
-//        await degreeController.getDegrees();
+        await studentController.setStudentUser(user.email);
+
+        await studentTypeController.getTypes();
+
+        await degreeController.getDegrees();
 
       }
       else{
-//        await supervisorController.setUserSup(email);
+        await supervisorController.setUserSup(email);
 
       }
       proceed=true;
+      print("got ...");
       //Navigator.popAndPushNamed(context, '/Home');
     }
     print(msg);

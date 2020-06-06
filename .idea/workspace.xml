@@ -1,58 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0994150b-15b6-4c0c-ac52-090ebb44e36c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+    <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="Added web support. Some instances are still buggy. The view w">
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/flutter/debug/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/intermediates/merged_assets/debug/out/flutter_assets/kernel_blob.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/apk/app.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/apk/app.apk.sha1" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/apk/app.apk.sha1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/flutter-apk/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/ListController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/ListController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/TaskController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/TaskController.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/AssetManifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/FontManifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/assets/ProfilePic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/assets/downarrow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/fonts/MaterialIcons-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/fonts/Montserrat-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/unit_test_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/DegreeController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/DegreeController.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/Controller/UserController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/UserController.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/View/Board.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Board.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/View/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Login.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+  <component name="ErrorTreeViewConfiguration">
+    <option name="autoscrollToSource" value="true" />
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_24" />
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Dart File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="PATH_TO_GIT" value="C:\Program Files\Git\cmd\git.exe" />
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" />
-        <option value="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectId" id="1ZbDsupN1CF8bbxzCs2cAlHCNCF" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectReloadState">
-    <option name="STATE" value="1" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -61,290 +48,106 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
-<<<<<<< HEAD
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Softwares/flutter/bin/cache/flutter_web_sdk" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
-=======
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../MergeFix/Innovative-Skyline" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="dart.settings" />
->>>>>>> 5d89e5744729d0072e2e91437fbfc20bdd4ad056
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline" />
-    </key>
-  </component>
-<<<<<<< HEAD
-  <component name="RunManager" selected="Flutter Test.All pages should be accessed!!! (1)">
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-    </configuration>
-=======
-  <component name="RunManager" selected="Flutter.main.dart">
->>>>>>> 5d89e5744729d0072e2e91437fbfc20bdd4ad056
-    <configuration default="true" type="Applet">
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="main" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
-      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
-      <option name="workingDirectory" value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unnamed" type="FlutterRunConfigurationType" factoryName="Flutter" nameIsGenerated="true">
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="FlutterRunConfigurationType" factoryName="Flutter">
-      <option name="filePath" value="$PROJECT_DIR$/postgrad_progress_tracker/lib/main.dart" />
-      <method v="2" />
-    </configuration>
-<<<<<<< HEAD
-    <configuration name="All pages should be accessed!!! (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All pages should be accessed!!!" />
-      <option name="testFile" value="$PROJECT_DIR$/test/Home_test.dart" />
-=======
-    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="All Models should be accessed" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All Models should be accessed" />
-      <option name="testFile" value="$PROJECT_DIR$/test/Models_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="All input feild and button widgets should be on screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All input feild and button widgets should be on screen" />
-      <option name="testFile" value="$PROJECT_DIR$/test/UserController_test.dart" />
->>>>>>> 5d89e5744729d0072e2e91437fbfc20bdd4ad056
-      <method v="2" />
-    </configuration>
-    <configuration name="All pages should be accessed!!!" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All pages should be accessed!!!" />
-      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Test DegreeType" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Test DegreeType" />
-      <option name="testFile" value="$PROJECT_DIR$/test/Models_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Testing Board" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Testing Board" />
-      <option name="testFile" value="$PROJECT_DIR$/test/Board_test.dart" />
-      <method v="2" />
-    </configuration>
-<<<<<<< HEAD
-    <configuration name="find widget by key" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="find widget by key" />
-      <option name="testFile" value="$PROJECT_DIR$/test/Home_test.dart" />
-      <method v="2" />
-=======
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
->>>>>>> 5d89e5744729d0072e2e91437fbfc20bdd4ad056
-    </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file enabled="true" id="idea.log" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Dart Command Line App.main" />
-      <item itemvalue="Flutter.main.dart" />
-      <item itemvalue="Flutter.Unnamed" />
-<<<<<<< HEAD
-      <item itemvalue="Flutter Test.Testing Board" />
-      <item itemvalue="Flutter Test.Test DegreeType" />
-      <item itemvalue="Flutter Test.All pages should be accessed!!!" />
-      <item itemvalue="Flutter Test.All pages should be accessed!!! (1)" />
-      <item itemvalue="Flutter Test.find widget by key" />
-=======
-      <item itemvalue="Flutter Test.All Models should be accessed" />
-      <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
-      <item itemvalue="Flutter Test.Find the studentProfile" />
-      <item itemvalue="Flutter Test.Future.value() returns the value (1)" />
-      <item itemvalue="Flutter Test.Testing Board" />
->>>>>>> 5d89e5744729d0072e2e91437fbfc20bdd4ad056
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Flutter Test.All pages should be accessed!!! (1)" />
-        <item itemvalue="Flutter Test.find widget by key" />
-        <item itemvalue="Flutter Test.All pages should be accessed!!!" />
-        <item itemvalue="Flutter Test.Test DegreeType" />
-        <item itemvalue="Flutter Test.Testing Board" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0994150b-15b6-4c0c-ac52-090ebb44e36c" name="Default Changelist" comment="" />
-      <created>1582811360786</created>
+      <changelist id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="" />
+      <created>1591344425524</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1582811360786</updated>
+      <updated>1591344425524</updated>
     </task>
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myShow1" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="SHOW_DIRTY_RECURSIVELY" value="true" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="679" y="261" key="#Testing_Board" timestamp="1589789196126">
+    <state x="414" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591346384043">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="679" y="261" key="#Testing_Board/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589789196126" />
-    <state x="652" y="261" key="#Unnamed" timestamp="1589790049569">
+    <state x="414" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591346384043" />
+    <state x="640" y="275" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1591344645046">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="652" y="261" key="#Unnamed/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589790049569" />
-    <state x="414" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589790215296">
+    <state x="640" y="275" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344645046" />
+    <state x="753" y="198" key="#com.intellij.tools.ToolEditorDialog" timestamp="1591344883272">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="414" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589790215296" />
-    <state x="765" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1589978261790">
+    <state x="753" y="198" key="#com.intellij.tools.ToolEditorDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344883272" />
+    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1591431037436">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="765" y="256" key="#com.intellij.ide.util.MemberChooser/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589978261790" />
-    <state x="690" y="329" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1589790446961">
+    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591431037436" />
+    <state x="765" y="109" key="FileChooserDialogImpl" timestamp="1591347248344">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="690" y="329" key="#com.intellij.ide.util.TreeFileChooserDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589790446961" />
-    <state x="691" y="254" width="538" height="571" key="#main" timestamp="1589789318943">
+    <state x="765" y="109" key="FileChooserDialogImpl/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591347248344" />
+    <state width="1877" height="288" key="GridCell.Tab.0.bottom" timestamp="1591432532376">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="652" y="261" width="616" height="571" key="#main.dart" timestamp="1589790459023">
+    <state width="1493" height="209" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
+    <state width="1877" height="288" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591432532376" />
+    <state width="1877" height="288" key="GridCell.Tab.0.center" timestamp="1591432532376">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="652" y="261" width="616" height="571" key="#main.dart/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589790459023" />
-    <state x="691" y="254" width="538" height="571" key="#main/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589789318943" />
-    <state x="740" y="294" key="FileChooserDialogImpl" timestamp="1589790143372">
+    <state width="1493" height="209" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
+    <state width="1877" height="288" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591432532376" />
+    <state width="1877" height="288" key="GridCell.Tab.0.left" timestamp="1591432532376">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="740" y="294" key="FileChooserDialogImpl/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589790143372" />
-    <state width="1877" height="295" key="GridCell.Tab.0.bottom" timestamp="1590087030983">
+    <state width="1493" height="209" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
+    <state width="1877" height="288" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591432532376" />
+    <state width="1877" height="288" key="GridCell.Tab.0.right" timestamp="1591432532376">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="295" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1590087030983" />
-    <state width="1877" height="295" key="GridCell.Tab.0.center" timestamp="1590087030982">
+    <state width="1493" height="209" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
+    <state width="1877" height="288" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591432532376" />
+    <state x="540" y="283" key="IDE.errors.dialog" timestamp="1591346336430">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="295" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1590087030982" />
-    <state width="1877" height="295" key="GridCell.Tab.0.left" timestamp="1590087030982">
+    <state x="540" y="283" key="IDE.errors.dialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591346336430" />
+    <state x="184" y="90" key="MergeDialog" timestamp="1591430929913">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="295" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1590087030982" />
-    <state width="1877" height="295" key="GridCell.Tab.0.right" timestamp="1590087030982">
+    <state x="184" y="90" key="MergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591430929913" />
+    <state x="672" y="256" key="MultipleFileMergeDialog" timestamp="1591430931724">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1877" height="295" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1590087030982" />
-    <state x="461" y="182" key="SettingsEditor" timestamp="1589790584887">
+    <state x="672" y="256" key="MultipleFileMergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591430931724" />
+    <state x="486" y="14" width="998" height="708" key="SettingsEditor" timestamp="1591430942244">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="461" y="182" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589790584887" />
-    <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1589967706021">
+    <state x="486" y="14" width="998" height="708" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591430942244" />
+    <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1591347133701">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589967706021" />
-    <state x="656" y="138" width="607" height="804" key="find.popup" timestamp="1589881747373">
+    <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591347133701" />
+    <state x="-698" y="139" width="1552" height="880" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1591370508691">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="-698" y="139" width="1552" height="880" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1591370508691" />
+    <state x="92" y="92" width="1736" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591364277713" />
+    <state x="656" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1591344433630">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="656" y="138" width="607" height="804" key="find.popup/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589881747373" />
-    <state x="616" y="250" key="run.anything.popup" timestamp="1589808076223">
+    <state x="656" y="364" key="com.intellij.ide.util.TipDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344433630" />
+    <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591430894403">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="616" y="250" key="run.anything.popup/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589808076223" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1589882400557">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1589882400557" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/test/main_test.dart</url>
-          <line>21</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="Dart">
-          <url>file://$PROJECT_DIR$/test/UserController_test.dart</url>
-          <line>66</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591430894403" />
   </component>
 </project>
