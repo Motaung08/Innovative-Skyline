@@ -29,45 +29,37 @@ import 'package:postgrad_tracker/View/register/SupervisorRegister.dart';
 import 'package:postgrad_tracker/View/resetpassword.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-
-
 //String boardTitle = '';
-User user=new User();
+User user = new User();
 
-Supervisor supervisor=new Supervisor();
-Student student=new Student();
+Supervisor supervisor = new Supervisor();
+Student student = new Student();
 
-List<DegreeType> degrees=List();
-List<StudentType> studentTypes=List();
-List<TaskStatus> taskStatuses=List();
-List<AssignmentType>assignmentTypes=List();
+List<DegreeType> degrees = List();
+List<StudentType> studentTypes = List();
+List<TaskStatus> taskStatuses = List();
+List<AssignmentType> assignmentTypes = List();
 
 // ignore: non_constant_identifier_names
 //Project_Board project_board=new Project_Board();
-ListCard listCard=new ListCard();
+ListCard listCard = new ListCard();
 
-
-StudentController studentController=new StudentController();
-SupervisorController supervisorController=new SupervisorController();
-UserController userController=new UserController();
-DegreeController degreeController=new DegreeController();
-StudentTypeController studentTypeController=new StudentTypeController();
+StudentController studentController = new StudentController();
+SupervisorController supervisorController = new SupervisorController();
+UserController userController = new UserController();
+DegreeController degreeController = new DegreeController();
+StudentTypeController studentTypeController = new StudentTypeController();
 
 // ignore: non_constant_identifier_names
 //Project_BoardController project_boardController=new Project_BoardController();
-ListController listController=new ListController();
-TaskController taskController=new TaskController();
+ListController listController = new ListController();
+TaskController taskController = new TaskController();
 
 //ProjectBoardView
-HomePage homePage=new HomePage();
-Board boardPage=new Board();
+HomePage homePage = new HomePage();
+Board boardPage = new Board();
 
-
-
-String personNo="";
-
-
-
+String personNo = "";
 
 void main() => runApp(MyApp());
 
@@ -108,17 +100,14 @@ class MyApp extends StatelessWidget {
         '/StudentRegister': (context) => new StudentRegisterPage(),
         '/SupervisorRegister': (context) => new SupervisorRegisterPage(),
 
-        '/Board': (context) =>  boardPage,
+        '/Board': (context) => boardPage,
         '/ResetPassword': (context) => new ResetPasswordView(),
-
-
       },
       //home: LoginPage(),
       home: LoginPage(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-
     );
   }
 }

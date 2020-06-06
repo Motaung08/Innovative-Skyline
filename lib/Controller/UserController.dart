@@ -116,14 +116,15 @@ class UserController{
         AssignmentTypeController assignmentTypeController=new AssignmentTypeController();
         await taskStatusController.getStatuses();
         await assignmentTypeController.getTypes();
+        await studentTypeController.getTypes();
+
+        await degreeController.getDegrees();
 
       if (user.userTypeID==1){
 
         await studentController.setStudentUser(user.email);
 
-        await studentTypeController.getTypes();
 
-        await degreeController.getDegrees();
 
       }
       else{

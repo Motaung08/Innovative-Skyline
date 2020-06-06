@@ -18,6 +18,8 @@ import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/Task.dart';
 import 'package:postgrad_tracker/Model/TaskStatus.dart';
 import 'package:postgrad_tracker/Model/User.dart';
+import 'package:postgrad_tracker/View/profile/student/ViewStudentProfile.dart';
+import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -74,6 +76,8 @@ class Board extends StatefulWidget {
       }
     }
   }
+
+
 
   @override
   _BoardState createState() => _BoardState();
@@ -588,29 +592,61 @@ class _BoardState extends State<Board> {
   TextEditingController emailController = new TextEditingController();
   GlobalKey<FormState> _key = new GlobalKey();
 
+
   bool _isShareDisabled=false;
   bool _isEditDisabled=false;
+  bool _isOwner=false;
   determineAccess(){
-    if(widget.proj_board.AccessLevel==null || widget.proj_board.AccessLevel==1) {
+    Project_Board pb=user.boards[getBoardIndex(widget.proj_board.ProjectID)];
+    print("ACCESS LEVEL: "+pb.AccessLevel.toString());
+    if(pb.AccessLevel==null || pb.AccessLevel==1) {
       //Full admin
       _isShareDisabled = false;
       _isEditDisabled = false;
     }
-    else if(widget.proj_board.AccessLevel==2){
+    else if(pb.AccessLevel==2){
       //Can edit but not share
       _isShareDisabled = true;
       _isEditDisabled = false;
-    }else if (widget.proj_board.AccessLevel==3){
+    }else if (pb.AccessLevel==3){
       //Can only view
       _isShareDisabled = true;
       _isEditDisabled = true;
     }
+    else if(pb.AccessLevel==4){
+      //Owner
+      _isShareDisabled=false;
+      _isEditDisabled=false;
+      _isOwner=true;
+
+    }
   }
+
+
+
+  AssignmentController assignmentController=new AssignmentController();
+  List<List> sharedWithList=new List<List>();
+  List<Student> studentList;
+  List<Supervisor> supList;
+  getShared() async{
+    sharedWithList.clear();
+    sharedWithList= await assignmentController.ReadBoardAssignments(widget.proj_board.ProjectID);
+
+    print("students!=null? "+(studentList!=[]).toString());
+    setState(() {
+      studentList=sharedWithList[0];
+      supList=sharedWithList[1];
+    });
+  }
+
+
+  final ScrollController _scrollController=ScrollController();
 
   @override
   Widget build(BuildContext context) {
 
   determineAccess();
+    Icon viewIcon=Icon(Icons.account_circle);
     final dropdownAssignmentType = new SizedBox(
 
       child:StatefulBuilder(
@@ -653,6 +689,182 @@ class _BoardState extends State<Board> {
 
     );
 
+
+
+  Future viewProfileDialog(Student aViewStudent, BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            //title: Text("Shared with: "),
+            content: SingleChildScrollView(
+              child: Center(
+                child: viewStudent().getProfile(aViewStudent, context,15.0,14),
+              ),
+            ),
+            actions: [
+              MaterialButton(
+                child: Text("Ok"),
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+
+          );
+        }
+    );
+  }
+
+  Future viewSupProfileDialog(Supervisor aViewSupervisor, BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            //title: Text("Shared with: "),
+            content: SingleChildScrollView(
+              child: Center(
+                child: viewSupervisor().getProfile(aViewSupervisor, context,15.0,14),
+              ),
+            ),
+            actions: [
+              MaterialButton(
+                child: Text("Ok"),
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+
+          );
+        }
+    );
+  }
+
+    Future sharedWithDialog(BuildContext context) async {
+    print("Students? "+(studentList!=null).toString());
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return StatefulBuilder(
+              builder: (context,setState) {
+                return AlertDialog(
+                  title: Text("Shared with: "),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+
+                          decoration: BoxDecoration(
+                            border:
+                            Border.all(color: Colors.grey, width: 1),
+                            borderRadius: BorderRadius.circular(32),
+                            shape: BoxShape.rectangle,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          child: Column(
+                            //mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "Students:", style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              studentList!=null?
+                              Container(
+                                height: MediaQuery.of(context).size.height/4,
+                                width: 400,
+                                child: CupertinoScrollbar(
+                                  isAlwaysShown: true,
+                                  controller: _scrollController,
+                                  child: ListView.builder(
+                                      itemCount: studentList.length,
+                                      controller: _scrollController,
+                                      shrinkWrap: true,
+                                      itemBuilder: (BuildContext ctxt, int index) {
+                                        Student aStudent=studentList[index];
+                                        print("Student in profile: "+aStudent.fName);
+                                        ListTile a =
+                                        _isOwner==true?
+                                        new ListTile(
+                                          title: Text(aStudent.fName+" "+aStudent.lName),
+                                          leading: IconButton(icon: viewIcon,onPressed: () async {
+                                            await viewProfileDialog(aStudent, context);
+                                          },),
+                                          trailing: IconButton(icon: Icon(Icons.clear),onPressed: ()async {},),
+
+                                        ):
+                                        new ListTile(
+                                          title: Text(aStudent.fName+" "+aStudent.lName),
+                                          leading: IconButton(icon: viewIcon,onPressed: () async {
+                                            await viewProfileDialog(aStudent, context);
+                                          },),
+                                        );
+                                        return a;
+                                      }
+
+                                  ),
+                                ),
+                              )
+                                  :
+                              Text("No students are associated with this board."),
+                              Text(
+                                  "\nSupervisors:",style: TextStyle(fontWeight: FontWeight.bold)
+                              ),
+                              supList!=null?
+                              SingleChildScrollView(
+                                child: Container(
+                                  height:MediaQuery.of(context).size.height/4,
+                                  width: 400,
+                                  child: ListView.builder(
+                                      itemCount: supList.length,
+                                      itemBuilder: (BuildContext ctxt, int index) {
+                                        Supervisor aSup=supList[index];
+                                        print("Sup: "+aSup.fName);
+                                        ListTile a =
+                                        _isOwner==true?
+                                        new ListTile(
+                                          title: Text(aSup.fName+" "+aSup.lName),
+                                          leading: IconButton(icon: viewIcon,onPressed: () async {
+                                            await viewSupProfileDialog(aSup, context);
+                                          },),
+                                          trailing: IconButton(icon: Icon(Icons.clear),onPressed: ()async {},),
+
+                                        ):
+                                        new ListTile(
+                                          title: Text(aSup.fName+" "+aSup.lName),
+                                          leading: IconButton(icon: viewIcon,onPressed: () async {
+                                            await viewSupProfileDialog(aSup, context);
+                                          },),
+                                        );
+                                        return a;
+                                      }
+                                  ),
+                                ),
+                              )
+                                  :
+                              Text("No supervisors are associated with this board."),
+                            ],
+                          )
+                      ),
+                    ],
+                  ),
+                  actions: <Widget>[
+                    MaterialButton(
+                      elevation: 5.0,
+                      child: Text("Ok"),
+                      onPressed: () async {
+                        Navigator.pop(context);
+                      }
+                    )
+                  ],
+
+                );
+              },
+
+            );
+      }
+      );
+    }
+
     Future<String> shareAlertDialog(BuildContext context) async {
       String foundUser = "";
 
@@ -663,7 +875,8 @@ class _BoardState extends State<Board> {
               builder: (context, setState) {
                 return AlertDialog(
                   title: Text("Share"),
-                  content: Column(
+                  content:
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
@@ -675,7 +888,42 @@ class _BoardState extends State<Board> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
+                              Row(
+                                children: [
+                                  Expanded(
+                                    //margin: EdgeInsets.only(bottom: 10),
+                                    child:
+                                    Text("Currently shared with: "),
+                                  ),
+                                  Container(
+                                    height: 30,
+                                    margin: EdgeInsets.all(5),
+                                    alignment: Alignment.center,
+                                    child: Material(
+                                      elevation: 5.0,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      color: Color(0xff009999).withOpacity(0.7),
+                                      child: MaterialButton(
+                                        minWidth: 10,
+                                        child: Text("...\n", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                        onPressed: () async {
+                                          await getShared();
+                                          setState(() {
 
+                                          });
+                                          await sharedWithDialog(context);
+                                        },
+                                      ),
+                                    ),
+                                  )
+
+                                ],
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 20),
+                                child:
+                                Text("Add: "),
+                              ),
                               TextFormField(
                                 controller: emailController,
                                 decoration: const InputDecoration(labelText: 'Email'),
@@ -729,13 +977,13 @@ class _BoardState extends State<Board> {
                               StudentController studentController =
                               new StudentController();
                               Student assignStud =
-                              await studentController.fetchStudent(email);
+                              await studentController.fetchStudent(email,null);
                               OtherPersonNo = assignStud.studentNo;
                             } else {
                               SupervisorController supervisorController =
                               new SupervisorController();
                               Supervisor assignSup =
-                              await supervisorController.fetchSup(email);
+                              await supervisorController.fetchSup(email,null);
                               OtherPersonNo = assignSup.staffNo;
                             }
 
@@ -762,6 +1010,8 @@ class _BoardState extends State<Board> {
             );
           });
     }
+
+
 
     //plus list
     final plusButton = new Container(
@@ -891,9 +1141,12 @@ class _BoardState extends State<Board> {
               Icons.share,
               color: _isShareDisabled==true? Colors.grey : Colors.black,
             ),
-            onPressed: _isShareDisabled==true? null : () {
-              //print("SHARE");
-              shareAlertDialog(context);
+            onPressed: _isShareDisabled==true? null : () async {
+              await getShared();
+              setState(() {
+
+              });
+              await shareAlertDialog(context);
               //Share.share(widget.proj_board.Project_Title);
             },
           )
@@ -957,6 +1210,32 @@ class DynamicList extends StatefulWidget {
 }
 
 class _DynamicListState extends State<DynamicList> {
+
+  bool _isShareDisabled=false;
+  bool _isEditDisabled=false;
+  determineAccess(){
+    Project_Board pb=user.boards[getBoardIndex(widget.aList.ProjectID)];
+    if(pb.AccessLevel==null || pb.AccessLevel==1) {
+      //Full admin
+      _isShareDisabled = false;
+      _isEditDisabled = false;
+    }
+    else if(pb.AccessLevel==2){
+      //Can edit but not share
+      _isShareDisabled = true;
+      _isEditDisabled = false;
+    }else if (pb.AccessLevel==3){
+      //Can only view
+      _isShareDisabled = true;
+      _isEditDisabled = true;
+    }
+    else if(pb.AccessLevel==4){
+      //Owner
+      _isShareDisabled=false;
+      _isEditDisabled=false;
+    }
+  }
+
   TextStyle style = TextStyle(
       fontFamily: 'Montserrat', fontSize: 20.0, color: (Colors.white));
 
@@ -1057,25 +1336,7 @@ class _DynamicListState extends State<DynamicList> {
     }
   }
 
-  bool _isShareDisabled=false;
-  bool _isEditDisabled=false;
-  determineAccess(){
-    Project_Board pb=user.boards[getBoardIndex(widget.aList.ProjectID)];
-    if(pb.AccessLevel==null || pb.AccessLevel==1) {
-      //Full admin
-      _isShareDisabled = false;
-      _isEditDisabled = false;
-    }
-    else if(pb.AccessLevel==2){
-      //Can edit but not share
-      _isShareDisabled = true;
-      _isEditDisabled = false;
-    }else if (pb.AccessLevel==3){
-      //Can only view
-      _isShareDisabled = true;
-      _isEditDisabled = true;
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -1550,8 +1811,6 @@ class _DynamicListState extends State<DynamicList> {
             );
           });
     }
-
-
 
     Future<String> confirmDeleteAlertDialog(BuildContext context) {
       return showDialog(

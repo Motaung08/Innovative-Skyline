@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Model/Assignment.dart';
+import 'package:postgrad_tracker/Model/Student.dart';
+import 'package:postgrad_tracker/Model/Supervisor.dart';
+import 'package:postgrad_tracker/main.dart';
 
 class AssignmentController {
   Assignment assignment;
@@ -54,6 +57,54 @@ class AssignmentController {
     print(Response);
 
     return Response;
+
+
+  }
+
+  // ignore: non_constant_identifier_names
+  Future<List<List>> ReadBoardAssignments(int ProjectID,{url='http://10.100.15.38/ReadBoardAssignments.php'}) async{
+//    var url =
+//        'https://witsinnovativeskyline.000webhostapp.com/ReadAssignment.php';
+
+    var data={
+      'ProjectID' : ProjectID.toString(),
+    };
+
+    // Starting Web API Call.
+    var response = await http.post(url,body: jsonEncode(data));
+
+    // Getting Server response into variable.
+    // ignore: non_constant_identifier_names
+    var Response = jsonDecode(response.body);
+    print(Response);
+    print("NULL? "+Response.length.toString());
+
+    List<Supervisor> sharedSups=new List<Supervisor>();
+    List<Student> sharedStudents=new List<Student>();
+    List<List> sharedWith=new List<List>();
+      for(int i=0;i<Response.length;i++){
+
+        if(Response[i]["StudentNo"]!=null){
+          //Assignment is for a student
+          String studNo=Response[i]["StudentNo"];
+          Student aStudent=new Student();
+          aStudent = await studentController.fetchStudent(null, studNo);
+          sharedStudents.add(aStudent);
+        }
+        else if(Response[i]["StaffNo"]!=null){
+          //Assignment is for a supervisor
+          String staffNo=Response[i]["StaffNo"];
+          Supervisor aSupervisor=new Supervisor();
+          aSupervisor=await supervisorController.fetchSup(null, staffNo);
+          sharedSups.add(aSupervisor);
+        }
+      }
+
+
+    sharedWith.add(sharedStudents);
+    sharedWith.add(sharedSups);
+
+    return sharedWith;
 
 
   }

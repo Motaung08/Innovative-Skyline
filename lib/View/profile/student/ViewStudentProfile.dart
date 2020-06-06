@@ -1,12 +1,115 @@
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:intl/intl.dart';
 
 import '../../../user.dart';
 // ignore: camel_case_types
-class String_Validator {
+class viewStudent{
 
+  Widget getProfile(Student viewStudent, BuildContext context, double textHeadingSize, double textValueSize){
+
+    TextStyle headingStyle = TextStyle(
+        fontFamily: 'Montserrat',
+        color: Color(0xff009999),
+        fontWeight: FontWeight.bold,
+        fontSize: textHeadingSize
+    );
+
+    TextStyle valueStyle = TextStyle(
+        fontFamily: 'Montserrat',
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+        fontSize: textValueSize
+    );
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+    String typeName="";
+    return Center(
+        child: Container(
+          color: Colors.white,
+          width: MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: const EdgeInsets.all(36.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("Profile:",
+                    key: Key('ProfileText'),
+                    textAlign: TextAlign.center,
+                    style: headingStyle.copyWith(
+                        color: Color(0xff009999),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24)),
+                Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                children: <Widget>[
+//                  SizedBox(
+//                    width: 20,
+//                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: Divider(
+                        thickness: 1,
+                      ),
+                    ),
+                  ),
+//                  SizedBox(
+//                    width: 20,
+//                  ),
+                ],
+              ),
+            ),
+                Text("Name: \n",
+                    style: headingStyle
+                ),
+              Text( ViewStudentProfilePage.validate(viewStudent.fName)+ " " +ViewStudentProfilePage.validate(viewStudent.lName) + "\n",
+                    textAlign: TextAlign.start,
+                    key: Key('Name'),
+                    style: valueStyle
+              ),
+                Text("Student Number: \n",
+                    style: headingStyle),
+                Text( ViewStudentProfilePage.validate(viewStudent.studentNo) + "\n",
+                    textAlign: TextAlign.start,
+                    key: Key('StudentNoText'),
+                    style: valueStyle),
+                Text("Email: \n",
+                    style: headingStyle),
+                Text( ViewStudentProfilePage.validate(viewStudent.email) + "\n",
+                    textAlign: TextAlign.center,
+                    key: Key('EmailText'),
+                    style: valueStyle),
+                Text("Degree: \n" ,
+                    style: headingStyle),
+                Text(  ViewStudentProfilePage.validate(degrees[viewStudent.degreeID-1].Degree_Type)
+                    + "\n",
+                    key: Key('DegreeText'),
+                    textAlign: TextAlign.start,
+                    style: valueStyle),
+                Text("Date Registered: \n" ,
+                    style: headingStyle),
+                Text( dateFormat.format(ViewStudentProfilePage.validateDate(viewStudent.registrationDate)) + "\n",
+                    textAlign: TextAlign.start,
+                    key: Key('DORText'),
+                    style: valueStyle),
+                Text("Student Type: \n",
+                    style: headingStyle ),
+                Text( ViewStudentProfilePage.validate(studentTypes[(viewStudent.studentTypeID-1)].Student_Type)
+                    + "\n",
+                    textAlign: TextAlign.start,
+                    key: Key('StudentText'),
+                    style: valueStyle),
+              ],
+            ),
+          ),
+        )
+    );
+  }
 }
+
 
 class ViewStudentProfilePage extends StatefulWidget {
 //  final User user;
@@ -18,6 +121,8 @@ class ViewStudentProfilePage extends StatefulWidget {
       return a;
     }
   }
+
+
 
   static DateTime validateDate(DateTime a){
     DateFormat dateFormat = DateFormat("yyyy-MM-dd");
@@ -32,106 +137,15 @@ class ViewStudentProfilePage extends StatefulWidget {
   @override
   _ViewStudentProfilePageState createState() => _ViewStudentProfilePageState();
 }
-final User user = new User();
-String msg = '';
+
 
 class _ViewStudentProfilePageState extends State<ViewStudentProfilePage> {
-  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-  DateFormat dateFormat = DateFormat("yyyy-MM-dd");
-  String typeName="";
-  int degreeID =student.degreeID;
- // ignore: non_constant_identifier_names, missing_return
- int DegreeID(){
-   if(degreeID!=null){
-     return degreeID;
-   }
- }
 
   @override
   Widget build(BuildContext context) {
-    //  studentController.GetStudDetails();
-
-    setState(() {
-
-    });
-
-    final studentProfile = Container(
-
-        child: Column(children: <Widget>[
-          Text("Profile:  \n",
-              key: Key('ProfileText'),
-              //textAlign: TextAlign.center,
-              style: style.copyWith(
-                  color: Color(0xff009999),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24)),
-          Text("Name: " + ViewStudentProfilePage.validate(student.fName)+ " " +ViewStudentProfilePage.validate(student.lName) + "\n",
-              //textAlign: TextAlign.center,
-              key: Key('Name'),
-              style: style.copyWith(
-                  color: Color(0xff009999),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18)),
-          Text("Student Number: " + ViewStudentProfilePage.validate(student.studentNo) + "\n",
-              //textAlign: TextAlign.start,
-              key: Key('StudentNoText'),
-              style: style.copyWith(
-                  color: Color(0xff009999),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18)),
-          Text("Email: " + ViewStudentProfilePage.validate(student.email) + "\n",
-              textAlign: TextAlign.center,
-              key: Key('EmailText'),
-              style: style.copyWith(
-                  color: Color(0xff009999),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18)),
-          Text("Degree: " +
-
-              ViewStudentProfilePage.validate(degrees[student.degreeID-1].Degree_Type)
-              + "\n",
-              key: Key('DegreeText'),
-              textAlign: TextAlign.start,
-              style: style.copyWith(
-                  color: Color(0xff009999),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18)),
-          Text("Date Registered: " + dateFormat.format(ViewStudentProfilePage.validateDate(student.registrationDate)) + "\n",
-              textAlign: TextAlign.start,
-              key: Key('DORText'),
-              style: style.copyWith(
-                  color: Color(0xff009999),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18)),
-          Text("Student Type: " +
-              ViewStudentProfilePage.validate(studentTypes[(student.studentTypeID-1)].Student_Type)
-              + "\n",
-              textAlign: TextAlign.start,
-              key: Key('StudentText'),
-              style: style.copyWith(
-                  color: Color(0xff009999),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18)),
-        ]));
 
     return Scaffold(
-      body: Center(
-          child: Row(
-            children: <Widget>[
-              Container(
-                color: Colors.white,
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.all(36.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[SizedBox(child: studentProfile)],
-                  ),
-                ),
-              ),
-            ],
-          )),
+      body: viewStudent().getProfile(student,context,17,16),
     );
   }
 }

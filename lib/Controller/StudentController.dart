@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/UserController.dart';
@@ -15,20 +16,31 @@ class StudentController{
   The purpose of this method is to retrieve the attributes of a specified
   Student instance in the database based on a passed in email address.
    */
-  Future<Student> fetchStudent(String email,{url="http://10.100.15.38/viewStudentProfile.php"}) async {
+  Future<Student> fetchStudent(String email, String studNo) async {
     String msg='';
     Student aStudent=new Student();
-    final response = await http.post(
-//        "https://witsinnovativeskyline.000webhostapp.com/viewStudentProfile.php",
-//    "http://10.100.15.38/viewStudentProfile.php",
-    url,
-        body: {
-          "Email": email.toLowerCase(),
-        });
-
+    String url;
+    var data;
+    if(email!=null){
+      email=email.toLowerCase();
+      url="http://10.100.15.38/viewStudentProfile.php";
+      data={
+        "Email": email,
+      };
+    }
+    else if(studNo!=null){
+      studNo=studNo.toLowerCase();
+      url="http://10.100.15.38/viewStudentStudNo.php";
+      data={
+        "StudNo" : studNo
+      };
+    }
+//
+    final response = await http.post(url, body: data);
+    //print(" ===========================   response "+response.body);
     var datauser = json.decode(response.body);
 
-    if (datauser.length == 0) {
+    if (datauser==null) {
 
       msg = " Error :( No such student found. ";
 
@@ -53,7 +65,7 @@ class StudentController{
    */
   Future setStudentUser(String email, {url='http://10.100.15.38/viewStudentProfile.php',url2:'http://10.100.15.38/ReadBoards.php'}) async {
 
-    student= await fetchStudent(email,url:url);
+    student= await fetchStudent(email,null);
     personNo=student.studentNo;
     user.boards.clear();
     Project_BoardController projectBoardController=new Project_BoardController();

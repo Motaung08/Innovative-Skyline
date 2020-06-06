@@ -13,16 +13,29 @@ class SupervisorController{
   with the given email address and assign the instance attributes to a new
   Supervisor object which is subsequently returned.
    */
-  Future<Supervisor> fetchSup(String email, {url="http://10.100.15.38/viewSupProfile.php"}) async {
+  Future<Supervisor> fetchSup(String email, String staffNo) async {
     Supervisor fetchedSup=new Supervisor();
     String msg='';
-    final response = await http.post(
-      url,
-//       "http://10.100.15.38/viewSupProfile.php",
-//        "https://witsinnovativeskyline.000webhostapp.com/viewSupProfile.php",
-        body: {
-          "Email": email.toLowerCase(),
-        });
+
+    String url;
+    var data;
+    if(email!=null){
+      email=email.toLowerCase();
+      url="http://10.100.15.38/viewSupProfile.php";
+      data={
+        "Email": email,
+      };
+    }
+    else if(staffNo!=null){
+      staffNo=staffNo.toLowerCase();
+      url="http://10.100.15.38/viewSupStaffNo.php";
+      data={
+        "StaffNo" : staffNo
+      };
+    }
+
+
+    final response = await http.post(url, body: data);
 
     var datauser = json.decode(response.body);
 
@@ -47,7 +60,7 @@ class SupervisorController{
   said user/supervisor.
    */
   Future setUserSup(String email,{url='http://10.100.15.38/viewSupProfile.php',url2='http://10.100.15.38/ReadBoards.php'})async{
-    supervisor=await fetchSup(email,url:url);
+    supervisor=await fetchSup(email,null);
     personNo=supervisor.staffNo;
     Project_BoardController projectBoardController=new Project_BoardController();
     user.boards=await projectBoardController.ReadBoards(user.userTypeID,supervisor.staffNo,url:url2);
