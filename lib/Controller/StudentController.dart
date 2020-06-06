@@ -118,7 +118,7 @@ class StudentController{
       }
       else if(message=="An account has already been created for this student number."){
         UserController userController=new UserController();
-        userController.userDeRegistration(userA,url:'http://10.100.15.38/deregister_user.php');
+        userController.userDeRegistration(userA);
         success=false;
         registrationSuccess="This student number already has an associated account.";
       }
