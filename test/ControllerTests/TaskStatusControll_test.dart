@@ -6,12 +6,23 @@ import 'package:postgrad_tracker/main.dart';
 class MockTaskStatusController extends TaskStatusController implements Mock{}
 
 void main(){
-  test('Test TaskStatusController', () async {
 
-    final client = MockTaskStatusController();
-    client.toString();
+//  group('Server connection', () {
+    test(
+        'fetchSupervisor', () async {
+      TaskStatusController fetchStatus=new TaskStatusController();
 
-    expect(taskStatuses.length, lessThanOrEqualTo(0));
+      expect(await fetchStatus.getStatuses(url: "https://lamp.ms.wits.ac.za/~s1611821/getTaskStatuses.php"),isNull);
+    });
 
-  });
+
+
+//  test('Test TaskStatusController', () async {
+//
+//    final client = MockTaskStatusController();
+//    client.toString();
+//
+//    expect(taskStatuses.length, lessThanOrEqualTo(0));
+//
+//  });
 }
