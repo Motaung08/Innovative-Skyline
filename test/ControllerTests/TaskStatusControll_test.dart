@@ -9,7 +9,7 @@ void main(){
 
 //  group('Server connection', () {
     test(
-        'fetchSupervisor', () async {
+        'Task Status', () async {
       TaskStatusController fetchStatus=new TaskStatusController();
 
       expect(await fetchStatus.getStatuses(url: "https://lamp.ms.wits.ac.za/~s1611821/getTaskStatuses.php"),isNull);
