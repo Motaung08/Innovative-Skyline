@@ -12,11 +12,12 @@ class StudentTypeController{
   more types of students such as full-time foreign students, part-time foreign
   students, disability students, etc, which may need to behave differently.
    */
-  Future getTypes() async{
+  Future getTypes({url="http://10.100.15.38/getStudentTypes.php"}) async{
     //print('I am called');
 //    final response = await http.post("http://146.141.21.17/getStudentTypes.php");
     final response = await http.post(
-      "http://10.100.15.38/getStudentTypes.php"
+      url
+//      "http://10.100.15.38/getStudentTypes.php"
 //        "https://witsinnovativeskyline.000webhostapp.com/getStudentTypes.php"
     );
 
