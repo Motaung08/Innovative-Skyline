@@ -79,7 +79,8 @@ class UserController{
   accordingly.
    */
   // ignore: non_constant_identifier_names
-  Future<bool> login(String email, String Password,{url='http://10.100.15.38/login.php'}) async {
+  Future<bool> login(String email, String Password,{url='http://10.100.15.38/login.php',url2:'http://10.100.15.38/getTaskStatuses.php'
+  ,url3='http://10.100.15.38/getAssignmentTypes.php',url4="http://10.100.15.38/getStudentTypes.php"}) async {
 
     bool proceed=false;
 
@@ -114,9 +115,9 @@ class UserController{
 
         TaskStatusController taskStatusController=new TaskStatusController();
         AssignmentTypeController assignmentTypeController=new AssignmentTypeController();
-        await taskStatusController.getStatuses();
-        await assignmentTypeController.getTypes();
-        await studentTypeController.getTypes();
+        await taskStatusController.getStatuses(url: url2);
+        await assignmentTypeController.getTypes(url: url3);
+        await studentTypeController.getTypes(url: url4);
 
         await degreeController.getDegrees();
 
@@ -193,9 +194,9 @@ class UserController{
   user.
    */
   // ignore: non_constant_identifier_names
-  Future<bool> userExists(String Email,{url1="http://10.100.15.38/readUsers.php"}) async{
+  Future<bool> userExists(String Email,{url="http://10.100.15.38/readUsers.php",}) async{
     print("Looking for: "+Email);
-    List<User> registeredUsers=await ReadUsers(url:"http://10.100.15.38/readUsers.php");
+    List<User> registeredUsers=await ReadUsers(url:url);
     bool exists=false;
     for (int i=0;i<registeredUsers.length;i++){
       if(registeredUsers[i].email.toLowerCase()==Email.toLowerCase()){
@@ -212,7 +213,7 @@ class UserController{
    */
   // ignore: non_constant_identifier_names
   Future<User> getUser(String Email,{url="http://10.100.15.38/readUsers.php"}) async{
-    List<User> registeredUsers=await ReadUsers(url:"http://10.100.15.38/readUsers.php");
+    List<User> registeredUsers=await ReadUsers(url:url);
     User giveUser=new User();
     for (int i=0;i<registeredUsers.length;i++){
       if(registeredUsers[i].email.toLowerCase()==Email.toLowerCase()){

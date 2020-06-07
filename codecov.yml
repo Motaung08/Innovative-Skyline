@@ -1,5 +1,5 @@
 ignore:
   - "lib/View/Board.dart"
   - "lib/View/register/StudentRegister.dart"
-  - "lib/View/Home"
+  - "lib/Controller"
 
