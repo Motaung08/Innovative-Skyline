@@ -598,7 +598,7 @@ class _BoardState extends State<Board> {
   bool _isOwner=false;
   determineAccess(){
     Project_Board pb=user.boards[getBoardIndex(widget.proj_board.ProjectID)];
-    print("ACCESS LEVEL: "+pb.AccessLevel.toString());
+    //print("ACCESS LEVEL: "+pb.AccessLevel.toString());
     if(pb.AccessLevel==null || pb.AccessLevel==1) {
       //Full admin
       _isShareDisabled = false;
@@ -620,6 +620,7 @@ class _BoardState extends State<Board> {
       _isOwner=true;
 
     }
+    //print("OWNER? "+_isOwner.toString());
   }
 
 
@@ -632,7 +633,7 @@ class _BoardState extends State<Board> {
     sharedWithList.clear();
     sharedWithList= await assignmentController.ReadBoardAssignments(widget.proj_board.ProjectID);
 
-    print("students!=null? "+(studentList!=[]).toString());
+    //print("students!=null? "+(studentList!=[]).toString());
     setState(() {
       studentList=sharedWithList[0];
       supList=sharedWithList[1];
@@ -742,7 +743,7 @@ class _BoardState extends State<Board> {
   }
 
     Future sharedWithDialog(BuildContext context) async {
-    print("Students? "+(studentList!=null).toString());
+    //print("Students? "+(studentList!=null).toString());
       return showDialog(
           context: context,
           builder: (context) {
@@ -772,36 +773,43 @@ class _BoardState extends State<Board> {
                               Container(
                                 height: MediaQuery.of(context).size.height/4,
                                 width: 400,
-                                child: CupertinoScrollbar(
-                                  isAlwaysShown: true,
-                                  controller: _scrollController,
-                                  child: ListView.builder(
-                                      itemCount: studentList.length,
-                                      controller: _scrollController,
-                                      shrinkWrap: true,
-                                      itemBuilder: (BuildContext ctxt, int index) {
-                                        Student aStudent=studentList[index];
-                                        print("Student in profile: "+aStudent.fName);
-                                        ListTile a =
-                                        _isOwner==true?
-                                        new ListTile(
-                                          title: Text(aStudent.fName+" "+aStudent.lName),
-                                          leading: IconButton(icon: viewIcon,onPressed: () async {
-                                            await viewProfileDialog(aStudent, context);
-                                          },),
-                                          trailing: IconButton(icon: Icon(Icons.clear),onPressed: ()async {},),
+                                child:  ListView.builder(
+                                    itemCount: studentList.length,
+                                    controller: _scrollController,
+                                    shrinkWrap: true,
+                                    itemBuilder: (BuildContext ctxt, int index) {
+                                      Student aStudent=studentList[index];
+                                      //print("Student in profile: "+aStudent.fName);
+                                      String fullName=(aStudent.studentNo==student.studentNo && student!=null)? aStudent.fName+" "+aStudent.lName+" (You)" : aStudent.fName+" "+aStudent.lName;
+                                      ListTile a =
+                                      _isOwner==true?
+                                      new ListTile(
+                                        title: Text(fullName),
+                                        leading: IconButton(icon: viewIcon,onPressed: () async {
+                                          await viewProfileDialog(aStudent, context);
+                                        },),
+                                        trailing: IconButton(icon: Icon(Icons.clear),onPressed: ()async {
+                                          print("DELETE...");
+                                          await assignmentController.DeleteAssignment(1, aStudent.studentNo, widget.proj_board.ProjectID);
+                                          studentList.removeWhere((element) => element.studentNo==aStudent.studentNo);
+                                          if(studentList.isEmpty){
+                                            studentList=null;
+                                          }
+                                          setState(() {
 
-                                        ):
-                                        new ListTile(
-                                          title: Text(aStudent.fName+" "+aStudent.lName),
-                                          leading: IconButton(icon: viewIcon,onPressed: () async {
-                                            await viewProfileDialog(aStudent, context);
-                                          },),
-                                        );
-                                        return a;
-                                      }
+                                          });
+                                        },),
 
-                                  ),
+                                      ):
+                                      new ListTile(
+                                        title: Text(fullName),
+                                        leading: IconButton(icon: viewIcon,onPressed: () async {
+                                          await viewProfileDialog(aStudent, context);
+                                        },),
+                                      );
+                                      return a;
+                                    }
+
                                 ),
                               )
                                   :
@@ -818,19 +826,29 @@ class _BoardState extends State<Board> {
                                       itemCount: supList.length,
                                       itemBuilder: (BuildContext ctxt, int index) {
                                         Supervisor aSup=supList[index];
-                                        print("Sup: "+aSup.fName);
+                                        String fullName=(aSup.staffNo==supervisor.staffNo && supervisor!=null)? aSup.fName+" "+aSup.lName +" (You)": aSup.fName+" "+aSup.lName;
+                                        //print("Sup: "+aSup.fName);
                                         ListTile a =
                                         _isOwner==true?
                                         new ListTile(
-                                          title: Text(aSup.fName+" "+aSup.lName),
+                                          title: Text(fullName),
                                           leading: IconButton(icon: viewIcon,onPressed: () async {
                                             await viewSupProfileDialog(aSup, context);
                                           },),
-                                          trailing: IconButton(icon: Icon(Icons.clear),onPressed: ()async {},),
+                                          trailing: IconButton(icon: Icon(Icons.clear),onPressed: ()async {
+                                            await assignmentController.DeleteAssignment(2, aSup.staffNo, widget.proj_board.ProjectID);
+                                            supList.removeWhere((element) => element.staffNo==aSup.staffNo);
+                                            if(supList.isEmpty){
+                                              supList=null;
+                                            }
+                                            setState(() {
+
+                                            });
+                                          },),
 
                                         ):
                                         new ListTile(
-                                          title: Text(aSup.fName+" "+aSup.lName),
+                                          title: Text(fullName),
                                           leading: IconButton(icon: viewIcon,onPressed: () async {
                                             await viewSupProfileDialog(aSup, context);
                                           },),
@@ -876,80 +894,82 @@ class _BoardState extends State<Board> {
                 return AlertDialog(
                   title: Text("Share"),
                   content:
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Form(
-                        key: _key,
-                        child:Container(
-                          alignment: Alignment.bottomLeft,
-                          child:
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                children: [
-                                  Expanded(
-                                    //margin: EdgeInsets.only(bottom: 10),
-                                    child:
-                                    Text("Currently shared with: "),
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    margin: EdgeInsets.all(5),
-                                    alignment: Alignment.center,
-                                    child: Material(
-                                      elevation: 5.0,
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      color: Color(0xff009999).withOpacity(0.7),
-                                      child: MaterialButton(
-                                        minWidth: 10,
-                                        child: Text("...\n", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                                        onPressed: () async {
-                                          await getShared();
-                                          setState(() {
-
-                                          });
-                                          await sharedWithDialog(context);
-                                        },
-                                      ),
+                  SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Form(
+                          key: _key,
+                          child:Container(
+                            alignment: Alignment.bottomLeft,
+                            child:
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      //margin: EdgeInsets.only(bottom: 10),
+                                      child:
+                                      Text("Currently shared with: "),
                                     ),
-                                  )
+                                    Container(
+                                      height: 30,
+                                      margin: EdgeInsets.all(5),
+                                      alignment: Alignment.center,
+                                      child: Material(
+                                        elevation: 5.0,
+                                        borderRadius: BorderRadius.circular(20.0),
+                                        color: Color(0xff009999).withOpacity(0.7),
+                                        child: MaterialButton(
+                                          minWidth: 10,
+                                          child: Text("...\n", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                          onPressed: () async {
+                                            await getShared();
+                                            setState(() {
 
-                                ],
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 20),
-                                child:
-                                Text("Add: "),
-                              ),
-                              TextFormField(
-                                controller: emailController,
-                                decoration: const InputDecoration(labelText: 'Email'),
-                                keyboardType: TextInputType.emailAddress,
-                                validator: (value) => validateEmail(value),
-                                maxLength: 32,
-                                onEditingComplete: () {
-                                  //Check if email exists
+                                            });
+                                            await sharedWithDialog(context);
+                                          },
+                                        ),
+                                      ),
+                                    )
 
-                                  //if there is time make it possible to add multiple
-                                  //recipients here.
-                                },
-                                onChanged: (String val) {
-                                  email = val;
-                                },
-                              ),
-                              dropdownAssignmentType
-                            ],
+                                  ],
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 20),
+                                  child:
+                                  Text("Add: "),
+                                ),
+                                TextFormField(
+                                  controller: emailController,
+                                  decoration: const InputDecoration(labelText: 'Email'),
+                                  keyboardType: TextInputType.emailAddress,
+                                  validator: (value) => validateEmail(value),
+                                  maxLength: 32,
+                                  onEditingComplete: () {
+                                    //Check if email exists
+
+                                    //if there is time make it possible to add multiple
+                                    //recipients here.
+                                  },
+                                  onChanged: (String val) {
+                                    email = val;
+                                  },
+                                ),
+                                dropdownAssignmentType
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      Text(
-                        foundUser,
-                        style: TextStyle(color: Colors.red),
-                      )
-                    ],
+                        Text(
+                          foundUser,
+                          style: TextStyle(color: Colors.red),
+                        )
+                      ],
+                    ),
                   ),
                   actions: <Widget>[
                     MaterialButton(
@@ -972,31 +992,42 @@ class _BoardState extends State<Board> {
                             User assignUser = await userController.getUser(email);
                             // ignore: non_constant_identifier_names
                             String OtherPersonNo;
-
+                            bool existingAssignmentFound=false;
                             if (assignUser.userTypeID == 1) {
                               StudentController studentController =
                               new StudentController();
                               Student assignStud =
                               await studentController.fetchStudent(email,null);
                               OtherPersonNo = assignStud.studentNo;
+                              if(studentList.contains(assignStud)){
+                                existingAssignmentFound=true;
+                              }
                             } else {
                               SupervisorController supervisorController =
                               new SupervisorController();
                               Supervisor assignSup =
                               await supervisorController.fetchSup(email,null);
                               OtherPersonNo = assignSup.staffNo;
+                              if(supList.contains(assignSup)){
+                                existingAssignmentFound=true;
+                              }
                             }
 
                             AssignmentController assignmentController =
                             new AssignmentController();
-                            print("SELECTED: "+_selectedAssignmentType.assignmentTypeText+" "+_selectedAssignmentType.assignmentTypeID.toString());
-                            //COME BACK AND CHANGE ACCESSID!
-                            await assignmentController.createAssignment(
-                                assignUser.userTypeID,
-                                OtherPersonNo,
-                                widget.proj_board.ProjectID,
-                                _selectedAssignmentType.assignmentTypeID);
-                            Navigator.pop(context);
+
+                           if(existingAssignmentFound!=true){
+                             await assignmentController.createAssignment(
+                                 assignUser.userTypeID,
+                                 OtherPersonNo,
+                                 widget.proj_board.ProjectID,
+                                 _selectedAssignmentType.assignmentTypeID);
+                             Navigator.pop(context);
+                           }
+                           else{
+                             Navigator.pop(context);
+                           }
+
                           } else {
                             foundUser = "No such user found.";
                             setState(() {});
@@ -1691,15 +1722,15 @@ class _DynamicListState extends State<DynamicList> {
 //                                    "Date Due: " +
 //                                    newTask.Task_Due.toString());
                                 await taskController.createTask(newTask);
+
                                 widget.initializeTaskDisplay();
                                 stiles[getListIndex(widget.aList.ListID)] =
                                     new StaggeredTile.count(
-                                        kIsWeb==true?1:
-                                        2,
+                                        1,
                                         stiles[getListIndex(
                                                     widget.aList.ListID)]
-                                                .mainAxisCellCount +
-                                            .225);
+                                                .mainAxisCellCount + (kIsWeb==true? .225 : .52)
+                                            );
                                 Navigator.of(context).pop();
                               }
 
@@ -1977,6 +2008,7 @@ class _DynamicListState extends State<DynamicList> {
                         proj_board:
                             user.boards[getBoardIndex(widget.aList.ProjectID)],
                       );
+                      //boardPage.populateListDisplay(widget.aList.ProjectID);
                       Navigator.pop(context);
 
                       Navigator.push(
