@@ -13,7 +13,8 @@ class SupervisorController{
   with the given email address and assign the instance attributes to a new
   Supervisor object which is subsequently returned.
    */
-  Future<Supervisor> fetchSup(String email, String staffNo) async {
+  Future<Supervisor> fetchSup(String email, String staffNo,{url1='http://10.100.15.38/viewSupProfile.php',
+  url2='http://10.100.15.38/viewSupStaffNo.php'}) async {
     Supervisor fetchedSup=new Supervisor();
     String msg='';
 
@@ -21,14 +22,14 @@ class SupervisorController{
     var data;
     if(email!=null){
       email=email.toLowerCase();
-      url="http://10.100.15.38/viewSupProfile.php";
+      url=url1;
       data={
         "Email": email,
       };
     }
     else if(staffNo!=null){
       staffNo=staffNo.toLowerCase();
-      url="http://10.100.15.38/viewSupStaffNo.php";
+      url=url2;
       data={
         "StaffNo" : staffNo
       };
@@ -36,6 +37,7 @@ class SupervisorController{
 
 
     final response = await http.post(url, body: data);
+    print(response.body);
 
     var datauser = json.decode(response.body);
 
@@ -59,8 +61,9 @@ class SupervisorController{
   supervisor attributes as well as loading the boards which are associated with
   said user/supervisor.
    */
-  Future setUserSup(String email,{url='http://10.100.15.38/viewSupProfile.php',url2='http://10.100.15.38/ReadBoards.php'})async{
-    supervisor=await fetchSup(email,null);
+  Future setUserSup(String email,{url='http://10.100.15.38/viewSupProfile.php',url2='http://10.100.15.38/ReadBoards.php',
+  url3='http://10.100.15.38/viewSupStaffNo.php'})async{
+    supervisor=await fetchSup(email,null,url1:url,url2:url3);
     personNo=supervisor.staffNo;
     Project_BoardController projectBoardController=new Project_BoardController();
     user.boards=await projectBoardController.ReadBoards(user.userTypeID,supervisor.staffNo,url:url2);

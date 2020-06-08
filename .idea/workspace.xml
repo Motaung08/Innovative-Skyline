@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +21,7 @@
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1cx2WyvMz36I4ZHicNNqKxAKjm6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -32,7 +34,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunDashboard">
@@ -47,23 +49,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.Supervisor Login">
+  <component name="RunManager" selected="Flutter Test.Supervisor Registration">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Read users" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Read users" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" />
-      <method v="2" />
-    </configuration>
     <configuration name="ReadBoards Assignment" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="ReadBoards Assignment" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Shared Boards" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Shared Boards" />
       <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" />
       <method v="2" />
     </configuration>
@@ -72,18 +64,28 @@
       <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Test Supervisor user" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Test Supervisor user" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" />
+    <configuration name="Supervisor Registration" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Supervisor Registration" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/SupervisorController_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="setSupervisorUser" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="setSupervisorUser" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/SupervisorController_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test variable data" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="test variable data" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/SupervisorController_test.dart" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.Supervisor Registration" />
+        <item itemvalue="Flutter Test.setSupervisorUser" />
+        <item itemvalue="Flutter Test.test variable data" />
         <item itemvalue="Flutter Test.Supervisor Login" />
         <item itemvalue="Flutter Test.ReadBoards Assignment" />
-        <item itemvalue="Flutter Test.Shared Boards" />
-        <item itemvalue="Flutter Test.Test Supervisor user" />
-        <item itemvalue="Flutter Test.Read users" />
       </list>
     </recent_temporary>
   </component>
