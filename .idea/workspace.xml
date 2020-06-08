@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="" />
+    <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="Added &quot;Shared with&quot; functionality and View Profile for each recipient.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,14 +48,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.Supervisor Registration">
+  <component name="RunManager" selected="Flutter Test.Test Task CRUD">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ReadBoards Assignment" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="ReadBoards Assignment" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="Supervisor Login" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -64,6 +61,11 @@
     <configuration name="Supervisor Registration" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Supervisor Registration" />
       <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/SupervisorController_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test Task CRUD" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Test Task CRUD" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/TaskController_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="setSupervisorUser" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -78,11 +80,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.Test Task CRUD" />
         <item itemvalue="Flutter Test.Supervisor Registration" />
         <item itemvalue="Flutter Test.setSupervisorUser" />
         <item itemvalue="Flutter Test.test variable data" />
         <item itemvalue="Flutter Test.Supervisor Login" />
-        <item itemvalue="Flutter Test.ReadBoards Assignment" />
       </list>
     </recent_temporary>
   </component>
