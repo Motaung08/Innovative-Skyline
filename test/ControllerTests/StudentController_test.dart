@@ -11,6 +11,7 @@ void main() {
     Student aStudent=new Student();
     aStudent.email ='1713445@students.wits.ac.za';
     aStudent.studentNo ='1713445';
+
     test('fetchStudent', () async {
       StudentController studentController=new StudentController();
 
@@ -39,7 +40,7 @@ void main() {
           testStudent.lName="Student";
           testStudent.degreeID=1;
           testStudent.registrationDate=DateTime.now();
-          testStudent.studentTypeID=1;
+          testStudent.studentTypeID=testUser.userTypeID;
 
           //testStudent.studentTypeID
       StudentController studentController=new StudentController();
@@ -48,6 +49,12 @@ void main() {
           url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
           url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"),
           "Student Register Success");
+
+      expect(await studentController.studentRegistration(testStudent,testUser,
+          url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
+          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"),
+          "Email Already Exists, Please Try Again With New Email Address..!");
+
       //UserController userController=new UserController();
       var j=await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
       print(j);

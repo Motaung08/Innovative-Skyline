@@ -87,7 +87,9 @@ class StudentController{
      NOTE: Should subsequently log the new user in if the registration is
      successful.
    */
-  Future<String> studentRegistration(Student studentA, User userA, {url1='http://10.100.15.38/register_student.php',url2='http://10.100.15.38/register_user.php'}) async {
+  Future<String> studentRegistration(Student studentA, User userA, {url1='http://10.100.15.38/register_student.php',
+    url2='http://10.100.15.38/register_user.php'}) async {
+
     student.register=false;
     bool success=false;
     String userSuccess="";
