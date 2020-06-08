@@ -75,6 +75,8 @@ class AssignmentController {
 
     // Getting Server response into variable.
     // ignore: non_constant_identifier_names
+    String sudoResp= response.body;
+    print(sudoResp);
     var Response = jsonDecode(response.body);
     print(Response);
     print("NULL? "+Response.length.toString());

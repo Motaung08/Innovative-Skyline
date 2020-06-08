@@ -16,21 +16,23 @@ class StudentController{
   The purpose of this method is to retrieve the attributes of a specified
   Student instance in the database based on a passed in email address.
    */
-  Future<Student> fetchStudent(String email, String studNo) async {
+  Future<Student> fetchStudent(String email, String studNo, {url1='http://10.100.15.38/viewStudentProfile.php',
+  url2="http://10.100.15.38/viewStudentStudNo.php"}) async {
+
     String msg='';
     Student aStudent=new Student();
     String url;
     var data;
     if(email!=null){
       email=email.toLowerCase();
-      url="http://10.100.15.38/viewStudentProfile.php";
+      url=url1;
       data={
         "Email": email,
       };
     }
     else if(studNo!=null){
       studNo=studNo.toLowerCase();
-      url="http://10.100.15.38/viewStudentStudNo.php";
+      url=url2;
       data={
         "StudNo" : studNo
       };
@@ -63,9 +65,10 @@ class StudentController{
   The purpose of this method is to assign the student attributes of a user
   and subsequently load the project boards which are associated.
    */
-  Future setStudentUser(String email, {url='http://10.100.15.38/viewStudentProfile.php',url2:'http://10.100.15.38/ReadBoards.php'}) async {
+  Future setStudentUser(String email, {url='http://10.100.15.38/viewStudentProfile.php',url2:'http://10.100.15.38/ReadBoards.php',
+    url3="http://10.100.15.38/viewStudentStudNo.php"}) async {
 
-    student= await fetchStudent(email,null);
+    student= await fetchStudent(email,null,url1: url,url2: url3);
     personNo=student.studentNo;
     user.boards.clear();
     Project_BoardController projectBoardController=new Project_BoardController();

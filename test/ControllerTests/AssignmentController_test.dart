@@ -15,14 +15,11 @@ void main() {
       AssignmentController mockAssignmentController= new MockAssignmentController();
 
 
-
-
 //      expect(await mockAssignmentController.createAssignment(2, "A00", 103, 1), "fail");
 
         String expectedResponse = "Association created!";
-        expect(await assignmentController.createAssignment(2, 'A00', 103, 1,url:"https://lamp.ms.wits.ac.za/~s1611821/createAssignment.php"), expectedResponse);
-
-
+        expect(await assignmentController.createAssignment(2, 'A00', 103, 1,
+            url:"https://lamp.ms.wits.ac.za/~s1611821/createAssignment.php"), expectedResponse);
 
     });
     test('Assignment read for valid supervisor', () async {
@@ -31,19 +28,31 @@ void main() {
 
       //String expectedResponse = "Association created!";
       //when(mockAssignmentController.createAssignment(2, 'A00', 55, 1)).thenAnswer((_) async => expectedResponse);
-      expect(await assignmentController.ReadAssignment(2, 'A00', 103,url:"https://lamp.ms.wits.ac.za/~s1611821/ReadAssignment.php"), isInstanceOf<List>());
+      expect(await assignmentController.ReadAssignment(2, 'A00', 103,
+          url:"https://lamp.ms.wits.ac.za/~s1611821/ReadAssignment.php"), isInstanceOf<List>());
 
 
     });
+
+
+//    test('Shared Boards', () async{
+//      AssignmentController sharedBoards = new AssignmentController();
+//      sharedBoards.
+//      expect(await sharedBoards.ReadBoardAssignments(2,url: "https://lamp.ms.wits.ac.za/~s1611821/ReadAssignment.php"), 'Board shared! ');
+//
+//    });
+
     test('Assignment deleted for valid supervisor', () async {
       AssignmentController assignmentController=new AssignmentController();
 
-
       //String expectedResponse = "Association created!";
       //when(mockAssignmentController.createAssignment(2, 'A00', 55, 1)).thenAnswer((_) async => expectedResponse);
-      expect(await assignmentController.DeleteAssignment(2, 'A00', 103,url:"https://lamp.ms.wits.ac.za/~s1611821/DeleteAssignment.php"), "Association DELETED!");
+      expect(await assignmentController.DeleteAssignment(2, 'A00', 103,
+          url:"https://lamp.ms.wits.ac.za/~s1611821/DeleteAssignment.php"), "Association DELETED!");
 
     });
+
+
 
 
   });
