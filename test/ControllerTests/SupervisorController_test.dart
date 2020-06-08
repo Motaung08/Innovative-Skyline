@@ -60,9 +60,7 @@ void main() {
       url2:'https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php',url3:'https://lamp.ms.wits.ac.za/~s1611821/viewSupStaffNo.php'),
           null);
 
-      expect(await supervisorController.fetchSup(testSupervisor.email, testSupervisor.staffNo,
-      url1:'https://lamp.ms.wits.ac.za/~s1611821/viewSupProfile.php',url2:'https://lamp.ms.wits.ac.za/~s1611821/viewSupStaffNo.php'),
-          isNotNull);
+
 
       await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
     });
