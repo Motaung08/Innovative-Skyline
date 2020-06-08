@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="Added &quot;Shared with&quot; functionality and View Profile for each recipient.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591459376689</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="TaskCtr Test">
+      <created>1591651072406</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1591651072406</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -132,7 +137,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added web support. Some instances/views are still buggy." />
     <MESSAGE value="Added &quot;Shared with&quot; functionality and View Profile for each recipient." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added &quot;Shared with&quot; functionality and View Profile for each recipient." />
+    <MESSAGE value="TaskCtr Test" />
+    <option name="LAST_COMMIT_MESSAGE" value="TaskCtr Test" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591346384043">
