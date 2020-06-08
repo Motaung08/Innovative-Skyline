@@ -35,10 +35,18 @@ void main() {
     });
 
 
+//    test('ReadBoards Assignment', () async {
+//      AssignmentController assignmentController = new AssignmentController();
+//
+//      expect(await assignmentController.ReadBoardAssignments(2,url:"https://lamp.ms.wits.ac.za/~s1611821/ReadBoardAssignments.php"),
+//      isInstanceOf<List>());
+//    });
+
+
 //    test('Shared Boards', () async{
 //      AssignmentController sharedBoards = new AssignmentController();
-//      sharedBoards.
-//      expect(await sharedBoards.ReadBoardAssignments(2,url: "https://lamp.ms.wits.ac.za/~s1611821/ReadAssignment.php"), 'Board shared! ');
+////      sharedBoards.
+//      expect(await sharedBoards.ReadBoardAssignments(2,url: "https://lamp.ms.wits.ac.za/~s1611821/ReadBoardAssignments.php"), 'Board shared! ');
 //
 //    });
 
