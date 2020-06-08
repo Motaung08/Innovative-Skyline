@@ -52,9 +52,9 @@ void main() {
 
       SupervisorController supervisorController=new SupervisorController();
 
-      expect(await supervisorController.registration(testSupervisor, testUser,
-          url:"https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php",
-          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"), "Supervisor successfully registered!");
+//      expect(await supervisorController.registration(testSupervisor, testUser,
+//          url:"https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php",
+//          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"), "Supervisor successfully registered!");
 
       expect(await supervisorController.setUserSup(testSupervisor.email,url:'https://lamp.ms.wits.ac.za/~s1611821/viewSupProfile.php',
       url2:'https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php',url3:'https://lamp.ms.wits.ac.za/~s1611821/viewSupStaffNo.php'),

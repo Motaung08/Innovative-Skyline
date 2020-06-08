@@ -34,18 +34,6 @@ void main(){
       await tester.pumpWidget(makeWidgetTestable(Project_Board()));
     });
 
-//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-//      await tester.pumpWidget(makeWidgetTestable(StudentController()));
-//    });
-
-//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-//      await tester.pumpWidget(makeWidgetTestable(UserController()));
-//    });
-
-//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-//      await tester.pumpWidget(makeWidgetTestable(Project_BoardController()));
-//    });
-
     testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
       await tester.pumpWidget(makeWidgetTestable(HomePage()));
     });
@@ -60,6 +48,12 @@ void main(){
       expect(find.byKey(key), findsOneWidget);
     });
 
+    test('Test functions', () async {
+
+    });
+
   });
+
+
 
 }
