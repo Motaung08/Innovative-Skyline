@@ -101,12 +101,12 @@ void main(){
           "Supervisor successfully registered!");
 
       //userLogin
-      expect(await userController.login(testUser.email, testUser.password,
-          url: "https://lamp.ms.wits.ac.za/~s1611821/login.php",
-          url2: '"https://lamp.ms.wits.ac.za/~s1611821/getTaskStatuses.php',
-          url3: 'https://lamp.ms.wits.ac.za/~s1611821/getAssignmentTypes.php',
-          url4: 'https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php'
-      ), false);
+//      expect(await userController.login(testUser.email, testUser.password,
+//          url: "https://lamp.ms.wits.ac.za/~s1611821/login.php",
+//          url2: '"https://lamp.ms.wits.ac.za/~s1611821/getTaskStatuses.php',
+//          url3: 'https://lamp.ms.wits.ac.za/~s1611821/getAssignmentTypes.php',
+//          url4: 'https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php'
+//      ), false);
 
 //      //userExists
 //      expect(await userController.userExists(testUser.email,url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"), isNotNull);
