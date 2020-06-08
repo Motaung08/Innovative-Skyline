@@ -87,5 +87,5 @@ if(isset($check)){
 	 }
 	 }
  }
- mysqli_close($con);
+ mysqli_close($connect);
 ?>

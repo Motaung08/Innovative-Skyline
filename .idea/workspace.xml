@@ -3,9 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/StudentController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/StudentController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP/Register_Supervisor.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP/Register_Supervisor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP/deregister_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP/deregister_user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/UserController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/UserController.dart" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,43 +51,43 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.studentRegistration">
+  <component name="RunManager" selected="Flutter Test.Supervisor Login">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Shared Boards" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Shared Boards" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" />
+    <configuration name="Read users" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Read users" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Student tests" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Student tests" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" />
+    <configuration name="Supervisor Login for invalid email" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Supervisor Login for invalid email" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="fetchStudent" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="fetchStudent" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" />
+    <configuration name="Supervisor Login" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Supervisor Login" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="setStudentUser" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="setStudentUser" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" />
+    <configuration name="Test Supervisor user" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Test Supervisor user" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="studentRegistration" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="studentRegistration" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" />
+    <configuration name="User exists" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="User exists" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter Test.studentRegistration" />
-        <item itemvalue="Flutter Test.Student tests" />
-        <item itemvalue="Flutter Test.setStudentUser" />
-        <item itemvalue="Flutter Test.fetchStudent" />
-        <item itemvalue="Flutter Test.Shared Boards" />
+        <item itemvalue="Flutter Test.Supervisor Login" />
+        <item itemvalue="Flutter Test.Read users" />
+        <item itemvalue="Flutter Test.Supervisor Login for invalid email" />
+        <item itemvalue="Flutter Test.Test Supervisor user" />
+        <item itemvalue="Flutter Test.User exists" />
       </list>
     </recent_temporary>
   </component>
@@ -121,7 +124,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

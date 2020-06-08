@@ -65,11 +65,13 @@ if(empty($check)){
 		$MSG='Try Again';
 	 
 	 }
+
+	 // Converting the message into JSON format.
+     		$json = json_encode($MSG);
+
+     		// Echo the message.
+     		 echo $json ;
  }
- // Converting the message into JSON format.
-		$json = json_encode($MSG);
-		 
-		// Echo the message.
-		 echo $json ;
+
  mysqli_close($connect);
 ?>
