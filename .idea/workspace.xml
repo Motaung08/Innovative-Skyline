@@ -118,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591651072406</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added test">
+      <created>1591652064078</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1591652064078</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,7 +145,8 @@
     <MESSAGE value="Added web support. Some instances/views are still buggy." />
     <MESSAGE value="Added &quot;Shared with&quot; functionality and View Profile for each recipient." />
     <MESSAGE value="TaskCtr Test" />
-    <option name="LAST_COMMIT_MESSAGE" value="TaskCtr Test" />
+    <MESSAGE value="Added test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added test" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="195" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591346384043">
