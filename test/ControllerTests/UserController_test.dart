@@ -56,55 +56,58 @@ void main(){
 
   });
 
-//  group('Test Supervisor user', (){
-//
-//    User testSupUser = new User();
-//    testSupUser.email = 'testSup@wits.ac.za';
-//    testSupUser.password = 'supPass';
-//    testSupUser.userTypeID =2;
-//
-//    Supervisor testSupervisor=new Supervisor();
-//
-//    testSupervisor.email=testSupUser.email;
-//    testSupervisor.staffNo="UniqueStaffNo123456b";
-//    testSupervisor.fName="Tshepang";
-//    testSupervisor.lName="Motaung";
-//    testSupervisor.office="+134";
-//
-//    /*
-//    Functions to test:
-//
-//    -userRegistration
-//    -userDeRegistration
-//    -login
-//    -ReadUsers
-//    -userExists
-//    -getUser
-//    -ResetPassword
-//     */
-//
-//    User testUser=new User();
-//
-//    testUser.email='1657114@student.wits.ac.za';
-//    testUser.password="password";
-//    testUser.userTypeID=2;
-//
-//
-//    test('Supervisor Login',() async{
-//      UserController userController=new UserController();
-//      SupervisorController supervisorController=new SupervisorController();
-//
-//      //userRegistration
-//      expect(await supervisorController.registration(testSupervisor,testUser,
-//          url:'https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php',url2:'https://lamp.ms.wits.ac.za/~s1611821/register_user.php'),
-//          "Supervisor successfully registered!");
-//
-//      //userLogin
-//      expect(await userController.login(testUser.email, testUser.password,
-//          url:"https://lamp.ms.wits.ac.za/~s1611821/login.php",url2:'"https://lamp.ms.wits.ac.za/~s1611821/getTaskStatuses.php',
-//        url3:'https://lamp.ms.wits.ac.za/~s1611821/getAssignmentTypes.php',url4:'https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php'
-//      ),false);
-//
+  group('Test Supervisor user', ()
+  {
+    User testSupUser = new User();
+    testSupUser.email = 'testSup@wits.ac.za';
+    testSupUser.password = 'supPass';
+    testSupUser.userTypeID = 2;
+
+    Supervisor testSupervisor = new Supervisor();
+
+    testSupervisor.email = testSupUser.email;
+    testSupervisor.staffNo = "UniqueStaffNo123456b";
+    testSupervisor.fName = "Tshepang";
+    testSupervisor.lName = "Motaung";
+    testSupervisor.office = "+134";
+
+    /*
+    Functions to test:
+
+    -userRegistration
+    -userDeRegistration
+    -login
+    -ReadUsers
+    -userExists
+    -getUser
+    -ResetPassword
+     */
+
+    User testUser = new User();
+
+    testUser.email = '1657114@student.wits.ac.za';
+    testUser.password = "password";
+    testUser.userTypeID = 2;
+
+
+    test('Supervisor Login', () async {
+      UserController userController = new UserController();
+      SupervisorController supervisorController = new SupervisorController();
+
+      //userRegistration
+      expect(await supervisorController.registration(testSupervisor, testUser,
+          url: 'https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php',
+          url2: 'https://lamp.ms.wits.ac.za/~s1611821/register_user.php'),
+          "Supervisor successfully registered!");
+
+      //userLogin
+      expect(await userController.login(testUser.email, testUser.password,
+          url: "https://lamp.ms.wits.ac.za/~s1611821/login.php",
+          url2: '"https://lamp.ms.wits.ac.za/~s1611821/getTaskStatuses.php',
+          url3: 'https://lamp.ms.wits.ac.za/~s1611821/getAssignmentTypes.php',
+          url4: 'https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php'
+      ), false);
+
 //      //userExists
 //      expect(await userController.userExists(testUser.email,url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"), isNotNull);
 //
@@ -126,6 +129,7 @@ void main(){
 //          "No such user exists!");
 //    });
 //
-//  });
+    });
+  });
 
 }

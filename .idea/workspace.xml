@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/ControllerTests/ProjectBoardCtrl_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,7 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.ReadBoards Assignment">
+  <component name="RunManager" selected="Flutter Test.Supervisor Login">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
@@ -82,10 +79,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.Supervisor Login" />
         <item itemvalue="Flutter Test.ReadBoards Assignment" />
         <item itemvalue="Flutter Test.Shared Boards" />
         <item itemvalue="Flutter Test.Test Supervisor user" />
-        <item itemvalue="Flutter Test.Supervisor Login" />
         <item itemvalue="Flutter Test.Read users" />
       </list>
     </recent_temporary>
