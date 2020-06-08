@@ -95,10 +95,10 @@ void main(){
       SupervisorController supervisorController = new SupervisorController();
 
       //userRegistration
-      expect(await supervisorController.registration(testSupervisor, testUser,
-          url: 'https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php',
-          url2: 'https://lamp.ms.wits.ac.za/~s1611821/register_user.php'),
-          "Supervisor successfully registered!");
+//      expect(await supervisorController.registration(testSupervisor, testUser,
+//          url: 'https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php',
+//          url2: 'https://lamp.ms.wits.ac.za/~s1611821/register_user.php'),
+//          "Supervisor successfully registered!");
 
       //userLogin
 //      expect(await userController.login(testUser.email, testUser.password,
@@ -108,22 +108,22 @@ void main(){
 //          url4: 'https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php'
 //      ), false);
 
-//      //userExists
-//      expect(await userController.userExists(testUser.email,url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"), isNotNull);
-//
-//      //getUser
-//      expect(await userController.getUser(testUser.email,url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"), isNotNull);
-//
-//      //userResetPassword
-//      expect(await userController.ResetPassword('1431795@students.wits.ac.za',"password123",url:"https://lamp.ms.wits.ac.za/~s1611821/ResetPassword.php"),
-//          "Successfully updated password!");
-//
-//      //ReadUsers
-//      expect(userController.ReadUsers(url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"), isNotNull);
-//
-//      //userLogin with invalid username
-//      expect(await userController.login('1234@students.wits.ac.za', '123456',url:"https://lamp.ms.wits.ac.za/~s1611821/login.php"),false);
-//
+      //userExists
+      expect(await userController.userExists(testUser.email,url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"), isNotNull);
+
+      //getUser
+      expect(await userController.getUser(testUser.email,url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"), isNotNull);
+
+      //userResetPassword
+      expect(await userController.ResetPassword('1431795@students.wits.ac.za',"password123",url:"https://lamp.ms.wits.ac.za/~s1611821/ResetPassword.php"),
+          "Successfully updated password!");
+
+      //ReadUsers
+      expect(userController.ReadUsers(url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"), isNotNull);
+
+      //userLogin with invalid username
+      expect(await userController.login('1234@students.wits.ac.za', '123456',url:"https://lamp.ms.wits.ac.za/~s1611821/login.php"),false);
+
 //      //userDeRegistration
 //      expect(await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php"),
 //          "No such user exists!");
