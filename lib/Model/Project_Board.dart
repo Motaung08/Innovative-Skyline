@@ -17,6 +17,9 @@ class Project_Board extends StatefulWidget {
   //Read in from the associations table to determine what should be disabled.
   int AccessLevel;
 
+  bool boardActive;
+  bool boardAssignActive;
+
   List<ListCard> boardLists=new List<ListCard>();
 
   _Project_BoardState createState() => _Project_BoardState();

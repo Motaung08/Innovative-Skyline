@@ -53,13 +53,6 @@ class ListController{
             //print("Added: "+listReceived.List_Title);
 
           }
-
-
-          /*At this point all the previously created lists have been read in from
-          the model and so the UI should then be populated.
-          */
-
-
         }
     return lists;
 

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/UserController.dart';
+import 'package:postgrad_tracker/Model/Project_Board.dart';
 
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/User.dart';
@@ -72,8 +73,9 @@ class StudentController{
     personNo=student.studentNo;
     user.boards.clear();
     Project_BoardController projectBoardController=new Project_BoardController();
-
-    user.boards=await projectBoardController.ReadBoards(user.userTypeID,student.studentNo,url:url2);
+    List<List<Project_Board>> allBoards=await projectBoardController.ReadBoards(user.userTypeID,student.studentNo,url:url2);
+    user.boards=allBoards[0];
+    user.archivedBoards=allBoards[1];
 
   }
 

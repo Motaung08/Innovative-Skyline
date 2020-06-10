@@ -18,6 +18,7 @@ import 'package:postgrad_tracker/Model/StudentType.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/TaskStatus.dart';
 import 'package:postgrad_tracker/Model/User.dart';
+import 'package:postgrad_tracker/View/ArchivedBoards.dart';
 import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/View/Login.dart';
@@ -57,7 +58,8 @@ TaskController taskController = new TaskController();
 
 //ProjectBoardView
 HomePage homePage = new HomePage();
-Board boardPage = new Board();
+ArchivedBoards archivedBoards=new ArchivedBoards();
+Board boardPage=new Board();
 
 String personNo = "";
 
@@ -70,28 +72,15 @@ class MyApp extends StatelessWidget {
     //boardPage.populateListDisplay(55);
 
     return MaterialApp(
-//      builder: (context, widget) => ResponsiveWrapper.builder(
-//        BouncingScrollWrapper.builder(context, widget),
-//        maxWidth: 1200,
-//        minWidth: 450,
-//        defaultScale: true,
-//        breakpoints: [
-//          ResponsiveBreakpoint.resize(450, name: MOBILE),
-//          ResponsiveBreakpoint.autoScale(800, name: TABLET),
-//          ResponsiveBreakpoint.autoScale(1000, name: TABLET),
-//          ResponsiveBreakpoint.resize(1200, name: DESKTOP),
-//          ResponsiveBreakpoint.autoScale(2460, name: "4K"),
-//        ],
-//
-//      ),
 
       title: 'Postgraduate Tracker',
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
-        //'/': (context) => new LoginPage(),
+
         '/Login': (context) => new LoginPage(),
         '/Home': (context) => homePage,
+        '/Archived': (context) => archivedBoards,
         //'/Home': (context) => new HomePage(email: student.email, userType: user.userTypeID),
         '/StudProfile': (BuildContext context) => new ViewStudentProfilePage(),
 //        new ViewStudentProfilePage(user: user,),

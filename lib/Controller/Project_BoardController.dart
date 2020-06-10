@@ -54,8 +54,10 @@ class Project_BoardController {
   associated with the specified user.
    */
   // ignore: non_constant_identifier_names
-  Future<List<Project_Board>> ReadBoards(int UserTypeID, String personNo,{url='http://10.100.15.38/ReadBoards.php'}) async{
+  Future<List<List<Project_Board>>> ReadBoards(int UserTypeID, String personNo,{url='http://10.100.15.38/ReadBoards.php'}) async{
     List<Project_Board> boards=List();
+    List<Project_Board> archivedBoards=List();
+    List<List<Project_Board>> allBoards=new List<List<Project_Board>>();
 
 
         // SERVER API URL
@@ -75,6 +77,7 @@ class Project_BoardController {
         // Getting Server response into variable.
         // ignore: non_constant_identifier_names
         var Response = jsonDecode(response.body);
+
         print(Response);
 
         String msg='';
@@ -91,6 +94,18 @@ class Project_BoardController {
             boardReceived.ProjectID = int.parse(Response[i]['ProjectID']);
             boardReceived.Project_Title = Response[i]['Project_Title'];
             boardReceived.Project_Description = Response[i]['Project_Description'];
+            if(Response[i]['BoardActive']=='1'){
+              boardReceived.boardActive=true;
+            }
+            else{
+              boardReceived.boardActive=false;
+            }
+            if(Response[i]['AssignmentActive']=='1'){
+              boardReceived.boardAssignActive=true;
+            }
+            else{
+              boardReceived.boardAssignActive=false;
+            }
             if(Response[i]['AccessLevelID']!=null){
               boardReceived.AccessLevel=int.parse(Response[i]['AccessLevelID']);
             }
@@ -103,9 +118,32 @@ class Project_BoardController {
               boardReceived.Project_EndDate=DateTime.parse(Response[i]['Project_EndDate']);
             }
 
-            //boardReceived.boardLists=await listController.ReadLists(boardReceived.ProjectID);
+            print("Board: "+boardReceived.Project_Title+" has a board status of: "+boardReceived.boardActive.toString()+" and an assignment status of: "+boardReceived.boardAssignActive.toString());
+            if(boardReceived.boardActive){
+              if(boardReceived.boardAssignActive==true){
 
-            boards.add(boardReceived);
+                boards.add(boardReceived);
+              }
+              else{
+                archivedBoards.add(boardReceived);
+              }
+            }else if (boardReceived.boardActive==false && boardReceived.AccessLevel==4){
+              print("Ere for board: "+boardReceived.Project_Title);
+              //board is currently archived for everyone
+              if(boardReceived.boardAssignActive==false){
+                archivedBoards.add(boardReceived);
+                print(boardReceived.Project_Title+" add to archive");
+              }
+              else{
+                boards.add(boardReceived);
+                print(boardReceived.Project_Title+" add to board recieved");
+              }
+
+            }
+
+
+            allBoards.add(boards);
+            allBoards.add(archivedBoards);
             //user.boards.add(boardReceived);
             //user.boards[i].boardLists=await listController.ReadLists(boardReceived.ProjectID);
           }
@@ -114,7 +152,7 @@ class Project_BoardController {
 
         }
     print(msg);
-    return boards;
+    return allBoards;
   }
 
   /*
@@ -158,6 +196,53 @@ class Project_BoardController {
     // Getting Server response into variable.
     var message = jsonDecode(response.body);
 
+    return message;
+  }
+
+  Future<String> archiveBoard(int projectID, bool active) async {
+    String url='http://10.100.15.38/ArchiveBoard.php';
+    int archived;
+    if(active==true){
+      archived=1;
+    }else{
+      archived=0;
+    }
+    var data = {
+      'BoardID': projectID,
+      'Archived' : archived.toString(),
+    };
+
+    // Starting Web API Call.
+    var response = await http.post(url, body: json.encode(data));
+
+    // Getting Server response into variable.
+    var message = jsonDecode(response.body);
+
+    return message;
+  }
+
+  Future<String> archiveAssignment(int userTypeID, String personNum, int projectID, bool active) async {
+    String url='http://10.100.15.38/ArchiveAssignment.php';
+    int archived;
+    if(active==true){
+      archived=1;
+    }else{
+      archived=0;
+    }
+
+    var data = {
+      'BoardID': projectID,
+      'UserTypeID' : userTypeID.toString(),
+      'personNo' : personNum,
+      'Archived' : archived.toString(),
+    };
+    //print("MESSAGE: "+data.toString());
+    // Starting Web API Call.
+    var response = await http.post(url, body: json.encode(data));
+
+    // Getting Server response into variable.
+    var message = jsonDecode(response.body);
+    //print("MESSAGE: "+message.toString());
     return message;
   }
 

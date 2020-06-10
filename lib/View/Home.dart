@@ -12,17 +12,24 @@ import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
+import 'package:postgrad_tracker/View/ArchivedBoards.dart';
 import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/main.dart';
 
-final List<DynamicWidget> listDynamic = [];
-
 class HomePage extends StatefulWidget {
-  initializeDisplay() async {
+  final List<DynamicWidget> listDynamic=new List<DynamicWidget>();
+  Future initialize() async{
     Project_BoardController projectBoardController=new Project_BoardController();
-    user.boards= await projectBoardController.ReadBoards(user.userTypeID,personNo);
+    List<List<Project_Board>> allBoards=await projectBoardController.ReadBoards(user.userTypeID,personNo);
+    user.boards= allBoards[0];
+    user.archivedBoards=allBoards[1];
+
+    //print("Active boards: "+user.boards.length.toString());
+  }
+  Future initializeDisplay() async {
+    await initialize();
     listDynamic.clear();
-    print('Initializing board display! ##################');
+    print('Initializing board display! ################## in list dynamic: '+listDynamic.length.toString());
     for (int i = 0; i < user.boards.length; i++) {
       print("Board ID: "+user.boards[i].ProjectID.toString()+", Title: "+user.boards[i].Project_Title);
       listDynamic.add(new DynamicWidget(aboard: user.boards[i]));
@@ -256,7 +263,9 @@ class _MyHomePageState extends State<HomePage> {
                       projectBoard.Project_EndDate = _endDate;
                       //print("Person: "+personNo);
                       await projectBoardController.createBoard(projectBoard,user.userTypeID,personNo);
-                      user.boards=await projectBoardController.ReadBoards(user.userTypeID, personNo);
+                      List<List<Project_Board>> allBoards=await projectBoardController.ReadBoards(user.userTypeID, personNo);
+                      user.boards=allBoards[0];
+                      user.archivedBoards=allBoards[1];
                       projectBoard=user.boards.last;
                       addDynamic(projectBoard);
                       boardTitle = "";
@@ -277,13 +286,13 @@ class _MyHomePageState extends State<HomePage> {
   Icon floatingIcon = new Icon(Icons.add);
 
   addDynamic(Project_Board givenBoard) {
-    listDynamic.add(new DynamicWidget(aboard: givenBoard));
+    widget.listDynamic.add(new DynamicWidget(aboard: givenBoard));
   }
 
   signout() {
     degrees.clear();
     studentTypes.clear();
-    listDynamic.clear();
+    widget.listDynamic.clear();
 
     user = new User();
     supervisor = new Supervisor();
@@ -301,6 +310,7 @@ class _MyHomePageState extends State<HomePage> {
 
   TextStyle style = TextStyle(
       fontFamily: 'Montserrat', fontSize: 20.0, color: (Colors.white));
+bool _viewArchived=false;
   @override
   Widget build(BuildContext context) {
 
@@ -309,8 +319,8 @@ class _MyHomePageState extends State<HomePage> {
       margin: new EdgeInsets.all(10.0),
       //height: MediaQuery.of(context).size.height,
       child: ListView.builder(
-        itemCount: listDynamic.length,
-        itemBuilder: (_, index) => listDynamic[index],
+        itemCount: widget.listDynamic.length,
+        itemBuilder: (_, index) => widget.listDynamic[index],
       ),
     );
 
@@ -371,7 +381,6 @@ class _MyHomePageState extends State<HomePage> {
     );
 
     return Scaffold(
-      //
       appBar: AppBar(
         title: Text("Innovative Skyline"),
         backgroundColor: Color(0xff009999),
@@ -420,6 +429,18 @@ class _MyHomePageState extends State<HomePage> {
               },
             ),
             ListTile(
+              title: Text('Archived Boards',
+                  style: TextStyle(
+                      color: Color(0xff009999), fontWeight: FontWeight.bold)),
+              onTap: () async {
+                await archivedBoards.initializeDisplay();
+                setState(() {
+
+                  Navigator.pushNamed(context, '/Archived');
+                });
+              },
+            ),
+            ListTile(
               title: Text('Sign Out',
                   style: TextStyle(
                       color: Color(0xff009999), fontWeight: FontWeight.bold)),
@@ -427,6 +448,7 @@ class _MyHomePageState extends State<HomePage> {
                 signout();
               },
             ),
+
           ],
         ),
       ),
@@ -457,14 +479,8 @@ class _DynamicWidgetState extends State<DynamicWidget> {
 
   // ignore: missing_return
   int getBoardIndex(int boardID) {
-    //print("BOARD ID: "+boardID.toString());
-    //print("getting board index ... ugh");
     for (int i = 0; i < user.boards.length; i++) {
-      //print("looking...............");
-      //print("Board ID: "+user.boards[i].ProjectID.toString()+" our ID: "+boardID.toString() );
-
       if (user.boards[i].ProjectID == boardID) {
-        //print("BOARD INDEX: "+i.toString());
         return i;
       }
     }
@@ -579,8 +595,6 @@ class _DynamicWidgetState extends State<DynamicWidget> {
 
 
                     listDynamic.removeAt(boardIndex);
-                    //user.boards.removeAt(boardIndex);
-                    //homePage=new HomePage();
                     homePage.initializeDisplay();
                     Navigator.pop(context);
                     Navigator.push(
@@ -665,7 +679,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                             margin: EdgeInsets.all(10),
                             child: TextFormField(
                               controller: descriptionController,
-                              maxLines: 5,
+                              maxLines: 4,
                               decoration: InputDecoration(
                                 //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                 //hintText: "Description",
@@ -789,10 +803,11 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                     ),
                                   )),
                             ],
-                          )
+                          ),
                         ],
                       ),
-                    )),
+                    )
+                ),
                 actions: <Widget>[
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -867,13 +882,12 @@ class _DynamicWidgetState extends State<DynamicWidget> {
           },
         ),
         onTap: () async {
-          print("BOARD: "+widget.aboard.ProjectID.toString());
+//          print("BOARD: "+widget.aboard.ProjectID.toString());
           await widget.popLists();
-          print("LISTS IS NULL: "+(widget.aboard.boardLists==null).toString());
-          //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
-          Board boardPage = new Board(
-            proj_board: widget.aboard,
-          );
+
+          Board boardPage = new Board();
+          boardPage.proj_board=widget.aboard;
+
           await boardPage.populateListDisplay(widget.aboard.ProjectID);
 
 

@@ -18,19 +18,31 @@ import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/Task.dart';
 import 'package:postgrad_tracker/Model/TaskStatus.dart';
 import 'package:postgrad_tracker/Model/User.dart';
+import 'package:postgrad_tracker/View/ArchivedBoards.dart';
 import 'package:postgrad_tracker/View/profile/student/ViewStudentProfile.dart';
 import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:hints/hints.dart';
+
+bool isArch(int ProjectID){
+  if(user.archivedBoards.where((element) => element.ProjectID==ProjectID).isNotEmpty){
+    return true;
+  }else{
+    return false;
+  }
+}
 
 List<StaggeredTile> stiles = new List<StaggeredTile>();
 List<DynamicList> listDynamic = [];
 // ignore: non_constant_identifier_names
-
+enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
 // ignore: must_be_immutable
 class Board extends StatefulWidget {
+  //1713445@students.wits.ac.za
+
   // ignore: non_constant_identifier_names
-  final Project_Board proj_board;
+  Project_Board proj_board;
   // ignore: non_constant_identifier_names
   Board({Key key, this.proj_board}) : super(key: key);
 
@@ -41,84 +53,142 @@ class Board extends StatefulWidget {
     int boardIndex;
     // int testVal;
     void getIndexes() {
-      for (int i = 0; i < user.boards.length; i++) {
-        if (user.boards[i].ProjectID == ProjectID) {
-          boardIndex = i;
+      bool _isArch=isArch(proj_board.ProjectID);
+      if(_isArch){
+        for (int i = 0; i < user.archivedBoards.length; i++) {
+          if (user.archivedBoards[i].ProjectID == ProjectID) {
+            boardIndex = i;
+          }
+        }
+      }else{
+        for (int i = 0; i < user.boards.length; i++) {
+          if (user.boards[i].ProjectID == ProjectID) {
+            boardIndex = i;
+          }
         }
       }
+
     }
 
     getIndexes();
     // items.clear();
-    user.boards[boardIndex].boardLists =
-        await listController.ReadLists(ProjectID);
+    bool _isArch=isArch(proj_board.ProjectID);
+    if(_isArch){
+      user.archivedBoards[boardIndex].boardLists =
+      await listController.ReadLists(ProjectID);
 
-    if (user.boards[boardIndex].boardLists != null) {
-      print('Initializing board\'s list display! ##################');
-      stiles.clear();
-      listDynamic.clear();
-      int crossCount=kIsWeb==true?1:2;
-      for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-        double mainAxis=0.5;
-        for(int m=0;m<user.boards[boardIndex].boardLists[i].listTasks.length;m++){
-          double addNum= kIsWeb==true? .225 : .52;
-          mainAxis+=addNum;
+      if (user.archivedBoards[boardIndex].boardLists != null) {
+        print('Initializing archived board\'s list display! ##################');
+        stiles.clear();
+        listDynamic.clear();
+        int crossCount = kIsWeb == true ? 1 : 2;
+        for (int i = 0; i < user.archivedBoards[boardIndex].boardLists.length; i++) {
+          double mainAxis = 0.5;
+          for (int m = 0;
+          m < user.archivedBoards[boardIndex].boardLists[i].listTasks.length;
+          m++) {
+            double addNum = kIsWeb == true ? .225 : .52;
+            mainAxis += addNum;
+          }
+          DynamicList dynamicCreatedList =
+          new DynamicList(aList: user.archivedBoards[boardIndex].boardLists[i]);
+
+          listDynamic.add(dynamicCreatedList);
+
+          stiles.add(StaggeredTile.count(
+              1,
+              kIsWeb == false
+                  ? user.archivedBoards[boardIndex].boardLists[i].listTasks.length + 1.3
+                  : mainAxis));
         }
-        DynamicList dynamicCreatedList =
-            new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
 
-        listDynamic.add(dynamicCreatedList);
+      }
 
-        stiles.add(StaggeredTile.count(
-            1,kIsWeb==false?
-        user.boards[boardIndex].boardLists[i].listTasks.length+1.3 :
-        mainAxis));
+    }else{
+      user.boards[boardIndex].boardLists =
+      await listController.ReadLists(ProjectID);
+
+      if (user.boards[boardIndex].boardLists != null) {
+        print('Initializing board\'s list display! ##################');
+        stiles.clear();
+        listDynamic.clear();
+        int crossCount = kIsWeb == true ? 1 : 2;
+        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+          double mainAxis = 0.5;
+          for (int m = 0;
+          m < user.boards[boardIndex].boardLists[i].listTasks.length;
+          m++) {
+            double addNum = kIsWeb == true ? .225 : .52;
+            mainAxis += addNum;
+          }
+          DynamicList dynamicCreatedList =
+          new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
+
+          listDynamic.add(dynamicCreatedList);
+
+          stiles.add(StaggeredTile.count(
+              1,
+              kIsWeb == false
+                  ? user.boards[boardIndex].boardLists[i].listTasks.length + 1.3
+                  : mainAxis));
+        }
       }
     }
+
+
+
   }
-
-
 
   @override
   _BoardState createState() => _BoardState();
 }
 
 class _BoardState extends State<Board> {
-
-
-
-
   // ignore: missing_return, non_constant_identifier_names
   int getBoardIndex(int BoardID) {
-    for (int i = 0; i < user.boards.length; i++) {
-      if (user.boards[i].ProjectID == BoardID) {
-        return i;
+    bool _isArch=isArch(widget.proj_board.ProjectID);
+    print("...................................................................................... "+_isArch.toString());
+    if(_isArch){
+      print("Getting archived index");
+      for (int i = 0; i < user.archivedBoards.length; i++) {
+        if (user.archivedBoards[i].ProjectID == BoardID) {
+          return i;
+        }
+      }
+    }else{
+      for (int i = 0; i < user.boards.length; i++) {
+        if (user.boards[i].ProjectID == BoardID) {
+          return i;
+        }
       }
     }
+
   }
 
-  Future initializeAssignmentTypes () async {
-
-    _dropdownAssignmentTypeMenuItems = buildDropdownAssignmentTypeMenuItems(_assignmentType);
+  Future initializeAssignmentTypes() async {
+    _dropdownAssignmentTypeMenuItems =
+        buildDropdownAssignmentTypeMenuItems(_assignmentType);
     _selectedAssignmentType = _dropdownAssignmentTypeMenuItems[0].value;
-    setState(() {
-
-    });
-
+    setState(() {});
   }
 
   List<AssignmentType> _assignmentType = assignmentTypes;
   List<DropdownMenuItem<AssignmentType>> _dropdownAssignmentTypeMenuItems;
   AssignmentType _selectedAssignmentType;
 
-  List<DropdownMenuItem<AssignmentType>> buildDropdownAssignmentTypeMenuItems(List types) {
+  List<DropdownMenuItem<AssignmentType>> buildDropdownAssignmentTypeMenuItems(
+      List types) {
     List<DropdownMenuItem<AssignmentType>> items = List();
     for (AssignmentType type in types) {
       items.add(
         DropdownMenuItem(
           value: type,
-          child: Text(type.assignmentTypeText, style: TextStyle(color: Colors.grey,fontFamily: 'Montserrat', fontSize: 20.0),overflow: TextOverflow.ellipsis,),
-
+          child: Text(
+            type.assignmentTypeText,
+            style: TextStyle(
+                color: Colors.grey, fontFamily: 'Montserrat', fontSize: 20.0),
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       );
     }
@@ -131,42 +201,70 @@ class _BoardState extends State<Board> {
     });
   }
 
-
   void pop() {
-    print("**POP**");
+
     stiles.clear();
     int boardIndex = getBoardIndex(widget.proj_board.ProjectID);
 
     listDynamic.clear();
-    if (user.boards[boardIndex].boardLists != null) {
+    bool _isArch=isArch(widget.proj_board.ProjectID);
+    if(_isArch){
+      print("**POP** archived");
+      if (user.archivedBoards[boardIndex].boardLists != null) {
+        for (int i = 0; i < user.archivedBoards[boardIndex].boardLists.length; i++) {
+          double mainAxis = 0.5;
+          DynamicList dynamicCreatedList =
+          new DynamicList(aList: user.archivedBoards[boardIndex].boardLists[i]);
+          //print("ARCHIVED BOARD LIST TITLE: "+user.archivedBoards[boardIndex].boardLists[i].List_Title);
+          listDynamic.add(dynamicCreatedList);
+          if (user.archivedBoards[boardIndex].boardLists[i].listTasks.length == 0) {
+            stiles.add(StaggeredTile.count(1, kIsWeb == true ? .8 : 1.5));
+            //stiles.add(StaggeredTile.count(1, .8));
+          } else {
 
-      for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-        double mainAxis=0.5;
-        DynamicList dynamicCreatedList =
-            new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
-
-        listDynamic.add(dynamicCreatedList);
-        if (user.boards[boardIndex].boardLists[i].listTasks.length == 0) {
-          stiles.add(StaggeredTile.count(1, kIsWeb==true? .8:1.5));
-          //stiles.add(StaggeredTile.count(1, .8));
-        } else {
-          print("LENGTH: "+user.boards[boardIndex].boardLists[i].listTasks.length.toString());
-          for(int m=0;m<user.boards[boardIndex].boardLists[i].listTasks.length;m++){
-            double addNum= kIsWeb==true? .225 : .52;
-            mainAxis+=addNum;
-
+            for (int m = 0;
+            m < user.archivedBoards[boardIndex].boardLists[i].listTasks.length;
+            m++) {
+              double addNum = kIsWeb == true ? .225 : .52;
+              mainAxis += addNum;
+            }
+            //mainAxis+=user.boards[boardIndex].boardLists[i].listTasks.length;
+            stiles.add(StaggeredTile.count(1, mainAxis));
           }
-          //mainAxis+=user.boards[boardIndex].boardLists[i].listTasks.length;
-          stiles.add(
-              StaggeredTile.count(
-                  1
-              ,
-              mainAxis
-          )
-          );
+        }
+      }
+
+    }
+    else{
+      print("**POP** active");
+      if (user.boards[boardIndex].boardLists != null) {
+        print("USER BOARDS LISTS: "+user.boards[boardIndex].boardLists.length.toString());
+        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+          double mainAxis = 0.5;
+          DynamicList dynamicCreatedList =
+          new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
+
+          listDynamic.add(dynamicCreatedList);
+          if (user.boards[boardIndex].boardLists[i].listTasks.length == 0) {
+            stiles.add(StaggeredTile.count(1, kIsWeb == true ? .8 : 1.5));
+            //stiles.add(StaggeredTile.count(1, .8));
+          } else {
+            print("LENGTH: " +
+                user.boards[boardIndex].boardLists[i].listTasks.length
+                    .toString());
+            for (int m = 0;
+            m < user.boards[boardIndex].boardLists[i].listTasks.length;
+            m++) {
+              double addNum = kIsWeb == true ? .225 : .52;
+              mainAxis += addNum;
+            }
+            //mainAxis+=user.boards[boardIndex].boardLists[i].listTasks.length;
+            stiles.add(StaggeredTile.count(1, mainAxis));
+          }
         }
       }
     }
+
   }
 
   @override
@@ -175,6 +273,7 @@ class _BoardState extends State<Board> {
     initializeAssignmentTypes();
     //widget.populateListDisplay(widget.proj_board.ProjectID);
     pop();
+
   }
 
   TextEditingController titleController = new TextEditingController();
@@ -196,6 +295,10 @@ class _BoardState extends State<Board> {
   bool ChangedEnd = false;
   // ignore: non_constant_identifier_names
   bool ChangedBoardValue;
+
+
+
+
   Future<Null> selectStartDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
@@ -237,7 +340,7 @@ class _BoardState extends State<Board> {
   // ignore: non_constant_identifier_names
   Project_BoardController project_boardController =
       new Project_BoardController();
-
+  bool _isDeleted = false;
   Future<String> confirmBoardDeleteAlertDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -245,13 +348,12 @@ class _BoardState extends State<Board> {
           return AlertDialog(
             title: Text(
               "CONFIRM DELETE ",
-              style:
-              TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
             ),
             content: Text(
               "Are you sure you want to delete this board?",
               style:
-              TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
             ),
             actions: <Widget>[
               MaterialButton(
@@ -261,17 +363,39 @@ class _BoardState extends State<Board> {
                   style: TextStyle(color: Colors.red),
                 ),
                 onPressed: () async {
-                  await project_boardController.deleteBoard(widget.proj_board.ProjectID);
+                  Project_BoardController projectBoardController =
+                      new Project_BoardController();
 
-                            //listDynamic.removeAt(boardIndex);
-                            await homePage.initializeDisplay();
-                            Navigator.pop(context);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) => homePage),
-                            );
-                            setState(() {});
+                  //1713445@students.wits.ac.za
+                  await projectBoardController
+                      .deleteBoard(widget.proj_board.ProjectID);
+                  ArchivedBoards archivedBoards=new ArchivedBoards();
+                  if(isArch(widget.proj_board.ProjectID)){
+                    await archivedBoards.initializeDisplay();
+
+                    setState(() {
+                      _isDeleted = true;
+                    });
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => archivedBoards),
+                    );
+                  }else{
+                    await homePage.initializeDisplay();
+
+                    setState(() {
+                      _isDeleted = true;
+                    });
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => homePage),
+                    );
+                  }
+
                 },
               ),
               MaterialButton(
@@ -323,7 +447,6 @@ class _BoardState extends State<Board> {
                         Container(
                           margin: EdgeInsets.all(10),
                           child: TextFormField(
-
                             controller: titleController,
                             decoration: InputDecoration(
                                 //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -488,8 +611,6 @@ class _BoardState extends State<Board> {
                           ),
                           onPressed: () async {
                             await confirmBoardDeleteAlertDialog(context);
-
-
                           },
                         )),
                     Container(
@@ -550,23 +671,31 @@ class _BoardState extends State<Board> {
                 onPressed: () async {
                   //listTitle.text = "";
                   if (_formKey.currentState.validate()) {
-                    print('BEFORE LISTS: ' +
-                        user.boards[getBoardIndex(widget.proj_board.ProjectID)]
-                            .boardLists.length
-                            .toString());
-                    ListCard newList = new ListCard();
-                    newList.List_Title = listTitle.text;
-                    newList.ProjectID = widget.proj_board.ProjectID;
-                    await listController.createList(newList);
-                    user.boards[getBoardIndex(widget.proj_board.ProjectID)]
-                            .boardLists =
-                        await listController.ReadLists(
-                            widget.proj_board.ProjectID);
-                    print('AFTER LISTS: ' +
-                        user.boards[getBoardIndex(widget.proj_board.ProjectID)]
-                            .boardLists.length
-                            .toString());
-                    Navigator.pop(context);
+                    bool _isArchived=isArch(widget.proj_board.ProjectID);
+                    if(_isArchived==false){
+                      ListCard newList = new ListCard();
+                      newList.List_Title = listTitle.text;
+                      newList.ProjectID = widget.proj_board.ProjectID;
+                      await listController.createList(newList);
+                      user.boards[getBoardIndex(widget.proj_board.ProjectID)]
+                          .boardLists =
+                      await listController.ReadLists(
+                          widget.proj_board.ProjectID);
+
+                      Navigator.pop(context);
+                    }else{
+                      ListCard newList = new ListCard();
+                      newList.List_Title = listTitle.text;
+                      newList.ProjectID = widget.proj_board.ProjectID;
+                      await listController.createList(newList);
+                      user.archivedBoards[getBoardIndex(widget.proj_board.ProjectID)]
+                          .boardLists =
+                      await listController.ReadLists(
+                          widget.proj_board.ProjectID);
+
+                      Navigator.pop(context);
+                    }
+
                   }
                 },
               )
@@ -592,71 +721,217 @@ class _BoardState extends State<Board> {
   TextEditingController emailController = new TextEditingController();
   GlobalKey<FormState> _key = new GlobalKey();
 
+  bool _isShareDisabled = false;
+  bool _isEditDisabled = false;
+  bool _isOwner = false;
+ // bool _isArchived = false;
 
-  bool _isShareDisabled=false;
-  bool _isEditDisabled=false;
-  bool _isOwner=false;
-  determineAccess(){
-    Project_Board pb=user.boards[getBoardIndex(widget.proj_board.ProjectID)];
-    //print("ACCESS LEVEL: "+pb.AccessLevel.toString());
-    if(pb.AccessLevel==null || pb.AccessLevel==1) {
-      //Full admin
-      _isShareDisabled = false;
-      _isEditDisabled = false;
-    }
-    else if(pb.AccessLevel==2){
-      //Can edit but not share
-      _isShareDisabled = true;
-      _isEditDisabled = false;
-    }else if (pb.AccessLevel==3){
-      //Can only view
-      _isShareDisabled = true;
-      _isEditDisabled = true;
-    }
-    else if(pb.AccessLevel==4){
-      //Owner
-      _isShareDisabled=false;
-      _isEditDisabled=false;
-      _isOwner=true;
+  determineAccess() {
+    if (_isDeleted == false) {
+      Project_Board pb;
+      bool _isArchived=isArch(widget.proj_board.ProjectID);
+      if(_isArchived){
+         pb =
+        user.archivedBoards[getBoardIndex(widget.proj_board.ProjectID)];
+         _isShareDisabled = true;
+         _isEditDisabled = true;
+         if(pb.AccessLevel==4){
+           //print("Owner");
+           _isOwner=true;
+         }
+      }else{
+        pb =
+        user.boards[getBoardIndex(widget.proj_board.ProjectID)];
+
+        //print("ACCESS LEVEL: "+pb.AccessLevel.toString());
+        if (pb.AccessLevel == null || pb.AccessLevel == 1) {
+          //Full admin
+          _isShareDisabled = false;
+          _isEditDisabled = false;
+        } else if (pb.AccessLevel == 2) {
+          //Can edit but not share
+          _isShareDisabled = true;
+          _isEditDisabled = false;
+        } else if (pb.AccessLevel == 3) {
+          //Can only view
+          _isShareDisabled = true;
+          _isEditDisabled = true;
+        } else if (pb.AccessLevel == 4) {
+          //Owner
+          _isShareDisabled = false;
+          _isEditDisabled = false;
+          _isOwner = true;
+        }
+      }
+
 
     }
+
     //print("OWNER? "+_isOwner.toString());
   }
 
-
-
-  AssignmentController assignmentController=new AssignmentController();
-  List<List> sharedWithList=new List<List>();
+  AssignmentController assignmentController = new AssignmentController();
+  List<List> sharedWithList = new List<List>();
   List<Student> studentList;
   List<Supervisor> supList;
-  getShared() async{
+  getShared() async {
     sharedWithList.clear();
-    sharedWithList= await assignmentController.ReadBoardAssignments(widget.proj_board.ProjectID);
+    sharedWithList = await assignmentController.ReadBoardAssignments(
+        widget.proj_board.ProjectID);
 
     //print("students!=null? "+(studentList!=[]).toString());
     setState(() {
-      studentList=sharedWithList[0];
-      supList=sharedWithList[1];
+      studentList = sharedWithList[0];
+      supList = sharedWithList[1];
     });
   }
 
+  final ScrollController _scrollController = ScrollController();
 
-  final ScrollController _scrollController=ScrollController();
+  Future choiceAction(String choice) async {
+    if (choice == Constants.ArchiveForMe) {
+      print("Archive for me");
+      /*
+      Set AssignActive=true in the Assignment table.
+       */
+      String result = await project_boardController.archiveAssignment(
+          user.userTypeID, personNo, widget.proj_board.ProjectID, false);
+      if (result == "Updated AssignmentActive") {
+
+        await homePage.initializeDisplay();
+        setState(() {
+          _isDeleted = true;
+        });
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => homePage),
+        );
+        setState(() {});
+      } else {
+        await errorAlertDialog();
+      }
+    }
+    else if (choice == Constants.ArchiveForEveryone) {
+      print("Archive for everyone");
+      /*
+      Set BoardActive=true in the Project_Board table.
+       */
+      String result = await project_boardController.archiveBoard(
+          widget.proj_board.ProjectID, false);
+      print("RESULT: "+result);
+      if (result == "Updated BoardActive") {
+        print("Archived board");
+        String result = await project_boardController.archiveAssignment(
+            user.userTypeID, personNo, widget.proj_board.ProjectID, false);
+        if (result == "Updated AssignmentActive") {
+          print("Archived board asignment");
+          await homePage.initializeDisplay();
+          setState(() {
+            _isDeleted = true;
+          });
+          Navigator.pop(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => homePage),
+          );
+          setState(() {});
+        } else {
+          await errorAlertDialog();
+        }
+      } else {
+        await errorAlertDialog();
+      }
+    }
+
+    if (choice == Constants.UnArchiveForEveryone){
+      String result = await project_boardController.archiveBoard(
+          widget.proj_board.ProjectID, true);
+      if (result == "Updated BoardActive") {
+
+        String result = await project_boardController.archiveAssignment(
+            user.userTypeID, personNo, widget.proj_board.ProjectID, true);
+        if (result == "Updated AssignmentActive") {
+
+          ArchivedBoards archivedBoards=new ArchivedBoards();
+          await archivedBoards.initializeDisplay();
+          setState(() {
+            _isDeleted = true;
+          });
+          Navigator.pop(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (BuildContext context) => archivedBoards),
+          );
+          setState(() {});
+        } else {
+          await errorAlertDialog();
+        }
+      } else {
+        await errorAlertDialog();
+      }
+    }
+    if (choice == Constants.UnArchiveForMe){
+      String result = await project_boardController.archiveAssignment(
+          user.userTypeID, personNo, widget.proj_board.ProjectID, true);
+      if (result == "Updated AssignmentActive") {
+
+        ArchivedBoards archivedBoards=new ArchivedBoards();
+        await archivedBoards.initializeDisplay();
+        setState(() {
+          _isDeleted = true;
+        });
+        Navigator.pop(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (BuildContext context) => archivedBoards),
+        );
+        setState(() {});
+      } else {
+        await errorAlertDialog();
+      }
+    }
+
+    if (choice == Constants.Delete) {
+      await confirmBoardDeleteAlertDialog(context);
+    }
+  }
+
+  Future errorAlertDialog() {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              "Error",
+              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+            ),
+            content: Text("There was an error processing your request."),
+            actions: [
+              MaterialButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
-
-  determineAccess();
-    Icon viewIcon=Icon(Icons.account_circle);
+    determineAccess();
+    Icon viewIcon = Icon(Icons.account_circle);
     final dropdownAssignmentType = new SizedBox(
-
-      child:StatefulBuilder(
-        builder: (context,setState){
-          return  Container(
+      child: StatefulBuilder(
+        builder: (context, setState) {
+          return Container(
             // padding: EdgeInsets.symmetric(horizontal: 20) ,
             decoration: ShapeDecoration(
               shape: RoundedRectangleBorder(
-                side: BorderSide(width: 1.0, style: BorderStyle.solid, color: Colors.grey),
+                side: BorderSide(
+                    width: 1.0, style: BorderStyle.solid, color: Colors.grey),
                 borderRadius: BorderRadius.all(Radius.circular(32.0)),
               ),
             ),
@@ -665,9 +940,7 @@ class _BoardState extends State<Board> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-
                 children: <Widget>[
-
                   DropdownButton(
                     value: _selectedAssignmentType,
                     items: _dropdownAssignmentTypeMenuItems,
@@ -685,80 +958,73 @@ class _BoardState extends State<Board> {
             ),
           );
         },
-
       ),
-
     );
 
-
-
-  Future viewProfileDialog(Student aViewStudent, BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            //title: Text("Shared with: "),
-            content: SingleChildScrollView(
-              child: Center(
-                child: viewStudent().getProfile(aViewStudent, context,15.0,14),
+    Future viewProfileDialog(Student aViewStudent, BuildContext context) async {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              //title: Text("Shared with: "),
+              content: SingleChildScrollView(
+                child: Center(
+                  child:
+                      viewStudent().getProfile(aViewStudent, context, 15.0, 14),
+                ),
               ),
-            ),
-            actions: [
-              MaterialButton(
-                child: Text("Ok"),
-                onPressed: (){
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
+              actions: [
+                MaterialButton(
+                  child: Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+    }
 
-          );
-        }
-    );
-  }
-
-  Future viewSupProfileDialog(Supervisor aViewSupervisor, BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            //title: Text("Shared with: "),
-            content: SingleChildScrollView(
-              child: Center(
-                child: viewSupervisor().getProfile(aViewSupervisor, context,15.0,14),
+    Future viewSupProfileDialog(
+        Supervisor aViewSupervisor, BuildContext context) async {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              //title: Text("Shared with: "),
+              content: SingleChildScrollView(
+                child: Center(
+                  child: viewSupervisor()
+                      .getProfile(aViewSupervisor, context, 15.0, 14),
+                ),
               ),
-            ),
-            actions: [
-              MaterialButton(
-                child: Text("Ok"),
-                onPressed: (){
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-
-          );
-        }
-    );
-  }
+              actions: [
+                MaterialButton(
+                  child: Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+    }
 
     Future sharedWithDialog(BuildContext context) async {
-    //print("Students? "+(studentList!=null).toString());
+      //print("Students? "+(studentList!=null).toString());
       return showDialog(
           context: context,
           builder: (context) {
             return StatefulBuilder(
-              builder: (context,setState) {
+              builder: (context, setState) {
                 return AlertDialog(
                   title: Text("Shared with: "),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-
                           decoration: BoxDecoration(
-                            border:
-                            Border.all(color: Colors.grey, width: 1),
+                            border: Border.all(color: Colors.grey, width: 1),
                             borderRadius: BorderRadius.circular(32),
                             shape: BoxShape.rectangle,
                           ),
@@ -767,120 +1033,176 @@ class _BoardState extends State<Board> {
                             //mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                "Students:", style: TextStyle(fontWeight: FontWeight.bold),
+                                "Students:",
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              studentList!=null?
-                              Container(
-                                height: MediaQuery.of(context).size.height/4,
-                                width: 400,
-                                child:  ListView.builder(
-                                    itemCount: studentList.length,
-                                    controller: _scrollController,
-                                    shrinkWrap: true,
-                                    itemBuilder: (BuildContext ctxt, int index) {
-                                      Student aStudent=studentList[index];
-                                      //print("Student in profile: "+aStudent.fName);
-                                      String fullName=(aStudent.studentNo==student.studentNo && student!=null)? aStudent.fName+" "+aStudent.lName+" (You)" : aStudent.fName+" "+aStudent.lName;
-                                      ListTile a =
-                                      _isOwner==true?
-                                      new ListTile(
-                                        title: Text(fullName),
-                                        leading: IconButton(icon: viewIcon,onPressed: () async {
-                                          await viewProfileDialog(aStudent, context);
-                                        },),
-                                        trailing: IconButton(icon: Icon(Icons.clear),onPressed: ()async {
-                                          print("DELETE...");
-                                          await assignmentController.DeleteAssignment(1, aStudent.studentNo, widget.proj_board.ProjectID);
-                                          studentList.removeWhere((element) => element.studentNo==aStudent.studentNo);
-                                          if(studentList.isEmpty){
-                                            studentList=null;
-                                          }
-                                          setState(() {
-
-                                          });
-                                        },),
-
-                                      ):
-                                      new ListTile(
-                                        title: Text(fullName),
-                                        leading: IconButton(icon: viewIcon,onPressed: () async {
-                                          await viewProfileDialog(aStudent, context);
-                                        },),
-                                      );
-                                      return a;
-                                    }
-
-                                ),
-                              )
-                                  :
-                              Text("No students are associated with this board."),
-                              Text(
-                                  "\nSupervisors:",style: TextStyle(fontWeight: FontWeight.bold)
-                              ),
-                              supList!=null?
-                              SingleChildScrollView(
-                                child: Container(
-                                  height:MediaQuery.of(context).size.height/4,
-                                  width: 400,
-                                  child: ListView.builder(
-                                      itemCount: supList.length,
-                                      itemBuilder: (BuildContext ctxt, int index) {
-                                        Supervisor aSup=supList[index];
-                                        String fullName=(aSup.staffNo==supervisor.staffNo && supervisor!=null)? aSup.fName+" "+aSup.lName +" (You)": aSup.fName+" "+aSup.lName;
-                                        //print("Sup: "+aSup.fName);
-                                        ListTile a =
-                                        _isOwner==true?
-                                        new ListTile(
-                                          title: Text(fullName),
-                                          leading: IconButton(icon: viewIcon,onPressed: () async {
-                                            await viewSupProfileDialog(aSup, context);
-                                          },),
-                                          trailing: IconButton(icon: Icon(Icons.clear),onPressed: ()async {
-                                            await assignmentController.DeleteAssignment(2, aSup.staffNo, widget.proj_board.ProjectID);
-                                            supList.removeWhere((element) => element.staffNo==aSup.staffNo);
-                                            if(supList.isEmpty){
-                                              supList=null;
-                                            }
-                                            setState(() {
-
-                                            });
-                                          },),
-
-                                        ):
-                                        new ListTile(
-                                          title: Text(fullName),
-                                          leading: IconButton(icon: viewIcon,onPressed: () async {
-                                            await viewSupProfileDialog(aSup, context);
-                                          },),
-                                        );
-                                        return a;
-                                      }
-                                  ),
-                                ),
-                              )
-                                  :
-                              Text("No supervisors are associated with this board."),
+                              studentList != null
+                                  ? Container(
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              4,
+                                      width: 400,
+                                      child: ListView.builder(
+                                          itemCount: studentList.length,
+                                          controller: _scrollController,
+                                          shrinkWrap: true,
+                                          itemBuilder:
+                                              (BuildContext ctxt, int index) {
+                                            Student aStudent =
+                                                studentList[index];
+                                            //print("Student in profile: "+aStudent.fName);
+                                            String fullName =
+                                                (aStudent.studentNo ==
+                                                            student.studentNo &&
+                                                        student != null)
+                                                    ? aStudent.fName +
+                                                        " " +
+                                                        aStudent.lName +
+                                                        " (You)"
+                                                    : aStudent.fName +
+                                                        " " +
+                                                        aStudent.lName;
+                                            ListTile a = _isOwner == true
+                                                ? new ListTile(
+                                                    title: Text(fullName),
+                                                    leading: IconButton(
+                                                      icon: viewIcon,
+                                                      onPressed: () async {
+                                                        await viewProfileDialog(
+                                                            aStudent, context);
+                                                      },
+                                                    ),
+                                                    trailing: IconButton(
+                                                      icon: Icon(Icons.clear),
+                                                      onPressed: () async {
+                                                        print("DELETE...");
+                                                        await assignmentController
+                                                            .DeleteAssignment(
+                                                                1,
+                                                                aStudent
+                                                                    .studentNo,
+                                                                widget
+                                                                    .proj_board
+                                                                    .ProjectID);
+                                                        studentList.removeWhere(
+                                                            (element) =>
+                                                                element
+                                                                    .studentNo ==
+                                                                aStudent
+                                                                    .studentNo);
+                                                        if (studentList
+                                                            .isEmpty) {
+                                                          studentList = null;
+                                                        }
+                                                        setState(() {});
+                                                      },
+                                                    ),
+                                                  )
+                                                : new ListTile(
+                                                    title: Text(fullName),
+                                                    leading: IconButton(
+                                                      icon: viewIcon,
+                                                      onPressed: () async {
+                                                        await viewProfileDialog(
+                                                            aStudent, context);
+                                                      },
+                                                    ),
+                                                  );
+                                            return a;
+                                          }),
+                                    )
+                                  : Text(
+                                      "No students are associated with this board."),
+                              Text("\nSupervisors:",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              supList != null
+                                  ? SingleChildScrollView(
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                4,
+                                        width: 400,
+                                        child: ListView.builder(
+                                            itemCount: supList.length,
+                                            itemBuilder:
+                                                (BuildContext ctxt, int index) {
+                                              Supervisor aSup = supList[index];
+                                              String fullName = (aSup.staffNo ==
+                                                          supervisor.staffNo &&
+                                                      supervisor != null)
+                                                  ? aSup.fName +
+                                                      " " +
+                                                      aSup.lName +
+                                                      " (You)"
+                                                  : aSup.fName +
+                                                      " " +
+                                                      aSup.lName;
+                                              //print("Sup: "+aSup.fName);
+                                              ListTile a = _isOwner == true
+                                                  ? new ListTile(
+                                                      title: Text(fullName),
+                                                      leading: IconButton(
+                                                        icon: viewIcon,
+                                                        onPressed: () async {
+                                                          await viewSupProfileDialog(
+                                                              aSup, context);
+                                                        },
+                                                      ),
+                                                      trailing: IconButton(
+                                                        icon: Icon(Icons.clear),
+                                                        onPressed: () async {
+                                                          await assignmentController
+                                                              .DeleteAssignment(
+                                                                  2,
+                                                                  aSup.staffNo,
+                                                                  widget
+                                                                      .proj_board
+                                                                      .ProjectID);
+                                                          supList.removeWhere(
+                                                              (element) =>
+                                                                  element
+                                                                      .staffNo ==
+                                                                  aSup.staffNo);
+                                                          if (supList.isEmpty) {
+                                                            supList = null;
+                                                          }
+                                                          setState(() {});
+                                                        },
+                                                      ),
+                                                    )
+                                                  : new ListTile(
+                                                      title: Text(fullName),
+                                                      leading: IconButton(
+                                                        icon: viewIcon,
+                                                        onPressed: () async {
+                                                          await viewSupProfileDialog(
+                                                              aSup, context);
+                                                        },
+                                                      ),
+                                                    );
+                                              return a;
+                                            }),
+                                      ),
+                                    )
+                                  : Text(
+                                      "No supervisors are associated with this board."),
                             ],
-                          )
-                      ),
+                          )),
                     ],
                   ),
                   actions: <Widget>[
                     MaterialButton(
-                      elevation: 5.0,
-                      child: Text("Ok"),
-                      onPressed: () async {
-                        Navigator.pop(context);
-                      }
-                    )
+                        elevation: 5.0,
+                        child: Text("Ok"),
+                        onPressed: () async {
+                          Navigator.pop(context);
+                        })
                   ],
-
                 );
               },
-
             );
-      }
-      );
+          });
     }
 
     Future<String> shareAlertDialog(BuildContext context) async {
@@ -893,26 +1215,23 @@ class _BoardState extends State<Board> {
               builder: (context, setState) {
                 return AlertDialog(
                   title: Text("Share"),
-                  content:
-                  SingleChildScrollView(
+                  content: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Form(
                           key: _key,
-                          child:Container(
+                          child: Container(
                             alignment: Alignment.bottomLeft,
-                            child:
-                            Column(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Row(
                                   children: [
                                     Expanded(
                                       //margin: EdgeInsets.only(bottom: 10),
-                                      child:
-                                      Text("Currently shared with: "),
+                                      child: Text("Currently shared with: "),
                                     ),
                                     Container(
                                       height: 30,
@@ -920,32 +1239,34 @@ class _BoardState extends State<Board> {
                                       alignment: Alignment.center,
                                       child: Material(
                                         elevation: 5.0,
-                                        borderRadius: BorderRadius.circular(20.0),
-                                        color: Color(0xff009999).withOpacity(0.7),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                        color:
+                                            Color(0xff009999).withOpacity(0.7),
                                         child: MaterialButton(
                                           minWidth: 10,
-                                          child: Text("...\n", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                          child: Text("...\n",
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold)),
                                           onPressed: () async {
                                             await getShared();
-                                            setState(() {
-
-                                            });
+                                            setState(() {});
                                             await sharedWithDialog(context);
                                           },
                                         ),
                                       ),
                                     )
-
                                   ],
                                 ),
                                 Container(
                                   margin: EdgeInsets.only(top: 20),
-                                  child:
-                                  Text("Add: "),
+                                  child: Text("Add: "),
                                 ),
                                 TextFormField(
                                   controller: emailController,
-                                  decoration: const InputDecoration(labelText: 'Email'),
+                                  decoration:
+                                      const InputDecoration(labelText: 'Email'),
                                   keyboardType: TextInputType.emailAddress,
                                   validator: (value) => validateEmail(value),
                                   maxLength: 32,
@@ -989,45 +1310,44 @@ class _BoardState extends State<Board> {
                             foundUser = "";
                             setState(() {});
                             // Add assignment now that it is valid.
-                            User assignUser = await userController.getUser(email);
+                            User assignUser =
+                                await userController.getUser(email);
                             // ignore: non_constant_identifier_names
                             String OtherPersonNo;
-                            bool existingAssignmentFound=false;
+                            bool existingAssignmentFound = false;
                             if (assignUser.userTypeID == 1) {
                               StudentController studentController =
-                              new StudentController();
-                              Student assignStud =
-                              await studentController.fetchStudent(email,null);
+                                  new StudentController();
+                              Student assignStud = await studentController
+                                  .fetchStudent(email, null);
                               OtherPersonNo = assignStud.studentNo;
-                              if(studentList.contains(assignStud)){
-                                existingAssignmentFound=true;
+                              if (studentList.contains(assignStud)) {
+                                existingAssignmentFound = true;
                               }
                             } else {
                               SupervisorController supervisorController =
-                              new SupervisorController();
-                              Supervisor assignSup =
-                              await supervisorController.fetchSup(email,null);
+                                  new SupervisorController();
+                              Supervisor assignSup = await supervisorController
+                                  .fetchSup(email, null);
                               OtherPersonNo = assignSup.staffNo;
-                              if(supList.contains(assignSup)){
-                                existingAssignmentFound=true;
+                              if (supList.contains(assignSup)) {
+                                existingAssignmentFound = true;
                               }
                             }
 
                             AssignmentController assignmentController =
-                            new AssignmentController();
+                                new AssignmentController();
 
-                           if(existingAssignmentFound!=true){
-                             await assignmentController.createAssignment(
-                                 assignUser.userTypeID,
-                                 OtherPersonNo,
-                                 widget.proj_board.ProjectID,
-                                 _selectedAssignmentType.assignmentTypeID);
-                             Navigator.pop(context);
-                           }
-                           else{
-                             Navigator.pop(context);
-                           }
-
+                            if (existingAssignmentFound != true) {
+                              await assignmentController.createAssignment(
+                                  assignUser.userTypeID,
+                                  OtherPersonNo,
+                                  widget.proj_board.ProjectID,
+                                  _selectedAssignmentType.assignmentTypeID);
+                              Navigator.pop(context);
+                            } else {
+                              Navigator.pop(context);
+                            }
                           } else {
                             foundUser = "No such user found.";
                             setState(() {});
@@ -1041,8 +1361,6 @@ class _BoardState extends State<Board> {
             );
           });
     }
-
-
 
     //plus list
     final plusButton = new Container(
@@ -1102,31 +1420,33 @@ class _BoardState extends State<Board> {
       ),
     );
 
-  final noBoardsNoEditView = new Container(
-    width: MediaQuery.of(context).size.width,
-    decoration: BoxDecoration(
-      color: Colors.white,
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.max,
-      children: <Widget>[
-        Container(
-          width: MediaQuery.of(context).size.width / 1.1,
-          alignment: Alignment.center,
-          child: Text(
-            "No lists created yet.",
-            style: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.blueGrey),
+    final noBoardsNoEditView = new Container(
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width / 1.1,
+            alignment: Alignment.center,
+            child: Text(
+              "No lists created yet.",
+              style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueGrey),
+            ),
           ),
-        ),
-      ],
-    ),
-  );
+        ],
+      ),
+    );
+
+
 
     //Staggered lists view which we see for individual boards.
     final staggered = Container(
@@ -1137,7 +1457,9 @@ class _BoardState extends State<Board> {
         child: StaggeredGridView.count(
           primary: false,
           addRepaintBoundaries: true,
-          crossAxisCount: kIsWeb==false?2:MediaQuery.of(context).size.width<1200?2:4,
+          crossAxisCount: kIsWeb == false
+              ? 2
+              : MediaQuery.of(context).size.width < 1200 ? 2 : 4,
           shrinkWrap: true,
           mainAxisSpacing: 0.0,
           crossAxisSpacing: 0.0,
@@ -1148,50 +1470,123 @@ class _BoardState extends State<Board> {
       //)
     );
 
-
-
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
           GestureDetector(
             onTap: () {},
-            child: IconButton(
-              disabledColor: Colors.grey,
-              icon: Icon(
-                Icons.edit,
-                color: _isEditDisabled==true? Colors.grey : Colors.black,
-              ),
-              onPressed:_isEditDisabled==true? null : () {
-                editBoardAlertDialog(context);
-              },
-            ),
+            child: (isArch(widget.proj_board.ProjectID))
+                ? Text("")
+                : IconButton(
+                    disabledColor: Colors.grey,
+                    icon: Icon(
+                      Icons.edit,
+                      color:
+                          _isEditDisabled == true ? Colors.grey : Colors.black,
+                    ),
+                    onPressed: _isEditDisabled == true
+                        ? null
+                        : () {
+                            editBoardAlertDialog(context);
+                          },
+                  ),
           ),
-          IconButton(
-            disabledColor: Colors.grey,
-            icon: Icon(
-              Icons.share,
-              color: _isShareDisabled==true? Colors.grey : Colors.black,
-            ),
-            onPressed: _isShareDisabled==true? null : () async {
-              await getShared();
-              setState(() {
+          (isArch(widget.proj_board.ProjectID))
+              ? Text("")
+              : IconButton(
+                  disabledColor: Colors.grey,
+                  icon: Icon(
+                    Icons.share,
+                    color:
+                        _isShareDisabled == true ? Colors.grey : Colors.black,
+                  ),
+                  onPressed: _isShareDisabled == true
+                      ? null
+                      : () async {
+                          await getShared();
+                          setState(() {});
+                          await shareAlertDialog(context);
+                          //Share.share(widget.proj_board.Project_Title);
+                        },
+                ),
+          (isArch(widget.proj_board.ProjectID))
+              ? PopupMenuButton(
+                  icon: Icon(
+                    Icons.archive,
+                    color: Colors.black,
+                  ),
+                 onSelected: choiceAction,
+                  itemBuilder: (BuildContext context) {
+                    final ownerOpt = _isOwner == true
+                        ? (Constants.ownerUnArchiveOptions.map((String choice) {
+                      return PopupMenuItem<String>(
+                        enabled: widget.proj_board.boardActive==true && choice==Constants.UnArchiveForEveryone?false:true,
+                        value: choice,
+                        child:
 
-              });
-              await shareAlertDialog(context);
-              //Share.share(widget.proj_board.Project_Title);
-            },
-          )
+                        widget.proj_board.boardActive==true && choice==Constants.UnArchiveForEveryone? Tooltip(
+                            message: "This board is already active for all other recipients",
+                          child: Text(choice),
+
+                        ):
+
+                          (choice==Constants.Delete)? Text(choice, style: TextStyle(color: Colors.red), key: Key('MyUniqueHintKey'),) : Text(choice),
+                      );
+                    }).toList())
+                        : Constants.nonOwnerUnArchiveOptions.map((String choice) {
+
+                      return PopupMenuItem<String>(
+                          value: choice,
+                          child: Text(choice));
+                    }).toList();
+
+                    return ownerOpt;
+                  }
+                  )
+              : PopupMenuButton(
+                  icon: Icon(
+                    Icons.archive,
+                    color: Colors.black,
+                  ),
+                  onSelected: choiceAction,
+                  itemBuilder: (BuildContext context) {
+                    final ownerOpt = _isOwner == true
+                        ? Constants.ownerArchiveOptions.map((String choice) {
+                            return PopupMenuItem<String>(
+                              enabled: widget.proj_board.boardActive==false && choice=="Archive for everyone" ?false:true,
+                              value: choice,
+                              child: widget.proj_board.boardActive==false && choice=="Archive for everyone" ?
+                              Tooltip(
+                                message: "This board has already been archived for all other recipients",
+                                child: Text(choice),
+                              ):Text(choice),
+                            );
+                          }).toList()
+                        : Constants.nonOwnerArchiveOptions.map((String choice) {
+                            return PopupMenuItem<String>(
+                                value: choice, child: Text(choice));
+                          }).toList();
+
+                    return ownerOpt;
+                  },
+                ),
         ],
         title: Text(widget.proj_board.Project_Title),
         backgroundColor: Color(0xff009999),
       ),
       backgroundColor: Colors.grey,
-      body: (
-          user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists.length!=0
-          )
+      body: _isDeleted == true
+          ? Text("")
+          : (isArch(widget.proj_board.ProjectID)==false)?
+      ((user.boards[getBoardIndex(widget.proj_board.ProjectID)].boardLists.length != 0)
+              ? staggered
+              : _isEditDisabled == true ? noBoardsNoEditView : noBoardsView)
+      :
+      ((user.archivedBoards[getBoardIndex(widget.proj_board.ProjectID)].boardLists.length != 0)
           ? staggered
-          : _isEditDisabled==true? noBoardsNoEditView : noBoardsView,
-      floatingActionButton: _isEditDisabled==true? null : plusButton,
+          : _isEditDisabled == true ? noBoardsNoEditView : noBoardsView)
+      ,
+      floatingActionButton: _isEditDisabled == true ? null : plusButton,
       //bottomSheet: plusButton,
     );
   }
@@ -1207,7 +1602,34 @@ class Constants {
     Delete,
     //SignOut
   ];
+
+  static const String ArchiveForMe = 'Archive';
+  static const String ArchiveForEveryone = 'Archive for everyone';
+
+  static const String UnArchiveForMe = 'Unarchive';
+  static const String UnArchiveForEveryone = 'Unarchive for everyone';
+
+  static const List<String>ownerUnArchiveOptions=<String>[
+    UnArchiveForMe,
+    UnArchiveForEveryone,
+    Delete
+  ];
+
+
+  static const List<String> nonOwnerUnArchiveOptions = <String>[
+    UnArchiveForMe,
+  ];
+
+  static const List<String> ownerArchiveOptions = <String>[
+    ArchiveForMe,
+    ArchiveForEveryone
+  ];
+
+  static const List<String> nonOwnerArchiveOptions = <String>[
+    ArchiveForMe,
+  ];
 }
+
 
 // ignore: must_be_immutable
 class DynamicList extends StatefulWidget {
@@ -1218,22 +1640,46 @@ class DynamicList extends StatefulWidget {
   int boardIndex;
   int listIndex;
   void getIndex() {
-    for (int i = 0; i < user.boards.length; i++) {
-      if (user.boards[i].ProjectID == aList.ProjectID) {
-        boardIndex = i;
-        for (int j = 0; j < user.boards[i].boardLists.length; j++) {
-          if (user.boards[i].boardLists[j].ListID == aList.ListID) {
-            listIndex = j;
+    bool _isArchive=isArch(aList.ProjectID);
+    print("IS ARCHIVE? "+_isArchive.toString());
+    if(_isArchive==false){
+      for (int i = 0; i < user.boards.length; i++) {
+        if (user.boards[i].ProjectID == aList.ProjectID) {
+          boardIndex = i;
+          for (int j = 0; j < user.boards[i].boardLists.length; j++) {
+            if (user.boards[i].boardLists[j].ListID == aList.ListID) {
+              listIndex = j;
+            }
           }
         }
       }
     }
+    else{
+      for (int i = 0; i < user.archivedBoards.length; i++) {
+        if (user.archivedBoards[i].ProjectID == aList.ProjectID) {
+          boardIndex = i;
+          for (int j = 0; j < user.archivedBoards[i].boardLists.length; j++) {
+            if (user.archivedBoards[i].boardLists[j].ListID == aList.ListID) {
+              listIndex = j;
+            }
+          }
+        }
+      }
+    }
+
   }
 
   Future initializeTaskDisplay() async {
     getIndex();
-    user.boards[boardIndex].boardLists[listIndex].listTasks =
-        await taskController.ReadTasks(aList.ListID);
+    bool _isArchive=isArch(aList.ProjectID);
+    if(_isArchive==false){
+      user.boards[boardIndex].boardLists[listIndex].listTasks =
+      await taskController.ReadTasks(aList.ListID);
+    }else{
+      user.archivedBoards[boardIndex].boardLists[listIndex].listTasks =
+      await taskController.ReadTasks(aList.ListID);
+    }
+
   }
 
   @override
@@ -1241,30 +1687,44 @@ class DynamicList extends StatefulWidget {
 }
 
 class _DynamicListState extends State<DynamicList> {
+  bool _isShareDisabled = false;
+  bool _isEditDisabled = false;
+  determineAccess() {
+    bool _isArchive=isArch(widget.aList.ProjectID);
+    Project_Board pb;
+    if(_isArchive==false){
+      pb = user.boards[getBoardIndex(widget.aList.ProjectID)];
 
-  bool _isShareDisabled=false;
-  bool _isEditDisabled=false;
-  determineAccess(){
-    Project_Board pb=user.boards[getBoardIndex(widget.aList.ProjectID)];
-    if(pb.AccessLevel==null || pb.AccessLevel==1) {
-      //Full admin
-      _isShareDisabled = false;
-      _isEditDisabled = false;
-    }
-    else if(pb.AccessLevel==2){
-      //Can edit but not share
-      _isShareDisabled = true;
-      _isEditDisabled = false;
-    }else if (pb.AccessLevel==3){
-      //Can only view
+      if (pb.AccessLevel == null || pb.AccessLevel == 1) {
+        //Full admin
+        _isShareDisabled = false;
+        _isEditDisabled = false;
+      } else if (pb.AccessLevel == 2) {
+        //Can edit but not share
+        _isShareDisabled = true;
+        _isEditDisabled = false;
+      } else if (pb.AccessLevel == 3) {
+        //Can only view
+        _isShareDisabled = true;
+        _isEditDisabled = true;
+      } else if (pb.AccessLevel == 4) {
+        //Owner
+        _isShareDisabled = false;
+        _isEditDisabled = false;
+      }
+
+
+    }else{
+      pb = user.archivedBoards[getBoardIndex(widget.aList.ProjectID)];
+
       _isShareDisabled = true;
       _isEditDisabled = true;
+      if(pb.AccessLevel==4){
+        //_isOwner=true;
+      }
     }
-    else if(pb.AccessLevel==4){
-      //Owner
-      _isShareDisabled=false;
-      _isEditDisabled=false;
-    }
+
+
   }
 
   TextStyle style = TextStyle(
@@ -1309,32 +1769,61 @@ class _DynamicListState extends State<DynamicList> {
   }
 
   int getBoardIndex(int boardID) {
-    //print("BOARD ID: "+boardID.toString());
-    //print("getting board index ... ugh");
-    for (int i = 0; i < user.boards.length; i++) {
-      //print("looking...............");
-      //print("Board ID: "+user.boards[i].ProjectID.toString()+" our ID: "+boardID.toString() );
+    bool _isArchive=isArch(widget.aList.ProjectID);
+    if(_isArchive==false){
+      for (int i = 0; i < user.boards.length; i++) {
+        //print("looking...............");
+        //print("Board ID: "+user.boards[i].ProjectID.toString()+" our ID: "+boardID.toString() );
 
-      if (user.boards[i].ProjectID == boardID) {
-        //print("BOARD INDEX: "+i.toString());
-        return i;
+        if (user.boards[i].ProjectID == boardID) {
+          //print("BOARD INDEX: "+i.toString());
+          return i;
+        }
+      }
+    }else{
+      for (int i = 0; i < user.archivedBoards.length; i++) {
+        //print("looking...............");
+        //print("Board ID: "+user.boards[i].ProjectID.toString()+" our ID: "+boardID.toString() );
+
+        if (user.archivedBoards[i].ProjectID == boardID) {
+          //print("BOARD INDEX: "+i.toString());
+          return i;
+        }
       }
     }
+
   }
 
   // ignore: missing_return
   int getListIndex(int listID) {
-    for (int j = 0;
-    j <
-        user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists
-            .length;
-    j++) {
-      if (user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[j]
-          .ListID ==
-          listID) {
-        return j;
+    bool _isArchive=isArch(widget.aList.ProjectID);
+    if(_isArchive==false){
+      for (int j = 0;
+      j <
+          user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists
+              .length;
+      j++) {
+        if (user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[j]
+            .ListID ==
+            listID) {
+          return j;
+        }
       }
     }
+    else{
+      for (int j = 0;
+      j <
+          user.archivedBoards[getBoardIndex(widget.aList.ProjectID)].boardLists
+              .length;
+      j++) {
+        if (user.archivedBoards[getBoardIndex(widget.aList.ProjectID)].boardLists[j]
+            .ListID ==
+            listID) {
+          return j;
+        }
+      }
+    }
+
   }
 
   // ignore: missing_return
@@ -1348,32 +1837,45 @@ class _DynamicListState extends State<DynamicList> {
 
   // ignore: missing_return, non_constant_identifier_names
   int getTaskIndex(int TaskID) {
-    for (int j = 0;
-    j <
-        user
+    bool _isArchive=isArch(widget.aList.ProjectID);
+    if(_isArchive==false){
+      for (int j = 0;
+      j <
+          user.boards[getBoardIndex(widget.aList.ProjectID)]
+              .boardLists[getListIndex(widget.aList.ListID)].listTasks.length;
+      j++) {
+        if (user
             .boards[getBoardIndex(widget.aList.ProjectID)]
             .boardLists[getListIndex(widget.aList.ListID)]
-            .listTasks
-            .length;
-    j++) {
-      if (user
-          .boards[getBoardIndex(widget.aList.ProjectID)]
-          .boardLists[getListIndex(widget.aList.ListID)]
-          .listTasks[j]
-          .TaskID ==
-          TaskID) {
-        return j;
+            .listTasks[j]
+            .TaskID ==
+            TaskID) {
+          return j;
+        }
+      }
+    }else{
+      for (int j = 0;
+      j <
+          user.archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+              .boardLists[getListIndex(widget.aList.ListID)].listTasks.length;
+      j++) {
+        if (user
+            .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+            .boardLists[getListIndex(widget.aList.ListID)]
+            .listTasks[j]
+            .TaskID ==
+            TaskID) {
+          return j;
+        }
       }
     }
+
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     determineAccess();
     // ignore: missing_return
-
 
     // ignore: non_constant_identifier_names
     final EditorKey = GlobalKey<FormState>();
@@ -1415,12 +1917,12 @@ class _DynamicListState extends State<DynamicList> {
               title: Text(
                 "CONFIRM DELETE ",
                 style:
-                TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
               ),
               content: Text(
                 "Are you sure you want to delete this task?",
                 style:
-                TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               ),
               actions: <Widget>[
                 MaterialButton(
@@ -1430,8 +1932,7 @@ class _DynamicListState extends State<DynamicList> {
                     style: TextStyle(color: Colors.red),
                   ),
                   onPressed: () async {
-                    print("DELETE TASK: " +
-                        _selectedTaskID.toString());
+                    print("DELETE TASK: " + _selectedTaskID.toString());
                     int send = _selectedTaskID;
                     await taskController.deleteTask(send);
 
@@ -1460,37 +1961,86 @@ class _DynamicListState extends State<DynamicList> {
     to update such details or to delete the task.
      */
     Future<String> createTaskAlertDialog(BuildContext context, bool create) {
+
       ChangedTask = false;
       TextEditingController titleController = new TextEditingController();
       TextEditingController descriptionController = new TextEditingController();
 
       TaskController taskController = new TaskController();
       Task newTask = new Task();
+      bool _isArchive=isArch(widget.aList.ProjectID);
+      if(_isArchive==false){
+        if (create == false) {
+          //i.e. to View/Edit the Task
 
-      if (create == false) {
-        //i.e. to View/Edit the Task
 
-        newTask = user
-            .boards[getBoardIndex(widget.aList.ProjectID)]
-            .boardLists[getListIndex(widget.aList.ListID)]
-            .listTasks[getTaskIndex(_selectedTaskID)];
+          newTask = user
+              .boards[getBoardIndex(widget.aList.ProjectID)]
+              .boardLists[getListIndex(widget.aList.ListID)]
+              .listTasks[getTaskIndex(_selectedTaskID)];
 
-        titleController.text = newTask.Task_Title;
-        descriptionController.text = newTask.Task_Description;
-        _selectedTaskStatus =
-            taskStatuses[getTaskStatusIndex(newTask.Task_StatusID)];
+          titleController.text = newTask.Task_Title;
+          descriptionController.text = newTask.Task_Description;
+          _selectedTaskStatus =
+          taskStatuses[getTaskStatusIndex(newTask.Task_StatusID)];
 
-        if (newTask.Task_Due != null) {
-          _dueDate = newTask.Task_Due;
-          dueDateInput = DateFormat("yyyy-MM-dd").format(_dueDate);
+          if (newTask.Task_Due != null) {
+            _dueDate = newTask.Task_Due;
+            dueDateInput = DateFormat("yyyy-MM-dd").format(_dueDate);
+          }
+        } else {
+          titleController.text = "";
+          descriptionController.text = "";
+          _selectedTaskStatus = taskStatuses[0];
+          _dueDate = null;
+          dueDateInput = "Select date ...";
         }
-      } else {
-        titleController.text = "";
-        descriptionController.text = "";
-        _selectedTaskStatus = taskStatuses[0];
-        _dueDate = null;
-        dueDateInput = "Select date ...";
+      }else{
+        _isArchive=true;
+        if (create == false) {
+          //i.e. to View/Edit the Task
+
+
+          newTask = user
+              .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+              .boardLists[getListIndex(widget.aList.ListID)]
+              .listTasks[getTaskIndex(_selectedTaskID)];
+
+          titleController.text = newTask.Task_Title;
+          descriptionController.text = newTask.Task_Description;
+          _selectedTaskStatus =
+          taskStatuses[getTaskStatusIndex(newTask.Task_StatusID)];
+
+          if (newTask.Task_Due != null) {
+            _dueDate = newTask.Task_Due;
+            dueDateInput = DateFormat("yyyy-MM-dd").format(_dueDate);
+          }
+        } else {
+          titleController.text = "";
+          descriptionController.text = "";
+          _selectedTaskStatus = taskStatuses[0];
+          _dueDate = null;
+          dueDateInput = "Select date ...";
+        }
       }
+//      String out= create == true
+//          ? "New Task: "
+//          : _isArchive?
+//      user
+//          .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+//          .boardLists[getListIndex(widget.aList.ListID)]
+//          .listTasks[getTaskIndex(_selectedTaskID)]
+//          .Task_Title
+//          :
+//      user
+//          .boards[getBoardIndex(widget.aList.ProjectID)]
+//          .boardLists[getListIndex(widget.aList.ListID)]
+//          .listTasks[getTaskIndex(_selectedTaskID)]
+//          .Task_Title;
+//      print("OUT: "+out);
+
+
+
 
       return showDialog(
           context: context,
@@ -1500,11 +2050,18 @@ class _DynamicListState extends State<DynamicList> {
                 return AlertDialog(
                   title: create == true
                       ? Text("New Task: ")
-                      : Text(user
-                          .boards[getBoardIndex(widget.aList.ProjectID)]
-                          .boardLists[getListIndex(widget.aList.ListID)]
-                          .listTasks[getTaskIndex(_selectedTaskID)]
-                          .Task_Title),
+                      : _isArchive?
+                  Text(user
+                      .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+                      .boardLists[getListIndex(widget.aList.ListID)]
+                      .listTasks[getTaskIndex(_selectedTaskID)]
+                      .Task_Title)
+                  :
+                  Text(user
+                      .boards[getBoardIndex(widget.aList.ProjectID)]
+                      .boardLists[getListIndex(widget.aList.ListID)]
+                      .listTasks[getTaskIndex(_selectedTaskID)]
+                      .Task_Title),
                   content: Container(
                     child: Form(
                       key: EditorKey,
@@ -1514,7 +2071,7 @@ class _DynamicListState extends State<DynamicList> {
                           children: <Widget>[
                             //Title
                             TextFormField(
-                              enabled: _isEditDisabled==true?false:true,
+                              enabled: _isEditDisabled == true ? false : true,
                               controller: titleController,
                               style: style.copyWith(color: Colors.black),
                               obscureText: false,
@@ -1542,9 +2099,7 @@ class _DynamicListState extends State<DynamicList> {
 
                             //Description
                             TextFormField(
-                              enabled:
-                              _isEditDisabled==true?false:
-                              true,
+                              enabled: _isEditDisabled == true ? false : true,
                               controller: descriptionController,
                               style: style.copyWith(color: Colors.black),
                               maxLines: 5,
@@ -1569,7 +2124,7 @@ class _DynamicListState extends State<DynamicList> {
                             //Status
 
                             IgnorePointer(
-                              ignoring: _isEditDisabled==true?true:false,
+                              ignoring: _isEditDisabled == true ? true : false,
                               child: Container(
                                 padding: EdgeInsets.symmetric(horizontal: 20),
                                 decoration: ShapeDecoration(
@@ -1579,18 +2134,19 @@ class _DynamicListState extends State<DynamicList> {
                                         style: BorderStyle.solid,
                                         color: Colors.grey),
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(32.0)),
+                                        BorderRadius.all(Radius.circular(32.0)),
                                   ),
                                 ),
                                 child: Center(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       DropdownButton(
-                                        value:  _selectedTaskStatus,
-                                        items:  _dropdownTaskStatusMenuItems,
-                                        onChanged:  (value) {
+                                        value: _selectedTaskStatus,
+                                        items: _dropdownTaskStatusMenuItems,
+                                        onChanged: (value) {
                                           ChangedTask = true;
                                           setState(() {
                                             _selectedTaskStatus = value;
@@ -1609,7 +2165,7 @@ class _DynamicListState extends State<DynamicList> {
 
                             //Due
                             IgnorePointer(
-                              ignoring: _isEditDisabled==true?true:false,
+                              ignoring: _isEditDisabled == true ? true : false,
                               child: Stack(
                                 children: <Widget>[
                                   Container(
@@ -1640,17 +2196,17 @@ class _DynamicListState extends State<DynamicList> {
                                             ),
                                           ],
                                         ),
-                                        onPressed:
-                                        _isEditDisabled==true?null :
-                                            () async {
-                                          await selectDueDate(context);
-                                          setState(() {
-                                            dueDateInput =
-                                                DateFormat('yyyy-MM-dd')
-                                                    .format(_dueDate);
-                                            ChangedTask = true;
-                                          });
-                                        },
+                                        onPressed: _isEditDisabled == true
+                                            ? null
+                                            : () async {
+                                                await selectDueDate(context);
+                                                setState(() {
+                                                  dueDateInput =
+                                                      DateFormat('yyyy-MM-dd')
+                                                          .format(_dueDate);
+                                                  ChangedTask = true;
+                                                });
+                                              },
                                       )),
                                   Positioned(
                                       left: 10,
@@ -1663,11 +2219,10 @@ class _DynamicListState extends State<DynamicList> {
                                         child: Text(
                                           'Due Date:',
                                           style: TextStyle(
-                                              color:
-                                              Colors.black.withOpacity(.65)),
+                                              color: Colors.black
+                                                  .withOpacity(.65)),
                                         ),
-                                      )
-                                  ),
+                                      )),
                                 ],
                               ),
                             ),
@@ -1729,34 +2284,38 @@ class _DynamicListState extends State<DynamicList> {
                                         1,
                                         stiles[getListIndex(
                                                     widget.aList.ListID)]
-                                                .mainAxisCellCount + (kIsWeb==true? .225 : .52)
-                                            );
+                                                .mainAxisCellCount +
+                                            (kIsWeb == true ? .225 : .52));
                                 Navigator.of(context).pop();
                               }
-
-
                             },
                           )
                         : Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               IgnorePointer(
-                                ignoring: _isEditDisabled==true?true:false,
+                                ignoring:
+                                    _isEditDisabled == true ? true : false,
                                 child: Container(
                                     alignment: Alignment.bottomLeft,
                                     //color: Colors.green,
-                                    width:
-                                    MediaQuery.of(context).size.width / 1.75,
+                                    width: MediaQuery.of(context).size.width /
+                                        1.75,
                                     child: MaterialButton(
                                       elevation: 5.0,
                                       child: Text(
                                         "DELETE",
-                                        style: _isEditDisabled==true?TextStyle(color:Colors.grey):TextStyle(color: Colors.red),
+                                        style: _isEditDisabled == true
+                                            ? TextStyle(color: Colors.grey)
+                                            : TextStyle(color: Colors.red),
                                       ),
-                                      onPressed: _isEditDisabled==true? null : () async {
-                                        await confirmTaskDeleteAlertDialog(context);
-                                        Navigator.of(context).pop();
-                                      },
+                                      onPressed: _isEditDisabled == true
+                                          ? null
+                                          : () async {
+                                              await confirmTaskDeleteAlertDialog(
+                                                  context);
+                                              Navigator.of(context).pop();
+                                            },
                                     )),
                               ),
                               Container(
@@ -1868,7 +2427,6 @@ class _DynamicListState extends State<DynamicList> {
                   onPressed: () async {
                     print("LIST: " + widget.aList.ListID.toString());
                     await listController.deleteList(widget.aList.ListID);
-                    //user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists=await listController.ReadLists(widget.aList.ProjectID);
                     Navigator.pop(context);
                   },
                 ),
@@ -1919,13 +2477,18 @@ class _DynamicListState extends State<DynamicList> {
             ],
           )),
     );
-
+    bool _isArchive=isArch(widget.aList.ProjectID);
     // ignore: non_constant_identifier_names
     final TaskContainer = new Expanded(
         flex: 1,
         child: ListView.builder(
-          itemCount: user.boards[getBoardIndex(widget.aList.ProjectID)]
-              .boardLists[getListIndex(widget.aList.ListID)].listTasks.length,
+          itemCount:(_isArchive==false)?
+          user.boards[getBoardIndex(widget.aList.ProjectID)]
+              .boardLists[getListIndex(widget.aList.ListID)].listTasks.length
+          :
+          user.archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+              .boardLists[getListIndex(widget.aList.ListID)].listTasks.length
+          ,
           // ignore: non_constant_identifier_names
           itemBuilder: (BuildContext Context, int index) {
             return new Container(
@@ -1957,64 +2520,119 @@ class _DynamicListState extends State<DynamicList> {
                       border: Border(
                           left: BorderSide(
                               //color: Color(0xff009999),
-                              color: user
-                                          .boards[getBoardIndex(
-                                              widget.aList.ProjectID)]
-                                          .boardLists[
-                                              getListIndex(widget.aList.ListID)]
-                                          .listTasks[index]
-                                          .Task_StatusID ==
-                                      4
+                              color: (_isArchive==false)?
+                              (user
+                                  .boards[getBoardIndex(
+                                  widget.aList.ProjectID)]
+                                  .boardLists[
+                              getListIndex(widget.aList.ListID)]
+                                  .listTasks[index]
+                                  .Task_StatusID ==
+                                  4
                                   ? Colors.grey
                                   : user
-                                              .boards[getBoardIndex(
-                                                  widget.aList.ProjectID)]
-                                              .boardLists[getListIndex(
-                                                  widget.aList.ListID)]
-                                              .listTasks[index]
-                                              .Task_StatusID ==
-                                          1
-                                      ? Color(0xff009999)
-                                      : Colors.green,
+                                  .boards[getBoardIndex(
+                                  widget.aList.ProjectID)]
+                                  .boardLists[getListIndex(
+                                  widget.aList.ListID)]
+                                  .listTasks[index]
+                                  .Task_StatusID ==
+                                  1
+                                  ? Color(0xff009999)
+                                  : Colors.green)
+                              :
+                              (user
+                                  .archivedBoards[getBoardIndex(
+                                  widget.aList.ProjectID)]
+                                  .boardLists[
+                              getListIndex(widget.aList.ListID)]
+                                  .listTasks[index]
+                                  .Task_StatusID ==
+                                  4
+                                  ? Colors.grey
+                                  : user
+                                  .archivedBoards[getBoardIndex(
+                                  widget.aList.ProjectID)]
+                                  .boardLists[getListIndex(
+                                  widget.aList.ListID)]
+                                  .listTasks[index]
+                                  .Task_StatusID ==
+                                  1
+                                  ? Color(0xff009999)
+                                  : Colors.green)
+                              ,
                               width: 5.0))),
                   child: ListTile(
-                    title: Text(user
-                        .boards[getBoardIndex(widget.aList.ProjectID)]
-                        .boardLists[getListIndex(widget.aList.ListID)]
-                        .listTasks[index]
-                        .Task_Title,
-                      style: user
-                          .boards[getBoardIndex(
-                          widget.aList.ProjectID)]
-                          .boardLists[
-                      getListIndex(widget.aList.ListID)]
-                          .listTasks[index]
-                          .Task_StatusID ==
-                          4? TextStyle(color: Colors.grey, decoration: TextDecoration.lineThrough)
-                          : TextStyle(color: Colors.black)
-                      ,
-                    ),
-                    onTap: () async {
-                      _selectedTaskID = user
+                    title: Text(
+                      (_isArchive==false)?
+                      user
                           .boards[getBoardIndex(widget.aList.ProjectID)]
                           .boardLists[getListIndex(widget.aList.ListID)]
                           .listTasks[index]
-                          .TaskID;
+                          .Task_Title
+                          :
+                      user
+                          .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+                          .boardLists[getListIndex(widget.aList.ListID)]
+                          .listTasks[index]
+                          .Task_Title
+                    ,
+                      style: (_isArchive==false)?
+                      user
+                          .boards[getBoardIndex(widget.aList.ProjectID)]
+                          .boardLists[getListIndex(widget.aList.ListID)]
+                          .listTasks[index]
+                          .Task_StatusID ==
+                          4
+                          ? TextStyle(
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough)
+                          : TextStyle(color: Colors.black)
+                      :
+                      user
+                          .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+                          .boardLists[getListIndex(widget.aList.ListID)]
+                          .listTasks[index]
+                          .Task_StatusID ==
+                          4
+                          ? TextStyle(
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough)
+                          : TextStyle(color: Colors.black),
+                    ),
+                    onTap: () async {
+                      bool isArchive=isArch(widget.aList.ProjectID);
+
+                      _selectedTaskID = isArchive==false? user
+                          .boards[getBoardIndex(widget.aList.ProjectID)]
+                          .boardLists[getListIndex(widget.aList.ListID)]
+                          .listTasks[index]
+                          .TaskID
+                      :
+                      user
+                          .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+                          .boardLists[getListIndex(widget.aList.ListID)]
+                          .listTasks[index]
+                          .TaskID
+                      ;
                       initializeTaskStatus();
                       //print("Current tasks: "+user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.length.toString());
                       await createTaskAlertDialog(context, false);
                       await widget.initializeTaskDisplay();
-                      Board boardPage = new Board(
-                        proj_board:
-                            user.boards[getBoardIndex(widget.aList.ProjectID)],
-                      );
+                      Board returnBoard=new Board();
+                      if(_isArchive==false){
+                        returnBoard.proj_board=user.boards[getBoardIndex(widget.aList.ProjectID)];
+                      }else{
+                        returnBoard.proj_board=user.archivedBoards[getBoardIndex(widget.aList.ProjectID)];
+                      }
+
                       //boardPage.populateListDisplay(widget.aList.ProjectID);
                       Navigator.pop(context);
 
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => boardPage),
+                            builder: (BuildContext context) => returnBoard),
                       );
                     },
                   ),
@@ -2023,8 +2641,7 @@ class _DynamicListState extends State<DynamicList> {
             );
           },
           shrinkWrap: true,
-        )
-    );
+        ));
 
     Widget titleView = Container(
       //width: MediaQuery.of(context).size.width / 4,
@@ -2076,8 +2693,8 @@ class _DynamicListState extends State<DynamicList> {
               children: <Widget>[
                 titleView,
                 PopupMenuButton<String>(
-                  enabled: _isEditDisabled==true?false:true,
-                  onSelected: _isEditDisabled==true? null : choiceAction,
+                  enabled: _isEditDisabled == true ? false : true,
+                  onSelected: _isEditDisabled == true ? null : choiceAction,
                   itemBuilder: (BuildContext context) {
                     return Constants.choices.map((String choice) {
                       return PopupMenuItem<String>(
@@ -2095,7 +2712,7 @@ class _DynamicListState extends State<DynamicList> {
               ],
             ),
             TaskContainer,
-            _isEditDisabled==false? addTaskButton : SizedBox(height:1),
+            _isEditDisabled == false ? addTaskButton : SizedBox(height: 1),
           ]),
     );
 

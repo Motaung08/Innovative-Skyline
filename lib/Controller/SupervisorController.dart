@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Controller/UserController.dart';
+import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:http/http.dart' as http;
@@ -66,7 +67,9 @@ class SupervisorController{
     supervisor=await fetchSup(email,null,url1:url,url2:url3);
     personNo=supervisor.staffNo;
     Project_BoardController projectBoardController=new Project_BoardController();
-    user.boards=await projectBoardController.ReadBoards(user.userTypeID,supervisor.staffNo,url:url2);
+    List<List<Project_Board>> allBoards=await projectBoardController.ReadBoards(user.userTypeID,supervisor.staffNo,url:url2);
+    user.boards=allBoards[0];
+    user.archivedBoards=allBoards[1];
   }
 
   /*

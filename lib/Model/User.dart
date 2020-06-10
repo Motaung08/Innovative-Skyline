@@ -20,6 +20,7 @@ class User extends StatefulWidget {
   bool register;
 
   List<Project_Board> boards=List();
+  List<Project_Board> archivedBoards=List();
 
  // User(this.userID, this._email, this.password, this.userTypeID);
 
