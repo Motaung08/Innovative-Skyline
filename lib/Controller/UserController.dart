@@ -95,11 +95,12 @@ class UserController{
         });
     //print('******************************************** Clicked');
     print(response.body);
-    var datauser = json.decode(response.body);
+    //var datauser = json.decode(response.body);
 
-    print(datauser);
+
+
     String msg="";
-    if (datauser== "No user found.") {
+    if (json.decode(response.body)== "No user found." || json.decode(response.body)=="Invalid password.") {
 
       proceed=false;
         msg = "Incorrect email or password!";
@@ -107,6 +108,7 @@ class UserController{
 
     } else {
         msg="Found user, assigning attributes ...";
+        List datauser=json.decode(response.body);
 
         user.email = datauser[0]['Email'];
         user.userTypeID = int.parse(datauser[0]['UserTypeId']);

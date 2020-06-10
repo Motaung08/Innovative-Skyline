@@ -2,24 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/icons/Icon-192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/icons/Icon-512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/ListController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/ListController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/StudentController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/StudentController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Model/Project_Board.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Model/Project_Board.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Model/User.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Model/User.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/UserController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/UserController.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/View/Board.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Board.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Login.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ControllerTests/ProjectBoardCtrl_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/ProjectBoardCtrl_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +31,16 @@
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1cx2WyvMz36I4ZHicNNqKxAKjm6" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
@@ -95,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591528152743</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Archive and UnArchive functionality.">
+      <created>1591787316941</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1591787316941</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -108,11 +114,49 @@
       </list>
     </option>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+      </set>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Added web support. Some instances/views are still buggy." />
     <MESSAGE value="Added &quot;Shared with&quot; functionality and View Profile for each recipient." />
     <MESSAGE value="Final touches on sharing function." />
-    <option name="LAST_COMMIT_MESSAGE" value="Final touches on sharing function." />
+    <MESSAGE value="Archive and UnArchive functionality." />
+    <option name="LAST_COMMIT_MESSAGE" value="Archive and UnArchive functionality." />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="198" key="#Notifications" timestamp="1591723262844">
@@ -131,34 +175,34 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="753" y="198" key="#com.intellij.tools.ToolEditorDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344883272" />
-    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1591528151910">
+    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1591787315922">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591528151910" />
+    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591787315922" />
     <state x="765" y="109" key="FileChooserDialogImpl" timestamp="1591726316401">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="765" y="109" key="FileChooserDialogImpl/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726316401" />
-    <state width="1535" height="295" key="GridCell.Tab.0.bottom" timestamp="1591784525622">
+    <state width="1535" height="295" key="GridCell.Tab.0.bottom" timestamp="1591790517346">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1535" height="295" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591784525622" />
-    <state width="1535" height="295" key="GridCell.Tab.0.center" timestamp="1591784525622">
+    <state width="1535" height="295" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591790517346" />
+    <state width="1535" height="295" key="GridCell.Tab.0.center" timestamp="1591790517346">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1535" height="295" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591784525622" />
-    <state width="1535" height="295" key="GridCell.Tab.0.left" timestamp="1591784525622">
+    <state width="1535" height="295" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591790517346" />
+    <state width="1535" height="295" key="GridCell.Tab.0.left" timestamp="1591790517346">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1535" height="295" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591784525622" />
-    <state width="1535" height="295" key="GridCell.Tab.0.right" timestamp="1591784525622">
+    <state width="1535" height="295" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591790517346" />
+    <state width="1535" height="295" key="GridCell.Tab.0.right" timestamp="1591790517346">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1535" height="295" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591784525622" />
+    <state width="1535" height="295" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591790517346" />
     <state x="540" y="283" key="IDE.errors.dialog" timestamp="1591346336430">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -175,11 +219,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="486" y="14" width="998" height="708" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726318067" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1591528154498">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1591787333416">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1591459682594" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591528154498" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591787333416" />
     <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1591700910038">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -189,10 +233,10 @@
     </state>
     <state x="-698" y="139" width="1552" height="880" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864@0.0.1536.864" timestamp="1591370508691" />
     <state x="92" y="92" width="1736" height="896" key="com.intellij.history.integration.ui.views.FileHistoryDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591604929734" />
-    <state x="656" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1591700659975">
+    <state x="656" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1591789350798">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="656" y="364" key="com.intellij.ide.util.TipDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591700659975" />
+    <state x="656" y="364" key="com.intellij.ide.util.TipDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591789350798" />
     <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591787275316">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

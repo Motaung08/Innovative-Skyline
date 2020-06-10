@@ -23,7 +23,7 @@ import 'package:postgrad_tracker/View/profile/student/ViewStudentProfile.dart';
 import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:hints/hints.dart';
+
 
 bool isArch(int ProjectID){
   if(user.archivedBoards.where((element) => element.ProjectID==ProjectID).isNotEmpty){

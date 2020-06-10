@@ -233,7 +233,7 @@ class LoginPageState extends State<LoginPage> {
                   user.boards.clear();
                   proceed = await userController.login(
                       _emailController.text, _passwordController.text);
-
+                  print("PROCEED: "+proceed.toString());
                   if (proceed == true) {
                     setState(() {
                       visible = false;
@@ -246,7 +246,11 @@ class LoginPageState extends State<LoginPage> {
                       MaterialPageRoute(builder: (BuildContext context) => homePage),
                     );
                   } else {
-                    print('Login Denied!');
+                    setState(() {
+                      visible=false;
+                      msg="Username or password incorrect";
+                      print("oooooooooo");
+                    });
                   }
 
                   setState(() {});
@@ -299,12 +303,14 @@ class LoginPageState extends State<LoginPage> {
                 MaterialPageRoute(builder: (BuildContext context) => homePage),
               );
             } else {
-              print('Login Denied!');
+              //print("AAAHH");
+              setState(() {
+                visible = false;
+                msg="Username or password incorrect";
+              });
             }
           }
-          else{
 
-          }
         },
         key: Key('LoginInput'),
         child: Text("Login",
