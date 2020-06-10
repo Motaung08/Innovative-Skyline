@@ -87,7 +87,12 @@ class Project_BoardController {
 
         }
         else {
-          user.boards.clear();
+          if(user.boards!=null){
+            user.boards.clear();
+          }
+          if(user.archivedBoards!=null){
+            user.archivedBoards.clear();
+          }
           for (int i = 0; i < Response.length; i++) {
 
             Project_Board boardReceived = new Project_Board();

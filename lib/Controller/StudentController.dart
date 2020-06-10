@@ -70,12 +70,33 @@ class StudentController{
     url3="http://10.100.15.38/viewStudentStudNo.php"}) async {
 
     student= await fetchStudent(email,null,url1: url,url2: url3);
+
     personNo=student.studentNo;
     user.boards.clear();
     Project_BoardController projectBoardController=new Project_BoardController();
     List<List<Project_Board>> allBoards=await projectBoardController.ReadBoards(user.userTypeID,student.studentNo,url:url2);
-    user.boards=allBoards[0];
-    user.archivedBoards=allBoards[1];
+
+    print('ay : '+(allBoards.isEmpty).toString());
+    if(allBoards.isEmpty==false){
+      if(allBoards[0]==null){
+        user.boards=null;
+      }else{
+        user.boards=allBoards[0];
+
+      }
+      if(allBoards[1]==null){
+        user.archivedBoards=null;
+      }else{
+        user.archivedBoards=allBoards[1];
+      }
+
+
+    }else{
+      user.boards=null;
+      user.archivedBoards=null;
+    }
+
+
 
   }
 

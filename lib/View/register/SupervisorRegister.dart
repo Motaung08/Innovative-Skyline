@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:postgrad_tracker/Model/Supervisor.dart';
@@ -242,7 +243,38 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
-    final registerButon = Material(
+    final registerButon = kIsWeb? Row(
+      children: [
+        Expanded(
+          child: Text("")
+        ),
+        Expanded(
+          child: Material(
+            elevation: 5.0,
+            borderRadius: BorderRadius.circular(30.0),
+            color: Color(0xff009999),
+            child: MaterialButton(
+              minWidth: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              onPressed: () async {
+                if(_formKey.currentState.validate()){
+                  supervisorRegistration();
+                }
+
+              },
+              child: Text("Register",
+                  textAlign: TextAlign.center,
+                  style: style.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+            ),
+          ),
+        ),
+        Expanded(
+          child:Text("")
+        )
+      ],
+    ):
+    Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
@@ -262,7 +294,39 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
       ),
     );
 
-    final loginButon = Material(
+    final loginButon = kIsWeb? Row(
+      children: [
+        Expanded(
+          child:Text("")
+        ),
+        Expanded(
+          child:  Material(
+            elevation: 5.0,
+            borderRadius: BorderRadius.circular(30.0),
+            color: Color(0xff009999),
+            child: MaterialButton(
+              minWidth: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              onPressed: () {
+                //widget.toggleView();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              child: Text("Login",
+                  textAlign: TextAlign.center,
+                  style: style.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Text(""),
+        )
+      ],
+    ):
+    Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
@@ -321,8 +385,10 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
         child: Container(
           color: Colors.white,
           width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          alignment: Alignment.center,
           child: Padding(
-              padding: const EdgeInsets.all(36.0),
+              padding: kIsWeb? EdgeInsets.all(5) : const EdgeInsets.all(36.0),
               child: Form(
                   key: _formKey,
                   child: SingleChildScrollView(
@@ -334,28 +400,106 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
                           "assets/logo.png",
                           fit: BoxFit.contain,
                         ),
+                        kIsWeb?
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
+                            Expanded(
+                              child:Text("")
+                            ),
+                            Expanded(
+                              //flex:3,
+                              child: Column(children: <Widget>[
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                   // width: 150.0,
+                                    child: staffFirstNameField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    //width: 150.0,
+                                    child: staffLastNameField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    //width: 150.0,
+                                    child: staffEmailField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    //width: 150.0,
+                                    child: staffOfficeField),
+                              ]),
+                            ),
+                            Column(children: <Widget>[
+                              SizedBox(
+                                width: 15.0,
+                              ),
+                            ]),
+                            Expanded(
+                              child: Column(children: <Widget>[
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    //width: 150.0,
+                                    child: staffNumberField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    //width: 150.0,
+                                    child: passwordField),
+                                SizedBox(
+                                  height: 15.0,
+                                ),
+                                SizedBox(
+                                    //width: 150.0,
+                                    child: confirmPasswordField),
+                              ]),
+                            ),
+                            Expanded(
+                                child:Text("")
+                            ),
+                          ],
+                        )
+                        :
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+
                             Column(children: <Widget>[
                               SizedBox(
                                 height: 15.0,
                               ),
                               SizedBox(
-                                  width: 150.0, child: staffFirstNameField),
+                                 width: 150.0,
+                                  child: staffFirstNameField),
                               SizedBox(
                                 height: 15.0,
                               ),
-                              SizedBox(width: 150.0, child: staffLastNameField),
+                              SizedBox(
+                                width: 150.0,
+                                  child: staffLastNameField),
                               SizedBox(
                                 height: 15.0,
                               ),
-                              SizedBox(width: 150.0, child: staffEmailField),
+                              SizedBox(
+                                width: 150.0,
+                                  child: staffEmailField),
                               SizedBox(
                                 height: 15.0,
                               ),
-                              SizedBox(width: 150.0, child: staffOfficeField),
+                              SizedBox(
+                                width: 150.0,
+                                  child: staffOfficeField),
                             ]),
                             Column(children: <Widget>[
                               SizedBox(
@@ -366,16 +510,21 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
                               SizedBox(
                                 height: 15.0,
                               ),
-                              SizedBox(width: 150.0, child: staffNumberField),
+                              SizedBox(
+                                width: 150.0,
+                                  child: staffNumberField),
                               SizedBox(
                                 height: 15.0,
                               ),
-                              SizedBox(width: 150.0, child: passwordField),
+                              SizedBox(
+                                width: 150.0,
+                                  child: passwordField),
                               SizedBox(
                                 height: 15.0,
                               ),
                               SizedBox(
-                                  width: 150.0, child: confirmPasswordField),
+                                width: 150.0,
+                                  child: confirmPasswordField),
                             ]),
                           ],
                         ),

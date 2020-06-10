@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/main.dart';
 
@@ -112,7 +113,37 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
     );
 
     // ignore: non_constant_identifier_names
-    final ResetButon = Material(
+    final ResetButon = kIsWeb? Row(
+      children: [
+        Expanded(
+          child:Text("")
+        ),
+        Expanded(
+          child: Material(
+            elevation: 5.0,
+            borderRadius: BorderRadius.circular(30.0),
+            color: Color(0xff009999),
+            child: MaterialButton(
+              minWidth: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              onPressed: () {
+                _tryReset();
+
+              },
+              key: Key('ResetButtonInput'),
+              child: Text("Reset",
+                  textAlign: TextAlign.center,
+                  style: style.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Text(""),
+        )
+      ],
+    ):
+    Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
@@ -145,7 +176,8 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
           child: Container(
             color: Colors.white,
             width: MediaQuery.of(context).size.width,
-
+            height: MediaQuery.of(context).size.height,
+            alignment: Alignment.center,
             child: Padding(
               padding: const EdgeInsets.all(36.0),
               child: Form(
@@ -158,24 +190,33 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                       SizedBox(
                       height: 15.0,
                       ),
-                      SizedBox(
-                        //width: MediaQuery.of(context).size.width / 2.8,
-                        child: studentEmailField
+                      Row(
+                        children: [
+                          Expanded(child: Text(""),),
+                          Expanded(child: studentEmailField,),
+                          Expanded(child: Text(""),)
+                        ],
                       ),
+
                       SizedBox(
                         height: 15.0,
                       ),
-                      SizedBox(
-                        //width:
-                        //MediaQuery.of(context).size.width / 2.8,
-                        child: passwordField),
+                      Row(
+                        children: [
+                          Expanded(child: Text(""),),
+                          Expanded(child: passwordField,),
+                          Expanded(child: Text(""),)
+                        ],
+                      ),
                       SizedBox(
                       height: 15.0,
                       ),
-                      SizedBox(
-                        //width:
-                        //MediaQuery.of(context).size.width / 2.8,
-                        child: confirmPasswordField
+                      Row(
+                        children: [
+                          Expanded(child: Text(""),),
+                          Expanded(child: confirmPasswordField,),
+                          Expanded(child: Text(""),)
+                        ],
                       ),
                       SizedBox(
                         height: 15.0,

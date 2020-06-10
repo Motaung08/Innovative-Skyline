@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:postgrad_tracker/Model/DegreeType.dart';
@@ -11,68 +12,61 @@ import 'package:postgrad_tracker/View/Login.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
 
-
 import '../../main.dart';
 
 class StudentRegisterPage extends StatefulWidget {
-
-   Future initialize() async{
+  Future initialize() async {
     print('initializing student types and degrees.');
     await studentTypeController.getTypes();
     await degreeController.getDegrees();
-    print('Student type '+studentTypes.length.toString());
+    print('Student type ' + studentTypes.length.toString());
   }
 
   @override
   _StudentRegisterPageState createState() => _StudentRegisterPageState();
 }
 
-
 class _StudentRegisterPageState extends State<StudentRegisterPage> {
-   Future initializeRegister () async {
+  Future initializeRegister() async {
     await widget.initialize();
     // ignore: missing_return
-    print("Student types: "+studentTypes.length.toString());
+    print("Student types: " + studentTypes.length.toString());
 
-
-    print("Degrees: "+degrees.length.toString());
+    print("Degrees: " + degrees.length.toString());
 
     //widget.initialize();
     _dropdownMenuItems = buildDropdownMenuItems(degrees);
     _selectedDegree = degrees[0];
-     //print('Degrees size: '+degrees.length.toString());
+    //print('Degrees size: '+degrees.length.toString());
 
-    _dropdownStudTypeMenuItems = buildDropdownStudentTypeMenuItems(_studenttype);
+    _dropdownStudTypeMenuItems =
+        buildDropdownStudentTypeMenuItems(_studenttype);
     _selectedStudType = _dropdownStudTypeMenuItems[0].value;
-    setState(() {
-
-    });
-
+    setState(() {});
   }
 
-   DateTime _date;
-   final format = DateFormat("yyyy-MM-dd");
-   String dateinput="Select date ...";
-   TextStyle datestyle=TextStyle(color: Colors.black.withOpacity(0.65),fontFamily: 'Montserrat');
+  DateTime _date;
+  final format = DateFormat("yyyy-MM-dd");
+  String dateinput = "Select date ...";
+  TextStyle datestyle = TextStyle(
+      color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
 
-   Future<Null> selectDate(BuildContext context) async {
-     final DateTime picked = await showDatePicker(
-         context: context,
-         initialDate: DateTime.now(),
-         firstDate: new DateTime(2000),
-         lastDate: new DateTime(2030)
-     );
+  Future<Null> selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: new DateTime(2000),
+        lastDate: new DateTime(2030));
 
-     if(picked != null){
-       print('Date Selected: ${_date.toString()}');
-       setState(() {
-         _date = picked;
-       });
-
-     }
-     datestyle=TextStyle(color: Colors.black,fontFamily: 'Montserrat');
-     dateinput=DateFormat('yyyy-MM-dd').format(_date);
-   }
+    if (picked != null) {
+      print('Date Selected: ${_date.toString()}');
+      setState(() {
+        _date = picked;
+      });
+    }
+    datestyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
+    dateinput = DateFormat('yyyy-MM-dd').format(_date);
+  }
 
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
 
@@ -83,7 +77,6 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
   List<DropdownMenuItem<StudentType>> _dropdownStudTypeMenuItems;
   StudentType _selectedStudType;
 
-
   @override
   // ignore: must_call_super
   void initState() {
@@ -91,14 +84,17 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 //    super.initState();
   }
 
-  List<DropdownMenuItem<DegreeType>> buildDropdownMenuItems(List companies)  {
+  List<DropdownMenuItem<DegreeType>> buildDropdownMenuItems(List companies) {
     List<DropdownMenuItem<DegreeType>> items = List();
     for (DegreeType degree in companies) {
       items.add(
         DropdownMenuItem(
           value: degree,
-          child: Text(degree.Degree_Type, style: TextStyle(color: Colors.grey,fontFamily: 'Montserrat', fontSize: 20.0),),
-
+          child: Text(
+            degree.Degree_Type,
+            style: TextStyle(
+                color: Colors.grey, fontFamily: 'Montserrat', fontSize: 20.0),
+          ),
         ),
       );
     }
@@ -111,15 +107,19 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     });
   }
 
-
-  List<DropdownMenuItem<StudentType>> buildDropdownStudentTypeMenuItems(List types) {
+  List<DropdownMenuItem<StudentType>> buildDropdownStudentTypeMenuItems(
+      List types) {
     List<DropdownMenuItem<StudentType>> items = List();
     for (StudentType type in types) {
       items.add(
         DropdownMenuItem(
           value: type,
-          child: Text(type.Student_Type, style: TextStyle(color: Colors.grey,fontFamily: 'Montserrat', fontSize: 20.0),overflow: TextOverflow.ellipsis,),
-
+          child: Text(
+            type.Student_Type,
+            style: TextStyle(
+                color: Colors.grey, fontFamily: 'Montserrat', fontSize: 20.0),
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       );
     }
@@ -131,7 +131,6 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       _selectedStudType = selectedType;
     });
   }
-
 
   final _formKey = GlobalKey<FormState>();
   String error = '';
@@ -157,7 +156,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
   String StudentNo = '';
   // ignore: non_constant_identifier_names
   String Degree = '';
-  String studentType='';
+  String studentType = '';
   // ignore: non_constant_identifier_names
   String DateReg = '';
 
@@ -181,20 +180,19 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
   final RegistrationDateController = TextEditingController();
 
   Future studentRegistration() async {
-
     // Showing CircularProgressIndicator.
     setState(() {
       visible = true;
     });
 
-    User userA=new User();
-    userA.register=false;
-    Student studentA=new Student();
-    studentA.register=false;
+    User userA = new User();
+    userA.register = false;
+    Student studentA = new Student();
+    studentA.register = false;
     // Getting value from Controller
 
     userA.email = emailController.text;
-    studentA.email=userA.email;
+    studentA.email = userA.email;
     userA.password = passwordController.text;
     userA.userTypeID = 1;
     studentA.studentNo = StudentNoController.text;
@@ -204,32 +202,33 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 
     //studentA.degreeID=1;
 
-    studentA.degreeID=_selectedDegree.DegreeID;
+    studentA.degreeID = _selectedDegree.DegreeID;
 
     studentA.registrationDate = DateTime.parse(RegistrationDateController.text);
     //studentA.studentTypeID=int.parse(studentTypeController.text);
-    userA.userTypeID=1;
+    userA.userTypeID = 1;
 
-   // studentA.studentTypeID=1;
+    // studentA.studentTypeID=1;
 
-    studentA.studentTypeID=_selectedStudType.StudentTypeID;
+    studentA.studentTypeID = _selectedStudType.StudentTypeID;
 
-    var registered = await studentController.studentRegistration(studentA, userA);
-    print("REGISTER OUTPUT: "+registered);
-    String message="";
+    var registered =
+        await studentController.studentRegistration(studentA, userA);
+    print("REGISTER OUTPUT: " + registered);
+    String message = "";
     //Empty string indicates no errors -> success
-    if (registered==""){
-      message="Successfuly registered.";
+    if (registered == "") {
+      message = "Successfuly registered.";
+    } else {
+      message = registered;
     }
-    else{
-      message=registered;
-    }
-    print('...............Student registration:      '+message+'      ...............');
+    print('...............Student registration:      ' +
+        message +
+        '      ...............');
 
-
-    if (student.register==true){
+    if (student.register == true) {
       setState(() {
-        visible=false;
+        visible = false;
       });
     }
 
@@ -244,16 +243,14 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
               child: new Text("OK"),
               onPressed: () {
                 //Navigator.of(context).pop();
-                if (student.register==true){
+                if (student.register == true) {
                   Navigator.pushNamed(context, '/Home');
-                }
-                else{
+                } else {
                   setState(() {
-                    visible=false;
+                    visible = false;
                   });
                   Navigator.of(context).pop();
                 }
-
               },
             ),
           ],
@@ -262,19 +259,19 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     );
   }
 
-  bool _isHidden=true;
+  bool _isHidden = true;
 
-  void toggleVisibility(){
+  void toggleVisibility() {
     setState(() {
-      _isHidden=!_isHidden;
+      _isHidden = !_isHidden;
     });
   }
 
-  bool _isHiddenConf=true;
+  bool _isHiddenConf = true;
 
-  void toggleVisibilityConf(){
+  void toggleVisibilityConf() {
     setState(() {
-      _isHiddenConf=!_isHiddenConf;
+      _isHiddenConf = !_isHiddenConf;
     });
   }
 
@@ -300,130 +297,237 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
-    final studentFirstNameField = TextFormField(
-      controller: Student_FNameController,
-      obscureText: false,
-      validator: (val) => val.isEmpty ? 'Enter a first name' : null,
-      onChanged: (val) {
-        setState(() => firstName = val);
-      },
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "First Name",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
+    final studentFirstNameField = kIsWeb
+        ? TextFormField(
+            controller: Student_FNameController,
+            obscureText: false,
+            validator: (val) => val.isEmpty ? 'Enter a first name' : null,
+            onChanged: (val) {
+              setState(() => firstName = val);
+            },
+            style: style,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "First Name",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32.0))),
+          )
+        : TextFormField(
+            controller: Student_FNameController,
+            obscureText: false,
+            validator: (val) => val.isEmpty ? 'Enter a first name' : null,
+            onChanged: (val) {
+              setState(() => firstName = val);
+            },
+            style: style,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "First Name",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32.0))),
+          );
 
-    final studentLastNameField = TextFormField(
-      controller: Student_LNameController,
-      obscureText: false,
-      validator: (val) => val.isEmpty ? 'Enter a last name' : null,
-      onChanged: (val) {
-        setState(() => lastName = val);
-      },
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Last Name",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
+    final studentLastNameField = kIsWeb
+        ? TextFormField(
+            controller: Student_LNameController,
+            obscureText: false,
+            validator: (val) => val.isEmpty ? 'Enter a last name' : null,
+            onChanged: (val) {
+              setState(() => lastName = val);
+            },
+            style: style,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Last Name",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32.0))),
+          )
+        : TextFormField(
+            controller: Student_LNameController,
+            obscureText: false,
+            validator: (val) => val.isEmpty ? 'Enter a last name' : null,
+            onChanged: (val) {
+              setState(() => lastName = val);
+            },
+            style: style,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Last Name",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32.0))),
+          );
 
-    final studentEmailField = TextFormField(
-      controller: emailController,
-      obscureText: false,
-      validator: (val){
-        if (val.isEmpty) {
-          return 'Please enter an email address!.';
-        }
-        if (val.contains("@students.wits.ac.za")==false){
-          return 'Invalid student email address';
-        }
-        return null;
-      },
-      onChanged: (val) {
-        setState(() => email = val);
-      },
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Email",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
+    final studentEmailField = kIsWeb
+        ? TextFormField(
+            controller: emailController,
+            obscureText: false,
+            validator: (val) {
+              if (val.isEmpty) {
+                return 'Please enter an email address!.';
+              }
+              if (val.contains("@students.wits.ac.za") == false) {
+                return 'Invalid student email address';
+              }
+              return null;
+            },
+            onChanged: (val) {
+              setState(() => email = val);
+            },
+            style: style,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Email",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32.0))),
+          )
+        : TextFormField(
+            controller: emailController,
+            obscureText: false,
+            validator: (val) {
+              if (val.isEmpty) {
+                return 'Please enter an email address!.';
+              }
+              if (val.contains("@students.wits.ac.za") == false) {
+                return 'Invalid student email address';
+              }
+              return null;
+            },
+            onChanged: (val) {
+              setState(() => email = val);
+            },
+            style: style,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Email",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32.0))),
+          );
 
-    final dropdownDegree =     new Container(
-      padding: EdgeInsets.symmetric(horizontal: 20) ,
-
-      decoration: ShapeDecoration(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1.0, style: BorderStyle.solid, color: Colors.grey),
-          borderRadius: BorderRadius.all(Radius.circular(32.0)),
-        ),
-      ),
-
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-
-          children: <Widget>[
-
-            DropdownButton(
-              value: _selectedDegree,
-              items: _dropdownMenuItems,
-              onChanged: onChangeDropdownItem,
-              isExpanded: true,
-
-              //style: style,
-
-
-              //style: style,
+    final dropdownDegree = kIsWeb
+        ? new Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                    width: 1.0, style: BorderStyle.solid, color: Colors.grey),
+                borderRadius: BorderRadius.all(Radius.circular(32.0)),
+              ),
             ),
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  DropdownButton(
+                    value: _selectedDegree,
+                    items: _dropdownMenuItems,
+                    onChanged: onChangeDropdownItem,
+                    isExpanded: true,
 
-            //Text('Selected: ${_selectedDegree.DegreeType}'),
-          ],
-        ),
-      ),
-    );
+                    //style: style,
 
-    final dropdownStudType = new Container(
-      padding: EdgeInsets.symmetric(horizontal: 20) ,
-      decoration: ShapeDecoration(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(width: 1.0, style: BorderStyle.solid, color: Colors.grey),
-          borderRadius: BorderRadius.all(Radius.circular(32.0)),
-        ),
-      ),
+                    //style: style,
+                  ),
 
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-
-          children: <Widget>[
-
-            DropdownButton(
-              value: _selectedStudType,
-              items: _dropdownStudTypeMenuItems,
-              onChanged: onChangeStudTypeDropdownItem,
-              isExpanded: true,
-
-
-              //style: style,
-
-
-              //style: style,
+                  //Text('Selected: ${_selectedDegree.DegreeType}'),
+                ],
+              ),
             ),
+          )
+        : new Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                    width: 1.0, style: BorderStyle.solid, color: Colors.grey),
+                borderRadius: BorderRadius.all(Radius.circular(32.0)),
+              ),
+            ),
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  DropdownButton(
+                    value: _selectedDegree,
+                    items: _dropdownMenuItems,
+                    onChanged: onChangeDropdownItem,
+                    isExpanded: true,
 
-            //Text('Selected: ${_selectedDegree.DegreeType}'),
-          ],
-        ),
-      ),
-    );
+                    //style: style,
 
-    RegistrationDateController.text=_date.toString();
+                    //style: style,
+                  ),
+
+                  //Text('Selected: ${_selectedDegree.DegreeType}'),
+                ],
+              ),
+            ),
+          );
+
+    final dropdownStudType = kIsWeb
+        ? new Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                    width: 1.0, style: BorderStyle.solid, color: Colors.grey),
+                borderRadius: BorderRadius.all(Radius.circular(32.0)),
+              ),
+            ),
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  DropdownButton(
+                    value: _selectedStudType,
+                    items: _dropdownStudTypeMenuItems,
+                    onChanged: onChangeStudTypeDropdownItem,
+                    isExpanded: true,
+
+                    //style: style,
+
+                    //style: style,
+                  ),
+
+                  //Text('Selected: ${_selectedDegree.DegreeType}'),
+                ],
+              ),
+            ),
+          )
+        : new Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                    width: 1.0, style: BorderStyle.solid, color: Colors.grey),
+                borderRadius: BorderRadius.all(Radius.circular(32.0)),
+              ),
+            ),
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  DropdownButton(
+                    value: _selectedStudType,
+                    items: _dropdownStudTypeMenuItems,
+                    onChanged: onChangeStudTypeDropdownItem,
+                    isExpanded: true,
+
+                    //style: style,
+
+                    //style: style,
+                  ),
+
+                  //Text('Selected: ${_selectedDegree.DegreeType}'),
+                ],
+              ),
+            ),
+          );
+
+    RegistrationDateController.text = _date.toString();
 //    final dateform =  Stack(
 //      children: <Widget>[
 //        Container(
@@ -468,96 +572,252 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 //    );
 
     // ignore: non_constant_identifier_names
-    final DateSelection = new    Stack(
-      children: <Widget>[
-        Container(
-          width: double.infinity,
-          height: 60,
-          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-          //padding: EdgeInsets.only(bottom: 10),
-          decoration: BoxDecoration(
-            border: Border.all(
-                color: Colors.grey, width: 1),
-            borderRadius: BorderRadius.circular(32),
-            shape: BoxShape.rectangle,
-          ),
-          child:  Row(
+    final DateSelection = kIsWeb
+        ? new Stack(
             children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.calendar_today, color: Color(0xff009999),),
-                onPressed: (){
-                  selectDate(context);
-
-                },
-                tooltip: "Select registration date",
+              Container(
+                width: double.infinity,
+                height: 60,
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                //padding: EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey, width: 1),
+                  borderRadius: BorderRadius.circular(32),
+                  shape: BoxShape.rectangle,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.calendar_today,
+                        color: Color(0xff009999),
+                      ),
+                      onPressed: () {
+                        selectDate(context);
+                      },
+                      tooltip: "Select registration date",
+                    ),
+                    Text(
+                      dateinput,
+                      style: datestyle,
+                    ),
+                  ],
+                ),
               ),
-              Text(dateinput,style: datestyle,),
+              Positioned(
+                  left: 10,
+                  top: 12,
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 10, left: 3, right: 0),
+                    margin: EdgeInsets.only(left: 10),
+                    color: Colors.white,
+                    child: Text(
+                      'Date Registered: ',
+                      style: TextStyle(color: Colors.black.withOpacity(.65)),
+                    ),
+                  )),
             ],
-          ),
-        ),
-        Positioned(
-            left: 10,
-            top: 12,
-            child: Container(
-              padding: EdgeInsets.only(bottom: 10, left: 3, right: 0),
-              margin: EdgeInsets.only(left: 10),
-              color: Colors.white,
-              child: Text(
-                'Date Registered: ',
-                style: TextStyle(color: Colors.black.withOpacity(.65)),
+          )
+        : new Stack(
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                height: 60,
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                //padding: EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey, width: 1),
+                  borderRadius: BorderRadius.circular(32),
+                  shape: BoxShape.rectangle,
+                ),
+                child: Row(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.calendar_today,
+                        color: Color(0xff009999),
+                      ),
+                      onPressed: () {
+                        selectDate(context);
+                      },
+                      tooltip: "Select registration date",
+                    ),
+                    Text(
+                      dateinput,
+                      style: datestyle,
+                    ),
+                  ],
+                ),
               ),
-            )),
-      ],
-    );
+              Positioned(
+                  left: 10,
+                  top: 12,
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 10, left: 3, right: 0),
+                    margin: EdgeInsets.only(left: 10),
+                    color: Colors.white,
+                    child: Text(
+                      'Date Registered: ',
+                      style: TextStyle(color: Colors.black.withOpacity(.65)),
+                    ),
+                  )),
+            ],
+          );
 
+    final passwordField = kIsWeb
+        ? TextFormField(
+            controller: passwordController,
+            obscureText: _isHidden,
+            validator: (val) =>
+                val.length < 6 ? 'Enter a password 6+ chars long' : null,
+            onChanged: (val) {
+              setState(() => password = val);
+            },
+            style: style,
+            decoration: InputDecoration(
+                suffixIcon: IconButton(
+                    icon: _isHidden
+                        ? Icon(Icons.visibility_off)
+                        : Icon(Icons.visibility),
+                    onPressed: toggleVisibility),
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Password",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32.0))),
+          )
+        : TextFormField(
+            controller: passwordController,
+            obscureText: _isHidden,
+            validator: (val) =>
+                val.length < 6 ? 'Enter a password 6+ chars long' : null,
+            onChanged: (val) {
+              setState(() => password = val);
+            },
+            style: style,
+            decoration: InputDecoration(
+                suffixIcon: IconButton(
+                    icon: _isHidden
+                        ? Icon(Icons.visibility_off)
+                        : Icon(Icons.visibility),
+                    onPressed: toggleVisibility),
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Password",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32.0))),
+          );
 
-    final passwordField = TextFormField(
-      controller: passwordController,
-      obscureText: _isHidden,
-
-      validator: (val) =>
-          val.length < 6 ? 'Enter a password 6+ chars long' : null,
-      onChanged: (val) {
-        setState(() => password = val);
-      },
-      style: style,
-      decoration: InputDecoration(
-        suffixIcon: IconButton(icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibility),
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Password",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
-    final confirmPasswordField = TextFormField(
-      controller: confirmPassCont,
-
-      validator: (val) {
-
-        if (val.isEmpty) {
-          return 'Confirm password.';
-        }
-        if (val !=passwordController.text){
-          return 'Passwords must match';
-        }
-        return null;
-      },
-      obscureText: _isHiddenConf,
-      onChanged: (val) {
-        setState(() => ConfirmPass = val);
-      },
-      style: style,
-      decoration: InputDecoration(
-          suffixIcon: IconButton(icon: _isHiddenConf ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibilityConf),
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Confirm Password",
-          border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
+    final confirmPasswordField = kIsWeb
+        ? TextFormField(
+            controller: confirmPassCont,
+            validator: (val) {
+              if (val.isEmpty) {
+                return 'Confirm password.';
+              }
+              if (val != passwordController.text) {
+                return 'Passwords must match';
+              }
+              return null;
+            },
+            obscureText: _isHiddenConf,
+            onChanged: (val) {
+              setState(() => ConfirmPass = val);
+            },
+            style: style,
+            decoration: InputDecoration(
+                suffixIcon: IconButton(
+                    icon: _isHiddenConf
+                        ? Icon(Icons.visibility_off)
+                        : Icon(Icons.visibility),
+                    onPressed: toggleVisibilityConf),
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Confirm Password",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32.0))),
+          )
+        : TextFormField(
+            controller: confirmPassCont,
+            validator: (val) {
+              if (val.isEmpty) {
+                return 'Confirm password.';
+              }
+              if (val != passwordController.text) {
+                return 'Passwords must match';
+              }
+              return null;
+            },
+            obscureText: _isHiddenConf,
+            onChanged: (val) {
+              setState(() => ConfirmPass = val);
+            },
+            style: style,
+            decoration: InputDecoration(
+                suffixIcon: IconButton(
+                    icon: _isHiddenConf
+                        ? Icon(Icons.visibility_off)
+                        : Icon(Icons.visibility),
+                    onPressed: toggleVisibilityConf),
+                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                hintText: "Confirm Password",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(32.0))),
+          );
 
     //final RegisterUser
-    final registerButon = Material(
+    final registerButon = kIsWeb? Row(
+      children: [
+        Expanded(
+          child: Text(""),
+        ),
+        Expanded(
+            //flex:3,
+            child: Material(
+          elevation: 5.0,
+          borderRadius: BorderRadius.circular(30.0),
+          color: Color(0xff009999),
+          child: MaterialButton(
+            minWidth: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+            onPressed: () async {
+              if (_formKey.currentState.validate()) {
+                if (_date == null) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: new Text("No registration date selected ..."),
+                        content: Text(
+                            "Enter the registration date of your current postgraduate degree so that deadlines may be calculated."),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: new Text("OK"),
+                            onPressed: () {
+                              setState(() {
+                                visible = false;
+                              });
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else {
+                  studentRegistration();
+                }
+              }
+            },
+            child: Text("Register",
+                textAlign: TextAlign.center,
+                style: style.copyWith(
+                    color: Colors.white, fontWeight: FontWeight.bold)),
+          ),
+        )
+        ),
+        Expanded(
+          child: Text(""),
+        )
+      ],
+    ):Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
@@ -565,21 +825,21 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
-
-          if (_formKey.currentState.validate()){
-            if(_date==null){
+          if (_formKey.currentState.validate()) {
+            if (_date == null) {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: new Text("No registration date selected ..."),
-                    content: Text("Enter the registration date of your current postgraduate degree so that deadlines may be calculated."),
+                    content: Text(
+                        "Enter the registration date of your current postgraduate degree so that deadlines may be calculated."),
                     actions: <Widget>[
                       FlatButton(
                         child: new Text("OK"),
                         onPressed: () {
                           setState(() {
-                            visible=false;
+                            visible = false;
                           });
                           Navigator.of(context).pop();
                         },
@@ -588,12 +848,10 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                   );
                 },
               );
-            }else{
+            } else {
               studentRegistration();
             }
-
           }
-
         },
         child: Text("Register",
             textAlign: TextAlign.center,
@@ -635,7 +893,36 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       );
     }
 
-    final loginButon = Material(
+    final loginButon = kIsWeb? Row(
+      children: [
+        Expanded(child: Text("")),
+        Expanded(
+          //flex: 3,
+          child: Material(
+            elevation: 5.0,
+            borderRadius: BorderRadius.circular(30.0),
+            color: Color(0xff009999),
+            child: MaterialButton(
+              minWidth: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+              onPressed: () {
+                //widget.toggleView();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              child: Text("Login",
+                  textAlign: TextAlign.center,
+                  style: style.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.bold)),
+            ),
+          ),
+        ),
+        Expanded(child: Text("")),
+      ],
+    ):
+    Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
@@ -643,7 +930,6 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-
           //widget.toggleView();
           Navigator.push(
             context,
@@ -662,128 +948,195 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         child: Container(
           color: Colors.white,
           width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          alignment: Alignment.center,
           child: Padding(
               padding: const EdgeInsets.all(36.0),
               child: Form(
                   key: _formKey,
                   child: SingleChildScrollView(
-
                       child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/logo.png",
+                        fit: BoxFit.contain,
+                      ),
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      kIsWeb?
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(""),
+                          ),
+                          Expanded(
+                            child: Column(children: <Widget>[
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.8,
+                                  child: studentFirstNameField),
+                              SizedBox(
+                                height: 15.0,
+                              ),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.8,
+                                  child: studentLastNameField),
+                              SizedBox(
+                                height: 15.0,
+                              ),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.8,
+                                  child: studentEmailField),
+                              SizedBox(
+                                height: 15.0,
+                              ),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.8,
+                                  child: dropdownDegree),
+                              SizedBox(
+                                height: 15.0,
+                              ),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 2.8,
+                                  child: dropdownStudType),
+                              SizedBox(
+                                height: 15.0,
+                              ),
+                            ]),
+                          ),
+                          Column(children: <Widget>[
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                          ]),
+                          Expanded(
+                              child: Column(children: <Widget>[
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.8,
+                                child:
+                                    //dateform
+                                    DateSelection),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.8,
+                                child: studentNumberField),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.8,
+                                child: passwordField),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.8,
+                                child: confirmPasswordField),
+                          ])),
+                          Expanded(
+                            child: Text(""),
+                          ),
+                        ],
+                      )
+                      :
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
 
-                          Image.asset(
-                            "assets/logo.png",
-                            fit: BoxFit.contain,
-                          ),
-
-                          SizedBox(
-                            height: 15.0,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Column(children: <Widget>[
-
-                                SizedBox(
-                                    width:
-                                    MediaQuery.of(context).size.width / 2.8,
-                                    child: studentFirstNameField),
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                SizedBox(
-                                    width:
-                                    MediaQuery.of(context).size.width / 2.8,
-                                    child: studentLastNameField),
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                SizedBox(
-                                    width:
-                                    MediaQuery.of(context).size.width / 2.8,
-                                    child: studentEmailField),
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                SizedBox(
-                                   width:
-                                    MediaQuery.of(context).size.width / 2.8,
-                                    child: dropdownDegree
-                                ),
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                SizedBox(
-                                    width:
-                                    MediaQuery.of(context).size.width / 2.8,
-                                    child: dropdownStudType
-                                ),
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-
-                              ]),
-                              Column(children: <Widget>[
-                                SizedBox(
-                                  width: 15.0,
-                                ),
-                              ]),
-                              Column(children: <Widget>[
-                                SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.8,
-                                    child:
-                                    //dateform
-                                    DateSelection
-                                ),
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.8,
-                                    child: studentNumberField),
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.8,
-                                    child: passwordField),
-                                SizedBox(
-                                  height: 15.0,
-                                ),
-                                SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.8,
-                                    child: confirmPasswordField),
-                              ]),
-                            ],
-                          ),
-
-
-                          registerButon,
-
-                          Visibility(
-                              visible: visible,
-                              child: Container(
-                                  margin: EdgeInsets.only(bottom: 30, top: 30),
-                                  child: CircularProgressIndicator()
-                              )
-                          ),
-                          _divider(),
-                          loginButon,
+                          Column(children: <Widget>[
+                            SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width / 2.8,
+                                child: studentFirstNameField),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width / 2.8,
+                                child: studentLastNameField),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width / 2.8,
+                                child: studentEmailField),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width / 2.8,
+                                child: dropdownDegree),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            SizedBox(
+                                width:
+                                MediaQuery.of(context).size.width / 2.8,
+                                child: dropdownStudType),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                          ]),
+                          Column(children: <Widget>[
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                          ]),
+                          Column(children: <Widget>[
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.8,
+                                child:
+                                //dateform
+                                DateSelection),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.8,
+                                child: studentNumberField),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.8,
+                                child: passwordField),
+                            SizedBox(
+                              height: 15.0,
+                            ),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.8,
+                                child: confirmPasswordField),
+                          ]),
 
                         ],
-                      )))),
+                      ),
+                      registerButon,
+                      Visibility(
+                          visible: visible,
+                          child: Container(
+                              margin: EdgeInsets.only(bottom: 30, top: 30),
+                              child: CircularProgressIndicator())),
+                      _divider(),
+                      loginButon,
+                    ],
+                  )))),
         ),
       ),
     );
   }
 }
-
-
-

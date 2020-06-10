@@ -35,8 +35,8 @@ bool isArch(int ProjectID){
 
 List<StaggeredTile> stiles = new List<StaggeredTile>();
 List<DynamicList> listDynamic = [];
-// ignore: non_constant_identifier_names
-enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
+
+
 // ignore: must_be_immutable
 class Board extends StatefulWidget {
   //1713445@students.wits.ac.za
@@ -1385,7 +1385,19 @@ class _BoardState extends State<Board> {
       ),
     );
 
-    final arrowImage = Image.asset("assets/downarrow.png");
+    final arrowImage = Row(
+      children: [
+        Expanded(
+          child:Text("")
+        ),
+        Expanded(
+            child:Image.asset("assets/downarrow.png")
+        ),
+        Expanded(
+            child:Text("")
+        ),
+      ],
+    );
 
     //This view should be displayed when it is determined that
     //The selected board has no lists to display.
@@ -1411,11 +1423,7 @@ class _BoardState extends State<Board> {
                   color: Colors.blueGrey),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(left: 100, top: 10),
-            alignment: Alignment.bottomLeft,
-            child: arrowImage,
-          ),
+          arrowImage
         ],
       ),
     );
@@ -1996,11 +2004,8 @@ class _DynamicListState extends State<DynamicList> {
           dueDateInput = "Select date ...";
         }
       }else{
-        _isArchive=true;
         if (create == false) {
           //i.e. to View/Edit the Task
-
-
           newTask = user
               .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
               .boardLists[getListIndex(widget.aList.ListID)]
@@ -2023,24 +2028,6 @@ class _DynamicListState extends State<DynamicList> {
           dueDateInput = "Select date ...";
         }
       }
-//      String out= create == true
-//          ? "New Task: "
-//          : _isArchive?
-//      user
-//          .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
-//          .boardLists[getListIndex(widget.aList.ListID)]
-//          .listTasks[getTaskIndex(_selectedTaskID)]
-//          .Task_Title
-//          :
-//      user
-//          .boards[getBoardIndex(widget.aList.ProjectID)]
-//          .boardLists[getListIndex(widget.aList.ListID)]
-//          .listTasks[getTaskIndex(_selectedTaskID)]
-//          .Task_Title;
-//      print("OUT: "+out);
-
-
-
 
       return showDialog(
           context: context,
@@ -2256,26 +2243,6 @@ class _DynamicListState extends State<DynamicList> {
                                 if (dueChanged == true) {
                                   newTask.Task_Due = _dueDate;
                                 }
-//                                print("Title: " +
-//                                    newTask.Task_Title +
-//                                    "\n" +
-//                                    "Description: " +
-//                                    newTask.Task_Description +
-//                                    "\n" +
-//                                    "ListID: " +
-//                                    newTask.ListID.toString() +
-//                                    "\n" +
-//                                    "Added by: " +
-//                                    newTask.Task_AddedBy +
-//                                    "\n" +
-//                                    "Status ID: " +
-//                                    newTask.Task_StatusID.toString() +
-//                                    "\n" +
-//                                    "Date added: " +
-//                                    newTask.Task_DateAdded.toString() +
-//                                    "\n" +
-//                                    "Date Due: " +
-//                                    newTask.Task_Due.toString());
                                 await taskController.createTask(newTask);
 
                                 widget.initializeTaskDisplay();
@@ -2481,167 +2448,175 @@ class _DynamicListState extends State<DynamicList> {
     // ignore: non_constant_identifier_names
     final TaskContainer = new Expanded(
         flex: 1,
-        child: ListView.builder(
-          itemCount:(_isArchive==false)?
-          user.boards[getBoardIndex(widget.aList.ProjectID)]
-              .boardLists[getListIndex(widget.aList.ListID)].listTasks.length
-          :
-          user.archivedBoards[getBoardIndex(widget.aList.ProjectID)]
-              .boardLists[getListIndex(widget.aList.ListID)].listTasks.length
-          ,
-          // ignore: non_constant_identifier_names
-          itemBuilder: (BuildContext Context, int index) {
-            return new Container(
-              margin: EdgeInsets.all(4),
-              height: 80,
-              decoration: BoxDecoration(
-                color: Color(0xff009999).withOpacity(0.1),
-                //color:Colors.green,
-                boxShadow: [
-                  new BoxShadow(
-                    color: Color(0xff009999),
-                    //color: Colors.red
-                    //blurRadius: 10.0,
-                    //offset: Offset(1.0,0.0)
-                  ),
-                ],
-
-                //border: Border.all(color: Colors.white, width: 8),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: ClipPath(
-                clipper: ShapeBorderClipper(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)))),
-                child: Container(
-                  height: 200.0,
+        child: StatefulBuilder(
+          builder: (context,setState){
+            return ListView.builder(
+              itemCount:(_isArchive==false)?
+              user.boards[getBoardIndex(widget.aList.ProjectID)]
+                  .boardLists[getListIndex(widget.aList.ListID)].listTasks.length
+                  :
+              user.archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+                  .boardLists[getListIndex(widget.aList.ListID)].listTasks.length
+              ,
+              // ignore: non_constant_identifier_names
+              itemBuilder: (BuildContext Context, int index) {
+                return new Container(
+                  margin: EdgeInsets.all(4),
+                  height: 80,
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border(
-                          left: BorderSide(
-                              //color: Color(0xff009999),
-                              color: (_isArchive==false)?
-                              (user
-                                  .boards[getBoardIndex(
-                                  widget.aList.ProjectID)]
-                                  .boardLists[
-                              getListIndex(widget.aList.ListID)]
-                                  .listTasks[index]
-                                  .Task_StatusID ==
-                                  4
-                                  ? Colors.grey
-                                  : user
-                                  .boards[getBoardIndex(
-                                  widget.aList.ProjectID)]
-                                  .boardLists[getListIndex(
-                                  widget.aList.ListID)]
-                                  .listTasks[index]
-                                  .Task_StatusID ==
-                                  1
-                                  ? Color(0xff009999)
-                                  : Colors.green)
-                              :
-                              (user
-                                  .archivedBoards[getBoardIndex(
-                                  widget.aList.ProjectID)]
-                                  .boardLists[
-                              getListIndex(widget.aList.ListID)]
-                                  .listTasks[index]
-                                  .Task_StatusID ==
-                                  4
-                                  ? Colors.grey
-                                  : user
-                                  .archivedBoards[getBoardIndex(
-                                  widget.aList.ProjectID)]
-                                  .boardLists[getListIndex(
-                                  widget.aList.ListID)]
-                                  .listTasks[index]
-                                  .Task_StatusID ==
-                                  1
-                                  ? Color(0xff009999)
-                                  : Colors.green)
-                              ,
-                              width: 5.0))),
-                  child: ListTile(
-                    title: Text(
-                      (_isArchive==false)?
-                      user
-                          .boards[getBoardIndex(widget.aList.ProjectID)]
-                          .boardLists[getListIndex(widget.aList.ListID)]
-                          .listTasks[index]
-                          .Task_Title
-                          :
-                      user
-                          .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
-                          .boardLists[getListIndex(widget.aList.ListID)]
-                          .listTasks[index]
-                          .Task_Title
-                    ,
-                      style: (_isArchive==false)?
-                      user
-                          .boards[getBoardIndex(widget.aList.ProjectID)]
-                          .boardLists[getListIndex(widget.aList.ListID)]
-                          .listTasks[index]
-                          .Task_StatusID ==
-                          4
-                          ? TextStyle(
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough)
-                          : TextStyle(color: Colors.black)
-                      :
-                      user
-                          .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
-                          .boardLists[getListIndex(widget.aList.ListID)]
-                          .listTasks[index]
-                          .Task_StatusID ==
-                          4
-                          ? TextStyle(
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough)
-                          : TextStyle(color: Colors.black),
-                    ),
-                    onTap: () async {
-                      bool isArchive=isArch(widget.aList.ProjectID);
+                    color: Color(0xff009999).withOpacity(0.1),
+                    //color:Colors.green,
+                    boxShadow: [
+                      new BoxShadow(
+                        color: Color(0xff009999),
+                        //color: Colors.red
+                        //blurRadius: 10.0,
+                        //offset: Offset(1.0,0.0)
+                      ),
+                    ],
 
-                      _selectedTaskID = isArchive==false? user
-                          .boards[getBoardIndex(widget.aList.ProjectID)]
-                          .boardLists[getListIndex(widget.aList.ListID)]
-                          .listTasks[index]
-                          .TaskID
-                      :
-                      user
-                          .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
-                          .boardLists[getListIndex(widget.aList.ListID)]
-                          .listTasks[index]
-                          .TaskID
-                      ;
-                      initializeTaskStatus();
-                      //print("Current tasks: "+user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.length.toString());
-                      await createTaskAlertDialog(context, false);
-                      await widget.initializeTaskDisplay();
-                      Board returnBoard=new Board();
-                      if(_isArchive==false){
-                        returnBoard.proj_board=user.boards[getBoardIndex(widget.aList.ProjectID)];
-                      }else{
-                        returnBoard.proj_board=user.archivedBoards[getBoardIndex(widget.aList.ProjectID)];
-                      }
-
-                      //boardPage.populateListDisplay(widget.aList.ProjectID);
-                      Navigator.pop(context);
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => returnBoard),
-                      );
-                    },
+                    //border: Border.all(color: Colors.white, width: 8),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                ),
-              ),
+                  child: ClipPath(
+                    clipper: ShapeBorderClipper(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)))),
+                    child: Container(
+                      height: 200.0,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border(
+                              left: BorderSide(
+                                //color: Color(0xff009999),
+                                  color: (_isArchive==false)?
+                                  (user
+                                      .boards[getBoardIndex(
+                                      widget.aList.ProjectID)]
+                                      .boardLists[
+                                  getListIndex(widget.aList.ListID)]
+                                      .listTasks[index]
+                                      .Task_StatusID ==
+                                      4
+                                      ? Colors.grey
+                                      : user
+                                      .boards[getBoardIndex(
+                                      widget.aList.ProjectID)]
+                                      .boardLists[getListIndex(
+                                      widget.aList.ListID)]
+                                      .listTasks[index]
+                                      .Task_StatusID ==
+                                      1
+                                      ? Color(0xff009999)
+                                      : Colors.green)
+                                      :
+                                  (user
+                                      .archivedBoards[getBoardIndex(
+                                      widget.aList.ProjectID)]
+                                      .boardLists[
+                                  getListIndex(widget.aList.ListID)]
+                                      .listTasks[index]
+                                      .Task_StatusID ==
+                                      4
+                                      ? Colors.grey
+                                      : user
+                                      .archivedBoards[getBoardIndex(
+                                      widget.aList.ProjectID)]
+                                      .boardLists[getListIndex(
+                                      widget.aList.ListID)]
+                                      .listTasks[index]
+                                      .Task_StatusID ==
+                                      1
+                                      ? Color(0xff009999)
+                                      : Colors.green)
+                                  ,
+                                  width: 5.0))),
+                      child: ListTile(
+                        title: Text(
+                          (_isArchive==false)?
+                          user
+                              .boards[getBoardIndex(widget.aList.ProjectID)]
+                              .boardLists[getListIndex(widget.aList.ListID)]
+                              .listTasks[index]
+                              .Task_Title
+                              :
+                          user
+                              .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+                              .boardLists[getListIndex(widget.aList.ListID)]
+                              .listTasks[index]
+                              .Task_Title
+                          ,
+                          style: (_isArchive==false)?
+                          user
+                              .boards[getBoardIndex(widget.aList.ProjectID)]
+                              .boardLists[getListIndex(widget.aList.ListID)]
+                              .listTasks[index]
+                              .Task_StatusID ==
+                              4
+                              ? TextStyle(
+                              color: Colors.grey,
+                              decoration: TextDecoration.lineThrough)
+                              : TextStyle(color: Colors.black)
+                              :
+                          user
+                              .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+                              .boardLists[getListIndex(widget.aList.ListID)]
+                              .listTasks[index]
+                              .Task_StatusID ==
+                              4
+                              ? TextStyle(
+                              color: Colors.grey,
+                              decoration: TextDecoration.lineThrough)
+                              : TextStyle(color: Colors.black),
+                        ),
+                        onTap: () async {
+                          bool isArchive=isArch(widget.aList.ProjectID);
+
+                          _selectedTaskID = isArchive==false? user
+                              .boards[getBoardIndex(widget.aList.ProjectID)]
+                              .boardLists[getListIndex(widget.aList.ListID)]
+                              .listTasks[index]
+                              .TaskID
+                              :
+                          user
+                              .archivedBoards[getBoardIndex(widget.aList.ProjectID)]
+                              .boardLists[getListIndex(widget.aList.ListID)]
+                              .listTasks[index]
+                              .TaskID
+                          ;
+                          initializeTaskStatus();
+                          //print("Current tasks: "+user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists[getListIndex(widget.aList.ListID)].listTasks.length.toString());
+                          await createTaskAlertDialog(context, false);
+                          await widget.initializeTaskDisplay();
+                          Board returnBoard=new Board();
+                          if(_isArchive==false){
+                            returnBoard.proj_board=user.boards[getBoardIndex(widget.aList.ProjectID)];
+                          }else{
+                            returnBoard.proj_board=user.archivedBoards[getBoardIndex(widget.aList.ProjectID)];
+                          }
+                          setState(() {
+
+                          });
+
+                          //boardPage.populateListDisplay(widget.aList.ProjectID);
+                          Navigator.pop(context);
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => returnBoard),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                );
+              },
+              shrinkWrap: true,
             );
           },
-          shrinkWrap: true,
-        ));
+        )
+    );
 
     Widget titleView = Container(
       //width: MediaQuery.of(context).size.width / 4,

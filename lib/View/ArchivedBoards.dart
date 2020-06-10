@@ -15,24 +15,55 @@ import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/main.dart';
-
+final List<DynamicWidget> listArchDynamic=new List<DynamicWidget>();
+bool _isDeleted;
 class ArchivedBoards extends StatefulWidget {
-  final List<DynamicWidget> listDynamic=new List<DynamicWidget>();
+
   Future initialize() async{
-    Project_BoardController projectBoardController=new Project_BoardController();
-    List<List<Project_Board>> allBoards=await projectBoardController.ReadBoards(user.userTypeID,personNo);
-    user.boards= allBoards[0];
-    user.archivedBoards=allBoards[1];
+    Project_BoardController projectBoardController =
+    new Project_BoardController();
+    List<List<Project_Board>> allBoards =
+    await projectBoardController.ReadBoards(user.userTypeID, personNo);
+    if (allBoards.isEmpty == false) {
+      if (allBoards[0] == null) {
+        user.boards = null;
+      } else {
+        user.boards = allBoards[0];
+      }
+      if (allBoards[1] == null) {
+        user.archivedBoards = null;
+      } else {
+        user.archivedBoards = allBoards[1];
+      }
+    } else {
+      user.boards = null;
+      user.archivedBoards = null;
+    }
 
     //print("Active boards: "+user.boards.length.toString());
   }
   Future initializeDisplay() async {
     await initialize();
-    listDynamic.clear();
-    print('Initializing board display! ################## in list dynamic: '+listDynamic.length.toString());
-    for (int i = 0; i < user.archivedBoards.length; i++) {
-      //print("Board ID: "+user.boards[i].ProjectID.toString()+", Title: "+user.boards[i].Project_Title);
-      listDynamic.add(new DynamicWidget(aboard: user.archivedBoards[i]));
+    listArchDynamic.clear();
+    print('Initializing board display! ##################');
+
+    if (user.archivedBoards != null) {
+      if(user.archivedBoards.length==0){
+        _isDeleted=true;
+      }
+      else{
+        for (int i = 0; i < user.archivedBoards.length; i++) {
+          print("Board ID: " +
+              user.archivedBoards[i].ProjectID.toString() +
+              ", Title: " +
+              user.archivedBoards[i].Project_Title);
+          listArchDynamic.add(new DynamicWidget(aboard: user.archivedBoards[i]));
+        }
+      }
+
+    }
+    else{
+      _isDeleted=true;
     }
   }
 
@@ -57,7 +88,7 @@ class _ArchivedBoardsPageState extends State<ArchivedBoards> {
   signout() {
     degrees.clear();
     studentTypes.clear();
-    widget.listDynamic.clear();
+    listArchDynamic.clear();
 
     user = new User();
     supervisor = new Supervisor();
@@ -84,8 +115,8 @@ bool _viewArchived=false;
       margin: new EdgeInsets.all(10.0),
       //height: MediaQuery.of(context).size.height,
       child: ListView.builder(
-        itemCount: widget.listDynamic.length,
-        itemBuilder: (_, index) => widget.listDynamic[index],
+        itemCount: listArchDynamic.length,
+        itemBuilder: (_, index) => listArchDynamic[index],
       ),
     );
 
@@ -119,6 +150,8 @@ bool _viewArchived=false;
         ],
       ),
     );
+    bool archempty=false;
+   // if(user.archivedBoards=null)
 
     return Scaffold(
       appBar: AppBar(
@@ -128,7 +161,7 @@ bool _viewArchived=false;
       body: new Container(
         alignment: Alignment.center,
         margin: new EdgeInsets.all(10.0),
-        child: user.archivedBoards.length > 0 ? dynamicTextField : noBoardsView,
+        child: (user.archivedBoards==null ) ? noBoardsView : (user.archivedBoards.length == 0) ? noBoardsView : dynamicTextField,
       ),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
@@ -293,7 +326,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                     await projectBoardController.deleteBoard(widget.aboard.ProjectID);
 
 
-                    listDynamic.removeAt(boardIndex);
+                    listArchDynamic.removeAt(boardIndex);
                     homePage.initializeDisplay();
                     Navigator.pop(context);
                     Navigator.push(

@@ -15,25 +15,58 @@ import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/ArchivedBoards.dart';
 import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/main.dart';
-
+final List<DynamicWidget> listDynamic = new List<DynamicWidget>();
+bool _isDeleted;
 class HomePage extends StatefulWidget {
-  final List<DynamicWidget> listDynamic=new List<DynamicWidget>();
-  Future initialize() async{
-    Project_BoardController projectBoardController=new Project_BoardController();
-    List<List<Project_Board>> allBoards=await projectBoardController.ReadBoards(user.userTypeID,personNo);
-    user.boards= allBoards[0];
-    user.archivedBoards=allBoards[1];
 
-    //print("Active boards: "+user.boards.length.toString());
+  Future initialize() async {
+    Project_BoardController projectBoardController =
+        new Project_BoardController();
+    List<List<Project_Board>> allBoards =
+        await projectBoardController.ReadBoards(user.userTypeID, personNo);
+    if (allBoards.isEmpty == false) {
+      if (allBoards[0] == null) {
+        user.boards = null;
+      } else {
+        user.boards = allBoards[0];
+      }
+      if (allBoards[1] == null) {
+        user.archivedBoards = null;
+      } else {
+        user.archivedBoards = allBoards[1];
+      }
+    } else {
+      user.boards = null;
+      user.archivedBoards = null;
+    }
+
+
   }
+
   Future initializeDisplay() async {
     await initialize();
     listDynamic.clear();
-    print('Initializing board display! ################## in list dynamic: '+listDynamic.length.toString());
-    for (int i = 0; i < user.boards.length; i++) {
-      print("Board ID: "+user.boards[i].ProjectID.toString()+", Title: "+user.boards[i].Project_Title);
-      listDynamic.add(new DynamicWidget(aboard: user.boards[i]));
+    print('Initializing board display! ##################');
+
+    if (user.boards != null) {
+      if(user.boards.length==0){
+        _isDeleted=true;
+      }
+      else{
+        for (int i = 0; i < user.boards.length; i++) {
+          print("Board ID: " +
+              user.boards[i].ProjectID.toString() +
+              ", Title: " +
+              user.boards[i].Project_Title);
+          listDynamic.add(new DynamicWidget(aboard: user.boards[i]));
+        }
+      }
+
     }
+    else{
+      _isDeleted=true;
+    }
+    //print('Deleted?! ################## '+_isDeleted.toString());
   }
 
   @override
@@ -109,7 +142,7 @@ class _MyHomePageState extends State<HomePage> {
                           child: TextFormField(
                             controller: titleController,
                             validator: (val) =>
-                            val.isEmpty ? 'Enter Board Title' : null,
+                                val.isEmpty ? 'Enter Board Title' : null,
                             decoration: InputDecoration(
                                 //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                                 hintText: "* Board Title",
@@ -161,7 +194,6 @@ class _MyHomePageState extends State<HomePage> {
                                 ),
                                 onPressed: () async {
                                   await selectStartDate(context);
-
 
                                   setState(() {
                                     startDateInput = DateFormat('yyyy-MM-dd')
@@ -222,8 +254,8 @@ class _MyHomePageState extends State<HomePage> {
                                   await selectEndDate(context);
 
                                   setState(() {
-                                    endDateInput =
-                                        DateFormat('yyyy-MM-dd').format(_endDate);
+                                    endDateInput = DateFormat('yyyy-MM-dd')
+                                        .format(_endDate);
                                   });
                                 },
                               ),
@@ -256,24 +288,42 @@ class _MyHomePageState extends State<HomePage> {
                     if (_formKey.currentState.validate()) {
                       Project_Board projectBoard = new Project_Board();
                       Project_BoardController projectBoardController =
-                      new Project_BoardController();
+                          new Project_BoardController();
                       projectBoard.Project_Title = titleController.text;
-                      projectBoard.Project_Description = descriptionController.text;
+                      projectBoard.Project_Description =
+                          descriptionController.text;
                       projectBoard.Project_StartDate = _startDate;
                       projectBoard.Project_EndDate = _endDate;
                       //print("Person: "+personNo);
-                      await projectBoardController.createBoard(projectBoard,user.userTypeID,personNo);
-                      List<List<Project_Board>> allBoards=await projectBoardController.ReadBoards(user.userTypeID, personNo);
-                      user.boards=allBoards[0];
-                      user.archivedBoards=allBoards[1];
-                      projectBoard=user.boards.last;
+                      await projectBoardController.createBoard(
+                          projectBoard, user.userTypeID, personNo);
+                      //print("NOT EMPTY");
+                      List<List<Project_Board>> allBoards =
+                          await projectBoardController.ReadBoards(
+                              user.userTypeID, personNo);
+                      if (allBoards.isEmpty == false) {
+
+                        if (allBoards[0] == null) {
+                          user.boards = null;
+                        } else {
+                          user.boards = allBoards[0];
+                        }
+                        if (allBoards[1] == null) {
+                          user.archivedBoards = null;
+                        } else {
+                          user.archivedBoards = allBoards[1];
+                        }
+                      } else {
+                        user.boards = null;
+                        user.archivedBoards = null;
+                      }
+                      projectBoard = user.boards.last;
                       addDynamic(projectBoard);
                       boardTitle = "";
                       await homePage.initializeDisplay();
+                      setState(() {});
                       Navigator.popAndPushNamed(context, '/Home');
-                      setState(() {
-
-                      });
+                      setState(() {});
                     }
                   },
                 )
@@ -286,13 +336,13 @@ class _MyHomePageState extends State<HomePage> {
   Icon floatingIcon = new Icon(Icons.add);
 
   addDynamic(Project_Board givenBoard) {
-    widget.listDynamic.add(new DynamicWidget(aboard: givenBoard));
+    listDynamic.add(new DynamicWidget(aboard: givenBoard));
   }
 
   signout() {
     degrees.clear();
     studentTypes.clear();
-    widget.listDynamic.clear();
+    listDynamic.clear();
 
     user = new User();
     supervisor = new Supervisor();
@@ -310,27 +360,33 @@ class _MyHomePageState extends State<HomePage> {
 
   TextStyle style = TextStyle(
       fontFamily: 'Montserrat', fontSize: 20.0, color: (Colors.white));
-bool _viewArchived=false;
+  bool _viewArchived = false;
   @override
   Widget build(BuildContext context) {
-
+    _isDeleted=false;
+print("LSD: "+ listDynamic.length.toString());
+if(user.boards==null){
+  _isDeleted=true;
+  print("BOARDS NULL: "+_isDeleted.toString());
+}else if(user.boards.length==0){
+  _isDeleted=true;
+  print("BOARDS Empty: "+_isDeleted.toString());
+}
     Widget dynamicTextField = new Container(
       alignment: Alignment.center,
       margin: new EdgeInsets.all(10.0),
       //height: MediaQuery.of(context).size.height,
       child: ListView.builder(
-        itemCount: widget.listDynamic.length,
-        itemBuilder: (_, index) => widget.listDynamic[index],
+        itemCount: listDynamic.length,
+        itemBuilder: (_, index) => listDynamic[index],
       ),
     );
 
     final plusButton = new Container(
       alignment: Alignment.bottomRight,
       child: MaterialButton(
-        onPressed: () async{
+        onPressed: () async {
           await createAlertDialog(context);
-
-
         },
         color:
             //Colors.blueGrey
@@ -345,8 +401,6 @@ bool _viewArchived=false;
       ),
     );
 
-    final arrowImage = Image.asset("assets/downarrow.png");
-
     final noBoardsView = new Container(
       width: MediaQuery.of(context).size.width,
       //height: MediaQuery.of(context).size.height,
@@ -359,36 +413,57 @@ bool _viewArchived=false;
         //mainAxisSize: MainAxisSize.max,
 
         children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width / 1.1,
-            alignment: Alignment.bottomCenter,
-            child: Text(
-              "Click the + button below to create a board.",
-              style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blueGrey),
+//          Expanded(
+//            child:Text("")
+//          ),
+        Container(
+          margin: EdgeInsets.all(10),
+          child: Text(
+            "Click the + button below to create a board.",
+            style: TextStyle(
+                fontFamily: 'Montserrat',
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueGrey),
+          ),
+        ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(""),
+                ),
+                Image.asset("assets/downarrow.png"),
+                Expanded(
+                  child: Text(""),
+                ),
+              ],
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 100, top: 10),
-            alignment: Alignment.bottomLeft,
-            child: arrowImage,
-          ),
         ],
       ),
     );
+
+    if(user.boards==null){
+      _isDeleted=true;
+    }else if (user.boards.length==0){
+      _isDeleted=true;
+    }
+    print("IS DELETED? "+_isDeleted.toString());
 
     return Scaffold(
       appBar: AppBar(
         title: Text("Innovative Skyline"),
         backgroundColor: Color(0xff009999),
       ),
-      body: new Container(
+      body: _isDeleted == true
+          ? noBoardsView:
+      new Container(
         alignment: Alignment.center,
         margin: new EdgeInsets.all(10.0),
-        child: user.boards.length > 0 ? dynamicTextField : noBoardsView,
+        child: (user.boards == null)
+            ? noBoardsView
+            :(user.boards.length == 0)?
+            noBoardsView
+            : dynamicTextField,
       ),
       floatingActionButton: plusButton,
       drawer: Drawer(
@@ -414,7 +489,6 @@ bool _viewArchived=false;
                   style: TextStyle(
                       color: Color(0xff009999), fontWeight: FontWeight.bold)),
               onTap: () {
-
                 if (user.userTypeID == 1) {
                   Navigator.popAndPushNamed(context, '/StudProfile');
                 } else if (user.userTypeID == 2) {
@@ -435,7 +509,6 @@ bool _viewArchived=false;
               onTap: () async {
                 await archivedBoards.initializeDisplay();
                 setState(() {
-
                   Navigator.pushNamed(context, '/Archived');
                 });
               },
@@ -448,7 +521,6 @@ bool _viewArchived=false;
                 signout();
               },
             ),
-
           ],
         ),
       ),
@@ -473,10 +545,7 @@ class DynamicWidget extends StatefulWidget {
   _DynamicWidgetState createState() => _DynamicWidgetState();
 }
 
-
-
 class _DynamicWidgetState extends State<DynamicWidget> {
-
   // ignore: missing_return
   int getBoardIndex(int boardID) {
     for (int i = 0; i < user.boards.length; i++) {
@@ -485,30 +554,32 @@ class _DynamicWidgetState extends State<DynamicWidget> {
       }
     }
   }
-  bool _isShareDisabled=false;
-  bool _isEditDisabled=false;
-  determineAccess(){
-    Project_Board pb=user.boards[getBoardIndex(widget.aboard.ProjectID)];
-    if(pb.AccessLevel==null || pb.AccessLevel==1) {
+
+  bool _isShareDisabled = false;
+  bool _isEditDisabled = false;
+  determineAccess() {
+    Project_Board pb = user.boards[getBoardIndex(widget.aboard.ProjectID)];
+    if (pb.AccessLevel == null || pb.AccessLevel == 1) {
       //Full admin
       _isShareDisabled = false;
       _isEditDisabled = false;
-    }
-    else if(pb.AccessLevel==2){
+    } else if (pb.AccessLevel == 2) {
       //Can edit but not share
       _isShareDisabled = true;
       _isEditDisabled = false;
-    }else if (pb.AccessLevel==3){
+    } else if (pb.AccessLevel == 3) {
       //Can only view
       _isShareDisabled = true;
       _isEditDisabled = true;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     determineAccess();
     //widget.popLists();
-    Project_BoardController projectBoardController = new Project_BoardController();
+    Project_BoardController projectBoardController =
+        new Project_BoardController();
     TextEditingController descriptionController = new TextEditingController();
     // ignore: non_constant_identifier_names
     final Edit_formKey = GlobalKey<FormState>();
@@ -560,60 +631,66 @@ class _DynamicWidgetState extends State<DynamicWidget> {
     }
 
     // ignore: non_constant_identifier_names
-    bool ChangedBoardValue=false;
+    bool ChangedBoardValue = false;
 
     Future<String> confirmDeleteAlertDialog(BuildContext context) {
       return showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
-              title: Text(
-                "CONFIRM DELETE ",
-                style:
-                TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-              ),
-              content: Text(
-                "Are you sure you want to delete this board?",
-                style:
-                TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              ),
-              actions: <Widget>[
-                MaterialButton(
-                  elevation: 5.0,
-                  child: Text(
-                    "Yes",
-                    style: TextStyle(color: Colors.red),
+            return StatefulBuilder(
+              builder: (context,setState){
+                return AlertDialog(
+                  title: Text(
+                    "CONFIRM DELETE ",
+                    style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
                   ),
-                  onPressed: () async {
-                    int boardIndex;
-                    for (int j=0;j<user.boards.length;j++){
-                      if(user.boards[j].ProjectID==widget.aboard.ProjectID){
-                        boardIndex=j;
-                      }
-                    }
-                    await projectBoardController.deleteBoard(widget.aboard.ProjectID);
+                  content: Text(
+                    "Are you sure you want to delete this board?",
+                    style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                  ),
+                  actions: <Widget>[
+                    MaterialButton(
+                      elevation: 5.0,
+                      child: Text(
+                        "Yes",
+                        style: TextStyle(color: Colors.red),
+                      ),
+                      onPressed: () async {
+                        int boardIndex;
+                        for (int j = 0; j < user.boards.length; j++) {
+                          if (user.boards[j].ProjectID == widget.aboard.ProjectID) {
+                            boardIndex = j;
+                          }
+                        }
 
+                        await projectBoardController.deleteBoard(widget.aboard.ProjectID);
+                        listDynamic.removeAt(boardIndex);
 
-                    listDynamic.removeAt(boardIndex);
-                    homePage.initializeDisplay();
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (BuildContext context) => homePage),
-                    );
-                    setState(() {
+                        await homePage.initializeDisplay();
 
-                    });
-                  },
-                ),
-                MaterialButton(
-                  elevation: 5.0,
-                  child: Text("No"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
+                        setState(() {
+                          _isDeleted = true;
+                        });
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => homePage),
+                        );
+                      },
+                    ),
+                    MaterialButton(
+                      elevation: 5.0,
+                      child: Text("No"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                );
+              },
             );
           });
     }
@@ -656,18 +733,18 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                             child: TextFormField(
                               controller: titleController,
                               decoration: InputDecoration(
-                                //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                                //hintText: "* Board Title",
+                                  //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                  //hintText: "* Board Title",
                                   border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(32.0))),
+                                      borderRadius:
+                                          BorderRadius.circular(32.0))),
                               onChanged: (val) {
-                                ChangedBoardValue=true;
+                                ChangedBoardValue = true;
                                 setState(() {
-
                                   widget.aboard.Project_Title = val;
-                                  print('changing: '+widget.aboard.Project_Title);
+                                  print('changing: ' +
+                                      widget.aboard.Project_Title);
                                 });
-
                               },
                             ),
                           ),
@@ -681,14 +758,15 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                               controller: descriptionController,
                               maxLines: 4,
                               decoration: InputDecoration(
-                                //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                                //hintText: "Description",
+                                  //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                  //hintText: "Description",
                                   border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(32.0))),
+                                      borderRadius:
+                                          BorderRadius.circular(32.0))),
                               onChanged: (val) {
-                                ChangedBoardValue=true;
+                                ChangedBoardValue = true;
                                 setState(() =>
-                                widget.aboard.Project_Description = val);
+                                    widget.aboard.Project_Description = val);
                               },
                             ),
                           ),
@@ -701,7 +779,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                 //padding: EdgeInsets.only(bottom: 10),
                                 decoration: BoxDecoration(
                                   border:
-                                  Border.all(color: Colors.grey, width: 1),
+                                      Border.all(color: Colors.grey, width: 1),
                                   borderRadius: BorderRadius.circular(32),
                                   shape: BoxShape.rectangle,
                                 ),
@@ -756,7 +834,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                 //padding: EdgeInsets.only(bottom: 10),
                                 decoration: BoxDecoration(
                                   border:
-                                  Border.all(color: Colors.grey, width: 1),
+                                      Border.all(color: Colors.grey, width: 1),
                                   borderRadius: BorderRadius.circular(32),
                                   shape: BoxShape.rectangle,
                                 ),
@@ -782,8 +860,8 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                   onPressed: () async {
                                     await selectEndDate(context);
                                     setState(() {
-                                      endDateinput =
-                                          DateFormat('yyyy-MM-dd').format(_endDate);
+                                      endDateinput = DateFormat('yyyy-MM-dd')
+                                          .format(_endDate);
                                     });
                                   },
                                 ),
@@ -806,8 +884,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                           ),
                         ],
                       ),
-                    )
-                ),
+                    )),
                 actions: <Widget>[
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -815,12 +892,19 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                       Container(
                           alignment: Alignment.bottomLeft,
                           //color: Colors.green,
-                          width: MediaQuery.of(context).size.width/1.75,
+                          width: MediaQuery.of(context).size.width / 1.75,
                           child: MaterialButton(
                             elevation: 5.0,
-                            child: Text("DELETE",style: TextStyle(color: Colors.red),),
+                            child: Text(
+                              "DELETE",
+                              style: TextStyle(color: Colors.red),
+                            ),
                             onPressed: () async {
                               await confirmDeleteAlertDialog(context);
+                              //print("aa "+listDynamic.length.toString());
+                              setState(() {
+
+                              });
                             },
                           )),
                       Container(
@@ -834,14 +918,14 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                               //print(widget.aboard.Project_Description);
                               if (Edit_formKey.currentState.validate()) {
                                 if (ChangedStart == true) {
-                                  widget.aboard.Project_StartDate =
-                                      _startDate;
+                                  widget.aboard.Project_StartDate = _startDate;
                                 }
                                 if (ChangedEnd == true) {
-                                  widget.aboard.Project_EndDate =
-                                      _endDate;
+                                  widget.aboard.Project_EndDate = _endDate;
                                 }
-                                if(ChangedBoardValue==true||ChangedStart==true||ChangedEnd==true){
+                                if (ChangedBoardValue == true ||
+                                    ChangedStart == true ||
+                                    ChangedEnd == true) {
                                   projectBoardController
                                       .updateBoard(widget.aboard);
                                   print(widget.aboard.Project_Title);
@@ -850,7 +934,6 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                               Navigator.of(context).pop();
                             },
                           )),
-
                     ],
                   ),
                 ],
@@ -859,99 +942,108 @@ class _DynamicWidgetState extends State<DynamicWidget> {
           });
     }
 
-
-    final listReturn = kIsWeb==false? new Container(
-      margin: EdgeInsets.all(8),
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          color: Colors.blueGrey, borderRadius: BorderRadius.circular(20)),
-      child: ListTile(
-        title: Text(
-          widget.aboard.Project_Title,
-          style: widget.style,
-        ),
-        trailing: IconButton(
-          icon: Icon(
-            Icons.edit,
-            color: _isEditDisabled==true? Colors.grey : Colors.black,),
-          onPressed: _isEditDisabled==true? null : ()async {
-            await editBoardAlertDialog(context);
-            setState(() {
-
-            });
-          },
-        ),
-        onTap: () async {
-//          print("BOARD: "+widget.aboard.ProjectID.toString());
-          await widget.popLists();
-
-          Board boardPage = new Board();
-          boardPage.proj_board=widget.aboard;
-
-          await boardPage.populateListDisplay(widget.aboard.ProjectID);
-
-
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (BuildContext context) => boardPage),
-          );
-        },
-      ),
-    ):
-    Row(
-      children: [
-        Expanded(
-          flex:1,
-          child:Text("")
-        ),
-        Expanded(
-          flex:5,
-            child:new Container(
-              margin: EdgeInsets.all(8),
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  color: Colors.blueGrey, borderRadius: BorderRadius.circular(20)),
-              child: ListTile(
-                title: Text(
-                  widget.aboard.Project_Title,
-                  style: widget.style,
+    final listReturn = kIsWeb == false
+        ? new StatefulBuilder(builder: (context,setState){
+          return Container(
+            margin: EdgeInsets.all(8),
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+                color: Colors.blueGrey,
+                borderRadius: BorderRadius.circular(20)),
+            child: ListTile(
+              title: Text(
+                widget.aboard.Project_Title,
+                style: widget.style,
+              ),
+              trailing: IconButton(
+                icon: Icon(
+                  Icons.edit,
+                  color: _isEditDisabled == true ? Colors.grey : Colors.black,
                 ),
-                trailing: IconButton(
-                  icon: Icon(
-                    Icons.edit,
-                    color: _isEditDisabled==true? Colors.grey : Colors.black,),
-                  onPressed: _isEditDisabled==true? null : ()async {
-                    await editBoardAlertDialog(context);
-                    setState(() {
-
-                    });
-                  },
-                ),
-                onTap: () async {
-                  print("BOARD: "+widget.aboard.ProjectID.toString());
-                  await widget.popLists();
-                  print("LISTS IS NULL: "+(widget.aboard.boardLists==null).toString());
-                  //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
-                  Board boardPage = new Board(
-                    proj_board: widget.aboard,
-                  );
-                  await boardPage.populateListDisplay(widget.aboard.ProjectID);
-
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (BuildContext context) => boardPage),
-                  );
+                onPressed: _isEditDisabled == true
+                    ? null
+                    : () async {
+                  await editBoardAlertDialog(context);
+                  setState(() {});
                 },
               ),
-            )
-        ),
-        Expanded(
-            flex:1,
-            child:Text("")
-        )
-      ],
-    );
+              onTap: () async {
+//          print("BOARD: "+widget.aboard.ProjectID.toString());
+                await widget.popLists();
+
+                Board boardPage = new Board();
+                boardPage.proj_board = widget.aboard;
+
+                await boardPage.populateListDisplay(widget.aboard.ProjectID);
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => boardPage),
+                );
+              },
+            ),
+          );
+    })
+        : StatefulBuilder(
+      builder: (context,setState){
+        return Row(
+          children: [
+            Expanded(flex: 1, child: Text("")),
+            Expanded(
+                flex: 5,
+                child: new Container(
+                  margin: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: Colors.blueGrey,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: ListTile(
+                    title: Text(
+                      widget.aboard.Project_Title,
+                      style: widget.style,
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(
+                        Icons.edit,
+                        color: _isEditDisabled == true
+                            ? Colors.grey
+                            : Colors.black,
+                      ),
+                      onPressed: _isEditDisabled == true
+                          ? null
+                          : () async {
+                        await editBoardAlertDialog(context);
+                        setState(() {});
+                      },
+                    ),
+                    onTap: () async {
+                      print("BOARD: " + widget.aboard.ProjectID.toString());
+                      await widget.popLists();
+                      print("LISTS IS NULL: " +
+                          (widget.aboard.boardLists == null).toString());
+                      //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
+                      Board boardPage = new Board(
+                        proj_board: widget.aboard,
+                      );
+                      await boardPage
+                          .populateListDisplay(widget.aboard.ProjectID);
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => boardPage),
+                      );
+                    },
+                  ),
+                )
+            ),
+            Expanded(flex: 1, child: Text(""))
+          ],
+        );
+      },
+    )
+    ;
 
     return listReturn;
   }
