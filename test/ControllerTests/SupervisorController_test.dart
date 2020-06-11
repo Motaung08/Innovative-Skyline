@@ -9,7 +9,7 @@ void main() {
 
     User testUser=new User();
 
-    testUser.email='testSupvisorReg@wits.ac.za';
+    testUser.email='testSupvisorRegistration@wits.ac.za';
     testUser.password="testSupPassword";
     testUser.userTypeID=2;
 
