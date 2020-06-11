@@ -15,7 +15,7 @@ void main(){
   group('Student User tests', (){
 
     Student tester = new Student();
-    tester.email = 'Katester@wits.ac.za';
+    tester.email = 'UniqueTestEmail@wits.ac.za';
     tester.studentNo = '12345';
     tester.fName = 'Test';
     tester.lName = 'Pass';
@@ -47,6 +47,9 @@ void main(){
 
       expect(await studUserCtr.ResetPassword("invalid","NewExamplePassword",
           url:"https://lamp.ms.wits.ac.za/~s1611821/ResetPassword.php"), "No user found :(");
+
+      expect(await studUserCtr.login(studUser.email, 'password',url: "https://lamp.ms.wits.ac.za/~s1611821/login.php",url2: "https://lamp.ms.wits.ac.za/~s1611821/getTaskStatuses.php", url3:
+      "https://lamp.ms.wits.ac.za/~s1611821/getAssignmentTypes.php", url4: "https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php"), true);
 
       expect(await studUserCtr.userDeRegistration(studUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php")
           , 'Student removed successfully.');
