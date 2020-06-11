@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Model/AssignmentType.dart';
 import 'package:postgrad_tracker/main.dart';
@@ -26,7 +25,7 @@ class AssignmentTypeController {
       assignmentType.assignmentTypeID =int.parse(result[i]['AssignmentTypeID']);
       assignmentType.assignmentTypeText=result[i]['AssignmentType'];
       assignmentTypes.add(assignmentType);
-      print(assignmentType.assignmentTypeText);
+      //print(assignmentType.assignmentTypeText);
     }
 
 
