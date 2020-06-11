@@ -135,8 +135,6 @@ class UserController{
 
       }
       proceed=true;
-      print("got ...");
-      //Navigator.popAndPushNamed(context, '/Home');
     }
     print(msg);
     return proceed;
