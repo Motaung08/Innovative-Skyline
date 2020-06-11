@@ -130,7 +130,7 @@ class ListController{
     var data={
       'ListID' : ListID.toString(),
     };
-
+    print("DELETE URL: "+url);
     // Starting Web API Call.
     var response = await http.post(url, body: jsonEncode(data));
 
