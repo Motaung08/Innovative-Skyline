@@ -21,8 +21,8 @@ void main() {
   test(
       'Student Type Controller Test', () async {
     StudentTypeController studentTypeController=new StudentTypeController();
-
-    expect(await studentTypeController.getTypes(url: "https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php"), isNull);
+    await studentTypeController.getTypes(url: "https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php");
+    expect(studentTypes.length, greaterThan(0));
   });
 
 

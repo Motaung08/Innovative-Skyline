@@ -53,6 +53,7 @@ class SupervisorController{
       fetchedSup.office=datauser[0]['Supervisor_OfficePhone'];
     }
     print(msg);
+    //print("WE ARE RETURNING A "+msg);
 
     return fetchedSup;
   }
@@ -65,11 +66,21 @@ class SupervisorController{
   Future setUserSup(String email,{url='http://10.100.15.38/viewSupProfile.php',url2='http://10.100.15.38/ReadBoards.php',
   url3='http://10.100.15.38/viewSupStaffNo.php'})async{
     supervisor=await fetchSup(email,null,url1:url,url2:url3);
+
     personNo=supervisor.staffNo;
     Project_BoardController projectBoardController=new Project_BoardController();
-    List<List<Project_Board>> allBoards=await projectBoardController.ReadBoards(user.userTypeID,supervisor.staffNo,url:url2);
-    user.boards=allBoards[0];
-    user.archivedBoards=allBoards[1];
+    List<List<Project_Board>> allBoards=await projectBoardController.ReadBoards(2,supervisor.staffNo,url:url2);
+    if(allBoards.isNotEmpty){
+//      print("BOARDS NOT NULL");
+      if(allBoards[0].isNotEmpty){
+        user.boards=allBoards[0];
+      }
+      if(allBoards[1].isNotEmpty){
+        user.archivedBoards=allBoards[1];
+      }
+//
+    }
+
   }
 
   /*
@@ -92,13 +103,14 @@ class SupervisorController{
           String userRegistrationMessage="";
           // ignore: non_constant_identifier_names
           String RegistrationSuccess="";
-
-          if(url == 'http://10.100.15.38/Register_Supervisor.php') {
-            userRegistrationMessage = await userController.userRegistration(
-                userA, url: url2);
-          }else{
-
-          }
+          userRegistrationMessage = await userController.userRegistration(
+              userA, url: url2);
+//          if(url == 'http://10.100.15.38/Register_Supervisor.php') {
+//            userRegistrationMessage = await userController.userRegistration(
+//                userA, url: url2);
+//          }else{
+//
+//          }
           if (userRegistrationMessage=="Email Already Exists, Please Try Again With New Email Address..!"){
             RegistrationSuccess=userRegistrationMessage;
           }
@@ -120,6 +132,7 @@ class SupervisorController{
       // Starting Web API Call.
       var response = await http.post(url, body: json.encode(data));
       print(response.body);
+
       // Getting Server response into variable.
       var message = jsonDecode(response.body);
 
