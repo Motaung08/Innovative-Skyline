@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/ControllerTests/AssignmentTypeCtrl_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/AssignmentTypeController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/AssignmentTypeController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/Login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/profile/studentsupervisor/StudentSuperVisorRegister.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/profile/studentsupervisor/StudentSuperVisorRegister.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/register/StudentRegister.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/register/StudentRegister.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/register/StudentSuperVisorRegister.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/register/StudentSuperVisorRegister.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/register/SupervisorRegister.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/register/SupervisorRegister.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,19 +56,24 @@
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\lib\View" />
     </key>
   </component>
-  <component name="RunManager" selected="Flutter Test.populates assignment type array if the http call completes successfully">
-    <configuration name="AssignmentTypeController_test.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
-      <option name="filePath" value="$PROJECT_DIR$/test/ControllerTests/AssignmentTypeController_test.dart" />
-      <option name="workingDirectory" value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Flutter Test.assignment">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Test TaskStatusController" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Test TaskStatusController" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/TaskStatusControll_test.dart" />
+    <configuration name="Assignment deleted for valid supervisor" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Assignment deleted for valid supervisor" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Assignment read for valid supervisor" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Assignment read for valid supervisor" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Rad Board assignments" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Rad Board assignments" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="assignment" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -83,22 +81,18 @@
       <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="populates assignment type array if the http call completes successfully" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="populates assignment type array if the http call completes successfully" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/AssignmentTypeCtrl_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="tests in StudentController_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" />
+    <configuration name="function call" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="function call" />
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter Test.populates assignment type array if the http call completes successfully" />
-        <item itemvalue="Dart Command Line App.AssignmentTypeController_test.dart" />
         <item itemvalue="Flutter Test.assignment" />
-        <item itemvalue="Flutter Test.tests in StudentController_test.dart" />
-        <item itemvalue="Flutter Test.Test TaskStatusController" />
+        <item itemvalue="Flutter Test.function call" />
+        <item itemvalue="Flutter Test.Rad Board assignments" />
+        <item itemvalue="Flutter Test.Assignment deleted for valid supervisor" />
+        <item itemvalue="Flutter Test.Assignment read for valid supervisor" />
       </list>
     </recent_temporary>
   </component>
@@ -211,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591887235249</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="AssignmentTypeCtrl_test.dart">
+      <created>1591888757018</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1591888757018</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -273,7 +274,8 @@
     <MESSAGE value="Controller tests all pass locally. Try push." />
     <MESSAGE value="DegreeController_test.dart" />
     <MESSAGE value="TaskStatusControll_test.dart" />
-    <option name="LAST_COMMIT_MESSAGE" value="TaskStatusControll_test.dart" />
+    <MESSAGE value="AssignmentTypeCtrl_test.dart" />
+    <option name="LAST_COMMIT_MESSAGE" value="AssignmentTypeCtrl_test.dart" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="198" key="#Notifications" timestamp="1591723262844">
@@ -292,34 +294,34 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="753" y="198" key="#com.intellij.tools.ToolEditorDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344883272" />
-    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1591887234697">
+    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1591888756395">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591887234697" />
+    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591888756395" />
     <state x="765" y="109" key="FileChooserDialogImpl" timestamp="1591726316401">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="765" y="109" key="FileChooserDialogImpl/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726316401" />
-    <state width="1551" height="295" key="GridCell.Tab.0.bottom" timestamp="1591888734708">
+    <state width="1551" height="295" key="GridCell.Tab.0.bottom" timestamp="1591898154673">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1551" height="295" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591888734708" />
-    <state width="1551" height="295" key="GridCell.Tab.0.center" timestamp="1591888734708">
+    <state width="1551" height="295" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591898154673" />
+    <state width="1551" height="295" key="GridCell.Tab.0.center" timestamp="1591898154672">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1551" height="295" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591888734708" />
-    <state width="1551" height="295" key="GridCell.Tab.0.left" timestamp="1591888734708">
+    <state width="1551" height="295" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591898154672" />
+    <state width="1551" height="295" key="GridCell.Tab.0.left" timestamp="1591898154672">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1551" height="295" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591888734708" />
-    <state width="1551" height="295" key="GridCell.Tab.0.right" timestamp="1591888734708">
+    <state width="1551" height="295" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591898154672" />
+    <state width="1551" height="295" key="GridCell.Tab.0.right" timestamp="1591898154673">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1551" height="295" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591888734708" />
+    <state width="1551" height="295" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591898154673" />
     <state x="540" y="283" key="IDE.errors.dialog" timestamp="1591346336430">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -336,11 +338,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="486" y="14" width="998" height="708" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726318067" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1591887245917">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1591888758715">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1591459682594" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591887245917" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591888758715" />
     <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1591700910038">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

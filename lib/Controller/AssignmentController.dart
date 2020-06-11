@@ -62,14 +62,14 @@ class AssignmentController {
   }
 
   // ignore: non_constant_identifier_names
-  Future<List<List>> ReadBoardAssignments(int ProjectID,{url='http://10.100.15.38/ReadBoardAssignments.php'}) async{
+  Future<List<List>> ReadBoardAssignments(int ProjectID,{url='http://10.100.15.38/ReadBoardAssignments.php',url2="http://10.100.15.38/viewStudentStudNo.php",url3='http://10.100.15.38/viewSupStaffNo.php'}) async{
 //    var url =
 //        'https://witsinnovativeskyline.000webhostapp.com/ReadAssignment.php';
 
     var data={
       'ProjectID' : ProjectID.toString(),
     };
-
+//    print("URL: "+url);
     // Starting Web API Call.
     var response = await http.post(url,body: jsonEncode(data));
 
@@ -90,14 +90,15 @@ class AssignmentController {
           //Assignment is for a student
           String studNo=Response[i]["StudentNo"];
           Student aStudent=new Student();
-          aStudent = await studentController.fetchStudent(null, studNo);
+          //print("URL2: "+url2);
+          aStudent = await studentController.fetchStudent(null, studNo,url2: url2);
           sharedStudents.add(aStudent);
         }
         else if(Response[i]["StaffNo"]!=null){
           //Assignment is for a supervisor
           String staffNo=Response[i]["StaffNo"];
           Supervisor aSupervisor=new Supervisor();
-          aSupervisor=await supervisorController.fetchSup(null, staffNo);
+          aSupervisor=await supervisorController.fetchSup(null, staffNo,url2: url3);
           sharedSups.add(aSupervisor);
         }
       }
@@ -105,7 +106,7 @@ class AssignmentController {
 
     sharedWith.add(sharedStudents);
     sharedWith.add(sharedSups);
-
+    print("SHARED WITH: "+sharedWith.length.toString());
     return sharedWith;
 
 
