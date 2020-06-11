@@ -76,6 +76,8 @@ before_script:
   - sudo apt-get update -qq -y
   - sudo apt-get install lcov -y
 
+  
+
 
 script:
   # Prints the flutter version
