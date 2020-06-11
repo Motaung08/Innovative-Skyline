@@ -2,7 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/main.dart';
 
+class Toggle{
+
+}
+
 class ResetPasswordView extends StatefulWidget {
+  bool isHidden=true;
   @override
   _ResetPasswordViewState createState() => _ResetPasswordViewState();
 }
@@ -21,13 +26,13 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   // ignore: non_constant_identifier_names
   String ConfirmPass = '';
 
-  bool _isHidden=true;
-
   void toggleVisibility(){
     setState(() {
-      _isHidden=!_isHidden;
+      widget.isHidden=!widget.isHidden;
     });
   }
+
+
 
   bool _isHiddenConf=true;
 
@@ -49,6 +54,11 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
 
   @override
   Widget build(BuildContext context) {
+    void toggleVisibility(){
+      setState(() {
+        widget.isHidden=!widget.isHidden;
+      });
+    }
 
     final studentEmailField = TextFormField(
       controller: emailController,
@@ -68,7 +78,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
 
     final passwordField = TextFormField(
       controller: passwordController,
-      obscureText: _isHidden,
+      obscureText: widget.isHidden,
 
       validator: (val) =>
       val.length < 6 ? 'Enter a password 6+ chars long' : null,
@@ -78,7 +88,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
       style: style,
       key: Key('PasswordInput'),
       decoration: InputDecoration(
-          suffixIcon: IconButton(icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibility, key: Key("viewHidePassword"),),
+          suffixIcon: IconButton(icon: widget.isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibility, key: Key("viewHidePassword"),),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "New Password",
           border:

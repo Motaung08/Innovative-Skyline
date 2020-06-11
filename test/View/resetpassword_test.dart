@@ -53,7 +53,14 @@ void main() {
      await tester.pumpWidget(makeWidgetTestable(ResetPasswordView()));
      final viewHidePassword = find.byKey(Key("viewHidePassword"));
      expect(viewHidePassword, findsOneWidget);
+     //tester.pumpWidget(makeWidgetTestable())
 
+   });
+
+   test('Toggle visibility', () async{
+     ResetPasswordView resetPasswordView=new ResetPasswordView();
+     expect(resetPasswordView.isHidden, true);
+     //resetPasswordView.toggleVisibility
    });
 
  });
