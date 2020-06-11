@@ -9,40 +9,26 @@ void main() {
   group('Student tests', () {
 
     Student aStudent=new Student();
-    aStudent.email ='1713445@students.wits.ac.za';
-    aStudent.studentNo ='1713445';
+    aStudent.email ='testStudTest@students.wits.ac.za';
+    aStudent.studentNo ='09887';
 
-    test('fetchStudent', () async {
-      StudentController studentController=new StudentController();
+    User testUser=new User();
+    testUser.email='123TestStudent@students.wits.ac.za';
+    testUser.password="testPassword";
+    testUser.userTypeID=1;
 
-      expect(await studentController.fetchStudent(aStudent.email,aStudent.studentNo,
-      url1:'https://lamp.ms.wits.ac.za/~s1611821/viewStudentProfile.php',url2:'https://lamp.ms.wits.ac.za/~s1611821/viewStudentStudNo.php'), isNotNull);
-    });
-
-    test('setStudentUser', () async {
-      StudentController studentController=new StudentController();
-      await studentController.setStudentUser(aStudent.email,
-          url:"https://lamp.ms.wits.ac.za/~s1611821/viewStudentProfile.php",url2: "https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php");
-      expect(student!=null, true);
-    });
+    Student testStudent=new Student();
+    testStudent.email=testUser.email;
+    testStudent.studentNo="123TestUnique";
+    testStudent.fName="Test";
+    testStudent.lName="Student";
+    testStudent.degreeID=1;
+    testStudent.registrationDate=DateTime.now();
+    testStudent.studentTypeID=1;
 
     test('studentRegistration', () async {
-          User testUser=new User();
 
-          testUser.email='123@students.wits.ac.za';
-          testUser.password="testPassword";
-          testUser.userTypeID=1;
-
-          Student testStudent=new Student();
-          testStudent.email=testUser.email;
-          testStudent.studentNo="123";
-          testStudent.fName="Test";
-          testStudent.lName="Student";
-          testStudent.degreeID=1;
-          testStudent.registrationDate=DateTime.now();
-          testStudent.studentTypeID=testUser.userTypeID;
-
-          //testStudent.studentTypeID
+      //testStudent.studentTypeID
       StudentController studentController=new StudentController();
 
       expect(await studentController.studentRegistration(testStudent,testUser,
@@ -56,9 +42,29 @@ void main() {
           "Email Already Exists, Please Try Again With New Email Address..!");
 
       //UserController userController=new UserController();
+
+    });
+
+    test('fetchStudent', () async {
+      StudentController studentController=new StudentController();
+
+      expect(await studentController.fetchStudent(testStudent.email,testStudent.studentNo,
+      url1:'https://lamp.ms.wits.ac.za/~s1611821/viewStudentProfile.php',url2:'https://lamp.ms.wits.ac.za/~s1611821/viewStudentStudNo.php'), isNotNull);
+    });
+
+    test('setStudentUser', () async {
+      StudentController studentController=new StudentController();
+      await studentController.setStudentUser(testStudent.email,
+          url:"https://lamp.ms.wits.ac.za/~s1611821/viewStudentProfile.php",url2: "https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php");
+      expect(student!=null, true);
+    });
+
+    test('deregister', () async {
       var j=await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
       print(j);
     });
+
+
 
   });
 
