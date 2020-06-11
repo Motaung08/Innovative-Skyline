@@ -204,8 +204,8 @@ class Project_BoardController {
     return message;
   }
 
-  Future<String> archiveBoard(int projectID, bool active) async {
-    String url='http://10.100.15.38/ArchiveBoard.php';
+  Future<String> archiveBoard(int projectID, bool active,{url='http://10.100.15.38/ArchiveBoard.php'}) async {
+//    String url='http://10.100.15.38/ArchiveBoard.php';
     int archived;
     if(active==true){
       archived=1;
@@ -226,8 +226,8 @@ class Project_BoardController {
     return message;
   }
 
-  Future<String> archiveAssignment(int userTypeID, String personNum, int projectID, bool active) async {
-    String url='http://10.100.15.38/ArchiveAssignment.php';
+  Future<String> archiveAssignment(int userTypeID, String personNum, int projectID, bool active,{url='http://10.100.15.38/ArchiveAssignment.php'}) async {
+    //String url='http://10.100.15.38/ArchiveAssignment.php';
     int archived;
     if(active==true){
       archived=1;
