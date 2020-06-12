@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
+import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import '../Models_test.dart';
 
@@ -48,9 +50,6 @@ void main(){
       expect(find.byKey(key), findsOneWidget);
     });
 
-    test('Test functions', () async {
-
-    });
 
   });
 

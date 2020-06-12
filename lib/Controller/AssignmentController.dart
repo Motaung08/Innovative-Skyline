@@ -62,7 +62,8 @@ class AssignmentController {
   }
 
   // ignore: non_constant_identifier_names
-  Future<List<List>> ReadBoardAssignments(int ProjectID,{url='http://10.100.15.38/ReadBoardAssignments.php',url2="http://10.100.15.38/viewStudentStudNo.php",url3='http://10.100.15.38/viewSupStaffNo.php'}) async{
+  Future<List<List>> ReadBoardAssignments(int ProjectID,{url='http://10.100.15.38/ReadBoardAssignments.php',
+    url2="http://10.100.15.38/viewStudentStudNo.php",url3='http://10.100.15.38/viewSupStaffNo.php'}) async{
 //    var url =
 //        'https://witsinnovativeskyline.000webhostapp.com/ReadAssignment.php';
 
