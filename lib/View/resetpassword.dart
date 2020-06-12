@@ -136,9 +136,11 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               onPressed: () {
                // _tryReset();
+                if(_formKey.currentState.validate()){
 
+                }
               },
-              key: Key('ResetButtonInput'),
+              key: Key('ResetButtonInputWeb'),
               child: Text("Reset",
                   textAlign: TextAlign.center,
                   style: style.copyWith(
@@ -160,6 +162,9 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
           //_tryReset();
+          if(_formKey.currentState.validate()){
+
+          }
 
         },
         key: Key('ResetButtonInput'),

@@ -70,17 +70,11 @@ void main() {
      ResetPasswordView resetPasswordView=new ResetPasswordView();
      await tester.pumpWidget(makeWidgetTestable(resetPasswordView));
 
-//     final StudentEmailField = find.byKey(Key('StudentEmailInput'));
-//    // TextFormField studEmail = tester.widget(StudentEmailField);
-//
-//     final emailErrorFinder = find.text('Email is Required');
-////     final passwordErrorFinder = find.text('Enter a password 6+ chars long');
-////     final confPasswordEmptyErrorFinder = find.text('Enter a password 6+ chars long');
-     final resetButton = find.byKey(Key("ResetButtonInput"));
-     expect(resetButton,findsOneWidget);
-     await tester.tap(resetButton);
-     print('button tapped');
-//     expect(actual, matcher)
+     Finder email = find.byKey(new Key('StudentEmailInput'));
+     Finder formWidgetFinder = find.byType(Form);
+     Form formWidget = tester.widget(formWidgetFinder) as Form;
+     GlobalKey<FormState> formKey = formWidget.key as GlobalKey<FormState>;
+     expect(formKey.currentState.validate(), isFalse);
 
    });
 
