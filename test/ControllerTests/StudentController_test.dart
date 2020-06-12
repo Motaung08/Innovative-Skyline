@@ -8,7 +8,7 @@ import 'package:postgrad_tracker/main.dart';
 void main() {
   group('Student tests', () {
     Student aStudent = new Student();
-    aStudent.email = 'testStudTest@students.wits.ac.za';
+    aStudent.email = 'aStudentUnique123@students.wits.ac.za';
     aStudent.studentNo = '09887';
 
     User testUser = new User();
@@ -26,33 +26,20 @@ void main() {
     testStudent.studentTypeID = 1;
 
     test('studentRegistration', () async {
-      //testStudent.studentTypeID
       StudentController studentController = new StudentController();
-
       expect(
           await studentController.studentRegistration(testStudent, testUser,
               url1: 'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
               url2: "https://lamp.ms.wits.ac.za/~s1611821/register_user.php"),
           "Student Register Success");
-      var j = await userController.userDeRegistration(testUser,
+      await userController.userDeRegistration(testUser,
           url: "https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
-//      print(j);
-
-//      expect(await studentController.studentRegistration(testStudent,testUser,
-//          url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
-//          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"),
-//          "Email Already Exists, Please Try Again With New Email Address..!");
-
-      //UserController userController=new UserController();
     });
 
     test('fetchStudent', () async {
       testStudent.email = '1713445@students.wits.ac.za';
       //testStudent.studentNo='1713445';
       StudentController studentController = new StudentController();
-//      await studentController.studentRegistration(testStudent,testUser,
-//          url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
-//          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php");
       expect(
           await studentController.fetchStudent(
               testStudent.email, null,
@@ -67,9 +54,6 @@ void main() {
     test('setStudentUser', () async {
       testStudent.email='1713445@students.wits.ac.za';
       StudentController studentController = new StudentController();
-//      await studentController.studentRegistration(testStudent,testUser,
-//          url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
-//          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php");
       await studentController.setStudentUser(testStudent.email,
           urlViewStudentProfile:
               "https://lamp.ms.wits.ac.za/~s1611821/viewStudentProfile.php",
