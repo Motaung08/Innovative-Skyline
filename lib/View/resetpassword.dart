@@ -46,7 +46,6 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
   Future _tryReset() async{
     _formKey.currentState.validate();
     msg= await userController.ResetPassword(email, password);
-    print('******************************************************   '+msg);
     if (msg=="Successfully updated password!"){
       msg="";
       Navigator.pop(context);
@@ -60,7 +59,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
     final studentEmailField = TextFormField(
       controller: emailController,
       obscureText: false,
-      validator: (val) => val.isEmpty ? 'Enter an email' : null,
+      validator: (val) => val.isEmpty ? 'Email is Required' : null,
       onChanged: (val) {
         setState(() => email = val);
       },

@@ -65,11 +65,20 @@ void main() {
 
    });
 
-   test('Toggle visibility', () async{
+   testWidgets('Reset password', (WidgetTester tester) async {
+//     ResetPasswordView resetPasswordView=new ResetPasswordView();
+//     await tester.pumpWidget(makeWidgetTestable(resetPasswordView));
+//     final emailErrorFinder = find.text('Email is Required');
+//     final passwordErrorFinder = find.text('Enter a password 6+ chars long');
+//     final confPasswordEmptyErrorFinder = find.text('Enter a password 6+ chars long');
+//     final ResetButon = find.byKey(Key("ResetButtonInput"));
+//     await tester.tap(ResetButon);
+//     expect(emailErrorFinder, findsOneWidget);
+//     expect(passwordErrorFinder, findsOneWidget);
+//     expect(confPasswordEmptyErrorFinder, findsOneWidget);
+//
+//     final confPasswordNoMatchErrorFinder = find.text('Passwords must match');
 
-     //resetPasswordView.toggleVisibility();
-     //expect(resetPasswordView.isHidden, false);
-     //resetPasswordView.toggleVisibility
    });
 
  });

@@ -13,7 +13,7 @@ void main() {
     aStudent.studentNo ='09887';
 
     User testUser=new User();
-    testUser.email='123TestStudent@students.wits.ac.za';
+    testUser.email='123TestStudentUnique@students.wits.ac.za';
     testUser.password="testPassword";
     testUser.userTypeID=1;
 
