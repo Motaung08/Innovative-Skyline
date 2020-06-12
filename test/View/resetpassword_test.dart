@@ -69,12 +69,13 @@ void main() {
    testWidgets('Reset password', (WidgetTester tester) async {
      ResetPasswordView resetPasswordView=new ResetPasswordView();
      await tester.pumpWidget(makeWidgetTestable(resetPasswordView));
-
+     resetPasswordView.resetUrl="https://lamp.ms.wits.ac.za/~s1611821/ResetPassword.php";
      Finder email = find.byKey(new Key('StudentEmailInput'));
      Finder formWidgetFinder = find.byType(Form);
      Form formWidget = tester.widget(formWidgetFinder) as Form;
      GlobalKey<FormState> formKey = formWidget.key as GlobalKey<FormState>;
      expect(formKey.currentState.validate(), isFalse);
+
 
    });
 

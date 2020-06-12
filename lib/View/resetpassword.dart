@@ -9,6 +9,7 @@ class Toggle{
 class ResetPasswordView extends StatefulWidget {
   bool isHidden=true;
   bool isHiddenConf=true;
+  String resetUrl="http://10.100.15.38/ResetPassword.php";
   @override
   ResetPasswordViewState createState() => ResetPasswordViewState();
 }
@@ -43,9 +44,9 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
     });
   }
 
-  Future _tryReset() async{
+  Future tryReset({url= "http://10.100.15.38/ResetPassword.php"}) async{
     _formKey.currentState.validate();
-    msg= await userController.ResetPassword(email, password);
+    msg= await userController.ResetPassword(email, password, url: widget.resetUrl);
     if (msg=="Successfully updated password!"){
       msg="";
       Navigator.pop(context);
@@ -135,9 +136,8 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
               minWidth: MediaQuery.of(context).size.width,
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               onPressed: () {
-               // _tryReset();
                 if(_formKey.currentState.validate()){
-
+                  tryReset();
                 }
               },
               key: Key('ResetButtonInputWeb'),
@@ -161,9 +161,9 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          //_tryReset();
+          //
           if(_formKey.currentState.validate()){
-
+            tryReset();
           }
 
         },
