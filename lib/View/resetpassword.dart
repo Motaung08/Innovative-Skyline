@@ -135,7 +135,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
               minWidth: MediaQuery.of(context).size.width,
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               onPressed: () {
-                _tryReset();
+               // _tryReset();
 
               },
               key: Key('ResetButtonInput'),
@@ -159,7 +159,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          _tryReset();
+          //_tryReset();
 
         },
         key: Key('ResetButtonInput'),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/View/Login.dart';
 import 'package:postgrad_tracker/View/resetpassword.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:postgrad_tracker/main.dart';
 
 
 Widget makeWidgetTestable(Widget widget){
@@ -69,15 +70,17 @@ void main() {
      ResetPasswordView resetPasswordView=new ResetPasswordView();
      await tester.pumpWidget(makeWidgetTestable(resetPasswordView));
 
-     final StudentEmailField = find.byKey(Key('StudentEmailInput'));
+//     final StudentEmailField = find.byKey(Key('StudentEmailInput'));
 //    // TextFormField studEmail = tester.widget(StudentEmailField);
 //
-//     //final emailErrorFinder = find.text('Email is Required');
+//     final emailErrorFinder = find.text('Email is Required');
 ////     final passwordErrorFinder = find.text('Enter a password 6+ chars long');
 ////     final confPasswordEmptyErrorFinder = find.text('Enter a password 6+ chars long');
-//     final ResetButon = find.byKey(Key("ResetButtonInput"));
-//     await tester.tap(ResetButon);
-//     print('button tapped');
+     final resetButton = find.byKey(Key("ResetButtonInput"));
+     expect(resetButton,findsOneWidget);
+     await tester.tap(resetButton);
+     print('button tapped');
+//     expect(actual, matcher)
 
    });
 
