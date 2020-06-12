@@ -140,7 +140,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
                   tryReset();
                 }
               },
-              key: Key('ResetButtonInputWeb'),
+              key: Key('ResetButtonInput'),
               child: Text("Reset",
                   textAlign: TextAlign.center,
                   style: style.copyWith(

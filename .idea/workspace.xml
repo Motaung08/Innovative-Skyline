@@ -56,7 +56,7 @@
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\lib\View" />
     </key>
   </component>
-  <component name="RunManager" selected="Flutter Test.Reset password">
+  <component name="RunManager" selected="Flutter Test.tests in resetpassword_test.dart">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
@@ -75,21 +75,21 @@
       <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="tests in TaskStatusControll_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/TaskStatusControll_test.dart" />
-      <method v="2" />
-    </configuration>
     <configuration name="tests in UserController_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" />
       <method v="2" />
     </configuration>
+    <configuration name="tests in resetpassword_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/View/resetpassword_test.dart" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.tests in resetpassword_test.dart" />
         <item itemvalue="Flutter Test.Reset password" />
         <item itemvalue="Flutter Test.tests in StudentController_test.dart" />
         <item itemvalue="Flutter Test.Student User tests" />
         <item itemvalue="Flutter Test.tests in UserController_test.dart" />
-        <item itemvalue="Flutter Test.tests in TaskStatusControll_test.dart" />
       </list>
     </recent_temporary>
   </component>
@@ -342,7 +342,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591970204458</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="ResetPassword view test addition with urls">
+      <created>1591971453776</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1591971453776</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -416,7 +423,8 @@
     <MESSAGE value="Supervisor login url fix." />
     <MESSAGE value="Changed student test." />
     <MESSAGE value="ResetPassword view test validator." />
-    <option name="LAST_COMMIT_MESSAGE" value="ResetPassword view test validator." />
+    <MESSAGE value="ResetPassword view test addition with urls" />
+    <option name="LAST_COMMIT_MESSAGE" value="ResetPassword view test addition with urls" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="198" key="#Notifications" timestamp="1591723262844">
@@ -435,34 +443,34 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="753" y="198" key="#com.intellij.tools.ToolEditorDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344883272" />
-    <state x="450" y="54" key="CommitChangelistDialog2" timestamp="1591970203799">
+    <state x="450" y="54" key="CommitChangelistDialog2" timestamp="1591971453162">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="450" y="54" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1591970203799" />
+    <state x="450" y="54" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1591971453162" />
     <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591958354443" />
     <state x="765" y="109" key="FileChooserDialogImpl" timestamp="1591726316401">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="765" y="109" key="FileChooserDialogImpl/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726316401" />
-    <state width="1167" height="295" key="GridCell.Tab.0.bottom" timestamp="1591971365037">
+    <state width="1493" height="295" key="GridCell.Tab.0.bottom" timestamp="1591971692592">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1591971365037" />
+    <state width="1493" height="295" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1591971692592" />
     <state width="1551" height="295" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787541" />
-    <state width="1167" height="295" key="GridCell.Tab.0.center" timestamp="1591971365037">
+    <state width="1493" height="295" key="GridCell.Tab.0.center" timestamp="1591971692591">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1591971365037" />
+    <state width="1493" height="295" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1591971692591" />
     <state width="1551" height="295" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787540" />
-    <state width="1167" height="295" key="GridCell.Tab.0.left" timestamp="1591971365037">
+    <state width="1493" height="295" key="GridCell.Tab.0.left" timestamp="1591971692591">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1591971365037" />
+    <state width="1493" height="295" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1591971692591" />
     <state width="1551" height="295" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787540" />
-    <state width="1167" height="295" key="GridCell.Tab.0.right" timestamp="1591971365037">
+    <state width="1493" height="295" key="GridCell.Tab.0.right" timestamp="1591971692591">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1591971365037" />
+    <state width="1493" height="295" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1591971692591" />
     <state width="1551" height="295" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787541" />
     <state x="540" y="283" key="IDE.errors.dialog" timestamp="1591346336430">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -480,10 +488,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="486" y="14" width="998" height="708" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726318067" />
-    <state x="442" y="218" key="Vcs.Push.Dialog.v2" timestamp="1591970206697">
+    <state x="442" y="218" key="Vcs.Push.Dialog.v2" timestamp="1591971455366">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1591970206697" />
+    <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1591971455366" />
     <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591958358563" />
     <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1591700910038">
       <screen x="0" y="0" width="1920" height="1080" />
