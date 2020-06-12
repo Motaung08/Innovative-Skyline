@@ -38,9 +38,6 @@ void main() {
      final ResetButon = find.byKey(Key("ResetButtonInput"));
      expect(ResetButon, findsOneWidget);
 
-     final resetButtonWeb=find.byKey(Key('ResetButtonInputWeb'));
-     expect(resetButtonWeb,findsOneWidget);
-
 
    });
 
