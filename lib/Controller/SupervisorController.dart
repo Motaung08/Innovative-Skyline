@@ -75,12 +75,12 @@ class SupervisorController {
         await projectBoardController.ReadBoards(2, supervisor.staffNo,
             url: urlReadBoards);
     print('Oy, we\'re here times twice');
-    if (allBoards!=null) {
+    if (allBoards.isNotEmpty) {
       print("BOARDS NOT NULL");
-      if (allBoards[0]!=null) {
+      if (allBoards[0].isNotEmpty) {
         user.boards = allBoards[0];
       }
-      if (allBoards[1]!=null) {
+      if (allBoards[1].isNotEmpty) {
         user.archivedBoards = allBoards[1];
       }
 //
