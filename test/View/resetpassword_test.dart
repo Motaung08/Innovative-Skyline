@@ -65,7 +65,7 @@ void main() {
      await tester.tap(hiddenConfButton);
      expect(resetPasswordView.isHidden, false);
      expect(resetPasswordView.isHiddenConf, false);
-     //tester.pumpWidget(makeWidgetTestable())
+
 
    });
 
@@ -73,12 +73,36 @@ void main() {
      ResetPasswordView resetPasswordView=new ResetPasswordView();
      await tester.pumpWidget(makeWidgetTestable(resetPasswordView));
      resetPasswordView.resetUrl="https://lamp.ms.wits.ac.za/~s1611821/ResetPassword.php";
+
      Finder email = find.byKey(new Key('StudentEmailInput'));
+     expect(email, findsOneWidget);
+
+     Finder password = find.byKey(new Key('PasswordInput'));
+     expect(password, findsOneWidget);
+
+     Finder confirmPassword = find.byKey(new Key('confirmPasswordInput'));
+     expect(confirmPassword, findsOneWidget);
+
      Finder formWidgetFinder = find.byType(Form);
      Form formWidget = tester.widget(formWidgetFinder) as Form;
      GlobalKey<FormState> formKey = formWidget.key as GlobalKey<FormState>;
      expect(formKey.currentState.validate(), isFalse);
 
+     await tester.enterText(email, "Default@students.wits.ac.za");
+
+     expect(formKey.currentState.validate(), isFalse);
+
+     await tester.enterText(password, "123456");
+
+     expect(formKey.currentState.validate(), isFalse);
+
+     await tester.enterText(confirmPassword, "1234567");
+
+     expect(formKey.currentState.validate(), isFalse);
+
+     await tester.enterText(confirmPassword, "123456");
+
+     expect(formKey.currentState.validate(), isTrue);
 
    });
 
