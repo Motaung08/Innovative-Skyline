@@ -28,32 +28,47 @@ void main(){
     studUser.email = tester.email;
     studUser.password = 'test@1234';
     studUser.userTypeID =tester.studentTypeID;
-
+    UserController studUserCtr = new UserController();
+    StudentController studLog = new StudentController();
     test('Student Registration', () async {
-      UserController studUserCtr = new UserController();
-      StudentController studLog = new StudentController();
-      
       expect(await studUserCtr.userRegistration(studUser,url:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"
       ,url2:"https://lamp.ms.wits.ac.za/~s1611821/register_student.php"), 'User Registered Successfully');
-
+    });
+    test('userExists',() async {
       expect(await studUserCtr.userExists(studUser.email,url: "https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"),
-          true);
-
+      true);
+    });
+    test('getUser',() async {
       expect(await studUserCtr.getUser(studUser.email,url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"),
-          isNotNull);
-
-      expect(await studUserCtr.ResetPassword(studUser.email, 'password',
+      isNotNull);
+    });
+    test('ResetPassword valid',() async {
+      expect(await studUserCtr.ResetPassword(studUser.email, '123456',
           url:"https://lamp.ms.wits.ac.za/~s1611821/ResetPassword.php" ), 'Successfully updated password!');
-
+    });
+    test('ResetPassword invalid',() async {
       expect(await studUserCtr.ResetPassword("invalid","NewExamplePassword",
           url:"https://lamp.ms.wits.ac.za/~s1611821/ResetPassword.php"), "No user found :(");
+    });
 
-      expect(await studUserCtr.login(studUser.email, 'password',url: "https://lamp.ms.wits.ac.za/~s1611821/login.php",url2: "https://lamp.ms.wits.ac.za/~s1611821/getTaskStatuses.php", url3:
-      "https://lamp.ms.wits.ac.za/~s1611821/getAssignmentTypes.php", url4: "https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php"), true);
+    test('login',() async {
+      expect(await studUserCtr.login('1713445@students.wits.ac.za', 'Meghan',
+        urlLogin: "https://lamp.ms.wits.ac.za/~s1611821/login.php",
+        urlGetTaskStatus: "https://lamp.ms.wits.ac.za/~s1611821/getTaskStatuses.php",
+        urlGetAssignmentTypes: "https://lamp.ms.wits.ac.za/~s1611821/getAssignmentTypes.php",
+        urlGetStudTypes: "https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php",
+        urlViewStudentProfile: "https://lamp.ms.wits.ac.za/~s1611821/viewStudentProfile.php",
+        urlViewStudentStudNo: "https://lamp.ms.wits.ac.za/~s1611821/viewStudentStudNo.php",
+        urlReadBoards: "https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php",
+        urlViewSupProfile: "https://lamp.ms.wits.ac.za/~s1611821/viewSupProfile.php",
+        url9ViewSupStaffNo: "https://lamp.ms.wits.ac.za/~s1611821/http://10.100.15.38/viewSupStaffNo.php",
+        urlGetDegreeTypes: "https://lamp.ms.wits.ac.za/~s1611821/getDegreeTypes.php",
 
+      ), true);
+    });
+    test('userDeRegistration',() async {
       expect(await studUserCtr.userDeRegistration(studUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php")
-          , 'Student removed successfully.');
-
+      , 'Student removed successfully.');
     });
 
 
@@ -125,7 +140,7 @@ void main(){
       expect(userController.ReadUsers(url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"), isNotNull);
 
       //userLogin with invalid username
-      expect(await userController.login('1234@students.wits.ac.za', '123456',url:"https://lamp.ms.wits.ac.za/~s1611821/login.php"),false);
+      expect(await userController.login('1234@students.wits.ac.za', '123456',urlLogin:"https://lamp.ms.wits.ac.za/~s1611821/login.php"),false);
 
 //      //userDeRegistration
 //      expect(await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php"),

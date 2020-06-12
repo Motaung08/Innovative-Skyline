@@ -95,7 +95,6 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
       controller: confirmPassCont,
 
       validator: (val) {
-
         if (val.isEmpty) {
           return 'Confirm password.';
         }

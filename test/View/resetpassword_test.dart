@@ -66,8 +66,13 @@ void main() {
    });
 
    testWidgets('Reset password', (WidgetTester tester) async {
-//     ResetPasswordView resetPasswordView=new ResetPasswordView();
-//     await tester.pumpWidget(makeWidgetTestable(resetPasswordView));
+     ResetPasswordView resetPasswordView=new ResetPasswordView();
+     await tester.pumpWidget(makeWidgetTestable(resetPasswordView));
+
+     final StudentEmailField = find.byKey(Key('StudentEmailInput'));
+     TextFormField studEmail = tester.widget(StudentEmailField);
+     expect(studEmail.validator, findsOneWidget);
+     
 //     final emailErrorFinder = find.text('Email is Required');
 //     final passwordErrorFinder = find.text('Enter a password 6+ chars long');
 //     final confPasswordEmptyErrorFinder = find.text('Enter a password 6+ chars long');

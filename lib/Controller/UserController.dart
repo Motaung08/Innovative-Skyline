@@ -79,33 +79,35 @@ class UserController{
   accordingly.
    */
   // ignore: non_constant_identifier_names
-  Future<bool> login(String email, String Password,{url='http://10.100.15.38/login.php',url2:'http://10.100.15.38/getTaskStatuses.php'
-  ,url3='http://10.100.15.38/getAssignmentTypes.php',url4="http://10.100.15.38/getStudentTypes.php"}) async {
+  Future<bool> login(String email, String Password,{
+    urlLogin='http://10.100.15.38/login.php',
+    urlGetTaskStatus:'http://10.100.15.38/getTaskStatuses.php',
+    urlGetAssignmentTypes='http://10.100.15.38/getAssignmentTypes.php',
+    urlGetStudTypes="http://10.100.15.38/getStudentTypes.php",
+    urlViewStudentProfile='http://10.100.15.38/viewStudentProfile.php',
+    urlViewStudentStudNo = "http://10.100.15.38/viewStudentStudNo.php",
+    urlReadBoards='http://10.100.15.38/ReadBoards.php',
+    urlViewSupProfile= 'http://10.100.15.38/viewSupProfile.php',
+    url9ViewSupStaffNo = 'http://10.100.15.38/viewSupStaffNo.php',
+    urlGetDegreeTypes='http://10.100.15.38/getDegreeTypes.php'}) async {
 
     bool proceed=false;
 
   print("EMAIL: "+email+", Password: "+Password);
 
     final response = await http.post(
-        url,
-//        "https://witsinnovativeskyline.000webhostapp.com/login.php",
+        urlLogin,
         body: {
           'Email': email.toLowerCase(),
           'Password': Password
         });
-    //print('******************************************** Clicked');
-    print(response.body);
+    print(json.decode(response.body));
     //var datauser = json.decode(response.body);
-
-
 
     String msg="";
     if (json.decode(response.body)== "No user found." || json.decode(response.body)=="Invalid password.") {
-
       proceed=false;
         msg = "Incorrect email or password!";
-
-
     } else {
         msg="Found user, assigning attributes ...";
         List datauser=json.decode(response.body);
@@ -117,21 +119,22 @@ class UserController{
 
         TaskStatusController taskStatusController=new TaskStatusController();
         AssignmentTypeController assignmentTypeController=new AssignmentTypeController();
-        await taskStatusController.getStatuses(url: url2);
-        await assignmentTypeController.getTypes(url: url3);
-        await studentTypeController.getTypes(url: url4);
 
-        await degreeController.getDegrees();
+        await taskStatusController.getStatuses(url: urlGetTaskStatus);
+        await assignmentTypeController.getTypes(url: urlGetAssignmentTypes);
+        await studentTypeController.getTypes(url: urlGetStudTypes);
+
+        await degreeController.getDegrees(url: urlGetDegreeTypes);
 
       if (user.userTypeID==1){
 
-        await studentController.setStudentUser(user.email);
-
-
+        await studentController.setStudentUser(user.email,urlViewStudentProfile: urlViewStudentProfile,urlReadBoards:urlReadBoards,
+            urlViewStudentStudNo:urlViewStudentStudNo );
 
       }
       else{
-        await supervisorController.setUserSup(email);
+        await supervisorController.setUserSup(email, url: urlViewSupProfile,
+            url2: url9ViewSupStaffNo);
 
       }
       proceed=true;

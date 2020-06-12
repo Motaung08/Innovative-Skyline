@@ -91,7 +91,7 @@ class AssignmentController {
           String studNo=Response[i]["StudentNo"];
           Student aStudent=new Student();
           //print("URL2: "+url2);
-          aStudent = await studentController.fetchStudent(null, studNo,url2: url2);
+          aStudent = await studentController.fetchStudent(null, studNo,urlViewStudentStudNo: url2);
           sharedStudents.add(aStudent);
         }
         else if(Response[i]["StaffNo"]!=null){
