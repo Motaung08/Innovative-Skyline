@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/resetpassword.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/resetpassword.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/View/resetpassword_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/resetpassword_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,24 +56,19 @@
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\lib\View" />
     </key>
   </component>
-  <component name="RunManager" selected="Flutter Test.Student tests">
+  <component name="RunManager" selected="Flutter Test.test visibility">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="CRUD Testing Student" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="CRUD Testing Student" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/ProjectBoardCtrl_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Student Registration" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Student Registration" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="Student tests" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Student tests" />
       <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Toggle visibility" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Toggle visibility" />
+      <option name="testFile" value="$PROJECT_DIR$/test/View/resetpassword_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="deregister" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -86,13 +81,18 @@
       <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/StudentController_test.dart" />
       <method v="2" />
     </configuration>
+    <configuration name="test visibility" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="test visibility" />
+      <option name="testFile" value="$PROJECT_DIR$/test/View/resetpassword_test.dart" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.test visibility" />
+        <item itemvalue="Flutter Test.Toggle visibility" />
         <item itemvalue="Flutter Test.Student tests" />
         <item itemvalue="Flutter Test.studentRegistration" />
         <item itemvalue="Flutter Test.deregister" />
-        <item itemvalue="Flutter Test.Student Registration" />
-        <item itemvalue="Flutter Test.CRUD Testing Student" />
       </list>
     </recent_temporary>
   </component>
@@ -247,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591903479152</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fix.">
+      <created>1591904562691</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1591904562691</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -315,7 +322,8 @@
     <MESSAGE value="TaskController_test.dart" />
     <MESSAGE value="Updated StudentController_test.dart after failed test." />
     <MESSAGE value="Test for archive board and archive assignment." />
-    <option name="LAST_COMMIT_MESSAGE" value="Test for archive board and archive assignment." />
+    <MESSAGE value="fix." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix." />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="198" key="#Notifications" timestamp="1591723262844">
@@ -334,34 +342,34 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="753" y="198" key="#com.intellij.tools.ToolEditorDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344883272" />
-    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1591903478547">
+    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1591904562114">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591903478547" />
+    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591904562114" />
     <state x="765" y="109" key="FileChooserDialogImpl" timestamp="1591726316401">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="765" y="109" key="FileChooserDialogImpl/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726316401" />
-    <state width="1551" height="295" key="GridCell.Tab.0.bottom" timestamp="1591904545494">
+    <state width="1551" height="295" key="GridCell.Tab.0.bottom" timestamp="1591951384308">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1551" height="295" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591904545494" />
-    <state width="1551" height="295" key="GridCell.Tab.0.center" timestamp="1591904545494">
+    <state width="1551" height="295" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591951384308" />
+    <state width="1551" height="295" key="GridCell.Tab.0.center" timestamp="1591951384308">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1551" height="295" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591904545494" />
-    <state width="1551" height="295" key="GridCell.Tab.0.left" timestamp="1591904545494">
+    <state width="1551" height="295" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591951384308" />
+    <state width="1551" height="295" key="GridCell.Tab.0.left" timestamp="1591951384308">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1551" height="295" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591904545494" />
-    <state width="1551" height="295" key="GridCell.Tab.0.right" timestamp="1591904545494">
+    <state width="1551" height="295" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591951384308" />
+    <state width="1551" height="295" key="GridCell.Tab.0.right" timestamp="1591951384308">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1493" height="209" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1591374192058" />
-    <state width="1551" height="295" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591904545494" />
+    <state width="1551" height="295" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591951384308" />
     <state x="540" y="283" key="IDE.errors.dialog" timestamp="1591346336430">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -378,11 +386,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="486" y="14" width="998" height="708" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726318067" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1591903480647">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1591904565407">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1591459682594" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591903480647" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591904565407" />
     <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1591700910038">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

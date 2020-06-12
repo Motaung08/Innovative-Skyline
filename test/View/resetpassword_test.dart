@@ -50,16 +50,24 @@ void main() {
 
 
    testWidgets('test visibility', (WidgetTester tester) async {
-     await tester.pumpWidget(makeWidgetTestable(ResetPasswordView()));
+     ResetPasswordView resetPasswordView=new ResetPasswordView();
+     await tester.pumpWidget(makeWidgetTestable(resetPasswordView));
+
+     expect(resetPasswordView.isHidden, true);
      final viewHidePassword = find.byKey(Key("viewHidePassword"));
+     final hiddenConfButton=find.byKey(Key('isHiddenConfButton'));
      expect(viewHidePassword, findsOneWidget);
+     expect(hiddenConfButton, findsOneWidget);
+     await tester.tap(viewHidePassword);
+     expect(resetPasswordView.isHidden, false);
      //tester.pumpWidget(makeWidgetTestable())
 
    });
 
    test('Toggle visibility', () async{
-     ResetPasswordView resetPasswordView=new ResetPasswordView();
-     expect(resetPasswordView.isHidden, true);
+
+     //resetPasswordView.toggleVisibility();
+     //expect(resetPasswordView.isHidden, false);
      //resetPasswordView.toggleVisibility
    });
 

@@ -9,10 +9,10 @@ class Toggle{
 class ResetPasswordView extends StatefulWidget {
   bool isHidden=true;
   @override
-  _ResetPasswordViewState createState() => _ResetPasswordViewState();
+  ResetPasswordViewState createState() => ResetPasswordViewState();
 }
 
-class _ResetPasswordViewState extends State<ResetPasswordView> {
+class ResetPasswordViewState extends State<ResetPasswordView> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   String msg="";
   var emailController = TextEditingController();
@@ -115,7 +115,10 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
       style: style,
       key: Key('confirmPasswordInput'),
       decoration: InputDecoration(
-          suffixIcon: IconButton(icon: _isHiddenConf ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibilityConf),
+          suffixIcon: IconButton(
+              icon: _isHiddenConf ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+              key: Key('isHiddenConfButton'),
+              onPressed: toggleVisibilityConf),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Confirm Password",
           border:
