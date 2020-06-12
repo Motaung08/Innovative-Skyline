@@ -76,7 +76,7 @@ class SupervisorController {
             url: urlReadBoards);
     print('Oy, we\'re here times twice');
     if (allBoards.isNotEmpty) {
-      print("BOARDS NOT NULL");
+      //print("BOARDS NOT NULL");
       if (allBoards[0].isNotEmpty) {
         user.boards = allBoards[0];
       }

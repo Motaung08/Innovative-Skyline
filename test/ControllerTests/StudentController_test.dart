@@ -35,8 +35,8 @@ void main() {
           url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
           url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"),
           "Student Register Success");
-      var j=await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
-      print(j);
+//      var j=await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
+//      print(j);
 
 //      expect(await studentController.studentRegistration(testStudent,testUser,
 //          url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
@@ -50,8 +50,8 @@ void main() {
 
     test('fetchStudent', () async {
 
-      testStudent.email='1713445@students.wits.ac.za';
-      testStudent.studentNo='1713445';
+      //testStudent.email='1713445@students.wits.ac.za';
+      //testStudent.studentNo='1713445';
       StudentController studentController=new StudentController();
 //      await studentController.studentRegistration(testStudent,testUser,
 //          url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
@@ -62,14 +62,17 @@ void main() {
     });
 
     test('setStudentUser', () async {
-      testStudent.email='1713445@students.wits.ac.za';
+      //testStudent.email='1713445@students.wits.ac.za';
       StudentController studentController=new StudentController();
-      await studentController.studentRegistration(testStudent,testUser,
-          url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
-          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php");
+//      await studentController.studentRegistration(testStudent,testUser,
+//          url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
+//          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php");
       await studentController.setStudentUser(testStudent.email,
           urlViewStudentProfile:"https://lamp.ms.wits.ac.za/~s1611821/viewStudentProfile.php",urlReadBoards: "https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php");
       expect(student!=null, true);
+//
+    });
+    test('student dereg',()async {
       var j=await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
     });
 

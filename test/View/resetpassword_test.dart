@@ -70,19 +70,14 @@ void main() {
      await tester.pumpWidget(makeWidgetTestable(resetPasswordView));
 
      final StudentEmailField = find.byKey(Key('StudentEmailInput'));
-     TextFormField studEmail = tester.widget(StudentEmailField);
-//     expect(studEmail.validator, findsOneWidget);
-     
-//     final emailErrorFinder = find.text('Email is Required');
-//     final passwordErrorFinder = find.text('Enter a password 6+ chars long');
-//     final confPasswordEmptyErrorFinder = find.text('Enter a password 6+ chars long');
+//    // TextFormField studEmail = tester.widget(StudentEmailField);
+//
+//     //final emailErrorFinder = find.text('Email is Required');
+////     final passwordErrorFinder = find.text('Enter a password 6+ chars long');
+////     final confPasswordEmptyErrorFinder = find.text('Enter a password 6+ chars long');
 //     final ResetButon = find.byKey(Key("ResetButtonInput"));
 //     await tester.tap(ResetButon);
-//     expect(emailErrorFinder, findsOneWidget);
-//     expect(passwordErrorFinder, findsOneWidget);
-//     expect(confPasswordEmptyErrorFinder, findsOneWidget);
-//
-//     final confPasswordNoMatchErrorFinder = find.text('Passwords must match');
+//     print('button tapped');
 
    });
 
