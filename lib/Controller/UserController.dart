@@ -89,7 +89,8 @@ class UserController{
     urlReadBoards='http://10.100.15.38/ReadBoards.php',
     urlViewSupProfile= 'http://10.100.15.38/viewSupProfile.php',
     url9ViewSupStaffNo = 'http://10.100.15.38/viewSupStaffNo.php',
-    urlGetDegreeTypes='http://10.100.15.38/getDegreeTypes.php'}) async {
+    urlGetDegreeTypes='http://10.100.15.38/getDegreeTypes.php'})
+  async {
 
     bool proceed=false;
 
@@ -133,8 +134,8 @@ class UserController{
 
       }
       else{
-        await supervisorController.setUserSup(email, url: urlViewSupProfile,
-            url2: url9ViewSupStaffNo);
+        await supervisorController.setUserSup(email, urlViewSupProfile: urlViewSupProfile,
+            urlReadBoards: urlReadBoards);
 
       }
       proceed=true;

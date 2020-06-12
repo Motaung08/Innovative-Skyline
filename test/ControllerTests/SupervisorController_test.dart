@@ -44,15 +44,15 @@ void main() {
         'fetchSupervisor', () async {
       SupervisorController fetchedSup=new SupervisorController();
 
-      expect(await fetchedSup.fetchSup(testUser.email,testSupervisor.staffNo,url1: "https://lamp.ms.wits.ac.za/~s1611821/viewSupProfile.php", url2: "https://lamp.ms.wits.ac.za/~s1611821/viewSupStaffNo.php"), isInstanceOf<Supervisor>());
+      expect(await fetchedSup.fetchSup(testUser.email,testSupervisor.staffNo,urlViewSupProfile: "https://lamp.ms.wits.ac.za/~s1611821/viewSupProfile.php", urlViewSupStaffNo: "https://lamp.ms.wits.ac.za/~s1611821/viewSupStaffNo.php"), isInstanceOf<Supervisor>());
     });
 
     test(
         'setSupervisorUser', () async {
       SupervisorController fetchedSup=new SupervisorController();
 
-      await fetchedSup.setUserSup(testSupervisor.email, url: "https://lamp.ms.wits.ac.za/~s1611821/viewSupProfile.php",
-          url2:"https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php");
+      await fetchedSup.setUserSup(testSupervisor.email, urlViewSupProfile: "https://lamp.ms.wits.ac.za/~s1611821/viewSupProfile.php",
+          urlReadBoards:"https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php");
 
       expect(supervisor!=null, true);
 

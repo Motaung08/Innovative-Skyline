@@ -75,10 +75,11 @@ class Project_BoardController {
         var response = await http.post(url, body: data);
         print('User: '+UserTypeID.toString()+", Stud no: "+personNo.toLowerCase()+", StaffNo: "+personNo.toLowerCase()+" Yields: "+response.body);
         // Getting Server response into variable.
+    print("Your boards response is: "+response.body);
         // ignore: non_constant_identifier_names
         var Response = jsonDecode(response.body);
 
-        print(Response);
+        //meghan@wits.ac.za
 
         String msg='';
         if (Response.length == 0) {

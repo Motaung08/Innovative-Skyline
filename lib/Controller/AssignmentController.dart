@@ -98,7 +98,7 @@ class AssignmentController {
           //Assignment is for a supervisor
           String staffNo=Response[i]["StaffNo"];
           Supervisor aSupervisor=new Supervisor();
-          aSupervisor=await supervisorController.fetchSup(null, staffNo,url2: url3);
+          aSupervisor=await supervisorController.fetchSup(null, staffNo,urlViewSupStaffNo: url3);
           sharedSups.add(aSupervisor);
         }
       }
