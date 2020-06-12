@@ -35,6 +35,8 @@ void main() {
           url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
           url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php"),
           "Student Register Success");
+      var j=await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
+      print(j);
 
 //      expect(await studentController.studentRegistration(testStudent,testUser,
 //          url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
@@ -48,22 +50,26 @@ void main() {
 
     test('fetchStudent', () async {
       StudentController studentController=new StudentController();
-
+      await studentController.studentRegistration(testStudent,testUser,
+          url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
+          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php");
       expect(await studentController.fetchStudent(testStudent.email,testStudent.studentNo,
       url1:'https://lamp.ms.wits.ac.za/~s1611821/viewStudentProfile.php',url2:'https://lamp.ms.wits.ac.za/~s1611821/viewStudentStudNo.php'), isNotNull);
+      var j=await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
     });
 
     test('setStudentUser', () async {
       StudentController studentController=new StudentController();
+      await studentController.studentRegistration(testStudent,testUser,
+          url1:'https://lamp.ms.wits.ac.za/~s1611821/register_student.php',
+          url2:"https://lamp.ms.wits.ac.za/~s1611821/register_user.php");
       await studentController.setStudentUser(testStudent.email,
           url:"https://lamp.ms.wits.ac.za/~s1611821/viewStudentProfile.php",url2: "https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php");
       expect(student!=null, true);
+      var j=await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
     });
 
-    test('deregister', () async {
-      var j=await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php");
-      print(j);
-    });
+
 
 
 

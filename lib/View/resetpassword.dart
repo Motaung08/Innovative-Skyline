@@ -8,6 +8,7 @@ class Toggle{
 
 class ResetPasswordView extends StatefulWidget {
   bool isHidden=true;
+  bool isHiddenConf=true;
   @override
   ResetPasswordViewState createState() => ResetPasswordViewState();
 }
@@ -34,11 +35,11 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
 
 
 
-  bool _isHiddenConf=true;
+
 
   void toggleVisibilityConf(){
     setState(() {
-      _isHiddenConf=!_isHiddenConf;
+      widget.isHiddenConf=!widget.isHiddenConf;
     });
   }
 
@@ -54,11 +55,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
 
   @override
   Widget build(BuildContext context) {
-    void toggleVisibility(){
-      setState(() {
-        widget.isHidden=!widget.isHidden;
-      });
-    }
+
 
     final studentEmailField = TextFormField(
       controller: emailController,
@@ -108,7 +105,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
         }
         return null;
       },
-      obscureText: _isHiddenConf,
+      obscureText: widget.isHiddenConf,
       onChanged: (val) {
         setState(() => ConfirmPass = val);
       },
@@ -116,7 +113,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
       key: Key('confirmPasswordInput'),
       decoration: InputDecoration(
           suffixIcon: IconButton(
-              icon: _isHiddenConf ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+              icon: widget.isHiddenConf ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
               key: Key('isHiddenConfButton'),
               onPressed: toggleVisibilityConf),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
