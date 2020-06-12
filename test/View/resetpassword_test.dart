@@ -71,7 +71,7 @@ void main() {
 
      final StudentEmailField = find.byKey(Key('StudentEmailInput'));
      TextFormField studEmail = tester.widget(StudentEmailField);
-     expect(studEmail.validator, findsOneWidget);
+//     expect(studEmail.validator, findsOneWidget);
      
 //     final emailErrorFinder = find.text('Email is Required');
 //     final passwordErrorFinder = find.text('Enter a password 6+ chars long');
