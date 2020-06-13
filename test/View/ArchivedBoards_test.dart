@@ -1,14 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart';
 import 'package:mockito/mockito.dart';
-import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
-import 'package:postgrad_tracker/Controller/StudentController.dart';
-import 'package:postgrad_tracker/Controller/UserController.dart';
 import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
@@ -82,20 +77,6 @@ void main() {
           '[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":"This board is a default board created for testing purposes. It should not be deleted.","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"}]',
           200));
 
-      data = {
-        'Project_Title': "Test Title",
-        'Project_Description' : "",
-        'Project_StartDate' : null,
-        'Project_EndDate' : null,
-        'StudentNo' : '123456789'.toLowerCase(),
-        'StaffNo' : '123456789'.toLowerCase(),
-        'userType' : 1.toString()
-      };
-
-
-      when(httpClient.post('http://10.100.15.38/createBoard.php', body: jsonEncode(data)))
-          .thenAnswer((_) async => http.Response("Board AND Association created!",200));
-
       await archivedBoards.initializeDisplay(httpClient);
 
       await tester.pumpWidget(makeWidgetTestable(archivedBoards));
@@ -105,8 +86,8 @@ void main() {
     });
 
     testWidgets('View Profile', (WidgetTester tester) async {
-      HomePage testHomePage = new HomePage();
-      await tester.pumpWidget(makeWidgetTestable(testHomePage));
+      ArchivedBoards archivedBoards = new ArchivedBoards();
+      await tester.pumpWidget(makeWidgetTestable(archivedBoards));
 
       final locateDrawer = find.byTooltip('Open navigation menu');
       expect(locateDrawer, findsOneWidget);
@@ -114,7 +95,7 @@ void main() {
       await tester.tap(locateDrawer);
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
-
+      user.userTypeID=1;
       final profile=find.byKey(Key('profileButton'));
       expect(profile, findsOneWidget);
 
@@ -123,8 +104,8 @@ void main() {
     });
 
     testWidgets('View Archived', (WidgetTester tester) async {
-      HomePage testHomePage = new HomePage();
-      await tester.pumpWidget(makeWidgetTestable(testHomePage));
+      ArchivedBoards archivedBoards = new ArchivedBoards();
+      await tester.pumpWidget(makeWidgetTestable(archivedBoards));
 
       final locateDrawer = find.byTooltip('Open navigation menu');
       expect(locateDrawer, findsOneWidget);
@@ -133,32 +114,34 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
 
-      final archived=find.byKey(Key('archivedButton'));
-      expect(archived, findsOneWidget);
+      final active=find.byKey(Key('ActiveBoardsInput'));
+      expect(active, findsOneWidget);
 
-      await tester.tap(archived);
+      await tester.tap(active);
 
     });
 
     testWidgets('Sign out', (WidgetTester tester) async {
-      HomePage testHomePage = new HomePage();
-      await tester.pumpWidget(makeWidgetTestable(testHomePage));
+      ArchivedBoards archivedBoards = new ArchivedBoards();
+      await tester.pumpWidget(makeWidgetTestable(archivedBoards));
 
       final locateDrawer = find.byTooltip('Open navigation menu');
       expect(locateDrawer, findsOneWidget);
 
       await tester.tap(locateDrawer);
       await tester.pump();
-      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 500));
 
       final signOut=find.byKey(Key('signOutDrawerButton'));
       expect(signOut, findsOneWidget);
 
       await tester.tap(signOut);
+      await tester.pump(const Duration(milliseconds: 500));
+      await tester.pump();
 
       expect(degrees, isEmpty);
       expect(studentTypes, isEmpty);
-      expect(listDynamic, isEmpty );
+      expect(listArchDynamic, isEmpty );
       expect(user.email, isNull);
       expect(supervisor.email , isNull);
       expect(student.email , isNull);
