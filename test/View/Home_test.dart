@@ -131,8 +131,8 @@ void main(){
       await tester.enterText(titleInout, "Testing Board Title");
       await tester.pump();
 
-      await tester.tap(createButton);
-      await tester.pump();
+//      await tester.tap(createButton);
+//      await tester.pump();
 //      expect(find.text('Enter Board Title'), findsNothing);
 
 
