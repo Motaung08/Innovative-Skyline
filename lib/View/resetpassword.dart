@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 class ResetPasswordView extends StatefulWidget {
   bool isHidden=true;
   bool isHiddenConf=true;
+  String email = '';
+  String password = '';
   http.Client resetClient=new http.Client();
   String resetUrl="http://10.100.15.38/ResetPassword.php";
   @override
@@ -23,8 +25,6 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
 
   final _formKey = GlobalKey<FormState>();
 
-  String email = '';
-  String password = '';
   // ignore: non_constant_identifier_names
   String ConfirmPass = '';
 
@@ -47,7 +47,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
   Future tryReset(http.Client client, {url= "http://10.100.15.38/ResetPassword.php"}) async{
     _formKey.currentState.validate();
 //    print("Reset client: "+widget.resetClient.toString());
-    msg= await userController.ResetPassword(email, password,widget.resetClient, url: widget.resetUrl);
+    msg= await userController.ResetPassword(widget.email, widget.password,widget.resetClient, url: widget.resetUrl);
     if (msg=="Successfully updated password!"){
       msg="";
       Navigator.pop(context);
@@ -63,7 +63,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Email is Required' : null,
       onChanged: (val) {
-        setState(() => email = val);
+        setState(() => widget.email = val);
       },
       style: style,
       key: Key('StudentEmailInput'),
@@ -81,7 +81,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
       validator: (val) =>
       val.length < 6 ? 'Enter a password 6+ chars long' : null,
       onChanged: (val) {
-        setState(() => password = val);
+        setState(() => widget.password = val);
       },
       style: style,
       key: Key('PasswordInput'),

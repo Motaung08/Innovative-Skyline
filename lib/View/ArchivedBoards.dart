@@ -14,36 +14,28 @@ import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/View/Home.dart';
+import 'package:postgrad_tracker/View/Login.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
 final List<DynamicWidget> listArchDynamic=new List<DynamicWidget>();
 bool _isDeleted;
 class ArchivedBoards extends StatefulWidget {
 
-  Future initialize(http.Client client) async{
+  Future<void> initialize(http.Client client) async{
     Project_BoardController projectBoardController =
     new Project_BoardController();
     List<List<Project_Board>> allBoards =
     await projectBoardController.ReadBoards(user.userTypeID, personNo,client);
     if (allBoards.isEmpty == false) {
-      if (allBoards[0] == null) {
-        user.boards = null;
-      } else {
+      if (allBoards[0] != null) {
         user.boards = allBoards[0];
       }
-      if (allBoards[1] == null) {
-        user.archivedBoards = null;
-      } else {
+      if (allBoards[1] != null) {
         user.archivedBoards = allBoards[1];
       }
-    } else {
-      user.boards = null;
-      user.archivedBoards = null;
     }
-
-    //print("Active boards: "+user.boards.length.toString());
   }
-  Future initializeDisplay(http.Client client) async {
+  Future<void> initializeDisplay(http.Client client) async {
     await initialize(client);
     listArchDynamic.clear();
     if (user.archivedBoards != null) {
@@ -52,10 +44,10 @@ class ArchivedBoards extends StatefulWidget {
       }
       else{
         for (int i = 0; i < user.archivedBoards.length; i++) {
-          print("Board ID: " +
-              user.archivedBoards[i].ProjectID.toString() +
-              ", Title: " +
-              user.archivedBoards[i].Project_Title);
+//          print("Board ID: " +
+//              user.archivedBoards[i].ProjectID.toString() +
+//              ", Title: " +
+//              user.archivedBoards[i].Project_Title);
           listArchDynamic.add(new DynamicWidget(aboard: user.archivedBoards[i]));
         }
       }
@@ -73,10 +65,6 @@ class ArchivedBoards extends StatefulWidget {
 class _ArchivedBoardsPageState extends State<ArchivedBoards> {
 
   String boardTitle = "";
-
-
-  DateTime _startDate;
-  DateTime _endDate;
   final format = DateFormat("yyyy-MM-dd");
   String startDateInput = "Select date ...";
   String endDateInput = "Select date ...";
@@ -84,7 +72,7 @@ class _ArchivedBoardsPageState extends State<ArchivedBoards> {
       color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
 
 
-  signout() {
+  signOut() {
     degrees.clear();
     studentTypes.clear();
     listArchDynamic.clear();
@@ -92,15 +80,16 @@ class _ArchivedBoardsPageState extends State<ArchivedBoards> {
     user = new User();
     supervisor = new Supervisor();
     student = new Student();
-    //project_board=new Project_Board();
-    studentController = new StudentController();
-    supervisorController = new SupervisorController();
-    userController = new UserController();
-    //project_boardController=new Project_BoardController();
-    Navigator.popAndPushNamed(context, '/Login');
-
-//ProjectBoardView
     homePage = new HomePage();
+
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+    );
+//    Navigator.popAndPushNamed(context, '/Login');
+
+
   }
 
   TextStyle style = TextStyle(
@@ -124,6 +113,7 @@ bool _viewArchived=false;
     final noBoardsView = new Container(
       width: MediaQuery.of(context).size.width,
       //height: MediaQuery.of(context).size.height,
+      key: Key('noBoardsView'),
       decoration: BoxDecoration(
         color: Colors.white,
       ),
@@ -153,6 +143,7 @@ bool _viewArchived=false;
    // if(user.archivedBoards=null)
 
     return Scaffold(
+      key: Key('archScaffold'),
       appBar: AppBar(
         title: Text("Archived Boards"),
         backgroundColor: Color(0xff009999),
@@ -217,7 +208,7 @@ bool _viewArchived=false;
                   style: TextStyle(
                       color: Color(0xff009999), fontWeight: FontWeight.bold)),
               onTap: () {
-                signout();
+                signOut();
               },
             ),
 

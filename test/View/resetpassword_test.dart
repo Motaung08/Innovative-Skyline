@@ -106,31 +106,35 @@ void main() {
      expect(find.text('Enter a password 6+ chars long'), findsOneWidget);
      expect(find.text('Confirm password.'), findsOneWidget);
 
-//     await tester.enterText(email, "Default@students.wits.ac.za");
-//     await tester.pump();
-//     await tester.enterText(password, "123456");
-//     await tester.pump();
-//     await tester.enterText(confirmPassword, "1234567");
-//     await tester.pump();
-//     await tester.tap(resetButton);
-//     await tester.pump();
-//     expect(find.text('Passwords must match'), findsOneWidget);
-//     await tester.enterText(confirmPassword, "123456");
-//     await tester.pump();
-//
-//     //http.Client httpClient=
-//     resetPasswordView.resetClient=new MockClient();
-//
-//     var data =
-//     {
-//       'Email': 'default@students.wits.ac.za'.toLowerCase(),
-//       'Password': '123456'
-//     };
-//
-//     when(resetPasswordView.resetClient.post('http://10.100.15.38/ResetPassword.php', body: jsonEncode(data)))
-//         .thenAnswer((_) async => http.Response("Password updated successfully",200));
-////     userController.ResetPassword('Default@students.wits.ac.za'.toLowerCase(), '123456', new MockClient());
-//
+     await tester.enterText(email, "Default@students.wits.ac.za");
+     await tester.pump();
+     await tester.enterText(password, "123456");
+     await tester.pump();
+     await tester.enterText(confirmPassword, "1234567");
+     await tester.pump();
+     await tester.tap(resetButton);
+     await tester.pump();
+     expect(find.text('Passwords must match'), findsOneWidget);
+     await tester.enterText(confirmPassword, "123456");
+     await tester.pump();
+
+     final client = MockClient();
+     resetPasswordView.resetClient=new MockClient();
+
+     var data =
+     {
+       'Email': 'default@students.wits.ac.za'.toLowerCase(),
+       'Password': '123456'
+     };
+
+     when(client.post('http://10.100.15.38/ResetPassword.php', body: jsonEncode(data)))
+         .thenAnswer((_) async => http.Response("Password updated successfully",200));
+     resetPasswordView.email='default@students.wits.ac.za'.toLowerCase();
+     resetPasswordView.password='123456';
+
+     resetPasswordView.resetClient=client;
+//     userController.ResetPassword('Default@students.wits.ac.za'.toLowerCase(), '123456', new MockClient());
+
 //     await tester.tap(resetButton);
 //     await tester.pump();
 //

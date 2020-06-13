@@ -243,7 +243,8 @@ class UserController{
       'Email': email.toLowerCase(),
       'Password': password
     };
-
+    print("Our doota is: "+data.toString());
+    print("Our client is: "+client.toString());
     /*The script below should take in the email and check if there exists a user
     * associated with the given email address. */
     final response = await client.post(
