@@ -23,7 +23,9 @@ import 'package:http/http.dart' as http;
 http.Client createClient=new http.Client();
 final List<DynamicWidget> listDynamic = new List<DynamicWidget>();
 bool _isDeleted;
+
 class HomePage extends StatefulWidget {
+
   bool isCreateOpen = false;
   DateTime startDate;
   DateTime endDate;
@@ -67,7 +69,6 @@ class HomePage extends StatefulWidget {
     else{
       _isDeleted=true;
     }
-
   }
 
   @override
@@ -75,6 +76,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomePage> {
+
   TextEditingController titleController = new TextEditingController();
   TextEditingController descriptionController = new TextEditingController();
   String boardTitle = "";
@@ -816,6 +818,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                   shape: BoxShape.rectangle,
                                 ),
                                 child: MaterialButton(
+                                  key: Key("selectStartDate"),
                                   child: Row(
                                     children: <Widget>[
                                       IconButton(

@@ -41,6 +41,14 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       type.StudentTypeID=1;
       studentTypes.add(type);
 
+      DegreeType testDropdown = DegreeType();
+      testDropdown.Degree_Type='Honours';
+      testDropdown.DegreeID=1;
+
+      List<DegreeType>L=List<DegreeType>();
+      L.add(testDropdown);
+      buildDropdownMenuItems(L);
+
 
     }
     //widget.initialize();

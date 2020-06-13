@@ -25,6 +25,7 @@ void main() {
     testWidgets('All input feild and button widgets should be on screen',
         (WidgetTester tester) async {
       await tester.pumpWidget(makeWidgetTestable(HomePage()));
+
     });
 
     testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
@@ -69,6 +70,7 @@ void main() {
       expect(noBoardsView, findsOneWidget);
       final plusButton = find.byKey(Key('plusButton'));
       expect(plusButton, findsOneWidget);
+
       final homeView = find.byKey(testHomePage.scaffoldKey);
       expect(homeView, findsOneWidget);
 
@@ -142,7 +144,7 @@ void main() {
       await tester.enterText(titleInout, "Testing Board Title");
       await tester.pump();
 
-
+      await tester.press(plusButton);
 
 
 //      await tester.tap(createButton);
