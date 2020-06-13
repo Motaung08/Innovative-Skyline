@@ -25,7 +25,7 @@ import 'package:postgrad_tracker/main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 
-
+//http.Client client;
 bool isArch(int ProjectID){
   if(user.archivedBoards.where((element) => element.ProjectID==ProjectID).isNotEmpty){
     return true;
