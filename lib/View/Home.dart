@@ -14,14 +14,18 @@ import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/ArchivedBoards.dart';
 import 'package:postgrad_tracker/View/Board.dart';
+import 'package:postgrad_tracker/View/Login.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
+
+http.Client createClient=new http.Client();
 final List<DynamicWidget> listDynamic = new List<DynamicWidget>();
 bool _isDeleted;
 class HomePage extends StatefulWidget {
   bool isCreateOpen = false;
   DateTime startDate;
   DateTime endDate;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   Future<void> initialize(http.Client client) async {
     Project_BoardController projectBoardController =
         new Project_BoardController();
@@ -42,6 +46,7 @@ class HomePage extends StatefulWidget {
 
   Future<void> initializeDisplay(http.Client client) async {
     //http.Client client=new http.Client();
+    createClient=client;
     await initialize(client);
 
     listDynamic.clear();
@@ -72,6 +77,7 @@ class _MyHomePageState extends State<HomePage> {
   TextEditingController descriptionController = new TextEditingController();
   String boardTitle = "";
   final _formKey = GlobalKey<FormState>();
+
   //int userType=user.userTypeID;
 
 
@@ -294,13 +300,13 @@ class _MyHomePageState extends State<HomePage> {
                           descriptionController.text;
                       projectBoard.Project_StartDate = widget.startDate;
                       projectBoard.Project_EndDate = widget.endDate;
-                      http.Client client=new http.Client();
+//                      http.Client client=new http.Client();
                       await projectBoardController.createBoard(
-                          projectBoard, user.userTypeID, personNo,client);
+                          projectBoard, user.userTypeID, personNo,createClient);
                       //http.Client client=new http.Client();
                       List<List<Project_Board>> allBoards =
                           await projectBoardController.ReadBoards(
-                              user.userTypeID, personNo,client);
+                              user.userTypeID, personNo,createClient);
                       if (allBoards.isEmpty == false) {
 
                         if (allBoards[0] == null) {
@@ -318,10 +324,10 @@ class _MyHomePageState extends State<HomePage> {
                         user.archivedBoards = null;
                       }
                       projectBoard = user.boards.last;
-                      addDynamic(projectBoard);
+                      listDynamic.add(new DynamicWidget(aboard: projectBoard));
                       boardTitle = "";
                       //http.Client client=new http.Client();
-                      await homePage.initializeDisplay(client);
+                      await homePage.initializeDisplay(createClient);
                       setState(() {
                         widget.isCreateOpen=false;
                       });
@@ -338,11 +344,8 @@ class _MyHomePageState extends State<HomePage> {
 
   Icon floatingIcon = new Icon(Icons.add);
 
-  addDynamic(Project_Board givenBoard) {
-    listDynamic.add(new DynamicWidget(aboard: givenBoard));
-  }
-
-  signout() {
+  signOut() {
+    print('We are signing out...');
     degrees.clear();
     studentTypes.clear();
     listDynamic.clear();
@@ -351,11 +354,16 @@ class _MyHomePageState extends State<HomePage> {
     supervisor = new Supervisor();
     student = new Student();
     //project_board=new Project_Board();
-    studentController = new StudentController();
-    supervisorController = new SupervisorController();
-    userController = new UserController();
+//    studentController = new StudentController();
+//    supervisorController = new SupervisorController();
+//    userController = new UserController();
     //project_boardController=new Project_BoardController();
-    Navigator.popAndPushNamed(context, '/Login');
+    Navigator.of(context).pop();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+    );
+//    Navigator.popAndPushNamed(context, '/Login');
 
 //ProjectBoardView
     homePage = new HomePage();
@@ -455,7 +463,7 @@ if(user.boards==null){
     }
 
     return Scaffold(
-      key: Key("HomeScaffold"),
+      key: widget.scaffoldKey,
       appBar: AppBar(
         title: Text("Innovative Skyline"),
         backgroundColor: Color(0xff009999),
@@ -473,11 +481,13 @@ if(user.boards==null){
       ),
       floatingActionButton: plusButton,
       drawer: Drawer(
+        key: Key('drawInput'),
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
         // space to fit everything.
         child: ListView(
           // Important: Remove any padding from the ListView.
+          key: Key('ListViewDrawer'),
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
@@ -519,10 +529,12 @@ if(user.boards==null){
             ),
             ListTile(
               title: Text('Sign Out',
+                  key: Key('signOutDrawerButton'),
                   style: TextStyle(
                       color: Color(0xff009999), fontWeight: FontWeight.bold)),
               onTap: () {
-                signout();
+                print("TAPPED!!!!!!!!!");
+                signOut();
               },
             ),
           ],
