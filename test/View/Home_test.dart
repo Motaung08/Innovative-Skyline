@@ -164,7 +164,7 @@ void main() {
       await tester.tap(locateDrawer);
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
-
+      user.userTypeID=1;
       final profile=find.byKey(Key('profileButton'));
       expect(profile, findsOneWidget);
 
