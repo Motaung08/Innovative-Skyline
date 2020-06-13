@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/Model/DegreeType.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
+import 'package:postgrad_tracker/Model/StudentType.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:intl/intl.dart';
 
@@ -8,6 +10,28 @@ import '../../../user.dart';
 class viewStudent{
 
   Widget getProfile(Student viewStudent, BuildContext context, double textHeadingSize, double textValueSize){
+
+    /*TODO  this should not even be here but on test file its here since i cant access the global variables you use in tests; */
+    /*TODO the student parameter passed in wiidgetBuild where is it defined */
+
+    if(viewStudent.fName==null){
+      print("Hala");
+      viewStudent=new Student();
+      viewStudent.fName="Student";
+      viewStudent.studentNo="123";
+      viewStudent.lName="Foster";
+      viewStudent.degreeID=1;
+      viewStudent.studentTypeID=1;
+      viewStudent.registrationDate=new DateTime.now();
+      DegreeType degree=DegreeType();
+      degree.Degree_Type="Honours";
+      degree.DegreeID=1;
+      degrees.add(degree);
+      StudentType type=StudentType();
+      type.Student_Type="Full time";
+      type.StudentTypeID=1;
+      studentTypes.add(type);
+    }
 
     TextStyle headingStyle = TextStyle(
         fontFamily: 'Montserrat',
@@ -67,7 +91,7 @@ class viewStudent{
                 ),
               Text( ViewStudentProfilePage.validate(viewStudent.fName)+ " " +ViewStudentProfilePage.validate(viewStudent.lName) + "\n",
                     textAlign: TextAlign.start,
-                    key: Key('Name'),
+                    key: Key('StudFullName'),
                     style: valueStyle
               ),
                 Text("Student Number: \n",

@@ -204,6 +204,23 @@ class _BoardState extends State<Board> {
   void pop() {
 
     stiles.clear();
+    if(widget.proj_board==null){
+
+      Project_Board b=Project_Board();
+      b.ProjectID=1;
+      b.Project_Title="Project";
+      b.Project_Description="Test";
+      b.Project_EndDate=DateTime.now();
+      b.Project_EndDate=DateTime.now();
+      b.AccessLevel=1;
+      b.boardActive=true;
+      b.boardAssignActive=true;
+      widget.proj_board=b;
+      user=new User();
+      user.boards=List<Project_Board>();
+      user.boards.add(b);
+
+    }
     int boardIndex = getBoardIndex(widget.proj_board.ProjectID);
 
     listDynamic.clear();

@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov.info - lib/Controller/SupervisorController.dart</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">lib/Controller</a> - SupervisorController.dart<span style="font-size: 80%;"> (source / <a href="SupervisorController.dart.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">40</td>
+            <td class="headerCovTableEntry">46</td>
+            <td class="headerCovTableEntryMed">87.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2020-06-12 22:49:07</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : import 'dart:convert';</a>
+<span class="lineNum">       2 </span>            : import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
+<span class="lineNum">       3 </span>            : import 'package:postgrad_tracker/Controller/UserController.dart';
+<span class="lineNum">       4 </span>            : import 'package:postgrad_tracker/Model/Project_Board.dart';
+<span class="lineNum">       5 </span>            : import 'package:postgrad_tracker/Model/Supervisor.dart';
+<span class="lineNum">       6 </span>            : import 'package:postgrad_tracker/Model/User.dart';
+<span class="lineNum">       7 </span>            : import 'package:http/http.dart' as http;
+<span class="lineNum">       8 </span>            : import 'package:postgrad_tracker/main.dart';
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span>            : class SupervisorController {
+<span class="lineNum">      11 </span>            :   /*
+<span class="lineNum">      12 </span>            :   The purpose of this method is to retrieve the Supervisor instance associated
+<span class="lineNum">      13 </span>            :   with the given email address and assign the instance attributes to a new
+<span class="lineNum">      14 </span>            :   Supervisor object which is subsequently returned.
+<span class="lineNum">      15 </span>            :    */
+<span class="lineNum">      16 </span><span class="lineCov">          2 :   Future&lt;Supervisor&gt; fetchSup(String email, String staffNo,</span>
+<span class="lineNum">      17 </span>            :       {urlViewSupProfile = 'http://10.100.15.38/viewSupProfile.php',
+<span class="lineNum">      18 </span>            :       urlViewSupStaffNo = 'http://10.100.15.38/viewSupStaffNo.php'}) async {
+<span class="lineNum">      19 </span><span class="lineCov">          2 :     Supervisor fetchedSup = new Supervisor();</span>
+<span class="lineNum">      20 </span>            :     String msg = '';
+<span class="lineNum">      21 </span>            : 
+<span class="lineNum">      22 </span>            :     String url;
+<span class="lineNum">      23 </span>            :     var data;
+<span class="lineNum">      24 </span>            :     if (email != null) {
+<span class="lineNum">      25 </span><span class="lineCov">          1 :       email = email.toLowerCase();</span>
+<span class="lineNum">      26 </span>            :       url = urlViewSupProfile;
+<span class="lineNum">      27 </span><span class="lineCov">          1 :       data = {</span>
+<span class="lineNum">      28 </span>            :         &quot;Email&quot;: email,
+<span class="lineNum">      29 </span>            :       };
+<span class="lineNum">      30 </span>            :     } else if (staffNo != null) {
+<span class="lineNum">      31 </span><span class="lineCov">          1 :       staffNo = staffNo.toLowerCase();</span>
+<span class="lineNum">      32 </span>            :       url = urlViewSupStaffNo;
+<span class="lineNum">      33 </span><span class="lineCov">          1 :       data = {&quot;StaffNo&quot;: staffNo};</span>
+<span class="lineNum">      34 </span>            :     }
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span><span class="lineCov">          4 :     final response = await http.post(url, body: data);</span>
+<span class="lineNum">      37 </span><span class="lineCov">          4 :     print(response.body);</span>
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span><span class="lineCov">          4 :     var datauser = json.decode(response.body);</span>
+<span class="lineNum">      40 </span>            : 
+<span class="lineNum">      41 </span><span class="lineCov">          4 :     if (datauser.length == 0) {</span>
+<span class="lineNum">      42 </span>            :       msg = 'No supervisor';
+<span class="lineNum">      43 </span>            :     } else {
+<span class="lineNum">      44 </span>            :       msg = 'Found supervisor.';
+<span class="lineNum">      45 </span><span class="lineCov">          6 :       fetchedSup.staffNo = datauser[0]['StaffNo'];</span>
+<span class="lineNum">      46 </span><span class="lineCov">          6 :       fetchedSup.fName = datauser[0]['Supervisor_Firstname'];</span>
+<span class="lineNum">      47 </span><span class="lineCov">          6 :       fetchedSup.lName = datauser[0]['Supervisor_Lastname'];</span>
+<span class="lineNum">      48 </span><span class="lineCov">          6 :       fetchedSup.email = datauser[0]['Supervisor_Email'];</span>
+<span class="lineNum">      49 </span><span class="lineCov">          6 :       fetchedSup.office = datauser[0]['Supervisor_OfficePhone'];</span>
+<span class="lineNum">      50 </span>            :     }
+<span class="lineNum">      51 </span><span class="lineCov">          2 :     print(msg);</span>
+<span class="lineNum">      52 </span>            :     //print(&quot;WE ARE RETURNING A &quot;+msg);
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span>            :     return fetchedSup;
+<span class="lineNum">      55 </span>            :   }
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            :   /*
+<span class="lineNum">      58 </span>            :   The purpose of this method is to set the user as a supervisor and load their
+<span class="lineNum">      59 </span>            :   supervisor attributes as well as loading the boards which are associated with
+<span class="lineNum">      60 </span>            :   said user/supervisor.
+<span class="lineNum">      61 </span>            :    */
+<span class="lineNum">      62 </span><span class="lineCov">          1 :   Future setUserSup(String email,</span>
+<span class="lineNum">      63 </span>            :       {urlViewSupProfile = 'http://10.100.15.38/viewSupProfile.php',
+<span class="lineNum">      64 </span>            :       urlReadBoards = 'http://10.100.15.38/ReadBoards.php',
+<span class="lineNum">      65 </span>            :       urlViewSupStaffNo = 'http://10.100.15.38/viewSupStaffNo.php'}) async {
+<span class="lineNum">      66 </span><span class="lineCov">          2 :     supervisor = await fetchSup(email, null,</span>
+<span class="lineNum">      67 </span>            :         urlViewSupProfile: urlViewSupProfile,
+<span class="lineNum">      68 </span>            :         urlViewSupStaffNo: urlViewSupStaffNo);
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span><span class="lineCov">          2 :     personNo = supervisor.staffNo;</span>
+<span class="lineNum">      71 </span>            :     Project_BoardController projectBoardController =
+<span class="lineNum">      72 </span><span class="lineCov">          1 :         new Project_BoardController();</span>
+<span class="lineNum">      73 </span><span class="lineCov">          1 :     print('Oy, we\'re here');</span>
+<span class="lineNum">      74 </span>            :     List&lt;List&lt;Project_Board&gt;&gt; allBoards =
+<span class="lineNum">      75 </span><span class="lineCov">          4 :         await projectBoardController.ReadBoards(2, supervisor.staffNo,</span>
+<span class="lineNum">      76 </span>            :             url: urlReadBoards);
+<span class="lineNum">      77 </span><span class="lineCov">          1 :     print('Oy, we\'re here times twice');</span>
+<span class="lineNum">      78 </span><span class="lineCov">          1 :     if (allBoards.isNotEmpty) {</span>
+<span class="lineNum">      79 </span>            :       //print(&quot;BOARDS NOT NULL&quot;);
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :       if (allBoards[0].isNotEmpty) {</span>
+<span class="lineNum">      81 </span><span class="lineNoCov">          0 :         user.boards = allBoards[0];</span>
+<span class="lineNum">      82 </span>            :       }
+<span class="lineNum">      83 </span><span class="lineNoCov">          0 :       if (allBoards[1].isNotEmpty) {</span>
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 :         user.archivedBoards = allBoards[1];</span>
+<span class="lineNum">      85 </span>            :       }
+<span class="lineNum">      86 </span>            : //
+<span class="lineNum">      87 </span>            :     }
+<span class="lineNum">      88 </span>            :   }
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span>            :   /*
+<span class="lineNum">      91 </span>            :     The purpose of this method is to take in a supervisor object and a user
+<span class="lineNum">      92 </span>            :     object (created when the user selects register under the supervisor
+<span class="lineNum">      93 </span>            :     registration page) and subsequently creates instances in the Supervisor
+<span class="lineNum">      94 </span>            :     Table and User Table respectively. This method ensures that a duplicate
+<span class="lineNum">      95 </span>            :     email address is not used.
+<span class="lineNum">      96 </span>            : 
+<span class="lineNum">      97 </span>            :     This registration method is different to that in StudentController
+<span class="lineNum">      98 </span>            :     as different data is required to be passed in.
+<span class="lineNum">      99 </span>            : 
+<span class="lineNum">     100 </span>            :      NOTE: Should subsequently log the new user in if the registration is
+<span class="lineNum">     101 </span>            :      successful.
+<span class="lineNum">     102 </span>            :    */
+<span class="lineNum">     103 </span><span class="lineCov">          1 :   Future&lt;String&gt; registration(Supervisor supervisorA, User userA,</span>
+<span class="lineNum">     104 </span>            :       {url = 'http://10.100.15.38/Register_Supervisor.php',
+<span class="lineNum">     105 </span>            :       url2: 'http://10.100.15.38/register_user.php'}) async {
+<span class="lineNum">     106 </span><span class="lineCov">          2 :     supervisor.register = false;</span>
+<span class="lineNum">     107 </span>            :     String userRegistrationMessage = &quot;&quot;;
+<span class="lineNum">     108 </span>            :     // ignore: non_constant_identifier_names
+<span class="lineNum">     109 </span>            :     String RegistrationSuccess = &quot;&quot;;
+<span class="lineNum">     110 </span>            :     userRegistrationMessage =
+<span class="lineNum">     111 </span><span class="lineCov">          3 :         await userController.userRegistration(userA, url: url2);</span>
+<span class="lineNum">     112 </span>            : //          if(url == 'http://10.100.15.38/Register_Supervisor.php') {
+<span class="lineNum">     113 </span>            : //            userRegistrationMessage = await userController.userRegistration(
+<span class="lineNum">     114 </span>            : //                userA, url: url2);
+<span class="lineNum">     115 </span>            : //          }else{
+<span class="lineNum">     116 </span>            : //
+<span class="lineNum">     117 </span>            : //          }
+<span class="lineNum">     118 </span><span class="lineCov">          1 :     if (userRegistrationMessage ==</span>
+<span class="lineNum">     119 </span>            :         &quot;Email Already Exists, Please Try Again With New Email Address..!&quot;) {
+<span class="lineNum">     120 </span>            :       RegistrationSuccess = userRegistrationMessage;
+<span class="lineNum">     121 </span>            :     } else {
+<span class="lineNum">     122 </span>            :       // SERVER API URL
+<span class="lineNum">     123 </span>            : //      var url =
+<span class="lineNum">     124 </span>            : //          'http://10.100.15.38/Register_Supervisor.php';
+<span class="lineNum">     125 </span>            : //          'https://witsinnovativeskyline.000webhostapp.com/Register_Supervisor.php';
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span>            :       // Store all data with Param Name.
+<span class="lineNum">     128 </span><span class="lineCov">          1 :       var data = {</span>
+<span class="lineNum">     129 </span><span class="lineCov">          2 :         'email': supervisorA.email.toLowerCase(),</span>
+<span class="lineNum">     130 </span><span class="lineCov">          2 :         'StaffNo': supervisorA.staffNo.toLowerCase(),</span>
+<span class="lineNum">     131 </span><span class="lineCov">          1 :         'Sup_FName': supervisorA.fName,</span>
+<span class="lineNum">     132 </span><span class="lineCov">          1 :         'Sup_LName': supervisorA.lName,</span>
+<span class="lineNum">     133 </span><span class="lineCov">          1 :         'Supervisor_OfficePhone': supervisorA.office,</span>
+<span class="lineNum">     134 </span>            :       };
+<span class="lineNum">     135 </span>            : 
+<span class="lineNum">     136 </span>            :       // Starting Web API Call.
+<span class="lineNum">     137 </span><span class="lineCov">          3 :       var response = await http.post(url, body: json.encode(data));</span>
+<span class="lineNum">     138 </span><span class="lineCov">          2 :       print(response.body);</span>
+<span class="lineNum">     139 </span>            : 
+<span class="lineNum">     140 </span>            :       // Getting Server response into variable.
+<span class="lineNum">     141 </span><span class="lineCov">          2 :       var message = jsonDecode(response.body);</span>
+<span class="lineNum">     142 </span>            : 
+<span class="lineNum">     143 </span><span class="lineCov">          1 :       if (message == &quot;This staff number already has an associated account.&quot;) {</span>
+<span class="lineNum">     144 </span>            :         RegistrationSuccess = message;
+<span class="lineNum">     145 </span><span class="lineNoCov">          0 :         UserController userController = new UserController();</span>
+<span class="lineNum">     146 </span><span class="lineNoCov">          0 :         userController.userDeRegistration(userA);</span>
+<span class="lineNum">     147 </span>            :       }
+<span class="lineNum">     148 </span>            : 
+<span class="lineNum">     149 </span>            :       // If Web call Success than Hide the CircularProgressIndicator.
+<span class="lineNum">     150 </span><span class="lineCov">          1 :       if (message == &quot;Supervisor Registered Successfully&quot;) {</span>
+<span class="lineNum">     151 </span><span class="lineCov">          2 :         supervisor.register = true;</span>
+<span class="lineNum">     152 </span>            :         RegistrationSuccess = &quot;Supervisor successfully registered!&quot;;
+<span class="lineNum">     153 </span>            :       }
+<span class="lineNum">     154 </span>            :     }
+<span class="lineNum">     155 </span>            : 
+<span class="lineNum">     156 </span>            :     return RegistrationSuccess;
+<span class="lineNum">     157 </span>            :   }
+<span class="lineNum">     158 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

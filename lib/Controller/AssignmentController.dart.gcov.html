@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov.info - lib/Controller/AssignmentController.dart</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">lib/Controller</a> - AssignmentController.dart<span style="font-size: 80%;"> (source / <a href="AssignmentController.dart.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">51</td>
+            <td class="headerCovTableEntry">51</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2020-06-12 22:49:07</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : import 'dart:convert';</a>
+<span class="lineNum">       2 </span>            : import 'package:http/http.dart' as http;
+<span class="lineNum">       3 </span>            : import 'package:postgrad_tracker/Model/Assignment.dart';
+<span class="lineNum">       4 </span>            : import 'package:postgrad_tracker/Model/Student.dart';
+<span class="lineNum">       5 </span>            : import 'package:postgrad_tracker/Model/Supervisor.dart';
+<span class="lineNum">       6 </span>            : import 'package:postgrad_tracker/main.dart';
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : class AssignmentController {
+<span class="lineNum">       9 </span>            :   Assignment assignment;
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            :   /*
+<span class="lineNum">      12 </span>            :   The purpose of this method is to share a board. This is done by taking in the
+<span class="lineNum">      13 </span>            :   appropriate arguments to write to the Assignment table in the database -
+<span class="lineNum">      14 </span>            :   with special mention of who the board is being shared with as this will be
+<span class="lineNum">      15 </span>            :   used to load the board upon their logging in.
+<span class="lineNum">      16 </span>            :    */
+<span class="lineNum">      17 </span>            :   // ignore: non_constant_identifier_names
+<span class="lineNum">      18 </span><span class="lineCov">          1 :   Future&lt;String&gt; createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID,{url='http://10.100.15.38/createAssignment.php'}) async{</span>
+<span class="lineNum">      19 </span>            : //    var url =
+<span class="lineNum">      20 </span>            : ////        'https://witsinnovativeskyline.000webhostapp.com/createAssignment.php';
+<span class="lineNum">      21 </span>            : //        'http://10.100.15.38/createAssignment.php';
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span><span class="lineCov">          1 :     var data={</span>
+<span class="lineNum">      24 </span><span class="lineCov">          1 :       'UserTypeID' : OtherUserType.toString(),</span>
+<span class="lineNum">      25 </span><span class="lineCov">          1 :       'AssignPerson' : OtherPersonNo.toLowerCase(),</span>
+<span class="lineNum">      26 </span><span class="lineCov">          1 :       'ProjectID' : ProjectID.toString(),</span>
+<span class="lineNum">      27 </span><span class="lineCov">          1 :       'AccessLevelID' : AccessID.toString(),</span>
+<span class="lineNum">      28 </span>            :     };
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span>            :     // Starting Web API Call.
+<span class="lineNum">      31 </span><span class="lineCov">          3 :     var response = await http.post(url,body: jsonEncode(data));</span>
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span>            :     // Getting Server response into variable.
+<span class="lineNum">      34 </span>            :     // ignore: non_constant_identifier_names
+<span class="lineNum">      35 </span><span class="lineCov">          2 :     var Response = jsonDecode(response.body);</span>
+<span class="lineNum">      36 </span><span class="lineCov">          1 :     print(Response);</span>
+<span class="lineNum">      37 </span>            :     return Response;
+<span class="lineNum">      38 </span>            :   }
+<span class="lineNum">      39 </span>            : 
+<span class="lineNum">      40 </span>            :   // ignore: non_constant_identifier_names
+<span class="lineNum">      41 </span><span class="lineCov">          1 :   Future&lt;List&gt; ReadAssignment(int UserType, String OtherPersonNo, int ProjectID,{url='http://10.100.15.38/ReadAssignment.php'}) async{</span>
+<span class="lineNum">      42 </span>            : //    var url =
+<span class="lineNum">      43 </span>            : //        'https://witsinnovativeskyline.000webhostapp.com/ReadAssignment.php';
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span><span class="lineCov">          1 :     var data={</span>
+<span class="lineNum">      46 </span><span class="lineCov">          1 :       'UserTypeID' : UserType.toString(),</span>
+<span class="lineNum">      47 </span><span class="lineCov">          1 :       'AssignPerson' : OtherPersonNo.toLowerCase(),</span>
+<span class="lineNum">      48 </span><span class="lineCov">          1 :       'ProjectID' : ProjectID.toString(),</span>
+<span class="lineNum">      49 </span>            :     };
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            :     // Starting Web API Call.
+<span class="lineNum">      52 </span><span class="lineCov">          3 :     var response = await http.post(url,body: jsonEncode(data));</span>
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span>            :     // Getting Server response into variable.
+<span class="lineNum">      55 </span>            :     // ignore: non_constant_identifier_names
+<span class="lineNum">      56 </span><span class="lineCov">          2 :     var Response = jsonDecode(response.body);</span>
+<span class="lineNum">      57 </span><span class="lineCov">          1 :     print(Response);</span>
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            :     return Response;
+<span class="lineNum">      60 </span>            : 
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span>            :   }
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span>            :   // ignore: non_constant_identifier_names
+<span class="lineNum">      65 </span><span class="lineCov">          1 :   Future&lt;List&lt;List&gt;&gt; ReadBoardAssignments(int ProjectID,{url='http://10.100.15.38/ReadBoardAssignments.php',</span>
+<span class="lineNum">      66 </span>            :     url2=&quot;http://10.100.15.38/viewStudentStudNo.php&quot;,url3='http://10.100.15.38/viewSupStaffNo.php'}) async{
+<span class="lineNum">      67 </span>            : //    var url =
+<span class="lineNum">      68 </span>            : //        'https://witsinnovativeskyline.000webhostapp.com/ReadAssignment.php';
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span><span class="lineCov">          1 :     var data={</span>
+<span class="lineNum">      71 </span><span class="lineCov">          1 :       'ProjectID' : ProjectID.toString(),</span>
+<span class="lineNum">      72 </span>            :     };
+<span class="lineNum">      73 </span>            : //    print(&quot;URL: &quot;+url);
+<span class="lineNum">      74 </span>            :     // Starting Web API Call.
+<span class="lineNum">      75 </span><span class="lineCov">          3 :     var response = await http.post(url,body: jsonEncode(data));</span>
+<span class="lineNum">      76 </span>            : 
+<span class="lineNum">      77 </span>            :     // Getting Server response into variable.
+<span class="lineNum">      78 </span>            :     // ignore: non_constant_identifier_names
+<span class="lineNum">      79 </span><span class="lineCov">          1 :     String sudoResp= response.body;</span>
+<span class="lineNum">      80 </span><span class="lineCov">          1 :     print(sudoResp);</span>
+<span class="lineNum">      81 </span><span class="lineCov">          2 :     var Response = jsonDecode(response.body);</span>
+<span class="lineNum">      82 </span><span class="lineCov">          1 :     print(Response);</span>
+<span class="lineNum">      83 </span><span class="lineCov">          4 :     print(&quot;NULL? &quot;+Response.length.toString());</span>
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span><span class="lineCov">          1 :     List&lt;Supervisor&gt; sharedSups=new List&lt;Supervisor&gt;();</span>
+<span class="lineNum">      86 </span><span class="lineCov">          1 :     List&lt;Student&gt; sharedStudents=new List&lt;Student&gt;();</span>
+<span class="lineNum">      87 </span><span class="lineCov">          1 :     List&lt;List&gt; sharedWith=new List&lt;List&gt;();</span>
+<span class="lineNum">      88 </span><span class="lineCov">          3 :       for(int i=0;i&lt;Response.length;i++){</span>
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span><span class="lineCov">          2 :         if(Response[i][&quot;StudentNo&quot;]!=null){</span>
+<span class="lineNum">      91 </span>            :           //Assignment is for a student
+<span class="lineNum">      92 </span><span class="lineCov">          2 :           String studNo=Response[i][&quot;StudentNo&quot;];</span>
+<span class="lineNum">      93 </span><span class="lineCov">          1 :           Student aStudent=new Student();</span>
+<span class="lineNum">      94 </span>            :           //print(&quot;URL2: &quot;+url2);
+<span class="lineNum">      95 </span><span class="lineCov">          3 :           aStudent = await studentController.fetchStudent(null, studNo,urlViewStudentStudNo: url2);</span>
+<span class="lineNum">      96 </span><span class="lineCov">          1 :           sharedStudents.add(aStudent);</span>
+<span class="lineNum">      97 </span>            :         }
+<span class="lineNum">      98 </span><span class="lineCov">          2 :         else if(Response[i][&quot;StaffNo&quot;]!=null){</span>
+<span class="lineNum">      99 </span>            :           //Assignment is for a supervisor
+<span class="lineNum">     100 </span><span class="lineCov">          2 :           String staffNo=Response[i][&quot;StaffNo&quot;];</span>
+<span class="lineNum">     101 </span><span class="lineCov">          1 :           Supervisor aSupervisor=new Supervisor();</span>
+<span class="lineNum">     102 </span><span class="lineCov">          3 :           aSupervisor=await supervisorController.fetchSup(null, staffNo,urlViewSupStaffNo: url3);</span>
+<span class="lineNum">     103 </span><span class="lineCov">          1 :           sharedSups.add(aSupervisor);</span>
+<span class="lineNum">     104 </span>            :         }
+<span class="lineNum">     105 </span>            :       }
+<span class="lineNum">     106 </span>            : 
+<span class="lineNum">     107 </span>            : 
+<span class="lineNum">     108 </span><span class="lineCov">          1 :     sharedWith.add(sharedStudents);</span>
+<span class="lineNum">     109 </span><span class="lineCov">          1 :     sharedWith.add(sharedSups);</span>
+<span class="lineNum">     110 </span><span class="lineCov">          4 :     print(&quot;SHARED WITH: &quot;+sharedWith.length.toString());</span>
+<span class="lineNum">     111 </span>            :     return sharedWith;
+<span class="lineNum">     112 </span>            : 
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span>            :   }
+<span class="lineNum">     115 </span>            : 
+<span class="lineNum">     116 </span>            :   // ignore: non_constant_identifier_names
+<span class="lineNum">     117 </span><span class="lineCov">          1 :   Future&lt;String&gt; DeleteAssignment(int UserType, String OtherPersonNo, int ProjectID,{url='http://10.100.15.38/DeleteAssignment.php'}) async{</span>
+<span class="lineNum">     118 </span>            : //    var url =
+<span class="lineNum">     119 </span>            : //        //'https://witsinnovativeskyline.000webhostapp.com/DeleteAssignment.php';
+<span class="lineNum">     120 </span>            : //    'http://10.100.15.38/DeleteAssignment.php';
+<span class="lineNum">     121 </span>            : 
+<span class="lineNum">     122 </span><span class="lineCov">          1 :     var data={</span>
+<span class="lineNum">     123 </span><span class="lineCov">          1 :       'UserTypeID' : UserType.toString(),</span>
+<span class="lineNum">     124 </span><span class="lineCov">          1 :       'AssignPerson' : OtherPersonNo.toLowerCase(),</span>
+<span class="lineNum">     125 </span><span class="lineCov">          1 :       'ProjectID' : ProjectID.toString(),</span>
+<span class="lineNum">     126 </span>            :     };
+<span class="lineNum">     127 </span>            : 
+<span class="lineNum">     128 </span>            :     // Starting Web API Call.
+<span class="lineNum">     129 </span><span class="lineCov">          3 :     var response = await http.post(url,body: jsonEncode(data));</span>
+<span class="lineNum">     130 </span>            : 
+<span class="lineNum">     131 </span>            :     // Getting Server response into variable.
+<span class="lineNum">     132 </span>            :     // ignore: non_constant_identifier_names
+<span class="lineNum">     133 </span><span class="lineCov">          2 :     var Response = jsonDecode(response.body);</span>
+<span class="lineNum">     134 </span><span class="lineCov">          1 :     print(Response);</span>
+<span class="lineNum">     135 </span>            : 
+<span class="lineNum">     136 </span>            :     return Response;
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span>            : 
+<span class="lineNum">     139 </span>            :   }
+<span class="lineNum">     140 </span>            : 
+<span class="lineNum">     141 </span>            : 
+<span class="lineNum">     142 </span>            : }
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span>            : 
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

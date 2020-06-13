@@ -1,13 +1,20 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
+import 'package:postgrad_tracker/Model/DegreeType.dart';
 import 'package:postgrad_tracker/View/profile/student/ViewStudentProfile.dart';
 import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
 import 'package:postgrad_tracker/main.dart';
-
+import 'Models_test.dart';
+import 'package:postgrad_tracker/Model/Student.dart';
 
 void main(){
   group('All pages should be accessed', ()
   {
+    testWidgets('All input feild and button widgets should be on screen',
+            (WidgetTester tester) async {
+              await tester.pumpWidget(
+                  makeWidgetTestable(ViewStudentProfilePage()));
+            });
     test('validation failed', () {
       final results = ViewStudentProfilePage.validate(null);
       expect(results, 'null');

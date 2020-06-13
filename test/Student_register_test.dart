@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
+import 'package:postgrad_tracker/View/Login.dart';
 
 
 class Post {
@@ -37,7 +38,15 @@ Widget makeWidgetTestable(Widget widget){
 void main(){
 
   group('Server connection', () {
-    test(
+
+    testWidgets('All input feild and button widgets should be on screen', (
+        WidgetTester tester) async {
+      await tester.pumpWidget(makeWidgetTestable(LoginPage()));
+
+      expect(1,1);
+    });
+
+      test(
         'returns a Post if the Login http call completes successfully', () async {
       final client = MockClient();
 

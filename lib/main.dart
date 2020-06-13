@@ -30,6 +30,11 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 //String boardTitle = '';
 User user = new User();
+/*TODO these global variables make stuff difficult to test
+/*TODO put the variable in the view in which they are used to make testing possible if you need variables from another view to the mext
+/*TODO you can put them in the constructor of that page */
+ */
+ */
 
 Supervisor supervisor = new Supervisor();
 Student student = new Student();

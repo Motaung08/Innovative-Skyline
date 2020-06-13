@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov.info - lib/Controller/StudentController.dart</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">lib/Controller</a> - StudentController.dart<span style="font-size: 80%;"> (source / <a href="StudentController.dart.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">55</td>
+            <td class="headerCovTableEntry">62</td>
+            <td class="headerCovTableEntryMed">88.7 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2020-06-12 22:49:07</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : import 'dart:convert';</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : import 'package:http/http.dart' as http;
+<span class="lineNum">       4 </span>            : import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
+<span class="lineNum">       5 </span>            : import 'package:postgrad_tracker/Controller/UserController.dart';
+<span class="lineNum">       6 </span>            : import 'package:postgrad_tracker/Model/Project_Board.dart';
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : import 'package:postgrad_tracker/Model/Student.dart';
+<span class="lineNum">       9 </span>            : import 'package:postgrad_tracker/Model/User.dart';
+<span class="lineNum">      10 </span>            : import 'package:postgrad_tracker/main.dart';
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span>            : // ignore: must_be_immutable
+<span class="lineNum">      13 </span>            : class StudentController {
+<span class="lineNum">      14 </span>            :   /*
+<span class="lineNum">      15 </span>            :   The purpose of this method is to retrieve the attributes of a specified
+<span class="lineNum">      16 </span>            :   Student instance in the database based on a passed in email address.
+<span class="lineNum">      17 </span>            :    */
+<span class="lineNum">      18 </span><span class="lineCov">          3 :   Future&lt;Student&gt; fetchStudent(String email, String studNo,</span>
+<span class="lineNum">      19 </span>            :       {urlViewStudentProfile = 'http://10.100.15.38/viewStudentProfile.php',
+<span class="lineNum">      20 </span>            :       urlViewStudentStudNo =
+<span class="lineNum">      21 </span>            :           &quot;http://10.100.15.38/viewStudentStudNo.php&quot;}) async {
+<span class="lineNum">      22 </span>            :     String msg = '';
+<span class="lineNum">      23 </span><span class="lineCov">          3 :     Student aStudent = new Student();</span>
+<span class="lineNum">      24 </span>            :     String url;
+<span class="lineNum">      25 </span>            :     var data;
+<span class="lineNum">      26 </span>            :     if (email != null) {
+<span class="lineNum">      27 </span><span class="lineCov">          2 :       email = email.toLowerCase();</span>
+<span class="lineNum">      28 </span>            :       url = urlViewStudentProfile;
+<span class="lineNum">      29 </span><span class="lineCov">          2 :       data = {</span>
+<span class="lineNum">      30 </span>            :         &quot;Email&quot;: email,
+<span class="lineNum">      31 </span>            :       };
+<span class="lineNum">      32 </span>            :     } else if (studNo != null) {
+<span class="lineNum">      33 </span><span class="lineCov">          1 :       studNo = studNo.toLowerCase();</span>
+<span class="lineNum">      34 </span>            :       url = urlViewStudentStudNo;
+<span class="lineNum">      35 </span><span class="lineCov">          1 :       data = {&quot;StudNo&quot;: studNo};</span>
+<span class="lineNum">      36 </span>            :     }
+<span class="lineNum">      37 </span>            : //
+<span class="lineNum">      38 </span><span class="lineCov">          6 :     final response = await http.post(url, body: data);</span>
+<span class="lineNum">      39 </span>            :     //print(&quot; ===========================   response &quot;+response.body);
+<span class="lineNum">      40 </span><span class="lineCov">          6 :     var datauser = json.decode(response.body);</span>
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span>            :     if (datauser == null) {
+<span class="lineNum">      43 </span>            :       msg = &quot; Error :( No such student found. &quot;;
+<span class="lineNum">      44 </span>            :     } else {
+<span class="lineNum">      45 </span>            :       msg = &quot;Found student, assigning attributes ...&quot;;
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span><span class="lineCov">          9 :       aStudent.fName = datauser[0]['Student_FirstName'];</span>
+<span class="lineNum">      48 </span><span class="lineCov">          9 :       aStudent.lName = datauser[0]['Student_LastName'];</span>
+<span class="lineNum">      49 </span><span class="lineCov">          9 :       aStudent.studentNo = datauser[0]['StudentNo'];</span>
+<span class="lineNum">      50 </span><span class="lineCov">         12 :       aStudent.degreeID = int.parse(datauser[0]['Degree_ID']);</span>
+<span class="lineNum">      51 </span><span class="lineCov">          3 :       aStudent.registrationDate =</span>
+<span class="lineNum">      52 </span><span class="lineCov">          9 :           DateTime.parse(datauser[0]['Student_RegistrationDate']);</span>
+<span class="lineNum">      53 </span><span class="lineCov">          9 :       aStudent.email = datauser[0]['Student_Email'];</span>
+<span class="lineNum">      54 </span><span class="lineCov">         12 :       aStudent.studentTypeID = int.parse(datauser[0]['StudentTypeID']);</span>
+<span class="lineNum">      55 </span>            :     }
+<span class="lineNum">      56 </span><span class="lineCov">          3 :     print(msg);</span>
+<span class="lineNum">      57 </span>            :     return aStudent;
+<span class="lineNum">      58 </span>            :   }
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span>            :   /*
+<span class="lineNum">      61 </span>            :   The purpose of this method is to assign the student attributes of a user
+<span class="lineNum">      62 </span>            :   and subsequently load the project boards which are associated.
+<span class="lineNum">      63 </span>            :    */
+<span class="lineNum">      64 </span><span class="lineCov">          2 :   Future setStudentUser(String email,</span>
+<span class="lineNum">      65 </span>            :       {urlViewStudentProfile = 'http://10.100.15.38/viewStudentProfile.php',
+<span class="lineNum">      66 </span>            :       urlReadBoards: 'http://10.100.15.38/ReadBoards.php',
+<span class="lineNum">      67 </span>            :       urlViewStudentStudNo =
+<span class="lineNum">      68 </span>            :           &quot;http://10.100.15.38/viewStudentStudNo.php&quot;}) async {
+<span class="lineNum">      69 </span><span class="lineCov">          4 :     student = await fetchStudent(email, null,</span>
+<span class="lineNum">      70 </span>            :         urlViewStudentProfile: urlViewStudentProfile,
+<span class="lineNum">      71 </span>            :         urlViewStudentStudNo: urlViewStudentStudNo);
+<span class="lineNum">      72 </span>            : 
+<span class="lineNum">      73 </span><span class="lineCov">          4 :     personNo = student.studentNo;</span>
+<span class="lineNum">      74 </span><span class="lineCov">          6 :     user.boards.clear();</span>
+<span class="lineNum">      75 </span>            :     Project_BoardController projectBoardController =
+<span class="lineNum">      76 </span><span class="lineCov">          2 :         new Project_BoardController();</span>
+<span class="lineNum">      77 </span>            :     List&lt;List&lt;Project_Board&gt;&gt; allBoards =
+<span class="lineNum">      78 </span><span class="lineCov">          4 :         await projectBoardController.ReadBoards(</span>
+<span class="lineNum">      79 </span><span class="lineCov">          8 :             user.userTypeID, student.studentNo,</span>
+<span class="lineNum">      80 </span>            :             url: urlReadBoards);
+<span class="lineNum">      81 </span>            : 
+<span class="lineNum">      82 </span><span class="lineCov">          8 :     print('ay : ' + (allBoards.isEmpty).toString());</span>
+<span class="lineNum">      83 </span><span class="lineCov">          4 :     if (allBoards.isEmpty == false) {</span>
+<span class="lineNum">      84 </span><span class="lineCov">          2 :       if (allBoards[0] == null) {</span>
+<span class="lineNum">      85 </span><span class="lineNoCov">          0 :         user.boards = null;</span>
+<span class="lineNum">      86 </span>            :       } else {
+<span class="lineNum">      87 </span><span class="lineCov">          6 :         user.boards = allBoards[0];</span>
+<span class="lineNum">      88 </span>            :       }
+<span class="lineNum">      89 </span><span class="lineCov">          2 :       if (allBoards[1] == null) {</span>
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 :         user.archivedBoards = null;</span>
+<span class="lineNum">      91 </span>            :       } else {
+<span class="lineNum">      92 </span><span class="lineCov">          6 :         user.archivedBoards = allBoards[1];</span>
+<span class="lineNum">      93 </span>            :       }
+<span class="lineNum">      94 </span>            :     } else {
+<span class="lineNum">      95 </span><span class="lineNoCov">          0 :       user.boards = null;</span>
+<span class="lineNum">      96 </span><span class="lineNoCov">          0 :       user.archivedBoards = null;</span>
+<span class="lineNum">      97 </span>            :     }
+<span class="lineNum">      98 </span>            :   }
+<span class="lineNum">      99 </span>            : 
+<span class="lineNum">     100 </span>            :   /*
+<span class="lineNum">     101 </span>            :     The purpose of this method is to take in a student object and a user object
+<span class="lineNum">     102 </span>            :      (created when the user selects register under the student registration
+<span class="lineNum">     103 </span>            :      page) and subsequently creates instances in the Student Table and User
+<span class="lineNum">     104 </span>            :      Table respectively. This method ensures that a duplicate email address is
+<span class="lineNum">     105 </span>            :      not used.
+<span class="lineNum">     106 </span>            : 
+<span class="lineNum">     107 </span>            :      NOTE: Should subsequently log the new user in if the registration is
+<span class="lineNum">     108 </span>            :      successful.
+<span class="lineNum">     109 </span>            :    */
+<span class="lineNum">     110 </span><span class="lineCov">          1 :   Future&lt;String&gt; studentRegistration(Student studentA, User userA,</span>
+<span class="lineNum">     111 </span>            :       {url1 = 'http://10.100.15.38/register_student.php',
+<span class="lineNum">     112 </span>            :       url2 = 'http://10.100.15.38/register_user.php'}) async {
+<span class="lineNum">     113 </span><span class="lineCov">          2 :     student.register = false;</span>
+<span class="lineNum">     114 </span>            :     bool success = false;
+<span class="lineNum">     115 </span>            :     String userSuccess = &quot;&quot;;
+<span class="lineNum">     116 </span>            :     String registrationSuccess = &quot;&quot;;
+<span class="lineNum">     117 </span>            :     userSuccess =
+<span class="lineNum">     118 </span><span class="lineCov">          3 :         await userController.userRegistration(userA, url: url2, url2: url1);</span>
+<span class="lineNum">     119 </span><span class="lineCov">          1 :     if (userSuccess ==</span>
+<span class="lineNum">     120 </span>            :         &quot;Email Already Exists, Please Try Again With New Email Address..!&quot;) {
+<span class="lineNum">     121 </span>            :       registrationSuccess = userSuccess;
+<span class="lineNum">     122 </span>            :     } else {
+<span class="lineNum">     123 </span>            :       // SERVER API URL
+<span class="lineNum">     124 </span>            : //      var url =
+<span class="lineNum">     125 </span>            : //          'http://10.100.15.38/register_student.php';
+<span class="lineNum">     126 </span>            : //          'https://witsinnovativeskyline.000webhostapp.com/register_student.php';
+<span class="lineNum">     127 </span>            : 
+<span class="lineNum">     128 </span>            :       // Store all data with Param Name.
+<span class="lineNum">     129 </span><span class="lineCov">          1 :       var data = {</span>
+<span class="lineNum">     130 </span><span class="lineCov">          2 :         'email': studentA.email.toLowerCase(),</span>
+<span class="lineNum">     131 </span><span class="lineCov">          2 :         'StudentNo': studentA.studentNo.toLowerCase(),</span>
+<span class="lineNum">     132 </span><span class="lineCov">          1 :         'Student_FName': studentA.fName,</span>
+<span class="lineNum">     133 </span><span class="lineCov">          1 :         'Student_LName': studentA.lName,</span>
+<span class="lineNum">     134 </span><span class="lineCov">          2 :         'DegreeType': studentA.degreeID.toString(),</span>
+<span class="lineNum">     135 </span><span class="lineCov">          2 :         'RegistrationDate': (studentA.registrationDate).toString(),</span>
+<span class="lineNum">     136 </span><span class="lineCov">          2 :         'StudentTypeID': studentA.studentTypeID.toString()</span>
+<span class="lineNum">     137 </span>            :       };
+<span class="lineNum">     138 </span>            : 
+<span class="lineNum">     139 </span>            :       // Starting Web API Call.
+<span class="lineNum">     140 </span><span class="lineCov">          3 :       var response = await http.post(url1, body: json.encode(data));</span>
+<span class="lineNum">     141 </span>            : 
+<span class="lineNum">     142 </span>            :       // Getting Server response into variable.
+<span class="lineNum">     143 </span><span class="lineCov">          2 :       var message = jsonDecode(response.body);</span>
+<span class="lineNum">     144 </span>            : 
+<span class="lineNum">     145 </span><span class="lineCov">          2 :       print(&quot;MESSAGE: &quot; + message);</span>
+<span class="lineNum">     146 </span>            :       // If Web call Success than Hide the CircularProgressIndicator.
+<span class="lineNum">     147 </span><span class="lineCov">          1 :       if (message == &quot;Student Registered Successfully&quot;) {</span>
+<span class="lineNum">     148 </span>            :         success = true;
+<span class="lineNum">     149 </span><span class="lineCov">          3 :         student.fName = studentA.fName;</span>
+<span class="lineNum">     150 </span><span class="lineCov">          3 :         student.lName = studentA.lName;</span>
+<span class="lineNum">     151 </span><span class="lineCov">          3 :         student.email = studentA.email;</span>
+<span class="lineNum">     152 </span><span class="lineCov">          3 :         student.studentTypeID = studentA.studentTypeID;</span>
+<span class="lineNum">     153 </span><span class="lineCov">          3 :         student.studentNo = studentA.studentNo;</span>
+<span class="lineNum">     154 </span><span class="lineCov">          3 :         student.registrationDate = studentA.registrationDate;</span>
+<span class="lineNum">     155 </span><span class="lineCov">          3 :         student.degreeID = studentA.degreeID;</span>
+<span class="lineNum">     156 </span><span class="lineNoCov">          0 :       } else if (message ==</span>
+<span class="lineNum">     157 </span>            :           &quot;An account has already been created for this student number.&quot;) {
+<span class="lineNum">     158 </span><span class="lineNoCov">          0 :         UserController userController = new UserController();</span>
+<span class="lineNum">     159 </span><span class="lineNoCov">          0 :         userController.userDeRegistration(userA);</span>
+<span class="lineNum">     160 </span>            :         success = false;
+<span class="lineNum">     161 </span>            :         registrationSuccess =
+<span class="lineNum">     162 </span>            :             &quot;This student number already has an associated account.&quot;;
+<span class="lineNum">     163 </span>            :       } else {
+<span class="lineNum">     164 </span>            :         success = false;
+<span class="lineNum">     165 </span>            :       }
+<span class="lineNum">     166 </span>            : 
+<span class="lineNum">     167 </span><span class="lineCov">          4 :       if (user.register == true &amp;&amp; success == true) {</span>
+<span class="lineNum">     168 </span><span class="lineCov">          2 :         student.register = true;</span>
+<span class="lineNum">     169 </span>            :         registrationSuccess = &quot;Student Register Success&quot;;
+<span class="lineNum">     170 </span>            :       }
+<span class="lineNum">     171 </span>            :     }
+<span class="lineNum">     172 </span>            : 
+<span class="lineNum">     173 </span>            :     return registrationSuccess;
+<span class="lineNum">     174 </span>            :   }
+<span class="lineNum">     175 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
