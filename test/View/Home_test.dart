@@ -89,15 +89,25 @@ void main(){
 
       await tester.pumpWidget(makeWidgetTestable(testHomePage));
       await tester.pumpWidget(makeWidgetTestable(testHomePage));
+      await tester.pump();
+      final dynamicBoards=find.byKey(Key('dynamicText'));
+//      expect(dynamicBoards,findsOneWidget);
 
       expect(testHomePage.isCreateOpen, false);
       await tester.tap(plusButton);
+      await tester.pump();
       expect(testHomePage.isCreateOpen, true);
 
+      final titleInout=find.byKey(Key('titleTextInput'));
+      expect(titleInout, findsOneWidget);
+      tester.enterText(titleInout, "Testing Board Title");
+//      await tester.pump();
+//      final descripTextInput=find.byKey(Key('descripTextInput'));
+//      expect(descripTextInput, findsOneWidget);
+      //tester.enterText(titleInout, "Testing Board Title");
 
 
-      final dynamicBoards=find.byKey(Key('dynamicText'));
-//      expect(dynamicBoards,findsOneWidget);
+
 
     });
 

@@ -142,6 +142,7 @@ class _MyHomePageState extends State<HomePage> {
                           margin: EdgeInsets.all(10),
                           child: TextFormField(
                             controller: titleController,
+                            key: Key('titleTextInput'),
                             validator: (val) =>
                                 val.isEmpty ? 'Enter Board Title' : null,
                             decoration: InputDecoration(
@@ -154,6 +155,7 @@ class _MyHomePageState extends State<HomePage> {
                         Container(
                           margin: EdgeInsets.all(10),
                           child: TextFormField(
+                            key: Key('descripTextInput'),
                             controller: descriptionController,
                             maxLines: 5,
                             decoration: InputDecoration(
@@ -376,9 +378,10 @@ if(user.boards==null){
     Widget dynamicTextField = new Container(
       alignment: Alignment.center,
       margin: new EdgeInsets.all(10.0),
-      key: Key('dynamicText'),
+
       //height: MediaQuery.of(context).size.height,
       child: ListView.builder(
+//        key: Key('dynamicText'),
         itemCount: listDynamic.length,
         itemBuilder: (_, index) => listDynamic[index],
       ),
