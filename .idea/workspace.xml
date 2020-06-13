@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codecov.yml" beforeDir="false" afterPath="$PROJECT_DIR$/codecov.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/View/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Home.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/View/Home_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/Home_test.dart" afterDir="false" />
     </list>
@@ -428,7 +429,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592057957180</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Removed null setters.">
+      <created>1592059416080</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1592059416080</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -479,7 +487,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Bug fixes and some web view fixes." />
     <MESSAGE value="ProjectBoardCtrl_test.dart fixes." />
     <MESSAGE value="Controller tests all pass locally." />
     <MESSAGE value="Controller tests all pass locally. Try push." />
@@ -504,7 +511,8 @@
     <MESSAGE value="Supervisor test fix." />
     <MESSAGE value="Home plus button." />
     <MESSAGE value="Fix?" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix?" />
+    <MESSAGE value="Removed null setters." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed null setters." />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="198" key="#Notifications" timestamp="1591723262844">
@@ -527,35 +535,35 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="753" y="198" key="#com.intellij.tools.ToolEditorDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344883272" />
-    <state x="450" y="54" key="CommitChangelistDialog2" timestamp="1592057956599">
+    <state x="450" y="54" key="CommitChangelistDialog2" timestamp="1592059415378">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="450" y="54" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1592057956599" />
+    <state x="450" y="54" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1592059415378" />
     <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591958354443" />
     <state x="612" y="87" key="FileChooserDialogImpl" timestamp="1592036677298">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="612" y="87" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1592036677298" />
     <state x="765" y="109" key="FileChooserDialogImpl/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726316401" />
-    <state width="1167" height="295" key="GridCell.Tab.0.bottom" timestamp="1592058409402">
+    <state width="1167" height="295" key="GridCell.Tab.0.bottom" timestamp="1592060088192">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1592058409402" />
+    <state width="1167" height="295" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1592060088192" />
     <state width="1551" height="295" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787541" />
-    <state width="1167" height="295" key="GridCell.Tab.0.center" timestamp="1592058409402">
+    <state width="1167" height="295" key="GridCell.Tab.0.center" timestamp="1592060088192">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1592058409402" />
+    <state width="1167" height="295" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1592060088192" />
     <state width="1551" height="295" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787540" />
-    <state width="1167" height="295" key="GridCell.Tab.0.left" timestamp="1592058409402">
+    <state width="1167" height="295" key="GridCell.Tab.0.left" timestamp="1592060088192">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1592058409402" />
+    <state width="1167" height="295" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1592060088192" />
     <state width="1551" height="295" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787540" />
-    <state width="1167" height="295" key="GridCell.Tab.0.right" timestamp="1592058409402">
+    <state width="1167" height="295" key="GridCell.Tab.0.right" timestamp="1592060088192">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1592058409402" />
+    <state width="1167" height="295" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1592060088192" />
     <state width="1551" height="295" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787541" />
     <state x="540" y="283" key="IDE.errors.dialog" timestamp="1591346336430">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -575,10 +583,10 @@
     </state>
     <state x="389" y="11" width="914" height="707" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1592036684202" />
     <state x="486" y="14" width="998" height="708" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726318067" />
-    <state x="442" y="218" key="Vcs.Push.Dialog.v2" timestamp="1592057963770">
+    <state x="442" y="218" key="Vcs.Push.Dialog.v2" timestamp="1592059419798">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1592057963770" />
+    <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1592059419798" />
     <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591958358563" />
     <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1591700910038">
       <screen x="0" y="0" width="1920" height="1080" />

@@ -64,7 +64,7 @@ void main(){
       user.email='Default@Students.wits.ac.za';
       user.userTypeID=1;
       student.studentNo='1713445';
-      personNo='123456789';
+      personNo='1713445';
 //      http.Client httpClient=new http.Client();
       http.Client httpClient=new MockClient();
       await tester.pumpWidget(makeWidgetTestable(testHomePage));
@@ -75,19 +75,6 @@ void main(){
       final homeView =find.byKey(Key('HomeScaffold'));
       expect(homeView,findsOneWidget);
 
-      var nullData={
-        'UserTypeID' : 1.toString(),
-        'StudentNo' : personNo.toLowerCase(),
-        'StaffNo' : personNo.toLowerCase()
-      };
-      when(httpClient.post('http://10.100.15.38/ReadBoards.php',body: nullData))
-          .thenAnswer((_) async => http.Response('[]', 200));
-
-      await testHomePage.initializeDisplay(httpClient);
-
-      await tester.pumpWidget(makeWidgetTestable(testHomePage));
-
-      personNo='1713445';
       var data={
         'UserTypeID' : 1.toString(),
         'StudentNo' : personNo.toLowerCase(),
@@ -116,19 +103,24 @@ void main(){
       expect(descripTextInput, findsOneWidget);
 
 
+      expect(testHomePage.startDate, isNull);
       final startDateInput=find.byKey(Key('startDateInput'));
       expect(startDateInput, findsOneWidget);
       await tester.tap(startDateInput);
       await tester.pump();
       await tester.tap(find.text('OK'));
       await tester.pump();
+      expect(testHomePage.startDate, isNotNull);
 
 
+      expect(testHomePage.endDate, isNull);
       final endDateInput=find.byKey(Key('endDateInput'));
       expect(endDateInput, findsOneWidget);
       await tester.tap(endDateInput);
       await tester.pump();
       await tester.tap(find.text('OK'));
+      await tester.pump();
+      expect(testHomePage.endDate, isNotNull);
 
 
     });

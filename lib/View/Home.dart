@@ -20,6 +20,8 @@ final List<DynamicWidget> listDynamic = new List<DynamicWidget>();
 bool _isDeleted;
 class HomePage extends StatefulWidget {
   bool isCreateOpen = false;
+  DateTime startDate;
+  DateTime endDate;
   Future<void> initialize(http.Client client) async {
     Project_BoardController projectBoardController =
         new Project_BoardController();
@@ -72,8 +74,7 @@ class _MyHomePageState extends State<HomePage> {
   final _formKey = GlobalKey<FormState>();
   //int userType=user.userTypeID;
 
-  DateTime _startDate;
-  DateTime _endDate;
+
   final format = DateFormat("yyyy-MM-dd");
   String startDateInput = "Select date ...";
   String endDateInput = "Select date ...";
@@ -89,11 +90,11 @@ class _MyHomePageState extends State<HomePage> {
 
     if (picked != null) {
       setState(() {
-        _startDate = picked;
+        widget.startDate = picked;
       });
     }
     dateStyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
-    startDateInput = DateFormat('yyyy-MM-dd').format(_startDate);
+    startDateInput = DateFormat('yyyy-MM-dd').format(widget.startDate);
   }
 
   Future<Null> selectEndDate(BuildContext context) async {
@@ -105,11 +106,11 @@ class _MyHomePageState extends State<HomePage> {
 
     if (picked != null) {
       setState(() {
-        _endDate = picked;
+        widget.endDate = picked;
       });
     }
     dateStyle = TextStyle(color: Colors.black, fontFamily: 'Montserrat');
-    endDateInput = DateFormat('yyyy-MM-dd').format(_endDate);
+    endDateInput = DateFormat('yyyy-MM-dd').format(widget.endDate);
   }
 
   Future<String> createAlertDialog(BuildContext context) {
@@ -194,7 +195,7 @@ class _MyHomePageState extends State<HomePage> {
 
                                   setState(() {
                                     startDateInput = DateFormat('yyyy-MM-dd')
-                                        .format(_startDate);
+                                        .format(widget.startDate);
                                   });
                                 },
                               ),
@@ -253,7 +254,7 @@ class _MyHomePageState extends State<HomePage> {
 
                                   setState(() {
                                     endDateInput = DateFormat('yyyy-MM-dd')
-                                        .format(_endDate);
+                                        .format(widget.endDate);
                                   });
                                 },
                               ),
@@ -290,8 +291,8 @@ class _MyHomePageState extends State<HomePage> {
                       projectBoard.Project_Title = titleController.text;
                       projectBoard.Project_Description =
                           descriptionController.text;
-                      projectBoard.Project_StartDate = _startDate;
-                      projectBoard.Project_EndDate = _endDate;
+                      projectBoard.Project_StartDate = widget.startDate;
+                      projectBoard.Project_EndDate = widget.endDate;
                       await projectBoardController.createBoard(
                           projectBoard, user.userTypeID, personNo);
                       http.Client client=new http.Client();

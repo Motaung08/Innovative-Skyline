@@ -1,5 +1,3 @@
-ignore:
-  - "lib/View/Board.dart"
-  - "lib/View/register/StudentRegister.dart"
+
 
 
