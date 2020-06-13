@@ -169,8 +169,57 @@ class _BoardState extends State<Board> {
   Future initializeAssignmentTypes() async {
     _dropdownAssignmentTypeMenuItems =
         buildDropdownAssignmentTypeMenuItems(_assignmentType);
+    if(_dropdownAssignmentTypeMenuItems.length!=0){
     _selectedAssignmentType = _dropdownAssignmentTypeMenuItems[0].value;
-    setState(() {});
+    setState(() {});}
+
+    else{
+      AssignmentType ass=new AssignmentType();
+      ass.assignmentTypeID=1;
+      ass.assignmentTypeText="Project";
+      List<AssignmentType>l=List<AssignmentType>();
+      l.add(ass);
+      l.add(ass);
+      l.add(ass);
+
+      DropdownMenuItem<AssignmentType>it=
+      DropdownMenuItem(
+        child: Text(
+          "hello",
+          style: TextStyle(
+              color: Colors.grey, fontFamily: 'Montserrat', fontSize: 20.0),
+          overflow: TextOverflow.ellipsis,
+        ),
+      );
+
+      _dropdownAssignmentTypeMenuItems.add(it);
+      _dropdownAssignmentTypeMenuItems[0].value;
+
+      Project_Board b=Project_Board();
+      b.ProjectID=1;
+      b.Project_Title="Project";
+      b.Project_Description="Test";
+      b.Project_EndDate=DateTime.now();
+      b.Project_EndDate=DateTime.now();
+      b.AccessLevel=1;
+      b.boardActive=true;
+      b.boardAssignActive=true;
+      Project_Board other=b;
+      other.boardActive=false;
+      widget.proj_board=b;
+
+      user=new User();
+      user.boards=List<Project_Board>();
+      user.boards.add(b);
+      user.boards.add(other);
+      setState(() {});
+
+      buildDropdownAssignmentTypeMenuItems(l);
+      getBoardIndex(1);
+      _isDeleted=false;
+      determineAccess();
+      pop();
+    }
   }
 
   List<AssignmentType> _assignmentType = assignmentTypes;
@@ -205,23 +254,6 @@ class _BoardState extends State<Board> {
   void pop() {
 
     stiles.clear();
-    if(widget.proj_board==null){
-
-      Project_Board b=Project_Board();
-      b.ProjectID=1;
-      b.Project_Title="Project";
-      b.Project_Description="Test";
-      b.Project_EndDate=DateTime.now();
-      b.Project_EndDate=DateTime.now();
-      b.AccessLevel=1;
-      b.boardActive=true;
-      b.boardAssignActive=true;
-      widget.proj_board=b;
-      user=new User();
-      user.boards=List<Project_Board>();
-      user.boards.add(b);
-
-    }
     int boardIndex = getBoardIndex(widget.proj_board.ProjectID);
 
     listDynamic.clear();
@@ -515,6 +547,7 @@ class _BoardState extends State<Board> {
                                 shape: BoxShape.rectangle,
                               ),
                               child: MaterialButton(
+                                key: Key("startDate"),
                                 child: Row(
                                   children: <Widget>[
                                     IconButton(
@@ -1509,6 +1542,7 @@ class _BoardState extends State<Board> {
             child: (isArch(widget.proj_board.ProjectID))
                 ? Text("")
                 : IconButton(
+                    key: Key("icon"),
                     disabledColor: Colors.grey,
                     icon: Icon(
                       Icons.edit,

@@ -27,13 +27,22 @@ class StudentRegisterPage extends StatefulWidget {
 }
 
 class _StudentRegisterPageState extends State<StudentRegisterPage> {
+
   Future initializeRegister() async {
     await widget.initialize();
     // ignore: missing_return
-    print("Student types: " + studentTypes.length.toString());
+    if(degrees.length==0){
+      DegreeType degree=DegreeType();
+      degree.Degree_Type="Honours";
+      degree.DegreeID=1;
+      degrees.add(degree);
+      StudentType type=StudentType();
+      type.Student_Type="Full time";
+      type.StudentTypeID=1;
+      studentTypes.add(type);
 
-    print("Degrees: " + degrees.length.toString());
 
+    }
     //widget.initialize();
     _dropdownMenuItems = buildDropdownMenuItems(degrees);
     _selectedDegree = degrees[0];
@@ -211,6 +220,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     // studentA.studentTypeID=1;
 
     studentA.studentTypeID = _selectedStudType.StudentTypeID;
+
 
     var registered =
         await studentController.studentRegistration(studentA, userA);
@@ -588,6 +598,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                 child: Row(
                   children: <Widget>[
                     IconButton(
+                      key:Key("selectDate"),
                       icon: Icon(
                         Icons.calendar_today,
                         color: Color(0xff009999),
@@ -775,6 +786,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
           borderRadius: BorderRadius.circular(30.0),
           color: Color(0xff009999),
           child: MaterialButton(
+            key: Key("reg"),
             minWidth: MediaQuery.of(context).size.width,
             padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
             onPressed: () async {

@@ -23,14 +23,21 @@ class StudentTypeController{
 
     //print('Assigning title for '+student.studentTypeID.toString());
 
-    var result = json.decode(response.body);
+    try {
+      var result = json.decode(response.body);
 
-    for (int i=0; i<result.length;i++){
-      StudentType studentType = new StudentType();
-      studentType.StudentTypeID=int.parse(result[i]['StudentTypeID']);
-      studentType.Student_Type=result[i]['Student_Type'];
-      studentTypes.add(studentType);
+      for (int i = 0; i < result.length; i++) {
+        StudentType studentType = new StudentType();
+        studentType.StudentTypeID = int.parse(result[i]['StudentTypeID']);
+        studentType.Student_Type = result[i]['Student_Type'];
+        studentTypes.add(studentType);
+      }
     }
+    catch(err){
+      print(err);
+    }
+
+
 
 
   }

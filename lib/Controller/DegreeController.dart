@@ -19,13 +19,18 @@ pre-populated list of degree types such as Honours, masters by coursework, etc.
 
     //print('Assigning title for '+student.studentTypeID.toString());
 
-    var result = json.decode(response.body);
+    try {
+      var result = json.decode(response.body);
 
-    for (int i=0; i<result.length;i++){
-      DegreeType degree=new DegreeType();
-      degree.DegreeID=int.parse(result[i]['DegreeID']);
-      degree.Degree_Type=result[i]['Degree_Type'];
-      degrees.add(degree);
+      for (int i = 0; i < result.length; i++) {
+        DegreeType degree = new DegreeType();
+        degree.DegreeID = int.parse(result[i]['DegreeID']);
+        degree.Degree_Type = result[i]['Degree_Type'];
+        degrees.add(degree);
+      }
+    }
+    catch(err){
+
     }
 
   }

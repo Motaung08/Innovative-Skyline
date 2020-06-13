@@ -16,11 +16,11 @@ class Post {
   Post.fromJson(this.data);
 }
 
-class MockClient extends Mock implements http.Client {}
+class MockClient extends Mock implements http.Client{}
 
 Future<Post> fetchPost(http.Client client) async {
   final response =
-  await client.get('https://witsinnovativeskyline.000webhostapp.com/register_user.php');
+  await client.get('https://lamp.ms.wits.ac.za/~s1611821/register_user.php');
 
   if (response.statusCode == 200) {
     // If the call to the server was successful, parse the JSON.
@@ -45,7 +45,7 @@ main() {
       final client = MockClient();
 
       when(client.get(
-          'https://witsinnovativeskyline.000webhostapp.com/register_user.php'))
+          'https://lamp.ms.wits.ac.za/~s1611821/register_user.php'))
           .thenAnswer((_) async => http.Response('{"title": "Test"}', 200));
     });
 
@@ -54,7 +54,7 @@ main() {
       final client = MockClient();
 
       when(client.get(
-          'https://witsinnovativeskyline.000webhostapp.com/register_user.php'))
+          'https://lamp.ms.wits.ac.za/~s1611821/register_user.php'))
           .thenAnswer((_) async =>
           http.Response('{"title: RegisterChoice"}', 200));
     });
@@ -64,7 +64,7 @@ main() {
       final client = MockClient();
 
       when(client.get(
-          'https://witsinnovativeskyline.000webhostapp.com/register_user.php'))
+          'https://lamp.ms.wits.ac.za/~s1611821/register_user.php'))
           .thenAnswer((_) async => http.Response('Not Found', 404));
 
       expect(fetchPost(client), throwsException);
@@ -89,7 +89,6 @@ main() {
     });
 
     testWidgets('find by tap', (WidgetTester tester) async {
-
 
 
     });
