@@ -67,8 +67,6 @@ class Project_BoardController {
 
         // Starting Web API Call.
         var response = await client.post(url, body: data);
-        print("response.body");
-        print(await client.post(url, body: data));
        // print('User: '+UserTypeID.toString()+", Stud no: "+personNo.toLowerCase()+", StaffNo: "+personNo.toLowerCase()+" Yields: "+response.body);
         // Getting Server response into variable.
    // print("Your boards response is: "+response.body);

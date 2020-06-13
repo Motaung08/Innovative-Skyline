@@ -19,13 +19,13 @@ import 'package:http/http.dart' as http;
 final List<DynamicWidget> listDynamic = new List<DynamicWidget>();
 bool _isDeleted;
 class HomePage extends StatefulWidget {
-
-  Future initialize(http.Client client) async {
+  bool isCreateOpen = false;
+  Future<void> initialize(http.Client client) async {
     Project_BoardController projectBoardController =
         new Project_BoardController();
     List<List<Project_Board>> allBoards =
         await projectBoardController.ReadBoards(user.userTypeID, personNo,client);
-    print("IN HOME INITIALIZE");
+
     if (allBoards.isEmpty == false) {
       if (allBoards[0] == null) {
         user.boards = null;
@@ -45,9 +45,10 @@ class HomePage extends StatefulWidget {
 
   }
 
-  Future initializeDisplay(http.Client client) async {
+  Future<void> initializeDisplay(http.Client client) async {
     //http.Client client=new http.Client();
     await initialize(client);
+
     listDynamic.clear();
 
     if (user.boards != null) {
@@ -64,6 +65,7 @@ class HomePage extends StatefulWidget {
     else{
       _isDeleted=true;
     }
+
   }
 
   @override
@@ -122,6 +124,7 @@ class _MyHomePageState extends State<HomePage> {
     descriptionController.text = "";
     startDateInput = "Select date ...";
     endDateInput = "Select date ...";
+    widget.isCreateOpen=true;
     return showDialog(
         context: context,
         builder: (context) {
@@ -319,7 +322,9 @@ class _MyHomePageState extends State<HomePage> {
                       boardTitle = "";
                       //http.Client client=new http.Client();
                       await homePage.initializeDisplay(client);
-                      setState(() {});
+                      setState(() {
+                        widget.isCreateOpen=false;
+                      });
                       Navigator.popAndPushNamed(context, '/Home');
                       setState(() {});
                     }
@@ -361,6 +366,7 @@ class _MyHomePageState extends State<HomePage> {
   bool _viewArchived = false;
   @override
   Widget build(BuildContext context) {
+    print("HOME BUILD!");
     _isDeleted=false;
 if(user.boards==null){
   _isDeleted=true;
@@ -380,8 +386,9 @@ if(user.boards==null){
 
     final plusButton = new Container(
       alignment: Alignment.bottomRight,
-      key: Key('plusButton'),
+
       child: MaterialButton(
+        key: Key('plusButton'),
         onPressed: () async {
           await createAlertDialog(context);
         },

@@ -46,8 +46,6 @@ class ArchivedBoards extends StatefulWidget {
   Future initializeDisplay(http.Client client) async {
     await initialize(client);
     listArchDynamic.clear();
-    print('Initializing board display! ##################');
-
     if (user.archivedBoards != null) {
       if(user.archivedBoards.length==0){
         _isDeleted=true;
