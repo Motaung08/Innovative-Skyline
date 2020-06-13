@@ -181,7 +181,7 @@ class _MyHomePageState extends State<HomePage> {
                                         Icons.calendar_today,
                                         color: Color(0xff009999),
                                       ),
-                                      onPressed: () {},
+
                                       tooltip: "Select start date",
                                     ),
                                     Text(
@@ -238,9 +238,9 @@ class _MyHomePageState extends State<HomePage> {
                                         Icons.calendar_today,
                                         color: Color(0xff009999),
                                       ),
-                                      onPressed: () {
-                                        setState(() {});
-                                      },
+//                                      onPressed: () {
+//                                        setState(() {});
+//                                      },
                                       tooltip: "Select end date",
                                     ),
                                     Text(
@@ -280,6 +280,7 @@ class _MyHomePageState extends State<HomePage> {
                   )),
               actions: <Widget>[
                 MaterialButton(
+                  key: Key('createBoardInput'),
                   elevation: 5.0,
                   child: Text("Create"),
                   onPressed: () async {
@@ -293,9 +294,10 @@ class _MyHomePageState extends State<HomePage> {
                           descriptionController.text;
                       projectBoard.Project_StartDate = widget.startDate;
                       projectBoard.Project_EndDate = widget.endDate;
-                      await projectBoardController.createBoard(
-                          projectBoard, user.userTypeID, personNo);
                       http.Client client=new http.Client();
+                      await projectBoardController.createBoard(
+                          projectBoard, user.userTypeID, personNo,client);
+                      //http.Client client=new http.Client();
                       List<List<Project_Board>> allBoards =
                           await projectBoardController.ReadBoards(
                               user.userTypeID, personNo,client);

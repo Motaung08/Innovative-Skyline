@@ -15,13 +15,13 @@ http.Client client=new http.Client();
 group('CRUD Testing Student', (){
   test('Create board',() async{
     Project_BoardController projectController=new Project_BoardController();
-    expect(await projectController.createBoard(data,1,'0930',url:"https://lamp.ms.wits.ac.za/~s1611821/createBoard.php"), "Board AND Association created!");
+    expect(await projectController.createBoard(data,1,'0930',client,url:"https://lamp.ms.wits.ac.za/~s1611821/createBoard.php"), "Board AND Association created!");
   });
   test('Create board',() async{
     Project_BoardController projectController=new Project_BoardController();
     Project_Board project_board=new Project_Board();
     project_board.Project_Title="Board in testing for archiving";
-    expect(await projectController.createBoard(project_board,1,'0930',url:"https://lamp.ms.wits.ac.za/~s1611821/createBoard.php"), "Board AND Association created!");
+    expect(await projectController.createBoard(project_board,1,'0930',client,url:"https://lamp.ms.wits.ac.za/~s1611821/createBoard.php"), "Board AND Association created!");
   });
   test('read board',() async{
     Project_BoardController projectController=new Project_BoardController();
@@ -78,7 +78,7 @@ group('CRUD Testing Student', (){
 group('CRUD Testing Supervisor', (){
   test('Create board',() async{
     Project_BoardController projectController=new Project_BoardController();
-    expect(await projectController.createBoard(data,2,'A00',url:"https://lamp.ms.wits.ac.za/~s1611821/createBoard.php"), "Board AND Association created!");
+    expect(await projectController.createBoard(data,2,'A00',client,url:"https://lamp.ms.wits.ac.za/~s1611821/createBoard.php"), "Board AND Association created!");
   });
   test('read board',() async{
     Project_BoardController projectController=new Project_BoardController();
@@ -106,7 +106,7 @@ group('CRUD Testing Student with dates', (){
   data.Project_EndDate=DateTime.now();
   test('Create board',() async{
     Project_BoardController projectController=new Project_BoardController();
-    expect(await projectController.createBoard(data,1,'0930',url:"https://lamp.ms.wits.ac.za/~s1611821/createBoard.php"), "Board AND Association created!");
+    expect(await projectController.createBoard(data,1,'0930',client,url:"https://lamp.ms.wits.ac.za/~s1611821/createBoard.php"), "Board AND Association created!");
   });
   test('read board',() async{
     Project_BoardController projectController=new Project_BoardController();

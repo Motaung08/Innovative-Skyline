@@ -15,7 +15,7 @@ void main(){
   group('Student User tests', (){
 
     Student tester = new Student();
-    tester.email = 'UniqueTestEmail@wits.ac.za';
+    tester.email = 'UniqueTestEmail1@wits.ac.za';
     tester.studentNo = '12345';
     tester.fName = 'Test';
     tester.lName = 'Pass';

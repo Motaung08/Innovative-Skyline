@@ -12,7 +12,7 @@ class Project_BoardController {
   database based on the attribute values stored in the newBoard which is
   passed in.
    */
-  Future<String> createBoard(Project_Board newBoard,int userTypeID, String personNum,{url= 'http://10.100.15.38/createBoard.php'}) async{
+  Future<String> createBoard(Project_Board newBoard,int userTypeID, String personNum,http.Client client,{url= 'http://10.100.15.38/createBoard.php'}) async{
 
     // SERVER API URL
 //    var url =
@@ -39,7 +39,7 @@ class Project_BoardController {
     };
 
     // Starting Web API Call.
-    var response = await http.post(url, body: json.encode(data));
+    var response = await client.post(url, body: json.encode(data));
     var message = jsonDecode(response.body);
     return message;
 

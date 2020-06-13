@@ -97,7 +97,7 @@ void main(){
 
       final titleInout=find.byKey(Key('titleTextInput'));
       expect(titleInout, findsOneWidget);
-      await tester.enterText(titleInout, "Testing Board Title");
+      //
 
       final descripTextInput=find.byKey(Key('descripTextInput'));
       expect(descripTextInput, findsOneWidget);
@@ -121,6 +121,19 @@ void main(){
       await tester.tap(find.text('OK'));
       await tester.pump();
       expect(testHomePage.endDate, isNotNull);
+
+      final createButton=find.byKey(Key('createBoardInput'));
+      await tester.tap(createButton);
+      await tester.pump();
+      expect(find.text('Enter Board Title'), findsOneWidget);
+
+      await tester.pump();
+      await tester.enterText(titleInout, "Testing Board Title");
+      await tester.pump();
+
+      await tester.tap(createButton);
+      await tester.pump();
+//      expect(find.text('Enter Board Title'), findsNothing);
 
 
     });
