@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test/View/Board_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/UserController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/UserController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/resetpassword.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/resetpassword.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/View/resetpassword_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/resetpassword_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/lcov.info" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/lcov.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +14,7 @@
     <option name="autoscrollToSource" value="true" />
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_24" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -52,27 +48,39 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\View" />
-      <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\ControllerTests" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\ControllerTests" />
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\lib\View" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\View" />
+      <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\ControllerTests" />
+    </key>
   </component>
-  <component name="RunManager" selected="Flutter Test.tests in UserController_test.dart">
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Flutter Test.all input field  and button widgets should be on screen">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="CreateBoard" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="CreateBoard" />
-      <option name="testFile" value="$PROJECT_DIR$/test/View/Home_test.dart" />
-      <method v="2" />
-    </configuration>
     <configuration name="Reset password" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testName" value="Reset password" />
+      <option name="testFile" value="$PROJECT_DIR$/test/View/resetpassword_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="all input field  and button widgets should be on screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="all input field  and button widgets should be on screen" />
       <option name="testFile" value="$PROJECT_DIR$/test/View/resetpassword_test.dart" />
       <method v="2" />
     </configuration>
@@ -90,11 +98,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.all input field  and button widgets should be on screen" />
         <item itemvalue="Flutter Test.tests in UserController_test.dart" />
         <item itemvalue="Flutter Test.Reset password" />
         <item itemvalue="Flutter Test.tests in Home_test.dart" />
         <item itemvalue="Flutter Test.tests in ProjectBoardCtrl_test.dart" />
-        <item itemvalue="Flutter Test.CreateBoard" />
       </list>
     </recent_temporary>
   </component>
