@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test/View/Supervisor_register_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/View/ArchivedBoards_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/ArchivedBoards_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/View/Home_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/Home_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage/lcov.info" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/lcov.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/register/StudentRegister.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/register/StudentRegister.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/View/Student_register_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/Student_register_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +18,7 @@
     <option name="autoscrollToSource" value="true" />
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_24" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -50,23 +52,40 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\View" />
-      <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\ControllerTests" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\ControllerTests" />
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\lib\View" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\View" />
+      <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\ControllerTests" />
+    </key>
   </component>
-  <component name="RunManager" selected="Flutter Test.tests in ListController_test.dart">
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Flutter Test.Server connection (1)">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="View Profile" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="View Profile" />
-      <option name="testFile" value="$PROJECT_DIR$/test/View/ArchivedBoards_test.dart" />
+    <configuration name="Server connection (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Server connection" />
+      <option name="testFile" value="$PROJECT_DIR$/test/View/Student_register_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Server connection" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Server connection" />
+      <option name="testFile" value="$PROJECT_DIR$/test/View/Supervisor_register_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="tests in ArchivedBoards_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -81,17 +100,13 @@
       <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/ListController_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="tests in resetpassword_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/View/resetpassword_test.dart" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.Server connection (1)" />
+        <item itemvalue="Flutter Test.Server connection" />
         <item itemvalue="Flutter Test.tests in ListController_test.dart" />
         <item itemvalue="Flutter Test.tests in ArchivedBoards_test.dart" />
         <item itemvalue="Flutter Test.tests in Home_test.dart" />
-        <item itemvalue="Flutter Test.View Profile" />
-        <item itemvalue="Flutter Test.tests in resetpassword_test.dart" />
       </list>
     </recent_temporary>
   </component>

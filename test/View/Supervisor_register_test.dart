@@ -1,14 +1,13 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
-import 'package:postgrad_tracker/View/Board.dart';
-import 'package:postgrad_tracker/View/Home.dart';
-import 'package:postgrad_tracker/View/Login.dart';
-import 'package:postgrad_tracker/View/register/StudentRegister.dart';
+import 'package:postgrad_tracker/View/register/SupervisorRegister.dart';
+
+import '../Models_test.dart';
+
+
+class MockClient extends Mock implements http.Client{}
 
 
 class Post {
@@ -16,11 +15,9 @@ class Post {
   Post.fromJson(this.data);
 }
 
-class MockClient extends Mock implements http.Client {}
-
 Future<Post> fetchPost(http.Client client) async {
   final response =
-  await client.get('https://lamp.ms.wits.ac.za/~s1611821/register_student.php');
+  await client.get('https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php');
 
   if (response.statusCode == 200) {
     // If the call to the server was successful, parse the JSON.
@@ -31,11 +28,6 @@ Future<Post> fetchPost(http.Client client) async {
   }
 }
 
-Widget makeWidgetTestable(Widget widget){
-  return MaterialApp(
-    home: DefaultAssetBundle(bundle: rootBundle,child: widget),
-  );
-}
 
 void main(){
 
@@ -43,12 +35,12 @@ void main(){
 
     testWidgets('All input feild and button widgets should be on screen', (
         WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(StudentRegisterPage()));
+      await tester.pumpWidget(makeWidgetTestable(SupervisorRegisterPage()));
 
       final client = MockClient();
 
       when(client.get(
-          'https://lamp.ms.wits.ac.za/~s1611821/register_student.php'))
+          'https://lamp.ms.wits.ac.za/~s1611821/Register_Supervisor.php'))
           .thenAnswer((_) async => http.Response('Not Found', 404));
 
       expect(fetchPost(client), throwsException);
