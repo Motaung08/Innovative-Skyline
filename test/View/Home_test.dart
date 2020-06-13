@@ -64,7 +64,7 @@ void main(){
       user.email='Default@Students.wits.ac.za';
       user.userTypeID=1;
       student.studentNo='1713445';
-      personNo='1713445';
+      personNo='123456789';
 //      http.Client httpClient=new http.Client();
       http.Client httpClient=new MockClient();
       await tester.pumpWidget(makeWidgetTestable(testHomePage));
@@ -75,7 +75,19 @@ void main(){
       final homeView =find.byKey(Key('HomeScaffold'));
       expect(homeView,findsOneWidget);
 
+      var nullData={
+        'UserTypeID' : 1.toString(),
+        'StudentNo' : personNo.toLowerCase(),
+        'StaffNo' : personNo.toLowerCase()
+      };
+      when(httpClient.post('http://10.100.15.38/ReadBoards.php',body: nullData))
+          .thenAnswer((_) async => http.Response('[]', 200));
 
+      await testHomePage.initializeDisplay(httpClient);
+
+      await tester.pumpWidget(makeWidgetTestable(testHomePage));
+
+      personNo='1713445';
       var data={
         'UserTypeID' : 1.toString(),
         'StudentNo' : personNo.toLowerCase(),
@@ -84,12 +96,10 @@ void main(){
       when(httpClient.post('http://10.100.15.38/ReadBoards.php',body: data))
           .thenAnswer((_) async => http.Response('[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":"This board is a default board created for testing purposes. It should not be deleted.","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"}]', 200));
 
-      final createBoardAlert=find.byKey(Key('CreateBoardAlertAlert'));
       await testHomePage.initializeDisplay(httpClient);
 
       await tester.pumpWidget(makeWidgetTestable(testHomePage));
-      await tester.pumpWidget(makeWidgetTestable(testHomePage));
-      //await tester.pump();
+
       final dynamicBoards=find.byKey(Key('dynamicText'));
 //      expect(dynamicBoards,findsOneWidget);
 
@@ -101,20 +111,24 @@ void main(){
       final titleInout=find.byKey(Key('titleTextInput'));
       expect(titleInout, findsOneWidget);
       await tester.enterText(titleInout, "Testing Board Title");
-//      await tester.pump();
+
       final descripTextInput=find.byKey(Key('descripTextInput'));
       expect(descripTextInput, findsOneWidget);
-      //tester.enterText(titleInout, "Testing Board Title");
+
 
       final startDateInput=find.byKey(Key('startDateInput'));
       expect(startDateInput, findsOneWidget);
       await tester.tap(startDateInput);
       await tester.pump();
-      //await tester.ta
+      await tester.tap(find.text('OK'));
+      await tester.pump();
 
 
       final endDateInput=find.byKey(Key('endDateInput'));
       expect(endDateInput, findsOneWidget);
+      await tester.tap(endDateInput);
+      await tester.pump();
+      await tester.tap(find.text('OK'));
 
 
     });

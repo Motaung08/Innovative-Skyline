@@ -27,19 +27,12 @@ class HomePage extends StatefulWidget {
         await projectBoardController.ReadBoards(user.userTypeID, personNo,client);
 
     if (allBoards.isEmpty == false) {
-      if (allBoards[0] == null) {
-        user.boards = null;
-      } else {
+      if (allBoards[0] != null) {
         user.boards = allBoards[0];
       }
-      if (allBoards[1] == null) {
-        user.archivedBoards = null;
-      } else {
+      if (allBoards[1] != null) {
         user.archivedBoards = allBoards[1];
       }
-    } else {
-      user.boards = null;
-      user.archivedBoards = null;
     }
 
 
