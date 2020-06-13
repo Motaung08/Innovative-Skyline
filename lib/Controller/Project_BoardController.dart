@@ -54,16 +54,10 @@ class Project_BoardController {
   associated with the specified user.
    */
   // ignore: non_constant_identifier_names
-  Future<List<List<Project_Board>>> ReadBoards(int UserTypeID, String personNo,{url='http://10.100.15.38/ReadBoards.php'}) async{
+  Future<List<List<Project_Board>>> ReadBoards(int UserTypeID, String personNo,http.Client client,{url='http://10.100.15.38/ReadBoards.php'}) async{
     List<Project_Board> boards=List();
     List<Project_Board> archivedBoards=List();
     List<List<Project_Board>> allBoards=new List<List<Project_Board>>();
-
-
-        // SERVER API URL
-//        var url =
-//            'http://10.100.15.38/ReadBoards.php';
-            //'https://witsinnovativeskyline.000webhostapp.com/ReadBoards.php';
 
         var data={
           'UserTypeID' : UserTypeID.toString(),
@@ -72,7 +66,7 @@ class Project_BoardController {
         };
 
         // Starting Web API Call.
-        var response = await http.post(url, body: data);
+        var response = await client.post(url, body: data);
         print('User: '+UserTypeID.toString()+", Stud no: "+personNo.toLowerCase()+", StaffNo: "+personNo.toLowerCase()+" Yields: "+response.body);
         // Getting Server response into variable.
     print("Your boards response is: "+response.body);

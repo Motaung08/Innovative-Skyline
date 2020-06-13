@@ -2,161 +2,139 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/amber.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/emerald.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gcov.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/glass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-sort-f.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index-sort-l.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/AssignmentTypeController.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/AssignmentTypeController.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/AssignmentTypeController.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/DegreeController.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/DegreeController.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/DegreeController.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/ListController.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/ListController.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/ListController.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/StudentController.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/StudentController.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/StudentController.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/StudentTypeController.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/StudentTypeController.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/StudentTypeController.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/TaskController.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/TaskController.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/TaskController.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/TaskStatusController.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/TaskStatusController.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/TaskStatusController.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/UserController.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/UserController.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/UserController.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/index-sort-f.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/index-sort-l.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Controller/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Assignment.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Assignment.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Assignment.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/DegreeType.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/DegreeType.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/DegreeType.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/ListCard.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/ListCard.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/ListCard.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/PostGradType.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/PostGradType.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/PostGradType.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Project_Board.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Project_Board.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Project_Board.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Student.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Student.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Student.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/StudentType.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/StudentType.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/StudentType.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Supervisor.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Supervisor.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Supervisor.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Task.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Task.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/Task.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/TaskStatus.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/TaskStatus.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/TaskStatus.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/User.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/User.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/User.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/UserType.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/UserType.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/UserType.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/index-sort-f.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/index-sort-l.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Model/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/Board.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/Board.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/Board.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/Home.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/Home.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/Home.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/Login.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/Login.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/Login.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/index-sort-f.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/index-sort-l.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/student/ViewStudentProfile.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/student/ViewStudentProfile.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/student/ViewStudentProfile.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/student/index-sort-f.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/student/index-sort-l.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/student/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/supervisor/ViewSupProfile.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/supervisor/ViewSupProfile.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/supervisor/ViewSupProfile.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/supervisor/index-sort-f.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/supervisor/index-sort-l.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/profile/supervisor/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/StudentRegister.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/StudentRegister.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/StudentRegister.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/StudentSuperVisorRegister.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/StudentSuperVisorRegister.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/StudentSuperVisorRegister.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/SupervisorRegister.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/SupervisorRegister.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/SupervisorRegister.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/index-sort-f.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/index-sort-l.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/register/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/resetpassword.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/resetpassword.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/View/resetpassword.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/counter.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/counter.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/counter.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/index-sort-f.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/index-sort-l.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/main.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/main.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/main.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/user.dart.func-sort-c.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/user.dart.func.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/user.dart.gcov.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ruby.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_driver/app.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_driver/app_test.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/updown.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/AssignmentTypeController.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/AssignmentTypeController.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/AssignmentTypeController.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/DegreeController.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/DegreeController.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/DegreeController.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/ListController.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/ListController.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/ListController.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/StudentController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/StudentController.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/StudentController.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/StudentController.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/StudentController.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/StudentTypeController.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/StudentTypeController.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/StudentTypeController.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/SupervisorController.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/TaskController.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/TaskController.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/TaskController.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/TaskStatusController.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/TaskStatusController.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/TaskStatusController.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/UserController.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/UserController.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/UserController.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/index-sort-f.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/index-sort-l.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Assignment.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Assignment.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Assignment.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/DegreeType.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/DegreeType.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/DegreeType.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/ListCard.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/ListCard.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/ListCard.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/PostGradType.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/PostGradType.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/PostGradType.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Project_Board.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Project_Board.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Project_Board.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Student.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Student.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Student.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/StudentType.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/StudentType.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/StudentType.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Supervisor.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Supervisor.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Supervisor.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Task.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Task.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/Task.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/TaskStatus.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/TaskStatus.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/TaskStatus.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/User.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/User.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/User.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/UserType.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/UserType.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/UserType.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/index-sort-f.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/index-sort-l.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Model/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart.gcov.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/View/Board.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Board.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/profile/student/ViewStudentProfile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/profile/student/ViewStudentProfile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Board.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Board.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Board.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Home.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Home.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Home.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Login.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Login.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Login.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/index-sort-f.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/index-sort-l.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/student/ViewStudentProfile.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/student/ViewStudentProfile.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/student/ViewStudentProfile.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/student/index-sort-f.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/student/index-sort-l.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/student/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/supervisor/ViewSupProfile.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/supervisor/ViewSupProfile.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/supervisor/ViewSupProfile.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/supervisor/index-sort-f.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/supervisor/index-sort-l.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/supervisor/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/resetpassword.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/resetpassword.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/resetpassword.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/counter.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/counter.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/counter.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/index-sort-f.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/index-sort-l.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart.gcov.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/user.dart.func-sort-c.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/user.dart.func.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/user.dart.gcov.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/StudentViewProfileValidator_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/StudentViewProfileValidator_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/Student_register_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/Student_register_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/View/Board_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/Board_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ControllerTests/ProjectBoardCtrl_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/ProjectBoardCtrl_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/View/Home_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/Home_test.dart" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -166,7 +144,7 @@
     <option name="autoscrollToSource" value="true" />
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_24" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -192,7 +170,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/View" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/test/ControllerTests" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -201,60 +179,48 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\View" />
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\ControllerTests" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\ControllerTests" />
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\lib\View" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Flutter.main.dart">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="All input feild and button widgets should be on screen (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All input feild and button widgets should be on screen" />
-      <option name="testFile" value="$PROJECT_DIR$/test/View/ViewStudentProfile_test.dart" />
+    <configuration name="CreateBoard" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="CreateBoard" />
+      <option name="testFile" value="$PROJECT_DIR$/test/View/Home_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="All input feild and button widgets should be on screen" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All input feild and button widgets should be on screen" />
-      <option name="testFile" value="$PROJECT_DIR$/test/View/ViewSupProfile_test.dart" />
+    <configuration name="Initialize" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="Initialize" />
+      <option name="testFile" value="$PROJECT_DIR$/test/View/Home_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="Reset password" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="Reset password" />
-      <option name="testFile" value="$PROJECT_DIR$/test/View/resetpassword_test.dart" />
+    <configuration name="tests in HomePage_test.dart (1)" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/View/HomePage_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="assignment" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="assignment" />
-      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" />
+    <configuration name="tests in HomePage_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/HomePage_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="tests in resetpassword_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/View/resetpassword_test.dart" />
+    <configuration name="tests in ProjectBoardCtrl_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/ProjectBoardCtrl_test.dart" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter Test.All input feild and button widgets should be on screen (1)" />
-        <item itemvalue="Flutter Test.All input feild and button widgets should be on screen" />
-        <item itemvalue="Flutter Test.assignment" />
-        <item itemvalue="Flutter Test.tests in resetpassword_test.dart" />
-        <item itemvalue="Flutter Test.Reset password" />
+        <item itemvalue="Flutter Test.CreateBoard" />
+        <item itemvalue="Flutter Test.Initialize" />
+        <item itemvalue="Flutter Test.tests in ProjectBoardCtrl_test.dart" />
+        <item itemvalue="Flutter Test.tests in HomePage_test.dart (1)" />
+        <item itemvalue="Flutter Test.tests in HomePage_test.dart" />
       </list>
     </recent_temporary>
   </component>
@@ -535,7 +501,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591974045156</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Reset password test.">
+      <created>1591974922036</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1591974922036</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -573,13 +546,6 @@
                   </entry>
                 </map>
               </option>
-            </State>
-          </value>
-        </entry>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
@@ -637,34 +603,35 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="753" y="198" key="#com.intellij.tools.ToolEditorDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344883272" />
-    <state x="450" y="54" key="CommitChangelistDialog2" timestamp="1591974044608">
+    <state x="450" y="54" key="CommitChangelistDialog2" timestamp="1591974921409">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="450" y="54" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1591974044608" />
+    <state x="450" y="54" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1591974921409" />
     <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591958354443" />
-    <state x="765" y="109" key="FileChooserDialogImpl" timestamp="1591726316401">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="612" y="87" key="FileChooserDialogImpl" timestamp="1592036677298">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state x="612" y="87" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1592036677298" />
     <state x="765" y="109" key="FileChooserDialogImpl/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726316401" />
-    <state width="1167" height="295" key="GridCell.Tab.0.bottom" timestamp="1591974906757">
+    <state width="1167" height="295" key="GridCell.Tab.0.bottom" timestamp="1592049162389">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1591974906757" />
+    <state width="1167" height="295" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1592049162389" />
     <state width="1551" height="295" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787541" />
-    <state width="1167" height="295" key="GridCell.Tab.0.center" timestamp="1591974906757">
+    <state width="1167" height="295" key="GridCell.Tab.0.center" timestamp="1592049162389">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1591974906757" />
+    <state width="1167" height="295" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1592049162389" />
     <state width="1551" height="295" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787540" />
-    <state width="1167" height="295" key="GridCell.Tab.0.left" timestamp="1591974906757">
+    <state width="1167" height="295" key="GridCell.Tab.0.left" timestamp="1592049162389">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1591974906757" />
+    <state width="1167" height="295" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1592049162389" />
     <state width="1551" height="295" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787540" />
-    <state width="1167" height="295" key="GridCell.Tab.0.right" timestamp="1591974906757">
+    <state width="1167" height="295" key="GridCell.Tab.0.right" timestamp="1592049162389">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1167" height="295" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1591974906757" />
+    <state width="1167" height="295" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1592049162389" />
     <state width="1551" height="295" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591959787541" />
     <state x="540" y="283" key="IDE.errors.dialog" timestamp="1591346336430">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -674,18 +641,20 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="184" y="90" key="MergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591430929913" />
-    <state x="672" y="256" key="MultipleFileMergeDialog" timestamp="1591726288452">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="672" y="256" key="MultipleFileMergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726288452" />
-    <state x="486" y="14" width="998" height="708" key="SettingsEditor" timestamp="1591726318067">
-      <screen x="0" y="0" width="1920" height="1080" />
-    </state>
-    <state x="486" y="14" width="998" height="708" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726318067" />
-    <state x="442" y="218" key="Vcs.Push.Dialog.v2" timestamp="1591974046463">
+    <state x="538" y="205" key="MultipleFileMergeDialog" timestamp="1592036594775">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1591974046463" />
+    <state x="538" y="205" key="MultipleFileMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1592036594775" />
+    <state x="672" y="256" key="MultipleFileMergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726288452" />
+    <state x="389" y="11" width="914" height="707" key="SettingsEditor" timestamp="1592036684202">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="389" y="11" width="914" height="707" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1592036684202" />
+    <state x="486" y="14" width="998" height="708" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726318067" />
+    <state x="442" y="218" key="Vcs.Push.Dialog.v2" timestamp="1591974923630">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1591974923630" />
     <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591958358563" />
     <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1591700910038">
       <screen x="0" y="0" width="1920" height="1080" />
@@ -700,9 +669,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="656" y="364" key="com.intellij.ide.util.TipDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591866987705" />
-    <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591883102907">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="615" y="366" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592036584167">
+      <screen x="0" y="0" width="1536" height="864" />
     </state>
+    <state x="615" y="366" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1592036584167" />
     <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591883102907" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">

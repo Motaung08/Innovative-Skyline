@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Controller/Project_BoardController.dart';
@@ -74,9 +75,10 @@ class StudentController {
     user.boards.clear();
     Project_BoardController projectBoardController =
         new Project_BoardController();
+    http.Client client=new http.Client();
     List<List<Project_Board>> allBoards =
         await projectBoardController.ReadBoards(
-            user.userTypeID, student.studentNo,
+            user.userTypeID, student.studentNo,client,
             url: urlReadBoards);
 
     print('ay : ' + (allBoards.isEmpty).toString());

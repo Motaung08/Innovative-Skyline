@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/main.dart';
-
+import 'package:http/http.dart' as http;
 
 
 
@@ -236,8 +236,8 @@ class LoginPageState extends State<LoginPage> {
                       visible = false;
                     });
                     homePage = new HomePage();
-
-                    await homePage.initializeDisplay();
+                    http.Client client=new http.Client();
+                    await homePage.initializeDisplay(client);
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (BuildContext context) => homePage),
@@ -293,8 +293,8 @@ class LoginPageState extends State<LoginPage> {
                 visible = false;
               });
               homePage = new HomePage();
-
-              await homePage.initializeDisplay();
+              http.Client client=new http.Client();
+              await homePage.initializeDisplay(client);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (BuildContext context) => homePage),

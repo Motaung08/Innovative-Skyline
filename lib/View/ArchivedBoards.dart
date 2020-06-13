@@ -15,15 +15,16 @@ import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/main.dart';
+import 'package:http/http.dart' as http;
 final List<DynamicWidget> listArchDynamic=new List<DynamicWidget>();
 bool _isDeleted;
 class ArchivedBoards extends StatefulWidget {
 
-  Future initialize() async{
+  Future initialize(http.Client client) async{
     Project_BoardController projectBoardController =
     new Project_BoardController();
     List<List<Project_Board>> allBoards =
-    await projectBoardController.ReadBoards(user.userTypeID, personNo);
+    await projectBoardController.ReadBoards(user.userTypeID, personNo,client);
     if (allBoards.isEmpty == false) {
       if (allBoards[0] == null) {
         user.boards = null;
@@ -42,8 +43,8 @@ class ArchivedBoards extends StatefulWidget {
 
     //print("Active boards: "+user.boards.length.toString());
   }
-  Future initializeDisplay() async {
-    await initialize();
+  Future initializeDisplay(http.Client client) async {
+    await initialize(client);
     listArchDynamic.clear();
     print('Initializing board display! ##################');
 
@@ -206,7 +207,8 @@ bool _viewArchived=false;
                       color: Color(0xff009999), fontWeight: FontWeight.bold)),
               onTap: () async{
                 print("Active boards");
-                await homePage.initializeDisplay();
+                http.Client client=new http.Client();
+                await homePage.initializeDisplay(client);
                 setState(() {
                   Navigator.of(context).pushNamed('/Home');
                 });
@@ -327,7 +329,8 @@ class _DynamicWidgetState extends State<DynamicWidget> {
 
 
                     listArchDynamic.removeAt(boardIndex);
-                    homePage.initializeDisplay();
+                    http.Client client=new http.Client();
+                    homePage.initializeDisplay(client);
                     Navigator.pop(context);
                     Navigator.push(
                       context,

@@ -15,15 +15,17 @@ import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/ArchivedBoards.dart';
 import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/main.dart';
+import 'package:http/http.dart' as http;
 final List<DynamicWidget> listDynamic = new List<DynamicWidget>();
 bool _isDeleted;
 class HomePage extends StatefulWidget {
 
-  Future initialize() async {
+  Future initialize(http.Client client) async {
     Project_BoardController projectBoardController =
         new Project_BoardController();
+
     List<List<Project_Board>> allBoards =
-        await projectBoardController.ReadBoards(user.userTypeID, personNo);
+        await projectBoardController.ReadBoards(user.userTypeID, personNo,client);
     if (allBoards.isEmpty == false) {
       if (allBoards[0] == null) {
         user.boards = null;
@@ -43,10 +45,10 @@ class HomePage extends StatefulWidget {
 
   }
 
-  Future initializeDisplay() async {
-    await initialize();
+  Future initializeDisplay(http.Client client) async {
+    //http.Client client=new http.Client();
+    await initialize(client);
     listDynamic.clear();
-    print('Initializing board display! ##################');
 
     if (user.boards != null) {
       if(user.boards.length==0){
@@ -54,10 +56,6 @@ class HomePage extends StatefulWidget {
       }
       else{
         for (int i = 0; i < user.boards.length; i++) {
-          print("Board ID: " +
-              user.boards[i].ProjectID.toString() +
-              ", Title: " +
-              user.boards[i].Project_Title);
           listDynamic.add(new DynamicWidget(aboard: user.boards[i]));
         }
       }
@@ -66,7 +64,6 @@ class HomePage extends StatefulWidget {
     else{
       _isDeleted=true;
     }
-    //print('Deleted?! ################## '+_isDeleted.toString());
   }
 
   @override
@@ -136,6 +133,7 @@ class _MyHomePageState extends State<HomePage> {
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
+                      key: Key('CreateColKey'),
                       children: <Widget>[
                         Container(
                           margin: EdgeInsets.all(10),
@@ -294,13 +292,12 @@ class _MyHomePageState extends State<HomePage> {
                           descriptionController.text;
                       projectBoard.Project_StartDate = _startDate;
                       projectBoard.Project_EndDate = _endDate;
-                      //print("Person: "+personNo);
                       await projectBoardController.createBoard(
                           projectBoard, user.userTypeID, personNo);
-                      //print("NOT EMPTY");
+                      http.Client client=new http.Client();
                       List<List<Project_Board>> allBoards =
                           await projectBoardController.ReadBoards(
-                              user.userTypeID, personNo);
+                              user.userTypeID, personNo,client);
                       if (allBoards.isEmpty == false) {
 
                         if (allBoards[0] == null) {
@@ -320,7 +317,8 @@ class _MyHomePageState extends State<HomePage> {
                       projectBoard = user.boards.last;
                       addDynamic(projectBoard);
                       boardTitle = "";
-                      await homePage.initializeDisplay();
+                      //http.Client client=new http.Client();
+                      await homePage.initializeDisplay(client);
                       setState(() {});
                       Navigator.popAndPushNamed(context, '/Home');
                       setState(() {});
@@ -364,17 +362,15 @@ class _MyHomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     _isDeleted=false;
-print("LSD: "+ listDynamic.length.toString());
 if(user.boards==null){
   _isDeleted=true;
-  print("BOARDS NULL: "+_isDeleted.toString());
 }else if(user.boards.length==0){
   _isDeleted=true;
-  print("BOARDS Empty: "+_isDeleted.toString());
 }
     Widget dynamicTextField = new Container(
       alignment: Alignment.center,
       margin: new EdgeInsets.all(10.0),
+      key: Key('dynamicText'),
       //height: MediaQuery.of(context).size.height,
       child: ListView.builder(
         itemCount: listDynamic.length,
@@ -384,6 +380,7 @@ if(user.boards==null){
 
     final plusButton = new Container(
       alignment: Alignment.bottomRight,
+      key: Key('plusButton'),
       child: MaterialButton(
         onPressed: () async {
           await createAlertDialog(context);
@@ -403,6 +400,7 @@ if(user.boards==null){
 
     final noBoardsView = new Container(
       width: MediaQuery.of(context).size.width,
+      key: Key('noBoardsView'),
       //height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -447,9 +445,9 @@ if(user.boards==null){
     }else if (user.boards.length==0){
       _isDeleted=true;
     }
-    print("IS DELETED? "+_isDeleted.toString());
 
     return Scaffold(
+      key: Key("HomeScaffold"),
       appBar: AppBar(
         title: Text("Innovative Skyline"),
         backgroundColor: Color(0xff009999),
@@ -492,12 +490,9 @@ if(user.boards==null){
                 if (user.userTypeID == 1) {
                   Navigator.popAndPushNamed(context, '/StudProfile');
                 } else if (user.userTypeID == 2) {
-//                  supervisorController.fetchSup(user.email);
-//                  print('Navigate to View Supervisor Profile: ' +
-//                      supervisor.staffNo);
                   Navigator.popAndPushNamed(context, '/SupProfile');
                 } else {
-                  print('User type not recognized');
+                  //print('User type not recognized');
                   Navigator.pop(context);
                 }
               },
@@ -507,7 +502,8 @@ if(user.boards==null){
                   style: TextStyle(
                       color: Color(0xff009999), fontWeight: FontWeight.bold)),
               onTap: () async {
-                await archivedBoards.initializeDisplay();
+                http.Client client =new http.Client();
+                await archivedBoards.initializeDisplay(client);
                 setState(() {
                   Navigator.pushNamed(context, '/Archived');
                 });
@@ -667,8 +663,8 @@ class _DynamicWidgetState extends State<DynamicWidget> {
 
                         await projectBoardController.deleteBoard(widget.aboard.ProjectID);
                         listDynamic.removeAt(boardIndex);
-
-                        await homePage.initializeDisplay();
+                        http.Client client=new http.Client();
+                        await homePage.initializeDisplay(client);
 
                         setState(() {
                           _isDeleted = true;
@@ -742,8 +738,6 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                 ChangedBoardValue = true;
                                 setState(() {
                                   widget.aboard.Project_Title = val;
-                                  print('changing: ' +
-                                      widget.aboard.Project_Title);
                                 });
                               },
                             ),
@@ -901,7 +895,6 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                             ),
                             onPressed: () async {
                               await confirmDeleteAlertDialog(context);
-                              //print("aa "+listDynamic.length.toString());
                               setState(() {
 
                               });
@@ -914,8 +907,6 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                             elevation: 5.0,
                             child: Text("Ok"),
                             onPressed: () {
-                              //boardTitle = titleController.text;
-                              //print(widget.aboard.Project_Description);
                               if (Edit_formKey.currentState.validate()) {
                                 if (ChangedStart == true) {
                                   widget.aboard.Project_StartDate = _startDate;
@@ -928,7 +919,6 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                                     ChangedEnd == true) {
                                   projectBoardController
                                       .updateBoard(widget.aboard);
-                                  print(widget.aboard.Project_Title);
                                 }
                               }
                               Navigator.of(context).pop();
@@ -945,6 +935,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
     final listReturn = kIsWeb == false
         ? new StatefulBuilder(builder: (context,setState){
           return Container(
+            key: Key("listContainer"),
             margin: EdgeInsets.all(8),
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -968,7 +959,6 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                 },
               ),
               onTap: () async {
-//          print("BOARD: "+widget.aboard.ProjectID.toString());
                 await widget.popLists();
 
                 Board boardPage = new Board();
@@ -988,6 +978,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
         : StatefulBuilder(
       builder: (context,setState){
         return Row(
+          key: Key("listContainer"),
           children: [
             Expanded(flex: 1, child: Text("")),
             Expanded(
@@ -1018,10 +1009,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                       },
                     ),
                     onTap: () async {
-                      print("BOARD: " + widget.aboard.ProjectID.toString());
                       await widget.popLists();
-                      print("LISTS IS NULL: " +
-                          (widget.aboard.boardLists == null).toString());
                       //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
                       Board boardPage = new Board(
                         proj_board: widget.aboard,

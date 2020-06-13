@@ -23,6 +23,7 @@ import 'package:postgrad_tracker/View/profile/student/ViewStudentProfile.dart';
 import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:http/http.dart' as http;
 
 
 bool isArch(int ProjectID){
@@ -388,7 +389,8 @@ class _BoardState extends State<Board> {
                       .deleteBoard(widget.proj_board.ProjectID);
                   ArchivedBoards archivedBoards=new ArchivedBoards();
                   if(isArch(widget.proj_board.ProjectID)){
-                    await archivedBoards.initializeDisplay();
+                    http.Client client=new http.Client();
+                    await archivedBoards.initializeDisplay(client);
 
                     setState(() {
                       _isDeleted = true;
@@ -400,7 +402,8 @@ class _BoardState extends State<Board> {
                           builder: (BuildContext context) => archivedBoards),
                     );
                   }else{
-                    await homePage.initializeDisplay();
+                    http.Client client=new http.Client();
+                    await homePage.initializeDisplay(client);
 
                     setState(() {
                       _isDeleted = true;
@@ -814,8 +817,8 @@ class _BoardState extends State<Board> {
       String result = await project_boardController.archiveAssignment(
           user.userTypeID, personNo, widget.proj_board.ProjectID, false);
       if (result == "Updated AssignmentActive") {
-
-        await homePage.initializeDisplay();
+        http.Client client=new http.Client();
+        await homePage.initializeDisplay(client);
         setState(() {
           _isDeleted = true;
         });
@@ -843,7 +846,8 @@ class _BoardState extends State<Board> {
             user.userTypeID, personNo, widget.proj_board.ProjectID, false);
         if (result == "Updated AssignmentActive") {
           print("Archived board asignment");
-          await homePage.initializeDisplay();
+          http.Client client=new http.Client();
+          await homePage.initializeDisplay(client);
           setState(() {
             _isDeleted = true;
           });
@@ -871,7 +875,8 @@ class _BoardState extends State<Board> {
         if (result == "Updated AssignmentActive") {
 
           ArchivedBoards archivedBoards=new ArchivedBoards();
-          await archivedBoards.initializeDisplay();
+          http.Client client=new http.Client();
+          await archivedBoards.initializeDisplay(client);
           setState(() {
             _isDeleted = true;
           });
@@ -894,7 +899,8 @@ class _BoardState extends State<Board> {
       if (result == "Updated AssignmentActive") {
 
         ArchivedBoards archivedBoards=new ArchivedBoards();
-        await archivedBoards.initializeDisplay();
+        http.Client client=new http.Client();
+        await archivedBoards.initializeDisplay(client);
         setState(() {
           _isDeleted = true;
         });
