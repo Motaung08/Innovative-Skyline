@@ -67,91 +67,97 @@ class Project_BoardController {
 
         // Starting Web API Call.
         var response = await client.post(url, body: data);
-        print('User: '+UserTypeID.toString()+", Stud no: "+personNo.toLowerCase()+", StaffNo: "+personNo.toLowerCase()+" Yields: "+response.body);
+        print("response.body");
+        print(await client.post(url, body: data));
+       // print('User: '+UserTypeID.toString()+", Stud no: "+personNo.toLowerCase()+", StaffNo: "+personNo.toLowerCase()+" Yields: "+response.body);
         // Getting Server response into variable.
-    print("Your boards response is: "+response.body);
-        // ignore: non_constant_identifier_names
-        var Response = jsonDecode(response.body);
+   // print("Your boards response is: "+response.body);
+    if(response.statusCode==200){
+      // ignore: non_constant_identifier_names
 
-        //meghan@wits.ac.za
+      var Response = jsonDecode(response.body);
 
-        String msg='';
-        if (Response.length == 0) {
+      //meghan@wits.ac.za
 
-          msg = "No boards created yet. Click the + button to create a board.";
+      String msg='';
+      if (Response.length == 0) {
 
+        msg = "No boards created yet. Click the + button to create a board.";
+
+      }
+      else {
+        if(user.boards!=null){
+          user.boards.clear();
         }
-        else {
-          if(user.boards!=null){
-            user.boards.clear();
-          }
-          if(user.archivedBoards!=null){
-            user.archivedBoards.clear();
-          }
-          for (int i = 0; i < Response.length; i++) {
+        if(user.archivedBoards!=null){
+          user.archivedBoards.clear();
+        }
+        for (int i = 0; i < Response.length; i++) {
 
-            Project_Board boardReceived = new Project_Board();
-            boardReceived.ProjectID = int.parse(Response[i]['ProjectID']);
-            boardReceived.Project_Title = Response[i]['Project_Title'];
-            boardReceived.Project_Description = Response[i]['Project_Description'];
-            if(Response[i]['BoardActive']=='1'){
-              boardReceived.boardActive=true;
+          Project_Board boardReceived = new Project_Board();
+          boardReceived.ProjectID = int.parse(Response[i]['ProjectID']);
+          boardReceived.Project_Title = Response[i]['Project_Title'];
+          boardReceived.Project_Description = Response[i]['Project_Description'];
+          if(Response[i]['BoardActive']=='1'){
+            boardReceived.boardActive=true;
+          }
+          else{
+            boardReceived.boardActive=false;
+          }
+          if(Response[i]['AssignmentActive']=='1'){
+            boardReceived.boardAssignActive=true;
+          }
+          else{
+            boardReceived.boardAssignActive=false;
+          }
+          if(Response[i]['AccessLevelID']!=null){
+            boardReceived.AccessLevel=int.parse(Response[i]['AccessLevelID']);
+          }
+
+          //print("START DATE: "+Response[i]['Project_StartDate'].toString());
+          if(Response[i]['Project_StartDate']!=null){
+            boardReceived.Project_StartDate=DateTime.parse(Response[i]['Project_StartDate']);
+          }
+          if(Response[i]['Project_EndDate']!=null){
+            boardReceived.Project_EndDate=DateTime.parse(Response[i]['Project_EndDate']);
+          }
+
+          print("Board: "+boardReceived.Project_Title+" has a board status of: "+boardReceived.boardActive.toString()+" and an assignment status of: "+boardReceived.boardAssignActive.toString());
+          if(boardReceived.boardActive){
+            if(boardReceived.boardAssignActive==true){
+
+              boards.add(boardReceived);
             }
             else{
-              boardReceived.boardActive=false;
+              archivedBoards.add(boardReceived);
             }
-            if(Response[i]['AssignmentActive']=='1'){
-              boardReceived.boardAssignActive=true;
+          }else if (boardReceived.boardActive==false && boardReceived.AccessLevel==4){
+            print("Ere for board: "+boardReceived.Project_Title);
+            //board is currently archived for everyone
+            if(boardReceived.boardAssignActive==false){
+              archivedBoards.add(boardReceived);
+              print(boardReceived.Project_Title+" add to archive");
             }
             else{
-              boardReceived.boardAssignActive=false;
-            }
-            if(Response[i]['AccessLevelID']!=null){
-              boardReceived.AccessLevel=int.parse(Response[i]['AccessLevelID']);
+              boards.add(boardReceived);
+              print(boardReceived.Project_Title+" add to board recieved");
             }
 
-            //print("START DATE: "+Response[i]['Project_StartDate'].toString());
-            if(Response[i]['Project_StartDate']!=null){
-              boardReceived.Project_StartDate=DateTime.parse(Response[i]['Project_StartDate']);
-            }
-            if(Response[i]['Project_EndDate']!=null){
-              boardReceived.Project_EndDate=DateTime.parse(Response[i]['Project_EndDate']);
-            }
-
-            print("Board: "+boardReceived.Project_Title+" has a board status of: "+boardReceived.boardActive.toString()+" and an assignment status of: "+boardReceived.boardAssignActive.toString());
-            if(boardReceived.boardActive){
-              if(boardReceived.boardAssignActive==true){
-
-                boards.add(boardReceived);
-              }
-              else{
-                archivedBoards.add(boardReceived);
-              }
-            }else if (boardReceived.boardActive==false && boardReceived.AccessLevel==4){
-              print("Ere for board: "+boardReceived.Project_Title);
-              //board is currently archived for everyone
-              if(boardReceived.boardAssignActive==false){
-                archivedBoards.add(boardReceived);
-                print(boardReceived.Project_Title+" add to archive");
-              }
-              else{
-                boards.add(boardReceived);
-                print(boardReceived.Project_Title+" add to board recieved");
-              }
-
-            }
-
-
-            allBoards.add(boards);
-            allBoards.add(archivedBoards);
-            //user.boards.add(boardReceived);
-            //user.boards[i].boardLists=await listController.ReadLists(boardReceived.ProjectID);
           }
 
 
-
+          allBoards.add(boards);
+          allBoards.add(archivedBoards);
+          //user.boards.add(boardReceived);
+          //user.boards[i].boardLists=await listController.ReadLists(boardReceived.ProjectID);
         }
-    print(msg);
+
+
+
+      }
+      print(msg);
+    }
+
     return allBoards;
   }
 

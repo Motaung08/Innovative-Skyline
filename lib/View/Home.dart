@@ -23,9 +23,9 @@ class HomePage extends StatefulWidget {
   Future initialize(http.Client client) async {
     Project_BoardController projectBoardController =
         new Project_BoardController();
-
     List<List<Project_Board>> allBoards =
         await projectBoardController.ReadBoards(user.userTypeID, personNo,client);
+    print("IN HOME INITIALIZE");
     if (allBoards.isEmpty == false) {
       if (allBoards[0] == null) {
         user.boards = null;

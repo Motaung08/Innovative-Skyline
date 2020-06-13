@@ -71,7 +71,7 @@ class SupervisorController {
     Project_BoardController projectBoardController =
         new Project_BoardController();
     print('Oy, we\'re here');
-    http.Client client;
+    http.Client client=new http.Client();
     List<List<Project_Board>> allBoards =
         await projectBoardController.ReadBoards(2, supervisor.staffNo,client,
             url: urlReadBoards);
