@@ -15,6 +15,8 @@ import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/ArchivedBoards.dart';
 import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/View/Login.dart';
+import 'package:postgrad_tracker/View/profile/student/ViewStudentProfile.dart';
+import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
 
@@ -345,7 +347,6 @@ class _MyHomePageState extends State<HomePage> {
   Icon floatingIcon = new Icon(Icons.add);
 
   signOut() {
-    print('We are signing out...');
     degrees.clear();
     studentTypes.clear();
     listDynamic.clear();
@@ -382,6 +383,7 @@ if(user.boards==null){
   _isDeleted=true;
 }
     Widget dynamicTextField = new Container(
+//      key: Key('DynamicView'),
       alignment: Alignment.center,
       margin: new EdgeInsets.all(10.0),
 
@@ -504,11 +506,22 @@ if(user.boards==null){
               title: Text('View Profile',
                   style: TextStyle(
                       color: Color(0xff009999), fontWeight: FontWeight.bold)),
+              key: Key('profileButton'),
               onTap: () {
                 if (user.userTypeID == 1) {
-                  Navigator.popAndPushNamed(context, '/StudProfile');
+                  //Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ViewStudentProfilePage()),
+                  );
+                  //Navigator.popAndPushNamed(context, '/StudProfile');
                 } else if (user.userTypeID == 2) {
-                  Navigator.popAndPushNamed(context, '/SupProfile');
+                  //Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ViewSupProfilePage()),
+                  );
+//                  Navigator.popAndPushNamed(context, '/SupProfile');
                 } else {
                   //print('User type not recognized');
                   Navigator.pop(context);
@@ -519,11 +532,17 @@ if(user.boards==null){
               title: Text('Archived Boards',
                   style: TextStyle(
                       color: Color(0xff009999), fontWeight: FontWeight.bold)),
+              key: Key('archivedButton'),
               onTap: () async {
                 http.Client client =new http.Client();
                 await archivedBoards.initializeDisplay(client);
                 setState(() {
-                  Navigator.pushNamed(context, '/Archived');
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ArchivedBoards()),
+                  );
+                  //Navigator.pushNamed(context, '/Archived');
                 });
               },
             ),
@@ -533,7 +552,6 @@ if(user.boards==null){
                   style: TextStyle(
                       color: Color(0xff009999), fontWeight: FontWeight.bold)),
               onTap: () {
-                print("TAPPED!!!!!!!!!");
                 signOut();
               },
             ),

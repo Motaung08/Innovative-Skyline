@@ -82,11 +82,25 @@ void main() {
               '[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":"This board is a default board created for testing purposes. It should not be deleted.","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"}]',
               200));
 
+       data = {
+        'Project_Title': "Test Title",
+        'Project_Description' : "",
+        'Project_StartDate' : null,
+        'Project_EndDate' : null,
+        'StudentNo' : '123456789'.toLowerCase(),
+        'StaffNo' : '123456789'.toLowerCase(),
+        'userType' : 1.toString()
+      };
+
+
+      when(httpClient.post('http://10.100.15.38/createBoard.php', body: jsonEncode(data)))
+          .thenAnswer((_) async => http.Response("Board AND Association created!",200));
+
       await testHomePage.initializeDisplay(httpClient);
 
       await tester.pumpWidget(makeWidgetTestable(testHomePage));
 
-      final dynamicBoards = find.byKey(Key('dynamicText'));
+      final dynamicBoards = find.byKey(Key('DynamicView'));
 //      expect(dynamicBoards,findsOneWidget);
 
       expect(testHomePage.isCreateOpen, false);
@@ -129,19 +143,7 @@ void main() {
       await tester.pump();
 
 
-      var createData = {
-        'Project_Title': "Test Title",
-        'Project_Description' : "",
-        'Project_StartDate' : null,
-        'Project_EndDate' : null,
-        'StudentNo' : '123456789'.toLowerCase(),
-        'StaffNo' : '123456789'.toLowerCase(),
-        'userType' : 1.toString()
-      };
 
-
-      when(httpClient.post('http://10.100.15.38/createBoard.php', body: jsonEncode(createData)))
-          .thenAnswer((_) async => http.Response("Board AND Association created!",200));
 
 //      await tester.tap(createButton);
 //      await tester.pump();
@@ -150,15 +152,45 @@ void main() {
 
     });
 
+    testWidgets('View Profile', (WidgetTester tester) async {
+      HomePage testHomePage = new HomePage();
+      await tester.pumpWidget(makeWidgetTestable(testHomePage));
+
+      final locateDrawer = find.byTooltip('Open navigation menu');
+      expect(locateDrawer, findsOneWidget);
+
+      await tester.tap(locateDrawer);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      final profile=find.byKey(Key('profileButton'));
+      expect(profile, findsOneWidget);
+
+      await tester.tap(profile);
+
+    });
+
+    testWidgets('View Archived', (WidgetTester tester) async {
+      HomePage testHomePage = new HomePage();
+      await tester.pumpWidget(makeWidgetTestable(testHomePage));
+
+      final locateDrawer = find.byTooltip('Open navigation menu');
+      expect(locateDrawer, findsOneWidget);
+
+      await tester.tap(locateDrawer);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      final archived=find.byKey(Key('archivedButton'));
+      expect(archived, findsOneWidget);
+
+      await tester.tap(archived);
+
+    });
+
     testWidgets('Sign out', (WidgetTester tester) async {
             HomePage testHomePage = new HomePage();
       await tester.pumpWidget(makeWidgetTestable(testHomePage));
-
-
-//      final scaffoldFind = find.byKey(testHomePage.scaffoldKey);
-//      Scaffold scaffold=tester.widget(scaffoldFind);
-
-      //GlobalKey<ScaffoldState> scaffoldKey=scaffold.key;
 
       final locateDrawer = find.byTooltip('Open navigation menu');
       expect(locateDrawer, findsOneWidget);
@@ -182,5 +214,6 @@ void main() {
 
 
     });
+
   });
 }
