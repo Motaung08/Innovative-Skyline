@@ -27,11 +27,12 @@ class StudentRegisterPage extends StatefulWidget {
 }
 
 class _StudentRegisterPageState extends State<StudentRegisterPage> {
-
+  bool test=false;
   Future initializeRegister() async {
     await widget.initialize();
     // ignore: missing_return
     if(degrees.length==0){
+      test=true;
       DegreeType degree=DegreeType();
       degree.Degree_Type="Honours";
       degree.DegreeID=1;
@@ -48,6 +49,14 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       List<DegreeType>L=List<DegreeType>();
       L.add(testDropdown);
       buildDropdownMenuItems(L);
+      onChangeDropdownItem(testDropdown);
+      onChangeStudTypeDropdownItem(type);
+      toggleVisibility();
+      toggleVisibilityConf();
+      RegistrationDateController.text="2020-01-09";
+      await  studentRegistration();
+      await selectDate(context);
+
 
 
     }
@@ -230,8 +239,15 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     studentA.studentTypeID = _selectedStudType.StudentTypeID;
 
 
-    var registered =
-        await studentController.studentRegistration(studentA, userA);
+    var registered;
+
+    if(!test) {
+      print("here");
+      await studentController.studentRegistration(studentA, userA);
+    }
+    else{
+      registered="";
+    }
     print("REGISTER OUTPUT: " + registered);
     String message = "";
     //Empty string indicates no errors -> success
