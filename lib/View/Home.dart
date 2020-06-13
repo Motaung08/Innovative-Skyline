@@ -155,8 +155,8 @@ class _MyHomePageState extends State<HomePage> {
                         Container(
                           margin: EdgeInsets.all(10),
                           child: TextFormField(
-                            key: Key('descripTextInput'),
                             controller: descriptionController,
+                            key: Key('descripTextInput'),
                             maxLines: 5,
                             decoration: InputDecoration(
                                 //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -179,6 +179,7 @@ class _MyHomePageState extends State<HomePage> {
                                 shape: BoxShape.rectangle,
                               ),
                               child: MaterialButton(
+                                key: Key('startDateInput'),
                                 child: Row(
                                   children: <Widget>[
                                     IconButton(
@@ -235,6 +236,7 @@ class _MyHomePageState extends State<HomePage> {
                                 shape: BoxShape.rectangle,
                               ),
                               child: MaterialButton(
+                                key: Key('endDateInput'),
                                 child: Row(
                                   children: <Widget>[
                                     IconButton(

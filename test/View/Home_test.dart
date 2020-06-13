@@ -89,7 +89,7 @@ void main(){
 
       await tester.pumpWidget(makeWidgetTestable(testHomePage));
       await tester.pumpWidget(makeWidgetTestable(testHomePage));
-      await tester.pump();
+      //await tester.pump();
       final dynamicBoards=find.byKey(Key('dynamicText'));
 //      expect(dynamicBoards,findsOneWidget);
 
@@ -100,13 +100,21 @@ void main(){
 
       final titleInout=find.byKey(Key('titleTextInput'));
       expect(titleInout, findsOneWidget);
-      tester.enterText(titleInout, "Testing Board Title");
+      await tester.enterText(titleInout, "Testing Board Title");
 //      await tester.pump();
-//      final descripTextInput=find.byKey(Key('descripTextInput'));
-//      expect(descripTextInput, findsOneWidget);
+      final descripTextInput=find.byKey(Key('descripTextInput'));
+      expect(descripTextInput, findsOneWidget);
       //tester.enterText(titleInout, "Testing Board Title");
 
+      final startDateInput=find.byKey(Key('startDateInput'));
+      expect(startDateInput, findsOneWidget);
+      await tester.tap(startDateInput);
+      await tester.pump();
+      //await tester.ta
 
+
+      final endDateInput=find.byKey(Key('endDateInput'));
+      expect(endDateInput, findsOneWidget);
 
 
     });
