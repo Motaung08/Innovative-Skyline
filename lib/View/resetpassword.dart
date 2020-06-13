@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/main.dart';
+import 'package:http/http.dart' as http;
 
-class Toggle{
 
-}
 
 class ResetPasswordView extends StatefulWidget {
   bool isHidden=true;
   bool isHiddenConf=true;
+  http.Client resetClient=new http.Client();
   String resetUrl="http://10.100.15.38/ResetPassword.php";
   @override
   ResetPasswordViewState createState() => ResetPasswordViewState();
@@ -44,9 +44,10 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
     });
   }
 
-  Future tryReset({url= "http://10.100.15.38/ResetPassword.php"}) async{
+  Future tryReset(http.Client client, {url= "http://10.100.15.38/ResetPassword.php"}) async{
     _formKey.currentState.validate();
-    msg= await userController.ResetPassword(email, password, url: widget.resetUrl);
+//    print("Reset client: "+widget.resetClient.toString());
+    msg= await userController.ResetPassword(email, password,widget.resetClient, url: widget.resetUrl);
     if (msg=="Successfully updated password!"){
       msg="";
       Navigator.pop(context);
@@ -137,7 +138,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               onPressed: () {
                 if(_formKey.currentState.validate()){
-                  tryReset();
+                  tryReset(widget.resetClient);
                 }
               },
               key: Key('ResetButtonInput'),
@@ -163,7 +164,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
         onPressed: () {
           //
           if(_formKey.currentState.validate()){
-            tryReset();
+            tryReset(widget.resetClient);
           }
 
         },

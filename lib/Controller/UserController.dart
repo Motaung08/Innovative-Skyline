@@ -236,8 +236,8 @@ class UserController{
   // ignore: non_constant_identifier_names
   String ResetString="";
   // ignore: non_constant_identifier_names
-  Future<String> ResetPassword(String email, String password,{url='http://10.100.15.38/ResetPassword.php'}) async{
-  print(email);
+  Future<String> ResetPassword(String email, String password,http.Client client,{url='http://10.100.15.38/ResetPassword.php'}) async{
+
     var data =
     {
       'Email': email.toLowerCase(),
@@ -246,13 +246,13 @@ class UserController{
 
     /*The script below should take in the email and check if there exists a user
     * associated with the given email address. */
-    final response = await http.post(
+    final response = await client.post(
         url,
-//        "https://witsinnovativeskyline.000webhostapp.com/ResetPassword.php",
         body: json.encode(data) );
+    print("http response: "+data.toString());
 
     var result = json.decode(response.body);
-    //print('000000000000000000000000000000000    ');
+//    print('000000000000000000000000000000000    ');
     print(result);
 
     if (result=="No user found.") {

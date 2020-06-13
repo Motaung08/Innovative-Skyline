@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:postgrad_tracker/Controller/StudentController.dart';
@@ -7,9 +9,14 @@ import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/main.dart';
+import 'package:http/http.dart' as http;
+
+import '../fetchPost.dart';
+import 'package:http/http.dart' as http;
 
 
 class MockUserController extends Mock implements UserController{}
+class MockClient extends Mock implements http.Client{}
 
 void main(){
   group('Student User tests', (){
@@ -43,11 +50,15 @@ void main(){
       isNotNull);
     });
     test('ResetPassword valid',() async {
-      expect(await studUserCtr.ResetPassword(studUser.email, '123456',
+//      http.Client client=new MockClient();
+      http.Client client=new http.Client();
+      expect(await studUserCtr.ResetPassword(studUser.email, '123456',client,
           url:"https://lamp.ms.wits.ac.za/~s1611821/ResetPassword.php" ), 'Successfully updated password!');
     });
     test('ResetPassword invalid',() async {
-      expect(await studUserCtr.ResetPassword("invalid","NewExamplePassword",
+//      http.Client client=new MockClient();
+      http.Client client=new http.Client();
+      expect(await studUserCtr.ResetPassword("invalid","NewExamplePassword",client,
           url:"https://lamp.ms.wits.ac.za/~s1611821/ResetPassword.php"), "No user found :(");
     });
 
@@ -133,7 +144,18 @@ void main(){
       expect(await userController.getUser(testUser.email,url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"), isNotNull);
 
       //userResetPassword
-      expect(await userController.ResetPassword('1431795@students.wits.ac.za',"password123",url:"https://lamp.ms.wits.ac.za/~s1611821/ResetPassword.php"),
+//      http.Client client=new MockClient();
+      http.Client client=new http.Client();
+      var data =
+      {
+        'Email': 'default@students.wits.ac.za'.toLowerCase(),
+        'Password': '123456'
+      };
+//      when(httpClient.post('http://10.100.15.38/ResetPassword.php', body: jsonEncode(data)))
+//          .thenAnswer((_) async => http.Response("Password updated successfully",200));
+      expect(await userController.ResetPassword(
+          '1431795@students.wits.ac.za',"password123",client,
+          url:"https://lamp.ms.wits.ac.za/~s1611821/ResetPassword.php"),
           "Successfully updated password!");
 
       //ReadUsers
