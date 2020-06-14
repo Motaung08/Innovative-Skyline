@@ -85,6 +85,9 @@ script:
   - flutter doctor -v
   - flutter clean
   - flutter pub get
+  - flutter channel beta
+  - flutter upgrade
+  - flutter config --enable-web
   # Run Flutter build
   - ./flutter/bin/flutter build apk
   #Run unit tests and widget tests with coverage
