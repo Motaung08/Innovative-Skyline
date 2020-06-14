@@ -64,9 +64,19 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       toggleVisibility();
       toggleVisibilityConf();
       RegistrationDateController.text="2020-01-09";
-      await  studentRegistration();
+
+      if(test!=false) {
+        await studentRegistration();
+        setState(() {
+          visible =false;
+        });
+      }
 
       if(selectDate(context)!=null){
+        print("");
+        setState(() {
+
+        });
         await selectDate(context);
       }
 
