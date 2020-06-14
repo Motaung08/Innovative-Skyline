@@ -14,13 +14,10 @@ import 'package:http/http.dart' as http;
 
 
 import '../../main.dart';
-
+http.Client studRegClient=new http.Client();
 class StudentRegisterPage extends StatefulWidget {
   bool isHidden = true;
-  Future initialize() async {
-//    print('initializing student types and degrees.');
-
-  http.Client client=new http.Client();
+  Future initialize(http.Client client) async {
     await studentTypeController.getTypes(client);
     await degreeController.getDegrees(client);
     print('Student type ' + studentTypes.length.toString());
@@ -32,8 +29,8 @@ class StudentRegisterPage extends StatefulWidget {
 
 class _StudentRegisterPageState extends State<StudentRegisterPage> {
   bool test=false;
-  Future initializeRegister() async {
-    await widget.initialize();
+  Future initializeRegister(http.Client client) async {
+    await widget.initialize(client);
 
     //widget.initialize();
     _dropdownMenuItems = buildDropdownMenuItems(degrees);
@@ -81,7 +78,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
   @override
   // ignore: must_call_super
   void initState() {
-    initializeRegister();
+    initializeRegister(studRegClient);
 //    super.initState();
   }
 

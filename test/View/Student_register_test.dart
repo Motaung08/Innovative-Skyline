@@ -20,6 +20,23 @@ void main(){
     testWidgets('All input feild and button widgets should be on screen', (
         WidgetTester tester) async {
       StudentRegisterPage studentRegisterPage=new StudentRegisterPage();
+
+      http.Client client=new MockClient();
+      when(client.post("http://10.100.15.38/getStudentTypes.php"))
+          .thenAnswer((_) async =>
+          http.Response(
+              '[{"StudentTypeID":"1","Student_Type":"Full-time"},{"StudentTypeID":"2","Student_Type":"Part-time"}]'
+              , 200
+          ));
+
+      //5
+      when(client.post('http://10.100.15.38/getDegreeTypes.php')).thenAnswer((
+          _) async =>
+          http.Response(
+              '[{"DegreeID":"1","Degree_Type":"Honors"},{"DegreeID":"2","Degree_Type":"Masters by dissertation"},{"DegreeID":"3","Degree_Type":"Masters by coursework"},{"DegreeID":"4","Degree_Type":"PhD"}]'
+              , 200
+          ));
+      studRegClient=client;
       await tester.pumpWidget(makeWidgetTestable(studentRegisterPage));
 
       final studNo = find.byKey(Key('studNo'));
@@ -75,10 +92,8 @@ void main(){
       expect(find.text('Enter a first name'),findsOneWidget);
       expect(find.text('Enter a last name'),findsOneWidget);
       expect(find.text('Please enter an email address!.'),findsOneWidget);
-//      expect(find.text('Invalid student email address'),findsNothing);
       expect(find.text('Enter a password 6+ chars long'),findsOneWidget);
       expect(find.text('Confirm password.'),findsOneWidget);
-//      expect(find.text('Passwords must match'),findsNothing);
 
 
       Finder formWidgetFinder = find.byType(Form);
@@ -105,7 +120,7 @@ void main(){
 
 //      await tester.tap(registerButton);
 //      await tester.pump();
-
+//
 //      expect(formKey.currentState.validate(), isTrue);
 
 
