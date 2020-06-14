@@ -9,7 +9,8 @@ import 'package:postgrad_tracker/main.dart';
 
 
 class SupervisorRegisterPage extends StatefulWidget {
-
+  bool isHidden=true;
+  bool isHiddenConf=true;
   @override
   _SupervisorRegisterPageState createState() => _SupervisorRegisterPageState();
 }
@@ -105,19 +106,19 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
     );
   }
 
-  bool _isHidden=true;
+
 
   void toggleVisibility(){
     setState(() {
-      _isHidden=!_isHidden;
+      widget.isHidden=!widget.isHidden;
     });
   }
 
-  bool _isHiddenConf=true;
+
 
   void toggleVisibilityConf(){
     setState(() {
-      _isHiddenConf=!_isHiddenConf;
+      widget.isHiddenConf=!widget.isHiddenConf;
     });
   }
 
@@ -125,6 +126,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
   @override
   Widget build(BuildContext context) {
     final staffNumberField = TextFormField(
+      key: Key('staffNumber'),
       controller: staffNoController,
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Enter a Staff Number' : null,
@@ -140,6 +142,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
     );
 
     final staffFirstNameField = TextFormField(
+      key: Key('firstName'),
       obscureText: false,
       controller: Sup_FNameController,
       validator: (val) => val.isEmpty ? 'Enter a First Name' : null,
@@ -155,6 +158,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
     );
 
     final staffLastNameField = TextFormField(
+      key: Key('lastName'),
       controller: Sup_LNameController,
       obscureText: false,
       style: style,
@@ -170,6 +174,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
     );
 
     final staffEmailField = TextFormField(
+      key: Key('email'),
       controller: emailController,
       obscureText: false,
       style: style,
@@ -193,6 +198,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
     );
 
     final staffOfficeField = TextFormField(
+      key: Key('office'),
       controller: OfficeController,
       obscureText: false,
       style: style,
@@ -204,16 +210,17 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
     );
 
     final passwordField = TextFormField(
+      key: Key('password'),
       controller: passwordController,
       validator: (val) =>
           val.length < 6 ? 'Enter a Password with 6+ chars.' : null,
       onChanged: (val) {
         setState(() => userA.password = val);
       },
-      obscureText: _isHidden,
+      obscureText: widget.isHidden,
       style: style,
       decoration: InputDecoration(
-          suffixIcon: IconButton(icon: _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibility),
+          suffixIcon: IconButton(icon: widget.isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibility),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Password",
           border:
@@ -221,22 +228,23 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
     );
 
     final confirmPasswordField = TextFormField(
+      key: Key('confPass'),
       controller: confirmPassController,
-      obscureText: _isHiddenConf,
+      obscureText: widget.isHiddenConf,
       style: style,
       validator: (val) {
 
         if (val.isEmpty) {
           return 'Confirm password.';
         }
-        if (val !=confirmPassController.text){
+        if (val !=passwordController.text){
           return 'Passwords must match';
         }
         return null;
       },
 
       decoration: InputDecoration(
-          suffixIcon: IconButton(icon: _isHiddenConf ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibilityConf),
+          suffixIcon: IconButton(icon: widget.isHiddenConf ? Icon(Icons.visibility_off) : Icon(Icons.visibility), onPressed: toggleVisibilityConf),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Confirm Password",
           border:
@@ -254,6 +262,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
             borderRadius: BorderRadius.circular(30.0),
             color: Color(0xff009999),
             child: MaterialButton(
+              key: Key('RegisterButton'),
               minWidth: MediaQuery.of(context).size.width,
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               onPressed: () async {
@@ -279,6 +288,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
       child: MaterialButton(
+        key: Key('RegisterButton'),
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
@@ -305,6 +315,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
             borderRadius: BorderRadius.circular(30.0),
             color: Color(0xff009999),
             child: MaterialButton(
+              key: Key('LoginButton'),
               minWidth: MediaQuery.of(context).size.width,
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               onPressed: () {
@@ -331,9 +342,11 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
       child: MaterialButton(
+        key: Key('LoginButton'),
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
+
           //widget.toggleView();
           Navigator.push(
             context,
@@ -349,6 +362,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
 
     Widget _divider() {
       return Container(
+        key: Key('Divider'),
         margin: EdgeInsets.symmetric(vertical: 10),
         child: Row(
           children: <Widget>[
@@ -381,6 +395,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
     }
 
     return Scaffold(
+      key: Key('Scaffold'),
       body: Center(
         child: Container(
           color: Colors.white,
