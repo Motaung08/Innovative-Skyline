@@ -25,12 +25,14 @@ import 'package:postgrad_tracker/main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 
-
+http.Client boardPageHttpClient = new http.Client();
 bool isArch(int ProjectID){
-  if(user.archivedBoards.where((element) => element.ProjectID==ProjectID).isNotEmpty){
-    return true;
-  }else{
-    return false;
+  if(user.archivedBoards!=null){
+    if(user.archivedBoards.where((element) => element.ProjectID==ProjectID).isNotEmpty){
+      return true;
+    }else{
+      return false;
+    }
   }
 }
 
@@ -42,6 +44,7 @@ http.Client boardClient=new http.Client();
 class Board extends StatefulWidget {
   //1713445@students.wits.ac.za
 
+//  http.Client boardPageHttpClient = new http.Client();
 
   // ignore: non_constant_identifier_names
   Project_Board proj_board;
@@ -50,8 +53,7 @@ class Board extends StatefulWidget {
 
   // ignore: non_constant_identifier_names
   Future populateListDisplay(int ProjectID, http.Client client) async {
-    print('populateListDisplay() called');
-//    lists = [];
+
     int boardIndex;
      int testVal;
     void getIndexes() {
@@ -63,6 +65,7 @@ class Board extends StatefulWidget {
           }
         }
       }else{
+
         for (int i = 0; i < user.boards.length; i++) {
           if (user.boards[i].ProjectID == ProjectID) {
             boardIndex = i;
@@ -71,11 +74,11 @@ class Board extends StatefulWidget {
       }
 
     }
-
+//
     getIndexes();
 //     items.clear();
     bool _isArch=isArch(proj_board.ProjectID);
-
+//
     if(_isArch){
 
       user.archivedBoards[boardIndex].boardLists =
@@ -110,8 +113,10 @@ class Board extends StatefulWidget {
 
     }
     else{
+
       user.boards[boardIndex].boardLists =
       await listController.ReadLists(ProjectID,client);
+
       if (user.boards[boardIndex].boardLists != null) {
         print('Initializing board\'s list display! ##################');
         stiles.clear();
@@ -149,6 +154,7 @@ class Board extends StatefulWidget {
 
 class _BoardState extends State<Board> {
   // ignore: missing_return, non_constant_identifier_names
+
   int getBoardIndex(int BoardID) {
     bool _isArch=isArch(widget.proj_board.ProjectID);
     print("...................................................................................... "+_isArch.toString());
@@ -290,32 +296,32 @@ class _BoardState extends State<Board> {
     }
     else{
       print("**POP** active");
-      if (user.boards[boardIndex].boardLists != null) {
-        print("USER BOARDS LISTS: "+user.boards[boardIndex].boardLists.length.toString());
-        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-          double mainAxis = 0.5;
-          DynamicList dynamicCreatedList =
-          new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
-
-          listDynamic.add(dynamicCreatedList);
-          if (user.boards[boardIndex].boardLists[i].listTasks.length == 0) {
-            stiles.add(StaggeredTile.count(1, kIsWeb == true ? .8 : 1.5));
-            //stiles.add(StaggeredTile.count(1, .8));
-          } else {
-            print("LENGTH: " +
-                user.boards[boardIndex].boardLists[i].listTasks.length
-                    .toString());
-            for (int m = 0;
-            m < user.boards[boardIndex].boardLists[i].listTasks.length;
-            m++) {
-              double addNum = kIsWeb == true ? .225 : .52;
-              mainAxis += addNum;
-            }
-            //mainAxis+=user.boards[boardIndex].boardLists[i].listTasks.length;
-            stiles.add(StaggeredTile.count(1, mainAxis));
-          }
-        }
-      }
+//      if (user.boards[boardIndex].boardLists != null) {
+//        print("USER BOARDS LISTS: "+user.boards[boardIndex].boardLists.length.toString());
+//        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+//          double mainAxis = 0.5;
+//          DynamicList dynamicCreatedList =
+//          new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
+//
+//          listDynamic.add(dynamicCreatedList);
+//          if (user.boards[boardIndex].boardLists[i].listTasks.length == 0) {
+//            stiles.add(StaggeredTile.count(1, kIsWeb == true ? .8 : 1.5));
+//            //stiles.add(StaggeredTile.count(1, .8));
+//          } else {
+//            print("LENGTH: " +
+//                user.boards[boardIndex].boardLists[i].listTasks.length
+//                    .toString());
+//            for (int m = 0;
+//            m < user.boards[boardIndex].boardLists[i].listTasks.length;
+//            m++) {
+//              double addNum = kIsWeb == true ? .225 : .52;
+//              mainAxis += addNum;
+//            }
+//            //mainAxis+=user.boards[boardIndex].boardLists[i].listTasks.length;
+//            stiles.add(StaggeredTile.count(1, mainAxis));
+//          }
+//        }
+//      }
     }
 
   }
@@ -830,10 +836,10 @@ class _BoardState extends State<Board> {
   List<List> sharedWithList = new List<List>();
   List<Student> studentList;
   List<Supervisor> supList;
-  getShared() async {
+  getShared(http.Client client) async {
     sharedWithList.clear();
     sharedWithList = await assignmentController.ReadBoardAssignments(
-        widget.proj_board.ProjectID);
+        widget.proj_board.ProjectID, client);
 
     //print("students!=null? "+(studentList!=[]).toString());
     setState(() {
@@ -982,6 +988,7 @@ class _BoardState extends State<Board> {
   Widget build(BuildContext context) {
     determineAccess();
     Icon viewIcon = Icon(Icons.account_circle);
+//    http.Client boardPageHttpClient = new http.Client();
     final dropdownAssignmentType = new SizedBox(
       child: StatefulBuilder(
         builder: (context, setState) {
@@ -1264,7 +1271,7 @@ class _BoardState extends State<Board> {
           });
     }
 
-    Future<String> shareAlertDialog(BuildContext context) async {
+    Future<String> shareAlertDialog(BuildContext context, http.Client httpClient) async {
       String foundUser = "";
 
       return showDialog(
@@ -1309,7 +1316,7 @@ class _BoardState extends State<Board> {
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold)),
                                           onPressed: () async {
-                                            await getShared();
+                                            await getShared(httpClient);
                                             setState(() {});
                                             await sharedWithDialog(context);
                                           },
@@ -1378,7 +1385,7 @@ class _BoardState extends State<Board> {
                               StudentController studentController =
                                   new StudentController();
                               Student assignStud = await studentController
-                                  .fetchStudent(email, null);
+                                  .fetchStudent(email, null,httpClient);
                               OtherPersonNo = assignStud.studentNo;
                               if (studentList.contains(assignStud)) {
                                 existingAssignmentFound = true;
@@ -1572,9 +1579,9 @@ class _BoardState extends State<Board> {
                   onPressed: _isShareDisabled == true
                       ? null
                       : () async {
-                          await getShared();
+                          await getShared(boardPageHttpClient);
                           setState(() {});
-                          await shareAlertDialog(context);
+                          await shareAlertDialog(context,boardPageHttpClient);
                           //Share.share(widget.proj_board.Project_Title);
                         },
                 ),

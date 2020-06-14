@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:postgrad_tracker/Model/Assignment.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
@@ -62,7 +63,7 @@ class AssignmentController {
   }
 
   // ignore: non_constant_identifier_names
-  Future<List<List>> ReadBoardAssignments(int ProjectID,{url='http://10.100.15.38/ReadBoardAssignments.php',
+  Future<List<List>> ReadBoardAssignments(int ProjectID,http.Client httpClient,{url='http://10.100.15.38/ReadBoardAssignments.php',
     url2="http://10.100.15.38/viewStudentStudNo.php",url3='http://10.100.15.38/viewSupStaffNo.php'}) async{
 //    var url =
 //        'https://witsinnovativeskyline.000webhostapp.com/ReadAssignment.php';
@@ -92,7 +93,7 @@ class AssignmentController {
           String studNo=Response[i]["StudentNo"];
           Student aStudent=new Student();
           //print("URL2: "+url2);
-          aStudent = await studentController.fetchStudent(null, studNo,urlViewStudentStudNo: url2);
+          aStudent = await studentController.fetchStudent(null, studNo,httpClient,urlViewStudentStudNo: url2);
           sharedStudents.add(aStudent);
         }
         else if(Response[i]["StaffNo"]!=null){

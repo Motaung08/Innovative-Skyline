@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/main.dart';
@@ -228,8 +229,9 @@ class LoginPageState extends State<LoginPage> {
                 bool proceed = false;
                 if (_formKey.currentState.validate()) {
                   user.boards.clear();
+                  http.Client client=new http.Client();
                   proceed = await userController.login(
-                      _emailController.text, _passwordController.text);
+                      _emailController.text, _passwordController.text,client);
 //                  print("PROCEED: "+proceed.toString());
                   if (proceed == true) {
                     setState(() {
@@ -285,22 +287,22 @@ class LoginPageState extends State<LoginPage> {
               visible = true;
             });
             user.boards.clear();
+            http.Client client=new http.Client();
             proceed = await userController.login(
-                _emailController.text, _passwordController.text);
+                _emailController.text, _passwordController.text,client);
 
             if (proceed == true) {
               setState(() {
                 visible = false;
               });
               homePage = new HomePage();
-              http.Client client=new http.Client();
+//              http.Client client=new http.Client();
               await homePage.initializeDisplay(client);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (BuildContext context) => homePage),
               );
             } else {
-              //print("AAAHH");
               setState(() {
                 visible = false;
                 msg="Username or password incorrect";

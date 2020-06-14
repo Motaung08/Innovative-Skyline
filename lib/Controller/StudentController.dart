@@ -16,7 +16,7 @@ class StudentController {
   The purpose of this method is to retrieve the attributes of a specified
   Student instance in the database based on a passed in email address.
    */
-  Future<Student> fetchStudent(String email, String studNo,
+  Future<Student> fetchStudent(String email, String studNo, http.Client client,
       {urlViewStudentProfile = 'http://10.100.15.38/viewStudentProfile.php',
       urlViewStudentStudNo =
           "http://10.100.15.38/viewStudentStudNo.php"}) async {
@@ -24,35 +24,44 @@ class StudentController {
     Student aStudent = new Student();
     String url;
     var data;
-    if (email != null) {
-      email = email.toLowerCase();
-      url = urlViewStudentProfile;
-      data = {
-        "Email": email,
-      };
-    } else if (studNo != null) {
-      studNo = studNo.toLowerCase();
-      url = urlViewStudentStudNo;
-      data = {"StudNo": studNo};
+    try{
+      if (email != null) {
+        //print("Email not null ya");
+        email = email.toLowerCase();
+        url = urlViewStudentProfile;
+        data = {
+          "Email": email,
+        };
+      }
+      else if (studNo != null) {
+        studNo = studNo.toLowerCase();
+        url = urlViewStudentStudNo;
+        data = {"StudNo": studNo};
+      }
+    }catch(Err){
+
     }
+
 //
-    final response = await http.post(url, body: data);
-    //print(" ===========================   response "+response.body);
-    var datauser = json.decode(response.body);
+    final response = await client.post(url, body: data);
 
-    if (datauser == null) {
-      msg = " Error :( No such student found. ";
-    } else {
-      msg = "Found student, assigning attributes ...";
+    if(response!=null){
+      var datauser = json.decode(response.body);
 
-      aStudent.fName = datauser[0]['Student_FirstName'];
-      aStudent.lName = datauser[0]['Student_LastName'];
-      aStudent.studentNo = datauser[0]['StudentNo'];
-      aStudent.degreeID = int.parse(datauser[0]['Degree_ID']);
-      aStudent.registrationDate =
-          DateTime.parse(datauser[0]['Student_RegistrationDate']);
-      aStudent.email = datauser[0]['Student_Email'];
-      aStudent.studentTypeID = int.parse(datauser[0]['StudentTypeID']);
+      if (datauser == null) {
+        msg = " Error :( No such student found. ";
+      } else {
+        msg = "Found student, assigning attributes ...";
+
+        aStudent.fName = datauser[0]['Student_FirstName'];
+        aStudent.lName = datauser[0]['Student_LastName'];
+        aStudent.studentNo = datauser[0]['StudentNo'];
+        aStudent.degreeID = int.parse(datauser[0]['Degree_ID']);
+        aStudent.registrationDate =
+            DateTime.parse(datauser[0]['Student_RegistrationDate']);
+        aStudent.email = datauser[0]['Student_Email'];
+        aStudent.studentTypeID = int.parse(datauser[0]['StudentTypeID']);
+      }
     }
     print(msg);
     return aStudent;
@@ -62,41 +71,36 @@ class StudentController {
   The purpose of this method is to assign the student attributes of a user
   and subsequently load the project boards which are associated.
    */
-  Future setStudentUser(String email,
+  Future setStudentUser(String email, http.Client httpClient,
       {urlViewStudentProfile = 'http://10.100.15.38/viewStudentProfile.php',
       urlReadBoards: 'http://10.100.15.38/ReadBoards.php',
       urlViewStudentStudNo =
           "http://10.100.15.38/viewStudentStudNo.php"}) async {
-    student = await fetchStudent(email, null,
+    student = await fetchStudent(email, null, httpClient,
         urlViewStudentProfile: urlViewStudentProfile,
         urlViewStudentStudNo: urlViewStudentStudNo);
 
     personNo = student.studentNo;
+
     user.boards.clear();
     Project_BoardController projectBoardController =
         new Project_BoardController();
-    http.Client client=new http.Client();
     List<List<Project_Board>> allBoards =
         await projectBoardController.ReadBoards(
-            user.userTypeID, student.studentNo,client,
+            user.userTypeID, student.studentNo,httpClient,
             url: urlReadBoards);
 
-    print('ay : ' + (allBoards.isEmpty).toString());
+//    print("ALL BOARDS LENGTH: "+allBoards.length.toString());
     if (allBoards.isEmpty == false) {
-      if (allBoards[0] == null) {
-        user.boards = null;
-      } else {
+//      print("HERERERERE");
+      if (allBoards[0] != null) {
         user.boards = allBoards[0];
       }
-      if (allBoards[1] == null) {
-        user.archivedBoards = null;
-      } else {
+      if (allBoards[1] != null) {
         user.archivedBoards = allBoards[1];
       }
-    } else {
-      user.boards = null;
-      user.archivedBoards = null;
     }
+//    print("IN Student Controller, boards length: "+user.boards.length.toString());
   }
 
   /*

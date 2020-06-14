@@ -63,7 +63,8 @@ void main(){
     });
 
     test('login',() async {
-      expect(await studUserCtr.login('1713445@students.wits.ac.za', 'Meghan',
+      http.Client client=http.Client();
+      expect(await studUserCtr.login('1713445@students.wits.ac.za', 'Meghan',client,
         urlLogin: "https://lamp.ms.wits.ac.za/~s1611821/login.php",
         urlGetTaskStatus: "https://lamp.ms.wits.ac.za/~s1611821/getTaskStatuses.php",
         urlGetAssignmentTypes: "https://lamp.ms.wits.ac.za/~s1611821/getAssignmentTypes.php",
@@ -162,7 +163,7 @@ void main(){
       expect(userController.ReadUsers(url:"https://lamp.ms.wits.ac.za/~s1611821/readUsers.php"), isNotNull);
 
       //userLogin with invalid username
-      expect(await userController.login('1234@students.wits.ac.za', '123456',urlLogin:"https://lamp.ms.wits.ac.za/~s1611821/login.php"),false);
+      expect(await userController.login('1234@students.wits.ac.za', '123456',client,urlLogin:"https://lamp.ms.wits.ac.za/~s1611821/login.php"),false);
 
 //      //userDeRegistration
 //      expect(await userController.userDeRegistration(testUser,url:"https://lamp.ms.wits.ac.za/~s1611821/deregister_user.php"),

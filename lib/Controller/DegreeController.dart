@@ -10,14 +10,8 @@ The purpose of this method is to fetch the different types of degrees stored.
 This is so that upon student app registration, the student may select from a
 pre-populated list of degree types such as Honours, masters by coursework, etc.
  */
-    Future getDegrees({url='http://10.100.15.38/getDegreeTypes.php'}) async{
-    final response = await http.post(url);
-//    final response = await http.post(
-//        //"https://witsinnovativeskyline.000webhostapp.com/getDegreeTypes.php"
-//      "http://10.100.15.38/getDegreeTypes.php"
-//      );
-
-    //print('Assigning title for '+student.studentTypeID.toString());
+    Future getDegrees(http.Client client,{url='http://10.100.15.38/getDegreeTypes.php'}) async{
+    final response = await client.post(url);
 
     try {
       var result = json.decode(response.body);

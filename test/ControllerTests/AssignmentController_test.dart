@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:postgrad_tracker/Controller/AssignmentController.dart';
 import 'package:postgrad_tracker/Model/Assignment.dart';
+import 'package:http/http.dart' as http;
 
 
 class MockAssignmentController extends Mock implements AssignmentController{
@@ -36,7 +37,8 @@ void main() {
     });
     test("function call",() async {
       AssignmentController assignmentController=new AssignmentController();
-      List testOut = await assignmentController.ReadBoardAssignments(103,url:'https://lamp.ms.wits.ac.za/~s1611821/ReadBoardAssignments.php',
+      http.Client client=new http.Client();
+      List testOut = await assignmentController.ReadBoardAssignments(103,client,url:'https://lamp.ms.wits.ac.za/~s1611821/ReadBoardAssignments.php',
           url2: "https://lamp.ms.wits.ac.za/~s1611821/viewStudentStudNo.php",url3: "https://lamp.ms.wits.ac.za/~s1611821/viewSupStaffNo.php");
       expect(testOut,isNotEmpty);
     });

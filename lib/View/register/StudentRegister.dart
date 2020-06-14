@@ -10,15 +10,17 @@ import 'package:postgrad_tracker/Model/StudentType.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/Login.dart';
 import 'package:postgrad_tracker/main.dart';
+import 'package:http/http.dart' as http;
 
 
 import '../../main.dart';
 
 class StudentRegisterPage extends StatefulWidget {
   Future initialize() async {
-    print('initializing student types and degrees.');
-    await studentTypeController.getTypes();
-    await degreeController.getDegrees();
+//    print('initializing student types and degrees.');
+  http.Client client=new http.Client();
+    await studentTypeController.getTypes(client);
+    await degreeController.getDegrees(client);
     print('Student type ' + studentTypes.length.toString());
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:postgrad_tracker/Controller/StudentTypeController.dart';
 import 'package:postgrad_tracker/main.dart';
+import 'package:http/http.dart' as http;
 
 
 
@@ -21,7 +22,8 @@ void main() {
   test(
       'Student Type Controller Test', () async {
     StudentTypeController studentTypeController=new StudentTypeController();
-    await studentTypeController.getTypes(url: "https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php");
+    http.Client httpClient=new http.Client();
+    await studentTypeController.getTypes(httpClient,url: "https://lamp.ms.wits.ac.za/~s1611821/getStudentTypes.php");
     expect(studentTypes.length, greaterThan(0));
   });
 

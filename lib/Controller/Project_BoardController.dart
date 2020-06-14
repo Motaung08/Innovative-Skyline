@@ -57,10 +57,11 @@ class Project_BoardController {
   associated with the specified user.
    */
   // ignore: non_constant_identifier_names
-  Future<List<List<Project_Board>>> ReadBoards(int UserTypeID, String personNo,http.Client client,{url='http://10.100.15.38/ReadBoards.php'}) async{
+  Future<List<List<Project_Board>>> ReadBoards(int UserTypeID, String personNo,http.Client httpClient,{url='http://10.100.15.38/ReadBoards.php'}) async{
     List<Project_Board> boards=List();
     List<Project_Board> archivedBoards=List();
     List<List<Project_Board>> allBoards=new List<List<Project_Board>>();
+    print("Read boards is being called. with UsertypeID "+UserTypeID.toString()+" and person "+personNo+" and client "+httpClient.toString());
 
         var data={
           'UserTypeID' : UserTypeID.toString(),
@@ -69,11 +70,13 @@ class Project_BoardController {
         };
 
         // Starting Web API Call.
-        var response = await client.post(url, body: data);
-       // print('User: '+UserTypeID.toString()+", Stud no: "+personNo.toLowerCase()+", StaffNo: "+personNo.toLowerCase()+" Yields: "+response.body);
+        var response = await httpClient.post(url, body: data);
+//        print('User: '+UserTypeID.toString()+", Stud no: "+personNo.toLowerCase()+", StaffNo: "+personNo.toLowerCase()+" Yields: "+response.body);
         // Getting Server response into variable.
-    print("Your boards response is: "+response.body);
-    if(response.statusCode==200){
+    print("IN PROJECT BOARD CONTROLLER: "+response.toString());
+
+    if(response!=null){
+      print("Yo RESP NOT NULL");
       // ignore: non_constant_identifier_names
 
       var Response = jsonDecode(response.body);

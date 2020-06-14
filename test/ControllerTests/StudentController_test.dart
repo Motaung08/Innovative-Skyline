@@ -4,6 +4,8 @@ import 'package:postgrad_tracker/Controller/UserController.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/main.dart';
+import 'package:http/http.dart' as http;
+
 
 void main() {
   group('Student tests', () {
@@ -40,9 +42,10 @@ void main() {
       testStudent.email = '1713445@students.wits.ac.za';
       //testStudent.studentNo='1713445';
       StudentController studentController = new StudentController();
+      http.Client client=new http.Client();
       expect(
           await studentController.fetchStudent(
-              testStudent.email, null,
+              testStudent.email, null, client,
               urlViewStudentProfile:
                   'https://lamp.ms.wits.ac.za/~s1611821/viewStudentProfile.php',
               urlViewStudentStudNo:
@@ -54,7 +57,8 @@ void main() {
     test('setStudentUser', () async {
       testStudent.email='1713445@students.wits.ac.za';
       StudentController studentController = new StudentController();
-      await studentController.setStudentUser(testStudent.email,
+      http.Client client=new http.Client();
+      await studentController.setStudentUser(testStudent.email, client,
           urlViewStudentProfile:
               "https://lamp.ms.wits.ac.za/~s1611821/viewStudentProfile.php",
           urlReadBoards: "https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php");

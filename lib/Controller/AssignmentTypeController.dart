@@ -8,16 +8,10 @@ class AssignmentTypeController {
   This method should retrieve the different assignment types so that
   upon sharing of a board, a user may select from a pre-populated list.
    */
-  Future getTypes({url='http://10.100.15.38/getAssignmentTypes.php'}) async{
-    //print('I am called');
-//    final response = await http.post("http://146.141.21.17/getStudentTypes.php");
-    final response = await http.post(
-       // "https://witsinnovativeskyline.000webhostapp.com/getAssignmentTypes.php"
-      url
-    );
+  Future getTypes(http.Client client,{url='http://10.100.15.38/getAssignmentTypes.php'}) async{
 
-    //print('Assigning title for '+student.studentTypeID.toString());
-
+    final response = await client.post(url);
+    print(response.body);
     var result = json.decode(response.body);
     assignmentTypes.clear();
     for (int i=0; i<result.length;i++){
