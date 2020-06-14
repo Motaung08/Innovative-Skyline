@@ -119,7 +119,7 @@ void main() {
      await tester.pump();
 
      final client = MockClient();
-     resetPasswordView.resetClient=new MockClient();
+     resetClient=new MockClient();
 
      var data =
      {
@@ -132,7 +132,7 @@ void main() {
      resetPasswordView.email='default@students.wits.ac.za'.toLowerCase();
      resetPasswordView.password='123456';
 
-     resetPasswordView.resetClient=client;
+     resetClient=client;
 //     userController.ResetPassword('Default@students.wits.ac.za'.toLowerCase(), '123456', new MockClient());
 
 //     await tester.tap(resetButton);

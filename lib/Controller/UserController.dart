@@ -127,6 +127,7 @@ class UserController{
         await studentTypeController.getTypes(client,url: urlGetStudTypes);
         await degreeController.getDegrees(client,url: urlGetDegreeTypes);
 
+
         if (user.userTypeID==1){
 
           await studentController.setStudentUser(user.email,client,urlViewStudentProfile: urlViewStudentProfile,urlReadBoards:urlReadBoards,
@@ -246,17 +247,16 @@ class UserController{
       'Email': email.toLowerCase(),
       'Password': password
     };
-    print("Our doota is: "+data.toString());
-    print("Our client is: "+client.toString());
+
     /*The script below should take in the email and check if there exists a user
     * associated with the given email address. */
     final response = await client.post(
         url,
         body: json.encode(data) );
-    print("http response: "+data.toString());
+
 
     var result = json.decode(response.body);
-//    print('000000000000000000000000000000000    ');
+
     print(result);
 
     if (result=="No user found.") {

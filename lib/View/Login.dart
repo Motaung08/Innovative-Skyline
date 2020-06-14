@@ -7,10 +7,11 @@ import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
 
-
+http.Client LoginClient=new http.Client();
 
 class LoginPage extends StatefulWidget {
-
+  bool isHidden = true;
+  bool visible = false;
   @override
   LoginPageState createState() => LoginPageState();
 }
@@ -24,18 +25,18 @@ class LoginPageState extends State<LoginPage> {
 
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
-  bool _isHidden = true;
+
 
   void toggleVisibility() {
     setState(() {
-      _isHidden = !_isHidden;
+      widget.isHidden = !widget.isHidden;
     });
   }
 
 
 
 
-  bool visible = false;
+
   @override
   Widget build(BuildContext context) {
 
@@ -53,8 +54,9 @@ class LoginPageState extends State<LoginPage> {
           //flex:1,
           child:   new Container(
             alignment: Alignment.bottomLeft,
-            key: Key("ForgotPasswordInput"),
+
             child: FlatButton(
+              key: Key("ForgotPasswordInput"),
               onPressed: () {
                 Navigator.pushNamed(context, '/ResetPassword');
               },
@@ -75,8 +77,9 @@ class LoginPageState extends State<LoginPage> {
     :
     new Container(
       alignment: Alignment.bottomLeft,
-      key: Key("ForgotPasswordInput"),
+
       child: FlatButton(
+        key: Key("ForgotPasswordInput"),
         onPressed: () {
           Navigator.pushNamed(context, '/ResetPassword');
         },
@@ -99,6 +102,7 @@ class LoginPageState extends State<LoginPage> {
         Expanded(
           //flex:1,
           child:  new TextFormField(
+            key: Key('emailField'),
             controller: _emailController,
             obscureText: false,
 
@@ -128,7 +132,7 @@ class LoginPageState extends State<LoginPage> {
     TextFormField(
       controller: _emailController,
       obscureText: false,
-
+      key: Key('emailField'),
       validator: (value) {
         if (value.isEmpty) {
           return 'Please enter an email address.';
@@ -154,8 +158,9 @@ class LoginPageState extends State<LoginPage> {
         Expanded(
           //flex:1,
           child:  new TextFormField(
+            key: Key('passwordField'),
             controller: _passwordController,
-            obscureText: _isHidden,
+            obscureText: widget.isHidden,
             validator: (val) => val.isEmpty ? 'Password cannot be empty.' : null,
             style: style,
             decoration: InputDecoration(
@@ -166,8 +171,9 @@ class LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(32.0),
                 ),
                 suffixIcon: IconButton(
+                  key: Key('toggle'),
                   icon:
-                  _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+                  widget.isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
                   onPressed: toggleVisibility,
                   focusColor: Color(0xff009999),
                 )),
@@ -183,8 +189,9 @@ class LoginPageState extends State<LoginPage> {
     )
     :
     new TextFormField(
+      key: Key('passwordField'),
       controller: _passwordController,
-      obscureText: _isHidden,
+      obscureText: widget.isHidden,
       validator: (val) => val.isEmpty ? 'Password cannot be empty.' : null,
       style: style,
       decoration: InputDecoration(
@@ -195,8 +202,9 @@ class LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(32.0),
           ),
           suffixIcon: IconButton(
+            key: Key('toggle'),
             icon:
-            _isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
+            widget.isHidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
             onPressed: toggleVisibility,
             focusColor: Color(0xff009999),
           )),
@@ -220,11 +228,12 @@ class LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(30.0),
             color: Color(0xff009999),
             child: MaterialButton(
+              key: Key('loginButton'),
               minWidth: MediaQuery.of(context).size.width,
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               onPressed: () async {
                 setState(() {
-                  visible = true;
+                  widget.visible = true;
                 });
                 bool proceed = false;
                 if (_formKey.currentState.validate()) {
@@ -235,7 +244,7 @@ class LoginPageState extends State<LoginPage> {
 //                  print("PROCEED: "+proceed.toString());
                   if (proceed == true) {
                     setState(() {
-                      visible = false;
+                      widget.visible = false;
                     });
                     homePage = new HomePage();
                     http.Client client=new http.Client();
@@ -246,7 +255,7 @@ class LoginPageState extends State<LoginPage> {
                     );
                   } else {
                     setState(() {
-                      visible=false;
+                      widget.visible=false;
                       msg="Username or password incorrect";
 
                     });
@@ -255,7 +264,6 @@ class LoginPageState extends State<LoginPage> {
                   setState(() {});
                 }
               },
-              key: Key('LoginInput'),
               child: Text("Login",
                   textAlign: TextAlign.center,
                   style: style.copyWith(
@@ -278,40 +286,41 @@ class LoginPageState extends State<LoginPage> {
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
       child: MaterialButton(
+        key: Key('loginButton'),
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
           bool proceed = false;
           if (_formKey.currentState.validate()) {
             setState(() {
-              visible = true;
+              widget.visible = true;
             });
             user.boards.clear();
-            http.Client client=new http.Client();
+//
             proceed = await userController.login(
-                _emailController.text, _passwordController.text,client);
+                _emailController.text, _passwordController.text,LoginClient);
 
             if (proceed == true) {
               setState(() {
-                visible = false;
+                widget.visible = false;
               });
               homePage = new HomePage();
 //              http.Client client=new http.Client();
-              await homePage.initializeDisplay(client);
+              await homePage.initializeDisplay(LoginClient);
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (BuildContext context) => homePage),
               );
             } else {
               setState(() {
-                visible = false;
+                widget.visible = false;
                 msg="Username or password incorrect";
               });
             }
           }
 
         },
-        key: Key('LoginInput'),
+
         child: Text("Login",
             textAlign: TextAlign.center,
             style: style.copyWith(
@@ -338,6 +347,7 @@ class LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(30.0),
             color: Color(0xff009999),
             child: MaterialButton(
+              key: Key('registerButton'),
               minWidth: MediaQuery.of(context).size.width,
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               onPressed: () {
@@ -346,7 +356,6 @@ class LoginPageState extends State<LoginPage> {
                   MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
                 );
               },
-              key: Key('RegisterBttnInput'),
               child: Text("Register",
                   textAlign: TextAlign.center,
                   style: style.copyWith(
@@ -368,6 +377,7 @@ class LoginPageState extends State<LoginPage> {
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
       child: MaterialButton(
+        key: Key('registerButton'),
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
@@ -376,7 +386,7 @@ class LoginPageState extends State<LoginPage> {
             MaterialPageRoute(builder: (context) => StudentSupChoicePage()),
           );
         },
-        key: Key('RegisterBttnInput'),
+//        key: Key('RegisterBttnInput'),
         child: Text("Register",
             textAlign: TextAlign.center,
             style: style.copyWith(
@@ -398,6 +408,7 @@ class LoginPageState extends State<LoginPage> {
           Expanded(
             //flex:1,
             child:  Container(
+              key: Key('divider'),
               margin: EdgeInsets.symmetric(vertical: 10),
               child: Row(
                 children: <Widget>[
@@ -437,6 +448,7 @@ class LoginPageState extends State<LoginPage> {
         ],
       ):
       Container(
+        key: Key('divider'),
         margin: EdgeInsets.symmetric(vertical: 10),
         child: Row(
           children: <Widget>[
@@ -469,6 +481,7 @@ class LoginPageState extends State<LoginPage> {
     }
 
     return Scaffold(
+      key: Key('Scaffold'),
       body: Center(
           child: Container(
             alignment: Alignment.center,
@@ -509,7 +522,7 @@ class LoginPageState extends State<LoginPage> {
 //                    height: 15.0,
 //                  ),
                       Visibility(
-                          visible: visible,
+                          visible: widget.visible,
                           child: Container(
                               margin: EdgeInsets.only(bottom: 30, top: 30),
                               child: CircularProgressIndicator())),

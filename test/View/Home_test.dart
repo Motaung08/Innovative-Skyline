@@ -72,7 +72,7 @@ void main() {
       final plusButton = find.byKey(Key('plusButton'));
       expect(plusButton, findsOneWidget);
 
-      final homeView = find.byKey(testHomePage.scaffoldKey);
+      final homeView = find.byKey(Key('Scaffold'));
       expect(homeView, findsOneWidget);
 
       var data = {

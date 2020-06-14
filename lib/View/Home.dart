@@ -29,7 +29,7 @@ class HomePage extends StatefulWidget {
   bool isCreateOpen = false;
   DateTime startDate;
   DateTime endDate;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+//  final scaffoldKey = GlobalKey<ScaffoldState>();
   Future<void> initialize(http.Client client) async {
     Project_BoardController projectBoardController =
         new Project_BoardController();
@@ -320,18 +320,28 @@ class _MyHomePageState extends State<HomePage> {
                           descriptionController.text;
                       projectBoard.Project_StartDate = widget.startDate;
                       projectBoard.Project_EndDate = widget.endDate;
-//                      http.Client client=new http.Client();
-                      await projectBoardController.createBoard(
-                          projectBoard, user.userTypeID, personNo,createClient);
-                      //http.Client client=new http.Client();
-                      List<List<Project_Board>> allBoards =
-                          await projectBoardController.ReadBoards(
-                              user.userTypeID, personNo,createClient);
-                      if (allBoards.isEmpty == false) {
 
+                      String createdYet = user.userTypeID==1? await projectBoardController.createBoard(
+                          projectBoard, user.userTypeID, student.studentNo,createClient)
+                      :
+                      await projectBoardController.createBoard(
+                          projectBoard, user.userTypeID, supervisor.staffNo,createClient);
+                      List<List<Project_Board>> allBoards = user.userTypeID==1?
+                      await projectBoardController.ReadBoards(
+                              user.userTypeID, student.studentNo,createClient)
+                      :
+                      await projectBoardController.ReadBoards(
+                          user.userTypeID, supervisor.staffNo,createClient);
+//                      print("I am ere ........*****");
+
+                      if (allBoards.isEmpty == false) {
+//                        print("I am NOW ere ........*****");
+//                        print("I am NOW ere ........*****");
+                      print(allBoards[0]);
                         if (allBoards[0] == null) {
                           user.boards = null;
                         } else {
+                          print("SETTING BOARDS........***** ");
                           user.boards = allBoards[0];
                         }
                         if (allBoards[1] == null) {
@@ -483,7 +493,7 @@ if(user.boards==null){
     }
 
     return Scaffold(
-      key: widget.scaffoldKey,
+      key: Key('Scaffold'),
       appBar: AppBar(
         title: Text("Innovative Skyline"),
         backgroundColor: Color(0xff009999),
@@ -590,7 +600,7 @@ class DynamicWidget extends StatefulWidget {
   DynamicWidget({Key key, @required this.aboard}) : super(key: key);
 
   popLists() async {
-    aboard.boardLists = await listController.ReadLists(aboard.ProjectID,client);
+    aboard.boardLists = await listController.ReadLists(aboard.ProjectID,createClient);
   }
 
   @override
@@ -628,6 +638,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
 
   @override
   Widget build(BuildContext context) {
+
     determineAccess();
     //widget.popLists();
     Project_BoardController projectBoardController =
@@ -717,7 +728,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                           }
                         }
 
-                        await projectBoardController.deleteBoard(widget.aboard.ProjectID);
+                        await projectBoardController.deleteBoard(widget.aboard.ProjectID,createClient);
                         listDynamic.removeAt(boardIndex);
                         http.Client client=new http.Client();
                         await homePage.initializeDisplay(client);
