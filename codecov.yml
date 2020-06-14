@@ -1,0 +1,3 @@
+ignore:
+  - 'lib/View/Board.dart'
+  - 'lib/View/ArchivedBoards.dart'

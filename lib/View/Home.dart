@@ -69,6 +69,22 @@ class HomePage extends StatefulWidget {
     else{
       _isDeleted=true;
     }
+
+    Project_Board testBoard = Project_Board();
+    testBoard.Project_Title="Last minutes";
+    testBoard.Project_Description='Things will workout!!!';
+    testBoard.Project_StartDate= DateTime.now();
+    testBoard.Project_EndDate= DateTime.now();
+
+//    Project_BoardController tester = Project_BoardController();
+////    await tester.createBoard(testBoard, user.userTypeID, '', client);
+//
+//      await t
+////    testBoard.ProjectID=566;
+//    List<Project_Board> testL= List<Project_Board>();
+//    testL.add(testBoard);
+
+
   }
 
   @override
