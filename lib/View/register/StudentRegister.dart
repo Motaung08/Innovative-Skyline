@@ -33,55 +33,55 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
   Future initializeRegister() async {
     await widget.initialize();
     // ignore: missing_return
-    if(degrees.length==0){
-      test=true;
-      DegreeType degree=DegreeType();
-      degree.Degree_Type="Honours";
-      degree.DegreeID=1;
-      degrees.add(degree);
-      StudentType type=StudentType();
-      type.Student_Type="Full time";
-      type.StudentTypeID=1;
-      studentTypes.add(type);
-
-      DegreeType testDropdown = DegreeType();
-      testDropdown.Degree_Type='Honours';
-      testDropdown.DegreeID=1;
-
-      List<DegreeType>L=List<DegreeType>();
-      L.add(testDropdown);
-      buildDropdownMenuItems(L);
-      onChangeDropdownItem(testDropdown);
-      onChangeStudTypeDropdownItem(type);
-
-      StudentType testStudent = StudentType();
-      testStudent.StudentTypeID=1;
-      testStudent.Student_Type='Full-time';
-      List<StudentType>S=List<StudentType>();
-      S.add(testStudent);
-
-      buildDropdownStudentTypeMenuItems(S);
-      toggleVisibility();
-      toggleVisibilityConf();
-      RegistrationDateController.text="2020-01-09";
-
-      if(test!=false) {
-        await studentRegistration();
-        setState(() {
-          visible =false;
-        });
-      }
-
-
-      if(selectDate(context)!=null){
-        print(_date.toString());
-        setState(() {});
-        await selectDate(context);
-      }
-
-
-
-    }
+//    if(degrees.length==0){
+//      test=true;
+//      DegreeType degree=DegreeType();
+//      degree.Degree_Type="Honours";
+//      degree.DegreeID=1;
+//      degrees.add(degree);
+//      StudentType type=StudentType();
+//      type.Student_Type="Full time";
+//      type.StudentTypeID=1;
+//      studentTypes.add(type);
+//
+//      DegreeType testDropdown = DegreeType();
+//      testDropdown.Degree_Type='Honours';
+//      testDropdown.DegreeID=1;
+//
+//      List<DegreeType>L=List<DegreeType>();
+//      L.add(testDropdown);
+//      buildDropdownMenuItems(L);
+//      onChangeDropdownItem(testDropdown);
+//      onChangeStudTypeDropdownItem(type);
+//
+//      StudentType testStudent = StudentType();
+//      testStudent.StudentTypeID=1;
+//      testStudent.Student_Type='Full-time';
+//      List<StudentType>S=List<StudentType>();
+//      S.add(testStudent);
+//
+//      buildDropdownStudentTypeMenuItems(S);
+//      toggleVisibility();
+//      toggleVisibilityConf();
+//      RegistrationDateController.text="2020-01-09";
+//
+//      if(test!=false) {
+//        await studentRegistration();
+//        setState(() {
+//          visible =false;
+//        });
+//      }
+//
+//
+//      if(selectDate(context)!=null){
+//        print(_date.toString());
+//        setState(() {});
+//        await selectDate(context);
+//      }
+//
+//
+//
+//    }
     //widget.initialize();
     _dropdownMenuItems = buildDropdownMenuItems(degrees);
     _selectedDegree = degrees[0];
@@ -234,9 +234,9 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     });
 
     User userA = new User();
-    userA.register = false;
+
     Student studentA = new Student();
-    studentA.register = false;
+
     // Getting value from Controller
 
     userA.email = emailController.text;
@@ -261,15 +261,8 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     studentA.studentTypeID = _selectedStudType.StudentTypeID;
 
 
-    var registered;
+    String registered=await studentController.studentRegistration(studentA, userA);
 
-    if(!test) {
-      print("here");
-      await studentController.studentRegistration(studentA, userA);
-    }
-    else{
-      registered="";
-    }
     print("REGISTER OUTPUT: " + registered);
     String message = "";
     //Empty string indicates no errors -> success
@@ -300,7 +293,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
               onPressed: () {
                 //Navigator.of(context).pop();
                 if (student.register == true) {
-                  Navigator.pushNamed(context, '/Home');
+                  Navigator.pushNamed(context, '/Login');
                 } else {
                   setState(() {
                     visible = false;
