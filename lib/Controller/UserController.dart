@@ -240,7 +240,7 @@ class UserController{
   // ignore: non_constant_identifier_names
   String ResetString="";
   // ignore: non_constant_identifier_names
-  Future<String> ResetPassword(String email, String password,http.Client client,{url='http://10.100.15.38/ResetPassword.php'}) async{
+  Future<String> ResetPassword(String email, String password,http.Client ctrlResetClient,{url='http://10.100.15.38/ResetPassword.php'}) async{
 
     var data =
     {
@@ -250,23 +250,26 @@ class UserController{
 
     /*The script below should take in the email and check if there exists a user
     * associated with the given email address. */
-    final response = await client.post(
+    final response = await ctrlResetClient.post(
         url,
         body: json.encode(data) );
 
+    print("In reset password, the response is : "+response.body.toString());
+    if(response!=null){
+//      var result = json.decode(response.body);
+      var result = response.body;
 
-    var result = json.decode(response.body);
+      print(result);
 
-    print(result);
-
-    if (result=="No user found.") {
+      if (result=="No user found.") {
 
         ResetString = "No user found :(";
 
-    } else if (result=="Password updated successfully") {
+      } else if (result=="Password updated successfully") {
 
-      ResetString="Successfully updated password!";
+        ResetString="Successfully updated password!";
 
+      }
     }
     print(ResetString);
     return ResetString;

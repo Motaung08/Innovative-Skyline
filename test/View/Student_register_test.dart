@@ -18,18 +18,18 @@ class Post {
 
 class MockClient extends Mock implements http.Client {}
 
-Future<Post> fetchPost(http.Client client) async {
-  final response =
-  await client.get('https://lamp.ms.wits.ac.za/~s1611821/register_student.php');
-
-  if (response.statusCode == 200) {
-    // If the call to the server was successful, parse the JSON.
-    return Post.fromJson(json.decode(response.body));
-  } else {
-    // If that call was not successful, throw an error.
-    throw Exception('Failed to load post');
-  }
-}
+//Future<Post> fetchPost(http.Client client) async {
+//  final response =
+//  await client.get('https://lamp.ms.wits.ac.za/~s1611821/register_student.php');
+//
+//  if (response.statusCode == 200) {
+//    // If the call to the server was successful, parse the JSON.
+//    return Post.fromJson(json.decode(response.body));
+//  } else {
+//    // If that call was not successful, throw an error.
+//    throw Exception('Failed to load post');
+//  }
+//}
 
 Widget makeWidgetTestable(Widget widget){
   return MaterialApp(
@@ -41,18 +41,18 @@ void main(){
 
   group('Server connection', () {
 
-    testWidgets('All input feild and button widgets should be on screen', (
-        WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(StudentRegisterPage()));
-
-      final client = MockClient();
-
-      when(client.get(
-          'https://lamp.ms.wits.ac.za/~s1611821/register_student.php'))
-          .thenAnswer((_) async => http.Response('Not Found', 404));
-
-      expect(fetchPost(client), throwsException);
-    });
+//    testWidgets('All input feild and button widgets should be on screen', (
+//        WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(StudentRegisterPage()));
+//
+//      final client = MockClient();
+//
+//      when(client.get(
+//          'https://lamp.ms.wits.ac.za/~s1611821/register_student.php'))
+//          .thenAnswer((_) async => http.Response('Not Found', 404));
+//
+//      expect(fetchPost(client), throwsException);
+//    });
 
   });
 
