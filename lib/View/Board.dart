@@ -26,6 +26,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 
 http.Client boardPageHttpClient = new http.Client();
+
 bool isArch(int ProjectID){
   if(user.archivedBoards!=null){
     if(user.archivedBoards.where((element) => element.ProjectID==ProjectID).isNotEmpty){

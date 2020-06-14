@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Board.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Board.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/main_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/main_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,21 +70,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flutter Test.tests in Student_register_test.dart">
+  <component name="RunManager" selected="Flutter Test.All pages should be accessed!!!">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
+    <configuration name="All main tests" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="All main tests" />
+      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="All pages should be accessed!!!" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="All pages should be accessed!!!" />
+      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
+      <method v="2" />
+    </configuration>
     <configuration name="tests in Student_register_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
       <option name="testFile" value="$PROJECT_DIR$/test/View/Student_register_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="tests in ViewSupProfile_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/View/ViewSupProfile_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="tests in main_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
       <method v="2" />
     </configuration>
     <configuration name="tests in profile_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
@@ -95,11 +99,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter Test.All pages should be accessed!!!" />
+        <item itemvalue="Flutter Test.All main tests" />
         <item itemvalue="Flutter Test.tests in Student_register_test.dart" />
         <item itemvalue="Flutter Test.tests in user_test.dart" />
         <item itemvalue="Flutter Test.tests in profile_test.dart" />
-        <item itemvalue="Flutter Test.tests in main_test.dart" />
-        <item itemvalue="Flutter Test.tests in ViewSupProfile_test.dart" />
       </list>
     </recent_temporary>
   </component>
