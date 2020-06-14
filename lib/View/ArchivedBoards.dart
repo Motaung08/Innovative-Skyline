@@ -19,7 +19,7 @@ import 'package:http/http.dart' as http;
 
 final List<DynamicWidget> listArchDynamic = new List<DynamicWidget>();
 bool _isDeleted;
-http.Client client=new http.Client();
+http.Client archiveClient=new http.Client();
 class ArchivedBoards extends StatefulWidget {
   Future<void> initialize(http.Client client) async {
     Project_BoardController projectBoardController =
@@ -201,8 +201,8 @@ class _ArchivedBoardsPageState extends State<ArchivedBoards> {
                       color: Color(0xff009999), fontWeight: FontWeight.bold)),
               onTap: () async {
                 print("Active boards");
-                http.Client client = new http.Client();
-                await homePage.initializeDisplay(client);
+//                http.Client client = new http.Client();
+                await homePage.initializeDisplay(archiveClient);
                 setState(() {
                   Navigator.of(context).pop();
                   Navigator.push(
@@ -238,7 +238,7 @@ class DynamicWidget extends StatefulWidget {
   DynamicWidget({Key key, @required this.aboard}) : super(key: key);
 
   popLists() async {
-    aboard.boardLists = await listController.ReadLists(aboard.ProjectID,client);
+    aboard.boardLists = await listController.ReadLists(aboard.ProjectID,archiveClient);
   }
 
   @override
@@ -323,7 +323,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                       }
                     }
                     await projectBoardController
-                        .deleteBoard(widget.aboard.ProjectID);
+                        .deleteBoard(widget.aboard.ProjectID,archiveClient);
 
                     listArchDynamic.removeAt(boardIndex);
                     http.Client client = new http.Client();
@@ -372,7 +372,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                 Board boardPage = new Board();
                 boardPage.proj_board = widget.aboard;
 
-                await boardPage.populateListDisplay(widget.aboard.ProjectID,client);
+                await boardPage.populateListDisplay(widget.aboard.ProjectID,archiveClient);
 
                 Navigator.push(
                   context,
@@ -409,7 +409,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                           proj_board: widget.aboard,
                         );
                         await boardPage
-                            .populateListDisplay(widget.aboard.ProjectID,client);
+                            .populateListDisplay(widget.aboard.ProjectID,archiveClient);
 
                         Navigator.push(
                           context,

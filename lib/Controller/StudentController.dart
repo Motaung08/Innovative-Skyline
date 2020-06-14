@@ -44,7 +44,7 @@ class StudentController {
 
 //
     final response = await client.post(url, body: data);
-
+//    print("FETCH STUDENT RESPONSE: "+response.body);
     if(response!=null){
       var datauser = json.decode(response.body);
 
@@ -76,6 +76,7 @@ class StudentController {
       urlReadBoards: 'http://10.100.15.38/ReadBoards.php',
       urlViewStudentStudNo =
           "http://10.100.15.38/viewStudentStudNo.php"}) async {
+
     student = await fetchStudent(email, null, httpClient,
         urlViewStudentProfile: urlViewStudentProfile,
         urlViewStudentStudNo: urlViewStudentStudNo);
@@ -83,6 +84,7 @@ class StudentController {
     personNo = student.studentNo;
 
     user.boards.clear();
+
     Project_BoardController projectBoardController =
         new Project_BoardController();
     List<List<Project_Board>> allBoards =
@@ -90,7 +92,7 @@ class StudentController {
             user.userTypeID, student.studentNo,httpClient,
             url: urlReadBoards);
 
-//    print("ALL BOARDS LENGTH: "+allBoards.length.toString());
+    print("ALL BOARDS LENGTH: "+allBoards.length.toString());
     if (allBoards.isEmpty == false) {
 //      print("HERERERERE");
       if (allBoards[0] != null) {

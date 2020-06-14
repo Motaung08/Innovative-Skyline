@@ -70,8 +70,8 @@ group('CRUD Testing Student', (){
     data.ProjectID=testBoards.last.ProjectID;
     List arch=allBoards[1];
     Project_Board archCreated=arch.last;
-    expect(await projectController.deleteBoard(data.ProjectID,url:"https://lamp.ms.wits.ac.za/~s1611821/deleteBoard.php"), "Board DELETED!");
-    expect(await projectController.deleteBoard(archCreated.ProjectID,url:"https://lamp.ms.wits.ac.za/~s1611821/deleteBoard.php"), "Board DELETED!");
+    expect(await projectController.deleteBoard(data.ProjectID,client,url:"https://lamp.ms.wits.ac.za/~s1611821/deleteBoard.php"), "Board DELETED!");
+    expect(await projectController.deleteBoard(archCreated.ProjectID,client,url:"https://lamp.ms.wits.ac.za/~s1611821/deleteBoard.php"), "Board DELETED!");
   });
 
 });
@@ -97,7 +97,7 @@ group('CRUD Testing Supervisor', (){
     List allBoards=await projectController.ReadBoards(2,'A00',client, url:"https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php");
     testBoards=allBoards[0];
     data.ProjectID=testBoards.last.ProjectID;
-    expect(await projectController.deleteBoard(data.ProjectID,url:"https://lamp.ms.wits.ac.za/~s1611821/deleteBoard.php"), "Board DELETED!");
+    expect(await projectController.deleteBoard(data.ProjectID,client,url:"https://lamp.ms.wits.ac.za/~s1611821/deleteBoard.php"), "Board DELETED!");
   });
 
 });
@@ -126,7 +126,7 @@ group('CRUD Testing Student with dates', (){
     List allBoards=await projectController.ReadBoards(1,'0930',client, url:"https://lamp.ms.wits.ac.za/~s1611821/ReadBoards.php");;
     testBoards=allBoards[0];
     data.ProjectID=testBoards.last.ProjectID;
-    expect(await projectController.deleteBoard(data.ProjectID,url:"https://lamp.ms.wits.ac.za/~s1611821/deleteBoard.php"), "Board DELETED!");
+    expect(await projectController.deleteBoard(data.ProjectID,client,url:"https://lamp.ms.wits.ac.za/~s1611821/deleteBoard.php"), "Board DELETED!");
   });
 
 });

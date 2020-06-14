@@ -61,6 +61,7 @@ class Project_BoardController {
     List<Project_Board> boards=List();
     List<Project_Board> archivedBoards=List();
     List<List<Project_Board>> allBoards=new List<List<Project_Board>>();
+
     print("Read boards is being called. with UsertypeID "+UserTypeID.toString()+" and person "+personNo+" and client "+httpClient.toString());
 
         var data={
@@ -73,7 +74,7 @@ class Project_BoardController {
         var response = await httpClient.post(url, body: data);
 //        print('User: '+UserTypeID.toString()+", Stud no: "+personNo.toLowerCase()+", StaffNo: "+personNo.toLowerCase()+" Yields: "+response.body);
         // Getting Server response into variable.
-    print("IN PROJECT BOARD CONTROLLER: "+response.toString());
+
 
     if(response!=null){
       print("Yo RESP NOT NULL");
@@ -261,7 +262,7 @@ class Project_BoardController {
   database based on the ProjectID of the newBoard which is passed in.
    */
   // ignore: non_constant_identifier_names
-  Future<String> deleteBoard(int ProjectID,{url='http://10.100.15.38/deleteBoard.php'}) async{
+  Future<String> deleteBoard(int ProjectID,http.Client client,{url='http://10.100.15.38/deleteBoard.php'}) async{
 
     // SERVER API URL
 //    var url =
@@ -274,7 +275,7 @@ class Project_BoardController {
     };
 
     // Starting Web API Call.
-    var response = await http.post(url, body: json.encode(data));
+    var response = await client.post(url, body: json.encode(data));
     //print(response.body.toString());
     // Getting Server response into variable.
     var message = jsonDecode(response.body);

@@ -296,32 +296,32 @@ class _BoardState extends State<Board> {
     }
     else{
       print("**POP** active");
-//      if (user.boards[boardIndex].boardLists != null) {
-//        print("USER BOARDS LISTS: "+user.boards[boardIndex].boardLists.length.toString());
-//        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-//          double mainAxis = 0.5;
-//          DynamicList dynamicCreatedList =
-//          new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
-//
-//          listDynamic.add(dynamicCreatedList);
-//          if (user.boards[boardIndex].boardLists[i].listTasks.length == 0) {
-//            stiles.add(StaggeredTile.count(1, kIsWeb == true ? .8 : 1.5));
-//            //stiles.add(StaggeredTile.count(1, .8));
-//          } else {
-//            print("LENGTH: " +
-//                user.boards[boardIndex].boardLists[i].listTasks.length
-//                    .toString());
-//            for (int m = 0;
-//            m < user.boards[boardIndex].boardLists[i].listTasks.length;
-//            m++) {
-//              double addNum = kIsWeb == true ? .225 : .52;
-//              mainAxis += addNum;
-//            }
-//            //mainAxis+=user.boards[boardIndex].boardLists[i].listTasks.length;
-//            stiles.add(StaggeredTile.count(1, mainAxis));
-//          }
-//        }
-//      }
+      if (user.boards[boardIndex].boardLists != null) {
+        print("USER BOARDS LISTS: "+user.boards[boardIndex].boardLists.length.toString());
+        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+          double mainAxis = 0.5;
+          DynamicList dynamicCreatedList =
+          new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
+
+          listDynamic.add(dynamicCreatedList);
+          if (user.boards[boardIndex].boardLists[i].listTasks.length == 0) {
+            stiles.add(StaggeredTile.count(1, kIsWeb == true ? .8 : 1.5));
+            //stiles.add(StaggeredTile.count(1, .8));
+          } else {
+            print("LENGTH: " +
+                user.boards[boardIndex].boardLists[i].listTasks.length
+                    .toString());
+            for (int m = 0;
+            m < user.boards[boardIndex].boardLists[i].listTasks.length;
+            m++) {
+              double addNum = kIsWeb == true ? .225 : .52;
+              mainAxis += addNum;
+            }
+            //mainAxis+=user.boards[boardIndex].boardLists[i].listTasks.length;
+            stiles.add(StaggeredTile.count(1, mainAxis));
+          }
+        }
+      }
     }
 
   }
@@ -426,25 +426,27 @@ class _BoardState extends State<Board> {
                       new Project_BoardController();
 
                   //1713445@students.wits.ac.za
-                  await projectBoardController
-                      .deleteBoard(widget.proj_board.ProjectID);
+                  String del = await projectBoardController
+                      .deleteBoard(widget.proj_board.ProjectID,boardPageHttpClient);
+                  print("DELETED ? : "+del);
                   ArchivedBoards archivedBoards=new ArchivedBoards();
                   if(isArch(widget.proj_board.ProjectID)){
 //                    http.Client client=new http.Client();
-//                    await archivedBoards.initializeDisplay(widget.boardClient);
+                    await archivedBoards.initializeDisplay(boardPageHttpClient);
 
                     setState(() {
                       _isDeleted = true;
                     });
 
+//                    Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) => archivedBoards),
                     );
                   }else{
-                    http.Client client=new http.Client();
-                    await homePage.initializeDisplay(client);
+//                    http.Client client=new http.Client();
+                    await homePage.initializeDisplay(boardPageHttpClient);
 
                     setState(() {
                       _isDeleted = true;
@@ -739,24 +741,29 @@ class _BoardState extends State<Board> {
                       newList.List_Title = listTitle.text;
                       newList.ProjectID = widget.proj_board.ProjectID;
                       await listController.createList(newList);
-//                      user.boards[getBoardIndex(widget.proj_board.ProjectID)]
-//                          .boardLists =
-//                      await listController.ReadLists(
-//                          widget.proj_board.ProjectID,widget.boardClient);
 
-                      Navigator.pop(context);
-                    }else{
-                      ListCard newList = new ListCard();
-                      newList.List_Title = listTitle.text;
-                      newList.ProjectID = widget.proj_board.ProjectID;
-                      await listController.createList(newList);
-//                      user.archivedBoards[getBoardIndex(widget.proj_board.ProjectID)]
-//                          .boardLists =
-//                      await listController.ReadLists(
-//                          widget.proj_board.ProjectID,widget.boardClient);
+                      user.boards[getBoardIndex(widget.proj_board.ProjectID)]
+                          .boardLists =
+                      await listController.ReadLists(
+                          widget.proj_board.ProjectID,boardPageHttpClient);
+                      setState(() {
+
+                      });
 
                       Navigator.pop(context);
                     }
+//                    else{
+//                      ListCard newList = new ListCard();
+//                      newList.List_Title = listTitle.text;
+//                      newList.ProjectID = widget.proj_board.ProjectID;
+//                      await listController.createList(newList);
+////                      user.archivedBoards[getBoardIndex(widget.proj_board.ProjectID)]
+////                          .boardLists =
+////                      await listController.ReadLists(
+////                          widget.proj_board.ProjectID,widget.boardClient);
+//
+//                      Navigator.pop(context);
+//                    }
 
                   }
                 },
@@ -786,7 +793,6 @@ class _BoardState extends State<Board> {
   bool _isShareDisabled = false;
   bool _isEditDisabled = false;
   bool _isOwner = false;
- // bool _isArchived = false;
 
   determineAccess() {
     if (_isDeleted == false) {
@@ -798,14 +804,12 @@ class _BoardState extends State<Board> {
          _isShareDisabled = true;
          _isEditDisabled = true;
          if(pb.AccessLevel==4){
-           //print("Owner");
            _isOwner=true;
          }
       }else{
         pb =
         user.boards[getBoardIndex(widget.proj_board.ProjectID)];
 
-        //print("ACCESS LEVEL: "+pb.AccessLevel.toString());
         if (pb.AccessLevel == null || pb.AccessLevel == 1) {
           //Full admin
           _isShareDisabled = false;
@@ -829,7 +833,6 @@ class _BoardState extends State<Board> {
 
     }
 
-    //print("OWNER? "+_isOwner.toString());
   }
 
   AssignmentController assignmentController = new AssignmentController();
@@ -1382,10 +1385,12 @@ class _BoardState extends State<Board> {
                             String OtherPersonNo;
                             bool existingAssignmentFound = false;
                             if (assignUser.userTypeID == 1) {
+
                               StudentController studentController =
                                   new StudentController();
                               Student assignStud = await studentController
                                   .fetchStudent(email, null,httpClient);
+//                              print("ASSIGN USER TYPE 1");
                               OtherPersonNo = assignStud.studentNo;
                               if (studentList.contains(assignStud)) {
                                 existingAssignmentFound = true;
@@ -2368,11 +2373,15 @@ class _DynamicListState extends State<DynamicList> {
                                         }
                                         newTask.Task_StatusID =
                                             _selectedTaskStatus.TaskStatusID;
+//                                        print("new tas STATUS ID   !!! : "+newTask.Task_StatusID.toString());
                                         //newTask.Task_Title=titleController.text;
-                                        //taskController.updateTask(newTask);
+                                        taskController.updateTask(newTask);
                                         if (ChangedTask == true) {
                                           print("Update task");
                                           taskController.updateTask(newTask);
+                                          setState(() {
+
+                                          });
                                         }
                                       }
                                       newTask = new Task();
@@ -2666,7 +2675,7 @@ class _DynamicListState extends State<DynamicList> {
 
                           });
 
-                          //boardPage.populateListDisplay(widget.aList.ProjectID);
+//                          boardPage.populateListDisplay(widget.aList.ProjectID);
                           Navigator.pop(context);
 
                           Navigator.push(
