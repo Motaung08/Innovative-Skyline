@@ -15,6 +15,7 @@ import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/main.dart';
+import '../ControllerTests/TaskController_test.dart';
 import '../Models_test.dart';
 import 'package:http/http.dart' as http;
 
@@ -185,7 +186,18 @@ void main() {
 
       final archived=find.byKey(Key('archivedButton'));
       expect(archived, findsOneWidget);
-
+      final client = new MockClient();
+      personNo='1713445';
+      var data = {
+        'UserTypeID': 1.toString(),
+        'StudentNo': personNo.toLowerCase(),
+        'StaffNo': personNo.toLowerCase()
+      };
+      when(client.post('http://10.100.15.38/ReadBoards.php', body: data))
+          .thenAnswer((_) async => http.Response(
+          '[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":"This board is a default board created for testing purposes. It should not be deleted.","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"},{"ProjectID":"707","Project_Title":"a","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"708","Project_Title":"b","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"0"}]'
+          ,200));
+      createClient=client;
       await tester.tap(archived);
 
     });
