@@ -241,7 +241,7 @@ class UserController{
   String ResetString="";
   // ignore: non_constant_identifier_names
   Future<String> ResetPassword(String email, String password,http.Client ctrlResetClient,{url='http://10.100.15.38/ResetPassword.php'}) async{
-
+//    print("email: "+email+", password: "+password+", client: "+ctrlResetClient.toString());
     var data =
     {
       'Email': email.toLowerCase(),
@@ -254,10 +254,11 @@ class UserController{
         url,
         body: json.encode(data) );
 
-    print("In reset password, the response is : "+response.body.toString());
+
     if(response!=null){
-//      var result = json.decode(response.body);
-      var result = response.body;
+          print("In reset password, the response is : "+response.body.toString());
+      var result = json.decode(response.body);
+//      var result = response.body;
 
       print(result);
 

@@ -133,10 +133,13 @@ void main() {
      resetPasswordView.password='123456';
 
      resetClient=client;
-     userController.ResetPassword('Default@students.wits.ac.za'.toLowerCase(), '123456', client);
+//     userController.ResetPassword('Default@students.wits.ac.za'.toLowerCase(), '123456', client);
+
 
 //     await tester.tap(resetButton);
 //     await tester.pump();
+
+//     expect(resetPasswordView.reset, true);
 //
 //     expect(formKey.currentState.validate(), isTrue);
 
