@@ -161,7 +161,8 @@ class StudentController {
         student.studentNo = studentA.studentNo;
         student.registrationDate = studentA.registrationDate;
         student.degreeID = studentA.degreeID;
-      } else if (message ==
+      }
+      else if (message ==
           "An account has already been created for this student number.") {
         UserController userController = new UserController();
         userController.userDeRegistration(userA);

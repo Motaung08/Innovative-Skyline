@@ -14,11 +14,10 @@ import 'package:http/http.dart' as http;
 
 
 import '../../main.dart';
-
+http.Client studRegClient=new http.Client();
 class StudentRegisterPage extends StatefulWidget {
-  Future initialize() async {
-//    print('initializing student types and degrees.');
-  http.Client client=new http.Client();
+  bool isHidden = true;
+  Future initialize(http.Client client) async {
     await studentTypeController.getTypes(client);
     await degreeController.getDegrees(client);
     print('Student type ' + studentTypes.length.toString());
@@ -30,58 +29,9 @@ class StudentRegisterPage extends StatefulWidget {
 
 class _StudentRegisterPageState extends State<StudentRegisterPage> {
   bool test=false;
-  Future initializeRegister() async {
-    await widget.initialize();
-    // ignore: missing_return
-    if(degrees.length==0){
-      test=true;
-      DegreeType degree=DegreeType();
-      degree.Degree_Type="Honours";
-      degree.DegreeID=1;
-      degrees.add(degree);
-      StudentType type=StudentType();
-      type.Student_Type="Full time";
-      type.StudentTypeID=1;
-      studentTypes.add(type);
+  Future initializeRegister(http.Client client) async {
+    await widget.initialize(client);
 
-      DegreeType testDropdown = DegreeType();
-      testDropdown.Degree_Type='Honours';
-      testDropdown.DegreeID=1;
-
-      List<DegreeType>L=List<DegreeType>();
-      L.add(testDropdown);
-      buildDropdownMenuItems(L);
-      onChangeDropdownItem(testDropdown);
-      onChangeStudTypeDropdownItem(type);
-
-      StudentType testStudent = StudentType();
-      testStudent.StudentTypeID=1;
-      testStudent.Student_Type='Full-time';
-      List<StudentType>S=List<StudentType>();
-      S.add(testStudent);
-
-      buildDropdownStudentTypeMenuItems(S);
-      toggleVisibility();
-      toggleVisibilityConf();
-      RegistrationDateController.text="2020-01-09";
-
-      if(test!=false) {
-        await studentRegistration();
-        setState(() {
-          visible =false;
-        });
-      }
-
-
-      if(selectDate(context)!=null){
-        print(_date.toString());
-        setState(() {});
-        await selectDate(context);
-      }
-
-
-
-    }
     //widget.initialize();
     _dropdownMenuItems = buildDropdownMenuItems(degrees);
     _selectedDegree = degrees[0];
@@ -128,7 +78,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
   @override
   // ignore: must_call_super
   void initState() {
-    initializeRegister();
+    initializeRegister(studRegClient);
 //    super.initState();
   }
 
@@ -234,9 +184,9 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     });
 
     User userA = new User();
-    userA.register = false;
+
     Student studentA = new Student();
-    studentA.register = false;
+
     // Getting value from Controller
 
     userA.email = emailController.text;
@@ -261,15 +211,8 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     studentA.studentTypeID = _selectedStudType.StudentTypeID;
 
 
-    var registered;
+    String registered=await studentController.studentRegistration(studentA, userA);
 
-    if(!test) {
-      print("here");
-      await studentController.studentRegistration(studentA, userA);
-    }
-    else{
-      registered="";
-    }
     print("REGISTER OUTPUT: " + registered);
     String message = "";
     //Empty string indicates no errors -> success
@@ -300,7 +243,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
               onPressed: () {
                 //Navigator.of(context).pop();
                 if (student.register == true) {
-                  Navigator.pushNamed(context, '/Home');
+                  Navigator.pushNamed(context, '/Login');
                 } else {
                   setState(() {
                     visible = false;
@@ -315,11 +258,11 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     );
   }
 
-  bool _isHidden = true;
+
 
   void toggleVisibility() {
     setState(() {
-      _isHidden = !_isHidden;
+      widget.isHidden = !widget.isHidden;
     });
   }
 
@@ -338,6 +281,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     //initializeRegister();
 
     final studentNumberField = TextFormField(
+      key: Key('studNo'),
       controller: StudentNoController,
       obscureText: false,
       validator: (val) => val.isEmpty ? 'Enter a Student Number' : null,
@@ -353,22 +297,8 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
 
-    final studentFirstNameField = kIsWeb
-        ? TextFormField(
-            controller: Student_FNameController,
-            obscureText: false,
-            validator: (val) => val.isEmpty ? 'Enter a first name' : null,
-            onChanged: (val) {
-              setState(() => firstName = val);
-            },
-            style: style,
-            decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                hintText: "First Name",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32.0))),
-          )
-        : TextFormField(
+    final studentFirstNameField = TextFormField(
+            key: Key('firstName'),
             controller: Student_FNameController,
             obscureText: false,
             validator: (val) => val.isEmpty ? 'Enter a first name' : null,
@@ -383,22 +313,8 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                     borderRadius: BorderRadius.circular(32.0))),
           );
 
-    final studentLastNameField = kIsWeb
-        ? TextFormField(
-            controller: Student_LNameController,
-            obscureText: false,
-            validator: (val) => val.isEmpty ? 'Enter a last name' : null,
-            onChanged: (val) {
-              setState(() => lastName = val);
-            },
-            style: style,
-            decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                hintText: "Last Name",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32.0))),
-          )
-        : TextFormField(
+    final studentLastNameField = TextFormField(
+            key: Key('lastName'),
             controller: Student_LNameController,
             obscureText: false,
             validator: (val) => val.isEmpty ? 'Enter a last name' : null,
@@ -413,30 +329,8 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                     borderRadius: BorderRadius.circular(32.0))),
           );
 
-    final studentEmailField = kIsWeb
-        ? TextFormField(
-            controller: emailController,
-            obscureText: false,
-            validator: (val) {
-              if (val.isEmpty) {
-                return 'Please enter an email address!.';
-              }
-              if (val.contains("@students.wits.ac.za") == false) {
-                return 'Invalid student email address';
-              }
-              return null;
-            },
-            onChanged: (val) {
-              setState(() => email = val);
-            },
-            style: style,
-            decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                hintText: "Email",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32.0))),
-          )
-        : TextFormField(
+    final studentEmailField = TextFormField(
+            key: Key('email'),
             controller: emailController,
             obscureText: false,
             validator: (val) {
@@ -459,8 +353,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                     borderRadius: BorderRadius.circular(32.0))),
           );
 
-    final dropdownDegree = kIsWeb
-        ? new Container(
+    final dropdownDegree = new Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             decoration: ShapeDecoration(
               shape: RoundedRectangleBorder(
@@ -479,36 +372,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                     items: _dropdownMenuItems,
                     onChanged: onChangeDropdownItem,
                     isExpanded: true,
-
-                    //style: style,
-
-                    //style: style,
-                  ),
-
-                  //Text('Selected: ${_selectedDegree.DegreeType}'),
-                ],
-              ),
-            ),
-          )
-        : new Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            decoration: ShapeDecoration(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                    width: 1.0, style: BorderStyle.solid, color: Colors.grey),
-                borderRadius: BorderRadius.all(Radius.circular(32.0)),
-              ),
-            ),
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  DropdownButton(
-                    value: _selectedDegree,
-                    items: _dropdownMenuItems,
-                    onChanged: onChangeDropdownItem,
-                    isExpanded: true,
+                    key: Key('DropDownDegree'),
 
                     //style: style,
 
@@ -521,8 +385,8 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
             ),
           );
 
-    final dropdownStudType = kIsWeb
-        ? new Container(
+    final dropdownStudType =
+         new Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             decoration: ShapeDecoration(
               shape: RoundedRectangleBorder(
@@ -541,36 +405,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                     items: _dropdownStudTypeMenuItems,
                     onChanged: onChangeStudTypeDropdownItem,
                     isExpanded: true,
-
-                    //style: style,
-
-                    //style: style,
-                  ),
-
-                  //Text('Selected: ${_selectedDegree.DegreeType}'),
-                ],
-              ),
-            ),
-          )
-        : new Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            decoration: ShapeDecoration(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                    width: 1.0, style: BorderStyle.solid, color: Colors.grey),
-                borderRadius: BorderRadius.all(Radius.circular(32.0)),
-              ),
-            ),
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  DropdownButton(
-                    value: _selectedStudType,
-                    items: _dropdownStudTypeMenuItems,
-                    onChanged: onChangeStudTypeDropdownItem,
-                    isExpanded: true,
+                    key: Key('DropDownStudType'),
 
                     //style: style,
 
@@ -628,54 +463,8 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 //    );
 
     // ignore: non_constant_identifier_names
-    final DateSelection = kIsWeb
-        ? new Stack(
-            children: <Widget>[
-              Container(
-                width: double.infinity,
-                height: 60,
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                //padding: EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey, width: 1),
-                  borderRadius: BorderRadius.circular(32),
-                  shape: BoxShape.rectangle,
-                ),
-                child: Row(
-                  children: <Widget>[
-                    IconButton(
-                      key:Key("selectDate"),
-                      icon: Icon(
-                        Icons.calendar_today,
-                        color: Color(0xff009999),
-                      ),
-                      onPressed: () {
-                        selectDate(context);
-                      },
-                      tooltip: "Select registration date",
-                    ),
-                    Text(
-                      dateinput,
-                      style: datestyle,
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                  left: 10,
-                  top: 12,
-                  child: Container(
-                    padding: EdgeInsets.only(bottom: 10, left: 3, right: 0),
-                    margin: EdgeInsets.only(left: 10),
-                    color: Colors.white,
-                    child: Text(
-                      'Date Registered: ',
-                      style: TextStyle(color: Colors.black.withOpacity(.65)),
-                    ),
-                  )),
-            ],
-          )
-        : new Stack(
+    final DateSelection =
+         new Stack(
             children: <Widget>[
               Container(
                 width: double.infinity,
@@ -694,6 +483,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                         Icons.calendar_today,
                         color: Color(0xff009999),
                       ),
+                      key: Key('RegDateButton'),
                       onPressed: () {
                         selectDate(context);
                       },
@@ -721,10 +511,11 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
             ],
           );
 
-    final passwordField = kIsWeb
-        ? TextFormField(
+    final passwordField =
+         TextFormField(
             controller: passwordController,
-            obscureText: _isHidden,
+            key: Key('password'),
+            obscureText: widget.isHidden,
             validator: (val) =>
                 val.length < 6 ? 'Enter a password 6+ chars long' : null,
             onChanged: (val) {
@@ -733,27 +524,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
             style: style,
             decoration: InputDecoration(
                 suffixIcon: IconButton(
-                    icon: _isHidden
-                        ? Icon(Icons.visibility_off)
-                        : Icon(Icons.visibility),
-                    onPressed: toggleVisibility),
-                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                hintText: "Password",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32.0))),
-          )
-        : TextFormField(
-            controller: passwordController,
-            obscureText: _isHidden,
-            validator: (val) =>
-                val.length < 6 ? 'Enter a password 6+ chars long' : null,
-            onChanged: (val) {
-              setState(() => password = val);
-            },
-            style: style,
-            decoration: InputDecoration(
-                suffixIcon: IconButton(
-                    icon: _isHidden
+                    icon: widget.isHidden
                         ? Icon(Icons.visibility_off)
                         : Icon(Icons.visibility),
                     onPressed: toggleVisibility),
@@ -763,36 +534,10 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                     borderRadius: BorderRadius.circular(32.0))),
           );
 
-    final confirmPasswordField = kIsWeb
-        ? TextFormField(
+    final confirmPasswordField =
+        TextFormField(
             controller: confirmPassCont,
-            validator: (val) {
-              if (val.isEmpty) {
-                return 'Confirm password.';
-              }
-              if (val != passwordController.text) {
-                return 'Passwords must match';
-              }
-              return null;
-            },
-            obscureText: _isHiddenConf,
-            onChanged: (val) {
-              setState(() => ConfirmPass = val);
-            },
-            style: style,
-            decoration: InputDecoration(
-                suffixIcon: IconButton(
-                    icon: _isHiddenConf
-                        ? Icon(Icons.visibility_off)
-                        : Icon(Icons.visibility),
-                    onPressed: toggleVisibilityConf),
-                contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                hintText: "Confirm Password",
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32.0))),
-          )
-        : TextFormField(
-            controller: confirmPassCont,
+            key: Key('confirmPass'),
             validator: (val) {
               if (val.isEmpty) {
                 return 'Confirm password.';
@@ -875,11 +620,13 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
           child: Text(""),
         )
       ],
-    ):Material(
+    ):
+    Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
       child: MaterialButton(
+        key: Key('registerButton'),
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () async {
@@ -920,6 +667,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
 
     Widget _divider() {
       return Container(
+        key: Key('divider'),
         margin: EdgeInsets.symmetric(vertical: 10),
         child: Row(
           children: <Widget>[
@@ -985,6 +733,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       borderRadius: BorderRadius.circular(30.0),
       color: Color(0xff009999),
       child: MaterialButton(
+        key: Key('loginButton'),
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {

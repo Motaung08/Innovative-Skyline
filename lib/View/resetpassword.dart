@@ -10,6 +10,7 @@ class ResetPasswordView extends StatefulWidget {
   bool isHiddenConf=true;
   String email = '';
   String password = '';
+  bool reset=false;
 
   String resetUrl="http://10.100.15.38/ResetPassword.php";
   @override
@@ -44,13 +45,17 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
     });
   }
 
-  Future tryReset(http.Client client, {url= "http://10.100.15.38/ResetPassword.php"}) async{
+  Future<bool> tryReset(http.Client client, {url= "http://10.100.15.38/ResetPassword.php"}) async{
     _formKey.currentState.validate();
 //    print("Reset client: "+widget.resetClient.toString());
     msg= await userController.ResetPassword(widget.email, widget.password,client, url: widget.resetUrl);
     if (msg=="Successfully updated password!"){
       msg="";
       Navigator.pop(context);
+      return true;
+    }else{
+      print("Unable to reset password in tryReset.");
+      return false;
     }
   }
 
@@ -136,9 +141,9 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
             child: MaterialButton(
               minWidth: MediaQuery.of(context).size.width,
               padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-              onPressed: () {
+              onPressed: () async{
                 if(_formKey.currentState.validate()){
-                  tryReset(resetClient);
+                  widget.reset =await tryReset(resetClient);
                 }
               },
               key: Key('ResetButtonInput'),
@@ -161,10 +166,10 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {
+        onPressed: () async{
           //
           if(_formKey.currentState.validate()){
-            tryReset(resetClient);
+            widget.reset =await tryReset(resetClient);
           }
 
         },

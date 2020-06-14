@@ -128,15 +128,18 @@ void main() {
      };
 
      when(client.post('http://10.100.15.38/ResetPassword.php', body: jsonEncode(data)))
-         .thenAnswer((_) async => http.Response("Password updated successfully",200));
+         .thenAnswer((_) async => http.Response('Password updated successfully',200));
      resetPasswordView.email='default@students.wits.ac.za'.toLowerCase();
      resetPasswordView.password='123456';
 
      resetClient=client;
-//     userController.ResetPassword('Default@students.wits.ac.za'.toLowerCase(), '123456', new MockClient());
+//     userController.ResetPassword('Default@students.wits.ac.za'.toLowerCase(), '123456', client);
+
 
 //     await tester.tap(resetButton);
 //     await tester.pump();
+
+//     expect(resetPasswordView.reset, true);
 //
 //     expect(formKey.currentState.validate(), isTrue);
 
@@ -145,8 +148,6 @@ void main() {
 
  });
 
- group('Reset',(){
 
- });
 
 }

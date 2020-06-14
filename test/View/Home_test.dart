@@ -63,7 +63,7 @@ void main() {
       user.email = 'Default@Students.wits.ac.za';
       user.userTypeID = 1;
       student.studentNo = '1713445';
-      personNo = '1713445';
+//      personNo = '1713445';
 //      http.Client httpClient=new http.Client();
       http.Client httpClient = new MockClient();
       await tester.pumpWidget(makeWidgetTestable(testHomePage));
@@ -193,7 +193,7 @@ void main() {
       final archived=find.byKey(Key('archivedButton'));
       expect(archived, findsOneWidget);
       final client = new MockClient();
-      personNo='1713445';
+      //personNo='1713445';
       var data = {
         'UserTypeID': 1.toString(),
         'StudentNo': personNo.toLowerCase(),

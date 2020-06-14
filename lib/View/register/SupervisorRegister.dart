@@ -91,7 +91,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
                 //Navigator.of(context).pop();
 
                 if (supervisor.register && user.register) {
-                  Navigator.pushNamed(context, '/Home');
+                  Navigator.pushNamed(context, '/Login');
                 } else {
                   setState(() {
                     visible=false;
