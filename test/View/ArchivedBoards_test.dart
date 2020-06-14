@@ -117,7 +117,7 @@ void main() {
       final active=find.byKey(Key('ActiveBoardsInput'));
       expect(active, findsOneWidget);
 
-      await tester.tap(active);
+//      await tester.tap(active);
 
     });
 
