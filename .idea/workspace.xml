@@ -39,7 +39,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1cx2WyvMz36I4ZHicNNqKxAKjm6" />
   <component name="ProjectLevelVcsManager">
@@ -561,11 +561,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="753" y="198" key="#com.intellij.tools.ToolEditorDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344883272" />
-    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1592160731489">
+    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1592161344859">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="310" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1592123504757" />
-    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592160731489" />
+    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592161344859" />
     <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1592079985253">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -603,21 +603,21 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="184" y="90" key="MergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591430929913" />
-    <state x="538" y="205" key="MultipleFileMergeDialog" timestamp="1592114701713">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="672" y="256" key="MultipleFileMergeDialog" timestamp="1592161382956">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="538" y="205" key="MultipleFileMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1592114701713" />
-    <state x="672" y="256" key="MultipleFileMergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591726288452" />
+    <state x="672" y="256" key="MultipleFileMergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592161382956" />
     <state x="486" y="14" width="914" height="707" key="SettingsEditor" timestamp="1592145406984">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="389" y="11" width="914" height="707" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1592114734222" />
     <state x="486" y="14" width="998" height="708" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592145406984" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1592145384374">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1592161347428">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1592123508944" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592145384374" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592161347428" />
     <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1591700910038">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -632,11 +632,11 @@
     </state>
     <state x="525" y="291" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1592114514701" />
     <state x="656" y="364" key="com.intellij.ide.util.TipDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591866987705" />
-    <state x="615" y="366" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592114688340">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592161371674">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="615" y="366" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1592114688340" />
-    <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591883102907" />
+    <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592161371674" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Innovative_Skyline$AssignmentTypeController_test_dart.json" NAME="AssignmentTypeController_test.dart Coverage Results" MODIFIED="1591888288230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="DartCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" CONTEXT_FILE_PATH="$PROJECT_DIR$/test/ControllerTests/AssignmentTypeController_test.dart" />
