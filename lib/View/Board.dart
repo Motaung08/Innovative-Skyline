@@ -25,7 +25,7 @@ import 'package:postgrad_tracker/main.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 
-//http.Client client;
+
 bool isArch(int ProjectID){
   if(user.archivedBoards.where((element) => element.ProjectID==ProjectID).isNotEmpty){
     return true;
@@ -37,10 +37,11 @@ bool isArch(int ProjectID){
 List<StaggeredTile> stiles = new List<StaggeredTile>();
 List<DynamicList> listDynamic = [];
 
-
+http.Client boardClient=new http.Client();
 // ignore: must_be_immutable
 class Board extends StatefulWidget {
   //1713445@students.wits.ac.za
+
 
   // ignore: non_constant_identifier_names
   Project_Board proj_board;
@@ -48,11 +49,11 @@ class Board extends StatefulWidget {
   Board({Key key, this.proj_board}) : super(key: key);
 
   // ignore: non_constant_identifier_names
-  Future populateListDisplay(int ProjectID) async {
+  Future populateListDisplay(int ProjectID, http.Client client) async {
     print('populateListDisplay() called');
-    //lists = [];
+//    lists = [];
     int boardIndex;
-    // int testVal;
+     int testVal;
     void getIndexes() {
       bool _isArch=isArch(proj_board.ProjectID);
       if(_isArch){
@@ -72,11 +73,13 @@ class Board extends StatefulWidget {
     }
 
     getIndexes();
-    // items.clear();
+//     items.clear();
     bool _isArch=isArch(proj_board.ProjectID);
+
     if(_isArch){
+
       user.archivedBoards[boardIndex].boardLists =
-      await listController.ReadLists(ProjectID);
+      await listController.ReadLists(ProjectID,client);
 
       if (user.archivedBoards[boardIndex].boardLists != null) {
         print('Initializing archived board\'s list display! ##################');
@@ -105,35 +108,37 @@ class Board extends StatefulWidget {
 
       }
 
-    }else{
+    }
+    else{
       user.boards[boardIndex].boardLists =
-      await listController.ReadLists(ProjectID);
-
-      if (user.boards[boardIndex].boardLists != null) {
-        print('Initializing board\'s list display! ##################');
-        stiles.clear();
-        listDynamic.clear();
-        int crossCount = kIsWeb == true ? 1 : 2;
-        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-          double mainAxis = 0.5;
-          for (int m = 0;
-          m < user.boards[boardIndex].boardLists[i].listTasks.length;
-          m++) {
-            double addNum = kIsWeb == true ? .225 : .52;
-            mainAxis += addNum;
-          }
-          DynamicList dynamicCreatedList =
-          new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
-
-          listDynamic.add(dynamicCreatedList);
-
-          stiles.add(StaggeredTile.count(
-              1,
-              kIsWeb == false
-                  ? user.boards[boardIndex].boardLists[i].listTasks.length + 1.3
-                  : mainAxis));
-        }
-      }
+      await listController.ReadLists(ProjectID,client);
+      print("Sleep ...");
+      print('populateListDisplay() called');
+//      if (user.boards[boardIndex].boardLists != null) {
+//        print('Initializing board\'s list display! ##################');
+//        stiles.clear();
+//        listDynamic.clear();
+//        int crossCount = kIsWeb == true ? 1 : 2;
+//        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+//          double mainAxis = 0.5;
+//          for (int m = 0;
+//          m < user.boards[boardIndex].boardLists[i].listTasks.length;
+//          m++) {
+//            double addNum = kIsWeb == true ? .225 : .52;
+//            mainAxis += addNum;
+//          }
+//          DynamicList dynamicCreatedList =
+//          new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
+//
+//          listDynamic.add(dynamicCreatedList);
+//
+//          stiles.add(StaggeredTile.count(
+//              1,
+//              kIsWeb == false
+//                  ? user.boards[boardIndex].boardLists[i].listTasks.length + 1.3
+//                  : mainAxis));
+//        }
+//      }
     }
 
 
@@ -173,53 +178,53 @@ class _BoardState extends State<Board> {
     _selectedAssignmentType = _dropdownAssignmentTypeMenuItems[0].value;
     setState(() {});}
 
-    else{
-      AssignmentType ass=new AssignmentType();
-      ass.assignmentTypeID=1;
-      ass.assignmentTypeText="Project";
-      List<AssignmentType>l=List<AssignmentType>();
-      l.add(ass);
-      l.add(ass);
-      l.add(ass);
-
-      DropdownMenuItem<AssignmentType>it=
-      DropdownMenuItem(
-        child: Text(
-          "hello",
-          style: TextStyle(
-              color: Colors.grey, fontFamily: 'Montserrat', fontSize: 20.0),
-          overflow: TextOverflow.ellipsis,
-        ),
-      );
-
-      _dropdownAssignmentTypeMenuItems.add(it);
-      _dropdownAssignmentTypeMenuItems[0].value;
-
-      Project_Board b=Project_Board();
-      b.ProjectID=1;
-      b.Project_Title="Project";
-      b.Project_Description="Test";
-      b.Project_EndDate=DateTime.now();
-      b.Project_EndDate=DateTime.now();
-      b.AccessLevel=1;
-      b.boardActive=true;
-      b.boardAssignActive=true;
-      Project_Board other=b;
-      other.boardActive=false;
-      widget.proj_board=b;
-
-      user=new User();
-      user.boards=List<Project_Board>();
-      user.boards.add(b);
-      user.boards.add(other);
-      setState(() {});
-
-      buildDropdownAssignmentTypeMenuItems(l);
-      getBoardIndex(1);
-      _isDeleted=false;
-      determineAccess();
-      pop();
-    }
+//    else{
+//      AssignmentType ass=new AssignmentType();
+//      ass.assignmentTypeID=1;
+//      ass.assignmentTypeText="Project";
+//      List<AssignmentType>l=List<AssignmentType>();
+//      l.add(ass);
+//      l.add(ass);
+//      l.add(ass);
+//
+//      DropdownMenuItem<AssignmentType>it=
+//      DropdownMenuItem(
+//        child: Text(
+//          "hello",
+//          style: TextStyle(
+//              color: Colors.grey, fontFamily: 'Montserrat', fontSize: 20.0),
+//          overflow: TextOverflow.ellipsis,
+//        ),
+//      );
+//
+//      _dropdownAssignmentTypeMenuItems.add(it);
+//      _dropdownAssignmentTypeMenuItems[0].value;
+//
+//      Project_Board b=Project_Board();
+//      b.ProjectID=1;
+//      b.Project_Title="Project";
+//      b.Project_Description="Test";
+//      b.Project_EndDate=DateTime.now();
+//      b.Project_EndDate=DateTime.now();
+//      b.AccessLevel=1;
+//      b.boardActive=true;
+//      b.boardAssignActive=true;
+//      Project_Board other=b;
+//      other.boardActive=false;
+//      widget.proj_board=b;
+//
+//      user=new User();
+//      user.boards=List<Project_Board>();
+//      user.boards.add(b);
+//      user.boards.add(other);
+//      setState(() {});
+//
+//      buildDropdownAssignmentTypeMenuItems(l);
+//      getBoardIndex(1);
+//      _isDeleted=false;
+//      determineAccess();
+//      pop();
+//    }
   }
 
   List<AssignmentType> _assignmentType = assignmentTypes;
@@ -421,8 +426,8 @@ class _BoardState extends State<Board> {
                       .deleteBoard(widget.proj_board.ProjectID);
                   ArchivedBoards archivedBoards=new ArchivedBoards();
                   if(isArch(widget.proj_board.ProjectID)){
-                    http.Client client=new http.Client();
-                    await archivedBoards.initializeDisplay(client);
+//                    http.Client client=new http.Client();
+//                    await archivedBoards.initializeDisplay(widget.boardClient);
 
                     setState(() {
                       _isDeleted = true;
@@ -730,10 +735,10 @@ class _BoardState extends State<Board> {
                       newList.List_Title = listTitle.text;
                       newList.ProjectID = widget.proj_board.ProjectID;
                       await listController.createList(newList);
-                      user.boards[getBoardIndex(widget.proj_board.ProjectID)]
-                          .boardLists =
-                      await listController.ReadLists(
-                          widget.proj_board.ProjectID);
+//                      user.boards[getBoardIndex(widget.proj_board.ProjectID)]
+//                          .boardLists =
+//                      await listController.ReadLists(
+//                          widget.proj_board.ProjectID,widget.boardClient);
 
                       Navigator.pop(context);
                     }else{
@@ -741,10 +746,10 @@ class _BoardState extends State<Board> {
                       newList.List_Title = listTitle.text;
                       newList.ProjectID = widget.proj_board.ProjectID;
                       await listController.createList(newList);
-                      user.archivedBoards[getBoardIndex(widget.proj_board.ProjectID)]
-                          .boardLists =
-                      await listController.ReadLists(
-                          widget.proj_board.ProjectID);
+//                      user.archivedBoards[getBoardIndex(widget.proj_board.ProjectID)]
+//                          .boardLists =
+//                      await listController.ReadLists(
+//                          widget.proj_board.ProjectID,widget.boardClient);
 
                       Navigator.pop(context);
                     }
@@ -1423,6 +1428,7 @@ class _BoardState extends State<Board> {
       alignment: Alignment.bottomRight,
       margin: EdgeInsets.all(1),
       child: MaterialButton(
+        key: Key('plusButton'),
         onPressed: () async {
           await createAlertDialog(context);
           pop();
@@ -1699,7 +1705,7 @@ class Constants {
 // ignore: must_be_immutable
 class DynamicList extends StatefulWidget {
   ListCard aList;
-
+  http.Client listClient=new http.Client();
   DynamicList({Key key, @required this.aList}) : super(key: key);
 
   int boardIndex;
@@ -1739,10 +1745,10 @@ class DynamicList extends StatefulWidget {
     bool _isArchive=isArch(aList.ProjectID);
     if(_isArchive==false){
       user.boards[boardIndex].boardLists[listIndex].listTasks =
-      await taskController.ReadTasks(aList.ListID);
+      await taskController.ReadTasks(aList.ListID,listClient);
     }else{
       user.archivedBoards[boardIndex].boardLists[listIndex].listTasks =
-      await taskController.ReadTasks(aList.ListID);
+      await taskController.ReadTasks(aList.ListID,listClient);
     }
 
   }
@@ -2693,7 +2699,7 @@ class _DynamicListState extends State<DynamicList> {
       } else if (choice == Constants.Delete) {
         await confirmDeleteAlertDialog(context);
         user.boards[getBoardIndex(widget.aList.ProjectID)].boardLists =
-            await listController.ReadLists(widget.aList.ProjectID);
+            await listController.ReadLists(widget.aList.ProjectID,widget.listClient);
         Board boardPage = new Board(
           proj_board: user.boards[getBoardIndex(widget.aList.ProjectID)],
         );

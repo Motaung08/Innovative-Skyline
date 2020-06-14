@@ -574,7 +574,7 @@ class DynamicWidget extends StatefulWidget {
   DynamicWidget({Key key, @required this.aboard}) : super(key: key);
 
   popLists() async {
-    aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
+    aboard.boardLists = await listController.ReadLists(aboard.ProjectID,client);
   }
 
   @override
@@ -1004,8 +1004,8 @@ class _DynamicWidgetState extends State<DynamicWidget> {
 
                 Board boardPage = new Board();
                 boardPage.proj_board = widget.aboard;
-
-                await boardPage.populateListDisplay(widget.aboard.ProjectID);
+                http.Client client=new http.Client();
+                await boardPage.populateListDisplay(widget.aboard.ProjectID,client);
 
                 Navigator.push(
                   context,
@@ -1055,8 +1055,9 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                       Board boardPage = new Board(
                         proj_board: widget.aboard,
                       );
+                      http.Client client=new http.Client();
                       await boardPage
-                          .populateListDisplay(widget.aboard.ProjectID);
+                          .populateListDisplay(widget.aboard.ProjectID,client);
 
                       Navigator.push(
                         context,

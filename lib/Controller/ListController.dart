@@ -16,21 +16,16 @@ class ListController{
   of the list titles of a board when a user navigates to said board page.
    */
   // ignore: non_constant_identifier_names, missing_return
-  Future<List<ListCard>> ReadLists(int ProjectID,{url='http://10.100.15.38/ReadLists.php',url2:'http://10.100.15.38/ReadTasks.php'}) async{
+  Future<List<ListCard>> ReadLists(int ProjectID,http.Client client,{url='http://10.100.15.38/ReadLists.php',url2:'http://10.100.15.38/ReadTasks.php'}) async{
     List<ListCard> lists=List();
-
-        // SERVER API URL
-//        var url =
-//            'http://10.100.15.38/ReadLists.php';
-            //'https://witsinnovativeskyline.000webhostapp.com/ReadLists.php';
 
         var data={
           'ProjectID' : ProjectID.toString(),
         };
 
         // Starting Web API Call.
-        var response = await http.post(url, body: data);
-
+        var response = await client.post(url, body: data);
+//        print("list response body : "+response.body);
         // Getting Server response into variable.
         // ignore: non_constant_identifier_names
         var Response = jsonDecode(response.body);
@@ -45,8 +40,8 @@ class ListController{
             listReceived.ListID = int.parse(Response[i]['ListID']);
             listReceived.List_Title = Response[i]['List_Title'];
             listReceived.ProjectID= int.parse(Response[i]['ProjectID']);
-            listReceived.listTasks=await taskController.ReadTasks(listReceived.ListID,url:url2);
-
+            listReceived.listTasks=await taskController.ReadTasks(listReceived.ListID,client,url:url2);
+//            print('In list controller busy adding '+listReceived.List_Title);
             lists.add(listReceived);
 
             //user.boards[listReceived.ProjectID].boardLists[listReceived.ListID].listTasks=await taskController.ReadTasks(listReceived.ListID);

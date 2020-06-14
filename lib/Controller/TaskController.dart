@@ -62,7 +62,7 @@ class TaskController{
   the form of a list of Task objects.
    */
   // ignore: non_constant_identifier_names
-  Future<List<Task>> ReadTasks(int ListID,{url='http://10.100.15.38/ReadTasks.php'}) async{
+  Future<List<Task>> ReadTasks(int ListID,http.Client client,{url='http://10.100.15.38/ReadTasks.php'}) async{
     List<Task> tasks=new List();
       String msg = '';
 
@@ -74,44 +74,47 @@ class TaskController{
         };
 
         // Starting Web API Call.
-        var response = await http.post(url, body: data);
-
+        var response = await client.post(url, body: data);
+//        print("Task response body : "+(response.body==null).toString());
         // Getting Server response into variable.
         // ignore: non_constant_identifier_names
-        var Response = jsonDecode(response.body);
-        print(Response);
+
+    if(response!=null){
+      var Response = jsonDecode(response.body);
+//        print(Response);
 
 
-        if (Response.length == 0) {
-          msg = "No Tasks created yet.";
-        }
-        else {
-         // print('mmmmmmmmmmmmmmmmmmmmmm lists!');
-          tasks=[];
+      if (Response.length == 0) {
+        msg = "No Tasks created yet.";
+      }
+      else {
+//          print('mmmmmmmmmmmmmmmmmmmmmm lists!');
+        tasks=[];
 
-          //Come back and add other task details
+        //Come back and add other task details
 
-          for (int i = 0; i < Response.length; i++) {
-            Task taskReceived = new Task();
-            taskReceived.TaskID = int.parse(Response[i]['TaskID']);
-            taskReceived.Task_Title = Response[i]['Task_Title'];
+        for (int i = 0; i < Response.length; i++) {
+          Task taskReceived = new Task();
+          taskReceived.TaskID = int.parse(Response[i]['TaskID']);
+          taskReceived.Task_Title = Response[i]['Task_Title'];
 
-            taskReceived.Task_StatusID = int.parse(Response[i]['Task_StatusID']);
-            if(Response[i]['Task_Date_Due']!=null){
-              taskReceived.Task_Due = DateTime.parse(Response[i]['Task_Date_Due']);
-            }
-
-            taskReceived.Task_Description = Response[i]['Task_Description'];
-            //taskReceived.Task_DateAdded = DateTime.parse(Response[i]['Task_Date_added']);
-            taskReceived.Task_AddedBy = Response[i]['Task_AddedBy'];
-            taskReceived.ListID = int.parse(Response[i]['ListID']);
-
-            tasks.add(taskReceived);
-            print("Added: "+taskReceived.Task_Title);
+          taskReceived.Task_StatusID = int.parse(Response[i]['Task_StatusID']);
+          if(Response[i]['Task_Date_Due']!=null){
+            taskReceived.Task_Due = DateTime.parse(Response[i]['Task_Date_Due']);
           }
 
+          taskReceived.Task_Description = Response[i]['Task_Description'];
+          //taskReceived.Task_DateAdded = DateTime.parse(Response[i]['Task_Date_added']);
+          taskReceived.Task_AddedBy = Response[i]['Task_AddedBy'];
+          taskReceived.ListID = int.parse(Response[i]['ListID']);
+
+          tasks.add(taskReceived);
+//            print("Added: "+tasks.length.toString());
         }
-        print(msg);
+
+      }
+    }
+
     return tasks;
   }
 

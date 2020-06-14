@@ -19,7 +19,7 @@ import 'package:http/http.dart' as http;
 
 final List<DynamicWidget> listArchDynamic = new List<DynamicWidget>();
 bool _isDeleted;
-
+http.Client client=new http.Client();
 class ArchivedBoards extends StatefulWidget {
   Future<void> initialize(http.Client client) async {
     Project_BoardController projectBoardController =
@@ -238,7 +238,7 @@ class DynamicWidget extends StatefulWidget {
   DynamicWidget({Key key, @required this.aboard}) : super(key: key);
 
   popLists() async {
-    aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
+    aboard.boardLists = await listController.ReadLists(aboard.ProjectID,client);
   }
 
   @override
@@ -372,7 +372,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                 Board boardPage = new Board();
                 boardPage.proj_board = widget.aboard;
 
-                await boardPage.populateListDisplay(widget.aboard.ProjectID);
+                await boardPage.populateListDisplay(widget.aboard.ProjectID,client);
 
                 Navigator.push(
                   context,
@@ -409,7 +409,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                           proj_board: widget.aboard,
                         );
                         await boardPage
-                            .populateListDisplay(widget.aboard.ProjectID);
+                            .populateListDisplay(widget.aboard.ProjectID,client);
 
                         Navigator.push(
                           context,

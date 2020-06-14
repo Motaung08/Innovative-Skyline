@@ -6,7 +6,7 @@ import 'package:postgrad_tracker/Controller/TaskController.dart';
 import 'package:postgrad_tracker/Model/Task.dart';
 
 class MockClient extends Mock implements http.Client {}
-
+http.Client client=new http.Client();
 void main() {
 
   group('Test Task CRUD', () {
@@ -42,14 +42,14 @@ void main() {
     test('Reading tasks for a valid list', () async {
 
       TaskController taskController = new TaskController();
-      expect(await taskController.ReadTasks(196, url: "https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php"),isNotEmpty);
+      expect(await taskController.ReadTasks(196,client, url: "https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php"),isNotEmpty);
 
     });
 
     test('Reading tasks for an invalid list', () async {
 
       TaskController taskController = new TaskController();
-      expect(await taskController.ReadTasks(0, url: "https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php"),isEmpty);
+      expect(await taskController.ReadTasks(0,client, url: "https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php"),isEmpty);
 
     });
 
@@ -57,7 +57,7 @@ void main() {
       TaskController taskController = new TaskController();
       Task atask = new Task();
       List<Task> testTasks=[];
-      testTasks=await taskController.ReadTasks(196, url: "https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php");
+      testTasks=await taskController.ReadTasks(196,client, url: "https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php");
       atask=testTasks.last;
       //await taskController.updateTask(atask);
 
@@ -77,7 +77,7 @@ void main() {
       TaskController taskController = new TaskController();
       Task atask = new Task();
       List<Task> testTasks=[];
-      testTasks=await taskController.ReadTasks(196, url: "https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php");
+      testTasks=await taskController.ReadTasks(196,client, url: "https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php");
       atask=testTasks.last;
 
       expect(await taskController.deleteTask(atask.TaskID,url: "https://lamp.ms.wits.ac.za/~s1611821/deleteTask.php"),"Task DELETED!");
