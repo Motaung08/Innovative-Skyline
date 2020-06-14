@@ -81,8 +81,8 @@ void main() {
       };
       when(client.post('http://10.100.15.38/ReadBoards.php', body: data))
           .thenAnswer((_) async => http.Response(
-          '[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":"This board is a default board created for testing purposes. It should not be deleted.","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"}]',
-          200));
+      '[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":"This board is a default board created for testing purposes. It should not be deleted.","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"},{"ProjectID":"707","Project_Title":"a","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"708","Project_Title":"b","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"0"}]'
+      ,200));
       Project_BoardController project_boardController=new Project_BoardController();
       List allBoards=await project_boardController.ReadBoards(1, personNo, client);
       if(allBoards!=null){
@@ -115,7 +115,7 @@ void main() {
          ,200));
       boardClient = client;
       await tester.pump();
-      print("Our project ID is ... "+testBoardPage.proj_board.ProjectID.toString());
+//      print("Our project ID is ... "+testBoardPage.proj_board.ProjectID.toString());
       await testBoardPage.populateListDisplay(testBoardPage.proj_board.ProjectID, client);
       await tester.pumpWidget(makeWidgetTestable(testBoardPage));
 
