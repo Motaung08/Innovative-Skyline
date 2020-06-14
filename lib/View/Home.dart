@@ -536,8 +536,8 @@ if(user.boards==null){
                       color: Color(0xff009999), fontWeight: FontWeight.bold)),
               key: Key('archivedButton'),
               onTap: () async {
-                http.Client client =new http.Client();
-                await archivedBoards.initializeDisplay(client);
+//                http.Client client =new http.Client();
+                await archivedBoards.initializeDisplay(createClient);
                 setState(() {
                   Navigator.of(context).pop();
                   Navigator.push(
