@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="View Student Profile test.">
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/StudentController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/StudentController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/Controller/UserController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/UserController.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/Board.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Board.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/Login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Login.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/resetpassword.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/resetpassword.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/ControllerTests/ProjectBoardCtrl_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/ProjectBoardCtrl_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/View/ArchivedBoards_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/ArchivedBoards_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/View/Home_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/Home_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/View/login_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/login_test.dart" afterDir="false" />
+    <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/test/View/resetpassword_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/resetpassword_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,20 +102,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1591344425524</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Test for archive board and archive assignment.">
-      <created>1591903479152</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1591903479152</updated>
-    </task>
-    <task id="LOCAL-00021" summary="fix.">
-      <created>1591904562691</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1591904562691</updated>
     </task>
     <task id="LOCAL-00022" summary="resetpassword_test.dart for view/hide password.">
       <created>1591951417285</created>
@@ -462,7 +432,21 @@
       <option name="project" value="LOCAL" />
       <updated>1592145382872</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Login test.">
+      <created>1592161345612</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1592161345612</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Login test.">
+      <created>1592161392068</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1592161392068</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -513,7 +497,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="ResetPassword view test validator." />
     <MESSAGE value="ResetPassword view test addition with urls" />
     <MESSAGE value="Included web button." />
     <MESSAGE value="Reset password test." />
@@ -538,7 +521,8 @@
     <MESSAGE value="Removed tap active." />
     <MESSAGE value="Supervisor register widget test" />
     <MESSAGE value="View Student Profile test." />
-    <option name="LAST_COMMIT_MESSAGE" value="View Student Profile test." />
+    <MESSAGE value="Login test." />
+    <option name="LAST_COMMIT_MESSAGE" value="Login test." />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="198" key="#Notifications" timestamp="1591723262844">
@@ -561,11 +545,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="753" y="198" key="#com.intellij.tools.ToolEditorDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344883272" />
-    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1592161344859">
+    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1592161391420">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="310" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1592123504757" />
-    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592161344859" />
+    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592161391420" />
     <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1592079985253">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -613,11 +597,11 @@
     </state>
     <state x="389" y="11" width="914" height="707" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1592114734222" />
     <state x="486" y="14" width="998" height="708" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592145406984" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1592161347428">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1592161395146">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1592123508944" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592161347428" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592161395146" />
     <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1591700910038">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
