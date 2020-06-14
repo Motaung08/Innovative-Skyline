@@ -53,11 +53,22 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
       buildDropdownMenuItems(L);
       onChangeDropdownItem(testDropdown);
       onChangeStudTypeDropdownItem(type);
+
+      StudentType testStudent = StudentType();
+      testStudent.StudentTypeID=1;
+      testStudent.Student_Type='Full-time';
+      List<StudentType>S=List<StudentType>();
+      S.add(testStudent);
+
+      buildDropdownStudentTypeMenuItems(S);
       toggleVisibility();
       toggleVisibilityConf();
       RegistrationDateController.text="2020-01-09";
       await  studentRegistration();
-      await selectDate(context);
+
+      if(selectDate(context)!=null){
+        await selectDate(context);
+      }
 
 
 
