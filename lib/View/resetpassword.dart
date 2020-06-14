@@ -128,7 +128,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
     );
 
     // ignore: non_constant_identifier_names
-    final ResetButon = kIsWeb? Row(
+    final ResetButton = kIsWeb? Row(
       children: [
         Expanded(
           child:Text("")
@@ -244,7 +244,7 @@ class ResetPasswordViewState extends State<ResetPasswordView> {
                       SizedBox(
                         height: 15.0,
                       ),
-                      ResetButon
+                      ResetButton
                     ]
                   )
                  )

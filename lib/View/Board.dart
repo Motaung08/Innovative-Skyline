@@ -119,7 +119,7 @@ class Board extends StatefulWidget {
       await listController.ReadLists(ProjectID,client);
 
       if (user.boards[boardIndex].boardLists != null) {
-        print('Initializing board\'s list display! ##################');
+
         stiles.clear();
         listDynamic.clear();
         int crossCount = kIsWeb == true ? 1 : 2;
@@ -426,27 +426,22 @@ class _BoardState extends State<Board> {
                   Project_BoardController projectBoardController =
                       new Project_BoardController();
 
-                  //1713445@students.wits.ac.za
                   String del = await projectBoardController
                       .deleteBoard(widget.proj_board.ProjectID,boardPageHttpClient);
-                  print("DELETED ? : "+del);
                   ArchivedBoards archivedBoards=new ArchivedBoards();
                   if(isArch(widget.proj_board.ProjectID)){
-//                    http.Client client=new http.Client();
                     await archivedBoards.initializeDisplay(boardPageHttpClient);
 
                     setState(() {
                       _isDeleted = true;
                     });
 
-//                    Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) => archivedBoards),
                     );
                   }else{
-//                    http.Client client=new http.Client();
                     await homePage.initializeDisplay(boardPageHttpClient);
 
                     setState(() {

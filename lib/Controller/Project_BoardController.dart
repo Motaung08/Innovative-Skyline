@@ -42,9 +42,13 @@ class Project_BoardController {
 
     // Starting Web API Call.
     var response = await client.post(url, body: json.encode(data));
-//    print(response.body);
-//      var message="dummy message";
-    var message = jsonDecode(response.body);
+
+    var message;
+    if(response!=null && response.body!=""){
+      print("CREATE RESPONSE: "+response.body.toString());
+      message = jsonDecode(response.body);
+    }
+
     return message;
 
   }
@@ -73,9 +77,6 @@ class Project_BoardController {
 
         // Starting Web API Call.
         var response = await httpClient.post(url, body: data);
-//        print('User: '+UserTypeID.toString()+", Stud no: "+personNo.toLowerCase()+", StaffNo: "+personNo.toLowerCase()+" Yields: "+response.body);
-        // Getting Server response into variable.
-
 
     if(response!=null){
       print("Yo RESP NOT NULL");

@@ -10,26 +10,8 @@ import 'package:postgrad_tracker/View/Login.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 
 
-
-class Post {
-  dynamic data;
-  Post.fromJson(this.data);
-}
-
 class MockClient extends Mock implements http.Client{}
 
-Future<Post> fetchPost(http.Client client) async {
-  final response =
-  await client.get('https://lamp.ms.wits.ac.za/~s1611821/register_user.php');
-
-  if (response.statusCode == 200) {
-    // If the call to the server was successful, parse the JSON.
-    return Post.fromJson(json.decode(response.body));
-  } else {
-    // If that call was not successful, throw an error.
-    throw Exception('Failed to load post');
-  }
-}
 
 Widget makeWidgetTestable(Widget widget){
   return MaterialApp(
@@ -59,28 +41,12 @@ main() {
           http.Response('{"title: RegisterChoice"}', 200));
     });
 
-    test(
-        'returns a Post if the Register http call completes successfully', () async {
-      final client = MockClient();
-
-      when(client.get(
-          'https://lamp.ms.wits.ac.za/~s1611821/register_user.php'))
-          .thenAnswer((_) async => http.Response('Not Found', 404));
-
-      expect(fetchPost(client), throwsException);
-    });
 
     testWidgets('All input feild and button widgets should be on screen', (
         WidgetTester tester) async {
       await tester.pumpWidget(makeWidgetTestable(LoginPage()));
 
     });
-//    testWidgets('All input feild and button widgets should be on screen', (
-//        WidgetTester tester) async {
-//      await tester.pumpWidget(makeWidgetTestable(StudentRegisterPage()));
-//
-//    });
-
 
     testWidgets('All input feild and button widgets should be on screen', (
         WidgetTester tester) async {
@@ -88,10 +54,6 @@ main() {
 
     });
 
-    testWidgets('find by tap', (WidgetTester tester) async {
-
-
-    });
 
 
 

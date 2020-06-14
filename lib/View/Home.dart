@@ -333,6 +333,7 @@ class _MyHomePageState extends State<HomePage> {
                       :
                       await projectBoardController.createBoard(
                           projectBoard, user.userTypeID, supervisor.staffNo,createClient);
+
                       List<List<Project_Board>> allBoards = user.userTypeID==1?
                       await projectBoardController.ReadBoards(
                               user.userTypeID, student.studentNo,createClient)
@@ -368,7 +369,12 @@ class _MyHomePageState extends State<HomePage> {
                       setState(() {
                         widget.isCreateOpen=false;
                       });
-                      Navigator.popAndPushNamed(context, '/Home');
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+//                      Navigator.popAndPushNamed(context, '/Home');
                       setState(() {});
                     }
                   },
@@ -389,11 +395,7 @@ class _MyHomePageState extends State<HomePage> {
     user = new User();
     supervisor = new Supervisor();
     student = new Student();
-    //project_board=new Project_Board();
-//    studentController = new StudentController();
-//    supervisorController = new SupervisorController();
-//    userController = new UserController();
-    //project_boardController=new Project_BoardController();
+
     Navigator.of(context).pop();
     Navigator.push(
       context,

@@ -17,9 +17,6 @@ class AssignmentController {
    */
   // ignore: non_constant_identifier_names
   Future<String> createAssignment(int OtherUserType, String OtherPersonNo, int ProjectID, int AccessID,{url='http://10.100.15.38/createAssignment.php'}) async{
-//    var url =
-////        'https://witsinnovativeskyline.000webhostapp.com/createAssignment.php';
-//        'http://10.100.15.38/createAssignment.php';
 
     var data={
       'UserTypeID' : OtherUserType.toString(),
@@ -34,14 +31,12 @@ class AssignmentController {
     // Getting Server response into variable.
     // ignore: non_constant_identifier_names
     var Response = jsonDecode(response.body);
-    print(Response);
+
     return Response;
   }
 
   // ignore: non_constant_identifier_names
   Future<List> ReadAssignment(int UserType, String OtherPersonNo, int ProjectID,{url='http://10.100.15.38/ReadAssignment.php'}) async{
-//    var url =
-//        'https://witsinnovativeskyline.000webhostapp.com/ReadAssignment.php';
 
     var data={
       'UserTypeID' : UserType.toString(),

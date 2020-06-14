@@ -2,9 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/AssignmentController.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Controller/Project_BoardController.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/ArchivedBoards.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/View/Board.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Board.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/main_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/main_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/List.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/profile/studentsupervisor/StudentSuperVisorRegister.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/View/resetpassword.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/resetpassword.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/AssignmentController_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ControllerTests/ListController_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/ControllerTests/ListController_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/View/ArchivedBoards_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/ArchivedBoards_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/View/Board_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/Board_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/View/Home_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/Home_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/View/StudSupVisorRegister_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/StudSupVisorRegister_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +28,7 @@
     <option name="autoscrollToSource" value="true" />
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_24" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -58,52 +71,38 @@
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\lib\View" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Flutter Test.All pages should be accessed!!!">
+  <component name="RunManager" selected="Flutter Test.tests in Home_test.dart">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="All main tests" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All main tests" />
-      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
+    <configuration name="tests in ArchivedBoards_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/View/ArchivedBoards_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="All pages should be accessed!!!" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="All pages should be accessed!!!" />
-      <option name="testFile" value="$PROJECT_DIR$/test/main_test.dart" />
+    <configuration name="tests in Board_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/View/Board_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="tests in Student_register_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/View/Student_register_test.dart" />
+    <configuration name="tests in Home_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/View/Home_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="tests in profile_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/profile_test.dart" />
+    <configuration name="tests in UserController_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/ControllerTests/UserController_test.dart" />
       <method v="2" />
     </configuration>
-    <configuration name="tests in user_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testFile" value="$PROJECT_DIR$/test/user_test.dart" />
+    <configuration name="tests in login_test.dart" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testFile" value="$PROJECT_DIR$/test/View/login_test.dart" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter Test.All pages should be accessed!!!" />
-        <item itemvalue="Flutter Test.All main tests" />
-        <item itemvalue="Flutter Test.tests in Student_register_test.dart" />
-        <item itemvalue="Flutter Test.tests in user_test.dart" />
-        <item itemvalue="Flutter Test.tests in profile_test.dart" />
+        <item itemvalue="Flutter Test.tests in Home_test.dart" />
+        <item itemvalue="Flutter Test.tests in login_test.dart" />
+        <item itemvalue="Flutter Test.tests in Board_test.dart" />
+        <item itemvalue="Flutter Test.tests in ArchivedBoards_test.dart" />
+        <item itemvalue="Flutter Test.tests in UserController_test.dart" />
       </list>
     </recent_temporary>
   </component>
@@ -117,13 +116,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1591344425524</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Student reg fix attempt.">
-      <created>1591958354980</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1591958354980</updated>
     </task>
     <task id="LOCAL-00029" summary="Supervisor login url fix.">
       <created>1591965780006</created>
@@ -461,7 +453,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592170226980</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Student register validation tests">
+      <created>1592170631635</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1592170631635</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -500,11 +499,6 @@
                 </map>
               </option>
             </State>
-          </value>
-        </entry>
-        <entry key="MAIN">
-          <value>
-            <State />
           </value>
         </entry>
       </map>
@@ -565,11 +559,11 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="753" y="198" key="#com.intellij.tools.ToolEditorDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591344883272" />
-    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1592170226342">
+    <state x="563" y="134" key="CommitChangelistDialog2" timestamp="1592177385779">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="310" y="0" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1592123504757" />
-    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592170226342" />
+    <state x="563" y="134" key="CommitChangelistDialog2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592177385779" />
     <state x="93" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1592079985253">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -579,49 +573,49 @@
     </state>
     <state x="612" y="87" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1592114732905" />
     <state x="765" y="109" key="FileChooserDialogImpl/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592145405433" />
-    <state width="1551" height="294" key="GridCell.Tab.0.bottom" timestamp="1592170615137">
+    <state width="1551" height="294" key="GridCell.Tab.0.bottom" timestamp="1592177358777">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1167" height="297" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1592135808195" />
-    <state width="1551" height="294" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592170615137" />
-    <state width="1551" height="294" key="GridCell.Tab.0.center" timestamp="1592170615136">
+    <state width="1551" height="294" key="GridCell.Tab.0.bottom/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592177358777" />
+    <state width="1551" height="294" key="GridCell.Tab.0.center" timestamp="1592177358777">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1167" height="297" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1592135808195" />
-    <state width="1551" height="294" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592170615136" />
-    <state width="1551" height="294" key="GridCell.Tab.0.left" timestamp="1592170615136">
+    <state width="1551" height="294" key="GridCell.Tab.0.center/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592177358777" />
+    <state width="1551" height="294" key="GridCell.Tab.0.left" timestamp="1592177358777">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1167" height="297" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1592135808194" />
-    <state width="1551" height="294" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592170615136" />
-    <state width="1551" height="294" key="GridCell.Tab.0.right" timestamp="1592170615137">
+    <state width="1551" height="294" key="GridCell.Tab.0.left/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592177358777" />
+    <state width="1551" height="294" key="GridCell.Tab.0.right" timestamp="1592177358777">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1167" height="297" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1592135808195" />
-    <state width="1551" height="294" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592170615137" />
+    <state width="1551" height="294" key="GridCell.Tab.0.right/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592177358777" />
     <state x="540" y="283" key="IDE.errors.dialog" timestamp="1591346336430">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="540" y="283" key="IDE.errors.dialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591346336430" />
-    <state x="184" y="90" key="MergeDialog" timestamp="1591430929913">
+    <state x="184" y="90" key="MergeDialog" timestamp="1592177450600">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="184" y="90" key="MergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591430929913" />
-    <state x="672" y="256" key="MultipleFileMergeDialog" timestamp="1592161382956">
+    <state x="184" y="90" key="MergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592177450600" />
+    <state x="672" y="256" key="MultipleFileMergeDialog" timestamp="1592177455717">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="538" y="205" key="MultipleFileMergeDialog/0.0.1536.864@0.0.1536.864" timestamp="1592114701713" />
-    <state x="672" y="256" key="MultipleFileMergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592161382956" />
+    <state x="672" y="256" key="MultipleFileMergeDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592177455717" />
     <state x="486" y="14" width="914" height="707" key="SettingsEditor" timestamp="1592162452212">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="389" y="11" width="914" height="707" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1592114734222" />
     <state x="486" y="14" width="998" height="708" key="SettingsEditor/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592162452212" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1592170228680">
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2" timestamp="1592170633362">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="442" y="218" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1592123508944" />
-    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592170228680" />
+    <state x="552" y="273" key="Vcs.Push.Dialog.v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592170633362" />
     <state x="92" y="92" width="1736" height="896" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1591700910038">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -636,11 +630,11 @@
     </state>
     <state x="525" y="291" key="com.intellij.ide.util.TipDialog/0.0.1536.864@0.0.1536.864" timestamp="1592114514701" />
     <state x="656" y="364" key="com.intellij.ide.util.TipDialog/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1591866987705" />
-    <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592161371674">
+    <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592177389368">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="615" y="366" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1592114688340" />
-    <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592161371674" />
+    <state x="769" y="457" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.0.1536.864/0.0.1920.1080@0.0.1920.1080" timestamp="1592177389368" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Innovative_Skyline$AssignmentTypeController_test_dart.json" NAME="AssignmentTypeController_test.dart Coverage Results" MODIFIED="1591888288230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="DartCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" CONTEXT_FILE_PATH="$PROJECT_DIR$/test/ControllerTests/AssignmentTypeController_test.dart" />
