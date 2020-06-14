@@ -81,8 +81,15 @@ class HomePage extends StatefulWidget {
 //
 //      await t
 ////    testBoard.ProjectID=566;
-//    List<Project_Board> testL= List<Project_Board>();
-//    testL.add(testBoard);
+    List<Project_Board> testL= List<Project_Board>();
+    testL.add(testBoard);
+
+    if(testL.isEmpty == false){
+      print(testL[0]);
+    }
+
+    testBoard = user.boards.last;
+    listDynamic.add(new DynamicWidget(aboard: testBoard));
 
 
   }
