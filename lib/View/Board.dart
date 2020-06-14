@@ -112,33 +112,31 @@ class Board extends StatefulWidget {
     else{
       user.boards[boardIndex].boardLists =
       await listController.ReadLists(ProjectID,client);
-      print("Sleep ...");
-      print('populateListDisplay() called');
-//      if (user.boards[boardIndex].boardLists != null) {
-//        print('Initializing board\'s list display! ##################');
-//        stiles.clear();
-//        listDynamic.clear();
-//        int crossCount = kIsWeb == true ? 1 : 2;
-//        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
-//          double mainAxis = 0.5;
-//          for (int m = 0;
-//          m < user.boards[boardIndex].boardLists[i].listTasks.length;
-//          m++) {
-//            double addNum = kIsWeb == true ? .225 : .52;
-//            mainAxis += addNum;
-//          }
-//          DynamicList dynamicCreatedList =
-//          new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
-//
-//          listDynamic.add(dynamicCreatedList);
-//
-//          stiles.add(StaggeredTile.count(
-//              1,
-//              kIsWeb == false
-//                  ? user.boards[boardIndex].boardLists[i].listTasks.length + 1.3
-//                  : mainAxis));
-//        }
-//      }
+      if (user.boards[boardIndex].boardLists != null) {
+        print('Initializing board\'s list display! ##################');
+        stiles.clear();
+        listDynamic.clear();
+        int crossCount = kIsWeb == true ? 1 : 2;
+        for (int i = 0; i < user.boards[boardIndex].boardLists.length; i++) {
+          double mainAxis = 0.5;
+          for (int m = 0;
+          m < user.boards[boardIndex].boardLists[i].listTasks.length;
+          m++) {
+            double addNum = kIsWeb == true ? .225 : .52;
+            mainAxis += addNum;
+          }
+          DynamicList dynamicCreatedList =
+          new DynamicList(aList: user.boards[boardIndex].boardLists[i]);
+
+          listDynamic.add(dynamicCreatedList);
+
+          stiles.add(StaggeredTile.count(
+              1,
+              kIsWeb == false
+                  ? user.boards[boardIndex].boardLists[i].listTasks.length + 1.3
+                  : mainAxis));
+        }
+      }
     }
 
 
