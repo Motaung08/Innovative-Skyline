@@ -72,11 +72,10 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
         });
       }
 
-      if(selectDate(context)!=null){
-        print("");
-        setState(() {
 
-        });
+      if(selectDate(context)!=null){
+        print(_date.toString());
+        setState(() {});
         await selectDate(context);
       }
 
