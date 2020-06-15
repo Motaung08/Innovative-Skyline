@@ -165,7 +165,17 @@ void main() {
 
       //End Board Create, now to edit
 
+      final board=find.byType(ListTile).last;
+      expect(board, findsOneWidget);
 
+
+      final edit=find.byType(ListTile).last;
+      expect(edit, findsOneWidget);
+
+
+
+//      final editDialog = find.byKey(Key('ProjectTitleInput'));
+//      expect(editDialog, findsOneWidget);
 
 
     });

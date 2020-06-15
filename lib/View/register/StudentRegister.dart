@@ -17,6 +17,7 @@ import '../../main.dart';
 http.Client studRegClient=new http.Client();
 class StudentRegisterPage extends StatefulWidget {
   bool isHidden = true;
+  bool isHiddenConf = true;
   Future initialize(http.Client client) async {
     await studentTypeController.getTypes(client);
     await degreeController.getDegrees(client);
@@ -266,11 +267,11 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
     });
   }
 
-  bool _isHiddenConf = true;
+
 
   void toggleVisibilityConf() {
     setState(() {
-      _isHiddenConf = !_isHiddenConf;
+      widget.isHiddenConf = !widget.isHiddenConf;
     });
   }
 
@@ -419,48 +420,6 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
           );
 
     RegistrationDateController.text = _date.toString();
-//    final dateform =  Stack(
-//      children: <Widget>[
-//        Container(
-//          width: double.infinity,
-//          height: 60,
-//          margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-//          //padding: EdgeInsets.only(bottom: 10),
-//          decoration: BoxDecoration(
-//            border: Border.all(
-//                color: Colors.grey, width: 1),
-//            borderRadius: BorderRadius.circular(32),
-//            shape: BoxShape.rectangle,
-//          ),
-//          child:  Padding(
-//            padding: EdgeInsets.only(left: 20, right: 20,),
-//            child: DateTimeFormField(
-//              initialValue: null,
-//              label: "",
-//              validator: (DateTime dateTime) {
-//                if (dateTime == null) {
-//                  return "Date Time Required";
-//                }
-//                return null;
-//              },
-//              onSaved: (DateTime dateTime) => _dateTime = dateTime,
-//            ),
-//          )
-//        ),
-//        Positioned(
-//            left: 10,
-//            top: 12,
-//            child: Container(
-//              padding: EdgeInsets.only(bottom: 10, left: 3, right: 0),
-//              margin: EdgeInsets.only(left: 10),
-//              color: Colors.white,
-//              child: Text(
-//                'Date Registered: ',
-//                style: TextStyle(color: Colors.black.withOpacity(.65)),
-//              ),
-//            ))
-//      ],
-//    );
 
     // ignore: non_constant_identifier_names
     final DateSelection =
@@ -547,14 +506,14 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
               }
               return null;
             },
-            obscureText: _isHiddenConf,
+            obscureText: widget.isHiddenConf,
             onChanged: (val) {
               setState(() => ConfirmPass = val);
             },
             style: style,
             decoration: InputDecoration(
                 suffixIcon: IconButton(
-                    icon: _isHiddenConf
+                    icon: widget.isHiddenConf
                         ? Icon(Icons.visibility_off)
                         : Icon(Icons.visibility),
                     onPressed: toggleVisibilityConf),
@@ -592,6 +551,7 @@ class _StudentRegisterPageState extends State<StudentRegisterPage> {
                             "Enter the registration date of your current postgraduate degree so that deadlines may be calculated."),
                         actions: <Widget>[
                           FlatButton(
+                            key: Key('NoDateOk'),
                             child: new Text("OK"),
                             onPressed: () {
                               setState(() {

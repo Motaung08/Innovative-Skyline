@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
+import 'package:postgrad_tracker/View/resetpassword.dart';
 import 'package:postgrad_tracker/main.dart';
 import 'package:http/http.dart' as http;
 
@@ -58,7 +59,11 @@ class LoginPageState extends State<LoginPage> {
             child: FlatButton(
               key: Key("ForgotPasswordInput"),
               onPressed: () {
-                Navigator.pushNamed(context, '/ResetPassword');
+//                Navigator.pushNamed(context, '/ResetPassword');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (BuildContext context) => ResetPasswordView()),
+                );
               },
               textColor: Color(0xff009999),
               child: Text('Forgot Password?'),

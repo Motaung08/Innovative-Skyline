@@ -27,6 +27,8 @@ bool _isDeleted;
 class HomePage extends StatefulWidget {
 
   bool isCreateOpen = false;
+  bool isEditOpen=false;
+  bool isConfDelOpen=false;
   DateTime startDate;
   DateTime endDate;
 //  final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -49,7 +51,6 @@ class HomePage extends StatefulWidget {
   }
 
   Future<void> initializeDisplay(http.Client client) async {
-    //http.Client client=new http.Client();
     createClient=client;
     await initialize(client);
 
@@ -69,28 +70,6 @@ class HomePage extends StatefulWidget {
     else{
       _isDeleted=true;
     }
-
-    Project_Board testBoard = Project_Board();
-    testBoard.Project_Title="Last minutes";
-    testBoard.Project_Description='Things will workout!!!';
-    testBoard.Project_StartDate= DateTime.now();
-    testBoard.Project_EndDate= DateTime.now();
-
-//    Project_BoardController tester = Project_BoardController();
-////    await tester.createBoard(testBoard, user.userTypeID, '', client);
-//
-//      await t
-////    testBoard.ProjectID=566;
-    List<Project_Board> testL= List<Project_Board>();
-    testL.add(testBoard);
-
-    if(testL.isEmpty == false){
-      print(testL[0]);
-    }
-
-    testBoard = user.boards.last;
-    listDynamic.add(new DynamicWidget(aboard: testBoard));
-
 
   }
 
@@ -340,31 +319,19 @@ class _MyHomePageState extends State<HomePage> {
                       :
                       await projectBoardController.ReadBoards(
                           user.userTypeID, supervisor.staffNo,createClient);
-//                      print("I am ere ........*****");
 
                       if (allBoards.isEmpty == false) {
-//                        print("I am NOW ere ........*****");
-//                        print("I am NOW ere ........*****");
-                      print(allBoards[0]);
-                        if (allBoards[0] == null) {
-                          user.boards = null;
-                        } else {
-                          print("SETTING BOARDS........***** ");
+                        if (allBoards[0] != null) {
                           user.boards = allBoards[0];
                         }
-                        if (allBoards[1] == null) {
-                          user.archivedBoards = null;
-                        } else {
+                        if (allBoards[1] != null) {
                           user.archivedBoards = allBoards[1];
                         }
-                      } else {
-                        user.boards = null;
-                        user.archivedBoards = null;
                       }
                       projectBoard = user.boards.last;
                       listDynamic.add(new DynamicWidget(aboard: projectBoard));
                       boardTitle = "";
-                      //http.Client client=new http.Client();
+
                       await homePage.initializeDisplay(createClient);
                       setState(() {
                         widget.isCreateOpen=false;
@@ -608,10 +575,6 @@ class DynamicWidget extends StatefulWidget {
 
   DynamicWidget({Key key, @required this.aboard}) : super(key: key);
 
-  popLists() async {
-    aboard.boardLists = await listController.ReadLists(aboard.ProjectID,createClient);
-  }
-
   @override
   _DynamicWidgetState createState() => _DynamicWidgetState();
 }
@@ -652,7 +615,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
   Widget build(BuildContext context) {
 
     determineAccess();
-    //widget.popLists();
+
     Project_BoardController projectBoardController =
         new Project_BoardController();
     TextEditingController descriptionController = new TextEditingController();
@@ -678,7 +641,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
           firstDate: new DateTime(2000),
           lastDate: new DateTime(2030));
 
-      if (picked != null && picked != DateTime.now()) {
+      if (picked != null) {
         setState(() {
           _startDate = picked;
           ChangedStart = true;
@@ -695,7 +658,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
           firstDate: new DateTime(2000),
           lastDate: new DateTime(2030));
 
-      if (picked != null && picked != DateTime.now()) {
+      if (picked != null) {
         setState(() {
           _endDate = picked;
           ChangedEnd = true;
@@ -771,6 +734,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
     }
 
     Future<String> editBoardAlertDialog(BuildContext context) {
+      print("OPENED EDIT!");
       TextEditingController titleController = new TextEditingController();
       descriptionController.text = widget.aboard.Project_Description;
       if (widget.aboard.Project_StartDate != null) {
@@ -806,6 +770,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                           Container(
                             margin: EdgeInsets.all(10),
                             child: TextFormField(
+                              key: Key('ProjectTitleInput'),
                               controller: titleController,
                               decoration: InputDecoration(
                                   //contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -1040,8 +1005,8 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                 },
               ),
               onTap: () async {
-                await widget.popLists();
 
+                widget.aboard.boardLists = await listController.ReadLists(widget.aboard.ProjectID,createClient);
                 Board boardPage = new Board();
                 boardPage.proj_board = widget.aboard;
                 http.Client client=new http.Client();
@@ -1090,7 +1055,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                       },
                     ),
                     onTap: () async {
-                      await widget.popLists();
+                      widget.aboard.boardLists = await listController.ReadLists(widget.aboard.ProjectID,createClient);
                       //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
                       Board boardPage = new Board(
                         proj_board: widget.aboard,

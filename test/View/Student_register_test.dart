@@ -115,15 +115,16 @@ void main(){
       expect(find.text('Invalid student email address'),findsOneWidget);
       expect(find.text('Passwords must match'),findsOneWidget);
 
-      await tester.enterText(email, 'supInput@wits.ac.za');
+      await tester.enterText(email, 'studInput@students.ac.za');
       await tester.enterText(confirmPass, '123456AQ');
 
-
-
-//      await tester.tap(registerButton);
-//      await tester.pump();
+      await tester.tap(registerButton);
+      await tester.pump();
 //
-//      expect(formKey.currentState.validate(), isTrue);
+//      expect(formKey.currentState.validate(), isFalse);
+
+//      await tester.tap(find.text('Enter the registration date of your current postgraduate degree so that deadlines may be calculated.'));
+//      await tester.pump();
 
 
 
