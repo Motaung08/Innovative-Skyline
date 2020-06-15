@@ -1,3 +1,4 @@
-#ignore:
-#  - 'lib/View/Board.dart'
-#  - 'lib/View/ArchivedBoards.dart'
+ignore:
+  - 'lib/View/Home.dart'
+  - 'lib/View/ArchivedBoards.dart'
+  - 'lib/View/Login.dart'

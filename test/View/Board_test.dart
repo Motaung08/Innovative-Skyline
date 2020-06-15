@@ -34,7 +34,8 @@ void main() {
               'Password': 'Meghan'
             })).thenAnswer((_) async =>
             http.Response(
-                '[{"UserID":"48","Email":"1713445@students.wits.ac.za","Password":"\$2y\$10\$gxaTrZTzD0L.LGCrBtKMZeaLcWKimeWN76KaSpMlthe6M9ARFFoYG","UserTypeId":"1"}]',
+                '[{"UserID":"48","Email":"1713445@students.wits.ac.za",'
+                    '"Password":"\$2y\$10\$gxaTrZTzD0L.LGCrBtKMZeaLcWKimeWN76KaSpMlthe6M9ARFFoYG","UserTypeId":"1"}]',
                 200
             ));
 
@@ -73,7 +74,9 @@ void main() {
             'http://10.100.15.38/viewStudentProfile.php', body: data))
             .thenAnswer((_) async =>
             http.Response(
-                '[{"StudentNo":"1713445","Student_FirstName":"Meghan","Student_LastName":"Sinclair-Black","Student_Email":"1713445@students.wits.ac.za","Degree_ID":"1","Student_RegistrationDate":"2021-01-01","StudentTypeID":"1"}]'
+                '[{"StudentNo":"1713445","Student_FirstName":"Meghan",'
+                    '"Student_LastName":"Sinclair-Black","Student_Email":"1713445@students.wits.ac.za","Degree_ID":"1",'
+                    '"Student_RegistrationDate":"2021-01-01","StudentTypeID":"1"}]'
                 , 200
             ));
 
@@ -96,7 +99,16 @@ void main() {
       };
       when(client.post('http://10.100.15.38/ReadBoards.php', body: data))
           .thenAnswer((_) async => http.Response(
-          '[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":"This board is a default board created for testing purposes. It should not be deleted.","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"},{"ProjectID":"707","Project_Title":"a","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"708","Project_Title":"b","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"0"}]'
+          '[{"ProjectID":"55","Project_Title":"Default test board",'
+              '"Project_Description":'
+              '"This board is a default board created for testing purposes. It should not be deleted.","Project_StartDate":null,'
+              '"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},'
+              '{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,'
+              '"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"},'
+              '{"ProjectID":"707","Project_Title":"a","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,'
+              '"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},'
+              '{"ProjectID":"708","Project_Title":"b","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1",'
+              '"AccessLevelID":"4","AssignmentActive":"0"}]'
           ,200));
       Project_BoardController project_boardController=new Project_BoardController();
       List allBoards=await project_boardController.ReadBoards(1, personNo, client);

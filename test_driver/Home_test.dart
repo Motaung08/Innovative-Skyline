@@ -15,8 +15,8 @@ import 'package:postgrad_tracker/Model/Supervisor.dart';
 import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/main.dart';
-import '../ControllerTests/TaskController_test.dart';
-import '../Models_test.dart';
+import '../test/ControllerTests/TaskController_test.dart';
+import '../test/Models_test.dart';
 import 'package:http/http.dart' as http;
 
 class MockClient extends Mock implements http.Client {}
@@ -186,6 +186,10 @@ void main() {
 
       await tester.tap(profile);
 
+      user.userTypeID=2;
+
+      await tester.tap(profile);
+
     });
 
     testWidgets('View Archived', (WidgetTester tester) async {
@@ -240,7 +244,6 @@ void main() {
       expect(supervisor.email , isNull);
       expect(student.email , isNull);
       expect(homePage.startDate,isNull );
-
 
     });
 
