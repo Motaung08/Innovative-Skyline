@@ -118,6 +118,8 @@ void main(){
       await tester.enterText(email, 'supInput@wits.ac.za');
       await tester.enterText(confirmPass, '123456AQ');
 
+
+
 //      await tester.tap(registerButton);
 //      await tester.pump();
 //

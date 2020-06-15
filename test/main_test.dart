@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:postgrad_tracker/View/ArchivedBoards.dart';
 import 'package:postgrad_tracker/View/Board.dart';
 import 'package:postgrad_tracker/View/Home.dart';
+import 'package:postgrad_tracker/View/profile/supervisor/ViewSupProfile.dart';
 import 'package:postgrad_tracker/View/register/StudentRegister.dart';
 import 'package:postgrad_tracker/View/resetpassword.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
@@ -23,7 +24,8 @@ void main(){
   group("All main tests", ()
   {
     testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(StudentSupChoicePage()));
+      await tester.pumpWidget(makeWidgetTestable(ViewSupProfilePage
+        ()));
     });
 
     testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
@@ -38,9 +40,9 @@ void main(){
       await tester.pumpWidget(makeWidgetTestable(ResetPasswordView()));
     });
 
-//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-//      await tester.pumpWidget(makeWidgetTestable(StudentRegisterPage()));
-//    });
+    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+      await tester.pumpWidget(makeWidgetTestable(ViewSupProfilePage()));
+    });
 
     testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
       await tester.pumpWidget(makeWidgetTestable(ArchivedBoards()));

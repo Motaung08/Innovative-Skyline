@@ -798,6 +798,7 @@ class _BoardState extends State<Board> {
   determineAccess() {
     if (_isDeleted == false) {
       Project_Board pb;
+
       bool _isArchived=isArch(widget.proj_board.ProjectID);
       if(_isArchived){
          pb =

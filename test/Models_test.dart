@@ -15,7 +15,7 @@ import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/Model/UserType.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Widget makeWidgetTestable(Widget widget){
+Widget   makeWidgetTestable(Widget widget){
   return MaterialApp(
     home: DefaultAssetBundle(bundle: rootBundle,child: widget),
   );
