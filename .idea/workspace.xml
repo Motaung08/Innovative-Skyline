@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c0754d0-f75b-4e5a-b1bd-3328b1abb34a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/codecov.yml" beforeDir="false" afterPath="$PROJECT_DIR$/codecov.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/lcov.info" beforeDir="false" afterPath="$PROJECT_DIR$/coverage/lcov.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/View/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/View/Home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/View/Board_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/Board_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/View/Home_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/Home_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/View/Board_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test_driver/Board_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_driver/ArchivedBoards_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/View/ArchivedBoards_test.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +54,7 @@
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\lib\View" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test_driver" />
       <recent name="$PROJECT_DIR$/test/View" />
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\View" />
       <recent name="C:\Users\MSI\Documents\GitHub\SD\Innovative-Skyline\test\ControllerTests" />
