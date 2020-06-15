@@ -42,9 +42,19 @@ class HomePage extends StatefulWidget {
       if (allBoards[0] != null) {
         user.boards = allBoards[0];
       }
+      else{
+        user.boards = null;
+      }
       if (allBoards[1] != null) {
         user.archivedBoards = allBoards[1];
       }
+      else {
+        user.archivedBoards=null;
+      }
+    }
+    else{
+      user.boards = null;
+      user.archivedBoards=null;
     }
 
 

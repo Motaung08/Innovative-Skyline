@@ -43,9 +43,6 @@ List<DynamicList> listDynamic = [];
 http.Client boardClient=new http.Client();
 // ignore: must_be_immutable
 class Board extends StatefulWidget {
-  //1713445@students.wits.ac.za
-
-//  http.Client boardPageHttpClient = new http.Client();
 
   // ignore: non_constant_identifier_names
   Project_Board proj_board;
@@ -86,7 +83,6 @@ class Board extends StatefulWidget {
       await listController.ReadLists(ProjectID,client);
 
       if (user.archivedBoards[boardIndex].boardLists != null) {
-        print('Initializing archived board\'s list display! ##################');
         stiles.clear();
         listDynamic.clear();
         int crossCount = kIsWeb == true ? 1 : 2;
@@ -428,20 +424,36 @@ class _BoardState extends State<Board> {
 
                   String del = await projectBoardController
                       .deleteBoard(widget.proj_board.ProjectID,boardPageHttpClient);
-                  ArchivedBoards archivedBoards=new ArchivedBoards();
+
                   if(isArch(widget.proj_board.ProjectID)){
-                    await archivedBoards.initializeDisplay(boardPageHttpClient);
 
-                    setState(() {
-                      _isDeleted = true;
-                    });
+                    int boardIndex;
+                    for (int j = 0; j < user.archivedBoards.length; j++) {
+                      if (user.archivedBoards[j].ProjectID ==
+                          widget.proj_board.ProjectID) {
+                        boardIndex = j;
+                      }
+                    }
+                    await projectBoardController
+                        .deleteBoard(widget.proj_board.ProjectID,archiveClient);
 
+                  listArchDynamic.removeAt(boardIndex);
+                    //http.Client client = new http.Client();
+                    ArchivedBoards archivedBoards=new ArchivedBoards();
+
+                    archivedBoards.initializeDisplay(boardPageHttpClient);
+
+//                    Navigator.pop(context);
+                    Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) => archivedBoards),
                     );
-                  }else{
+                    setState(() {});
+
+                  }
+                  else{
                     await homePage.initializeDisplay(boardPageHttpClient);
 
                     setState(() {
@@ -1138,7 +1150,10 @@ class _BoardState extends State<Board> {
                                                             aStudent, context);
                                                       },
                                                     ),
-                                                    trailing: IconButton(
+                                                    trailing: aStudent.studentNo ==
+                                                        student.studentNo &&
+                                                        student != null ? null :
+                                                    IconButton(
                                                       icon: Icon(Icons.clear),
                                                       onPressed: () async {
                                                         print("DELETE...");
@@ -1215,7 +1230,9 @@ class _BoardState extends State<Board> {
                                                               aSup, context);
                                                         },
                                                       ),
-                                                      trailing: IconButton(
+                                                      trailing: (aSup.staffNo ==
+                                                          supervisor.staffNo &&
+                                                          supervisor != null)? null: IconButton(
                                                         icon: Icon(Icons.clear),
                                                         onPressed: () async {
                                                           await assignmentController
@@ -1273,6 +1290,7 @@ class _BoardState extends State<Board> {
 
     Future<String> shareAlertDialog(BuildContext context, http.Client httpClient) async {
       String foundUser = "";
+      emailController.text='';
 
       return showDialog(
           context: context,
@@ -2699,7 +2717,10 @@ class _DynamicListState extends State<DynamicList> {
               fontFamily: 'Montserrat',
               fontSize: 14.0,
               color: Colors.black,
-              fontWeight: FontWeight.bold)),
+              fontWeight: FontWeight.bold),
+//        overflow: TextOverflow.ellipsis,
+
+      ),
     );
 
     Future choiceAction(String choice) async {
@@ -2740,24 +2761,30 @@ class _DynamicListState extends State<DynamicList> {
               mainAxisAlignment: MainAxisAlignment.start,
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                titleView,
-                PopupMenuButton<String>(
-                  enabled: _isEditDisabled == true ? false : true,
-                  onSelected: _isEditDisabled == true ? null : choiceAction,
-                  itemBuilder: (BuildContext context) {
-                    return Constants.choices.map((String choice) {
-                      return PopupMenuItem<String>(
-                        value: choice,
-                        child: choice != "Delete"
-                            ? Text(choice)
-                            : Text(
-                                choice,
-                                style: TextStyle(color: Colors.red),
-                              ),
-                      );
-                    }).toList();
-                  },
+                Expanded(
+                  child: titleView,
                 ),
+                Expanded(
+                  child: PopupMenuButton<String>(
+                    enabled: _isEditDisabled == true ? false : true,
+                    onSelected: _isEditDisabled == true ? null : choiceAction,
+                    itemBuilder: (BuildContext context) {
+                      return Constants.choices.map((String choice) {
+                        return PopupMenuItem<String>(
+                          value: choice,
+                          child: choice != "Delete"
+                              ? Text(choice)
+                              : Text(
+                            choice,
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        );
+                      }).toList();
+                    },
+                  ),
+                )
+
+
               ],
             ),
             TaskContainer,

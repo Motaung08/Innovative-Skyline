@@ -25,16 +25,26 @@ class ArchivedBoards extends StatefulWidget {
   Future<void> initialize(http.Client client) async {
     Project_BoardController projectBoardController =
         new Project_BoardController();
+
     List<List<Project_Board>> allBoards =
         await projectBoardController.ReadBoards(
             user.userTypeID, personNo, client);
     if (allBoards.isEmpty == false) {
       if (allBoards[0] != null) {
         user.boards = allBoards[0];
+      }else{
+        user.boards=null;
       }
       if (allBoards[1] != null) {
         user.archivedBoards = allBoards[1];
       }
+      else{
+        user.archivedBoards=null;
+      }
+    }
+    else{
+      user.boards=null;
+      user.archivedBoards=null;
     }
   }
 
@@ -46,10 +56,7 @@ class ArchivedBoards extends StatefulWidget {
         _isDeleted = true;
       } else {
         for (int i = 0; i < user.archivedBoards.length; i++) {
-//          print("Board ID: " +
-//              user.archivedBoards[i].ProjectID.toString() +
-//              ", Title: " +
-//              user.archivedBoards[i].Project_Title);
+
           listArchDynamic
               .add(new DynamicWidget(aboard: user.archivedBoards[i]));
         }
@@ -256,99 +263,8 @@ class _DynamicWidgetState extends State<DynamicWidget> {
     }
   }
 
-  bool _isShareDisabled = false;
-  bool _isEditDisabled = false;
-  determineAccess() {
-    Project_Board pb =
-        user.archivedBoards[getBoardIndex(widget.aboard.ProjectID)];
-    if (pb.AccessLevel == null || pb.AccessLevel == 1) {
-      //Full admin
-      _isShareDisabled = false;
-      _isEditDisabled = false;
-    } else if (pb.AccessLevel == 2) {
-      //Can edit but not share
-      _isShareDisabled = true;
-      _isEditDisabled = false;
-    } else if (pb.AccessLevel == 3) {
-      //Can only view
-      _isShareDisabled = true;
-      _isEditDisabled = true;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    //determineAccess();
-    //widget.popLists();
-    Project_BoardController projectBoardController =
-        new Project_BoardController();
-    TextEditingController descriptionController = new TextEditingController();
-    // ignore: non_constant_identifier_names
-    final Edit_formKey = GlobalKey<FormState>();
-    //int userType=user.userTypeID;
-
-    DateTime _startDate;
-    DateTime _endDate;
-
-    TextStyle datestyle = TextStyle(
-        color: Colors.black.withOpacity(0.65), fontFamily: 'Montserrat');
-
-    Future<String> confirmDeleteAlertDialog(BuildContext context) {
-      return showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(
-                "CONFIRM DELETE ",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-              ),
-              content: Text(
-                "Are you sure you want to delete this board?",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              ),
-              actions: <Widget>[
-                MaterialButton(
-                  elevation: 5.0,
-                  child: Text(
-                    "Yes",
-                    style: TextStyle(color: Colors.red),
-                  ),
-                  onPressed: () async {
-                    int boardIndex;
-                    for (int j = 0; j < user.archivedBoards.length; j++) {
-                      if (user.archivedBoards[j].ProjectID ==
-                          widget.aboard.ProjectID) {
-                        boardIndex = j;
-                      }
-                    }
-                    await projectBoardController
-                        .deleteBoard(widget.aboard.ProjectID,archiveClient);
-
-                    listArchDynamic.removeAt(boardIndex);
-                    http.Client client = new http.Client();
-                    homePage.initializeDisplay(client);
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => homePage),
-                    );
-                    setState(() {});
-                  },
-                ),
-                MaterialButton(
-                  elevation: 5.0,
-                  child: Text("No"),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            );
-          });
-    }
 
     final listReturn = kIsWeb == false
         ? new Container(

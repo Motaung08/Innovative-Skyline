@@ -62,7 +62,7 @@ class _SupervisorRegisterPageState extends State<SupervisorRegisterPage> {
     userA.userTypeID=2;
 
     var registered = await supervisorController.registration(supervisorA, userA);
-
+//    print("IN SUP REG : "+registered);
 
 
 
