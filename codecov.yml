@@ -1,0 +1,5 @@
+ignore:
+  - 'lib/View/Board.dart'
+  - 'lib/View/Home.dart'
+  - 'lib/View/ArchivedBoards.dart'
+  - 'lib/View/login.dart'
