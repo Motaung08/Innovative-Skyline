@@ -362,12 +362,7 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                 widget.aboard.Project_Title,
                 style: widget.style,
               ),
-//        trailing: PopupMenuButton(
-//          itemBuilder: ,
-//
-//        ),
               onTap: () async {
-//          print("BOARD: "+widget.aboard.ProjectID.toString());
                 await widget.popLists();
 
                 Board boardPage = new Board();
@@ -399,19 +394,14 @@ class _DynamicWidgetState extends State<DynamicWidget> {
                         widget.aboard.Project_Title,
                         style: widget.style,
                       ),
-                      //trailing: PopupMenuButton(),
                       onTap: () async {
-                        print("BOARD: " + widget.aboard.ProjectID.toString());
                         await widget.popLists();
-                        print("LISTS IS NULL: " +
-                            (widget.aboard.boardLists == null).toString());
                         //aboard.boardLists = await listController.ReadLists(aboard.ProjectID);
                         Board boardPage = new Board(
                           proj_board: widget.aboard,
                         );
                         await boardPage
                             .populateListDisplay(widget.aboard.ProjectID,archiveClient);
-
                         Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -17,36 +17,36 @@ import 'package:http/http.dart' as http;
 class MockClient extends Mock implements http.Client {}
 
 void main() {
-  group('All pages should be accessed!!!', () {
-    testWidgets('All input feild and button widgets should be on screen',
-            (WidgetTester tester) async {
-          await tester.pumpWidget(makeWidgetTestable(ArchivedBoards()));
-        });
-
-    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(Supervisor()));
-    });
-
-    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(Student()));
-    });
-
-    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(Project_Board()));
-    });
-
-    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
-      await tester.pumpWidget(makeWidgetTestable(HomePage()));
-    });
-
-    testWidgets('find widget by key', (WidgetTester tester) async {
-      final key = Key('key');
-      // await tester.pumpWidget(DynamicWidget(key: key, aboard: aboard));
-      await tester.pumpWidget(MaterialApp(key: key, home: Container()));
-
-      expect(find.byKey(key), findsOneWidget);
-    });
-  });
+//  group('All pages should be accessed!!!', () {
+//    testWidgets('All input feild and button widgets should be on screen',
+//            (WidgetTester tester) async {
+//          await tester.pumpWidget(makeWidgetTestable(ArchivedBoards()));
+//        });
+//
+//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(Supervisor()));
+//    });
+//
+//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(Student()));
+//    });
+//
+//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(Project_Board()));
+//    });
+//
+//    testWidgets('All pages should be accessed!!!', (WidgetTester tester) async {
+//      await tester.pumpWidget(makeWidgetTestable(HomePage()));
+//    });
+//
+//    testWidgets('find widget by key', (WidgetTester tester) async {
+//      final key = Key('key');
+//      // await tester.pumpWidget(DynamicWidget(key: key, aboard: aboard));
+//      await tester.pumpWidget(MaterialApp(key: key, home: Container()));
+//
+//      expect(find.byKey(key), findsOneWidget);
+//    });
+//  });
 
   group('Initialize', () {
     testWidgets('Archive', (WidgetTester tester) async {
@@ -58,7 +58,7 @@ void main() {
       user.userTypeID = 1;
       student.studentNo = '1713445';
       personNo = '1713445';
-//      http.Client httpClient=new http.Client();
+
       http.Client httpClient = new MockClient();
       await tester.pumpWidget(makeWidgetTestable(archivedBoards));
       final noBoardsView = find.byKey(Key('noBoardsView'));

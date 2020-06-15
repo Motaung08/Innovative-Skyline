@@ -10,7 +10,6 @@ import 'package:postgrad_tracker/Controller/UserController.dart';
 import 'package:postgrad_tracker/Model/AssignmentType.dart';
 import 'package:postgrad_tracker/Model/DegreeType.dart';
 import 'package:postgrad_tracker/Model/ListCard.dart';
-import 'package:postgrad_tracker/Model/Project_Board.dart';
 import 'package:postgrad_tracker/Model/Student.dart';
 import 'package:postgrad_tracker/Model/StudentType.dart';
 import 'package:postgrad_tracker/Model/Supervisor.dart';
@@ -26,15 +25,9 @@ import 'package:postgrad_tracker/View/register/StudentRegister.dart';
 import 'package:postgrad_tracker/View/register/StudentSuperVisorRegister.dart';
 import 'package:postgrad_tracker/View/register/SupervisorRegister.dart';
 import 'package:postgrad_tracker/View/resetpassword.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
-//String boardTitle = '';
+
 User user = new User();
-/*TODO these global variables make stuff difficult to test
-/*TODO put the variable in the view in which they are used to make testing possible if you need variables from another view to the mext
-/*TODO you can put them in the constructor of that page */
- */
- */
 
 Supervisor supervisor = new Supervisor();
 Student student = new Student();

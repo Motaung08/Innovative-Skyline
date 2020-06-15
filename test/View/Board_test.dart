@@ -88,7 +88,7 @@ void main() {
     Project_Board tBoard =new Project_Board();
     testWidgets('Initialize', (WidgetTester tester) async {
       final client = new MockClient();
-      personNo='1713445';
+//      personNo='1713445';
       var data = {
         'UserTypeID': 1.toString(),
         'StudentNo': personNo.toLowerCase(),

@@ -56,6 +56,7 @@ void main() {
 
   group('Initialize', () {
     testWidgets('CreateBoard', (WidgetTester tester) async {
+      var data;
       HomePage testHomePage = new HomePage();
       User aUser = new User();
       aUser.email = 'Default@Students.wits.ac.za';
@@ -75,19 +76,25 @@ void main() {
       final homeView = find.byKey(Key('Scaffold'));
       expect(homeView, findsOneWidget);
 
-      var data = {
+      data = {
+        'UserTypeID': 1.toString(),
+        'StudentNo': '1713445'.toLowerCase(),
+        'StaffNo': '1713445'.toLowerCase()
+      };
+      when(httpClient.post('http://10.100.15.38/ReadBoards.php', body: data))
+          .thenAnswer((_) async => http.Response(
+          '[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":"This board is a default board created for testing purposes. It should not be deleted.","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"},{"ProjectID":"707","Project_Title":"a","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"708","Project_Title":"b","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"0"}]'
+          ,200));
+
+
+      data = {
         'UserTypeID': 1.toString(),
         'StudentNo': personNo.toLowerCase(),
         'StaffNo': personNo.toLowerCase()
       };
       when(httpClient.post('http://10.100.15.38/ReadBoards.php', body: data))
           .thenAnswer((_) async => http.Response(
-              '[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":'
-                  '"This board is a default board created for testing purposes.'
-                  ' It should not be deleted.","Project_StartDate":null,"Project_EndDate"'
-                  ':null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},'
-                  '{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,'
-                  '"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"}]',
+              '[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":"This board is a default board created for testing purposes. It should not be deleted.","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"}]',
               200));
 
        data = {
@@ -108,8 +115,7 @@ void main() {
 
       await tester.pumpWidget(makeWidgetTestable(testHomePage));
 
-      final dynamicBoards = find.byKey(Key('DynamicView'));
-//      expect(dynamicBoards,findsOneWidget);
+
 
       expect(testHomePage.isCreateOpen, false);
       await tester.tap(plusButton);
@@ -150,13 +156,16 @@ void main() {
       await tester.enterText(titleInout, "Testing Board Title");
       await tester.pump();
 
-      await tester.press(plusButton);
 
 
+      createClient=httpClient;
 
-//      await tester.tap(createButton);
-//      await tester.pump();
-//      expect(find.text('Enter Board Title'), findsNothing);
+      await tester.tap(createButton);
+      await tester.pump();
+
+      //End Board Create, now to edit
+
+
 
 
     });
@@ -201,16 +210,7 @@ void main() {
       };
       when(client.post('http://10.100.15.38/ReadBoards.php', body: data))
           .thenAnswer((_) async => http.Response(
-          '[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":'
-              '"This board is a default board created for testing purposes. It should not be deleted.",'
-              '"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4",'
-              '"AssignmentActive":"1"},{"ProjectID":"63","Project_Title":"Created by a sup",'
-              '"Project_Description":null,"Project_StartDate":null,"Project_EndDate":null,'
-              '"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"},{"ProjectID":"707",'
-              '"Project_Title":"a","Project_Description":"","Project_StartDate":null,'
-              '"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},'
-              '{"ProjectID":"708","Project_Title":"b","Project_Description":"","Project_StartDate":null,'
-              '"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"0"}]'
+          '[{"ProjectID":"55","Project_Title":"Default test board","Project_Description":"This board is a default board created for testing purposes. It should not be deleted.","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"63","Project_Title":"Created by a sup","Project_Description":null,"Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"1","AssignmentActive":"1"},{"ProjectID":"707","Project_Title":"a","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"1"},{"ProjectID":"708","Project_Title":"b","Project_Description":"","Project_StartDate":null,"Project_EndDate":null,"BoardActive":"1","AccessLevelID":"4","AssignmentActive":"0"}]'
           ,200));
       createClient=client;
       await tester.tap(archived);

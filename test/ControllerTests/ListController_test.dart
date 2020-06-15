@@ -63,13 +63,11 @@ void main() {
     });
     test('delete lists',() async{
       ListController listController=new ListController();
-      List<ListCard> testlists=[];
-      testlists=await listController.ReadLists(103,client, url: "https://lamp.ms.wits.ac.za/~s1611821/ReadLists.php", url2: "https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php");
-      int listID=testlists.last.ListID;
+      List<ListCard> testLists;
+      testLists=await listController.ReadLists(103,client, url: "https://lamp.ms.wits.ac.za/~s1611821/ReadLists.php", url2: "https://lamp.ms.wits.ac.za/~s1611821/ReadTasks.php");
+      int listID=testLists.last.ListID;
 
       expect(await listController.deleteList(listID,url: "https://lamp.ms.wits.ac.za/~s1611821/deleteList.php"), "List DELETED!");
-
-
 
     });
 
