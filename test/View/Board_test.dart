@@ -234,6 +234,11 @@ void main() {
       var k=await project_boardController.ReadBoards(1 ,'1713445', client);
 
       await tester.pumpWidget(makeWidgetTestable(testBoardPage));
+
+//      final bItem=find.byKey(Key("bItem"));
+//      expect(bItem, findsOneWidget);
+
+      //await tester.press(icon);
     });
   });
 

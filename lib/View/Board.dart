@@ -1794,7 +1794,6 @@ class _DynamicListState extends State<DynamicList> {
 
     }else{
       pb = user.archivedBoards[getBoardIndex(widget.aList.ProjectID)];
-
       _isShareDisabled = true;
       _isEditDisabled = true;
       if(pb.AccessLevel==4){
@@ -2606,6 +2605,7 @@ class _DynamicListState extends State<DynamicList> {
                                   ,
                                   width: 5.0))),
                       child: ListTile(
+                        key: Key("bItem"),
                         title: Text(
                           (_isArchive==false)?
                           user

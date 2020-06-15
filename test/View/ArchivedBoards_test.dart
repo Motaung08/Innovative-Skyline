@@ -11,7 +11,7 @@ import 'package:postgrad_tracker/Model/User.dart';
 import 'package:postgrad_tracker/View/ArchivedBoards.dart';
 import 'package:postgrad_tracker/View/Home.dart';
 import 'package:postgrad_tracker/main.dart';
-import '../test/Models_test.dart';
+import '../Models_test.dart';
 import 'package:http/http.dart' as http;
 
 class MockClient extends Mock implements http.Client {}
