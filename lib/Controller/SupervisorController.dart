@@ -70,12 +70,12 @@ class SupervisorController {
     personNo = supervisor.staffNo;
     Project_BoardController projectBoardController =
         new Project_BoardController();
-    print('Oy, we\'re here');
+
     http.Client client=new http.Client();
     List<List<Project_Board>> allBoards =
         await projectBoardController.ReadBoards(2, supervisor.staffNo,client,
             url: urlReadBoards);
-    print('Oy, we\'re here times twice');
+
     if (allBoards.isNotEmpty) {
       //print("BOARDS NOT NULL");
       if (allBoards[0].isNotEmpty) {
